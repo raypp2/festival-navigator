@@ -792,7 +792,9 @@ function spotifyAppSteps() {
   const steps = el('div', 'display: flex; flex-direction: column; gap: 6px; color: var(--text-tertiary); font-size: 11px; font-weight: 600; line-height: 1.55;');
   const lines = [
     '1. developer.spotify.com/dashboard → Create app. You need Spotify Premium, and Spotify allows ONE development-mode app per account — reuse it across projects if you already have one.',
-    '2. In the app’s settings, add this exact Redirect URI: https://festival-navigator-raypp2.vercel.app/spotify-callback — running your own fork on another domain? Use https://YOUR-DOMAIN/spotify-callback and change CANONICAL_HOST in js/spotify.js to match.',
+    // Derived, never typed: a hardcoded host here is what showed every fork
+    // the UPSTREAM author's callback URL as "this exact Redirect URI".
+    `2. In the app’s settings, add this exact Redirect URI: https://${spotify.CANONICAL_HOST}/spotify-callback — it must match character for character, because Spotify only accepts redirect URIs you registered up front.`,
     '3. Pick “Web API” when it asks which APIs you’re using.',
     '4. Copy the Client ID from the app page and paste it here.',
     '5. Spotify caps development apps at 5 authorized users: on the app page, open User Management and add each friend’s Spotify account email — nobody can connect until their email is on that list.',
