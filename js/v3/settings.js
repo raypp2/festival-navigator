@@ -792,7 +792,7 @@ function spotifyAppSteps() {
   const steps = el('div', 'display: flex; flex-direction: column; gap: 6px; color: var(--text-tertiary); font-size: 11px; font-weight: 600; line-height: 1.55;');
   const lines = [
     '1. developer.spotify.com/dashboard → Create app. You need Spotify Premium, and Spotify allows ONE development-mode app per account — reuse it across projects if you already have one.',
-    '2. In the app’s settings, add this exact Redirect URI: https://fest.kevinhg.com/spotify-callback — running your own fork on another domain? Use https://YOUR-DOMAIN/spotify-callback and change CANONICAL_HOST in js/spotify.js to match.',
+    '2. In the app’s settings, add this exact Redirect URI: https://festival-navigator-raypp2.vercel.app/spotify-callback — running your own fork on another domain? Use https://YOUR-DOMAIN/spotify-callback and change CANONICAL_HOST in js/spotify.js to match.',
     '3. Pick “Web API” when it asks which APIs you’re using.',
     '4. Copy the Client ID from the app page and paste it here.',
     '5. Spotify caps development apps at 5 authorized users: on the app page, open User Management and add each friend’s Spotify account email — nobody can connect until their email is on that list.',
@@ -914,7 +914,7 @@ function connectCard({ onConnect, extras = [] }) {
 function startConnect(msg) {
   const hop = spotify.canonicalHopUrl({ autoConnect: true });
   if (hop) {
-    msg.textContent = 'Connecting on fest.kevinhg.com — your boards come along…';
+    msg.textContent = `Connecting on ${spotify.CANONICAL_HOST} — your boards come along…`;
     setTimeout(() => location.assign(hop), 650);
     return;
   }
@@ -1089,7 +1089,10 @@ function advancedFold(actions, rerenderDrill, msg, { owner }) {
   return fold;
 }
 
-const SPOTIFY_CANONICAL_HOST = 'fest.kevinhg.com';
+// One source of truth: js/spotify.js owns the canonical OAuth host. This used
+// to be a second hardcoded copy, which is exactly how a fork ends up hopping
+// users (crew token + person master key in the URL) to the UPSTREAM domain.
+const SPOTIFY_CANONICAL_HOST = spotify.CANONICAL_HOST;
 
 function openSpotifyDrill(ctx, actions) {
   const host = document.getElementById('settings-subview');

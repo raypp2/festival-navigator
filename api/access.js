@@ -35,14 +35,18 @@ const EMAIL_RE = /^[A-Za-z0-9._%+'-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const mrkdwnEscape = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const APPROVE_TTL_MS = 60 * 60 * 1000; // approve links expire after an hour
 // Hosts we will build an approve link for when PUBLIC_BASE_URL is unset.
-// Only THIS project's own hostnames: any kevinhg.com subdomain (all anchored
-// at the end so kevinhg.com.evil.com is rejected), and this project's Vercel
-// preview URLs, whose `-kevinhg` team-slug suffix an attacker cannot forge.
-// A bare `.vercel.app$` would trust every tenant's deployments — the hole
-// this list closes.
+// Only THIS deployment's own hostnames, whose `-raypp2` team-slug suffix an
+// attacker cannot forge. A bare `.vercel.app$` would trust every tenant's
+// deployments — the hole this list closes.
+//
+// FORK: upstream allowlisted kevinhg.com + `-kevinhg` preview URLs. Left
+// as-is, this deployment would refuse to build an approve link on its OWN
+// hosts (falling through to "no trusted base URL") while trusting the
+// upstream author's. Both the production alias and the longer preview form
+// are listed. Setting PUBLIC_BASE_URL bypasses this list entirely.
 const HOST_ALLOW = [
-  /^([a-z0-9-]+\.)*kevinhg\.com$/,
-  /^festival-navigator-[a-z0-9]+-kevinhg\.vercel\.app$/,
+  /^festival-navigator-raypp2\.vercel\.app$/,
+  /^festival-navigator-[a-z0-9]+-raypp2\.vercel\.app$/,
 ];
 const hostAllowed = (host) => HOST_ALLOW.some((re) => re.test(host));
 

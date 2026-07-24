@@ -17,13 +17,19 @@ const SCOPES = 'user-library-read user-follow-read playlist-modify-public playli
 const redirectUri = () => `${location.origin}/spotify-callback`;
 
 // OAuth happens on ONE origin (SPOT-1): the Spotify app registers exactly
-// fest.kevinhg.com/spotify-callback. Every OTHER host hops — aliases,
+// <CANONICAL_HOST>/spotify-callback. Every OTHER host hops — aliases,
 // staging, previews — carrying the crew, the fest, and an sp=1 flag that
 // re-opens the Spotify drill after the hop. This used to be an allowlist of
 // known aliases, which silently broke OAuth on any new domain: staging sent
 // Spotify a stage.fest redirect URI and got "redirect_uri: Not matching
 // configuration" (Kevin, 2026-07-12). Localhost stays in place for dev.
-const CANONICAL_HOST = 'fest.kevinhg.com';
+//
+// FORK: this MUST be this deployment's own host. The hop URL carries the crew
+// token AND the person token (the master key), so pointing it at someone
+// else's domain hands them our users' credentials. Upstream's value was
+// fest.kevinhg.com; ours is below. Change it here and in settings.js
+// (SPOTIFY_CANONICAL_HOST) together if the domain ever changes.
+export const CANONICAL_HOST = 'festival-navigator-raypp2.vercel.app';
 const LOCAL_HOSTS = ['localhost', '127.0.0.1'];
 
 // `sp=connect` means "the person already pressed Connect — just keep going".

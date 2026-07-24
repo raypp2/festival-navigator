@@ -127,7 +127,12 @@ test('the connect hop carries sp=connect, so one press means one connect', () =>
   globalThis.location = { origin: 'https://stage.fest.kevinhg.com', host: 'stage.fest.kevinhg.com', hostname: 'stage.fest.kevinhg.com', hash: '' };
 
   const hop = spotify.canonicalHopUrl({ autoConnect: true });
-  assert.match(hop, /^https:\/\/fest\.kevinhg\.com\//, 'OAuth happens on the one registered origin');
+  // Asserted against the CONSTANT, not a literal host: this fork's whole
+  // Spotify bug was a hardcoded upstream host, and a test hardcoding the same
+  // string would have gone green while sending our crew + person tokens to
+  // someone else's domain.
+  assert.match(hop, new RegExp(`^https://${spotify.CANONICAL_HOST.replace(/\./g, '\\.')}/`), 'OAuth happens on the one registered origin');
+  assert.ok(!/kevinhg\.com/.test(hop), 'and never hops to the upstream author’s host — the tokens ride along in this URL');
   assert.match(hop, /sp=connect/, 'and continues by itself — the hop is our plumbing, not the user’s errand');
   // Built, not written: a token-shaped literal after `#g=` is exactly what the
   // pre-commit scan exists to stop, and a scanner that cries wolf on its own
@@ -135,6 +140,6 @@ test('the connect hop carries sp=connect, so one press means one connect', () =>
   assert.ok(hop.includes('#g=' + state.getCrewToken()), 'carrying the crew');
 
   // On the canonical host there is nothing to hop to.
-  globalThis.location = { origin: 'https://fest.kevinhg.com', host: 'fest.kevinhg.com', hostname: 'fest.kevinhg.com', hash: '' };
+  globalThis.location = { origin: `https://${spotify.CANONICAL_HOST}`, host: spotify.CANONICAL_HOST, hostname: spotify.CANONICAL_HOST, hash: '' };
   assert.equal(spotify.canonicalHopUrl({ autoConnect: true }), null);
 });
