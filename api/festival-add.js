@@ -15,7 +15,7 @@
 // Custom festivals are PRIVATE to the crew (no moderation surface); the repo's
 // data/festivals/*.json stays canonical for shared festivals.
 import { neon } from '@neondatabase/serverless';
-import { rateLimited, crossSite, callGemini } from './_lib/guard.mjs';
+import { rateLimited, crossSite, callGemini, GEMINI_MODEL } from './_lib/guard.mjs';
 import { TOKEN_RE, LIMITS } from './_lib/crew-shared.mjs';
 import { validateFestivalDoc, SLUG_RE } from './_lib/festival-rules.mjs';
 
@@ -90,7 +90,7 @@ export default async function handler(req, res) {
       const createdBy = typeof body.person === 'string' ? body.person.slice(0, LIMITS.personName) : null;
       await sql`
         INSERT INTO custom_festivals (token, fest_id, doc, source_urls, model, created_by)
-        VALUES (${token}, ${fest.id}, ${JSON.stringify(fest)}::jsonb, ${JSON.stringify(sources)}::jsonb, 'gemini-2.5-flash', ${createdBy})
+        VALUES (${token}, ${fest.id}, ${JSON.stringify(fest)}::jsonb, ${JSON.stringify(sources)}::jsonb, ${GEMINI_MODEL}, ${createdBy})
         ON CONFLICT (token, fest_id) DO UPDATE SET doc = EXCLUDED.doc, source_urls = EXCLUDED.source_urls, updated_at = now()`;
       return res.status(200).json({ saved: true, id: fest.id });
     }
