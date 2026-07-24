@@ -100,6 +100,12 @@ Two consequences worth knowing before you change anything here:
 
 ## 🏗️ Setup (fork / self-host)
 
+> **Forking?** Read [`docs/fork-setup.md`](docs/fork-setup.md) first. It covers
+> the full walkthrough plus the non-obvious traps — the hardcoded Spotify OAuth
+> host (which carries crew *and* person tokens, so it must be yours), Vercel
+> `[SENSITIVE]` variables that cannot be read back, Deployment Protection
+> silently breaking every share link, and the Gemini model pin that rots.
+
 No build step — the CSS is hand-written and the JS ships as ES modules.
 
 1. **Deploy to Vercel** (static + functions).
