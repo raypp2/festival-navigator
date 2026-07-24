@@ -45,6 +45,7 @@ const APPROVE_TTL_MS = 60 * 60 * 1000; // approve links expire after an hour
 // upstream author's. Both the production alias and the longer preview form
 // are listed. Setting PUBLIC_BASE_URL bypasses this list entirely.
 const HOST_ALLOW = [
+  /^ray-festival\.vercel\.app$/,
   /^festival-navigator-raypp2\.vercel\.app$/,
   /^festival-navigator-[a-z0-9]+-raypp2\.vercel\.app$/,
 ];

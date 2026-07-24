@@ -29,7 +29,7 @@ const redirectUri = () => `${location.origin}/spotify-callback`;
 // else's domain hands them our users' credentials. Upstream's value was
 // fest.kevinhg.com; ours is below. Change it here and in settings.js
 // (SPOTIFY_CANONICAL_HOST) together if the domain ever changes.
-export const CANONICAL_HOST = 'festival-navigator-raypp2.vercel.app';
+export const CANONICAL_HOST = 'ray-festival.vercel.app';
 const LOCAL_HOSTS = ['localhost', '127.0.0.1'];
 
 // `sp=connect` means "the person already pressed Connect — just keep going".

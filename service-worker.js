@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v36'; // v36 = fork: canonical Spotify OAuth host is THIS deployment, not upstream (the hop URL carries the person master key)
+const CACHE_VERSION = 'festival-nav-v37'; // v37 = canonical host is ray-festival.vercel.app; Gemini model unpinned (2.5-flash retired for new keys)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

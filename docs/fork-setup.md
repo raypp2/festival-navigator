@@ -88,12 +88,21 @@ Key: <https://aistudio.google.com/apikey>. The free tier is enough.
 > (`gemini-flash-latest`) so it cannot decay the same way. If research starts
 > 404ing, check there first.
 
-> **Trap — 429 does not mean "you must pay".** Google Search grounding works
-> on the free tier, but its rate limits are tight and grounded calls trip them
-> first. A burst of rapid calls returns
+> **Trap — 429 does not mean "you must pay".** Google Search grounding *does*
+> work on the free tier (verified: `200` with 7 grounding chunks). But its
+> rate limits are tight and grounded calls trip them first, returning
 > `429 RESOURCE_EXHAUSTED "check your plan and billing details"` on every
-> model — which reads as a billing wall and is not one. Space your calls out.
-> (The endpoint already rate-limits real users to 5 research calls/hour.)
+> model — which reads as a billing wall and is not one. Space your calls out
+> before concluding anything. (The endpoint already rate-limits real users to
+> 5 research calls/hour.)
+
+**Free tier vs. billing.** Free is enough to try research and to develop
+against. For real use, enable billing on the key's Google Cloud project:
+festival research is *grounded by definition*, grounded calls are exactly the
+ones that exhaust free quota first, and a crew hitting 429s cannot tell a rate
+limit from a broken feature. This deployment runs a billing-enabled key for
+that reason. Billing raises the limits — it does not unlock grounding, which
+was already available.
 
 Grounding sometimes returns **zero source URLs** even on a good 200 response;
 the UI says so out loud. Treat every result as a *candidate* — nothing is
