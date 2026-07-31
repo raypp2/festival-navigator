@@ -1280,5 +1280,1578 @@
   "polyjamorous": {
     "youtubeQuery": "Polyjamorous live set",
     "enrichedAt": "2026-07-31T02:16:23.541Z"
+  },
+  "silly goose": {
+    "genres": [
+      "nu metal",
+      "metal",
+      "rap metal",
+      "rap rock",
+      "rapcore"
+    ],
+    "spotifyId": "0GicbfMtwhn3Ch0PdwkADQ",
+    "youtubeQuery": "Silly Goose live set",
+    "mbid": "da677401-713b-4b4a-969f-a0a6655fe2d3",
+    "enrichedAt": "2026-07-31T02:17:19.379Z"
+  },
+  "dj heather": {
+    "youtubeQuery": "DJ Heather live set",
+    "mbid": "8c2d581b-4482-4653-9d02-f44506604b57",
+    "enrichedAt": "2026-07-31T02:17:21.948Z"
+  },
+  "the symposium": {
+    "genres": [
+      "indie rock",
+      "psychedelic rock",
+      "garage rock",
+      "rock",
+      "rock and roll"
+    ],
+    "soundcloudSlug": "thesymposium",
+    "spotifyId": "2FQgnKHydnhSnRS17BSy28",
+    "youtubeQuery": "The Symposium live set",
+    "mbid": "ef15c574-cf5f-4cc8-823f-f4a9e82833f3",
+    "enrichedAt": "2026-07-31T02:17:26.353Z"
+  },
+  "torren foot b2b rawolf paradiso": {
+    "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set",
+    "enrichedAt": "2026-07-31T02:17:27.375Z"
+  },
+  "jade lemac": {
+    "spotifyId": "4JnJjqxsTp8E5rZsyITf63",
+    "youtubeQuery": "Jade LeMac live set",
+    "mbid": "badf41dd-ead5-4201-b093-6c86e90daf35",
+    "enrichedAt": "2026-07-31T02:17:30.896Z"
+  },
+  "girl tones": {
+    "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
+    "youtubeQuery": "Girl Tones live set",
+    "mbid": "4771a96d-bd64-4da2-9acc-da68e52dbd35",
+    "enrichedAt": "2026-07-31T02:17:33.386Z"
+  },
+  "nourished by time": {
+    "genres": [
+      "alternative r&b",
+      "bedroom pop"
+    ],
+    "spotifyId": "7zNkqI6qRr0OJ4XO1Pw29g",
+    "youtubeQuery": "Nourished by Time live set",
+    "mbid": "6420dd6b-8232-42db-9cb9-90bec8f40e91",
+    "enrichedAt": "2026-07-31T02:17:36.009Z"
+  },
+  "the droptines": {
+    "genres": [
+      "alternative country",
+      "americana"
+    ],
+    "spotifyId": "5MKl9FP3O6MpQhVx7QRFyc",
+    "youtubeQuery": "The Droptines live set",
+    "mbid": "34fd1f98-630a-4a43-92c1-723225fb7e9e",
+    "enrichedAt": "2026-07-31T02:17:38.548Z"
+  },
+  "black party": {
+    "genres": [
+      "r&b"
+    ],
+    "spotifyId": "4C9Tvlt8v7d8R6h98FgdUy",
+    "youtubeQuery": "Black Party live set",
+    "mbid": "90e06458-7717-4618-b6b2-7942ac23ab05",
+    "enrichedAt": "2026-07-31T02:17:45.687Z"
+  },
+  "azzecca": {
+    "spotifyId": "2k5DY2QDU3kBi5DX7OQlWj",
+    "youtubeQuery": "Azzecca live set",
+    "mbid": "f55e5016-c424-467f-b90c-8db26a017ea8",
+    "enrichedAt": "2026-07-31T02:17:48.473Z"
+  },
+  "julie": {
+    "youtubeQuery": "Julie live set",
+    "enrichedAt": "2026-07-31T02:17:49.917Z"
+  },
+  "alexsucks": {
+    "spotifyId": "0zmxCsd8aIJHfNC95gdT2i",
+    "youtubeQuery": "ALEXSUCKS live set",
+    "mbid": "5a376cb7-0489-4934-ae5b-35dcff2b4ea7",
+    "enrichedAt": "2026-07-31T02:17:52.593Z"
+  },
+  "chicago made": {
+    "youtubeQuery": "Chicago Made live set",
+    "enrichedAt": "2026-07-31T02:17:53.821Z"
+  },
+  "sunami": {
+    "genres": [
+      "beatdown hardcore",
+      "hardcore punk",
+      "metalcore"
+    ],
+    "spotifyId": "1pBeRGeBHNPLy95LswDViS",
+    "youtubeQuery": "Sunami live set",
+    "mbid": "1b53aa11-ccef-457f-90d9-5165b270fdc5",
+    "enrichedAt": "2026-07-31T02:17:56.573Z"
+  },
+  "durand bernarr": {
+    "genres": [
+      "r&b"
+    ],
+    "spotifyId": "2d6ggH1oVt4z2zCuY2u5DW",
+    "youtubeQuery": "Durand Bernarr live set",
+    "mbid": "dc346e8d-b930-4878-b0f7-7e50e197388f",
+    "enrichedAt": "2026-07-31T02:18:07.165Z"
+  },
+  "prospa": {
+    "soundcloudSlug": "prospauk",
+    "spotifyId": "6HabM2PUM519iIxervGWSb",
+    "youtubeQuery": "Prospa live set",
+    "mbid": "4c3cffca-37b7-4ecd-9320-e6dcc2cb837a",
+    "enrichedAt": "2026-07-31T02:18:13.488Z"
+  },
+  "yana": {
+    "youtubeQuery": "Yana live set",
+    "enrichedAt": "2026-07-31T02:18:14.522Z"
+  },
+  "half•alive": {
+    "genres": [
+      "indie pop"
+    ],
+    "soundcloudSlug": "halfaliveco",
+    "spotifyId": "7sOR7gk6XUlGnxj3p9F54k",
+    "youtubeQuery": "half•alive live set",
+    "mbid": "00d0f0fa-a48c-416d-b4ff-25a290ce82d8",
+    "enrichedAt": "2026-07-31T02:18:17.260Z"
+  },
+  "fcukers": {
+    "genres": [
+      "electro house",
+      "electronic"
+    ],
+    "soundcloudSlug": "fcukers",
+    "spotifyId": "3UtzOHYm3lQALkKzVD4wyO",
+    "youtubeQuery": "Fcukers live set",
+    "mbid": "5e23e428-d9f5-4679-bd7c-8254d6f0a437",
+    "enrichedAt": "2026-07-31T02:18:20.388Z"
+  },
+  "matt champion": {
+    "genres": [
+      "alternative pop",
+      "alternative r&b",
+      "pop rap"
+    ],
+    "soundcloudSlug": "himattchampion",
+    "spotifyId": "29Oq9Nv8zLgu3IvX1tIpbm",
+    "youtubeQuery": "Matt Champion live set",
+    "mbid": "b4d4301c-d88f-4d5e-9ccc-bf2933a0a297",
+    "enrichedAt": "2026-07-31T02:18:22.960Z"
+  },
+  "the blessed madonna": {
+    "genres": [
+      "alternative dance",
+      "electro-disco",
+      "house",
+      "techno"
+    ],
+    "soundcloudSlug": "theblessedmadonna",
+    "spotifyId": "2nNEvsyPzLwKVZrfkwLpNK",
+    "youtubeQuery": "The Blessed Madonna live set",
+    "mbid": "3f351696-75a2-4167-86b1-c5cd37770600",
+    "enrichedAt": "2026-07-31T02:18:25.521Z"
+  },
+  "bo staloch": {
+    "spotifyId": "2EtiCherSxAKu7mnbU8Poh",
+    "youtubeQuery": "Bo Staloch live set",
+    "mbid": "c353dd11-40c4-493c-ad23-063b19d89ba0",
+    "enrichedAt": "2026-07-31T02:18:27.896Z"
+  },
+  "sierra ferrell": {
+    "genres": [
+      "americana",
+      "alternative country",
+      "contemporary country",
+      "country",
+      "neo-traditional country",
+      "progressive country",
+      "singer-songwriter"
+    ],
+    "spotifyId": "3oVcF3VdpMuvMvLLyHPT4t",
+    "youtubeQuery": "Sierra Ferrell live set",
+    "mbid": "4a27848e-ffdc-45d2-bed4-f5d62b85dc3e",
+    "enrichedAt": "2026-07-31T02:18:33.825Z"
+  },
+  "barry can't swim": {
+    "youtubeQuery": "Barry Can't Swim live set",
+    "enrichedAt": "2026-07-31T02:18:35.061Z"
+  },
+  "glass beams": {
+    "genres": [
+      "neo-psychedelia",
+      "psychedelic",
+      "instrumental",
+      "folk",
+      "psychedelic rock"
+    ],
+    "soundcloudSlug": "glassbeams",
+    "spotifyId": "1LTFJvVvRw7ghAyThxYmnF",
+    "youtubeQuery": "Glass Beams live set",
+    "mbid": "5bb54b77-2caa-4377-bdc3-3b8c0f5e507f",
+    "enrichedAt": "2026-07-31T02:18:38.908Z"
+  },
+  "colby acuff": {
+    "spotifyId": "2L9DVKDXY3W8uRl5TwLbMC",
+    "youtubeQuery": "Colby Acuff live set",
+    "mbid": "fbed2353-569e-479e-955c-32711b1219af",
+    "enrichedAt": "2026-07-31T02:18:43.634Z"
+  },
+  "role model": {
+    "genres": [
+      "pop"
+    ],
+    "spotifyId": "1dy5WNgIKQU6ezkpZs4y8z",
+    "youtubeQuery": "Role Model live set",
+    "mbid": "4c76d2ab-cc32-47b9-8bfe-d382bed617f6",
+    "enrichedAt": "2026-07-31T02:18:46.202Z"
+  },
+  "cloonee": {
+    "soundcloudSlug": "cloonee",
+    "spotifyId": "7MdlXmq2HViAJWo9cf30sR",
+    "youtubeQuery": "Cloonee live set",
+    "mbid": "b643c24d-4cd6-4531-88bc-62b39ce43ee1",
+    "enrichedAt": "2026-07-31T02:18:51.251Z"
+  },
+  "magdalena bay": {
+    "genres": [
+      "synth-pop",
+      "alternative pop",
+      "neo-psychedelia",
+      "atmospheric drum and bass",
+      "bubblegum bass",
+      "chillwave",
+      "drum and bass",
+      "electronic"
+    ],
+    "soundcloudSlug": "magbae",
+    "spotifyId": "1oPRcJUkloHaRLYx0olBLJ",
+    "youtubeQuery": "Magdalena Bay live set",
+    "mbid": "68c261d5-48c8-4ea9-9466-9fc908dc79bb",
+    "enrichedAt": "2026-07-31T02:18:53.713Z"
+  },
+  "overmono": {
+    "genres": [
+      "ambient",
+      "breakbeat",
+      "edm",
+      "electronic",
+      "uk garage"
+    ],
+    "soundcloudSlug": "overmono",
+    "spotifyId": "01PnN11ovfen6xUOHfNpn3",
+    "youtubeQuery": "Overmono live set",
+    "mbid": "b841d0f2-0a2a-4cb2-a2d8-9895b7f90bfa",
+    "enrichedAt": "2026-07-31T02:18:56.313Z"
+  },
+  "cage the elephant": {
+    "genres": [
+      "alternative rock",
+      "indie rock",
+      "garage rock",
+      "garage rock revival",
+      "psychedelic rock",
+      "punk blues",
+      "punk rock",
+      "acoustic rock"
+    ],
+    "soundcloudSlug": "cagetheelephant",
+    "spotifyId": "26T3LtbuGT1Fu9m0eRq5X3",
+    "youtubeQuery": "Cage the Elephant live set",
+    "mbid": "b41b38d4-ef3e-4f37-8c75-cfe9af999696",
+    "enrichedAt": "2026-07-31T02:18:58.803Z"
+  },
+  "xaviersobased": {
+    "genres": [
+      "cloud rap",
+      "jerk",
+      "trap",
+      "underground hip hop"
+    ],
+    "soundcloudSlug": "motorola2k7",
+    "spotifyId": "2oM7LMPFu882oC6jSwEqjd",
+    "youtubeQuery": "Xaviersobased live set",
+    "mbid": "155cfd40-dcde-471e-acc0-32179916165c",
+    "enrichedAt": "2026-07-31T02:19:03.949Z"
+  },
+  "mau p": {
+    "spotifyId": "0w1sbtZVQoK6GzV4A4OkCv",
+    "youtubeQuery": "Mau P live set",
+    "mbid": "429ea265-e9d0-40fc-b193-e1e4b6b7fbdf",
+    "enrichedAt": "2026-07-31T02:19:06.314Z"
+  },
+  "gracie abrams": {
+    "genres": [
+      "pop",
+      "folk pop",
+      "bedroom pop",
+      "singer-songwriter"
+    ],
+    "soundcloudSlug": "gracie-abrams",
+    "spotifyId": "4tuJ0bMpJh08umKkEXKUI5",
+    "youtubeQuery": "Gracie Abrams live set",
+    "mbid": "f7441bc7-d7de-4813-a2fc-31a4033d396d",
+    "enrichedAt": "2026-07-31T02:19:10.221Z"
+  },
+  "2hollis": {
+    "genres": [
+      "cloud rap",
+      "digicore",
+      "edm",
+      "electropop",
+      "experimental hip hop"
+    ],
+    "soundcloudSlug": "2hollis",
+    "spotifyId": "72NhFAGG5Pt91VbheJeEPG",
+    "youtubeQuery": "2Hollis live set",
+    "mbid": "8bd5a8fb-4c25-401d-a597-2c24affdd5c5",
+    "enrichedAt": "2026-07-31T02:19:12.715Z"
+  },
+  "alex warren": {
+    "genres": [
+      "indie pop",
+      "pop"
+    ],
+    "soundcloudSlug": "alexwaarren",
+    "spotifyId": "0fTSzq9jAh4c36UVb4V7CB",
+    "youtubeQuery": "Alex Warren live set",
+    "mbid": "609a2ea3-f446-4e31-8eef-9f7591afb55a",
+    "enrichedAt": "2026-07-31T02:19:15.328Z"
+  },
+  "royel otis": {
+    "genres": [
+      "indie rock",
+      "pop"
+    ],
+    "spotifyId": "5b5bt4mZQpJMoCRbiQ7diH",
+    "youtubeQuery": "Royel Otis live set",
+    "mbid": "2244c1f9-773f-4541-a4fe-ee6dc4f2ce60",
+    "enrichedAt": "2026-07-31T02:19:17.710Z"
+  },
+  "dom dolla": {
+    "soundcloudSlug": "domdolla",
+    "spotifyId": "205i7E8fNVfojowcQSfK9m",
+    "youtubeQuery": "Dom Dolla live set",
+    "mbid": "9b8548a9-5991-42a9-ba96-fe83bd238b7a",
+    "enrichedAt": "2026-07-31T02:19:20.466Z"
+  },
+  "luke combs": {
+    "genres": [
+      "country"
+    ],
+    "soundcloudSlug": "lukecombs",
+    "spotifyId": "718COspgdWOnwOFpJHRZHS",
+    "youtubeQuery": "Luke Combs live set",
+    "mbid": "c20ee61f-071f-4e65-9c81-45ee931a54ce",
+    "enrichedAt": "2026-07-31T02:19:23.205Z"
+  },
+  "xdinary heroes": {
+    "genres": [
+      "rock",
+      "k-pop",
+      "metal"
+    ],
+    "spotifyId": "1khChLj7REGqjM043PlYyn",
+    "youtubeQuery": "Xdinary Heroes live set",
+    "mbid": "d95a463f-e7d3-4c97-98ba-57f75cb4fda2",
+    "enrichedAt": "2026-07-31T02:19:25.679Z"
+  },
+  "tyler, the creator": {
+    "genres": [
+      "hip hop",
+      "hardcore hip hop",
+      "horrorcore",
+      "west coast hip hop"
+    ],
+    "soundcloudSlug": "tylerthecreator-official",
+    "spotifyId": "4V8LLVI7PbaPR0K2TGSxFF",
+    "youtubeQuery": "Tyler, the Creator live set",
+    "mbid": "f6beac20-5dfe-4d1f-ae02-0b0a740aafd6",
+    "enrichedAt": "2026-07-31T02:19:28.604Z"
+  },
+  "tanner adell": {
+    "spotifyId": "5xKVALj2MSqOHmQhburCM8",
+    "youtubeQuery": "Tanner Adell live set",
+    "mbid": "dc5aa749-10d1-4e58-a18d-9e2c8cadaa7c",
+    "enrichedAt": "2026-07-31T02:19:35.169Z"
+  },
+  "gigi perez": {
+    "genres": [
+      "indie folk",
+      "indie pop"
+    ],
+    "soundcloudSlug": "gigiperez",
+    "spotifyId": "1iCnM8foFssWlPRLfAbIwo",
+    "youtubeQuery": "Gigi Perez live set",
+    "mbid": "8ab64ebd-200e-47af-a3fc-92540e186214",
+    "enrichedAt": "2026-07-31T02:19:37.980Z"
+  },
+  "foster the people": {
+    "genres": [
+      "indie pop",
+      "pop",
+      "dance-pop"
+    ],
+    "soundcloudSlug": "fosterthepeoplemusic",
+    "spotifyId": "7gP3bB2nilZXLfPHJhMdvc",
+    "youtubeQuery": "Foster the People live set",
+    "mbid": "e0e1a584-dd0a-4bd1-88d1-c4c62895039d",
+    "enrichedAt": "2026-07-31T02:19:41.593Z"
+  },
+  "djo": {
+    "genres": [
+      "indie pop",
+      "bedroom pop",
+      "indie rock",
+      "neo-psychedelia"
+    ],
+    "soundcloudSlug": "djokyri",
+    "spotifyId": "5p9HO3XC5P3BLxJs5Mtrhm",
+    "youtubeQuery": "Djo live set",
+    "mbid": "dc84c3f5-a44c-4a46-bf41-fd1640e3c99d",
+    "enrichedAt": "2026-07-31T02:19:50.511Z"
+  },
+  "olivia rodrigo": {
+    "genres": [
+      "pop",
+      "pop rock",
+      "pop punk",
+      "power pop",
+      "singer-songwriter",
+      "folk pop",
+      "musical",
+      "rock"
+    ],
+    "soundcloudSlug": "oliviarodrigo",
+    "spotifyId": "1McMsnEElThX1knmY4oliG",
+    "youtubeQuery": "Olivia Rodrigo live set",
+    "mbid": "6925db17-f35e-42f3-a4eb-84ee6bf5d4b0",
+    "enrichedAt": "2026-07-31T02:19:54.286Z"
+  },
+  "hex cougar": {
+    "genres": [
+      "electronic",
+      "trap edm"
+    ],
+    "soundcloudSlug": "hexcougar",
+    "spotifyId": "0AlNB0yIoyxdKloLmK9AOR",
+    "youtubeQuery": "Hex Cougar live set",
+    "mbid": "613b9913-f368-45ef-a47c-712545a01f7d",
+    "enrichedAt": "2026-07-31T02:19:58.177Z"
+  },
+  "viperactive": {
+    "soundcloudSlug": "viperactive",
+    "spotifyId": "7HeSEuZA4D7EtdygBjCbi9",
+    "youtubeQuery": "Viperactive live set",
+    "mbid": "54eb87ac-5fcf-41de-b86e-9fafd1e771de",
+    "enrichedAt": "2026-07-31T02:20:00.651Z"
+  },
+  "murda beatz": {
+    "genres": [
+      "trap"
+    ],
+    "soundcloudSlug": "murdabeatz9",
+    "spotifyId": "3CbYyyd8wH3RT6t0jwpdzC",
+    "youtubeQuery": "Murda Beatz live set",
+    "mbid": "91376b53-c37d-4eed-ac24-63d167af6885",
+    "enrichedAt": "2026-07-31T02:20:04.468Z"
+  },
+  "bunt.": {
+    "youtubeQuery": "BUNT. live set",
+    "enrichedAt": "2026-07-31T02:20:07.301Z"
+  },
+  "tape b": {
+    "genres": [
+      "dubstep",
+      "edm",
+      "trap"
+    ],
+    "soundcloudSlug": "tape-b-official",
+    "spotifyId": "59tlsKpLWoLTxjNNS2wdPi",
+    "youtubeQuery": "Tape B live set",
+    "mbid": "cdee470d-8167-4c15-808e-c4ce7fa3d6e7",
+    "enrichedAt": "2026-07-31T02:20:11.185Z"
+  },
+  "knock2": {
+    "genres": [
+      "bass house",
+      "hybrid trap"
+    ],
+    "soundcloudSlug": "knock2music",
+    "spotifyId": "6mmSS7itNWKbapgG2eZbIg",
+    "youtubeQuery": "Knock2 live set",
+    "mbid": "4a5d133b-46f3-4c19-aae1-ec199787658d",
+    "enrichedAt": "2026-07-31T02:20:14.846Z"
+  },
+  "dogpark": {
+    "spotifyId": "2VlmDb05CPERyCZfmZI3x7",
+    "youtubeQuery": "Dogpark live set",
+    "mbid": "8c8b7177-4c03-4cb4-858c-b071f5de013e",
+    "enrichedAt": "2026-07-31T02:20:18.140Z"
+  },
+  "isabel larosa": {
+    "genres": [
+      "alternative pop"
+    ],
+    "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
+    "youtubeQuery": "Isabel LaRosa live set",
+    "mbid": "fa22eeda-8db9-4ae5-97c9-6d0b9ceb7cf3",
+    "enrichedAt": "2026-07-31T02:20:26.487Z"
+  },
+  "ravyn lenae": {
+    "genres": [
+      "alternative r&b",
+      "contemporary r&b",
+      "neo soul",
+      "pop",
+      "r&b",
+      "singer-songwriter"
+    ],
+    "soundcloudSlug": "ravynlenaesounds",
+    "spotifyId": "5RTLRtXjbXI2lSXc6jxlAz",
+    "youtubeQuery": "Ravyn Lenae live set",
+    "mbid": "94c64122-dbd4-4927-b2fa-f204b0b4b0c2",
+    "enrichedAt": "2026-07-31T02:20:29.293Z"
+  },
+  "amaarae": {
+    "genres": [
+      "afrobeats",
+      "alternative r&b",
+      "alté",
+      "contemporary r&b",
+      "neo soul",
+      "r&b"
+    ],
+    "spotifyId": "21UPYSRWFKwtqvSAnFnSvS",
+    "youtubeQuery": "Amaarae live set",
+    "mbid": "29fab96f-c3a2-4251-80f6-7ccda50da706",
+    "enrichedAt": "2026-07-31T02:20:38.030Z"
+  },
+  "wallows": {
+    "genres": [
+      "alternative rock",
+      "pop rock",
+      "indie pop",
+      "indie rock"
+    ],
+    "soundcloudSlug": "wallowsmusic",
+    "spotifyId": "0NIPkIjTV8mB795yEIiPYL",
+    "youtubeQuery": "Wallows live set",
+    "mbid": "9fae44ec-b95c-4b0f-a0a6-f0008613eabf",
+    "enrichedAt": "2026-07-31T02:20:40.832Z"
+  },
+  "winyah": {
+    "spotifyId": "4iyP4VOGOLzbt2Vxcyu6zG",
+    "youtubeQuery": "Winyah live set",
+    "mbid": "bff06586-9050-420e-93a1-bff166090e7f",
+    "enrichedAt": "2026-07-31T02:20:43.558Z"
+  },
+  "cassandra coleman": {
+    "spotifyId": "1O6GvgnaHzgcFlCX6RlhYV",
+    "youtubeQuery": "Cassandra Coleman live set",
+    "mbid": "b49a2757-d21d-40bf-911e-bdda5eb7f66b",
+    "enrichedAt": "2026-07-31T02:20:46.215Z"
+  },
+  "caroline kingsbury": {
+    "spotifyId": "0uE0bzpIfuZ9XVduu0byzg",
+    "youtubeQuery": "Caroline Kingsbury live set",
+    "mbid": "a7515be2-3bd8-402f-87bc-a77e01c9de73",
+    "enrichedAt": "2026-07-31T02:20:50.474Z"
+  },
+  "carol ades": {
+    "genres": [
+      "pop"
+    ],
+    "soundcloudSlug": "caroline-pennell",
+    "spotifyId": "0cZPTEmf3mlwj5kjVXR4po",
+    "youtubeQuery": "Carol Ades live set",
+    "mbid": "5fe67b7e-2cfe-46a7-afe0-37018d579775",
+    "enrichedAt": "2026-07-31T02:20:55.321Z"
+  },
+  "star bandz": {
+    "spotifyId": "5qhDQveADDnjIZQ85AtgDM",
+    "youtubeQuery": "Star Bandz live set",
+    "mbid": "aa7be156-ddb4-4e85-b911-d27eb87c42d5",
+    "enrichedAt": "2026-07-31T02:21:03.610Z"
+  },
+  "jesse detor": {
+    "spotifyId": "3HljFuKgpaXNKfIlFZWCEk",
+    "youtubeQuery": "Jesse Detor live set",
+    "mbid": "90751b46-1bfa-40d5-ae86-9c7fa9836d43",
+    "enrichedAt": "2026-07-31T02:21:06.335Z"
+  },
+  "old mervs": {
+    "spotifyId": "3N8YzKqrEQonvd5RLQ4iYg",
+    "youtubeQuery": "Old Mervs live set",
+    "mbid": "0891a6be-10b8-4bc2-aa66-584ba1c6a33b",
+    "enrichedAt": "2026-07-31T02:21:10.816Z"
+  },
+  "hey, nothing": {
+    "soundcloudSlug": "heynothing-music",
+    "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
+    "youtubeQuery": "Hey, Nothing live set",
+    "mbid": "63094905-b963-46ca-8429-090e1afd6752",
+    "enrichedAt": "2026-07-31T02:21:16.307Z"
+  },
+  "zinadelphia": {
+    "genres": [
+      "jazz pop",
+      "pop soul"
+    ],
+    "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
+    "youtubeQuery": "Zinadelphia live set",
+    "mbid": "b9227dfa-8e4f-4801-98d5-8b3abaeeb016",
+    "enrichedAt": "2026-07-31T02:21:21.414Z"
+  },
+  "orla gartland": {
+    "genres": [
+      "folk",
+      "indie pop"
+    ],
+    "soundcloudSlug": "orlagartland",
+    "spotifyId": "3ajf12ub55b51qcS94d9Co",
+    "youtubeQuery": "Orla Gartland live set",
+    "mbid": "8094a83b-86ce-4a13-b25f-90af829c9ed6",
+    "enrichedAt": "2026-07-31T02:21:28.155Z"
+  },
+  "the dare": {
+    "genres": [
+      "electroclash",
+      "new rave"
+    ],
+    "soundcloudSlug": "itsthedare",
+    "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
+    "youtubeQuery": "The Dare live set",
+    "mbid": "7fe3380a-8e35-48d1-ac5a-174fe6b5060b",
+    "enrichedAt": "2026-07-31T02:21:30.879Z"
+  },
+  "ocean alley": {
+    "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
+    "youtubeQuery": "Ocean Alley live set",
+    "mbid": "8cf32b06-c5a3-4804-a967-376f88d12aad",
+    "enrichedAt": "2026-07-31T02:21:36.215Z"
+  },
+  "wyatt flores": {
+    "genres": [
+      "country",
+      "red dirt"
+    ],
+    "spotifyId": "46lEQmDJLJeyltECJYJv1Y",
+    "youtubeQuery": "Wyatt Flores live set",
+    "mbid": "4ae67eb7-c01c-4d71-b995-21b093fcb888",
+    "enrichedAt": "2026-07-31T02:21:38.838Z"
+  },
+  "bladee": {
+    "genres": [
+      "cloud rap",
+      "experimental hip hop",
+      "alternative r&b",
+      "emo rap",
+      "trap",
+      "contemporary r&b",
+      "pop rap"
+    ],
+    "soundcloudSlug": "bladee1000",
+    "spotifyId": "2xvtxDNInKDV4AvGmjw6d1",
+    "youtubeQuery": "Bladee live set",
+    "mbid": "cd689e77-dfdd-4f81-b50c-5e5a3f5e38a4",
+    "enrichedAt": "2026-07-31T02:21:44.305Z"
+  },
+  "alemeda": {
+    "spotifyId": "33Se8kMYeTPkeeM2LnsPF8",
+    "youtubeQuery": "Alemeda live set",
+    "mbid": "787a4eb5-e9b7-4944-b503-57020255104d",
+    "enrichedAt": "2026-07-31T02:21:47.657Z"
+  },
+  "kenny mason": {
+    "genres": [
+      "alternative hip hop",
+      "hip hop",
+      "trap"
+    ],
+    "soundcloudSlug": "kennymason",
+    "spotifyId": "4mwdnO2jZrMmMVrjcHsZBv",
+    "youtubeQuery": "Kenny Mason live set",
+    "mbid": "42c5e9b5-5cff-41fc-aca7-fb0bcf555bc7",
+    "enrichedAt": "2026-07-31T02:21:52.992Z"
+  },
+  "del water gap": {
+    "genres": [
+      "indie pop",
+      "pop"
+    ],
+    "soundcloudSlug": "delwatergap",
+    "spotifyId": "0xPoVNPnxIIUS1vrxAYV00",
+    "youtubeQuery": "Del Water Gap live set",
+    "mbid": "5f606b3d-fab7-4d39-bcdb-f5d42edae945",
+    "enrichedAt": "2026-07-31T02:22:01.602Z"
+  },
+  "flipturn": {
+    "genres": [
+      "indie rock"
+    ],
+    "soundcloudSlug": "flipturnband",
+    "spotifyId": "7FKTg75ADVMZgY3P9ZMRtH",
+    "youtubeQuery": "Flipturn live set",
+    "mbid": "0c97b403-1aae-4315-93ab-af54fe2169d6",
+    "enrichedAt": "2026-07-31T02:22:04.002Z"
+  },
+  "jane remover": {
+    "genres": [
+      "digicore",
+      "hyperpop",
+      "indie rock",
+      "experimental hip hop",
+      "experimental rock",
+      "indie pop",
+      "pop rap",
+      "rock"
+    ],
+    "soundcloudSlug": "janeremover",
+    "spotifyId": "2rLGlNI6htigNxx172qxLu",
+    "youtubeQuery": "Jane Remover live set",
+    "mbid": "f4b6e451-5dce-4842-a555-f793892299b3",
+    "enrichedAt": "2026-07-31T02:22:09.964Z"
+  },
+  "otoboke beaver": {
+    "youtubeQuery": "Otoboke Beaver live set",
+    "enrichedAt": "2026-07-31T02:22:10.992Z"
+  },
+  "t-pain": {
+    "youtubeQuery": "T-Pain live set",
+    "enrichedAt": "2026-07-31T02:22:12.228Z"
+  },
+  "bleachers": {
+    "genres": [
+      "alternative rock",
+      "indie rock",
+      "rock"
+    ],
+    "soundcloudSlug": "bleachers",
+    "spotifyId": "2eam0iDomRHGBypaDQLwWI",
+    "youtubeQuery": "Bleachers live set",
+    "mbid": "58e235fc-f6ea-4614-9ed4-9855a5665ae1",
+    "enrichedAt": "2026-07-31T02:22:21.580Z"
+  },
+  "korn": {
+    "genres": [
+      "nu metal",
+      "alternative metal",
+      "metal",
+      "alternative rock",
+      "rock",
+      "heavy metal"
+    ],
+    "soundcloudSlug": "kornofficial",
+    "spotifyId": "3RNrq3jvMZxD9ZyoOZbQOD",
+    "youtubeQuery": "Korn live set",
+    "mbid": "ac865b2e-bba8-4f5a-8756-dd40d5e39f46",
+    "enrichedAt": "2026-07-31T02:22:24.128Z"
+  },
+  "tessla": {
+    "soundcloudSlug": "thisistess",
+    "spotifyId": "3bIr4g7fZxrqbUbAEqFsCS",
+    "youtubeQuery": "Tessla live set",
+    "mbid": "f9878db4-79c0-4ad3-8a8f-73e498cef686",
+    "enrichedAt": "2026-07-31T02:22:26.735Z"
+  },
+  "birds of a feather": {
+    "youtubeQuery": "Birds of a Feather live set",
+    "mbid": "c899d283-63ce-426a-b639-8e2703e02d57",
+    "enrichedAt": "2026-07-31T02:22:29.167Z"
+  },
+  "landon conrath": {
+    "spotifyId": "2PJ06l59DomDd440az768u",
+    "youtubeQuery": "Landon Conrath live set",
+    "mbid": "ae412320-5be9-43ae-963e-c31fae54b110",
+    "enrichedAt": "2026-07-31T02:22:31.881Z"
+  },
+  "winnetka bowling league": {
+    "spotifyId": "4ug3P1K8BaCdJXROrqHqhu",
+    "youtubeQuery": "Winnetka Bowling League live set",
+    "mbid": "cae1f90c-53f9-442c-a284-3b638ecdb653",
+    "enrichedAt": "2026-07-31T02:22:34.570Z"
+  },
+  "jev": {
+    "youtubeQuery": "Jev live set",
+    "enrichedAt": "2026-07-31T02:22:35.822Z"
+  },
+  "dua saleh": {
+    "soundcloudSlug": "doitlikedua",
+    "spotifyId": "2DGBzoOLcKLK3eWxFyugdB",
+    "youtubeQuery": "Dua Saleh live set",
+    "mbid": "0181a90e-6b1d-4d09-bd6f-b0b1145e7ad8",
+    "enrichedAt": "2026-07-31T02:22:46.075Z"
+  },
+  "eddie and the getaway": {
+    "youtubeQuery": "Eddie and the Getaway live set",
+    "mbid": "2d4eb032-b114-41e5-b4ab-d703fe8779c7",
+    "enrichedAt": "2026-07-31T02:22:48.386Z"
+  },
+  "kickflip": {
+    "genres": [
+      "likedis auto"
+    ],
+    "youtubeQuery": "Kickflip live set",
+    "mbid": "0efef7d5-fc1e-4e31-98aa-96721bcf8cab",
+    "enrichedAt": "2026-07-31T02:22:57.374Z"
+  },
+  "sam austins": {
+    "soundcloudSlug": "samaustins",
+    "spotifyId": "0zmnfFQX8LWVVZyRPHRx1V",
+    "youtubeQuery": "Sam Austins live set",
+    "mbid": "0ffe666f-5f7c-4cd1-b07e-dbb6eac41a50",
+    "enrichedAt": "2026-07-31T02:23:00.365Z"
+  },
+  "fyutch & aura v": {
+    "youtubeQuery": "Fyütch & Aura V live set",
+    "enrichedAt": "2026-07-31T02:23:04.201Z"
+  },
+  "wasia project": {
+    "genres": [
+      "bedroom pop",
+      "jazz pop",
+      "pop"
+    ],
+    "spotifyId": "7poQNrOwZoUcoqihg4Xex0",
+    "youtubeQuery": "Wasia Project live set",
+    "mbid": "145336bb-1faf-47f3-92aa-08471650edcc",
+    "enrichedAt": "2026-07-31T02:23:09.733Z"
+  },
+  "salute": {
+    "genres": [
+      "speed garage",
+      "uk garage",
+      "dance-pop",
+      "french house",
+      "electronic",
+      "funky house"
+    ],
+    "soundcloudSlug": "saluteaut",
+    "spotifyId": "1np8xozf7ATJZDi9JX8Dx5",
+    "youtubeQuery": "Salute live set",
+    "mbid": "87484a93-1aae-4917-8d2f-7af0d16a2129",
+    "enrichedAt": "2026-07-31T02:23:12.692Z"
+  },
+  "charlotte lawrence": {
+    "genres": [
+      "pop"
+    ],
+    "soundcloudSlug": "charlotteslawrence",
+    "spotifyId": "7LImGq5KnzQobZciDJpeJb",
+    "youtubeQuery": "Charlotte Lawrence live set",
+    "mbid": "0ef0f607-8d6b-40f3-8180-fa4ced129da1",
+    "enrichedAt": "2026-07-31T02:23:18.782Z"
+  },
+  "carter vail": {
+    "spotifyId": "4Bu9DnBZ12oX7MiiaJy9hK",
+    "youtubeQuery": "Carter Vail live set",
+    "mbid": "063ef568-674e-4181-a9a9-6bc17c753806",
+    "enrichedAt": "2026-07-31T02:23:23.830Z"
+  },
+  "layz": {
+    "soundcloudSlug": "layzdubz",
+    "spotifyId": "2ozQcs5XxFaj5fvA02zhwo",
+    "youtubeQuery": "Layz live set",
+    "mbid": "60c0c427-ef03-4d63-b47e-9ab08bf48d04",
+    "enrichedAt": "2026-07-31T02:23:33.020Z"
+  },
+  "boa": {
+    "genres": [
+      "k-pop",
+      "j-pop",
+      "pop",
+      "singer-songwriter"
+    ],
+    "spotifyId": "35M2kdEtBZT6K4tcVm78A0",
+    "youtubeQuery": "Bôa live set",
+    "mbid": "a16d1433-ba89-4f72-a47b-a370add0bb55",
+    "enrichedAt": "2026-07-31T02:23:35.825Z"
+  },
+  "ole 60": {
+    "spotifyId": "3iXeAZ8862AyoZ5ZGg800O",
+    "youtubeQuery": "Ole 60 live set",
+    "mbid": "d0da565b-64c4-4e4f-bebf-f4bb7c56ef30",
+    "enrichedAt": "2026-07-31T02:23:41.591Z"
+  },
+  "max mcnown": {
+    "spotifyId": "340PS4ZcZ4UCBgyrXzEjcp",
+    "youtubeQuery": "Max McNown live set",
+    "mbid": "cc45b39c-c7c2-4db3-98f2-9c0220c76d7c",
+    "enrichedAt": "2026-07-31T02:23:47.654Z"
+  },
+  "divinity roxx & divi roxx kids": {
+    "youtubeQuery": "Divinity Roxx & Divi Roxx Kids live set",
+    "enrichedAt": "2026-07-31T02:23:48.881Z"
+  },
+  "the bingo-go-go": {
+    "youtubeQuery": "The Bingo-Go-Go live set",
+    "enrichedAt": "2026-07-31T02:23:52.770Z"
+  },
+  "rachel grae": {
+    "spotifyId": "0ekCwZGQUkAISV1h48jlHn",
+    "youtubeQuery": "Rachel Grae live set",
+    "mbid": "dcde6074-fda8-48df-a581-c3678a5e0b5a",
+    "enrichedAt": "2026-07-31T02:23:58.293Z"
+  },
+  "flux pavilion": {
+    "genres": [
+      "dubstep",
+      "edm",
+      "electronic",
+      "dance",
+      "uk garage",
+      "club",
+      "dub"
+    ],
+    "soundcloudSlug": "flux-pavilion",
+    "spotifyId": "7muzHifhMdnfN1xncRLOqk",
+    "youtubeQuery": "Flux Pavilion live set",
+    "mbid": "3ce513c5-bdd4-492c-a875-07e0f3e1993b",
+    "enrichedAt": "2026-07-31T02:24:03.773Z"
+  },
+  "montell fish": {
+    "genres": [
+      "alternative r&b"
+    ],
+    "soundcloudSlug": "montellfish",
+    "spotifyId": "5nvWOyAkfNgVLKESq4fOj2",
+    "youtubeQuery": "Montell Fish live set",
+    "mbid": "20634ec0-4bdb-47dc-9bf4-07ed76f8154a",
+    "enrichedAt": "2026-07-31T02:24:11.146Z"
+  },
+  "bossman dlow": {
+    "genres": [
+      "hip hop",
+      "trap"
+    ],
+    "soundcloudSlug": "bossman-dlow",
+    "spotifyId": "23xFbA9rYgRX8mreqysWPc",
+    "youtubeQuery": "Bossman Dlow live set",
+    "mbid": "44fac0de-d5ae-4bea-a68c-948fedc3d9c5",
+    "enrichedAt": "2026-07-31T02:24:13.628Z"
+  },
+  "the happiness club": {
+    "youtubeQuery": "The Happiness Club live set",
+    "enrichedAt": "2026-07-31T02:24:14.722Z"
+  },
+  "naomi scott": {
+    "soundcloudSlug": "naomiscottmusic",
+    "spotifyId": "2Zi3RrdQqk63Xj0914STkS",
+    "youtubeQuery": "Naomi Scott live set",
+    "mbid": "65fc5739-3562-46a0-8b69-1d1f64941a8b",
+    "enrichedAt": "2026-07-31T02:24:17.405Z"
+  },
+  "young miko": {
+    "genres": [
+      "hip hop",
+      "latin",
+      "reggaeton",
+      "trap",
+      "trap latino"
+    ],
+    "soundcloudSlug": "youngmiko",
+    "spotifyId": "3qsKSpcV3ncke3hw52JSMB",
+    "youtubeQuery": "Young Miko live set",
+    "mbid": "c4442130-e7f2-40aa-bcab-b921cc45a365",
+    "enrichedAt": "2026-07-31T02:24:22.547Z"
+  },
+  "marina": {
+    "genres": [
+      "pop",
+      "electropop",
+      "indie pop",
+      "alternative pop",
+      "dance-pop",
+      "alternative rock",
+      "emo pop",
+      "leftfield"
+    ],
+    "soundcloudSlug": "marinadiamandis",
+    "spotifyId": "1dYg03VTo2pCwwqxjNa3YI",
+    "youtubeQuery": "Marina live set",
+    "mbid": "7f3d82ee-3817-4367-9eec-f33a312247a1",
+    "enrichedAt": "2026-07-31T02:24:25.030Z"
+  },
+  "dr. fresch": {
+    "soundcloudSlug": "drfresch",
+    "spotifyId": "1htHgbGwgCWJBfGiQwcRqC",
+    "youtubeQuery": "Dr. Fresch live set",
+    "mbid": "6bc0fa87-4d85-4387-94f0-f99094c32ea6",
+    "enrichedAt": "2026-07-31T02:24:29.748Z"
+  },
+  "orion sun": {
+    "genres": [
+      "indie pop",
+      "neo soul",
+      "r&b"
+    ],
+    "soundcloudSlug": "orionsun",
+    "spotifyId": "2efrqekWSHlvhATD50AG3m",
+    "youtubeQuery": "Orion Sun live set",
+    "mbid": "b25798de-0ca8-4f44-886e-3d00f6e9be6e",
+    "enrichedAt": "2026-07-31T02:24:34.991Z"
+  },
+  "zoe ko": {
+    "spotifyId": "493xhO4GiL1eOhWUBt8CzZ",
+    "youtubeQuery": "Zoe Ko live set",
+    "mbid": "79088467-dfaf-4862-bbb2-cb22edf8a826",
+    "enrichedAt": "2026-07-31T02:24:37.377Z"
+  },
+  "fujii kaze": {
+    "youtubeQuery": "Fujii Kaze live set",
+    "enrichedAt": "2026-07-31T02:24:38.659Z"
+  },
+  "bilmuri": {
+    "genres": [
+      "post-hardcore",
+      "alternative metal",
+      "alternative rock",
+      "indie rock",
+      "alternative pop",
+      "pop punk",
+      "rock"
+    ],
+    "spotifyId": "5Rc75vGFBWZPgL7EXb4k89",
+    "youtubeQuery": "Bilmuri live set",
+    "mbid": "b09de30a-09ac-4cc9-8812-49bb12e2bfa6",
+    "enrichedAt": "2026-07-31T02:24:43.124Z"
+  },
+  "clairo": {
+    "genres": [
+      "bedroom pop",
+      "indie pop",
+      "pop",
+      "dream pop",
+      "indie folk",
+      "lo-fi",
+      "singer-songwriter"
+    ],
+    "soundcloudSlug": "ccottrill",
+    "spotifyId": "3l0CmX0FuQjFxr8SK7Vqag",
+    "youtubeQuery": "Clairo live set",
+    "mbid": "d786f59b-1836-4ddb-8393-ab753edbe984",
+    "enrichedAt": "2026-07-31T02:24:48.632Z"
+  },
+  "doechii": {
+    "genres": [
+      "hip hop",
+      "pop rap"
+    ],
+    "soundcloudSlug": "iam-doechii",
+    "spotifyId": "4E2rKHVDssGJm2SCDOMMJB",
+    "youtubeQuery": "Doechii live set",
+    "mbid": "9f75277c-b283-4846-ac8c-f932255cd0ac",
+    "enrichedAt": "2026-07-31T02:24:55.278Z"
+  },
+  "people r ugly": {
+    "spotifyId": "1kXY7pco0sC6GEgJW9xxyI",
+    "youtubeQuery": "People R Ugly live set",
+    "mbid": "f6079afa-d125-4c92-9d35-887728fe8329",
+    "enrichedAt": "2026-07-31T02:24:59.111Z"
+  },
+  "chase & status": {
+    "genres": [
+      "drum and bass",
+      "electronic",
+      "dubstep",
+      "uk garage",
+      "jungle",
+      "breakbeat",
+      "breaks",
+      "club"
+    ],
+    "soundcloudSlug": "chaseandstatus",
+    "spotifyId": "3jNkaOXasoc7RsxdchvEVq",
+    "youtubeQuery": "Chase & Status live set",
+    "mbid": "82e454e2-38ee-4e69-89a6-cc65167753d1",
+    "enrichedAt": "2026-07-31T02:25:03.457Z"
+  },
+  "damiano david": {
+    "spotifyId": "7AaGbSgUxJFuZ49VvclNH6",
+    "youtubeQuery": "Damiano David live set",
+    "mbid": "852c198a-75ee-4e2b-9aba-4453c52260b2",
+    "enrichedAt": "2026-07-31T02:25:05.780Z"
+  },
+  "jpegmafia": {
+    "genres": [
+      "experimental hip hop",
+      "hip hop",
+      "cloud rap",
+      "alternative r&b",
+      "east coast hip hop",
+      "glitch hop",
+      "hardcore hip hop",
+      "industrial hip hop"
+    ],
+    "soundcloudSlug": "jpegmafia",
+    "spotifyId": "6yJ6QQ3Y5l0s0tn7b0arrO",
+    "youtubeQuery": "JPEGMAFIA live set",
+    "mbid": "c42e60f4-4520-4954-b6e4-82bbdf532c11",
+    "enrichedAt": "2026-07-31T02:25:12.552Z"
+  },
+  "twice": {
+    "genres": [
+      "k-pop",
+      "pop",
+      "dance",
+      "r&b",
+      "dance-pop",
+      "electronica",
+      "j-pop"
+    ],
+    "spotifyId": "7n2Ycct7Beij7Dj7meI4X0",
+    "youtubeQuery": "Twice live set",
+    "mbid": "8da127cc-c432-418f-b356-ef36210d82ac",
+    "enrichedAt": "2026-07-31T02:25:16.829Z"
+  },
+  "two friends": {
+    "genres": [
+      "dance-pop",
+      "edm"
+    ],
+    "soundcloudSlug": "two-friends",
+    "spotifyId": "44Ewva5aHOX00EwaX2D2mh",
+    "youtubeQuery": "Two Friends live set",
+    "mbid": "c394e9ff-888f-4c03-a494-147d5aa53ccb",
+    "enrichedAt": "2026-07-31T02:25:19.845Z"
+  },
+  "rufus du sol": {
+    "genres": [
+      "alternative dance",
+      "edm",
+      "house",
+      "dance",
+      "dance-pop",
+      "deep house",
+      "electro",
+      "electronic"
+    ],
+    "soundcloudSlug": "rufusdusol",
+    "spotifyId": "5Pb27ujIyYb33zBqVysBkj",
+    "youtubeQuery": "RÜFÜS du Sol live set",
+    "mbid": "1cfa6ee5-1189-4ade-97db-8f20a6ba5c76",
+    "enrichedAt": "2026-07-31T02:25:22.381Z"
+  },
+  "mk.gee": {
+    "genres": [
+      "alternative r&b",
+      "ambient pop",
+      "dream pop",
+      "indietronica",
+      "neo-psychedelia"
+    ],
+    "soundcloudSlug": "mkgee",
+    "spotifyId": "7tr9pbgNEKtG0GQTKe08Tz",
+    "youtubeQuery": "Mk.gee live set",
+    "mbid": "262cf0ce-2af2-4686-a8cc-d6b33e97336d",
+    "enrichedAt": "2026-07-31T02:25:27.098Z"
+  },
+  "raecola": {
+    "soundcloudSlug": "raecolaa",
+    "spotifyId": "4ZLYabLbKeMkfAsFNESfpj",
+    "youtubeQuery": "Raecola live set",
+    "mbid": "60d3c087-1e69-46a4-8e1e-4da35cf15848",
+    "enrichedAt": "2026-07-31T02:25:31.090Z"
+  },
+  "kaicrewsade": {
+    "spotifyId": "4WgDm2J3jztBZSc1S0lMsx",
+    "youtubeQuery": "Kaicrewsade live set",
+    "mbid": "226715ae-6ad9-424f-9ba8-4c94224e5334",
+    "enrichedAt": "2026-07-31T02:25:33.423Z"
+  },
+  "landon barker": {
+    "spotifyId": "7tWnepocfeqynsYC75hWoF",
+    "youtubeQuery": "Landon Barker live set",
+    "mbid": "f5b25786-81c6-4d48-9042-76b7ea75a0ce",
+    "enrichedAt": "2026-07-31T02:25:39.011Z"
+  },
+  "joe p": {
+    "genres": [
+      "alternative rock"
+    ],
+    "spotifyId": "3pIwImfumJioKb0zHHP61x",
+    "youtubeQuery": "Joe P live set",
+    "mbid": "73ae4a8d-861e-4cfc-97a4-c61f2f48708c",
+    "enrichedAt": "2026-07-31T02:25:41.875Z"
+  },
+  "the criticals": {
+    "spotifyId": "6ArhcOX0zzUe8GDzLTgBrK",
+    "youtubeQuery": "The Criticals live set",
+    "mbid": "4f68897c-f168-4873-8a55-c2dcfe64cb7d",
+    "enrichedAt": "2026-07-31T02:25:47.143Z"
+  },
+  "benches": {
+    "youtubeQuery": "Benches live set",
+    "mbid": "904f6d75-b3cb-48df-bad8-f91afddf9295",
+    "enrichedAt": "2026-07-31T02:25:50.175Z"
+  },
+  "flowerovlove": {
+    "genres": [
+      "dance-pop",
+      "indie pop"
+    ],
+    "soundcloudSlug": "flower_garden",
+    "spotifyId": "1JspXUvEv3D9ddMeLNqYWj",
+    "youtubeQuery": "Flowerovlove live set",
+    "mbid": "cc082564-87b8-405c-97b0-7c2a8e84212a",
+    "enrichedAt": "2026-07-31T02:25:55.204Z"
+  },
+  "laila!": {
+    "youtubeQuery": "Laila! live set",
+    "enrichedAt": "2026-07-31T02:25:56.081Z"
+  },
+  "nimino": {
+    "genres": [
+      "electronic"
+    ],
+    "soundcloudSlug": "milo-good-evans",
+    "spotifyId": "5x0R3zoC09GMiRJomoexLV",
+    "youtubeQuery": "Nimino live set",
+    "mbid": "e4f6a122-099e-4ced-9efe-f46da2a790fb",
+    "enrichedAt": "2026-07-31T02:25:59.099Z"
+  },
+  "vincent lima": {
+    "youtubeQuery": "Vincent Lima live set",
+    "mbid": "55989e47-4c3f-49ad-9b1c-10cf4f9c2107",
+    "enrichedAt": "2026-07-31T02:26:01.504Z"
+  },
+  "post animal": {
+    "genres": [
+      "psychedelic rock"
+    ],
+    "soundcloudSlug": "postanimal-music",
+    "spotifyId": "4iaDWP59Z3e62DW7YWDbIE",
+    "youtubeQuery": "Post Animal live set",
+    "mbid": "40c857d5-6ab0-41f4-aa1d-7614a79a0686",
+    "enrichedAt": "2026-07-31T02:26:07.127Z"
+  },
+  "john walt foundation: chicag...": {
+    "youtubeQuery": "John Walt Foundation: Chicag... live set",
+    "enrichedAt": "2026-07-31T02:26:09.884Z"
+  },
+  "lekan": {
+    "spotifyId": "3Z7dkUrTApDgi6npZfoHVv",
+    "youtubeQuery": "Lekan live set",
+    "mbid": "62ce428d-c504-4ae0-b7ee-defc2ebfc3e0",
+    "enrichedAt": "2026-07-31T02:26:14.219Z"
+  },
+  "boynextdoor": {
+    "genres": [
+      "k-pop"
+    ],
+    "spotifyId": "4hnHLgMSOiqERWBL4jINP1",
+    "youtubeQuery": "Boynextdoor live set",
+    "mbid": "656d0024-7b5f-4089-9d3e-ce383f15f1b7",
+    "enrichedAt": "2026-07-31T02:26:19.848Z"
+  },
+  "willow avalon": {
+    "spotifyId": "6EEkobfnenJF603WO8nUrR",
+    "youtubeQuery": "Willow Avalon live set",
+    "mbid": "a7c5cd9d-861f-4500-9958-ec4a50b7d80f",
+    "enrichedAt": "2026-07-31T02:26:26.459Z"
+  },
+  "rebecca black": {
+    "genres": [
+      "pop"
+    ],
+    "soundcloudSlug": "rebeccareneeblack",
+    "spotifyId": "3Vl9fyKMIdLMswk8ai3mm9",
+    "youtubeQuery": "Rebecca Black live set",
+    "mbid": "312c7cc1-9b5c-4406-963b-9f73f50674c0",
+    "enrichedAt": "2026-07-31T02:26:29.291Z"
+  },
+  "q brothers": {
+    "youtubeQuery": "Q Brothers live set",
+    "mbid": "5c6342ff-e185-4fdb-a6ff-33699d20cae6",
+    "enrichedAt": "2026-07-31T02:26:31.730Z"
+  },
+  "wild rivers": {
+    "genres": [
+      "indie folk"
+    ],
+    "soundcloudSlug": "wildriversband",
+    "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
+    "youtubeQuery": "Wild Rivers live set",
+    "mbid": "ffd11889-af95-42ed-b0ee-315df62510f5",
+    "enrichedAt": "2026-07-31T02:26:38.503Z"
+  },
+  "katseye": {
+    "genres": [
+      "dance-pop",
+      "pop",
+      "k-pop",
+      "electronic",
+      "hip hop",
+      "hip hop soul",
+      "new jack swing"
+    ],
+    "spotifyId": "3c0gDdb9lhnHGFtP4prQpn",
+    "youtubeQuery": "Katseye live set",
+    "mbid": "abbf7d85-9a7f-4a6c-80bd-bf71f2c7d520",
+    "enrichedAt": "2026-07-31T02:26:46.164Z"
+  },
+  "the second city: comedy mixtape": {
+    "youtubeQuery": "The Second City: Comedy Mixtape live set",
+    "enrichedAt": "2026-07-31T02:26:47.396Z"
+  },
+  "sofia camara": {
+    "spotifyId": "5bdLfpk3TpFVwrlHWmPL55",
+    "youtubeQuery": "Sofia Camara live set",
+    "mbid": "b2d774c0-2c0b-4710-92f6-47ebcf7a7784",
+    "enrichedAt": "2026-07-31T02:26:50.258Z"
+  },
+  "mariah the scientist": {
+    "genres": [
+      "contemporary r&b",
+      "r&b"
+    ],
+    "soundcloudSlug": "selkcub",
+    "spotifyId": "7HO5fOXE4gh3lzZn64tX2E",
+    "youtubeQuery": "Mariah the Scientist live set",
+    "mbid": "5fc55ebf-21bd-4eda-954c-dd250132331e",
+    "enrichedAt": "2026-07-31T02:26:55.502Z"
+  },
+  "la femme": {
+    "genres": [
+      "psychedelic",
+      "coldwave",
+      "electronic",
+      "post-punk",
+      "neo-psychedelia",
+      "synth-pop",
+      "acid jazz",
+      "pop"
+    ],
+    "soundcloudSlug": "lafemmeressort",
+    "spotifyId": "5VTWoYYizcOY3uIKnxeCGI",
+    "youtubeQuery": "La Femme live set",
+    "mbid": "559211a5-2a51-4346-ba84-5cc74821a1cd",
+    "enrichedAt": "2026-07-31T02:26:58.270Z"
+  },
+  "wave to earth": {
+    "genres": [
+      "bedroom pop",
+      "indie pop",
+      "indie rock"
+    ],
+    "soundcloudSlug": "wave_to_earth",
+    "spotifyId": "5069JTmv5ZDyPeZaCCXiCg",
+    "youtubeQuery": "Wave to Earth live set",
+    "mbid": "89e95aa3-bd49-4af3-9c87-0d88b2093bb0",
+    "enrichedAt": "2026-07-31T02:27:02.195Z"
+  },
+  "chachi (dj set)": {
+    "youtubeQuery": "Chachi (DJ Set) live set",
+    "enrichedAt": "2026-07-31T02:27:03.208Z"
+  },
+  "marlon hoffstadt": {
+    "soundcloudSlug": "marlonhoffstadt",
+    "spotifyId": "0HHa7ZJZxUQlg5l2mB0N0f",
+    "youtubeQuery": "Marlon Hoffstadt live set",
+    "mbid": "7377ee25-9240-4b50-a824-20c202e96da9",
+    "enrichedAt": "2026-07-31T02:27:05.876Z"
+  },
+  "aliyah's interlude": {
+    "youtubeQuery": "Aliyah's Interlude live set",
+    "enrichedAt": "2026-07-31T02:27:08.449Z"
+  },
+  "isaiah rashad": {
+    "genres": [
+      "hip hop"
+    ],
+    "soundcloudSlug": "isaiah_rashad",
+    "spotifyId": "6aaMZ3fcfLv4tEbmY7bjRM",
+    "youtubeQuery": "Isaiah Rashad live set",
+    "mbid": "37547347-ea75-45fa-9766-ff36b44d8147",
+    "enrichedAt": "2026-07-31T02:27:12.284Z"
+  },
+  "remi wolf": {
+    "genres": [
+      "alternative pop",
+      "pop soul"
+    ],
+    "soundcloudSlug": "remi-wolf",
+    "spotifyId": "0NB5HROxc8dDBXpkIi1v3d",
+    "youtubeQuery": "Remi Wolf live set",
+    "mbid": "afb6cc6d-a060-4f5e-bc3a-00d4b6832e41",
+    "enrichedAt": "2026-07-31T02:27:16.085Z"
+  },
+  "joey valence & brae": {
+    "genres": [
+      "hip hop",
+      "boom bap",
+      "rap rock"
+    ],
+    "soundcloudSlug": "joeyvalenceandbrae",
+    "spotifyId": "1q4618qKswelCGLoanFKQh",
+    "youtubeQuery": "Joey Valence & Brae live set",
+    "mbid": "93a4d03b-4f0e-42da-ae0b-a62876e46071",
+    "enrichedAt": "2026-07-31T02:27:18.717Z"
+  },
+  "blk odyssy": {
+    "genres": [
+      "hip hop",
+      "r&b"
+    ],
+    "spotifyId": "062tCT8GVioC9EMiI9jeOV",
+    "youtubeQuery": "BLK Odyssy live set",
+    "mbid": "e254ca64-ef8a-44b3-80eb-106fab5940d0",
+    "enrichedAt": "2026-07-31T02:27:21.185Z"
+  },
+  "finneas": {
+    "genres": [
+      "pop",
+      "indie pop",
+      "singer-songwriter"
+    ],
+    "soundcloudSlug": "finneasmusic",
+    "spotifyId": "37M5pPGs6V1fchFJSgCguX",
+    "youtubeQuery": "Finneas live set",
+    "mbid": "151cd917-1ee2-4702-859f-90899ad897f8",
+    "enrichedAt": "2026-07-31T02:27:24.535Z"
+  },
+  "ian": {
+    "youtubeQuery": "Ian live set",
+    "enrichedAt": "2026-07-31T02:27:25.583Z"
+  },
+  "bob's dance shop": {
+    "youtubeQuery": "Bob's Dance Shop live set",
+    "mbid": "0481fc67-d5dc-42ce-9279-d62ab9e60c89",
+    "enrichedAt": "2026-07-31T02:27:29.160Z"
+  },
+  "maribou state": {
+    "genres": [
+      "electronic",
+      "downtempo",
+      "house",
+      "leftfield"
+    ],
+    "soundcloudSlug": "mariboustate",
+    "spotifyId": "7zrkALJ9ayRjzysp4QYoEg",
+    "youtubeQuery": "Maribou State live set",
+    "mbid": "72034a05-bcd8-40c2-8255-3ee4ac0e7ef0",
+    "enrichedAt": "2026-07-31T02:27:31.952Z"
+  },
+  "goo (dj set)": {
+    "youtubeQuery": "Goo (DJ Set) live set",
+    "enrichedAt": "2026-07-31T02:27:33.094Z"
+  },
+  "graham barham": {
+    "spotifyId": "3WHWgx8Dh0IqQT1BMDTeE3",
+    "youtubeQuery": "Graham Barham live set",
+    "mbid": "0ddd210b-12f5-43f5-ba4b-17c9da267d4c",
+    "enrichedAt": "2026-07-31T02:27:36.643Z"
+  },
+  "dominic fike": {
+    "genres": [
+      "alternative pop"
+    ],
+    "soundcloudSlug": "dominicfike",
+    "spotifyId": "6USv9qhCn6zfxlBQIYJ9qs",
+    "youtubeQuery": "Dominic Fike live set",
+    "mbid": "e337c918-098f-418e-97a2-81dc224b1bf9",
+    "enrichedAt": "2026-07-31T02:27:39.535Z"
+  },
+  "gryffin": {
+    "genres": [
+      "dance-pop",
+      "electronic",
+      "electropop",
+      "pop"
+    ],
+    "soundcloudSlug": "gryffinofficial",
+    "spotifyId": "2ZRQcIgzPCVaT9XKhXZIzh",
+    "youtubeQuery": "Gryffin live set",
+    "mbid": "f1348139-efb5-43c7-9204-199827efad3c",
+    "enrichedAt": "2026-07-31T02:27:42.360Z"
+  },
+  "the marias": {
+    "genres": [
+      "dream pop",
+      "indie pop",
+      "lo-fi",
+      "psychedelic pop",
+      "bedroom pop",
+      "psychedelic soul",
+      "synth-pop"
+    ],
+    "soundcloudSlug": "themarias",
+    "spotifyId": "2sSGPbdZJkaSE2AbcGOACx",
+    "youtubeQuery": "The Marías live set",
+    "mbid": "7a3970c9-ecd8-4eee-a267-4d8c77d97ff3",
+    "enrichedAt": "2026-07-31T02:27:45.828Z"
+  },
+  "artemas": {
+    "genres": [
+      "alternative pop",
+      "dark electro",
+      "pop",
+      "pop rock",
+      "sexy drill",
+      "synth-pop"
+    ],
+    "spotifyId": "0PCCGZ0wGLizHt2KZ7hhA2",
+    "youtubeQuery": "Artemas live set",
+    "mbid": "0211be88-dc0f-4002-a1de-4001bb359d51",
+    "enrichedAt": "2026-07-31T02:27:48.341Z"
+  },
+  "still woozy": {
+    "genres": [
+      "bedroom pop",
+      "indie pop",
+      "indietronica"
+    ],
+    "soundcloudSlug": "stillwoozy",
+    "spotifyId": "4iMO20EPodreIaEl8qW66y",
+    "youtubeQuery": "Still Woozy live set",
+    "mbid": "bfa6929d-8375-488d-b027-8a0691c73643",
+    "enrichedAt": "2026-07-31T02:27:51.204Z"
+  },
+  "martin garrix": {
+    "genres": [
+      "edm",
+      "big room house",
+      "electro house",
+      "dance-pop",
+      "festival progressive house",
+      "tropical house"
+    ],
+    "soundcloudSlug": "martingarrix",
+    "spotifyId": "60d24wfXkVzDSfLS6hyCjZ",
+    "youtubeQuery": "Martin Garrix live set",
+    "mbid": "3e1f2ee4-16be-4406-bf18-6173840cf2b1",
+    "enrichedAt": "2026-07-31T02:27:55.928Z"
+  },
+  "a$ap rocky": {
+    "genres": [
+      "hip hop",
+      "east coast hip hop",
+      "cloud rap",
+      "experimental hip hop",
+      "hardcore hip hop",
+      "pop rap",
+      "trap"
+    ],
+    "soundcloudSlug": "asvpxrocky",
+    "spotifyId": "13ubrt8QOOCPljQ2FL1Kca",
+    "youtubeQuery": "A$AP Rocky live set",
+    "mbid": "25b7b584-d952-4662-a8b9-dd8cdfbfeb64",
+    "enrichedAt": "2026-07-31T02:27:58.811Z"
+  },
+  "sabrina carpenter": {
+    "genres": [
+      "pop",
+      "dance-pop",
+      "electropop"
+    ],
+    "soundcloudSlug": "sabrinacarpenter",
+    "spotifyId": "74KM79TiuVKeVCqs8QtB0B",
+    "youtubeQuery": "Sabrina Carpenter live set",
+    "mbid": "1882fe91-cdd9-49c9-9956-8e06a3810bd4",
+    "enrichedAt": "2026-07-31T02:28:01.555Z"
   }
 }

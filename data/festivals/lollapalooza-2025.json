@@ -1027,882 +1027,1839 @@
     {
       "name": "Silly Goose",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "nu metal",
+        "metal",
+        "rap metal",
+        "rap rock",
+        "rapcore"
+      ],
+      "spotifyId": "0GicbfMtwhn3Ch0PdwkADQ",
+      "youtubeQuery": "Silly Goose live set"
     },
     {
       "name": "DJ Heather",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "youtubeQuery": "DJ Heather live set"
     },
     {
       "name": "The Symposium",
       "day": "Thursday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "indie rock",
+        "psychedelic rock",
+        "garage rock",
+        "rock",
+        "rock and roll"
+      ],
+      "soundcloudSlug": "thesymposium",
+      "spotifyId": "2FQgnKHydnhSnRS17BSy28",
+      "youtubeQuery": "The Symposium live set"
     },
     {
       "name": "Torren Foot B2B Rawolf Paradiso",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set"
     },
     {
       "name": "Jade LeMac",
       "day": "Thursday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "spotifyId": "4JnJjqxsTp8E5rZsyITf63",
+      "youtubeQuery": "Jade LeMac live set"
     },
     {
       "name": "Girl Tones",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
+      "youtubeQuery": "Girl Tones live set"
     },
     {
       "name": "Nourished by Time",
       "day": "Thursday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "alternative r&b",
+        "bedroom pop"
+      ],
+      "spotifyId": "7zNkqI6qRr0OJ4XO1Pw29g",
+      "youtubeQuery": "Nourished by Time live set"
     },
     {
       "name": "The Droptines",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "alternative country",
+        "americana"
+      ],
+      "spotifyId": "5MKl9FP3O6MpQhVx7QRFyc",
+      "youtubeQuery": "The Droptines live set"
     },
     {
       "name": "Black Party",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "r&b"
+      ],
+      "spotifyId": "4C9Tvlt8v7d8R6h98FgdUy",
+      "youtubeQuery": "Black Party live set"
     },
     {
       "name": "Azzecca",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "spotifyId": "2k5DY2QDU3kBi5DX7OQlWj",
+      "youtubeQuery": "Azzecca live set"
     },
     {
       "name": "Julie",
       "day": "Thursday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "youtubeQuery": "Julie live set"
     },
     {
       "name": "ALEXSUCKS",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "0zmxCsd8aIJHfNC95gdT2i",
+      "youtubeQuery": "ALEXSUCKS live set"
     },
     {
       "name": "Chicago Made",
       "day": "Thursday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "youtubeQuery": "Chicago Made live set"
     },
     {
       "name": "Sunami",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "beatdown hardcore",
+        "hardcore punk",
+        "metalcore"
+      ],
+      "spotifyId": "1pBeRGeBHNPLy95LswDViS",
+      "youtubeQuery": "Sunami live set"
     },
     {
       "name": "Durand Bernarr",
       "day": "Thursday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "r&b"
+      ],
+      "spotifyId": "2d6ggH1oVt4z2zCuY2u5DW",
+      "youtubeQuery": "Durand Bernarr live set"
     },
     {
       "name": "Prospa",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "soundcloudSlug": "prospauk",
+      "spotifyId": "6HabM2PUM519iIxervGWSb",
+      "youtubeQuery": "Prospa live set"
     },
     {
       "name": "Yana",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "youtubeQuery": "Yana live set"
     },
     {
       "name": "half•alive",
       "day": "Thursday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "indie pop"
+      ],
+      "soundcloudSlug": "halfaliveco",
+      "spotifyId": "7sOR7gk6XUlGnxj3p9F54k",
+      "youtubeQuery": "half•alive live set"
     },
     {
       "name": "Fcukers",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "electro house",
+        "electronic"
+      ],
+      "soundcloudSlug": "fcukers",
+      "spotifyId": "3UtzOHYm3lQALkKzVD4wyO",
+      "youtubeQuery": "Fcukers live set"
     },
     {
       "name": "Matt Champion",
       "day": "Thursday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "alternative pop",
+        "alternative r&b",
+        "pop rap"
+      ],
+      "soundcloudSlug": "himattchampion",
+      "spotifyId": "29Oq9Nv8zLgu3IvX1tIpbm",
+      "youtubeQuery": "Matt Champion live set"
     },
     {
       "name": "The Blessed Madonna",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "genres": [
+        "alternative dance",
+        "electro-disco",
+        "house",
+        "techno"
+      ],
+      "soundcloudSlug": "theblessedmadonna",
+      "spotifyId": "2nNEvsyPzLwKVZrfkwLpNK",
+      "youtubeQuery": "The Blessed Madonna live set"
     },
     {
       "name": "Bo Staloch",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "2EtiCherSxAKu7mnbU8Poh",
+      "youtubeQuery": "Bo Staloch live set"
     },
     {
       "name": "Sierra Ferrell",
       "day": "Thursday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "americana",
+        "alternative country",
+        "contemporary country",
+        "country",
+        "neo-traditional country",
+        "progressive country",
+        "singer-songwriter"
+      ],
+      "spotifyId": "3oVcF3VdpMuvMvLLyHPT4t",
+      "youtubeQuery": "Sierra Ferrell live set"
     },
     {
       "name": "Barry Can't Swim",
       "day": "Thursday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "youtubeQuery": "Barry Can't Swim live set"
     },
     {
       "name": "Glass Beams",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "neo-psychedelia",
+        "psychedelic",
+        "instrumental",
+        "folk",
+        "psychedelic rock"
+      ],
+      "soundcloudSlug": "glassbeams",
+      "spotifyId": "1LTFJvVvRw7ghAyThxYmnF",
+      "youtubeQuery": "Glass Beams live set"
     },
     {
       "name": "Colby Acuff",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "2L9DVKDXY3W8uRl5TwLbMC",
+      "youtubeQuery": "Colby Acuff live set"
     },
     {
       "name": "Role Model",
       "day": "Thursday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "pop"
+      ],
+      "spotifyId": "1dy5WNgIKQU6ezkpZs4y8z",
+      "youtubeQuery": "Role Model live set"
     },
     {
       "name": "Cloonee",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "soundcloudSlug": "cloonee",
+      "spotifyId": "7MdlXmq2HViAJWo9cf30sR",
+      "youtubeQuery": "Cloonee live set"
     },
     {
       "name": "Magdalena Bay",
       "day": "Thursday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "synth-pop",
+        "alternative pop",
+        "neo-psychedelia",
+        "atmospheric drum and bass",
+        "bubblegum bass",
+        "chillwave",
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "magbae",
+      "spotifyId": "1oPRcJUkloHaRLYx0olBLJ",
+      "youtubeQuery": "Magdalena Bay live set"
     },
     {
       "name": "Overmono",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "ambient",
+        "breakbeat",
+        "edm",
+        "electronic",
+        "uk garage"
+      ],
+      "soundcloudSlug": "overmono",
+      "spotifyId": "01PnN11ovfen6xUOHfNpn3",
+      "youtubeQuery": "Overmono live set"
     },
     {
       "name": "Cage the Elephant",
       "day": "Thursday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "alternative rock",
+        "indie rock",
+        "garage rock",
+        "garage rock revival",
+        "psychedelic rock",
+        "punk blues",
+        "punk rock",
+        "acoustic rock"
+      ],
+      "soundcloudSlug": "cagetheelephant",
+      "spotifyId": "26T3LtbuGT1Fu9m0eRq5X3",
+      "youtubeQuery": "Cage the Elephant live set"
     },
     {
       "name": "Xaviersobased",
       "day": "Thursday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "genres": [
+        "cloud rap",
+        "jerk",
+        "trap",
+        "underground hip hop"
+      ],
+      "soundcloudSlug": "motorola2k7",
+      "spotifyId": "2oM7LMPFu882oC6jSwEqjd",
+      "youtubeQuery": "Xaviersobased live set"
     },
     {
       "name": "Mau P",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "spotifyId": "0w1sbtZVQoK6GzV4A4OkCv",
+      "youtubeQuery": "Mau P live set"
     },
     {
       "name": "Gracie Abrams",
       "day": "Thursday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "pop",
+        "folk pop",
+        "bedroom pop",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "gracie-abrams",
+      "spotifyId": "4tuJ0bMpJh08umKkEXKUI5",
+      "youtubeQuery": "Gracie Abrams live set"
     },
     {
       "name": "2Hollis",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "cloud rap",
+        "digicore",
+        "edm",
+        "electropop",
+        "experimental hip hop"
+      ],
+      "soundcloudSlug": "2hollis",
+      "spotifyId": "72NhFAGG5Pt91VbheJeEPG",
+      "youtubeQuery": "2Hollis live set"
     },
     {
       "name": "Alex Warren",
       "day": "Thursday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "indie pop",
+        "pop"
+      ],
+      "soundcloudSlug": "alexwaarren",
+      "spotifyId": "0fTSzq9jAh4c36UVb4V7CB",
+      "youtubeQuery": "Alex Warren live set"
     },
     {
       "name": "Royel Otis",
       "day": "Thursday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "indie rock",
+        "pop"
+      ],
+      "spotifyId": "5b5bt4mZQpJMoCRbiQ7diH",
+      "youtubeQuery": "Royel Otis live set"
     },
     {
       "name": "Dom Dolla",
       "day": "Thursday",
-      "stage": "DOLLAPALOOZA"
+      "stage": "DOLLAPALOOZA",
+      "soundcloudSlug": "domdolla",
+      "spotifyId": "205i7E8fNVfojowcQSfK9m",
+      "youtubeQuery": "Dom Dolla live set"
     },
     {
       "name": "Luke Combs",
       "day": "Thursday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "country"
+      ],
+      "soundcloudSlug": "lukecombs",
+      "spotifyId": "718COspgdWOnwOFpJHRZHS",
+      "youtubeQuery": "Luke Combs live set"
     },
     {
       "name": "Xdinary Heroes",
       "day": "Thursday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "rock",
+        "k-pop",
+        "metal"
+      ],
+      "spotifyId": "1khChLj7REGqjM043PlYyn",
+      "youtubeQuery": "Xdinary Heroes live set"
     },
     {
       "name": "Tyler, the Creator",
       "day": "Thursday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "hip hop",
+        "hardcore hip hop",
+        "horrorcore",
+        "west coast hip hop"
+      ],
+      "soundcloudSlug": "tylerthecreator-official",
+      "spotifyId": "4V8LLVI7PbaPR0K2TGSxFF",
+      "youtubeQuery": "Tyler, the Creator live set"
     },
     {
       "name": "Tanner Adell",
       "day": "Friday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "spotifyId": "5xKVALj2MSqOHmQhburCM8",
+      "youtubeQuery": "Tanner Adell live set"
     },
     {
       "name": "Gigi Perez",
       "day": "Friday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "indie folk",
+        "indie pop"
+      ],
+      "soundcloudSlug": "gigiperez",
+      "spotifyId": "1iCnM8foFssWlPRLfAbIwo",
+      "youtubeQuery": "Gigi Perez live set"
     },
     {
       "name": "Foster the People",
       "day": "Friday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "indie pop",
+        "pop",
+        "dance-pop"
+      ],
+      "soundcloudSlug": "fosterthepeoplemusic",
+      "spotifyId": "7gP3bB2nilZXLfPHJhMdvc",
+      "youtubeQuery": "Foster the People live set"
     },
     {
       "name": "Djo",
       "day": "Friday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "indie pop",
+        "bedroom pop",
+        "indie rock",
+        "neo-psychedelia"
+      ],
+      "soundcloudSlug": "djokyri",
+      "spotifyId": "5p9HO3XC5P3BLxJs5Mtrhm",
+      "youtubeQuery": "Djo live set"
     },
     {
       "name": "Olivia Rodrigo",
       "day": "Friday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "pop",
+        "pop rock",
+        "pop punk",
+        "power pop",
+        "singer-songwriter",
+        "folk pop",
+        "musical",
+        "rock"
+      ],
+      "soundcloudSlug": "oliviarodrigo",
+      "spotifyId": "1McMsnEElThX1knmY4oliG",
+      "youtubeQuery": "Olivia Rodrigo live set"
     },
     {
       "name": "Mary Droppinz",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "marydroppinz",
+      "spotifyId": "4tPVnr7VB15UA9TRsie3cS",
+      "youtubeQuery": "Mary Droppinz live set"
     },
     {
       "name": "Hex Cougar",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "electronic",
+        "trap edm"
+      ],
+      "soundcloudSlug": "hexcougar",
+      "spotifyId": "0AlNB0yIoyxdKloLmK9AOR",
+      "youtubeQuery": "Hex Cougar live set"
     },
     {
       "name": "Viperactive",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "viperactive",
+      "spotifyId": "7HeSEuZA4D7EtdygBjCbi9",
+      "youtubeQuery": "Viperactive live set"
     },
     {
       "name": "Murda Beatz",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "trap"
+      ],
+      "soundcloudSlug": "murdabeatz9",
+      "spotifyId": "3CbYyyd8wH3RT6t0jwpdzC",
+      "youtubeQuery": "Murda Beatz live set"
     },
     {
       "name": "Alleycvt",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "spotifyId": "4JxRK2gxmri7L7OWaxnVD1",
+      "youtubeQuery": "Alleycvt live set"
     },
     {
       "name": "BUNT.",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "youtubeQuery": "BUNT. live set"
     },
     {
       "name": "Tape B",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "dubstep",
+        "edm",
+        "trap"
+      ],
+      "soundcloudSlug": "tape-b-official",
+      "spotifyId": "59tlsKpLWoLTxjNNS2wdPi",
+      "youtubeQuery": "Tape B live set"
     },
     {
       "name": "Isoxo",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "dubstep",
+        "edm",
+        "electronic",
+        "hybrid trap",
+        "trap edm"
+      ],
+      "soundcloudSlug": "isoxo",
+      "spotifyId": "4zVCMnjw54nkhGHU4e1Pav",
+      "youtubeQuery": "Isoxo live set"
     },
     {
       "name": "Knock2",
       "day": "Friday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "bass house",
+        "hybrid trap"
+      ],
+      "soundcloudSlug": "knock2music",
+      "spotifyId": "6mmSS7itNWKbapgG2eZbIg",
+      "youtubeQuery": "Knock2 live set"
     },
     {
       "name": "Dogpark",
       "day": "Friday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "spotifyId": "2VlmDb05CPERyCZfmZI3x7",
+      "youtubeQuery": "Dogpark live set"
     },
     {
       "name": "Isabel LaRosa",
       "day": "Friday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "alternative pop"
+      ],
+      "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
+      "youtubeQuery": "Isabel LaRosa live set"
     },
     {
       "name": "Ravyn Lenae",
       "day": "Friday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "alternative r&b",
+        "contemporary r&b",
+        "neo soul",
+        "pop",
+        "r&b",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "ravynlenaesounds",
+      "spotifyId": "5RTLRtXjbXI2lSXc6jxlAz",
+      "youtubeQuery": "Ravyn Lenae live set"
     },
     {
       "name": "Amaarae",
       "day": "Friday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "afrobeats",
+        "alternative r&b",
+        "alté",
+        "contemporary r&b",
+        "neo soul",
+        "r&b"
+      ],
+      "spotifyId": "21UPYSRWFKwtqvSAnFnSvS",
+      "youtubeQuery": "Amaarae live set"
     },
     {
       "name": "Wallows",
       "day": "Friday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "alternative rock",
+        "pop rock",
+        "indie pop",
+        "indie rock"
+      ],
+      "soundcloudSlug": "wallowsmusic",
+      "spotifyId": "0NIPkIjTV8mB795yEIiPYL",
+      "youtubeQuery": "Wallows live set"
     },
     {
       "name": "Winyah",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "4iyP4VOGOLzbt2Vxcyu6zG",
+      "youtubeQuery": "Winyah live set"
     },
     {
       "name": "Cassandra Coleman",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "1O6GvgnaHzgcFlCX6RlhYV",
+      "youtubeQuery": "Cassandra Coleman live set"
     },
     {
       "name": "Caroline Kingsbury",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "0uE0bzpIfuZ9XVduu0byzg",
+      "youtubeQuery": "Caroline Kingsbury live set"
     },
     {
       "name": "Midnight Generation",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "4CKIGHCZRzNoiNDSaW5eaq",
+      "youtubeQuery": "Midnight Generation live set"
     },
     {
       "name": "Carol Ades",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "genres": [
+        "pop"
+      ],
+      "soundcloudSlug": "caroline-pennell",
+      "spotifyId": "0cZPTEmf3mlwj5kjVXR4po",
+      "youtubeQuery": "Carol Ades live set"
     },
     {
       "name": "Star Bandz",
       "day": "Friday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "5qhDQveADDnjIZQ85AtgDM",
+      "youtubeQuery": "Star Bandz live set"
     },
     {
       "name": "Jesse Detor",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "3HljFuKgpaXNKfIlFZWCEk",
+      "youtubeQuery": "Jesse Detor live set"
     },
     {
       "name": "Old Mervs",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "3N8YzKqrEQonvd5RLQ4iYg",
+      "youtubeQuery": "Old Mervs live set"
     },
     {
       "name": "Hey, Nothing",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "soundcloudSlug": "heynothing-music",
+      "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
+      "youtubeQuery": "Hey, Nothing live set"
     },
     {
       "name": "Zinadelphia",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "jazz pop",
+        "pop soul"
+      ],
+      "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
+      "youtubeQuery": "Zinadelphia live set"
     },
     {
       "name": "Orla Gartland",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "folk",
+        "indie pop"
+      ],
+      "soundcloudSlug": "orlagartland",
+      "spotifyId": "3ajf12ub55b51qcS94d9Co",
+      "youtubeQuery": "Orla Gartland live set"
     },
     {
       "name": "The Dare",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "electroclash",
+        "new rave"
+      ],
+      "soundcloudSlug": "itsthedare",
+      "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
+      "youtubeQuery": "The Dare live set"
     },
     {
       "name": "Ocean Alley",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
+      "youtubeQuery": "Ocean Alley live set"
     },
     {
       "name": "Wyatt Flores",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "country",
+        "red dirt"
+      ],
+      "spotifyId": "46lEQmDJLJeyltECJYJv1Y",
+      "youtubeQuery": "Wyatt Flores live set"
     },
     {
       "name": "Bladee",
       "day": "Friday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "cloud rap",
+        "experimental hip hop",
+        "alternative r&b",
+        "emo rap",
+        "trap",
+        "contemporary r&b",
+        "pop rap"
+      ],
+      "soundcloudSlug": "bladee1000",
+      "spotifyId": "2xvtxDNInKDV4AvGmjw6d1",
+      "youtubeQuery": "Bladee live set"
     },
     {
       "name": "Alemeda",
       "day": "Friday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "spotifyId": "33Se8kMYeTPkeeM2LnsPF8",
+      "youtubeQuery": "Alemeda live set"
     },
     {
       "name": "Kenny Mason",
       "day": "Friday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "alternative hip hop",
+        "hip hop",
+        "trap"
+      ],
+      "soundcloudSlug": "kennymason",
+      "spotifyId": "4mwdnO2jZrMmMVrjcHsZBv",
+      "youtubeQuery": "Kenny Mason live set"
     },
     {
       "name": "Del Water Gap",
       "day": "Friday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "indie pop",
+        "pop"
+      ],
+      "soundcloudSlug": "delwatergap",
+      "spotifyId": "0xPoVNPnxIIUS1vrxAYV00",
+      "youtubeQuery": "Del Water Gap live set"
     },
     {
       "name": "Flipturn",
       "day": "Friday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "indie rock"
+      ],
+      "soundcloudSlug": "flipturnband",
+      "spotifyId": "7FKTg75ADVMZgY3P9ZMRtH",
+      "youtubeQuery": "Flipturn live set"
     },
     {
       "name": "Jane Remover",
       "day": "Friday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "digicore",
+        "hyperpop",
+        "indie rock",
+        "experimental hip hop",
+        "experimental rock",
+        "indie pop",
+        "pop rap",
+        "rock"
+      ],
+      "soundcloudSlug": "janeremover",
+      "spotifyId": "2rLGlNI6htigNxx172qxLu",
+      "youtubeQuery": "Jane Remover live set"
     },
     {
       "name": "Otoboke Beaver",
       "day": "Friday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "youtubeQuery": "Otoboke Beaver live set"
     },
     {
       "name": "T-Pain",
       "day": "Friday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "youtubeQuery": "T-Pain live set"
     },
     {
       "name": "Bleachers",
       "day": "Friday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "alternative rock",
+        "indie rock",
+        "rock"
+      ],
+      "soundcloudSlug": "bleachers",
+      "spotifyId": "2eam0iDomRHGBypaDQLwWI",
+      "youtubeQuery": "Bleachers live set"
     },
     {
       "name": "Korn",
       "day": "Friday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "nu metal",
+        "alternative metal",
+        "metal",
+        "alternative rock",
+        "rock",
+        "heavy metal"
+      ],
+      "soundcloudSlug": "kornofficial",
+      "spotifyId": "3RNrq3jvMZxD9ZyoOZbQOD",
+      "youtubeQuery": "Korn live set"
     },
     {
       "name": "Tessla",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "thisistess",
+      "spotifyId": "3bIr4g7fZxrqbUbAEqFsCS",
+      "youtubeQuery": "Tessla live set"
     },
     {
       "name": "Birds of a Feather",
       "day": "Saturday",
-      "stage": "Kidzapalooza"
+      "stage": "Kidzapalooza",
+      "youtubeQuery": "Birds of a Feather live set"
     },
     {
       "name": "Landon Conrath",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "2PJ06l59DomDd440az768u",
+      "youtubeQuery": "Landon Conrath live set"
     },
     {
       "name": "Winnetka Bowling League",
       "day": "Saturday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "spotifyId": "4ug3P1K8BaCdJXROrqHqhu",
+      "youtubeQuery": "Winnetka Bowling League live set"
     },
     {
       "name": "Jev",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "youtubeQuery": "Jev live set"
     },
     {
       "name": "Dua Saleh",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "soundcloudSlug": "doitlikedua",
+      "spotifyId": "2DGBzoOLcKLK3eWxFyugdB",
+      "youtubeQuery": "Dua Saleh live set"
     },
     {
       "name": "Eddie and the Getaway",
       "day": "Saturday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "youtubeQuery": "Eddie and the Getaway live set"
     },
     {
       "name": "Kickflip",
       "day": "Saturday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "likedis auto"
+      ],
+      "youtubeQuery": "Kickflip live set"
     },
     {
       "name": "Sam Austins",
       "day": "Saturday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "soundcloudSlug": "samaustins",
+      "spotifyId": "0zmnfFQX8LWVVZyRPHRx1V",
+      "youtubeQuery": "Sam Austins live set"
     },
     {
       "name": "Daniel Allan",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "spotifyId": "5JQ1XqKJ2Art01rF4tu1Ra",
+      "youtubeQuery": "Daniel Allan live set"
     },
     {
       "name": "Fyütch & Aura V",
       "day": "Saturday",
-      "stage": "Kidzapalooza"
+      "stage": "Kidzapalooza",
+      "youtubeQuery": "Fyütch & Aura V live set"
     },
     {
       "name": "Wasia Project",
       "day": "Saturday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "bedroom pop",
+        "jazz pop",
+        "pop"
+      ],
+      "spotifyId": "7poQNrOwZoUcoqihg4Xex0",
+      "youtubeQuery": "Wasia Project live set"
     },
     {
       "name": "Salute",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "speed garage",
+        "uk garage",
+        "dance-pop",
+        "french house",
+        "electronic",
+        "funky house"
+      ],
+      "soundcloudSlug": "saluteaut",
+      "spotifyId": "1np8xozf7ATJZDi9JX8Dx5",
+      "youtubeQuery": "Salute live set"
     },
     {
       "name": "Charlotte Lawrence",
       "day": "Saturday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "pop"
+      ],
+      "soundcloudSlug": "charlotteslawrence",
+      "spotifyId": "7LImGq5KnzQobZciDJpeJb",
+      "youtubeQuery": "Charlotte Lawrence live set"
     },
     {
       "name": "Carter Vail",
       "day": "Saturday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "4Bu9DnBZ12oX7MiiaJy9hK",
+      "youtubeQuery": "Carter Vail live set"
     },
     {
       "name": "Layz",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "layzdubz",
+      "spotifyId": "2ozQcs5XxFaj5fvA02zhwo",
+      "youtubeQuery": "Layz live set"
     },
     {
       "name": "Bôa",
       "day": "Saturday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "k-pop",
+        "j-pop",
+        "pop",
+        "singer-songwriter"
+      ],
+      "spotifyId": "35M2kdEtBZT6K4tcVm78A0",
+      "youtubeQuery": "Bôa live set"
     },
     {
       "name": "Ole 60",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "3iXeAZ8862AyoZ5ZGg800O",
+      "youtubeQuery": "Ole 60 live set"
     },
     {
       "name": "Max McNown",
       "day": "Saturday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "spotifyId": "340PS4ZcZ4UCBgyrXzEjcp",
+      "youtubeQuery": "Max McNown live set"
     },
     {
       "name": "Divinity Roxx & Divi Roxx Kids",
       "day": "Saturday",
-      "stage": "Kidzapalooza"
+      "stage": "Kidzapalooza",
+      "youtubeQuery": "Divinity Roxx & Divi Roxx Kids live set"
     },
     {
       "name": "The Bingo-Go-Go",
       "day": "Saturday",
-      "stage": "Bonus Tracks"
+      "stage": "Bonus Tracks",
+      "youtubeQuery": "The Bingo-Go-Go live set"
     },
     {
       "name": "Rachel Grae",
       "day": "Saturday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "0ekCwZGQUkAISV1h48jlHn",
+      "youtubeQuery": "Rachel Grae live set"
     },
     {
       "name": "Flux Pavilion",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "dubstep",
+        "edm",
+        "electronic",
+        "dance",
+        "uk garage",
+        "club",
+        "dub"
+      ],
+      "soundcloudSlug": "flux-pavilion",
+      "spotifyId": "7muzHifhMdnfN1xncRLOqk",
+      "youtubeQuery": "Flux Pavilion live set"
     },
     {
       "name": "Montell Fish",
       "day": "Saturday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "alternative r&b"
+      ],
+      "soundcloudSlug": "montellfish",
+      "spotifyId": "5nvWOyAkfNgVLKESq4fOj2",
+      "youtubeQuery": "Montell Fish live set"
     },
     {
       "name": "Bossman Dlow",
       "day": "Saturday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "hip hop",
+        "trap"
+      ],
+      "soundcloudSlug": "bossman-dlow",
+      "spotifyId": "23xFbA9rYgRX8mreqysWPc",
+      "youtubeQuery": "Bossman Dlow live set"
     },
     {
       "name": "The Happiness Club",
       "day": "Saturday",
-      "stage": "Kidzapalooza"
+      "stage": "Kidzapalooza",
+      "youtubeQuery": "The Happiness Club live set"
     },
     {
       "name": "Naomi Scott",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "soundcloudSlug": "naomiscottmusic",
+      "spotifyId": "2Zi3RrdQqk63Xj0914STkS",
+      "youtubeQuery": "Naomi Scott live set"
     },
     {
       "name": "Young Miko",
       "day": "Saturday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "hip hop",
+        "latin",
+        "reggaeton",
+        "trap",
+        "trap latino"
+      ],
+      "soundcloudSlug": "youngmiko",
+      "spotifyId": "3qsKSpcV3ncke3hw52JSMB",
+      "youtubeQuery": "Young Miko live set"
     },
     {
       "name": "Marina",
       "day": "Saturday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "pop",
+        "electropop",
+        "indie pop",
+        "alternative pop",
+        "dance-pop",
+        "alternative rock",
+        "emo pop",
+        "leftfield"
+      ],
+      "soundcloudSlug": "marinadiamandis",
+      "spotifyId": "1dYg03VTo2pCwwqxjNa3YI",
+      "youtubeQuery": "Marina live set"
     },
     {
       "name": "Dr. Fresch",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "drfresch",
+      "spotifyId": "1htHgbGwgCWJBfGiQwcRqC",
+      "youtubeQuery": "Dr. Fresch live set"
     },
     {
       "name": "Orion Sun",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "indie pop",
+        "neo soul",
+        "r&b"
+      ],
+      "soundcloudSlug": "orionsun",
+      "spotifyId": "2efrqekWSHlvhATD50AG3m",
+      "youtubeQuery": "Orion Sun live set"
     },
     {
       "name": "Zoe Ko",
       "day": "Saturday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "493xhO4GiL1eOhWUBt8CzZ",
+      "youtubeQuery": "Zoe Ko live set"
     },
     {
       "name": "Levity",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "levity-pl",
+      "youtubeQuery": "Levity live set"
     },
     {
       "name": "Fujii Kaze",
       "day": "Saturday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "youtubeQuery": "Fujii Kaze live set"
     },
     {
       "name": "Bilmuri",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "post-hardcore",
+        "alternative metal",
+        "alternative rock",
+        "indie rock",
+        "alternative pop",
+        "pop punk",
+        "rock"
+      ],
+      "spotifyId": "5Rc75vGFBWZPgL7EXb4k89",
+      "youtubeQuery": "Bilmuri live set"
     },
     {
       "name": "Clairo",
       "day": "Saturday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "bedroom pop",
+        "indie pop",
+        "pop",
+        "dream pop",
+        "indie folk",
+        "lo-fi",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "ccottrill",
+      "spotifyId": "3l0CmX0FuQjFxr8SK7Vqag",
+      "youtubeQuery": "Clairo live set"
     },
     {
       "name": "Doechii",
       "day": "Saturday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "hip hop",
+        "pop rap"
+      ],
+      "soundcloudSlug": "iam-doechii",
+      "spotifyId": "4E2rKHVDssGJm2SCDOMMJB",
+      "youtubeQuery": "Doechii live set"
     },
     {
       "name": "People R Ugly",
       "day": "Saturday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "1kXY7pco0sC6GEgJW9xxyI",
+      "youtubeQuery": "People R Ugly live set"
     },
     {
       "name": "Chase & Status",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "drum and bass",
+        "electronic",
+        "dubstep",
+        "uk garage",
+        "jungle",
+        "breakbeat",
+        "breaks",
+        "club"
+      ],
+      "soundcloudSlug": "chaseandstatus",
+      "spotifyId": "3jNkaOXasoc7RsxdchvEVq",
+      "youtubeQuery": "Chase & Status live set"
     },
     {
       "name": "Damiano David",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "7AaGbSgUxJFuZ49VvclNH6",
+      "youtubeQuery": "Damiano David live set"
     },
     {
       "name": "JPEGMAFIA",
       "day": "Saturday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "experimental hip hop",
+        "hip hop",
+        "cloud rap",
+        "alternative r&b",
+        "east coast hip hop",
+        "glitch hop",
+        "hardcore hip hop",
+        "industrial hip hop"
+      ],
+      "soundcloudSlug": "jpegmafia",
+      "spotifyId": "6yJ6QQ3Y5l0s0tn7b0arrO",
+      "youtubeQuery": "JPEGMAFIA live set"
     },
     {
       "name": "Twice",
       "day": "Saturday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "k-pop",
+        "pop",
+        "dance",
+        "r&b",
+        "dance-pop",
+        "electronica",
+        "j-pop"
+      ],
+      "spotifyId": "7n2Ycct7Beij7Dj7meI4X0",
+      "youtubeQuery": "Twice live set"
     },
     {
       "name": "Two Friends",
       "day": "Saturday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "dance-pop",
+        "edm"
+      ],
+      "soundcloudSlug": "two-friends",
+      "spotifyId": "44Ewva5aHOX00EwaX2D2mh",
+      "youtubeQuery": "Two Friends live set"
     },
     {
       "name": "RÜFÜS du Sol",
       "day": "Saturday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "alternative dance",
+        "edm",
+        "house",
+        "dance",
+        "dance-pop",
+        "deep house",
+        "electro",
+        "electronic"
+      ],
+      "soundcloudSlug": "rufusdusol",
+      "spotifyId": "5Pb27ujIyYb33zBqVysBkj",
+      "youtubeQuery": "RÜFÜS du Sol live set"
     },
     {
       "name": "Mk.gee",
       "day": "Saturday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "alternative r&b",
+        "ambient pop",
+        "dream pop",
+        "indietronica",
+        "neo-psychedelia"
+      ],
+      "soundcloudSlug": "mkgee",
+      "spotifyId": "7tr9pbgNEKtG0GQTKe08Tz",
+      "youtubeQuery": "Mk.gee live set"
     },
     {
       "name": "Raecola",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "raecolaa",
+      "spotifyId": "4ZLYabLbKeMkfAsFNESfpj",
+      "youtubeQuery": "Raecola live set"
     },
     {
       "name": "Kaicrewsade",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "4WgDm2J3jztBZSc1S0lMsx",
+      "youtubeQuery": "Kaicrewsade live set"
     },
     {
       "name": "Landon Barker",
       "day": "Sunday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "spotifyId": "7tWnepocfeqynsYC75hWoF",
+      "youtubeQuery": "Landon Barker live set"
     },
     {
       "name": "Jigitz",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "jigitz",
+      "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
+      "youtubeQuery": "Jigitz live set"
     },
     {
       "name": "Joe P",
       "day": "Sunday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "alternative rock"
+      ],
+      "spotifyId": "3pIwImfumJioKb0zHHP61x",
+      "youtubeQuery": "Joe P live set"
     },
     {
       "name": "The Criticals",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "6ArhcOX0zzUe8GDzLTgBrK",
+      "youtubeQuery": "The Criticals live set"
     },
     {
       "name": "Benches",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "youtubeQuery": "Benches live set"
     },
     {
       "name": "Flowerovlove",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "dance-pop",
+        "indie pop"
+      ],
+      "soundcloudSlug": "flower_garden",
+      "spotifyId": "1JspXUvEv3D9ddMeLNqYWj",
+      "youtubeQuery": "Flowerovlove live set"
     },
     {
       "name": "Laila!",
       "day": "Sunday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "youtubeQuery": "Laila! live set"
     },
     {
       "name": "Nimino",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "electronic"
+      ],
+      "soundcloudSlug": "milo-good-evans",
+      "spotifyId": "5x0R3zoC09GMiRJomoexLV",
+      "youtubeQuery": "Nimino live set"
     },
     {
       "name": "Vincent Lima",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "youtubeQuery": "Vincent Lima live set"
     },
     {
       "name": "Post Animal",
       "day": "Sunday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "psychedelic rock"
+      ],
+      "soundcloudSlug": "postanimal-music",
+      "spotifyId": "4iaDWP59Z3e62DW7YWDbIE",
+      "youtubeQuery": "Post Animal live set"
     },
     {
       "name": "John Walt Foundation: Chicag...",
       "day": "Sunday",
-      "stage": "Fountain"
+      "stage": "Fountain",
+      "youtubeQuery": "John Walt Foundation: Chicag... live set"
     },
     {
       "name": "Lekan",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "3Z7dkUrTApDgi6npZfoHVv",
+      "youtubeQuery": "Lekan live set"
     },
     {
       "name": "Boynextdoor",
       "day": "Sunday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "k-pop"
+      ],
+      "spotifyId": "4hnHLgMSOiqERWBL4jINP1",
+      "youtubeQuery": "Boynextdoor live set"
     },
     {
       "name": "Willow Avalon",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "spotifyId": "6EEkobfnenJF603WO8nUrR",
+      "youtubeQuery": "Willow Avalon live set"
     },
     {
       "name": "Rebecca Black",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "pop"
+      ],
+      "soundcloudSlug": "rebeccareneeblack",
+      "spotifyId": "3Vl9fyKMIdLMswk8ai3mm9",
+      "youtubeQuery": "Rebecca Black live set"
     },
     {
       "name": "Q Brothers",
       "day": "Sunday",
-      "stage": "Kidzapalooza"
+      "stage": "Kidzapalooza",
+      "youtubeQuery": "Q Brothers live set"
     },
     {
       "name": "Wild Rivers",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "indie folk"
+      ],
+      "soundcloudSlug": "wildriversband",
+      "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
+      "youtubeQuery": "Wild Rivers live set"
     },
     {
       "name": "Katseye",
       "day": "Sunday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "dance-pop",
+        "pop",
+        "k-pop",
+        "electronic",
+        "hip hop",
+        "hip hop soul",
+        "new jack swing"
+      ],
+      "spotifyId": "3c0gDdb9lhnHGFtP4prQpn",
+      "youtubeQuery": "Katseye live set"
     },
     {
       "name": "The Second City: Comedy Mixtape",
       "day": "Sunday",
-      "stage": "Bonus Tracks"
+      "stage": "Bonus Tracks",
+      "youtubeQuery": "The Second City: Comedy Mixtape live set"
     },
     {
       "name": "Sofia Camara",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "5bdLfpk3TpFVwrlHWmPL55",
+      "youtubeQuery": "Sofia Camara live set"
     },
     {
       "name": "Mariah the Scientist",
       "day": "Sunday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "contemporary r&b",
+        "r&b"
+      ],
+      "soundcloudSlug": "selkcub",
+      "spotifyId": "7HO5fOXE4gh3lzZn64tX2E",
+      "youtubeQuery": "Mariah the Scientist live set"
     },
     {
       "name": "La Femme",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "psychedelic",
+        "coldwave",
+        "electronic",
+        "post-punk",
+        "neo-psychedelia",
+        "synth-pop",
+        "acid jazz",
+        "pop"
+      ],
+      "soundcloudSlug": "lafemmeressort",
+      "spotifyId": "5VTWoYYizcOY3uIKnxeCGI",
+      "youtubeQuery": "La Femme live set"
     },
     {
       "name": "Wave to Earth",
       "day": "Sunday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "genres": [
+        "bedroom pop",
+        "indie pop",
+        "indie rock"
+      ],
+      "soundcloudSlug": "wave_to_earth",
+      "spotifyId": "5069JTmv5ZDyPeZaCCXiCg",
+      "youtubeQuery": "Wave to Earth live set"
     },
     {
       "name": "Chachi (DJ Set)",
       "day": "Sunday",
-      "stage": "Bud Light Backyard"
+      "stage": "Bud Light Backyard",
+      "youtubeQuery": "Chachi (DJ Set) live set"
     },
     {
       "name": "Marlon Hoffstadt",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "soundcloudSlug": "marlonhoffstadt",
+      "spotifyId": "0HHa7ZJZxUQlg5l2mB0N0f",
+      "youtubeQuery": "Marlon Hoffstadt live set"
     },
     {
       "name": "Aliyah's Interlude",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "youtubeQuery": "Aliyah's Interlude live set"
     },
     {
       "name": "Isaiah Rashad",
       "day": "Sunday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "hip hop"
+      ],
+      "soundcloudSlug": "isaiah_rashad",
+      "spotifyId": "6aaMZ3fcfLv4tEbmY7bjRM",
+      "youtubeQuery": "Isaiah Rashad live set"
     },
     {
       "name": "Remi Wolf",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "alternative pop",
+        "pop soul"
+      ],
+      "soundcloudSlug": "remi-wolf",
+      "spotifyId": "0NB5HROxc8dDBXpkIi1v3d",
+      "youtubeQuery": "Remi Wolf live set"
     },
     {
       "name": "Joey Valence & Brae",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "hip hop",
+        "boom bap",
+        "rap rock"
+      ],
+      "soundcloudSlug": "joeyvalenceandbrae",
+      "spotifyId": "1q4618qKswelCGLoanFKQh",
+      "youtubeQuery": "Joey Valence & Brae live set"
     },
     {
       "name": "BLK Odyssy",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "genres": [
+        "hip hop",
+        "r&b"
+      ],
+      "spotifyId": "062tCT8GVioC9EMiI9jeOV",
+      "youtubeQuery": "BLK Odyssy live set"
     },
     {
       "name": "Sammy Virji",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "bass house",
+        "bassline",
+        "dance",
+        "electronic",
+        "uk funky",
+        "uk garage"
+      ],
+      "soundcloudSlug": "sammyvirji",
+      "spotifyId": "1GuqTQbuixFHD6eBkFwVcb",
+      "youtubeQuery": "Sammy Virji live set"
     },
     {
       "name": "Finneas",
       "day": "Sunday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "pop",
+        "indie pop",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "finneasmusic",
+      "spotifyId": "37M5pPGs6V1fchFJSgCguX",
+      "youtubeQuery": "Finneas live set"
     },
     {
       "name": "Ian",
       "day": "Sunday",
-      "stage": "Tito's"
+      "stage": "Tito's",
+      "youtubeQuery": "Ian live set"
     },
     {
       "name": "Bob's Dance Shop",
       "day": "Sunday",
-      "stage": "Bonus Tracks"
+      "stage": "Bonus Tracks",
+      "youtubeQuery": "Bob's Dance Shop live set"
     },
     {
       "name": "Maribou State",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "electronic",
+        "downtempo",
+        "house",
+        "leftfield"
+      ],
+      "soundcloudSlug": "mariboustate",
+      "spotifyId": "7zrkALJ9ayRjzysp4QYoEg",
+      "youtubeQuery": "Maribou State live set"
     },
     {
       "name": "Goo (DJ Set)",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "youtubeQuery": "Goo (DJ Set) live set"
     },
     {
       "name": "Graham Barham",
       "day": "Sunday",
-      "stage": "BMI"
+      "stage": "BMI",
+      "spotifyId": "3WHWgx8Dh0IqQT1BMDTeE3",
+      "youtubeQuery": "Graham Barham live set"
     },
     {
       "name": "Dominic Fike",
       "day": "Sunday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "alternative pop"
+      ],
+      "soundcloudSlug": "dominicfike",
+      "spotifyId": "6USv9qhCn6zfxlBQIYJ9qs",
+      "youtubeQuery": "Dominic Fike live set"
     },
     {
       "name": "Gryffin",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "dance-pop",
+        "electronic",
+        "electropop",
+        "pop"
+      ],
+      "soundcloudSlug": "gryffinofficial",
+      "spotifyId": "2ZRQcIgzPCVaT9XKhXZIzh",
+      "youtubeQuery": "Gryffin live set"
     },
     {
       "name": "The Marías",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "dream pop",
+        "indie pop",
+        "lo-fi",
+        "psychedelic pop",
+        "bedroom pop",
+        "psychedelic soul",
+        "synth-pop"
+      ],
+      "soundcloudSlug": "themarias",
+      "spotifyId": "2sSGPbdZJkaSE2AbcGOACx",
+      "youtubeQuery": "The Marías live set"
     },
     {
       "name": "Artemas",
       "day": "Sunday",
-      "stage": "The Grove"
+      "stage": "The Grove",
+      "genres": [
+        "alternative pop",
+        "dark electro",
+        "pop",
+        "pop rock",
+        "sexy drill",
+        "synth-pop"
+      ],
+      "spotifyId": "0PCCGZ0wGLizHt2KZ7hhA2",
+      "youtubeQuery": "Artemas live set"
     },
     {
       "name": "Still Woozy",
       "day": "Sunday",
-      "stage": "Lakeshore"
+      "stage": "Lakeshore",
+      "genres": [
+        "bedroom pop",
+        "indie pop",
+        "indietronica"
+      ],
+      "soundcloudSlug": "stillwoozy",
+      "spotifyId": "4iMO20EPodreIaEl8qW66y",
+      "youtubeQuery": "Still Woozy live set"
     },
     {
       "name": "Martin Garrix",
       "day": "Sunday",
-      "stage": "Perry's"
+      "stage": "Perry's",
+      "genres": [
+        "edm",
+        "big room house",
+        "electro house",
+        "dance-pop",
+        "festival progressive house",
+        "tropical house"
+      ],
+      "soundcloudSlug": "martingarrix",
+      "spotifyId": "60d24wfXkVzDSfLS6hyCjZ",
+      "youtubeQuery": "Martin Garrix live set"
     },
     {
       "name": "A$AP Rocky",
       "day": "Sunday",
-      "stage": "Bud Light"
+      "stage": "Bud Light",
+      "genres": [
+        "hip hop",
+        "east coast hip hop",
+        "cloud rap",
+        "experimental hip hop",
+        "hardcore hip hop",
+        "pop rap",
+        "trap"
+      ],
+      "soundcloudSlug": "asvpxrocky",
+      "spotifyId": "13ubrt8QOOCPljQ2FL1Kca",
+      "youtubeQuery": "A$AP Rocky live set"
     },
     {
       "name": "Sabrina Carpenter",
       "day": "Sunday",
-      "stage": "T-Mobile"
+      "stage": "T-Mobile",
+      "genres": [
+        "pop",
+        "dance-pop",
+        "electropop"
+      ],
+      "soundcloudSlug": "sabrinacarpenter",
+      "spotifyId": "74KM79TiuVKeVCqs8QtB0B",
+      "youtubeQuery": "Sabrina Carpenter live set"
     }
   ],
   "dayMeta": {
