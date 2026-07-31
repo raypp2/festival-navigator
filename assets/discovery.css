@@ -232,3 +232,118 @@
 }
 .sample-player-collapse-title { font: 700 13px var(--font-ui); color: var(--text-body); }
 .sample-player-collapse-sub { font: 500 11px/1.5 var(--font-ui); color: var(--text-tertiary); margin-top: 5px; }
+
+/* ---- artist page ---- */
+/* App-wide surface (js/discovery/artist-page.js), frames 5a (mobile, normative)
+ * / 5b (desktop, M7 — not built yet). A fixed full-screen overlay, created/
+ * destroyed dynamically like the share-moment/add-member sheets in app.js —
+ * there is no static markup for it in index.html. z-index sits above the dock
+ * (30) and below the notes sheet (40/41): the page's own "Add a note" button
+ * opens that EXISTING sheet on top of it. */
+.artist-page {
+  position: fixed; inset: 0; z-index: 35; background: var(--page);
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+.ap-scroll { display: flex; flex-direction: column; min-height: 100%; }
+.ap-body { display: flex; flex-direction: column; gap: 22px; padding: 0 18px 40px; }
+
+/* ---- hero: crew-aura background (js/v3/aura.js) + grain, name, chips, set
+ * line, headline pick control. .hero-grain is the shared v3 token class
+ * (opacity .4) — reused rather than redeclared. */
+.ap-hero { position: relative; overflow: hidden; padding: 10px 18px 20px; flex: none; }
+.ap-hero-bg { position: absolute; inset: 0; }
+.ap-hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 18px; }
+.ap-hero-top { display: flex; align-items: center; justify-content: space-between; }
+.ap-back {
+  width: 40px; height: 40px; border-radius: var(--r-pill); flex: none;
+  border: 1px solid rgba(43, 36, 64, .8); background: rgba(10, 8, 18, .45);
+  color: var(--text-header); font-size: 16px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.ap-hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.ap-hero-name-wrap { min-width: 0; flex: 1; }
+/* Long names wrap — never truncated (verified against "Skull Machine (Black
+ * Tiger Sex Machine x Kai Wachi)"). */
+.ap-name {
+  margin: 0; font: 800 clamp(24px, 6vw, 30px)/1.08 var(--font-ui); color: #fff;
+  letter-spacing: -.01em; word-break: break-word; overflow-wrap: anywhere;
+}
+.ap-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.ap-chip {
+  border: 1px solid rgba(50, 42, 77, .9); border-radius: var(--r-pill); padding: 5px 11px;
+  font: 700 10px var(--font-ui); color: var(--text-header); background: rgba(10, 8, 18, .35);
+}
+.ap-no-genres { margin-top: 12px; font: 600 11.5px var(--font-ui); color: var(--text-tertiary); }
+.ap-setline { margin-top: 14px; font: 700 12px var(--font-ui); color: var(--text-header); letter-spacing: .01em; }
+.ap-stage { color: rgb(var(--fest)); } /* one of the four allowed fest-accent places */
+
+/* ---- headline pick control: fixed-height tick + must/pass, hero right side ---- */
+.ap-pick-control { display: flex; align-items: stretch; gap: 8px; flex: none; }
+.ap-tick {
+  position: relative; width: 34px; height: 96px; flex: none; padding: 0;
+  border-radius: 11px; border: 1.5px solid #fff; background: rgba(10, 8, 18, .5);
+  overflow: hidden; cursor: pointer;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.ap-tick-fill { position: absolute; left: 0; right: 0; bottom: 0; }
+.ap-tick-label { position: relative; font: 800 12px var(--font-ui); color: #fff; padding-bottom: 7px; }
+.ap-pick-side { display: flex; flex-direction: column; gap: 8px; }
+.ap-must, .ap-pass {
+  width: 44px; height: 44px; border-radius: var(--r-pill); flex: none; cursor: pointer;
+  background: rgba(10, 8, 18, .5);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.ap-must { border: 1px solid rgba(var(--brand), .55); color: var(--tonal-text); font-size: 16px; }
+.ap-must.is-on { background: var(--tonal-fill); border-color: rgb(var(--brand)); }
+.ap-pass { border: 1px dashed var(--border-emphasis); color: var(--text-secondary); font-size: 13px; } /* quiet, never a thumbs-down */
+.ap-pass.is-on { color: var(--text-body); border-style: solid; }
+
+/* ---- shared section chrome ---- */
+.ap-section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+.ap-section-label { font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-tertiary); }
+.ap-section-sub { font: 600 10px var(--font-ui); color: var(--text-tertiary); }
+
+/* ---- sample: hosts js/discovery/player.js's mountPlayer, layout 'full' ---- */
+.ap-sample { border: 1px solid var(--border-card); border-radius: var(--r-row); background: var(--card); overflow: hidden; }
+
+/* ---- crew ---- */
+.ap-crew-list { display: flex; flex-direction: column; gap: 11px; font: 600 12.5px var(--font-ui); color: var(--text-body); }
+.ap-crew-row { display: flex; align-items: center; gap: 10px; }
+.ap-crew-row-passed { opacity: .55; }
+.ap-crew-row-dashed .ap-crew-name { color: var(--text-body); }
+.ap-pill {
+  height: 18px; min-width: 26px; padding: 0 5px; border-radius: var(--r-pill);
+  font: 800 9.5px var(--font-ui); color: #fff; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.ap-pill-dashed { border-style: dashed !important; background: transparent !important; }
+.ap-crew-name { flex: 1; min-width: 0; }
+.ap-crew-hint { color: var(--text-tertiary); font-weight: 600; }
+.ap-crew-status { font: 700 11px var(--font-ui); color: var(--text-tertiary); flex: none; display: flex; align-items: center; gap: 7px; }
+.ap-mini-tick {
+  height: 16px; width: 6px; border-radius: 3px; background: var(--hairline); border: 1px solid;
+  overflow: hidden; display: flex; align-items: flex-end; flex: none;
+}
+.ap-mini-tick-fill { width: 100%; display: block; }
+.ap-recommend { background: none; border: none; padding: 0; cursor: pointer; color: var(--tonal-text); font: 700 11px var(--font-ui); }
+
+/* ---- notes: inline preview (bubble style reused from assets/v3.css's
+ * .note-row/.bubble — same identity the notes sheet uses); authoring stays in
+ * the existing sheet (js/v3/notes.js openArtistSheet). ---- */
+.ap-notes-list { display: flex; flex-direction: column; gap: 8px; }
+.ap-add-note {
+  margin-top: 9px; width: 100%; border: 1px dashed var(--border-input); border-radius: var(--r-row);
+  padding: 10px 12px; font: 600 12px var(--font-ui); color: var(--text-tertiary); background: transparent;
+  cursor: pointer; display: flex; align-items: center; gap: 7px; text-align: left;
+}
+
+/* ---- similar artists ---- */
+.ap-similar-list { display: flex; flex-direction: column; gap: 8px; }
+.ap-similar-row {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  border: 1px solid var(--border-card); border-radius: var(--r-row); padding: 11px 12px;
+  background: var(--card); color: inherit; cursor: pointer; text-align: left;
+}
+.ap-similar-left { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ap-similar-name { font: 700 13px var(--font-ui); color: var(--text-header); }
+.ap-similar-sub { font: 600 11px var(--font-ui); color: var(--text-tertiary); }

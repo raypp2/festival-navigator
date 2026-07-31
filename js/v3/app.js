@@ -12,6 +12,7 @@ import { loadFestivalIndex, loadFestival, loadCustomFestivals, FESTIVAL_INDEX, d
 import { renderWall, refreshCard, showUndoToast, showToast, wireScrollspy, colorIndexOf, groupByDay, knownDaysOf } from './wall.js';
 import { disclosureFold, eqLoader, festRow } from './tools.js';
 import { openArtistSheet, openDayNotes, openAllNotes, closeSheet, refreshOpenSheet, sheetChrome, dialogize, rememberOpener } from './notes.js';
+import { openArtistPage, closeArtistPage, refreshOpenArtistPage } from '../discovery/artist-page.js';
 import { renderSettings, appSettings, openSubviewByKey } from './settings.js';
 import { onStorageWriteFail, saveLS } from '../util.js';
 import { router } from './router.js';
@@ -47,6 +48,11 @@ const ctx = {
 function onNotesChange() {
   sync.scheduleSync();
   repaintWall();
+  // The notes sheet can be stacked ON TOP of an open artist page (its
+  // "Add a note" button opens the same existing sheet) — a note added there
+  // must show up in the page's own inline notes preview without a manual
+  // reopen, same as the wall repaints underneath it.
+  refreshOpenArtistPage();
 }
 
 function refreshCtx() {
@@ -60,45 +66,40 @@ function refreshCtx() {
 }
 
 // ---- tap cycle -------------------------------------------------------------------
-// A multi-day artist has one card under EACH day — a pick must repaint every
-// sibling, or the others go stale and invite double-cycling (CORE-15).
-function refreshArtistCards(artistName) {
-  const els = document.querySelectorAll(`#wall-root .card[data-artist="${CSS.escape(artistName)}"]`);
-  if (!els.length) { repaintWall(); return; }
-  els.forEach((el) => refreshCard(el, artistName, ctx));
-}
-
+// Flow change (Discovery M3, build spec 7.1): tapping an artist name — wall
+// row, timetable set, or any other renderCard consumer, since they all route
+// through ctx.onTap — no longer cycles the pick inline. It opens the artist
+// page instead; the pick cycle now lives on the page's headline tick. Every
+// tap path (click AND the card's Enter/Space keydown) already calls
+// ctx.onTap, so this one function change is the whole flow change.
 function handleTap(artistName) {
   if (!ctx.meName) return;
   if (ctx.migrationPending) {
     showToast($('toast-root'), 'Updating this crew — picks unlock in a moment');
     return;
   }
-  const current = (ctx.picks[artistName] || {})[ctx.meName] || 0;
-  const next = model.nextTapLevel(current);
-  state.recordSelection(artistName, ctx.meName, next);
-  applyLocalPick(artistName, ctx.meName, next);
-  refreshCtx();
-  refreshArtistCards(artistName);
-  sync.scheduleSync();
-  if (current === 4 && next === 0) {
-    showUndoToast($('toast-root'), 'Cleared your must for ' + artistName, () => {
-      state.recordSelection(artistName, ctx.meName, 4);
-      applyLocalPick(artistName, ctx.meName, 4);
-      refreshCtx();
-      refreshArtistCards(artistName);
-      sync.scheduleSync();
-    });
-  }
+  openArtistPage(artistName, ctx, artistPageActions);
+  router.push('artist:' + artistName);
 }
 
-// recordSelection writes pending; mirror into the local doc for instant render.
-function applyLocalPick(artist, person, level) {
+// recordSelection(For) writes pending only; mirror into the local doc for
+// instant render — the artist page's pick/pass writes reuse this exact
+// function (passed through artistPageActions) rather than duplicating it.
+export function applyLocalPick(artist, person, level) {
   state.ensureFestivalState(ctx.fid);
   const sels = state.crewDoc.festivals[ctx.fid].selections;
   (sels[artist] = sels[artist] || {})[person] = level;
   state.persist();
 }
+
+// What the artist page needs from app.js that it can't reach without a
+// circular import: the local-doc mirror above, and an undo toast bound to
+// this shell's toast-root. Built once; ctx (also referenced) is the same
+// live object the rest of the shell mutates in place via refreshCtx.
+const artistPageActions = {
+  applyLocalPick,
+  showUndoToast: (message, onUndo) => showUndoToast($('toast-root'), message, onUndo),
+};
 
 // ---- header / toolbar / dock ------------------------------------------------------
 function applyFestTheme() {
@@ -304,7 +305,9 @@ function maybeShowCoachMark() {
   bar.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-top: 11px; padding: 10px 13px; border: 1px solid var(--notes-chip-stroke); border-radius: var(--r-row); background: rgba(139, 123, 255, .07);';
   const msg = document.createElement('span');
   msg.style.cssText = 'flex: 1; color: var(--text-body); font-size: 12px; font-weight: 600; line-height: 1.45;';
-  msg.append('Tap an artist to pick — brighter each tap, 4th is a must. Hold one for notes. ');
+  // Copy tracks the Discovery flow change: a tap OPENS the artist now; the
+  // pick cycle lives on the page's tick.
+  msg.append('Tap an artist to open it — sample a set, see the crew, and pick right there. ');
   const how = document.createElement('button');
   how.style.cssText = 'background: none; border: none; padding: 0; cursor: pointer; color: var(--notes-chip-text); font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px;';
   how.textContent = 'How it works';
@@ -1579,7 +1582,7 @@ export function init() {
   sync.initSync({
     // Everything that renders identity/state repaints together — the dock
     // avatar was the one holdout showing a stale color (audit 1.5).
-    onRemoteChange: () => { repaintWall(); renderPersonChips(); renderYou(); refreshOpenSheet(); },
+    onRemoteChange: () => { repaintWall(); renderPersonChips(); renderYou(); refreshOpenSheet(); refreshOpenArtistPage(); },
     onCrewGone: (token) => {
       // The server said this crew no longer exists — a dead row on the
       // landing list would just 404 again (FLOW-3).
@@ -1618,6 +1621,18 @@ export function init() {
     else if (key.startsWith('sheet:day:')) openDayNotes(key.slice('sheet:day:'.length), ctx, onNotesChange);
     else if (key.startsWith('sheet:notes:')) openArtistSheet(key.slice('sheet:notes:'.length), ctx, onNotesChange);
   }, () => closeSheet());
+  // The one overlay element persists across artist-to-artist navigation
+  // (tapping a Similar row re-renders it in place, per artist-page.js), but
+  // the router still gets one stack entry PER artist — so back steps
+  // artist-by-artist. Closing the top 'artist:' entry must therefore check
+  // whether another one is still underneath before tearing the page down:
+  // if so, step back to ITS content instead of closing (idempotent either
+  // way — openArtistPage never creates a second overlay).
+  router.registerKind('artist:', (key) => openArtistPage(key.slice('artist:'.length), ctx, artistPageActions), () => {
+    const top = router.top();
+    if (top && top.startsWith('artist:')) openArtistPage(top.slice('artist:'.length), ctx, artistPageActions);
+    else closeArtistPage();
+  });
   window.addEventListener('popstate', (e) => router.onPopState(e.state));
   $('search-input').addEventListener('input', (e) => {
     ctx.query = e.target.value;

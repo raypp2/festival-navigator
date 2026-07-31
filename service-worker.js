@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v37'; // v37 = canonical host is ray-festival.vercel.app; Gemini model unpinned (2.5-flash retired for new keys)
+const CACHE_VERSION = 'festival-nav-v38'; // v38 = Discovery M3: artist page assets added to precache
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
@@ -35,6 +35,12 @@ const APP_CORE = [
   '/js/v3/favicon.js',
   '/js/v3/router.js',
   '/js/v3/sort-control.js',
+  '/js/discovery/artist-page.js',
+  '/js/discovery/genres.js',
+  '/js/discovery/score.js',
+  '/js/discovery/player.js',
+  '/js/discovery/player-core.js',
+  '/assets/discovery.css',
   '/data/festivals/index.json',
 ];
 

@@ -104,15 +104,19 @@ let ACTIVE = null;
  * artist        — { id?, name, genres? } (genres: string or string[]).
  * sources       — { youtubeVideoIds?, youtubeLabels?, soundcloudSlug?, spotifyId? }.
  * layout        — 'full' | 'compact' | 'desktop'.
+ * showHeader    — default true; false suppresses the name/genres head (the
+ *                 artist page already carries both in its hero — frame 5a
+ *                 draws the sample block headerless). Offline status still
+ *                 renders either way.
  * onStateChange — optional (snapshot) => void, called after every render.
  *
  * Returns { destroy, getState, handoverTo(newHost, newLayout) }.
  */
-export function mountPlayer({ host, artist, sources, layout = 'full', onStateChange } = {}) {
+export function mountPlayer({ host, artist, sources, layout = 'full', showHeader = true, onStateChange } = {}) {
   if (!host) throw new Error('mountPlayer: host element is required');
   if (ACTIVE) ACTIVE.destroy(); // tear down the previous embed FIRST, always
 
-  const instance = createInstance({ host, artist, sources, layout, onStateChange });
+  const instance = createInstance({ host, artist, sources, layout, showHeader, onStateChange });
   ACTIVE = instance;
   instance.init();
 
@@ -126,7 +130,7 @@ export function mountPlayer({ host, artist, sources, layout = 'full', onStateCha
   };
 }
 
-function createInstance({ host, artist, sources, layout, onStateChange }) {
+function createInstance({ host, artist, sources, layout, showHeader = true, onStateChange }) {
   const core = createPlayerCore({ storage: safeLocalStorage() });
   const artistKey = artist?.id || artist?.name || 'unknown-artist';
   const genresLine = Array.isArray(artist?.genres) ? artist.genres.join(' · ') : artist?.genres || '';
@@ -301,8 +305,10 @@ function createInstance({ host, artist, sources, layout, onStateChange }) {
   function renderHead(snap) {
     const head = document.createElement('div');
     head.className = 'sample-player-head';
-    head.innerHTML = `<h2 class="sample-player-head-name">${esc(artist?.name || '')}</h2>` +
-      (genresLine ? `<div class="sample-player-head-genres">${esc(genresLine)}</div>` : '');
+    if (showHeader) {
+      head.innerHTML = `<h2 class="sample-player-head-name">${esc(artist?.name || '')}</h2>` +
+        (genresLine ? `<div class="sample-player-head-genres">${esc(genresLine)}</div>` : '');
+    }
     if (!snap.online) {
       const status = document.createElement('span');
       status.className = 'sample-player-status';
