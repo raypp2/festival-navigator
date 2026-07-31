@@ -355,6 +355,53 @@
 .ap-similar-name { font: 700 13px var(--font-ui); color: var(--text-header); }
 .ap-similar-sub { font: 600 11px var(--font-ui); color: var(--text-tertiary); }
 
+/* ---- artist page · desktop (5b) ---- */
+/* Frame 5b: "two columns · shell 1120 · a designed size". Left rail 440
+   (hero card, sample, pick caption); right: crew and notes side by side,
+   similar as a two-column grid. Pure CSS re-placement — .ap-body dissolves
+   via display:contents and every section takes a named grid area, so the
+   mobile DOM/behavior is untouched below 1200px. */
+@media (min-width: 1200px) {
+  #artist-page-overlay .ap-scroll {
+    display: grid;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 40px 60px;
+    grid-template-columns: 440px minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'hero   crew  notes'
+      'sample crew  notes'
+      'sample sim   sim';
+    gap: 20px;
+    align-items: start;
+    min-height: 0;
+  }
+  #artist-page-overlay .ap-body { display: contents; }
+  #artist-page-overlay .ap-hero {
+    grid-area: hero;
+    border: 1px solid var(--border-card);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  #artist-page-overlay .ap-sample { grid-area: sample; align-self: start; }
+  #artist-page-overlay .ap-crew,
+  #artist-page-overlay .ap-notes {
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    background: var(--card);
+    padding: 18px;
+    align-self: start;
+  }
+  #artist-page-overlay .ap-crew { grid-area: crew; }
+  #artist-page-overlay .ap-notes { grid-area: notes; }
+  #artist-page-overlay .ap-similar { grid-area: sim; }
+  #artist-page-overlay .ap-similar-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+
 /* ---- discover deck ---- */
 /* Toolbar entry (js/v3/app.js inserts this after #sort-control): violet
  * tonal treatment, same pill footprint as the app's other tonal buttons —

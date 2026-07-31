@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v41'; // v41 = player seek + SC monetization honesty
+const CACHE_VERSION = 'festival-nav-v42'; // v42 = artist page desktop (5b)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
