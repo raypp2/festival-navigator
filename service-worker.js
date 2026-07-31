@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v39'; // v39 = Discovery M4/M5: deck + filter modules added to precache
+const CACHE_VERSION = 'festival-nav-v40'; // v40 = YouTube video ids enriched into festival data — data changes need a bump too (a v39 SW served the pre-enrichment JSON and hid the YouTube tab)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

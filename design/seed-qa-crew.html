@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seed QA crew — local testing only</title>
+<style>
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#0C0A14; color:#C6CBD6; font:15px/1.6 Inter,system-ui,sans-serif; }
+  .card { width:min(480px, 92vw); background:#141021; border:1px solid #2B2440; border-radius:12px; padding:26px; }
+  h1 { font-size:18px; color:#EDEAF4; margin:0 0 6px; }
+  p  { font-size:12.5px; color:#8E86A8; margin:0 0 18px; }
+  label { display:block; font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#877FA4; margin:0 0 8px; }
+  select { width:100%; min-height:44px; background:#1C1731; color:#EDEAF4; border:1px solid #322A4D; border-radius:10px; padding:0 12px; font:600 14px Inter,system-ui; margin-bottom:16px; }
+  button { display:block; width:100%; min-height:48px; border-radius:999px; border:none; cursor:pointer;
+           font:800 14px Inter,system-ui; margin-bottom:10px;
+           background:rgba(192,132,252,.13); color:#D8B4FE; }
+  button.secondary { background:transparent; border:1px solid #322A4D; color:#C6CBD6; font-weight:700; }
+  .note { font-size:11px; color:#6B6480; margin-top:12px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Seed a QA crew (device-local)</h1>
+  <p>Writes a throwaway crew into THIS browser's localStorage and opens the app.
+     The token is fake — nothing syncs, nothing touches a real database. Sync will
+     sit at offline/error on a static server; that's expected.</p>
+
+  <label for="me">Test as</label>
+  <select id="me">
+    <option value="Ray" selected>Ray (red · has musts and a pass)</option>
+    <option value="Drew">Drew (blue · musts, wrote the notes)</option>
+    <option value="Mara">Mara (green · light picker, one pass)</option>
+    <option value="Sam">Sam (yellow · never opened — sees the rec queue)</option>
+  </select>
+
+  <button id="ubbi">Seed &amp; open Ubbi Dubbi '26 — For-you wall + deck</button>
+  <button id="ef">Seed &amp; open Electric Forest '26 — timetable + artist page</button>
+  <button id="clear" class="secondary">Clear QA data from this browser</button>
+
+  <div class="note">QA-only page; ships in <code>design/</code>, linked from nowhere.
+     Members: Ray · Drew · Mara · Sam. Ubbi Dubbi carries taste signal (trap/dubstep
+     musts) so For-you and the deck rank visibly; EF carries picks, a pass, notes
+     and crew spread across the timetable.</div>
+</div>
+<script>
+  const TOK = 'localtestcrew0000000000000000';
+  const NOW = '2026-07-29T10:00:00.000Z';
+  const DOC = {
+    v: 4,
+    meta: { name: 'QA Crew', inviteFestId: 'ubbi-dubbi-2026' },
+    spotify: {},
+    people: {
+      Ray:  { color: '239, 68, 68' },
+      Drew: { color: '59, 130, 246' },
+      Mara: { color: '34, 197, 94' },
+      Sam:  { color: '251, 191, 36' },
+    },
+    festivals: {
+      'ubbi-dubbi-2026': {
+        selections: {
+          'Tape B':            { Ray: 4, Drew: 2 },
+          'TroyBoi':           { Ray: 4 },
+          'Alesso':            { Drew: 4 },
+          'Ganja White Night': { Mara: 2 },
+          'Kx5':               { Mara: 1, Drew: 1 },
+        },
+        passes: {
+          'Within The Void': { Mara: { ts: NOW } },
+          'RayRay':          { Ray:  { ts: NOW } },
+        },
+        recs: {
+          'Tape B': { Sam: { by: 'Ray', ts: NOW } },
+        },
+        notes: { artist: {
+          'Tape B': { 'Drew.1753000000000.qa0001': { author: 'Drew', ts: '2026-07-20T10:00:00.000Z',
+            text: 'His Red Rocks set was unreal — do not miss.' } },
+        } },
+      },
+      'electric-forest-2026': {
+        selections: {
+          'Excision':          { Ray: 4, Drew: 4 },
+          'GRiZ':              { Ray: 2, Drew: 2 },
+          'Effin':             { Mara: 2 },
+          'Ganja White Night': { Drew: 1 },
+          'Eggy':              { Mara: 3 },
+        },
+        passes: {
+          'Passion Pit': { Mara: { ts: NOW } },
+        },
+        notes: { artist: {
+          'GRiZ': { 'Drew.1753000000001.qa0002': { author: 'Drew', ts: '2026-07-20T10:00:00.000Z',
+            text: 'Caught the b2b at EF — insane energy. Worth skipping dinner for.' } },
+        } },
+      },
+    },
+    affinity: {},
+  };
+
+  function seed(fid) {
+    const me = document.getElementById('me').value;
+    localStorage.setItem('fn_crew_doc_v3_' + TOK, JSON.stringify(DOC));
+    localStorage.setItem('fn_crews_v3', JSON.stringify([{ token: TOK, name: 'QA Crew' }]));
+    localStorage.setItem('fn_active_crew_v3', TOK);
+    localStorage.setItem('fn_me_v3_' + TOK, me);
+    localStorage.setItem('fn_crew_fest_v3_' + TOK, fid);
+    localStorage.removeItem('fn_crew_pending_v3_' + TOK);
+    location.href = '/index.html#g=' + TOK;
+  }
+
+  document.getElementById('ubbi').addEventListener('click', () => seed('ubbi-dubbi-2026'));
+  document.getElementById('ef').addEventListener('click', () => seed('electric-forest-2026'));
+  document.getElementById('clear').addEventListener('click', () => {
+    for (const k of Object.keys(localStorage)) {
+      if (k.includes(TOK) || k === 'fn_crews_v3' || k === 'fn_active_crew_v3') localStorage.removeItem(k);
+    }
+    document.getElementById('clear').textContent = 'Cleared ✓';
+  });
+</script>
+</body>
+</html>

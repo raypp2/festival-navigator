@@ -1098,21 +1098,36 @@
       ],
       "soundcloudSlug": "effin",
       "spotifyId": "6l0u1oM2imxw0isrGcXpmH",
-      "youtubeQuery": "Effin live set"
+      "youtubeQuery": "Effin live set",
+      "youtubeVideoIds": [
+        "wu801rrpRtk",
+        "SbDrE2dB14c",
+        "65yoSnu_SkM"
+      ]
     },
     {
       "name": "Midnight Generation",
       "day": "Day 1",
       "stage": "Ranch Arena",
       "spotifyId": "4CKIGHCZRzNoiNDSaW5eaq",
-      "youtubeQuery": "Midnight Generation live set"
+      "youtubeQuery": "Midnight Generation live set",
+      "youtubeVideoIds": [
+        "Ko2IxE-mY50",
+        "ab4VdLongGs",
+        "0czmXDQG8F8"
+      ]
     },
     {
       "name": "Disco Lines",
       "day": "Day 1",
       "stage": "Ranch Arena",
       "spotifyId": "5Kmr0b3ip8g9P2i0dLTC3Z",
-      "youtubeQuery": "Disco Lines live set"
+      "youtubeQuery": "Disco Lines live set",
+      "youtubeVideoIds": [
+        "swc-zm2NV6o",
+        "vsPU3kdB5QY",
+        "e3Oo1ASxr7U"
+      ]
     },
     {
       "name": "Excision",
@@ -1124,7 +1139,12 @@
       ],
       "soundcloudSlug": "excision",
       "spotifyId": "5FKchcZpQOkqFvXBj1aCvb",
-      "youtubeQuery": "Excision live set"
+      "youtubeQuery": "Excision live set",
+      "youtubeVideoIds": [
+        "RRDavrjyxik",
+        "Vt4eMphyB1Y",
+        "b29GV8RODIc"
+      ]
     },
     {
       "name": "Eggy",
@@ -1138,7 +1158,12 @@
         "psychedelic",
         "psychedelic rock"
       ],
-      "youtubeQuery": "Eggy live set"
+      "youtubeQuery": "Eggy live set",
+      "youtubeVideoIds": [
+        "tyC_jupNOZo",
+        "op0qgzuw3oc",
+        "8p7rNlNl3AI"
+      ]
     },
     {
       "name": "Night Tapes",
@@ -1149,14 +1174,24 @@
         "electronic"
       ],
       "spotifyId": "5APEQlUaQ5K70LgPqAdTuU",
-      "youtubeQuery": "Night Tapes live set"
+      "youtubeQuery": "Night Tapes live set",
+      "youtubeVideoIds": [
+        "xXLOeNk9ulM",
+        "kjFYmXlnojE",
+        "aL-U1wv3gmM"
+      ]
     },
     {
       "name": "Alleycvt",
       "day": "Day 1",
       "stage": "Sherwood Court",
       "spotifyId": "4JxRK2gxmri7L7OWaxnVD1",
-      "youtubeQuery": "Alleycvt live set"
+      "youtubeQuery": "Alleycvt live set",
+      "youtubeVideoIds": [
+        "yGXyuoeSwBU",
+        "t0zryekEWao",
+        "oEkQ6gU3VFs"
+      ]
     },
     {
       "name": "Ganja White Night",
@@ -1168,33 +1203,58 @@
       ],
       "soundcloudSlug": "ganjawhitenight",
       "spotifyId": "1a6oIpEh4DGgaqgWg5xwd3",
-      "youtubeQuery": "Ganja White Night live set"
+      "youtubeQuery": "Ganja White Night live set",
+      "youtubeVideoIds": [
+        "f4zHRGzMG7c",
+        "7RV8xYka7Yg",
+        "pWfLeXmvJ8A"
+      ]
     },
     {
       "name": "H&RRY",
       "day": "Day 1",
       "stage": "Tripolee",
-      "youtubeQuery": "H&RRY live set"
+      "youtubeQuery": "H&RRY live set",
+      "youtubeVideoIds": [
+        "5O0SthcwHew",
+        "luW5Xy01KRU",
+        "_IpY-xKVNgs"
+      ]
     },
     {
       "name": "Close Friends Only",
       "day": "Day 1",
       "stage": "Tripolee",
-      "youtubeQuery": "Close Friends Only live set"
+      "youtubeQuery": "Close Friends Only live set",
+      "youtubeVideoIds": [
+        "Sh5lrGTaACo",
+        "V96jBrTDGJY",
+        "kuwg8YHoMAc"
+      ]
     },
     {
       "name": "Jackie Hollander",
       "day": "Day 1",
       "stage": "Tripolee",
       "spotifyId": "5ykY9Uweo3gl5VFpb6z6pQ",
-      "youtubeQuery": "Jackie Hollander live set"
+      "youtubeQuery": "Jackie Hollander live set",
+      "youtubeVideoIds": [
+        "h0UoFF7MDEU",
+        "rCzMyJtPPT0",
+        "g3-Vi2sJt-s"
+      ]
     },
     {
       "name": "Daniel Allan",
       "day": "Day 1",
       "stage": "Tripolee",
       "spotifyId": "5JQ1XqKJ2Art01rF4tu1Ra",
-      "youtubeQuery": "Daniel Allan live set"
+      "youtubeQuery": "Daniel Allan live set",
+      "youtubeVideoIds": [
+        "dsA3N2vPP_E",
+        "YSj9Zv7ZUFU",
+        "cytbKbmfWLY"
+      ]
     },
     {
       "name": "Devault",
@@ -1202,13 +1262,29 @@
       "stage": "Tripolee",
       "soundcloudSlug": "devaultmusic",
       "spotifyId": "1VBAKMui4zm5MnBWNn3NbL",
-      "youtubeQuery": "Devault live set"
+      "youtubeQuery": "Devault live set",
+      "youtubeVideoIds": [
+        "h6PvAp66s_c",
+        "UhXrLjOvElE",
+        "LOYh1JnmK6k"
+      ]
     },
     {
       "name": "Westend",
       "day": "Day 1",
       "stage": "Tripolee",
-      "youtubeQuery": "Westend live set"
+      "youtubeQuery": "Westend live set",
+      "genres": [
+        "house",
+        "tech house"
+      ],
+      "soundcloudSlug": "itsthewestend",
+      "spotifyId": "4epc3Bd0DOBA0kDywkRAsu",
+      "youtubeVideoIds": [
+        "NbmK0YD5_P8",
+        "jQLWYc2UrFY",
+        "c8U1psZPyCc"
+      ]
     },
     {
       "name": "D.O.D",
@@ -1221,7 +1297,12 @@
       ],
       "soundcloudSlug": "d-o-d",
       "spotifyId": "0Cs47vvRsPgEfliBU9KDiB",
-      "youtubeQuery": "D.O.D live set"
+      "youtubeQuery": "D.O.D live set",
+      "youtubeVideoIds": [
+        "g3NGORYpcjI",
+        "fzPvVGLcRsI",
+        "lNdp9V0XM5s"
+      ]
     },
     {
       "name": "Odd Mob",
@@ -1233,26 +1314,53 @@
       ],
       "soundcloudSlug": "oddmob",
       "spotifyId": "4qLwtWhlhyAoQ4S9mSrDW9",
-      "youtubeQuery": "Odd Mob live set"
+      "youtubeQuery": "Odd Mob live set",
+      "youtubeVideoIds": [
+        "2idboK_vTT8",
+        "gO03gfI_JF0",
+        "ObiAocVMTyo"
+      ]
     },
     {
       "name": "Eli Brown",
       "day": "Day 1",
       "stage": "Tripolee",
       "spotifyId": "5lVNSw2GPci8kebrAQpZqU",
-      "youtubeQuery": "Eli Brown live set"
+      "youtubeQuery": "Eli Brown live set",
+      "youtubeVideoIds": [
+        "Xsblzk_1mP4",
+        "MVg7m6dgUqw",
+        "w5ULqs1LfNg"
+      ]
     },
     {
       "name": "Dixon's Violin",
       "day": "Day 1",
       "stage": "The Observatory",
-      "youtubeQuery": "Dixon's Violin live set"
+      "youtubeQuery": "Dixon's Violin live set",
+      "genres": [
+        "avant-garde",
+        "experimental",
+        "instrumental"
+      ],
+      "soundcloudSlug": "dixonsviolin",
+      "spotifyId": "7ECUCqZFq0J4GOHZ7zsi60",
+      "youtubeVideoIds": [
+        "NcPvF31nUlM",
+        "S-96KJtzDmo",
+        "a1ZSUpxNQCg"
+      ]
     },
     {
       "name": "Shima",
       "day": "Day 1",
       "stage": "The Observatory",
-      "youtubeQuery": "Shima live set"
+      "youtubeQuery": "Shima live set",
+      "youtubeVideoIds": [
+        "XzBfl8gVHn0",
+        "bw56itX9nrs",
+        "GsUjyvu2250"
+      ]
     },
     {
       "name": "Hershe",
@@ -1260,7 +1368,12 @@
       "stage": "The Observatory",
       "soundcloudSlug": "djhershe",
       "spotifyId": "572W2DIMj2JYViwkIpae6J",
-      "youtubeQuery": "Hershe live set"
+      "youtubeQuery": "Hershe live set",
+      "youtubeVideoIds": [
+        "QAvQK5yjfC0",
+        "Ixo2N1Fkfpk",
+        "TUXMBbVuxWw"
+      ]
     },
     {
       "name": "Jkyl & Hyde",
@@ -1272,7 +1385,12 @@
       ],
       "soundcloudSlug": "jkylxhyde",
       "spotifyId": "23AH13eC6V0NB0QCkV6206",
-      "youtubeQuery": "Jkyl & Hyde live set"
+      "youtubeQuery": "Jkyl & Hyde live set",
+      "youtubeVideoIds": [
+        "OqDVzImD3P4",
+        "7WnPfivWHC4",
+        "kAkgtIRASWE"
+      ]
     },
     {
       "name": "ProbCause",
@@ -1280,31 +1398,56 @@
       "stage": "The Observatory",
       "soundcloudSlug": "probcause",
       "spotifyId": "1ZcfGrGrm9aHnUNVQz3sCY",
-      "youtubeQuery": "ProbCause live set"
+      "youtubeQuery": "ProbCause live set",
+      "youtubeVideoIds": [
+        "KMjng_GHr84",
+        "UFm1aRse8Og",
+        "Eiu-w-B7N3c"
+      ]
     },
     {
       "name": "LSDream (Surprise Set)",
       "day": "Day 1",
       "stage": "The Observatory",
-      "youtubeQuery": "LSDream (Surprise Set) live set"
+      "youtubeQuery": "LSDream (Surprise Set) live set",
+      "youtubeVideoIds": [
+        "t6UnCvoUcg0",
+        "AsN5fdngBCk",
+        "OFFPMjpWigE"
+      ]
     },
     {
       "name": "All.Lo Collective",
       "day": "Day 1",
       "stage": "The Observatory",
-      "youtubeQuery": "All.Lo Collective live set"
+      "youtubeQuery": "All.Lo Collective live set",
+      "youtubeVideoIds": [
+        "13wfRqRbJjI",
+        "sVesQYvKcQk",
+        "VlqLsjTgNLo"
+      ]
     },
     {
       "name": "LSD Clownsystem",
       "day": "Day 1",
       "stage": "The Observatory",
-      "youtubeQuery": "LSD Clownsystem live set"
+      "youtubeQuery": "LSD Clownsystem live set",
+      "youtubeVideoIds": [
+        "EM-AXb5G-Xs",
+        "_1c1zhV3vHk",
+        "N23BTiWkydk"
+      ]
     },
     {
       "name": "Suzanne (Opening)",
       "day": "Day 1",
       "stage": "Honeycomb",
-      "youtubeQuery": "Suzanne (Opening) live set"
+      "youtubeQuery": "Suzanne (Opening) live set",
+      "youtubeVideoIds": [
+        "Nxtvk07Dsg8",
+        "UXhjTNwfRB0",
+        "AndEMO__p2U"
+      ]
     },
     {
       "name": "Bipolar Sunshine",
@@ -1315,7 +1458,12 @@
       ],
       "soundcloudSlug": "bipolarsunshine",
       "spotifyId": "0CjWKoS55T7DOt0HJuwF1H",
-      "youtubeQuery": "Bipolar Sunshine live set"
+      "youtubeQuery": "Bipolar Sunshine live set",
+      "youtubeVideoIds": [
+        "NWN6aTzhVt0",
+        "T3W96JR3wVs",
+        "Yf0DsunZurE"
+      ]
     },
     {
       "name": "Magoo",
@@ -1326,13 +1474,23 @@
         "progressive bluegrass"
       ],
       "spotifyId": "5WekSJls7QTlBwgvrUvVDy",
-      "youtubeQuery": "Magoo live set"
+      "youtubeQuery": "Magoo live set",
+      "youtubeVideoIds": [
+        "yNhJ6I9akQw",
+        "0VGI_LLexOk",
+        "ziHyQBv508A"
+      ]
     },
     {
       "name": "Laszewo",
       "day": "Day 1",
       "stage": "Honeycomb",
-      "youtubeQuery": "Laszewo live set"
+      "youtubeQuery": "Laszewo live set",
+      "youtubeVideoIds": [
+        "kdxJGWTZTac",
+        "neVoZVawDpM",
+        "bTFlW3VmJys"
+      ]
     },
     {
       "name": "MCR-T",
@@ -1340,13 +1498,23 @@
       "stage": "Honeycomb",
       "soundcloudSlug": "mcr-t",
       "spotifyId": "4m7q9onIm2bqhwHy9utqmw",
-      "youtubeQuery": "MCR-T live set"
+      "youtubeQuery": "MCR-T live set",
+      "youtubeVideoIds": [
+        "P1wcfXYzF0w",
+        "zIjBFjoQh9U",
+        "ihSEfhrt_Dg"
+      ]
     },
     {
       "name": "Bardo",
       "day": "Day 1",
       "stage": "Honeycomb",
-      "youtubeQuery": "Bardo live set"
+      "youtubeQuery": "Bardo live set",
+      "youtubeVideoIds": [
+        "k6uEyrD1M8Y",
+        "d4-FSVVGjVw",
+        "guovgqcy5a0"
+      ]
     },
     {
       "name": "Shauhiin Davari",
@@ -1360,13 +1528,23 @@
       "stage": "Center Stage",
       "soundcloudSlug": "cofresimusic",
       "spotifyId": "5qqc3uTsdX82MR0IpU5jsY",
-      "youtubeQuery": "Cofresi live set"
+      "youtubeQuery": "Cofresi live set",
+      "youtubeVideoIds": [
+        "xPpcCZy2drc",
+        "usM2Kh8nWeg",
+        "nN-2Iz_WT0s"
+      ]
     },
     {
       "name": "Fireflower",
       "day": "Day 1",
       "stage": "Center Stage",
-      "youtubeQuery": "Fireflower live set"
+      "youtubeQuery": "Fireflower live set",
+      "youtubeVideoIds": [
+        "ixEO3kcx8OE",
+        "A9OobIxBIxk",
+        "11ziT8HVCoI"
+      ]
     },
     {
       "name": "Supertaste",
@@ -1374,7 +1552,12 @@
       "stage": "Center Stage",
       "soundcloudSlug": "supertastemusic",
       "spotifyId": "6C4cWzfNlyH0l5xTQPLQa6",
-      "youtubeQuery": "Supertaste live set"
+      "youtubeQuery": "Supertaste live set",
+      "youtubeVideoIds": [
+        "LW0hiPA9JKE",
+        "luPmHAoAoy0",
+        "IyXHkGW-26Y"
+      ]
     },
     {
       "name": "Flying Mojito Bros",
@@ -1382,19 +1565,34 @@
       "stage": "Center Stage",
       "soundcloudSlug": "flying-mojito-bros",
       "spotifyId": "6tH2rLIDBEaniiX5mVsozq",
-      "youtubeQuery": "Flying Mojito Bros live set"
+      "youtubeQuery": "Flying Mojito Bros live set",
+      "youtubeVideoIds": [
+        "8LFou77NElA",
+        "WkW91IlLfMo",
+        "OxreGnuUeh4"
+      ]
     },
     {
       "name": "Cry Queen",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Cry Queen live set"
+      "youtubeQuery": "Cry Queen live set",
+      "youtubeVideoIds": [
+        "2q4RwTIkYk0",
+        "gVccKZmY664",
+        "W3r8-xyU0l0"
+      ]
     },
     {
       "name": "Public Works Dept",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Public Works Dept live set"
+      "youtubeQuery": "Public Works Dept live set",
+      "youtubeVideoIds": [
+        "BSaxPgyAmsY",
+        "ogmKTsB9C2k",
+        "TwZWRFdAhg0"
+      ]
     },
     {
       "name": "Keys",
@@ -1406,7 +1604,13 @@
       "name": "Mr. Wobbles",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Mr. Wobbles live set"
+      "youtubeQuery": "Mr. Wobbles live set",
+      "spotifyId": "1vG1KY8zUxiuoxqol1jufs",
+      "youtubeVideoIds": [
+        "JaYO_K1QrQk",
+        "uHlSntemBrs",
+        "RSzqyneVIyc"
+      ]
     },
     {
       "name": "Rambo Party",
