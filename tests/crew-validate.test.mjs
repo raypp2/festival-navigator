@@ -98,6 +98,56 @@ test('merge + validate round trip preserves crew semantics', () => {
   assert.equal(validateMergedDoc(merged).ok, true);
 });
 
+// ---- passes / recs (Discovery §3.4) ------------------------------------------
+
+test('passes: valid shapes accepted, tombstone (removed) accepted', () => {
+  ok({ festivals: { f: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  ok({ festivals: { f: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z', removed: true } } } } } });
+  ok({ festivals: { f: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z', removed: false } } } } } });
+});
+
+test('passes: an array where passes should be an object is rejected', () => {
+  bad({ festivals: { f: { passes: [] } } });
+  bad({ festivals: { f: { passes: { GRiZ: [] } } } });
+  bad({ festivals: { f: { passes: { GRiZ: { Kev: ['not-a-leaf'] } } } } });
+});
+
+test('passes: a numeric ts is rejected', () => {
+  bad({ festivals: { f: { passes: { GRiZ: { Kev: { ts: 1753833600000 } } } } } });
+});
+
+test('passes: bad person key, bad artist key, unknown leaf key rejected', () => {
+  bad({ festivals: { f: { passes: { GRiZ: { '<img>': { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  bad({ festivals: { f: { passes: { '': { Kev: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  bad({ festivals: { f: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z', extra: 1 } } } } } });
+  bad({ festivals: { f: { passes: { GRiZ: { Kev: { removed: true } } } } } }); // ts required even on tombstone
+});
+
+test('recs: valid shapes accepted, tombstone (removed) accepted', () => {
+  ok({ festivals: { f: { recs: { GRiZ: { Sam: { by: 'Drew', ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  ok({ festivals: { f: { recs: { GRiZ: { Sam: { by: 'Drew', ts: '2026-07-30T00:00:00.000Z', removed: true } } } } } });
+});
+
+test('recs: a rec leaf missing "by" is rejected', () => {
+  bad({ festivals: { f: { recs: { GRiZ: { Sam: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  bad({ festivals: { f: { recs: { GRiZ: { Sam: { by: '', ts: '2026-07-30T00:00:00.000Z' } } } } } });
+});
+
+test('recs: a numeric ts is rejected', () => {
+  bad({ festivals: { f: { recs: { GRiZ: { Sam: { by: 'Drew', ts: 1753833600000 } } } } } });
+});
+
+test('recs: an array where recs should be an object is rejected', () => {
+  bad({ festivals: { f: { recs: [] } } });
+  bad({ festivals: { f: { recs: { GRiZ: [] } } } });
+});
+
+test('recs: bad forPerson key, bad by name, unknown leaf key rejected', () => {
+  bad({ festivals: { f: { recs: { GRiZ: { '<img>': { by: 'Drew', ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  bad({ festivals: { f: { recs: { GRiZ: { Sam: { by: '<img>', ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  bad({ festivals: { f: { recs: { GRiZ: { Sam: { by: 'Drew', ts: '2026-07-30T00:00:00.000Z', note: 'hi' } } } } } });
+});
+
 test('prototype-pollution keys rejected everywhere and skipped by merge', () => {
   bad({ people: { ['__proto__']: { color: '1, 2, 3' } } });
   bad({ people: { constructor: { color: '1, 2, 3' } } });

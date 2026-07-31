@@ -190,6 +190,72 @@ function validateNotes(notes, fid) {
   return OK;
 }
 
+// `passes` and `recs` (Discovery, spec §3.4) are siblings of `selections` —
+// same keyed-object/tombstone discipline, never arrays (G-1).
+//
+// Tombstone convention adopted: a `removed: boolean` field on the leaf
+// object, exactly like `people[name].removed` above (validatePeople, the
+// `k === 'removed'` branch) — NOT notes' one-way `deleted: true` (validateNote,
+// `k === 'deleted'`, which rejects anything but `true` because a deleted note
+// is dead forever). Passes are explicitly reversible (spec §3.4: "reversible");
+// a plain boolean that can flip both ways is what makes that possible — with
+// jsonb_deep_merge's object-leaf-merges-key-by-key semantics, re-passing after
+// an un-pass MUST be able to write `removed:false` to clear a stale tombstone,
+// which a one-way sentinel (like notes' `deleted`) cannot express. Recs reuse
+// the same shape for consistency (one validator, one mental model) even though
+// their tombstone (forPerson acts on the rec) is expected to only run one way
+// in practice.
+//
+// As proven by tests/db-merge.test.mjs ("deletion is inexpressible"), sending
+// a bare `null` leaf does NOT remove the key — jsonb_deep_merge has no delete
+// operation, only overwrite — so, like selections' level-0 and notes'
+// `deleted:true`, the tombstone must be a normal value inside the schema, not
+// null.
+function validRemovedFlag(v) {
+  return typeof v === 'boolean';
+}
+
+function validatePasses(passes, fid) {
+  if (!isPlainObject(passes)) return fail(`festivals[${fid}].passes must be an object`);
+  for (const [artist, byPerson] of Object.entries(passes)) {
+    if (!validArtistKey(artist)) return fail(`passes: invalid artist key`);
+    if (!isPlainObject(byPerson)) return fail(`passes[${safeKey(artist)}] must be an object`);
+    for (const [person, leaf] of Object.entries(byPerson)) {
+      if (!validName(person, LIMITS.personName)) return fail(`passes[${safeKey(artist)}]: invalid person`);
+      const where = `passes[${safeKey(artist)}][${safeKey(person)}]`;
+      if (!isPlainObject(leaf)) return fail(`${where} must be an object`);
+      if (!validNoteTs(leaf.ts)) return fail(`${where}: bad ts`);
+      for (const [k, v] of Object.entries(leaf)) {
+        if (k === 'ts') continue;
+        else if (k === 'removed') { if (!validRemovedFlag(v)) return fail(`${where}: removed must be boolean`); }
+        else return fail(`${where}: unknown key ${safeKey(k)}`);
+      }
+    }
+  }
+  return OK;
+}
+
+function validateRecs(recs, fid) {
+  if (!isPlainObject(recs)) return fail(`festivals[${fid}].recs must be an object`);
+  for (const [artist, byForPerson] of Object.entries(recs)) {
+    if (!validArtistKey(artist)) return fail(`recs: invalid artist key`);
+    if (!isPlainObject(byForPerson)) return fail(`recs[${safeKey(artist)}] must be an object`);
+    for (const [forPerson, leaf] of Object.entries(byForPerson)) {
+      if (!validName(forPerson, LIMITS.personName)) return fail(`recs[${safeKey(artist)}]: invalid forPerson`);
+      const where = `recs[${safeKey(artist)}][${safeKey(forPerson)}]`;
+      if (!isPlainObject(leaf)) return fail(`${where} must be an object`);
+      if (!validName(leaf.by, LIMITS.personName)) return fail(`${where}: bad by`);
+      if (!validNoteTs(leaf.ts)) return fail(`${where}: bad ts`);
+      for (const [k, v] of Object.entries(leaf)) {
+        if (k === 'by' || k === 'ts') continue;
+        else if (k === 'removed') { if (!validRemovedFlag(v)) return fail(`${where}: removed must be boolean`); }
+        else return fail(`${where}: unknown key ${safeKey(k)}`);
+      }
+    }
+  }
+  return OK;
+}
+
 function validateFestivals(festivals) {
   if (!isPlainObject(festivals)) return fail('festivals must be an object');
   for (const [fid, entry] of Object.entries(festivals)) {
@@ -201,6 +267,12 @@ function validateFestivals(festivals) {
         if (!r.ok) return r;
       } else if (k === 'notes') {
         const r = validateNotes(v, fid);
+        if (!r.ok) return r;
+      } else if (k === 'passes') {
+        const r = validatePasses(v, fid);
+        if (!r.ok) return r;
+      } else if (k === 'recs') {
+        const r = validateRecs(v, fid);
         if (!r.ok) return r;
       } else return fail(`festivals[${fid}]: unknown key ${k}`);
     }

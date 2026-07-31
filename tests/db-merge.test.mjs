@@ -296,6 +296,54 @@ test('the v4 and legacy deltas are not swapped — $2 and $3 select by the row\'
   );
 });
 
+// ---- passes / recs (Discovery §3.4) --------------------------------------------
+// Siblings of `selections` — same keyed-object/tombstone discipline. Tombstone
+// convention: a `removed: boolean` leaf field (mirrors people[name].removed,
+// NOT notes' one-way `deleted:true` — see api/_lib/crew-shared.mjs for why).
+
+test('two people passing the same artist concurrently both survive the merge', async () => {
+  await seed();
+  await merge({ festivals: { ef: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  await merge({ festivals: { ef: { passes: { GRiZ: { Drew: { ts: '2026-07-30T00:01:00.000Z' } } } } } });
+  const doc = await readDoc();
+  assert.deepEqual(doc.festivals.ef.passes.GRiZ, {
+    Kev: { ts: '2026-07-30T00:00:00.000Z' },
+    Drew: { ts: '2026-07-30T00:01:00.000Z' },
+  }, 'concurrent passes from two people must not eat each other');
+});
+
+test('pass then tombstone reads as passed-removed, per the removed:boolean convention', async () => {
+  await seed();
+  await merge({ festivals: { ef: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  await merge({ festivals: { ef: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:05:00.000Z', removed: true } } } } } });
+  const leaf = (await readDoc()).festivals.ef.passes.GRiZ.Kev;
+  assert.deepEqual(leaf, { ts: '2026-07-30T00:05:00.000Z', removed: true }, 'tombstone lands as removed:true, key never disappears');
+
+  // And because it is `removed:boolean` (not a one-way sentinel), re-passing
+  // by writing removed:false clears the tombstone — this is what makes the
+  // convention support the "reversible" semantics spec §3.4 requires.
+  await merge({ festivals: { ef: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:10:00.000Z', removed: false } } } } } });
+  const leaf2 = (await readDoc()).festivals.ef.passes.GRiZ.Kev;
+  assert.deepEqual(leaf2, { ts: '2026-07-30T00:10:00.000Z', removed: false }, 'removed:false un-tombstones the pass');
+});
+
+test('a rec written for Sam by Drew, then overwritten by Mara, holds Mara\'s by/ts', async () => {
+  await seed();
+  await merge({ festivals: { ef: { recs: { GRiZ: { Sam: { by: 'Drew', ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  await merge({ festivals: { ef: { recs: { GRiZ: { Sam: { by: 'Mara', ts: '2026-07-30T00:02:00.000Z' } } } } } });
+  const leaf = (await readDoc()).festivals.ef.recs.GRiZ.Sam;
+  assert.deepEqual(leaf, { by: 'Mara', ts: '2026-07-30T00:02:00.000Z' }, 'a second sender overwrites by/ts at the leaf');
+});
+
+test('a pass and a pick for the same artist/person both survive at the doc level (client resolves)', async () => {
+  await seed();
+  await merge({ festivals: { ef: { selections: { GRiZ: { Kev: 4 } } } } });
+  await merge({ festivals: { ef: { passes: { GRiZ: { Kev: { ts: '2026-07-30T00:00:00.000Z' } } } } } });
+  const fest = (await readDoc()).festivals.ef;
+  assert.equal(fest.selections.GRiZ.Kev, 4, 'the pick is not dropped by a concurrent pass');
+  assert.deepEqual(fest.passes.GRiZ.Kev, { ts: '2026-07-30T00:00:00.000Z' }, 'the pass is not dropped by the pick either — mutual exclusion is a CLIENT concern');
+});
+
 // ---- festival membership sync (the ghost-festival fix, 2026-07-13) -----------
 // Adding a festival used to write only the local doc — The Crew's server doc
 // held ONE festival while Kevin's device showed six. The fix syncs an empty
