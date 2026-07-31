@@ -5,7 +5,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mergeEnrichment, normalizeName, pickMbHit, extractGenres, extractSoundcloudSlug, extractSpotifyId } from '../scripts/enrich-artists.mjs';
-import { validateArtistExtras, validateGenresDoc } from '../scripts/validate-festivals.mjs';
+import { validateArtistExtras, validateGenresDoc, validateArtistOrder, ARTIST_ORDERS } from '../scripts/validate-festivals.mjs';
 
 // ---------------------------------------------------------------------------
 // mergeEnrichment
@@ -184,6 +184,28 @@ test('validateArtistExtras rejects a non-array genres field', () => {
   const artists = [{ name: 'GRiZ', genres: 'future bass' }];
   const r = validateArtistExtras(artists);
   assert.ok(r.errors.some((e) => /genres must be an array/.test(e)), JSON.stringify(r.errors));
+});
+
+// ---------------------------------------------------------------------------
+// validateArtistOrder — the artists[] billing-vs-schedule declaration
+// ---------------------------------------------------------------------------
+
+test('validateArtistOrder accepts both enum values', () => {
+  assert.deepEqual(validateArtistOrder({ artistOrder: 'billing' }).errors, []);
+  assert.deepEqual(validateArtistOrder({ artistOrder: 'schedule' }).errors, []);
+  assert.deepEqual(ARTIST_ORDERS, ['billing', 'schedule']);
+});
+
+test('validateArtistOrder accepts a festival with no artistOrder at all (absent = billing)', () => {
+  assert.deepEqual(validateArtistOrder({ id: 'some-fest' }).errors, []);
+});
+
+test('validateArtistOrder rejects any value outside the two enum values', () => {
+  for (const junk of ['Billing', 'SCHEDULE', 'chronological', '', 0, null, true, ['schedule'], {}]) {
+    const r = validateArtistOrder({ artistOrder: junk });
+    assert.ok(r.errors.length > 0, `expected an error for artistOrder=${JSON.stringify(junk)}`);
+    assert.ok(/artistOrder must be one of/.test(r.errors[0]), JSON.stringify(r.errors));
+  }
 });
 
 // ---------------------------------------------------------------------------

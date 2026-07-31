@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import {
   WEIGHTS, BILLING_REASON_CUTOFF,
   buildTasteProfile, crewTasteProfile, scoreArtist, rankLineup, similarArtists,
+  derivePopularity,
 } from '../js/discovery/score.js';
 
 // canon ordered most-specific-first (per genres.js): Bass House is more
@@ -295,4 +296,203 @@ test('determinism: same input twice -> identical scoreArtist output', () => {
     artist, index: 0, total: 50, profile: PROFILE, picks: PICKS, passes: {}, me: 'Me', canonData: CANON,
   });
   assert.deepEqual(run(), run());
+});
+
+// ---- derivePopularity: schedule-derived billing prior for artistOrder:'schedule' festivals ----
+// Bug being fixed: score.js used to treat artists[] array position as
+// billing order everywhere. That's wrong for festivals whose artists[] is
+// printed in SCHEDULE order (openers first, headliners last) — the billing
+// prior inverted, cold start dealt openers first, and "#n on the bill"
+// ribbons went to the wrong artists. derivePopularity() reads the actual
+// per-day set times instead: headliners play LAST and LONGEST.
+
+test('derivePopularity: a late + long set outranks an early + short one', () => {
+  const fest = {
+    artists: [{ name: 'Early Short' }, { name: 'Late Long' }],
+    days: {
+      'Day 1': {
+        stages: ['Main'],
+        artists: [
+          { name: 'Early Short', stage: 'Main', time: '1:00 PM - 1:30 PM' },
+          { name: 'Late Long', stage: 'Main', time: '11:00 PM - 1:00 AM' },
+        ],
+      },
+    },
+  };
+  const pop = derivePopularity(fest);
+  assert.ok(pop.get('Late Long') > pop.get('Early Short'));
+  assert.equal(pop.get('Early Short'), 0);
+  assert.equal(pop.get('Late Long'), 1);
+});
+
+test('derivePopularity: a cross-midnight set (12:30 AM on "Day 1") counts as LATE, not early', () => {
+  // If AM times were read as literal small clock minutes instead of
+  // js/time.js's after-midnight semantics, the 12:30 AM headliner would
+  // score as the EARLIEST set of the day instead of the latest.
+  const fest = {
+    artists: [{ name: 'Afternoon Opener' }, { name: 'Midnight Headliner' }],
+    days: {
+      'Day 1': {
+        stages: ['Main'],
+        artists: [
+          { name: 'Afternoon Opener', stage: 'Main', time: '1:00 PM - 2:00 PM' },
+          { name: 'Midnight Headliner', stage: 'Main', time: '12:30 AM - 1:30 AM' },
+        ],
+      },
+    },
+  };
+  const pop = derivePopularity(fest);
+  assert.ok(pop.get('Midnight Headliner') > pop.get('Afternoon Opener'),
+    'the 12:30 AM set must score as later, not earlier, than the 1 PM set on the same printed day');
+  assert.equal(pop.get('Afternoon Opener'), 0);
+  assert.equal(pop.get('Midnight Headliner'), 1);
+});
+
+test('derivePopularity: a multi-set artist takes their max set, not their last or their sum', () => {
+  const fest = {
+    artists: [{ name: 'Multi Artist' }, { name: 'Single Late' }],
+    days: {
+      'Day 1': {
+        stages: ['Main'],
+        artists: [{ name: 'Multi Artist', stage: 'Main', time: '1:00 PM - 1:10 PM' }], // tiny raw
+      },
+      'Day 2': {
+        stages: ['Main'],
+        artists: [
+          { name: 'Multi Artist', stage: 'Main', time: '11:00 PM - 1:00 AM' }, // big raw
+          { name: 'Single Late', stage: 'Main', time: '1:00 PM - 1:15 PM' }, // this day's baseline (tiny raw)
+        ],
+      },
+      'Day 3': {
+        stages: ['Main'],
+        artists: [{ name: 'Multi Artist', stage: 'Main', time: '1:00 PM - 1:10 PM' }], // tiny raw again, and LAST seen
+      },
+    },
+  };
+  const pop = derivePopularity(fest);
+  // Multi Artist's best set (Day 2) is the global max raw -> normalizes to 1.
+  // If the implementation took the last-seen set instead of the max, this
+  // would come back as Day 3's tiny value instead.
+  assert.equal(pop.get('Multi Artist'), 1);
+  assert.equal(pop.get('Single Late'), 0);
+});
+
+test('derivePopularity: an artist in artists[] with no printed set gets a low floor, not zero', () => {
+  const fest = {
+    artists: [
+      { name: 'S1' }, { name: 'S2' }, { name: 'S3' }, { name: 'S4' }, { name: 'S5' },
+      { name: 'Ghost Artist' },
+    ],
+    days: {
+      'Day 1': {
+        stages: ['Main'],
+        artists: [
+          { name: 'S1', stage: 'Main', time: '1:00 PM - 1:10 PM' },
+          { name: 'S2', stage: 'Main', time: '3:00 PM - 3:30 PM' },
+          { name: 'S3', stage: 'Main', time: '6:00 PM - 7:00 PM' },
+          { name: 'S4', stage: 'Main', time: '9:00 PM - 10:30 PM' },
+          { name: 'S5', stage: 'Main', time: '11:30 PM - 1:00 AM' },
+        ],
+      },
+    },
+  };
+  const pop = derivePopularity(fest);
+  const ghost = pop.get('Ghost Artist');
+  assert.ok(ghost > 0, 'unscheduled artist must not be floored to zero -- it exists');
+  assert.ok(ghost < pop.get('S2'), 'floor sits below the lowest ACTUAL scheduled set, not among real signal');
+  // 10th percentile (linear interpolation, p=0.10 over 5 sorted normalized
+  // values: idx = 0.4 -> between sorted[0]=0 and sorted[1]=3600/56700).
+  const expectedFloor = (0 + ((3600 / 56700) - 0) * 0.4);
+  assert.ok(Math.abs(ghost - expectedFloor) < 1e-9, `expected floor ~= ${expectedFloor}, got ${ghost}`);
+});
+
+test('derivePopularity is a pure function: same fest twice -> identical Map contents', () => {
+  const fest = {
+    artists: [{ name: 'A' }, { name: 'B' }],
+    days: {
+      'Day 1': {
+        stages: ['Main'],
+        artists: [
+          { name: 'A', stage: 'Main', time: '1:00 PM - 1:30 PM' },
+          { name: 'B', stage: 'Main', time: '11:00 PM - 1:00 AM' },
+        ],
+      },
+    },
+  };
+  assert.deepEqual([...derivePopularity(fest)], [...derivePopularity(fest)]);
+});
+
+// ---- order:'schedule' ranking: popularity replaces the billing prior, reason copy changes ----
+
+const SCHEDULE_LINEUP = ['A', 'B', 'C', 'D', 'E'].map((n) => ({ name: n, genres: [] }));
+// Deliberately NOT in descending array-position order -- proves the score
+// comes from popularity, not index, once order:'schedule' is set.
+const SCHEDULE_POPULARITY = new Map([
+  ['A', 0.9], ['B', 0.8], ['C', 0.7], ['D', 0.5], ['E', 0.1],
+]);
+
+test('order:"schedule": billing prior comes from popularity, never from array index -- numeric "#n on the bill" is never emitted', () => {
+  const ranked = rankLineup({
+    artists: SCHEDULE_LINEUP, picks: {}, passes: {}, me: 'Me', canonData: CANON,
+    order: 'schedule', popularity: SCHEDULE_POPULARITY,
+  });
+  assert.deepEqual(ranked.map((r) => r.name), ['A', 'B', 'C', 'D', 'E'], 'ranks by popularity, matching array order here only incidentally');
+  for (const r of ranked) {
+    if (r.reason) assert.ok(!/^#\d+ on the bill$/.test(r.reason.text), `must never emit numeric billing copy, got: ${JSON.stringify(r.reason)}`);
+  }
+});
+
+test('order:"schedule": "headlining" is emitted only for the top 3 by derived popularity', () => {
+  const ranked = rankLineup({
+    artists: SCHEDULE_LINEUP, picks: {}, passes: {}, me: 'Me', canonData: CANON,
+    order: 'schedule', popularity: SCHEDULE_POPULARITY,
+  });
+  const byName = Object.fromEntries(ranked.map((r) => [r.name, r]));
+  assert.deepEqual(byName.A.reason, { type: 'billing', text: 'headlining' });
+  assert.deepEqual(byName.B.reason, { type: 'billing', text: 'headlining' });
+  assert.deepEqual(byName.C.reason, { type: 'billing', text: 'headlining' });
+  assert.equal(byName.D.reason, null);
+  assert.equal(byName.E.reason, null);
+});
+
+test('order:"schedule": array position is irrelevant to the "headlining" gate -- a low-index, low-popularity artist gets no reason; a high-index, high-popularity artist does', () => {
+  const lowIndexLowPop = scoreArtist({
+    artist: { name: 'E', genres: [] }, index: 0, total: 5, profile: PROFILE,
+    picks: {}, passes: {}, me: 'Me', canonData: CANON, order: 'schedule', popularity: SCHEDULE_POPULARITY,
+  });
+  assert.equal(lowIndexLowPop.reason, null, 'index 0 would be "headlining" under billing order, but E is not top-3 by popularity');
+
+  const highIndexHighPop = scoreArtist({
+    artist: { name: 'A', genres: [] }, index: 4, total: 5, profile: PROFILE,
+    picks: {}, passes: {}, me: 'Me', canonData: CANON, order: 'schedule', popularity: SCHEDULE_POPULARITY,
+  });
+  assert.deepEqual(highIndexHighPop.reason, { type: 'billing', text: 'headlining' });
+});
+
+test('order:"schedule": taste and crew reasons are unaffected (still outrank billing/popularity copy)', () => {
+  const artist = { name: 'Priority Test Artist', genres: ['Bass House'] };
+  const { reason } = scoreArtist({
+    artist, index: 0, total: 5, profile: PROFILE, picks: PICKS, passes: {}, me: 'Me', canonData: CANON,
+    order: 'schedule', popularity: SCHEDULE_POPULARITY,
+  });
+  assert.equal(reason.type, 'taste');
+  assert.equal(reason.text, 'shares Bass House with 1 of your musts');
+});
+
+// ---- order:'billing' (default/explicit) is byte-for-byte unchanged ----
+
+test('order:"billing" explicit param produces identical output to omitting order/popularity entirely', () => {
+  const lineup = [
+    { name: 'Priority Test Artist', genres: ['Bass House'] },
+    { name: 'Crew Over Billing Artist', genres: ['Techno'] },
+    { name: 'Crew Popular Artist', genres: ['House'] },
+    { name: 'Passed Artist', genres: ['Bass House'] },
+    { name: 'Blank Filler', genres: [] },
+  ];
+  const withDefaults = rankLineup({ artists: lineup, picks: PICKS, passes: PASSES, me: 'Me', canonData: CANON });
+  const withExplicitBilling = rankLineup({
+    artists: lineup, picks: PICKS, passes: PASSES, me: 'Me', canonData: CANON,
+    order: 'billing', popularity: SCHEDULE_POPULARITY, // popularity must be IGNORED under billing order
+  });
+  assert.deepEqual(withDefaults, withExplicitBilling);
 });

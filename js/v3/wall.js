@@ -13,7 +13,7 @@ import { activityMinutes } from '../time.js';
 import { auraBackground, whoCorner, aboutCorner, nameColor, subColor } from './aura.js';
 import { BOARD } from './palette.js';
 import { notesSection } from './notes.js'; // runtime-only cycle with this module (colorIndexOf) — safe
-import { rankLineup } from '../discovery/score.js'; // For-you sort (M5) — reasons + ranking, same source the deck uses
+import { rankLineup, derivePopularity } from '../discovery/score.js'; // For-you sort (M5) — reasons + ranking, same source the deck uses
 
 // Genre canon fallback for a repaint that races ahead of app.js's async load
 // (js/discovery/genres.js's own EMPTY_CANON shape, kept local rather than
@@ -356,12 +356,19 @@ export function applyWeekend(artists, weekend) {
 // signal only (no genre-driven reasons yet) rather than blocking the wall.
 function forYouRanked(ctx) {
   const fest = state.fest();
+  // Schedule-ordered festivals (artistOrder:"schedule" — EF, Lolla) can't use
+  // array position as a billing prior (openers sit first); the prior comes
+  // from the derived lateness×length popularity instead, and numeric
+  // "#n on the bill" copy is suppressed inside rankLineup.
+  const order = fest.artistOrder || 'billing';
   return rankLineup({
     artists: fest.artists || [],
     picks: ctx.picks || {},
     passes: ctx.passes || {},
     me: ctx.meName,
     canonData: ctx.canonData || EMPTY_CANON,
+    order,
+    popularity: order === 'schedule' ? derivePopularity(fest) : undefined,
   });
 }
 

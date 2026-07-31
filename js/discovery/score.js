@@ -11,6 +11,7 @@
 //   (the "plain list"); it just isn't presented as a recommendation.
 
 import { canonicalize } from './genres.js';
+import { computeDayArtists } from '../time.js';
 
 // Tuning lives here, in one place, per the build spec ("weights in one
 // exported const so tuning is one edit"). Everything a caller might want to
@@ -183,10 +184,59 @@ function billingReason(index) {
   return null;
 }
 
+// order:'schedule' variant. A numeric bill position is a lie on a
+// schedule-ordered festival (array position isn't billing), so it is NEVER
+// emitted — only 'headlining', and only for the top 3 artists by DERIVED
+// popularity (not array position).
+function scheduleBillingReason(name, popularity) {
+  if (!popularity) return null;
+  const top = topPopularityNames(popularity, 3);
+  if (top.has(name)) return { type: 'billing', text: 'headlining' };
+  return null;
+}
+
 function indexByName(artists) {
   const out = {};
   for (const a of artists || []) if (a && a.name) out[a.name] = a;
   return out;
+}
+
+// Read one artist's prior out of a derivePopularity() result. Accepts either
+// a Map (what derivePopularity returns) or a plain object (documented as an
+// acceptable shape too), so callers that serialize/rebuild the prior aren't
+// forced through a Map.
+function popularityFor(popularity, name) {
+  if (!popularity) return 0;
+  if (typeof popularity.get === 'function') {
+    const v = popularity.get(name);
+    return typeof v === 'number' ? v : 0;
+  }
+  const v = popularity[name];
+  return typeof v === 'number' ? v : 0;
+}
+
+// The top N artist names by derived popularity, for order:'schedule''s
+// "headlining" gate (top 3 — see scheduleBillingReason). Ties keep whatever
+// order the popularity map iterates in (Array#sort is stable), which for
+// derivePopularity's own output is festival artists[] order — deterministic.
+function topPopularityNames(popularity, n) {
+  const entries = popularity && typeof popularity.entries === 'function'
+    ? [...popularity.entries()]
+    : Object.entries(popularity || {});
+  const sorted = entries.slice().sort((a, b) => b[1] - a[1]);
+  return new Set(sorted.slice(0, n).map(([name]) => name));
+}
+
+// Linear interpolation percentile over an ascending-sorted array (p in [0,1]).
+function percentile(sortedAsc, p) {
+  if (sortedAsc.length === 0) return 0;
+  if (sortedAsc.length === 1) return sortedAsc[0];
+  const idx = p * (sortedAsc.length - 1);
+  const lo = Math.floor(idx);
+  const hi = Math.ceil(idx);
+  if (lo === hi) return sortedAsc[lo];
+  const frac = idx - lo;
+  return sortedAsc[lo] + (sortedAsc[hi] - sortedAsc[lo]) * frac;
 }
 
 // ---- public API --------------------------------------------------------------------
@@ -220,9 +270,89 @@ export function crewTasteProfile({ picks, artistsByName, canonData, excludePerso
   });
 }
 
+// Derive a billing prior from the SCHEDULE rather than from artists[]
+// position — for festivals whose artists[] is printed in schedule order
+// (openers first, headliners last: `artistOrder: 'schedule'`, see
+// scripts/validate-festivals.mjs) rather than billing order (headliners
+// first, the default contract). The build spec's own observation is that
+// headliners play LAST and LONGEST, so each set's raw weight is:
+//
+//   lateness (minutes from that day's earliest start, cross-midnight aware)
+//   x length (minutes)
+//
+// via js/time.js's computeDayArtists (reused, not re-implemented, so AM/PM
+// and cross-midnight parsing stay in one place). An artist with multiple
+// sets takes their single best (max raw) set. Raw values are then min-max
+// normalized to [0,1] across the whole schedule. Artists in artists[] but
+// never seen in fest.days (no printed set time) get a low floor rather than
+// 0 — they're on the lineup, just unscheduled — pinned at the 10th
+// percentile of the scheduled distribution.
+//
+// Pure: reads only the fest object passed in, no fetch/DOM/Date.now.
+export function derivePopularity(fest) {
+  const days = fest && typeof fest.days === 'object' && fest.days ? fest.days : {};
+  const rawByArtist = new Map(); // name -> best (max) raw lateness*length across all its sets
+
+  for (const dayData of Object.values(days)) {
+    if (!dayData || !Array.isArray(dayData.artists) || dayData.artists.length === 0) continue;
+    let resolved;
+    try { resolved = computeDayArtists(dayData); } catch { continue; }
+    if (!resolved.length) continue;
+
+    const dayStart = Math.min(...resolved.map((a) => a.startMin));
+    for (const set of resolved) {
+      const lateness = set.startMin - dayStart;
+      const endMin = set.endMin != null ? set.endMin : set.startMin;
+      const length = Math.max(0, endMin - set.startMin);
+      const raw = lateness * length;
+      const prev = rawByArtist.get(set.name);
+      if (prev === undefined || raw > prev) rawByArtist.set(set.name, raw);
+    }
+  }
+
+  const rawValues = [...rawByArtist.values()];
+  const min = rawValues.length ? Math.min(...rawValues) : 0;
+  const max = rawValues.length ? Math.max(...rawValues) : 0;
+  const span = max - min;
+
+  const normalized = new Map();
+  for (const [name, raw] of rawByArtist) {
+    // span === 0 (every scheduled set equally "late x long", or only one
+    // set exists) -> no signal to rank by; park everyone at the midpoint
+    // rather than an arbitrary 0 or 1.
+    normalized.set(name, span > 0 ? (raw - min) / span : 0.5);
+  }
+
+  const sortedNormalized = [...normalized.values()].sort((a, b) => a - b);
+  const floor = sortedNormalized.length ? percentile(sortedNormalized, 0.10) : 0;
+
+  const priors = new Map();
+  const artists = Array.isArray(fest?.artists) ? fest.artists : [];
+  for (const a of artists) {
+    if (!a || !a.name) continue;
+    priors.set(a.name, normalized.has(a.name) ? normalized.get(a.name) : floor);
+  }
+  // Defensive: a scheduled set whose artist is somehow missing from
+  // artists[] still gets its derived prior rather than silently vanishing.
+  for (const [name, val] of normalized) {
+    if (!priors.has(name)) priors.set(name, val);
+  }
+
+  return priors;
+}
+
 // Score + reason for one artist. `index`/`total` are this artist's position
 // and the lineup length (billing order, never re-sorted — build spec 3.1).
-export function scoreArtist({ artist, index, total, profile, picks, passes, me, canonData }) {
+// `order` ('billing' default | 'schedule') and `popularity` (a
+// derivePopularity() Map/object) are optional — omitted, behavior is
+// byte-for-byte the original billing-order scoring. order:'schedule'
+// replaces the billing-position prior with the derived popularity prior for
+// this artist, and swaps the billing reason: no numeric "#n on the bill"
+// (array position isn't billing on these festivals), and 'headlining' only
+// for the top 3 artists by derived popularity.
+export function scoreArtist({
+  artist, index, total, profile, picks, passes, me, canonData, order = 'billing', popularity,
+}) {
   const name = artist?.name;
   const passLeaf = passes?.[name]?.[me];
   const passed = !!(passLeaf && !passLeaf.removed);
@@ -234,7 +364,9 @@ export function scoreArtist({ artist, index, total, profile, picks, passes, me, 
   const crew = crewSignal({ artistName: name, picks, me });
   const crewScore = crew.musts.length * WEIGHTS.crewMustWeight + crew.others.length * WEIGHTS.crewPickWeight;
 
-  const billingScore = total > 0 ? (total - index) / total : 0;
+  const billingScore = order === 'schedule'
+    ? popularityFor(popularity, name)
+    : (total > 0 ? (total - index) / total : 0);
 
   const score = WEIGHTS.affinity * affinityScore + WEIGHTS.crew * crewScore + WEIGHTS.billing * billingScore;
 
@@ -245,16 +377,18 @@ export function scoreArtist({ artist, index, total, profile, picks, passes, me, 
   if (!passed) {
     reason = tasteReason(genres, profile?.mustGenreCounts)
       || crewReason(crew)
-      || billingReason(index);
+      || (order === 'schedule' ? scheduleBillingReason(name, popularity) : billingReason(index));
   }
 
   return { score, reason, passed };
 }
 
-// Rank a whole lineup. artists = the festival's artists[] in billing order;
-// picks = picksFor output ({artist:{person:level}}); passes = passesFor
-// output shape ({artist:{person:{ts}}}).
-export function rankLineup({ artists, picks, passes, me, canonData }) {
+// Rank a whole lineup. artists = the festival's artists[] (billing order by
+// default; schedule order when the festival declares `artistOrder:
+// 'schedule'` — pass order:'schedule' + a derivePopularity(fest) result in
+// that case). picks = picksFor output ({artist:{person:level}}); passes =
+// passesFor output shape ({artist:{person:{ts}}}).
+export function rankLineup({ artists, picks, passes, me, canonData, order = 'billing', popularity }) {
   const list = Array.isArray(artists) ? artists : [];
   const total = list.length;
   const artistsByName = indexByName(list);
@@ -262,7 +396,7 @@ export function rankLineup({ artists, picks, passes, me, canonData }) {
 
   const ranked = list.map((artist, index) => {
     const { score, reason, passed } = scoreArtist({
-      artist, index, total, profile, picks, passes, me, canonData,
+      artist, index, total, profile, picks, passes, me, canonData, order, popularity,
     });
     const { primary, secondary } = canonicalGenresOf(artist, canonData);
     return { name: artist.name, index, score, reason, passed, primary, secondary };

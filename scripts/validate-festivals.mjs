@@ -56,6 +56,24 @@ export function validateArtistExtras(artists) {
   return { errors, warnings };
 }
 
+// Discovery billing-vs-schedule fix (2026-07-30): festivals MAY declare a
+// top-level `artistOrder` telling score.js how to read artists[] position.
+// Absent means "billing" (headliners first) — the long-documented contract.
+// Schedule-ordered festivals (openers first, headliners last, e.g. Electric
+// Forest / Lollapalooza) must say so explicitly, or score.js's billing prior
+// and "#n on the bill" ribbons invert. Anything other than the two known
+// values is an error, not a warning — a typo here silently re-breaks the
+// exact bug this field exists to fix.
+export const ARTIST_ORDERS = ['billing', 'schedule'];
+
+export function validateArtistOrder(fest) {
+  const errors = [];
+  if (fest && fest.artistOrder !== undefined && !ARTIST_ORDERS.includes(fest.artistOrder)) {
+    errors.push(`artistOrder must be one of ${ARTIST_ORDERS.join('|')} (got ${JSON.stringify(fest.artistOrder)})`);
+  }
+  return { errors, warnings: [] };
+}
+
 // Validate data/genres.json itself (build spec section 3.3): canon must be
 // non-empty with unique entries; every synonyms value must resolve to a
 // canon entry; no suppress entry may shadow a canon entry (case-insensitive)
@@ -138,6 +156,8 @@ function main() {
     const extras = validateArtistExtras(fest && fest.artists);
     errors.push(...extras.errors.map((m) => `${file}: ${m}`));
     warnings.push(...extras.warnings.map((m) => `${file}: ${m}`));
+    const orderCheck = validateArtistOrder(fest);
+    errors.push(...orderCheck.errors.map((m) => `${file}: ${m}`));
     if (!indexIds.has(fest.id)) errors.push(`${file}: festival not listed in index.json`);
   }
   for (const entry of index) {
