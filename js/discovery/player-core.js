@@ -30,6 +30,43 @@ export const SOURCE_META = {
   sp: { label: 'Spotify', color: '#67B98A' },
 };
 
+// Map a click/drag position on a seek track to a playback fraction.
+export function seekFraction(x, width) {
+  if (!Number.isFinite(x) || !Number.isFinite(width) || width <= 0) return 0;
+  return Math.min(1, Math.max(0, x / width));
+}
+
+// SoundCloud getSounds() → our alternates list, with the monetization truth
+// baked in. Evidence (live probe against soundcloud.com/alesso, 2026-07-31):
+//   policy 'MONETIZE'  — the widget SKIPS it for anonymous listeners (this was
+//                        the reported "plays then immediately skips" bug);
+//                        a row for it would be a dead control, so it's dropped.
+//   policy 'SNIP'      — 30-second preview (duration 30000 vs full_duration
+//                        ~162s on the probe) — kept, badged, honesty rule.
+//   policy 'ALLOW'/absent — streams in full.
+//   'BLOCK' / streamable:false — never plays; dropped.
+// Sounds still lazy-loading (no title yet) can't be judged and stay as
+// loading rows. initialIndex = the first full-play row (never auto-pick a
+// preview when a full set is sitting right there); allUnplayable = the list
+// had sounds but every one is known-unplayable → caller falls through to the
+// next source exactly like an embed error.
+export function mapSoundcloudSounds(sounds) {
+  const arr = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
+  const unplayable = (s) => s.policy === 'MONETIZE' || s.policy === 'BLOCK' || s.streamable === false;
+  const kept = arr.filter((s) => !s.title || !unplayable(s));
+  const items = kept.slice(0, 6).map((s) => ({
+    id: s.permalink_url,
+    label: s.title || null,
+    preview: s.policy === 'SNIP',
+  }));
+  const firstFull = items.findIndex((i) => i.label && !i.preview);
+  return {
+    items,
+    initialIndex: firstFull >= 0 ? firstFull : 0,
+    allUnplayable: arr.length > 0 && arr.every((s) => s.title && unplayable(s)),
+  };
+}
+
 function isValidStorage(storage) {
   return !!storage && typeof storage.getItem === 'function' && typeof storage.setItem === 'function';
 }
@@ -195,9 +232,27 @@ export function createPlayerCore({ storage } = {}) {
   // widget is scrolled) — player.js calls this every time it gets a fresher
   // list. Also used once at mount time for YouTube's cached ids, but that
   // path goes through mount() directly since it's synchronous.
-  function setAlternates(src, items) {
+  function setAlternates(src, items, defaultIndex) {
     alternates = { ...alternates, [src]: Array.isArray(items) ? items : [] };
+    // A data-driven default pick (e.g. SC's first full-play track) applies
+    // only while nothing is playing and the user hasn't chosen a row —
+    // never yanks an in-progress selection.
+    if (Number.isInteger(defaultIndex) && src === currentSource && !play && clipIndex === 0) {
+      clipIndex = defaultIndex;
+    }
     clampClipIndex();
+    return snapshot();
+  }
+
+  // The widget told us what it's ACTUALLY playing (auto-advance off an
+  // unplayable track, or its own internal next). State follows reality —
+  // no play-state change, and the caller must NOT drive the embed off this
+  // (that would loop). Distinct from setClip, which is a user gesture.
+  function syncClipIndex(src, index) {
+    if (src === currentSource && Number.isInteger(index)) {
+      clipIndex = index;
+      clampClipIndex();
+    }
     return snapshot();
   }
 
@@ -250,5 +305,5 @@ export function createPlayerCore({ storage } = {}) {
     return tabs();
   }
 
-  return { mount, setSource, setClip, togglePlay, setAlternates, markFailed, retry, setOnline, getState, getTabs };
+  return { mount, setSource, setClip, togglePlay, setAlternates, syncClipIndex, markFailed, retry, setOnline, getState, getTabs };
 }

@@ -13,7 +13,7 @@
 // third-party iframes) — design/player-harness.html is the manual test
 // surface for it.
 
-import { createPlayerCore, PRIORITY, SOURCE_META } from './player-core.js';
+import { createPlayerCore, PRIORITY, SOURCE_META, mapSoundcloudSounds, seekFraction } from './player-core.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -283,6 +283,13 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
 
     const stageWrap = curLayout === 'compact' ? buildCompactStage(snap) : buildFullStage(snap);
     body.appendChild(stageWrap);
+    // Compact can't fit usable native chrome (YT at 82x46) and SC compact has
+    // no visible widget at all — a full-width seek row is the scrubber there.
+    // Full/desktop YT has native controls; full/desktop SC has the widget's
+    // own clickable waveform; Spotify's embed is self-contained.
+    if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
+      body.appendChild(buildSeekRow(snap));
+    }
     body.appendChild(snap.currentSource === 'sp' ? renderSpotifyNote() : renderClips(snap));
     root.appendChild(body);
 
@@ -293,13 +300,39 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       const target = curLayout === 'compact' ? root.querySelector('.sample-player-np-thumb') : root.querySelector('.sample-player-stage');
       if (target) {
         target.insertBefore(preserved, target.firstChild);
-        if (snap.currentSource === 'yt' && curLayout !== 'compact' && !target.querySelector('.sample-player-yt-overlay')) {
-          target.appendChild(buildYtOverlay(snap));
-        }
         const stage = root.querySelector('.sample-player-stage');
         if (stage) stage.dataset.state = 'ready';
       }
     }
+  }
+
+  // The compact scrubber: one full-width button (44px hit target, thin visual
+  // track) — tap or drag anywhere on it to seek the live embed. Position/time
+  // update from the yt ticker or SC's PLAY_PROGRESS via updateSeekRow().
+  function buildSeekRow(snap) {
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'sample-player-seek';
+    row.setAttribute('aria-label', 'Seek');
+    row.disabled = !snap.online;
+    row.innerHTML = '<span class="sample-player-seek-track"><span class="sample-player-seek-fill" data-seek-fill style="width:0%"></span></span>' +
+      '<span class="sample-player-seek-time"><span data-seek-cur>0:00</span><span data-seek-dur>0:00</span></span>';
+    const seekAt = (clientX) => {
+      const rect = row.getBoundingClientRect();
+      const frac = seekFraction(clientX - rect.left, rect.width);
+      if (embedAdapter && embedAdapter.seekTo) embedAdapter.seekTo(frac);
+    };
+    row.addEventListener('click', (e) => seekAt(e.clientX));
+    return row;
+  }
+
+  function updateSeekRow(cur, dur) {
+    const fill = root.querySelector('[data-seek-fill]');
+    if (fill && dur > 0) fill.style.width = `${Math.min(100, (cur / dur) * 100)}%`;
+    const curEl = root.querySelector('[data-seek-cur]');
+    const durEl = root.querySelector('[data-seek-dur]');
+    if (curEl) curEl.textContent = fmtTime(cur);
+    if (durEl) durEl.textContent = fmtTime(dur);
   }
 
   function renderHead(snap) {
@@ -395,24 +428,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     return wrap;
   }
 
-  function buildYtOverlay(snap) {
-    const overlay = document.createElement('div');
-    overlay.className = 'sample-player-yt-overlay';
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'sample-player-yt-overlay-btn';
-    setPlayGlyph(btn, snap.play);
-    btn.addEventListener('click', () => applyState(core.togglePlay()));
-    overlay.appendChild(btn);
-
-    const bar = document.createElement('div');
-    bar.className = 'sample-player-yt-overlay-bar';
-    bar.innerHTML = '<div class="sample-player-np-progress"><span class="sample-player-np-progress-fill" style="width:0%"></span></div>' +
-      '<div class="sample-player-yt-overlay-time"><span data-yt-cur>0:00</span><span data-yt-dur>0:00</span></div>';
-    overlay.appendChild(bar);
-    return overlay;
-  }
+  // (The old controls:0 YT overlay — fake progress bar, no seeking — is gone;
+  // YouTube's native chrome is the full/desktop scrubber now.)
 
   function renderClips(snap) {
     const box = document.createElement('div');
@@ -438,6 +455,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       btn.disabled = loading || !snap.online;
       btn.innerHTML = `<span class="sample-player-clip-n">${i + 1}</span>` +
         `<span class="sample-player-clip-t">${esc(item.label || '(loading…)')}</span>` +
+        (item.preview ? '<span class="sample-player-clip-preview">30-sec preview</span>' : '') +
         `<span class="sample-player-clip-eq"><i></i><i></i><i></i></span>`;
       btn.addEventListener('click', () => applyState(core.setClip(i)));
       rows.appendChild(btn);
@@ -519,14 +537,18 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
 
     const setReady = () => {
       const stage = root.querySelector('.sample-player-stage');
-      if (stage) {
-        stage.dataset.state = 'ready';
-        if (src === 'yt' && !stage.querySelector('.sample-player-yt-overlay')) stage.appendChild(buildYtOverlay(lastSnap));
-      }
+      if (stage) stage.dataset.state = 'ready';
     };
     const onError = () => applyState(core.markFailed(src));
-    const onSounds = (list) => {
-      const updated = core.setAlternates('sc', list);
+    const onSounds = ({ items, initialIndex, allUnplayable }) => {
+      if (allUnplayable) {
+        // Every posted track is monetization-gated for anonymous listeners —
+        // rows for them would all be dead. Same treatment as an embed error:
+        // strike the tab, fall through to the next source.
+        applyState(core.markFailed('sc'));
+        return;
+      }
+      const updated = core.setAlternates('sc', items, initialIndex);
       lastSnap = updated;
       if (updated.currentSource === 'sc') {
         const oldClips = root.querySelector('.sample-player-clips');
@@ -534,9 +556,22 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       }
       notify(updated);
     };
+    // The widget auto-advanced (or moved on its own): state follows reality,
+    // and we must NOT drive the embed back (reconcileEmbed would loop) — so
+    // this bypasses applyState on purpose.
+    const onTrackSync = (index) => {
+      const synced = core.syncClipIndex('sc', index);
+      if (synced.clipIndex === lastSnap.clipIndex) return;
+      lastSnap = synced;
+      const oldClips = root.querySelector('.sample-player-clips');
+      if (oldClips) oldClips.replaceWith(renderClips(synced));
+      const meta = root.querySelector('.sample-player-np-meta');
+      if (meta) meta.innerHTML = npMetaHtml(synced);
+      notify(synced);
+    };
 
     if (src === 'yt') embedAdapter = buildYouTube(embedHost, sources, snap, { setReady, onError });
-    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, sources, snap, { setReady, onError, onSounds });
+    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, sources, snap, { setReady, onError, onSounds, onTrackSync });
     else if (src === 'sp') embedAdapter = buildSpotify(embedHost, sources, snap, { setReady, onError });
   }
 
@@ -573,7 +608,12 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
           playsinline: 1,
           rel: 0,
           autoplay: snap.play ? 1 : 0,
-          controls: curLayout === 'compact' ? 1 : 0, // compact keeps YouTube's own native chrome; full/desktop use our overlay
+          // Native chrome everywhere: the stage never lies, and YouTube's own
+          // scrubber/fullscreen beats a drawn overlay (the old controls:0 +
+          // decorative bar shipped with NO way to seek — reported in testing).
+          // Compact's 82x46 frame is too small for that chrome to be usable,
+          // which is what the seek row under the card row is for.
+          controls: 1,
         },
         events: {
           onReady: () => { setReady(); if (snap.play) startYtTicker(player); },
@@ -592,6 +632,11 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       play: () => player && player.playVideo && player.playVideo(),
       pause: () => player && player.pauseVideo && player.pauseVideo(),
       loadClip: (item) => player && player.loadVideoById && player.loadVideoById(item.id),
+      seekTo: (frac) => {
+        if (!player || !player.getDuration) return;
+        const dur = player.getDuration();
+        if (dur > 0) player.seekTo(dur * frac, true);
+      },
     };
   }
 
@@ -604,10 +649,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
         const pct = dur > 0 ? Math.min(100, Math.round((cur / dur) * 100)) : 0;
         const fill = root.querySelector('.sample-player-np-progress-fill');
         if (fill) fill.style.width = pct + '%';
-        const curLabel = root.querySelector('[data-yt-cur]');
-        const durLabel = root.querySelector('[data-yt-dur]');
-        if (curLabel) curLabel.textContent = fmtTime(cur);
-        if (durLabel) durLabel.textContent = fmtTime(dur);
+        updateSeekRow(cur, dur);
       } catch { /* embed may be mid-teardown */ }
     }, 500);
   }
@@ -629,6 +671,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     let widget = null;
     let torn = false;
 
+    let scDurMs = 0;
+    let lastKnownItems = [];
+
     loadSoundCloudApi().then((SC) => {
       if (torn) return;
       widget = SC.Widget(iframe);
@@ -643,6 +688,24 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
         setTimeout(fetchSounds, 1000);
         setTimeout(fetchSounds, 3000);
       });
+      // Whatever the widget actually plays is what our rows must show as
+      // active — it auto-advances off monetization-gated tracks, and lying
+      // about the current track was exactly the reported bug.
+      widget.bind(E.PLAY, () => {
+        if (torn) return;
+        widget.getCurrentSound((s) => {
+          if (torn || !s) return;
+          scDurMs = s.duration || 0;
+          if (onTrackSync && lastKnownItems.length) {
+            const i = lastKnownItems.findIndex((it) => it.id === s.permalink_url);
+            if (i >= 0) onTrackSync(i);
+          }
+        });
+      });
+      widget.bind(E.PLAY_PROGRESS, (e) => {
+        if (torn || !e) return;
+        updateSeekRow((e.currentPosition || 0) / 1000, scDurMs / 1000);
+      });
       widget.bind(E.ERROR, () => onError());
     });
 
@@ -650,8 +713,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       if (!widget || torn) return;
       widget.getSounds((sounds) => {
         if (torn) return;
-        const list = (sounds || []).slice(0, 6).map((s) => ({ id: s && s.permalink_url, label: s && s.title ? s.title : null }));
-        onSounds(list);
+        const mapped = mapSoundcloudSounds(sounds);
+        lastKnownItems = mapped.items;
+        onSounds(mapped);
       });
     }
 
@@ -661,11 +725,16 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       pause: () => widget && widget.pause && widget.pause(),
       loadClip: (item) => {
         if (!widget) return;
-        // skip() takes an index, not an id — resolve it against the current list
+        // skip() takes a WIDGET index, and our list is filtered — resolve the
+        // row's id against the widget's own unfiltered list every time.
         widget.getSounds((sounds) => {
           const i = (sounds || []).findIndex((s) => s && s.permalink_url === item.id);
           if (i >= 0) { widget.skip(i); widget.play(); }
         });
+      },
+      seekTo: (frac) => {
+        if (!widget) return;
+        widget.getDuration((d) => { if (d > 0) widget.seekTo(d * frac); });
       },
     };
   }

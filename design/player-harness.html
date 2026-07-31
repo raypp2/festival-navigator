@@ -124,6 +124,11 @@ const ARTISTS = [
     sources: { youtubeVideoIds: ['7R5yo5FznTI'], youtubeLabels: ['Tomorrowland 2024 · WE2'], soundcloudSlug: 'adambeyer' } }, // no Spotify — real missing-source case
   { id: 'btsm', name: 'Skull Machine (Black Tiger Sex Machine × Kai Wachi)', genres: ['Dubstep', 'Riddim'],
     sources: { youtubeVideoIds: ['VR-KzGFQBTE'], youtubeLabels: ['EDC Vegas 2025 · Full Set'], soundcloudSlug: 'blacktigersexmachine' } }, // long name + no Spotify
+  // Alesso is the SC-monetization test case (live probe 2026-07-31): tracks
+  // 1-4 are policy MONETIZE (widget skips them anonymously — must be DROPPED
+  // from our rows), track 5 "Destiny (HILLS Remix)" is SNIP (30s preview —
+  // kept + badged). Exercises mapSoundcloudSounds against reality.
+  { id: 'alesso', name: 'Alesso', genres: ['Progressive House'], sources: { soundcloudSlug: 'alesso', spotifyId: '4AVFqumd2ogHFlRbKIjp1t' } },
   { id: 'unannounced', name: 'Unannounced B2B', genres: [], sources: {} }, // zero sources -> "Nothing to sample yet"
 ];
 

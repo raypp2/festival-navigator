@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createPlayerCore, PRIORITY, STORAGE_KEY } from '../js/discovery/player-core.js';
+import { createPlayerCore, PRIORITY, STORAGE_KEY, mapSoundcloudSounds, seekFraction } from '../js/discovery/player-core.js';
 
 // Fake storage — no localStorage/browser needed. Mirrors the getItem/setItem
 // surface createPlayerCore expects.
@@ -262,4 +262,70 @@ test('setSource is a no-op for an already-failed source (must retry instead)', (
   core.markFailed('yt'); // -> sc, yt struck
   const snap = core.setSource('yt');
   assert.equal(snap.currentSource, 'sc');
+});
+
+// ---- seek + SoundCloud monetization honesty (2026-07-31 fixes) --------------
+// Evidence base: live probe of soundcloud.com/alesso — tracks 1-4 policy
+// MONETIZE (widget skips them anonymously), track 5 SNIP (30s preview,
+// duration 30000 vs full_duration 162508).
+
+test('seekFraction clamps to [0,1] and survives junk', () => {
+  assert.equal(seekFraction(50, 100), 0.5);
+  assert.equal(seekFraction(-10, 100), 0);
+  assert.equal(seekFraction(150, 100), 1);
+  assert.equal(seekFraction(10, 0), 0);
+  assert.equal(seekFraction(NaN, 100), 0);
+});
+
+const ALESSO_SOUNDS = [
+  { title: 'In Your Eyes', permalink_url: 'u1', policy: 'MONETIZE', streamable: true },
+  { title: 'Turn Up The Bass', permalink_url: 'u2', policy: 'MONETIZE', streamable: true },
+  { title: 'Destiny (HILLS Remix)', permalink_url: 'u5', policy: 'SNIP', streamable: true, duration: 30000, full_duration: 162508 },
+  { title: 'Words (Alesso VIP)', permalink_url: 'u6', policy: 'ALLOW', streamable: true },
+];
+
+test('mapSoundcloudSounds drops MONETIZE/BLOCK/unstreamable, badges SNIP', () => {
+  const { items } = mapSoundcloudSounds(ALESSO_SOUNDS);
+  assert.deepEqual(items.map((i) => i.id), ['u5', 'u6']);
+  assert.equal(items[0].preview, true);
+  assert.equal(items[1].preview, false);
+});
+
+test('mapSoundcloudSounds auto-picks the first FULL-play row, not a preview', () => {
+  const { initialIndex } = mapSoundcloudSounds(ALESSO_SOUNDS);
+  assert.equal(initialIndex, 1); // u6 (ALLOW), not the SNIP at index 0
+});
+
+test('mapSoundcloudSounds keeps still-loading sounds as loading rows', () => {
+  const { items } = mapSoundcloudSounds([{ permalink_url: 'x' }, ...ALESSO_SOUNDS]);
+  assert.equal(items[0].label, null); // unjudgeable placeholder stays
+});
+
+test('mapSoundcloudSounds: all known-unplayable -> allUnplayable (falls through like an error)', () => {
+  const gated = ALESSO_SOUNDS.slice(0, 2);
+  const { items, allUnplayable } = mapSoundcloudSounds(gated);
+  assert.equal(items.length, 0);
+  assert.equal(allUnplayable, true);
+  assert.equal(mapSoundcloudSounds([]).allUnplayable, false); // empty list is just "no data yet"
+});
+
+test('setAlternates defaultIndex applies only before any play/user choice', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  core.mount('alesso', { soundcloudSlug: 'alesso' });
+  const snap = core.setAlternates('sc', [{ id: 'u5', label: 'A', preview: true }, { id: 'u6', label: 'B' }], 1);
+  assert.equal(snap.clipIndex, 1);
+  // but never yanks an in-progress selection:
+  core.setClip(0); // user gesture -> play:true, clipIndex 0
+  const snap2 = core.setAlternates('sc', [{ id: 'u5', label: 'A', preview: true }, { id: 'u6', label: 'B' }], 1);
+  assert.equal(snap2.clipIndex, 0);
+});
+
+test('syncClipIndex follows widget reality without touching play state', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  core.mount('alesso', { soundcloudSlug: 'alesso' });
+  core.setAlternates('sc', [{ id: 'u5', label: 'A' }, { id: 'u6', label: 'B' }]);
+  const snap = core.syncClipIndex('sc', 1);
+  assert.equal(snap.clipIndex, 1);
+  assert.equal(snap.play, false); // widget-driven, not a gesture
+  assert.equal(core.syncClipIndex('yt', 0).clipIndex, 1); // wrong source: no-op
 });
