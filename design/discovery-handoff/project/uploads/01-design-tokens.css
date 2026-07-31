@@ -1,0 +1,182 @@
+/* v3 design tokens — transcribed from the design atlas (Festival Navigator
+ * Screens.dc.html, turn 21) and its README. Values are FINAL per the handoff
+ * ("recreate pixel-perfectly"); do not invent — look up, and if a value is
+ * missing here, read the atlas, then add it here with a comment.
+ * The aura card engine lives in js/v3/aura.js (per-card computed gradients);
+ * this file holds everything static. */
+
+:root {
+  /* Surfaces (dark, violet-cast) */
+  --page: #0C0A14;
+  --dock: #0A0812;          /* dock, sheets */
+  --card: #141021;
+  --card-unpicked: #1C1731; /* artist card base under auras */
+  --hairline: #241E38;
+  --border-card: #2B2440;
+  --border-input: #322A4D;  /* inputs + ghost buttons */
+  --border-emphasis: #3A3354;
+
+  /* Text */
+  --text-header: #EDEAF4;
+  --text-primary: #FFFFFF;
+  --text-body: #C6CBD6;
+  --text-secondary: #8E86A8;
+  /* v3.1 retune (AX-3): was #5D5578 = 2.84:1 on --page — failed AA on real
+   * copy read in daylight. Same hue/sat, L 40% -> 57%; computed ≥4.5:1 on
+   * --page (5.24), --card (4.98), --card-unpicked (4.61). */
+  --text-tertiary: #877FA4;
+  --text-unpicked-name: #B9B3CC; /* artist name on a card nobody picked */
+
+  /* Fixed identity colors */
+  --spotify-fill: rgba(18, 138, 62, .5);
+  --spotify-stroke: rgb(103, 185, 138);
+  --notes-fill: rgba(108, 91, 212, .5);
+  --notes-stroke: rgb(196, 189, 238);
+  --notes-chip-stroke: #8B7BFF;  /* outlined Notes chip variant */
+  --notes-chip-text: #A99BFF;
+  --tonal-fill: rgba(192, 132, 252, .13);
+  --tonal-text: #D8B4FE;
+  /* The APP's own violet, as an R,G,B triple. Distinct from --fest on purpose:
+   * the festival accent is reserved for exactly four places (fest name, active
+   * day tab, stage headers, the current-fest border). Everything else that
+   * wants to look "selected" or "ours" reaches for this instead — including the
+   * loader shown while a crew is being CREATED, which used to wear a festival's
+   * accent before any festival had been chosen. */
+  --brand: 192, 132, 252;
+  --sync-ok: #10B981;
+  --sync-syncing: #F59E0B;
+  --sync-offline: #6B7280;
+  /* Offline is GRAY (a state, not a fault — you are in a field, we expected
+   * this). Error and blocked are RED (something needs you). The dot used to
+   * paint error gray while the Settings label painted the same status red:
+   * one state, two colors, and the quieter one was lying. */
+  --sync-error: #F87171;
+  --danger: #F87171;
+
+  /* Festival accent is set per-fest at runtime: --fest: R, G, B */
+  --fest: 192, 132, 252; /* fallback: brand violet */
+
+  /* Grain (feTurbulence data-URI). Cards overlay at .3, heroes .4 */
+  --grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'/%3E%3C/filter%3E%3Crect%20width='140'%20height='140'%20filter='url(%23n)'%20opacity='0.6'/%3E%3C/svg%3E");
+
+  /* Radii */
+  --r-card: 8px;
+  --r-row: 10px;      /* rows + buttons */
+  --r-settings: 12px; /* settings cards + landing fest rows */
+  --r-pill: 999px;
+  --r-bubble: 8px 8px 8px 2px; /* notes identity: sharp lower-left */
+  --r-sheet: 20px 20px 0 0;
+
+  /* Type */
+  --font-display: 'Anton', sans-serif; /* titles, fest names, day headers, hero labels */
+  --font-ui: 'Inter', system-ui, sans-serif;
+  --track-display: .05em;   /* atlas range .04-.06em */
+  --track-label: .12em;     /* section micro-labels, 10px/800 */
+
+  /* v3.1 fluid scale (design-direction doc): one axis, 390 -> 1440. Desktop
+   * is a designed size, not a stretched phone. Micro labels stay fixed. */
+  --fs-display: clamp(26px, 4.5vw, 40px);  /* app-header fest title */
+  --fs-screen: clamp(30px, 5vw, 44px);     /* PICK THE FEST, join headline */
+  --fs-day: clamp(16px, 1.6vw, 19px);      /* day-rule headers */
+  --fs-card: clamp(13.5px, 1.2vw, 15px);   /* card names */
+  --fs-body: clamp(12.5px, 1.1vw, 13.5px);
+  --fs-micro: 11px;
+  --shell-max: 960px;
+  --sp-gutter: clamp(14px, 2.5vw, 28px);
+}
+
+/* The one "wide" breakpoint (1100): shell widens, everything else is fluid. */
+@media (min-width: 1100px) {
+  :root { --shell-max: 1080px; }
+}
+
+/* ---- focus + motion floor (AX-2) ----------------------------------------------
+ * Lives HERE, not in v3.css, because 404.html does not load v3.css — so the 404
+ * page ran two infinite animations straight through prefers-reduced-motion. A
+ * floor that only covers the pages someone remembered to wire up is not a
+ * floor. Every styled page loads this file (finish pass, 2026-07-12). */
+/* Quiet by default, unmistakable on keyboard: one focus language everywhere. */
+button, input, textarea, select, a, [role="button"], [role="option"] { outline: none; }
+:focus-visible {
+  /* --brand, not --fest: a focus ring is app chrome, not festival content, and
+   * the accent is reserved for exactly four surfaces. It also has to work on
+   * screens where no festival is chosen yet. */
+  outline: 2px solid rgba(var(--brand), .9) !important; /* beats inline resets */
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .hero-grain, .card-grain { display: none; }
+}
+
+@keyframes gradShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* (hueSpin removed 2026-07-12 — see .hero-bg below.) */
+
+/* Brand gradient ("the pulse") — gradient text on the wordmark.
+ * (.pulse-bg removed 2026-07-12: zero consumers, grep-verified.) */
+.pulse-text {
+  background: linear-gradient(90deg, #C084FC, #F472B6, #8B5CF6, #C084FC);
+  background-size: 300% 100%;
+  animation: gradShift 8s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #C084FC; /* fallback */
+}
+
+/* Hero button (ADD A FESTIVAL ->, OPEN THE FESTIVAL ->): aura blobs over dark,
+ * grain overlay, white Anton label. Structure: .hero > .hero-bg + .hero-grain
+ * + .hero-label (absolute stack; container owns radius + overflow). */
+.hero { position: relative; border-radius: var(--r-row); overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(45% 90% at 12% 25%, hsla(28, 100%, 60%, .95) 0%, hsla(28, 100%, 60%, .4) 55%, transparent 100%),
+    radial-gradient(40% 80% at 55% 95%, hsla(305, 85%, 65%, .9) 0%, hsla(305, 85%, 65%, .35) 55%, transparent 100%),
+    radial-gradient(50% 95% at 92% 10%, hsla(221, 90%, 58%, .95) 0%, hsla(221, 90%, 58%, .4) 55%, transparent 100%),
+    #12101E;
+  background-size: 220% 220%;
+  /* gradShift only. A hueSpin 34s hue-rotate(360deg) used to ride on top, which
+   * means the three stops above — chosen orange, pink, blue — were only ever on
+   * screen for a sliver of each cycle. The rest of the time the app's very first
+   * call to action sat in muddy olive and brown, on the landing page, for a new
+   * person's first impression. Rotating a deliberately-chosen palette through
+   * every hue is not motion that communicates; it just undoes the palette. */
+  animation: gradShift 18s ease-in-out infinite;
+}
+.hero-grain { position: absolute; inset: 0; background-image: var(--grain); opacity: .4; mix-blend-mode: overlay; }
+.hero-label {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); letter-spacing: .06em; color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+}
+
+.card-grain { position: absolute; inset: 0; background-image: var(--grain); opacity: .3; mix-blend-mode: overlay; pointer-events: none; }
+
+/* Toggle: 40x24 track, 18px knob, 3px inset. ON = brand gradient, knob right. */
+.toggle {
+  width: 40px; height: 24px; border-radius: var(--r-pill);
+  background: var(--border-card);
+  display: inline-flex; align-items: center; padding: 0 3px;
+  flex: none; cursor: pointer; border: none;
+}
+.toggle-knob { width: 18px; height: 18px; border-radius: var(--r-pill); background: var(--text-secondary); transition: transform .15s ease; }
+.toggle[aria-checked="true"] {
+  background: linear-gradient(90deg, #C084FC, #F472B6, #8B5CF6, #C084FC);
+  background-size: 300% 100%;
+  animation: gradShift 8s ease-in-out infinite;
+}
+.toggle[aria-checked="true"] .toggle-knob { background: #fff; transform: translateX(16px); }
+
+/* Buttons */
+.btn-tonal { background: var(--tonal-fill); color: var(--tonal-text); font-weight: 700; border-radius: var(--r-pill); border: none; cursor: pointer; }
+.btn-ghost { background: transparent; border: 1px solid var(--border-input); color: var(--text-secondary); font-weight: 600; border-radius: var(--r-pill); cursor: pointer; }
+
+/* Low power: pause every animation + hide grain (design: "kills motion"). */
+.low-power *, .low-power *::before, .low-power *::after { animation: none !important; transition: none !important; }
+.low-power .hero-grain, .low-power .card-grain { display: none; }

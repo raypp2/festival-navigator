@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#0C0A14; color:#C6CBD6; font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  button { font-family:inherit; cursor:pointer; }
+  :focus-visible { outline:2px solid rgba(192,132,252,.9); outline-offset:2px; }
+  @keyframes popStar { 0%{transform:scale(.4) rotate(-12deg);opacity:0} 55%{transform:scale(1.18) rotate(4deg);opacity:1} 100%{transform:scale(1) rotate(0);opacity:1} }
+  @keyframes pulseBtn { 0%,100%{box-shadow:0 0 0 0 rgba(192,132,252,0)} 50%{box-shadow:0 0 0 5px rgba(192,132,252,.28)} }
+</style>
+</helmet>
+
+<div style="max-width:460px;margin:0 auto;padding:26px 20px 40px;min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;gap:16px">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+    <div>
+      <div style="font-family:Anton,sans-serif;font-size:24px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase">Swipe / pick demo</div>
+      <div style="font:500 12px Inter;color:#877FA4;margin-top:3px">Swipe left = pass · up = must · right = pick ×1. Or tap Pick to set the level.</div>
+    </div>
+    <button onClick="{{ toggleRm }}" style="flex:none;border:1px solid #322A4D;background:transparent;color:#C6CBD6;border-radius:999px;padding:8px 12px;font:700 10.5px Inter;white-space:nowrap">{{ rmLabel }}</button>
+  </div>
+
+  <div>
+    <div style="display:flex;justify-content:space-between;font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4"><span>Discovery session</span><span style="color:#C6CBD6">{{ counter }}</span></div>
+    <div style="height:6px;border-radius:999px;background:#241E38;margin-top:8px;overflow:hidden"><div style="height:100%;background:rgb(192,132,252);border-radius:999px;width:{{ pct }}%;transition:width .3s ease"></div></div>
+  </div>
+
+  <div style="position:relative;height:520px">
+    <sc-if value="{{ deckActive }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:16px 22px auto 22px;height:480px;border-radius:14px;border:1px solid #241E38;background:#17132a"></div>
+      <div style="position:absolute;inset:8px 12px auto 12px;height:492px;border-radius:14px;border:1px solid #2B2440;background:#1a1530"></div>
+      <div onPointerDown="{{ onDown }}" onPointerMove="{{ onMove }}" onPointerUp="{{ onUp }}" style="position:absolute;inset:0;border-radius:14px;border:1px solid #2B2440;padding:18px;display:flex;flex-direction:column;gap:12px;overflow:hidden;cursor:grab;touch-action:none;user-select:none;will-change:transform;background:{{ cardBg }};filter:{{ cardFilter }};transform:{{ cardTransform }};transition:{{ cardTransition }};opacity:{{ cardOpacity }}">
+        <div style="position:absolute;top:20px;left:0;right:0;text-align:center;font:800 36px Inter;letter-spacing:.14em;pointer-events:none;color:{{ hintColor }};opacity:{{ hintOpacity }}">{{ hintLabel }}</div>
+        <div style="font:700 11px Inter;color:#C6CBD6">{{ genres }}</div>
+        <div style="font:800 22px/1.12 Inter;color:#fff">{{ name }}</div>
+        <div style="align-self:flex-start;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 11px;font:700 11px Inter">{{ reason }}</div>
+        <div style="margin-top:auto;border:1px solid #2B2440;border-radius:10px;background:#141021;padding:12px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span>
+            <span style="font:600 10px Inter;color:#877FA4">{{ srcBadge }}</span>
+          </div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ srcTabs }}" as="t" hint-placeholder-count="3">
+              <button onPointerDown="{{ stopDrag }}" onClick="{{ t.on }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;border:1px solid {{ t.bc }};background:{{ t.bg }};color:{{ t.fg }}">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ t.dot }}"></span>{{ t.label }}
+              </button>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:11px">
+            <sc-if value="{{ isVideo }}" hint-placeholder-val="{{ true }}">
+              <button onPointerDown="{{ stopDrag }}" onClick="{{ toggleSample }}" style="position:relative;width:82px;height:46px;flex:none;border:0;padding:0;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center">
+                <span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">{{ sampleGlyph }}</span>
+                <span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:{{ samplePct }}%;background:#FF4E45"></span></span>
+              </button>
+            </sc-if>
+            <sc-if value="{{ isAudio }}" hint-placeholder-val="{{ false }}">
+              <button onPointerDown="{{ stopDrag }}" onClick="{{ toggleSample }}" style="width:44px;height:44px;flex:none;border-radius:999px;border:1px solid {{ srcAccent }};background:{{ srcAccentSoft }};color:#fff;font-size:15px">{{ sampleGlyph }}</button>
+            </sc-if>
+            <div style="flex:1;min-width:0">
+              <div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sampleTitle }}</div>
+              <div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">{{ sampleMeta }}</div>
+            </div>
+          </div>
+          <sc-if value="{{ canAlts }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline">
+                <span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4">{{ altsLabel }}</span>
+                <span style="font:600 9.5px Inter;color:#877FA4">tap to switch</span>
+              </div>
+              <sc-for list="{{ altRows }}" as="r" hint-placeholder-count="3">
+                <button onPointerDown="{{ stopDrag }}" onClick="{{ r.on }}" style="display:flex;align-items:center;gap:9px;min-height:38px;padding:6px 9px;border-radius:8px;text-align:left;font:600 11.5px Inter;border:1px solid {{ r.bc }};background:{{ r.bg }};color:{{ r.fg }}">
+                  <span style="flex:none;width:14px;font:700 10.5px ui-monospace,monospace;color:{{ r.nfg }}">{{ r.n }}</span>
+                  <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span>
+                  <span style="font:600 10px ui-monospace,monospace;color:#877FA4">{{ r.d }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;background:rgba(10,8,18,.42);opacity:{{ overlayOpacity }};transition:opacity .15s ease">
+          <sc-if value="{{ isStar }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:70px;line-height:1;color:#D8B4FE;text-shadow:0 0 24px rgba(192,132,252,.7);animation:{{ popAnim }}">★</div>
+            <div style="font:800 13px Inter;letter-spacing:.14em;color:#fff">MUST</div>
+          </sc-if>
+          <sc-if value="{{ isThumb }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:52px;line-height:1;filter:grayscale(.4);animation:{{ popAnim }}">👎</div>
+            <div style="font:800 13px Inter;letter-spacing:.14em;color:#8E86A8">NOT FOR ME</div>
+          </sc-if>
+          <sc-if value="{{ isTick }}" hint-placeholder-val="{{ false }}">
+            <div style="height:78px;width:28px;border-radius:6px;background:#241E38;border:1.5px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><div style="width:100%;background:hsla(270,90%,72%,.95);height:{{ tickFill }}%;transition:height .18s ease"></div></div>
+            <div style="font:800 30px/1 Inter;color:#fff">×{{ pendingLevel }}</div>
+            <div style="display:flex;gap:6px">{{ pips }}</div>
+            <div style="font:700 11px Inter;color:#D8B4FE">tap Pick again to raise · locks in 1s</div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ deckDone }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;border:1px dashed #2B2440;border-radius:14px;padding:24px">
+        <div style="font:800 22px Inter;color:#fff">That's the deck</div>
+        <div style="font:600 13px Inter;color:#877FA4">{{ picks }} picked · {{ musts }} musts · {{ passes }} passed</div>
+        <button onClick="{{ reset }}" style="border:1px solid rgb(192,132,252);background:rgba(192,132,252,.16);color:#fff;border-radius:999px;padding:12px 20px;font:800 13px Inter">Run it again</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="display:flex;gap:10px">
+    <button onClick="{{ pass }}" style="flex:.9;min-height:54px;border:1px solid #322A4D;background:transparent;color:#8E86A8;border-radius:999px;font:700 13px Inter">Pass</button>
+    <button onClick="{{ pick }}" style="flex:1.5;min-height:54px;border:none;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;font:800 14px Inter;animation:{{ pickPulse }}">{{ pickBtnLabel }}</button>
+    <button onClick="{{ must }}" style="flex:.9;min-height:54px;border:1px solid #322A4D;background:transparent;color:#D8B4FE;border-radius:999px;font:800 13px Inter">★ Must</button>
+  </div>
+
+  <sc-if value="{{ undoVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #322A4D;border-radius:10px;background:#141021;padding:10px 14px">
+      <span style="font:600 12.5px Inter;color:#C6CBD6">{{ undoText }}</span>
+      <button onClick="{{ undoLast }}" style="border:none;background:transparent;color:#D8B4FE;font:800 12px Inter;padding:4px 6px">Undo</button>
+    </div>
+  </sc-if>
+
+  <div style="font:500 11px/1.5 Inter;color:#6B6280;text-align:center;margin-top:2px">Toggle reduced motion to feel the instant fallback — level still reads from the tick + aura, never from the animation.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:760}}">
+const SRC = { yt: { label: 'YouTube', color: '#FF4E45', soft: 'rgba(255,78,69,.18)' }, sc: { label: 'SoundCloud', color: '#FF7A2F', soft: 'rgba(255,122,47,.18)' }, sp: { label: 'Spotify', color: '#67B98A', soft: 'rgba(103,185,138,.18)' } };
+const ORDER = ['yt', 'sc', 'sp'];
+
+class Component extends DCLogic {
+  deck = [
+    { name: 'Mau P', genres: 'Tech House', reason: '★ shares Tech House with 3 of your musts',
+      src: { yt: [{ t: 'Tomorrowland 2024 · Freedom Stage', d: '58:04' }, { t: 'ADE 2024 · Warehouse Elementenstraat', d: '1:12:40' }, { t: 'EDC Las Vegas 2025', d: '59:31' }],
+             sc: [{ t: 'Mau P Radio 012', d: '59:12' }, { t: 'Drugs From Amsterdam', d: '3:12' }, { t: 'Beats For The Underground', d: '3:38' }],
+             sp: [{ t: 'Drugs From Amsterdam', d: '3:12' }, { t: 'Your Mind Is Dirty', d: '3:26' }, { t: 'Gimme That Bass', d: '3:04' }] } },
+    { name: 'Skull Machine (Black Tiger Sex Machine × Kai Wachi)', genres: 'Riddim · Dubstep', reason: '★ 3 of your crew like Riddim',
+      src: { yt: [{ t: 'EDC Vegas 2025 · Full Set', d: '1:04:22' }, { t: 'Electric Forest 2024', d: '58:47' }, { t: 'Lost Lands 2021', d: '1:02:10' }],
+             sc: [{ t: 'Kill The Silence', d: '4:38' }, { t: 'Zombie', d: '3:52' }, { t: 'BTSM — Rise', d: '4:20' }] } },
+    { name: 'Jessica Audiffred', genres: 'Riddim · Dubstep', reason: '★ like Wooli, who Ren has as a must',
+      src: { yt: [{ t: 'Lost Lands 2024 · Prehistoric Paradise', d: '1:01:47' }, { t: 'EDC Mexico 2025', d: '56:03' }, { t: 'A Night With Jessica · Denver', d: '1:08:22' }],
+             sp: [{ t: 'Ahora', d: '3:28' }, { t: 'No Hay Problema', d: '3:15' }, { t: 'Bring It Back', d: '3:41' }] } },
+    { name: 'San Holo (Wholesome Riddim Set)', genres: 'Future Bass · Melodic', reason: '★ plays in your 4–6 PM gap',
+      src: { yt: [{ t: 'bitbird takeover 2023', d: '52:19' }, { t: 'Tomorrowland 2024 · Rise', d: '49:58' }, { t: 'wholesome riddim set · Denver', d: '1:03:11' }],
+             sc: [{ t: 'wholesome riddim (edit)', d: '7:41' }, { t: 'Light', d: '4:02' }, { t: 'brighter days', d: '5:16' }],
+             sp: [{ t: 'Light', d: '4:02' }, { t: 'Worthy', d: '3:37' }, { t: 'One Thing', d: '3:29' }] } },
+    { name: 'phrva', genres: 'Bass House', reason: '★ Drew has this as a must',
+      src: { sc: [{ t: 'phrva — warehouse mix 04', d: '41:26' }, { t: 'submerged', d: '5:12' }, { t: 'low tide (club edit)', d: '4:48' }] } },
+  ];
+  state = { i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null, rm: false, src: 'yt', clip: 0, playing: false, alts: false };
+  _start = { x: 0, y: 0 };
+  _undoTimer = null; _pickTimer = null; _t1 = null; _t2 = null;
+
+  componentDidMount() {
+    try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ rm: true }); } catch (e) {}
+  }
+  _clearAll() { clearTimeout(this._pickTimer); clearTimeout(this._t1); clearTimeout(this._t2); }
+  toggleRm = () => this.setState(s => ({ rm: !s.rm }));
+  stopDrag = (e) => { e.stopPropagation(); };
+  setSrc = (k) => this.setState({ src: k, clip: 0, playing: true, alts: false });  // source choice is remembered across cards
+  setClip = (n) => this.setState({ clip: n, playing: true });
+  toggleSample = () => this.setState(s => ({ playing: !s.playing }));
+
+  onDown = (e) => {
+    if (this.state.exiting || this.state.celebrate || this.state.i >= this.deck.length) return;
+    clearTimeout(this._pickTimer);
+    this._start = { x: e.clientX, y: e.clientY };
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {}
+    this.setState({ dragging: true, pending: null });
+  };
+  onMove = (e) => {
+    if (!this.state.dragging) return;
+    this.setState({ dx: e.clientX - this._start.x, dy: e.clientY - this._start.y });
+  };
+  onUp = () => {
+    if (!this.state.dragging) return;
+    const { dx, dy } = this.state;
+    if (dy < -90 && Math.abs(dy) > Math.abs(dx)) this.begin('must', 4);
+    else if (dx > 90) this.begin('pick', 1);
+    else if (dx < -90) this.begin('pass', 0);
+    else this.setState({ dx: 0, dy: 0, dragging: false });
+  };
+
+  // Pick button: tap to fill; each tap raises level (1->2->3->loop 1); 1s idle locks it in.
+  pickTap = () => {
+    if (this.state.exiting || this.state.celebrate || this.state.i >= this.deck.length) return;
+    clearTimeout(this._pickTimer);
+    this.setState(s => ({ pending: { level: s.pending ? (s.pending.level % 3) + 1 : 1 }, dragging: false, dx: 0, dy: 0 }));
+    this._pickTimer = setTimeout(() => {
+      const lvl = this.state.pending ? this.state.pending.level : 1;
+      this.begin('pick', lvl);
+    }, 1000);
+  };
+
+  begin = (kind, level) => {
+    if (this.state.exiting || this.state.celebrate || this.state.i >= this.deck.length) return;
+    const cur = this.deck[this.state.i];
+    const rm = this.state.rm;
+    this._clearAll();
+    this.setState({ celebrate: { kind, level }, pending: null, dragging: false, dx: 0, dy: 0 });
+    this._t1 = setTimeout(() => {
+      const tx = kind === 'pass' ? -520 : 520;
+      this.setState({ exiting: kind, dx: tx, dy: 40 });
+      this._t2 = setTimeout(() => {
+        this.setState(s => ({ i: s.i + 1, dx: 0, dy: 0, exiting: null, celebrate: null, playing: false, clip: 0, alts: false, decisions: [...s.decisions, { name: cur.name, kind, level }], undo: { name: cur.name, kind, level } }));
+        clearTimeout(this._undoTimer);
+        this._undoTimer = setTimeout(() => this.setState({ undo: null }), 5000);
+      }, rm ? 0 : 300);
+    }, rm ? (kind === 'pick' ? 160 : 520) : 420);
+  };
+
+  undoLast = () => {
+    this._clearAll(); clearTimeout(this._undoTimer);
+    this.setState(s => s.i > 0 ? ({ i: s.i - 1, dx: 0, dy: 0, exiting: null, celebrate: null, pending: null, dragging: false, decisions: s.decisions.slice(0, -1), undo: null }) : s);
+  };
+  reset = () => {
+    this._clearAll(); clearTimeout(this._undoTimer);
+    this.setState({ i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null });
+  };
+
+  renderVals() {
+    const s = this.state, d = this.deck;
+    const done = s.i >= d.length;
+    const cur = done ? null : d[s.i];
+    const cel = s.celebrate;
+    const isStar = !!(cel && cel.kind === 'must');
+    const isThumb = !!(cel && cel.kind === 'pass');
+    const isTick = !!s.pending || !!(cel && cel.kind === 'pick');
+    const level = s.pending ? s.pending.level : (cel && cel.kind === 'pick' ? cel.level : 1);
+    const overlayVisible = isStar || isThumb || isTick;
+
+    // drag hint (gesture only)
+    const dir = s.dragging ? (s.dy < -40 && Math.abs(s.dy) > Math.abs(s.dx) ? 'must' : s.dx > 40 ? 'pick' : s.dx < -40 ? 'pass' : null) : null;
+    let hintLabel = '', hintColor = '#8E86A8';
+    if (dir === 'must') { hintLabel = 'MUST'; hintColor = '#D8B4FE'; }
+    else if (dir === 'pick') { hintLabel = 'PICK'; hintColor = '#D8B4FE'; }
+    else if (dir === 'pass') { hintLabel = 'PASS'; hintColor = '#8E86A8'; }
+    const dragMag = Math.max(Math.abs(s.dx), Math.abs(s.dy));
+    const hintOpacity = (s.dragging && !overlayVisible) ? Math.min(1, Math.max(0, (dragMag - 25) / 80)) : 0;
+
+    // card bg/filter
+    const exitOrDrag = s.exiting || dir;
+    const aura = (strong) => `radial-gradient(130% 130% at 50% 120%, hsla(270,90%,70%,${strong ? 1 : 0.7}) 0%, hsla(270,90%,70%,${strong ? 0.5 : 0.35}) 45%, transparent 78%), #1C1731`;
+    let cardBg = '#1C1731', cardFilter = 'none';
+    if (isStar || exitOrDrag === 'must') cardBg = aura(true);
+    else if (isTick || exitOrDrag === 'pick') cardBg = aura(false);
+    else if (isThumb || exitOrDrag === 'pass') cardFilter = 'grayscale(.7) brightness(.82)';
+
+    const rot = s.exiting ? (s.exiting === 'pass' ? -16 : 16) : s.dx / 18;
+    const transition = s.dragging ? 'none' : (s.rm ? 'none' : 'transform .3s cubic-bezier(.2,.7,.3,1), opacity .3s ease, background .2s ease, filter .2s ease');
+
+    const counts = s.decisions.reduce((a, x) => { a[x.kind] = (a[x.kind] || 0) + 1; return a; }, {});
+    const pipsEls = [1, 2, 3].map(n => React.createElement('span', { key: n, style: { width: '9px', height: '9px', borderRadius: '999px', background: n <= level ? 'hsla(270,90%,72%,.95)' : '#2B2440', border: '1px solid ' + (n <= level ? '#fff' : '#3A3354') } }));
+    let undoText = '';
+    if (s.undo) undoText = s.undo.kind === 'pass' ? `Passed ${s.undo.name}` : s.undo.kind === 'must' ? `Made ${s.undo.name} a must` : `Picked ${s.undo.name} ×${s.undo.level}`;
+
+    // sample block — presence-driven tabs, remembered source, one player at a time
+    const avail = cur ? ORDER.filter(k => cur.src[k]) : [];
+    const src = avail.includes(s.src) ? s.src : avail[0];
+    const list = src ? cur.src[src] : [];
+    const ci = Math.min(s.clip, Math.max(0, list.length - 1));
+    const track = list[ci] || null;
+    const srcTabs = avail.map(k => ({
+      key: k, label: SRC[k].label, dot: SRC[k].color,
+      bc: k === src ? SRC[k].color : '#2B2440',
+      bg: k === src ? '#1C1731' : 'transparent',
+      fg: k === src ? '#fff' : '#8E86A8',
+      on: () => this.setSrc(k),
+    }));
+    const kindWord = src === 'sp' ? 'Top track' : src === 'sc' ? 'Track' : 'Set';
+    // Spotify lists its own top tracks inside the embed — no alternates pane for it
+    const canAlts = !!src && src !== 'sp' && list.length > 1;
+    const altRows = list.slice(0, 3).map((r, n) => ({
+      n: n + 1, t: r.t, d: r.d,
+      bc: n === ci ? '#C084FC' : '#241E38',
+      bg: n === ci ? 'rgba(192,132,252,.13)' : '#1C1731',
+      fg: n === ci ? '#fff' : '#C6CBD6',
+      nfg: n === ci ? '#C084FC' : '#8E86A8',
+      on: () => this.setClip(n),
+    }));
+
+    return {
+      deckActive: !done, deckDone: done,
+      srcTabs, stopDrag: this.stopDrag, toggleSample: this.toggleSample,
+      srcBadge: src === 'sp' ? '30-sec preview' : 'plays in full · no account',
+      srcAccent: src ? SRC[src].color : '#322A4D',
+      srcAccentSoft: src ? SRC[src].soft : 'transparent',
+      sampleGlyph: s.playing ? '❚❚' : '▶',
+      isVideo: src === 'yt', isAudio: !!src && src !== 'yt', samplePct: s.playing ? 22 : 0,
+      sampleTitle: track ? track.t : 'Nothing to sample yet',
+      sampleMeta: track ? `${kindWord} ${ci + 1} of ${list.length} · ${track.d}` : 'No source resolved — picking is unaffected',
+      altRows, canAlts,
+      altsLabel: src === 'sc' ? 'Tracks' : 'Live sets',
+      name: cur ? cur.name : '', genres: cur ? cur.genres : '', reason: cur ? cur.reason : '',
+      cardBg, cardFilter, cardTransform: `translate(${s.dx}px, ${s.dy}px) rotate(${rot}deg)`, cardTransition: transition, cardOpacity: s.exiting ? 0 : 1,
+      hintLabel, hintColor, hintOpacity,
+      overlayOpacity: overlayVisible ? 1 : 0, isStar, isThumb, isTick,
+      popAnim: s.rm ? 'none' : 'popStar .4s ease both', tickFill: level * 33.4, pendingLevel: level, pips: pipsEls,
+      onDown: this.onDown, onMove: this.onMove, onUp: this.onUp,
+      pass: () => this.begin('pass', 0), pick: this.pickTap, must: () => this.begin('must', 4),
+      pickBtnLabel: s.pending ? `＋ Pick ×${s.pending.level}` : '＋ Pick', pickPulse: (s.pending && !s.rm) ? 'pulseBtn 1s ease-in-out infinite' : 'none',
+      pendingHintVisible: !!s.pending,
+      undoLast: this.undoLast, undoVisible: !!s.undo, undoText,
+      reset: this.reset, rm: s.rm, toggleRm: this.toggleRm, rmLabel: s.rm ? 'Reduced motion: ON' : 'Reduced motion: off',
+      pct: Math.round((s.i / d.length) * 100), counter: `${Math.min(s.i + 1, d.length)} / ${d.length}`,
+      picks: counts.pick || 0, musts: counts.must || 0, passes: counts.pass || 0,
+    };
+  }
+}
+</script>
+</body>
+</html>

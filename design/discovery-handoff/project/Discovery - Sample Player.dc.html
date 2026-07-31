@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#0C0A14; color:#C6CBD6; font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+         background-image:radial-gradient(1200px 600px at 100% -10%,rgba(224,71,155,.06),transparent),radial-gradient(900px 500px at -10% 110%,rgba(192,132,252,.06),transparent); }
+  button { font-family:inherit; cursor:pointer; }
+  a { color:#D8B4FE; } a:hover { color:#EBD6FF; }
+  :focus-visible { outline:2px solid rgba(192,132,252,.9); outline-offset:2px; }
+  @keyframes eq { 0%,100%{height:4px} 50%{height:14px} }
+</style>
+</helmet>
+
+<div style="max-width:1180px;margin:0 auto;padding:52px 28px 110px">
+  <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+    <div style="font-family:Anton,sans-serif;font-size:40px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase">Sample player — v2</div>
+    <div style="font:700 10px Inter;letter-spacing:.14em;text-transform:uppercase;color:#C084FC;border:1px solid #322A4D;border-radius:999px;padding:4px 10px">Rebuilt from the player research</div>
+  </div>
+  <div style="font:400 14px/1.6 Inter;color:#8E86A8;max-width:74ch;margin-top:12px">Replaces the placeholder sample block in every mockup. Behaviour, tab order and stage sizes are taken from the working harness — the three embeds have fixed shapes and we design around them, not the other way round. Mockup only: the stages here are drawn, not live embeds.</div>
+
+  <div style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase;margin:44px 0 4px">What the research changed</div>
+  <div style="height:1px;background:#241E38;margin-bottom:18px"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px">
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">YouTube leads now</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Tab order is <b style="color:#C6CBD6">YouTube → SoundCloud → Spotify</b>. The top YouTube hit is usually the full festival set — v1 defaulted to SoundCloud, which is the weaker first guess.</div>
+    </div>
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">Auto-pick, then swap</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Every source mounts its best result and starts. Alternates sit next to the stage as a numbered list — <b style="color:#C6CBD6">no search box, no dead ▶</b>.</div>
+    </div>
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">The source is remembered</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Last source used persists across artists and across reloads. If an artist lacks it, fall back to the highest-priority source they do have.</div>
+    </div>
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">One player, always</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Switching source, switching artist, closing the sheet — each tears the previous player down first. Two things never sound at once.</div>
+    </div>
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">Stage sizes are fixed</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">YouTube <b style="color:#C6CBD6">16:9</b> · SoundCloud <b style="color:#C6CBD6">166px</b> · Spotify <b style="color:#C6CBD6">352px</b>. The panel height changes per tab — that's expected, don't lock it.</div>
+    </div>
+    <div style="border:1px solid #241E38;border-radius:12px;background:#141021;padding:14px">
+      <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">Spotify brings its own list</div>
+      <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Its embed already lists top tracks, so we draw <b style="color:#C6CBD6">no alternates pane</b> for it — just the preview caveat.</div>
+    </div>
+  </div>
+
+  <div style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase;margin:52px 0 4px">01 · Full player — phone sheet</div>
+  <div style="height:1px;background:#241E38;margin-bottom:18px"></div>
+  <div style="font:400 13px/1.6 Inter;color:#8E86A8;max-width:74ch;margin-bottom:18px">Used on the artist page and as the bottom sheet raised from a card's ▶. Tap the tabs and the numbered rows — it behaves like the harness.</div>
+
+  <div style="display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start">
+    <div style="width:390px;flex:none;border:1px solid #2B2440;border-radius:18px 18px 0 0;background:#0A0812;overflow:hidden">
+      <div style="width:38px;height:4px;border-radius:999px;background:#2B2440;margin:10px auto 2px"></div>
+      <div style="padding:14px 18px 12px">
+        <div style="font:700 20px/1.2 Inter;color:#fff">{{ artist }}</div>
+        <div style="font:500 13px Inter;color:#8E86A8;margin-top:3px">{{ genres }}</div>
+      </div>
+      <div style="display:flex;gap:8px;padding:0 18px 14px;flex-wrap:wrap">
+        <sc-for list="{{ f.tabs }}" as="t" hint-placeholder-count="3">
+          <button onClick="{{ t.on }}" style="display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border-radius:999px;font:700 13px Inter;border:1px solid {{ t.bc }};background:{{ t.bg }};color:{{ t.fg }}">
+            <span style="width:9px;height:9px;border-radius:50%;background:{{ t.dot }}"></span>{{ t.label }}
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{ f.isYt }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative;aspect-ratio:16/9;background:#000;display:flex;align-items:center;justify-content:center">
+          <button onClick="{{ f.toggle }}" style="width:64px;height:64px;border-radius:999px;border:none;background:rgba(255,78,69,.9);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center">{{ f.glyph }}</button>
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:10px 12px;background:linear-gradient(transparent,rgba(0,0,0,.85))">
+            <div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div>
+            <div style="display:flex;justify-content:space-between;font:600 10.5px ui-monospace,monospace;color:#C6CBD6;margin-top:7px"><span>13:44</span><span>{{ f.dur }}</span></div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ f.isSc }}" hint-placeholder-val="{{ false }}">
+        <div style="height:166px;background:#0F0C18;border-top:1px solid #241E38;border-bottom:1px solid #241E38;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <button onClick="{{ f.toggle }}" style="width:44px;height:44px;flex:none;border-radius:999px;border:none;background:#FF7A2F;color:#fff;font-size:15px">{{ f.glyph }}</button>
+            <div style="min-width:0">
+              <div style="font:700 13px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.title }}</div>
+              <div style="font:600 11px Inter;color:#8E86A8;margin-top:2px">{{ artist }} · SoundCloud</div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;align-items:flex-end;gap:2px;min-height:0">
+            <sc-for list="{{ wave }}" as="b" hint-placeholder-count="40">
+              <span style="flex:1;border-radius:1px;height:{{ b.h }}%;background:{{ b.c }}"></span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ f.isSp }}" hint-placeholder-val="{{ false }}">
+        <div style="height:352px;background:#0F0C18;border-top:1px solid #241E38;border-bottom:1px solid #241E38;padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:60px;height:60px;flex:none;border-radius:6px;background:repeating-linear-gradient(135deg,#1C1731,#1C1731 6px,#241E38 6px,#241E38 12px)"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font:700 14px Inter;color:#fff">{{ artist }}</div>
+              <div style="font:600 11px Inter;color:#8E86A8;margin-top:2px">Top tracks · Spotify</div>
+            </div>
+            <span style="flex:none;border:1px solid #67B98A;color:#67B98A;border-radius:999px;padding:4px 9px;font:700 9.5px Inter;letter-spacing:.06em;text-transform:uppercase">30-sec preview</span>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden">
+            <sc-for list="{{ f.spRows }}" as="r" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:11px;padding:8px 8px;border-radius:7px;background:{{ r.bg }}">
+                <span style="width:14px;font:700 11px ui-monospace,monospace;color:{{ r.nfg }}">{{ r.n }}</span>
+                <span style="flex:1;min-width:0;font:600 12.5px Inter;color:{{ r.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span>
+                <span style="font:600 11px ui-monospace,monospace;color:#877FA4">{{ r.d }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="padding:14px 18px 20px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+          <span style="font:800 11px Inter;letter-spacing:.1em;text-transform:uppercase;color:#8E86A8">{{ f.label }}</span>
+          <span style="font:600 11px Inter;color:#877FA4">{{ f.hint }}</span>
+        </div>
+        <sc-if value="{{ f.showRows }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ f.clips }}" as="c" hint-placeholder-count="3">
+              <button onClick="{{ c.on }}" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:9px 11px;border-radius:10px;text-align:left;font:600 13px Inter;border:1px solid {{ c.bc }};background:{{ c.bg }};color:{{ c.fg }}">
+                <span style="flex:none;width:18px;font:700 12px ui-monospace,monospace;color:{{ c.nfg }}">{{ c.n }}</span>
+                <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.t }}</span>
+                <span style="font:600 11px ui-monospace,monospace;color:#877FA4">{{ c.d }}</span>
+                <span style="flex:none;display:{{ c.eq }};gap:2px;align-items:flex-end;height:14px">
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqA }}"></i>
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqB }}"></i>
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqC }}"></i>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div style="font:500 12px/1.5 Inter;color:#8E86A8;margin-top:11px">{{ f.foot }}</div>
+      </div>
+    </div>
+
+    <div style="flex:1;min-width:290px;display:flex;flex-direction:column;gap:10px">
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="width:9px;height:9px;border-radius:50%;background:#FF4E45"></span><span style="font:800 12px Inter;color:#fff">YouTube</span><span style="font:700 9px Inter;letter-spacing:.08em;text-transform:uppercase;color:#10B981;border:1px solid #10B981;border-radius:999px;padding:2px 7px">default</span></div>
+        <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Cached <code style="color:#D8B4FE">search.list</code> per artist gives 3 verified sets; the keyless IFrame player plays the first. Alternates are the other cached hits, labelled by festival and year — that label is what makes the list worth tapping.</div>
+      </div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="width:9px;height:9px;border-radius:50%;background:#FF7A2F"></span><span style="font:800 12px Inter;color:#fff">SoundCloud</span></div>
+        <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Widget API embeds the artist's profile; <code style="color:#D8B4FE">getSounds()</code> returns the real posted tracks live, so the list is never stale. Cap at 6. Public tracks play in full with no session. Attribution required.</div>
+      </div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="width:9px;height:9px;border-radius:50%;background:#67B98A"></span><span style="font:800 12px Inter;color:#fff">Spotify</span></div>
+        <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">The studio sound, not the set. Its embed carries its own top-tracks list, so our alternates pane collapses to one line. Signed out or Free = <b style="color:#C6CBD6">30-sec preview</b> — the chip on the stage says so, always.</div>
+      </div>
+      <div style="border:1px dashed #322A4D;border-radius:10px;padding:12px 14px">
+        <div style="font:700 12px Inter;color:#C6CBD6;margin-bottom:3px">Tabs are presence-driven</div>
+        <div style="font:500 11.5px/1.55 Inter;color:#8E86A8">A tab only renders when that artist resolved that source. Two sources = two tabs. None = the block collapses to the one-liner below.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase;margin:52px 0 4px">02 · Compact — inside a card</div>
+  <div style="height:1px;background:#241E38;margin-bottom:18px"></div>
+  <div style="font:400 13px/1.6 Inter;color:#8E86A8;max-width:74ch;margin-bottom:18px">The swipe deck can't hold a 16:9 stage, so the card carries the same tabs over a now-playing row, with the first three alternates listed underneath — <b style="color:#C6CBD6">open by default</b>. Three rows is small enough that hiding them behind a control only makes the swap undiscoverable; if a source has more, the extra rows are reachable in the sheet. This is what replaces the old three-chips-and-a-waveform block.</div>
+
+  <div style="display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start">
+    <div style="width:340px;flex:none;border:1px solid #2B2440;border-radius:10px;background:#141021;padding:12px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span>
+        <span style="font:600 10px Inter;color:#877FA4">{{ c.badge }}</span>
+      </div>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ c.tabs }}" as="t" hint-placeholder-count="3">
+          <button onClick="{{ t.on }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;border:1px solid {{ t.bc }};background:{{ t.bg }};color:{{ t.fg }}">
+            <span style="width:7px;height:7px;border-radius:50%;background:{{ t.dot }}"></span>{{ t.label }}
+          </button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px">
+        <span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">{{ c.glyph }}</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span>
+        <div style="flex:1;min-width:0">
+          <div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.title }}</div>
+          <div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">{{ c.meta }}</div>
+        </div>
+      </div>
+      <sc-if value="{{ c.showRows }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4">{{ c.label }}</span>
+            <span style="font:600 9.5px Inter;color:#877FA4">tap to switch</span>
+          </div>
+          <sc-for list="{{ c.clips }}" as="r" hint-placeholder-count="3">
+            <button onClick="{{ r.on }}" style="display:flex;align-items:center;gap:9px;min-height:38px;padding:6px 9px;border-radius:8px;text-align:left;font:600 11.5px Inter;border:1px solid {{ r.bc }};background:{{ r.bg }};color:{{ r.fg }}">
+              <span style="flex:none;width:14px;font:700 10.5px ui-monospace,monospace;color:{{ r.nfg }}">{{ r.n }}</span>
+              <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.t }}</span>
+              <span style="font:600 10px ui-monospace,monospace;color:#877FA4">{{ r.d }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="flex:1;min-width:290px;display:flex;flex-direction:column;gap:10px">
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px"><div style="font:800 12px Inter;color:#fff;margin-bottom:4px">Same ▶, same instance</div><div style="font:500 11.5px/1.55 Inter;color:#8E86A8">The card's play button and the artist page target one player. Raising the sheet from a card hands over the running source and position rather than starting a second one.</div></div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px"><div style="font:800 12px Inter;color:#fff;margin-bottom:4px">Swiping stops it</div><div style="font:500 11.5px/1.55 Inter;color:#8E86A8">A decision — pick, must or pass — tears the player down as the card leaves. The next card mounts on the remembered source but does <b style="color:#C6CBD6">not</b> auto-play; sampling stays a deliberate tap in the deck.</div></div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px"><div style="font:800 12px Inter;color:#fff;margin-bottom:4px">The stage never lies</div><div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Whatever is playing has to look like itself: YouTube is a 16:9 frame — full size where there is room, an 82×46 thumbnail with its own progress bar in a card — SoundCloud is the waveform row, Spotify its list. A video source never hides behind a round play button.</div></div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#0A0812;padding:12px 14px"><div style="font:800 12px Inter;color:#fff;margin-bottom:4px">Row count</div><div style="font:500 11.5px/1.55 Inter;color:#8E86A8">Three rows on a card, six in the sheet — always visible, never collapsed. Spotify shows none: its list lives inside its own embed, so the card falls back to the now-playing row and the preview badge.</div></div>
+    </div>
+  </div>
+
+  <div style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase;margin:52px 0 4px">03 · Desktop — stage beside the list</div>
+  <div style="height:1px;background:#241E38;margin-bottom:18px"></div>
+  <div style="font:400 13px/1.6 Inter;color:#8E86A8;max-width:74ch;margin-bottom:18px">At 1120px and up the alternates move to a right-hand rail so the stage keeps the width. Between 960 and 1120 the pane stays single-column — a bigger player beats a side-by-side list. Spotify spans full width at every size.</div>
+
+  <div style="border:1px solid #2B2440;border-radius:12px;background:#141021;overflow:hidden">
+    <div style="padding:18px 18px 14px">
+      <div style="font:700 22px/1.2 Inter;color:#fff">{{ artist }}</div>
+      <div style="font:500 13px Inter;color:#8E86A8;margin-top:3px">{{ genres }}</div>
+    </div>
+    <div style="display:flex;gap:8px;padding:0 18px 14px;flex-wrap:wrap">
+      <sc-for list="{{ d.tabs }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.on }}" style="display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border-radius:999px;font:700 13px Inter;border:1px solid {{ t.bc }};background:{{ t.bg }};color:{{ t.fg }}">
+          <span style="width:9px;height:9px;border-radius:50%;background:{{ t.dot }}"></span>{{ t.label }}
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ d.cols }};align-items:start">
+      <div>
+        <sc-if value="{{ d.isYt }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;aspect-ratio:16/9;background:#000;display:flex;align-items:center;justify-content:center">
+            <button onClick="{{ d.toggle }}" style="width:72px;height:72px;border-radius:999px;border:none;background:rgba(255,78,69,.9);color:#fff;font-size:24px">{{ d.glyph }}</button>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:12px 16px;background:linear-gradient(transparent,rgba(0,0,0,.85))">
+              <div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div>
+              <div style="display:flex;justify-content:space-between;font:600 11px ui-monospace,monospace;color:#C6CBD6;margin-top:8px"><span>13:44</span><span>{{ d.dur }}</span></div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ d.isSc }}" hint-placeholder-val="{{ true }}">
+          <div style="height:166px;background:#0F0C18;border-top:1px solid #241E38;padding:16px 18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <button onClick="{{ d.toggle }}" style="width:44px;height:44px;flex:none;border-radius:999px;border:none;background:#FF7A2F;color:#fff;font-size:15px">{{ d.glyph }}</button>
+              <div style="min-width:0">
+                <div style="font:700 14px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ d.title }}</div>
+                <div style="font:600 11px Inter;color:#8E86A8;margin-top:2px">{{ artist }} · SoundCloud</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;align-items:flex-end;gap:2px;min-height:0">
+              <sc-for list="{{ wave }}" as="b" hint-placeholder-count="40">
+                <span style="flex:1;border-radius:1px;height:{{ b.h }}%;background:{{ b.c }}"></span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ d.isSp }}" hint-placeholder-val="{{ false }}">
+          <div style="height:352px;background:#0F0C18;border-top:1px solid #241E38;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="width:64px;height:64px;flex:none;border-radius:6px;background:repeating-linear-gradient(135deg,#1C1731,#1C1731 6px,#241E38 6px,#241E38 12px)"></div>
+              <div style="flex:1;min-width:0"><div style="font:700 15px Inter;color:#fff">{{ artist }}</div><div style="font:600 11.5px Inter;color:#8E86A8;margin-top:2px">Top tracks · Spotify</div></div>
+              <span style="flex:none;border:1px solid #67B98A;color:#67B98A;border-radius:999px;padding:4px 9px;font:700 9.5px Inter;letter-spacing:.06em;text-transform:uppercase">30-sec preview</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px;overflow:hidden">
+              <sc-for list="{{ d.spRows }}" as="r" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:12px;padding:9px;border-radius:7px;background:{{ r.bg }}">
+                  <span style="width:14px;font:700 11px ui-monospace,monospace;color:{{ r.nfg }}">{{ r.n }}</span>
+                  <span style="flex:1;min-width:0;font:600 13px Inter;color:{{ r.fg }}">{{ r.t }}</span>
+                  <span style="font:600 11px ui-monospace,monospace;color:#877FA4">{{ r.d }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <div style="border-left:1px solid #241E38;padding:16px 18px 20px;max-height:520px;overflow:auto">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+          <span style="font:800 11px Inter;letter-spacing:.1em;text-transform:uppercase;color:#8E86A8">{{ d.label }}</span>
+          <span style="font:600 11px Inter;color:#877FA4">{{ d.hint }}</span>
+        </div>
+        <sc-if value="{{ d.showRows }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ d.clips }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.on }}" style="display:flex;align-items:center;gap:10px;min-height:44px;padding:9px 11px;border-radius:10px;text-align:left;font:600 13px Inter;border:1px solid {{ c.bc }};background:{{ c.bg }};color:{{ c.fg }}">
+                <span style="flex:none;width:18px;font:700 12px ui-monospace,monospace;color:{{ c.nfg }}">{{ c.n }}</span>
+                <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.t }}</span>
+                <span style="font:600 11px ui-monospace,monospace;color:#877FA4">{{ c.d }}</span>
+                <span style="flex:none;display:{{ c.eq }};gap:2px;align-items:flex-end;height:14px">
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqA }}"></i>
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqB }}"></i>
+                  <i style="width:3px;border-radius:2px;background:#C084FC;height:9px;animation:{{ eqC }}"></i>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <div style="font:500 12px/1.5 Inter;color:#8E86A8;margin-top:11px">{{ d.foot }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase;margin:52px 0 4px">04 · States</div>
+  <div style="height:1px;background:#241E38;margin-bottom:18px"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;align-items:start">
+    <div>
+      <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span></div>
+        <div style="display:flex;gap:6px">
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731">YouTube</span>
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440">SoundCloud</span>
+        </div>
+        <div style="height:96px;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;font:600 12px ui-monospace,monospace;color:#8E86A8">loading…</div>
+      </div>
+      <div style="font:600 10px ui-monospace,monospace;color:#877FA4;margin-top:7px">mounting · never a spinner over an empty box</div>
+    </div>
+    <div>
+      <div style="border:1px dashed #322A4D;border-radius:10px;background:#0A0812;padding:16px;text-align:center">
+        <div style="font:700 13px Inter;color:#C6CBD6">Nothing to sample yet</div>
+        <div style="font:500 11px/1.5 Inter;color:#877FA4;margin-top:5px">No source resolved for this artist. The whole block collapses to this line — picking is unaffected.</div>
+      </div>
+      <div style="font:600 10px ui-monospace,monospace;color:#877FA4;margin-top:7px">no sources · 4b</div>
+    </div>
+    <div>
+      <div style="border:1px solid #241E38;border-radius:10px;background:#141021;padding:12px;display:flex;flex-direction:column;gap:10px;opacity:.5">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="display:flex;align-items:center;gap:6px;font:600 10px Inter;color:#877FA4"><span style="width:8px;height:8px;border-radius:999px;background:#6B7280"></span>offline</span></div>
+        <div style="display:flex;gap:6px">
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#6B7280;border:1px solid #2B2440">YouTube</span>
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#6B7280;border:1px solid #2B2440">SoundCloud</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px"><span style="width:44px;height:44px;border-radius:999px;border:1px solid #322A4D;color:#6B7280;display:flex;align-items:center;justify-content:center;font-size:15px">▶</span><span style="font:600 11px Inter;color:#877FA4">Sampling resumes when you're back</span></div>
+      </div>
+      <div style="font:600 10px ui-monospace,monospace;color:#877FA4;margin-top:7px">offline · grey dot, not an error</div>
+    </div>
+    <div>
+      <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:12px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#F59E0B">source failed</span></div>
+        <div style="display:flex;gap:6px">
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#8E86A8;border:1px dashed #322A4D;text-decoration:line-through">YouTube</span>
+          <span style="flex:1;text-align:center;border-radius:8px;padding:8px 0;font:700 10.5px Inter;color:#fff;border:1px solid #FF7A2F;background:#1C1731">SoundCloud</span>
+        </div>
+        <div style="font:500 11px/1.5 Inter;color:#877FA4">That set wouldn't load — we fell through to SoundCloud. <span style="color:#D8B4FE;font-weight:700">Retry YouTube</span></div>
+      </div>
+      <div style="font:600 10px ui-monospace,monospace;color:#877FA4;margin-top:7px">sampling error ≠ offline · falls through</div>
+    </div>
+  </div>
+
+  <div style="border:1px solid #322A4D;border-radius:12px;background:#0A0812;padding:16px 18px;margin-top:26px">
+    <div style="font:800 12px Inter;color:#fff;margin-bottom:6px">For engineering</div>
+    <div style="font:500 12px/1.65 Inter;color:#8E86A8;max-width:88ch">Tab priority <code style="color:#D8B4FE">['yt','sc','sp']</code> doubles as the fallback order. Persist the last source under one key and honour it per artist when present. YouTube needs a <b style="color:#C6CBD6">secure context</b> — over plain HTTP the player throws 150/153 while the other two keep working, so dev builds must run on localhost or HTTPS. Cache the YouTube search per artist (100 units a call against a 10k/day quota); SoundCloud's list is free to fetch live.</div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultSource&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;yt&quot;,&quot;sc&quot;,&quot;sp&quot;],&quot;default&quot;:&quot;yt&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behaviour&quot;},&quot;reducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+const SRC = { yt:{label:'YouTube',color:'#FF4E45'}, sc:{label:'SoundCloud',color:'#FF7A2F'}, sp:{label:'Spotify',color:'#67B98A'} };
+const ORDER = ['yt','sc','sp'];
+
+class Component extends DCLogic {
+  ART = {
+    name: 'Charlotte de Witte',
+    gen: 'Hard Techno · Melodic Techno',
+    yt: [
+      { t:'Tomorrowland 2022 · Main Stage', d:'1:02:37' },
+      { t:'Tomorrowland Brasil 2024', d:'58:12' },
+      { t:'Tomorrowland Belgium 2025', d:'1:14:05' },
+    ],
+    sc: [
+      { t:'KNTXT Radio 041', d:'59:58' },
+      { t:'Overdrive', d:'6:24' },
+      { t:'Rave On Time', d:'5:41' },
+      { t:'Formula — live edit', d:'7:02' },
+    ],
+    sp: [
+      { t:'Rave On Time', d:'3:44' },
+      { t:'Doppler', d:'3:12' },
+      { t:'Sgadi Li Mi', d:'3:58' },
+      { t:'High Street', d:'4:06' },
+      { t:'Overdrive', d:'3:30' },
+    ],
+  };
+  state = { f:{src:null,i:0,play:true}, c:{src:null,i:0,play:false,open:false}, d:{src:'sc',i:1,play:true} };
+
+  src(k) { return this.state[k].src || this.props.defaultSource || 'yt'; }
+  setSrc = (k, s) => this.setState(st => ({ [k]: Object.assign({}, st[k], { src:s, i:0, play:true, open:false }) }));
+  setClip = (k, i) => this.setState(st => ({ [k]: Object.assign({}, st[k], { i, play:true }) }));
+  toggle = (k) => this.setState(st => ({ [k]: Object.assign({}, st[k], { play: !st[k].play }) }));
+
+  vm(k, maxRows) {
+    const src = this.src(k), s = this.state[k], A = this.ART;
+    const list = A[src], i = Math.min(s.i, list.length - 1), cur = list[i];
+    const tabs = ORDER.map(x => ({
+      key:x, label:SRC[x].label, dot:SRC[x].color,
+      bc: x === src ? SRC[x].color : '#2B2440',
+      bg: x === src ? '#1C1731' : 'transparent',
+      fg: x === src ? '#fff' : '#8E86A8',
+      on: () => this.setSrc(k, x),
+    }));
+    const clips = list.slice(0, maxRows).map((r, n) => ({
+      n: n + 1, t: r.t, d: r.d,
+      bc: n === i ? '#C084FC' : '#241E38',
+      bg: n === i ? 'rgba(192,132,252,.13)' : '#1C1731',
+      fg: n === i ? '#fff' : '#C6CBD6',
+      nfg: n === i ? '#C084FC' : '#8E86A8',
+      eq: n === i && s.play ? 'flex' : 'none',
+      on: () => this.setClip(k, n),
+    }));
+    const spRows = A.sp.map((r, n) => ({
+      n: n + 1, t: r.t, d: r.d,
+      bg: n === i && src === 'sp' ? 'rgba(103,185,138,.14)' : 'transparent',
+      fg: n === i && src === 'sp' ? '#fff' : '#C6CBD6',
+      nfg: n === i && src === 'sp' ? '#67B98A' : '#877FA4',
+    }));
+    const copy = {
+      yt: { label:'Live sets', hint:'tap to switch set', foot:'Cached search results — three verified sets, no query box. Plays in full, no account.' },
+      sc: { label:'Tracks', hint:'live from their profile', foot:'Public tracks stream in full with no session. Attribution shown on the artist page.' },
+      sp: { label:'Top tracks', hint:'Spotify picks these', foot:'The embed lists them itself — tap a row on the stage above. 30-sec preview unless a Premium session is live.' },
+    }[src];
+    return {
+      tabs, clips, spRows,
+      isYt: src === 'yt', isSc: src === 'sc', isSp: src === 'sp',
+      showRows: src !== 'sp',
+      title: cur.t, dur: cur.d,
+      meta: (src === 'sp' ? 'Top track' : src === 'sc' ? 'Track' : 'Set') + ' ' + (i + 1) + ' of ' + list.length + ' · ' + cur.d,
+      badge: src === 'sp' ? '30-sec preview' : 'plays in full · no account',
+      accent: SRC[src].color,
+      accentSoft: src === 'yt' ? 'rgba(255,78,69,.18)' : src === 'sc' ? 'rgba(255,122,47,.18)' : 'rgba(103,185,138,.18)',
+      glyph: s.play ? '❚❚' : '▶',
+      label: copy.label, hint: copy.hint, foot: copy.foot,
+      cols: src === 'sp' ? '1fr' : 'minmax(0,1fr) minmax(300px,360px)',
+      toggle: () => this.toggle(k),
+    };
+  }
+
+  renderVals() {
+    const rm = this.props.reducedMotion;
+    const wave = Array.from({ length: 46 }, (_, n) => {
+      const h = 22 + Math.abs(Math.sin(n * 1.7) * 46) + (n % 5) * 6;
+      return { h: Math.min(100, Math.round(h)), c: n < 12 ? '#FF7A2F' : 'rgba(255,122,47,.32)' };
+    });
+    return {
+      artist: this.ART.name, genres: this.ART.gen, wave,
+      f: this.vm('f', 6), c: this.vm('c', 3), d: this.vm('d', 6),
+      eqA: rm ? 'none' : 'eq 1s ease-in-out infinite',
+      eqB: rm ? 'none' : 'eq 1s ease-in-out .2s infinite',
+      eqC: rm ? 'none' : 'eq 1s ease-in-out .4s infinite',
+    };
+  }
+}
+
+</script>
+</body>
+</html>

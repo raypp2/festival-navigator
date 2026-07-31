@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<template id="__bundler_thumbnail" data-bg-color="#E9E6DE">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300"><rect width="400" height="300" fill="#E9E6DE"></rect><g transform="translate(120 90)"><rect x="0" y="0" width="72" height="120" rx="10" fill="#FCFBF8" stroke="{{ ink }}" stroke-width="4"></rect><rect x="14" y="18" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="14" y="38" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="14" y="58" width="30" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="88" y="0" width="72" height="120" rx="10" fill="#FCFBF8" stroke="{{ ink }}" stroke-width="4"></rect><rect x="102" y="18" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="102" y="38" width="30" height="7" rx="3.5" fill="#d9d4c8"></rect><circle cx="124" cy="86" r="16" fill="none" stroke="#a08f6a" stroke-width="4"></circle></g></svg>
+</template>
+<style>
+  body { margin:0; background:#E9E6DE; color:#2a2a28; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  a { color:#7d6f45; text-decoration: underline dotted; }
+  a:hover { color:#2a2a28; }
+</style>
+</helmet>
+
+<div style="background:{{ pageBg }};min-height:100vh;padding-bottom:2px">
+
+<div style="padding:40px 44px 12px;max-width:1180px">
+  <div style="font:800 30px/1.05 system-ui;letter-spacing:-.01em;color:{{ ink }}">Discovery — screens</div>
+  <div style="font:600 13px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};margin-top:8px">the design of record · hi-fi on top, mid-fi below</div>
+  <div style="font:400 13px/1.6 system-ui;color:{{ body }};max-width:74ch;margin-top:14px">Every frame here is live design. Explorations, options that lost, and frames a later round replaced now live in the <a href="./Discovery - Archive.dc.html">archive</a> — nothing on this page is superseded. Reference a frame by its id in chat (e.g. <a href="#5a">5a</a>).</div>
+  <div style="border:1px solid {{ ruleSoft }};border-left:3px solid #a08f6a;background:{{ stock }};border-radius:8px;padding:11px 14px;margin-top:16px;max-width:74ch;font:500 12px/1.6 ui-monospace,monospace;color:{{ mono }}">Every frame here carries the v2 sample player — YouTube-first tabs, auto-picked top result, alternates always visible. Full anatomy and states on the <a href="./Discovery - Sample Player.dc.html">sample player</a> sheet.</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+    <a href="./Discovery - Screens.dc.html" style="text-decoration:none;border:1px solid {{ rule }};background:{{ badgeBg }};color:{{ badgeInk }};border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Screens · current</a>
+    <a href="./Discovery - Style Guide.dc.html" style="text-decoration:none;border:1px solid {{ rule }};background:{{ stock }};color:{{ body }};border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Style guide</a>
+    <a href="./Discovery - Sample Player.dc.html" style="text-decoration:none;border:1px solid {{ rule }};background:{{ stock }};color:{{ body }};border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Sample player v2</a>
+    <a href="./Discovery - Swipe Demo.dc.html" style="text-decoration:none;border:1px solid {{ rule }};background:{{ stock }};color:{{ body }};border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Swipe demo</a>
+    <a href="./Discovery - Archive.dc.html" style="text-decoration:none;border:1px solid {{ rule }};background:{{ stock }};color:{{ body }};border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Archive · superseded</a>
+  </div>
+</div>
+
+<sc-if value="{{ showFlow }}" hint-placeholder-val="{{ true }}">
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:{{ ink }};letter-spacing:-.01em">User flow</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ accent }};margin-top:6px">what these frames are, in order — and where they touch the existing app</div>
+  </div>
+  <div style="background:{{ stock }};border:1px solid {{ rule }};border-radius:14px;padding:26px 28px;box-shadow:3px 4px 0 rgba(58,54,46,.06);display:flex;flex-direction:column;gap:22px;width:1124px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;font:600 10px ui-monospace,monospace;color:{{ mono }}">
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:11px;border:1.5px dashed {{ ruleSoft }};background:{{ sunk }};border-radius:3px"></span>existing app — untouched</span>
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:11px;border:1.5px solid {{ ink }};background:#fff;border-radius:3px"></span>frame in this doc — click the id</span>
+      <span style="display:flex;align-items:center;gap:7px"><span style="width:16px;height:11px;border:1.5px solid {{ compBorder }};background:{{ compBg }};border-radius:3px"></span>shared component</span>
+    </div>
+
+    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:nowrap">
+      <div style="display:flex;flex-direction:column;gap:11px;width:194px;flex:none">
+        <div style="font:700 9.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};border-bottom:1px dashed {{ ruleSoft }};padding-bottom:7px">Getting there</div>
+        <div style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px dashed {{ ruleSoft }};background:{{ sunk }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:none"><span style="font:700 12.5px system-ui;color:{{ mono }}">Festival page</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">the fest you follow</span></div>
+        <div style="display:flex;align-items:center;gap:7px;padding-left:88px"><span style="font:700 14px system-ui;color:{{ accent }}">↓</span><span style="font:600 9.5px ui-monospace,monospace;color:{{ mono }}">“Discover” · lineup tab</span></div>
+        <div style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px dashed {{ ruleSoft }};background:{{ sunk }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:none"><span style="font:700 12.5px system-ui;color:{{ mono }}">Lineup & timetable</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">names, times, stages</span><span style="font:600 9.5px/1.4 ui-monospace,monospace;color:{{ accent }};border-top:1px dashed {{ ruleSoft }};padding-top:6px;margin-top:3px">tap any artist name → artist page ↗</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 2px;flex:none"><span style="font:700 15px system-ui;color:{{ accent }}">→</span><span style="font:600 9px ui-monospace,monospace;color:{{ mono }};white-space:nowrap">enters</span></div>
+      <div style="display:flex;flex-direction:column;gap:11px;width:520px;flex:none">
+        <div style="font:700 9.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};border-bottom:1px dashed {{ ruleSoft }};padding-bottom:7px">Discovery — this work</div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <a href="#2a" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">2a · 5c</span><span style="font:700 12.5px system-ui;color:{{ ink }}">Discover deck</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">one artist at a time · phone deck, desktop three-pane</span></a>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 2px;flex:none"><span style="font:700 15px system-ui;color:{{ accent }}">→</span><span style="font:600 9px ui-monospace,monospace;color:{{ mono }};white-space:nowrap">Filter</span></div>
+          <a href="#2e" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">2e</span><span style="font:700 12.5px system-ui;color:{{ ink }}">Pool filter</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">genre, day, crew, sources · badge shows facets on</span></a>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;padding-left:88px"><span style="font:700 14px system-ui;color:{{ accent }}">↓</span><span style="font:600 9.5px ui-monospace,monospace;color:{{ mono }}">tap the name</span></div>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <a href="#5a" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">5a · 5b</span><span style="font:700 12.5px system-ui;color:{{ ink }}">Artist page <span style="font:600 9px ui-monospace,monospace;color:{{ accent }}">shared surface</span></span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">opened from the deck, the lineup, the timetable and Decide · full player, crew, notes, pick chip</span></a>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 2px;flex:none"><span style="font:700 15px system-ui;color:{{ accent }}">→</span></div>
+          <a href="./Discovery - Sample Player.dc.html" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ compBorder }};background:{{ compBg }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 12.5px system-ui;color:{{ ink }}">Sample player v2</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">one instance, one thing playing — the same ▶ on card and page</span></a>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;padding-left:88px"><span style="font:700 14px system-ui;color:{{ accent }}">↓</span><span style="font:600 9.5px ui-monospace,monospace;color:{{ mono }}">pick ×1–3 · must · pass — then the next card</span></div>
+        <div style="border:1.5px dashed {{ ruleSoft }};border-radius:10px;padding:10px 13px;font:500 10.5px/1.5 ui-monospace,monospace;color:{{ mono }};background:{{ sunk }}"><b style="color:{{ accent }}">Loop —</b> the product is the cycle: sample → decide → next. Pass is a decision, not a skip; every card can be undone.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 2px;flex:none"><span style="font:700 15px system-ui;color:{{ accent }}">→</span><span style="font:600 9px ui-monospace,monospace;color:{{ mono }};white-space:nowrap">picks</span></div>
+      <div style="display:flex;flex-direction:column;gap:11px;width:212px;flex:none">
+        <div style="font:700 9.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};border-bottom:1px dashed {{ ruleSoft }};padding-bottom:7px">Back into the app</div>
+        <a href="#2b" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">2b · 5d</span><span style="font:700 12.5px system-ui;color:{{ ink }}">My schedule</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">your picks on the timetable, crew alongside</span></a>
+        <div style="display:flex;align-items:center;gap:7px;padding-left:88px"><span style="font:700 14px system-ui;color:{{ accent }}">↓</span><span style="font:600 9.5px ui-monospace,monospace;color:{{ mono }}">two musts, one slot</span></div>
+        <a href="#4a" style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:2px 3px 0 rgba(58,54,46,.07)"><span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:{{ accent }}">4a · 5e</span><span style="font:700 12.5px system-ui;color:{{ ink }}">Decide</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">side-by-side compare · never auto-picks</span></a>
+        <div style="display:flex;align-items:center;gap:7px;padding-left:88px"><span style="font:700 14px system-ui;color:{{ accent }}">↓</span><span style="font:600 9.5px ui-monospace,monospace;color:{{ mono }}">choice written back</span></div>
+        <div style="text-decoration:none;display:flex;flex-direction:column;gap:3px;border:1.5px dashed {{ ruleSoft }};background:{{ sunk }};border-radius:10px;padding:11px 13px;width:184px;box-shadow:none"><span style="font:700 12.5px system-ui;color:{{ mono }}">Existing timetable</span><span style="font:500 10.5px/1.45 ui-monospace,monospace;color:{{ mono }}">no new surface — Discovery only ranks</span></div>
+      </div>
+    </div>
+
+    <div style="border:1.5px solid {{ compBorder }};background:{{ compBg }};border-radius:10px;padding:13px 15px;display:flex;flex-direction:column;gap:5px">
+      <span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ compInk }}">Flow change in this work</span>
+      <span style="font:500 11.5px/1.55 ui-monospace,monospace;color:{{ ink }}">Selecting an artist is no longer an inline toggle on a lineup row. <b>Every artist name in the app now opens the artist page</b> — from the lineup, the timetable, a crew feed or the Discovery deck — and the pick chip lives there. The artist page is an app-wide surface Discovery borrows, not a Discovery screen: it works the same for someone who never opens the deck.</span>
+    </div>
+
+    <div style="border-top:1px dashed {{ ruleSoft }};padding-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <span style="font:700 9.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:{{ accent }};margin-right:4px">States, any step</span>
+      <a href="#4b" style="text-decoration:none;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:999px;padding:7px 12px;font:700 11px system-ui;color:{{ ink }}">4b · no metadata</a>
+      <a href="#4c" style="text-decoration:none;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:999px;padding:7px 12px;font:700 11px system-ui;color:{{ ink }}">4c · offline</a>
+      <a href="#4d" style="text-decoration:none;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:999px;padding:7px 12px;font:700 11px system-ui;color:{{ ink }}">4d · cold start</a>
+      <a href="#4e" style="text-decoration:none;border:1.5px solid {{ ink }};background:{{ stock }};border-radius:999px;padding:7px 12px;font:700 11px system-ui;color:{{ ink }}">4e · zero artists</a>
+      <span style="font:500 10.5px/1.5 ui-monospace,monospace;color:{{ mono }}">— none of them block picking. Discovery ranks and enriches; it is never a gate.</span>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ showHifi }}" hint-placeholder-val="{{ true }}">
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:{{ ink }};letter-spacing:-.01em">Round 3 — hi-fi · Artist page</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ accent }};margin-top:6px">chosen flow · mobile 390 + desktop 1440 (a designed size, not a stretched phone)</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+    <!-- ═══════ 5a · Artist page — mobile hi-fi ═══════ -->
+    <div id="5a" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">5a</span><span style="font:800 16px system-ui;color:{{ ink }}">Artist page · mobile 390</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">hi-fi · grain, real aura, full states</div>
+      <div style="width:390px;height:1496px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+          <div style="padding:6px 18px 16px;position:relative;overflow:hidden;flex:none">
+            <div style="position:absolute;inset:0;background:radial-gradient(120% 130% at 18% 115%, hsla(10,90%,62%,.6) 0%, transparent 68%), radial-gradient(110% 120% at 92% -12%, hsla(305,90%,62%,.42) 0%, transparent 62%), radial-gradient(90% 90% at 55% 50%, hsla(221,90%,62%,.22) 0%, transparent 70%)"></div>
+            <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==&quot;);opacity:.4;mix-blend-mode:overlay;pointer-events:none"></div>
+            <div style="position:relative;z-index:1">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(43,36,64,.8);color:#EDEAF4;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(10,8,18,.45);backdrop-filter:blur(4px)">‹</span><span style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(43,36,64,.8);color:#EDEAF4;display:flex;align-items:center;justify-content:center;font-size:14px;background:rgba(10,8,18,.45)">⤴</span></div>
+              <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-top:18px">
+                <div style="min-width:0;flex:1">
+                  <div style="font:800 30px/1.05 Inter;color:#fff;letter-spacing:-.01em">GRiZ</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+                <span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 11px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Future Bass</span>
+                <span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 11px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Bass House</span>
+                <span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 11px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Disco</span>
+              </div>
+                  <div style="margin-top:14px;font:700 12px Inter;color:#EDEAF4;letter-spacing:.01em">SAT · 6:30 – 8:00 PM · <span style="color:rgb(74,201,155)">LAKESHORE</span></div>
+                </div>
+                <div style="display:flex;align-items:stretch;gap:8px;flex:none">
+                  <span style="position:relative;width:34px;height:96px;border-radius:11px;border:1.5px solid #fff;background:rgba(10,8,18,.5);overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+                    <span style="position:absolute;left:0;right:0;bottom:0;height:66.8%;background:hsla(270,90%,72%,.9)"></span>
+                    <span style="position:relative;font:800 12px Inter;color:#fff;padding-bottom:7px">×2</span>
+                  </span>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <span style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(192,132,252,.55);background:rgba(10,8,18,.5);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font-size:16px">★</span>
+                    <span style="width:44px;height:44px;border-radius:999px;border:1px dashed #4A4270;background:rgba(10,8,18,.5);color:#8E86A8;display:flex;align-items:center;justify-content:center;font-size:13px">✕</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 18px;display:flex;flex-direction:column;gap:15px;overflow:hidden">
+            <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:14px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#877FA4">plays in full · no account</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+              <div style="position:relative;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:56px;height:56px;border-radius:999px;background:#FF4E45E6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px">❚❚</span><div style="position:absolute;left:0;right:0;bottom:0;padding:9px 11px;background:linear-gradient(transparent,rgba(0,0,0,.85))"><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div><div style="display:flex;justify-content:space-between;font:600 10px ui-monospace,monospace;color:#C6CBD6;margin-top:6px"><span>13:44</span><span>1:02:14</span></div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2025 · Freedom</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:02:14</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Red Rocks 2024 · GRiZMAS in July</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:18:30</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Electric Forest 2024</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">59:22</span></span></div>
+            </div>
+            <div style="font:500 11px/1.45 Inter;color:#877FA4">Tap the tick to raise — ×1 → ×2 → ×3 → clear. <b style="color:#D8B4FE">★</b> makes it a must; <b style="color:#C6CBD6">✕</b> is “not for me”, reversible and quiet.</div>
+            <div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">The crew</span><span style="font:600 10px Inter;color:#877FA4">picks + recommend-ahead</span></div>
+              <div style="display:flex;flex-direction:column;gap:11px;font:600 12.5px Inter;color:#C6CBD6">
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(305,85%,82%);background:hsla(305,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">R</span><span style="flex:1">Ren</span><span style="font:700 11px Inter;color:#877FA4">★ must</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="flex:1">Drew</span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">×2</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="flex:1">You</span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">×2</span></div>
+                <div style="display:flex;align-items:center;gap:10px;opacity:.55"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(150,70%,82%);background:hsla(150,70%,50%,.35);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">M</span><span style="flex:1">Mara</span><span style="font:700 11px Inter;color:#877FA4">passed</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px dashed hsl(42,90%,72%);background:transparent;color:hsl(42,90%,82%);font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">Sa</span><span style="flex:1">Sam <span style="font:600 11px Inter;color:#877FA4">· hasn't opened</span></span><span style="font:700 11px Inter;color:#D8B4FE;text-align:right;line-height:1.2">recommend →<br>pick ahead?</span></div>
+              </div>
+            </div>
+            <div>
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Notes · 2</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:9px 11px"><div style="display:flex;align-items:center;gap:7px;margin-bottom:3px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="font:700 10px Inter;color:#EDEAF4">Drew</span></div><div style="font:500 12px/1.4 Inter;color:#fff">Caught the b2b at EF — insane energy. Worth skipping dinner for.</div></div>
+                <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:9px 11px"><div style="display:flex;align-items:center;gap:7px;margin-bottom:3px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="font:700 10px Inter;color:#EDEAF4">You</span></div><div style="font:500 12px/1.4 Inter;color:#fff">Right after Four Tet — easy walk, same end of the field.</div></div>
+              </div>
+              <div style="margin-top:9px;border:1px dashed #322A4D;border-radius:10px;padding:10px 12px;font:600 12px Inter;color:#877FA4;display:flex;align-items:center;gap:7px">✎ Add a note…</div>
+            </div>
+            <div style="font:500 11.5px Inter;color:#877FA4">You've seen GRiZ <b style="color:#C6CBD6">4×</b> · last Jul 2024</div>
+            <div>
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Similar · and when they play</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid rgb(192,132,252);border-radius:10px;padding:11px 12px;background:rgba(192,132,252,.08)"><span><span style="font:700 13px Inter;color:#fff;display:block">phrva</span><span style="font:600 11px Inter;color:#877FA4">Sat · 5:00 · Bud Light</span></span><span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 9px;font:800 9px Inter;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:11px 12px;background:#141021"><span><span style="font:700 13px Inter;color:#EDEAF4;display:block">San Holo (Wholesome Riddim Set)</span><span style="font:600 11px Inter;color:#877FA4">Sat · 4:30 · Tito's</span></span><span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 9px;font:800 9px Inter;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:11px 12px;background:#141021"><span><span style="font:700 13px Inter;color:#EDEAF4;display:block">Wooli</span><span style="font:600 11px Inter;color:#877FA4">Sat · 7:00 · clashes with GRiZ</span></span><span style="color:#877FA4;font-size:15px">›</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Hi-fi pass on the hub: grain-over-aura hero, refined type scale, the finalized player, crew glyphs, inline notes and gap-aware similar artists. The pick control lives in the headline bar as a vertical tick that fills with each tap (×1→×2→×3→clear) — the same glyph the who-corner uses, so level reads identically on a card, in the crew list and here. It holds a fixed 84px whatever the name's length; ★ and ✕ sit beside it, so must and “not for me” are one tap from the top of the page.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 5b · Artist page — desktop 1440 ═══════ -->
+    <div id="5b" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">5b</span><span style="font:800 16px system-ui;color:{{ ink }}">Artist page · desktop 1440</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">two columns · shell 1120 · a designed size</div>
+      <div style="width:1440px;background:#0C0A14;border:1px solid #241E38;border-radius:16px;overflow:hidden;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+        <div style="height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #241E38;background:#0A0812">
+          <div style="display:flex;align-items:center;gap:16px"><span style="width:38px;height:38px;border-radius:999px;border:1px solid #2B2440;color:#C6CBD6;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span><span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:rgb(74,201,155)">ELECTRIC FOREST '26</span><span style="font:600 12px Inter;color:#877FA4">/ Artist</span></div>
+          <div style="display:flex;align-items:center;gap:16px"><span style="display:flex;align-items:center;gap:7px;font:600 12px Inter;color:#877FA4"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span>Synced</span><span style="height:34px;border-radius:999px;border:1px solid #2B2440;padding:0 14px;display:flex;align-items:center;gap:7px;font:700 11px Inter;color:#C6CBD6"><span style="width:18px;height:18px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 8px Inter;display:flex;align-items:center;justify-content:center">You</span>Ren's crew</span></div>
+        </div>
+        <div style="max-width:1120px;margin:0 auto;padding:36px 40px 48px;display:flex;gap:32px;align-items:flex-start">
+          <div style="width:440px;flex:none;display:flex;flex-direction:column;gap:20px">
+            <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid #2B2440;padding:28px">
+              <div style="position:absolute;inset:0;background:radial-gradient(110% 120% at 15% 115%, hsla(10,90%,62%,.65) 0%, transparent 66%), radial-gradient(100% 110% at 95% -10%, hsla(305,90%,62%,.45) 0%, transparent 60%), radial-gradient(90% 90% at 60% 45%, hsla(221,90%,62%,.24) 0%, transparent 68%), #1C1731"></div>
+              <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==&quot;);opacity:.4;mix-blend-mode:overlay;pointer-events:none"></div>
+              <div style="position:relative;z-index:1">
+                <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+                  <div style="font:800 46px/1 Inter;color:#fff;letter-spacing:-.02em">GRiZ</div>
+                  <div style="display:flex;align-items:stretch;gap:8px;flex:none">
+                  <span style="position:relative;width:36px;height:100px;border-radius:11px;border:1.5px solid #fff;background:rgba(10,8,18,.5);overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+                    <span style="position:absolute;left:0;right:0;bottom:0;height:66.8%;background:hsla(270,90%,72%,.9)"></span>
+                    <span style="position:relative;font:800 12px Inter;color:#fff;padding-bottom:7px">×2</span>
+                  </span>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <span style="width:46px;height:46px;border-radius:999px;border:1px solid rgba(192,132,252,.55);background:rgba(10,8,18,.5);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font-size:16px">★</span>
+                    <span style="width:46px;height:46px;border-radius:999px;border:1px dashed #4A4270;background:rgba(10,8,18,.5);color:#8E86A8;display:flex;align-items:center;justify-content:center;font-size:13px">✕</span>
+                  </div>
+                </div>
+                </div>
+                <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:16px"><span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 12px;font:700 11px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Future Bass</span><span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 12px;font:700 11px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Bass House</span><span style="border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 12px;font:700 11px Inter;color:#EDEAF4;background:rgba(10,8,18,.35)">Disco</span></div>
+                <div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between"><span style="font:700 13px Inter;color:#EDEAF4">SAT · 6:30–8:00 PM · <span style="color:rgb(74,201,155)">LAKESHORE</span></span><span style="font:600 11px Inter;color:#C6CBD6;background:rgba(10,8,18,.4);border:1px solid rgba(50,42,77,.9);border-radius:999px;padding:5px 10px">Seen 4× · Jul '24</span></div>
+              </div>
+            </div>
+            <div style="border:1px solid #2B2440;border-radius:12px;background:#141021;padding:18px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#877FA4">plays in full · no account</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border-radius:8px;font:700 11px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border-radius:8px;font:700 11px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;border-radius:8px;font:700 11px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+              <div style="position:relative;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:56px;height:56px;border-radius:999px;background:#FF4E45E6;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px">❚❚</span><div style="position:absolute;left:0;right:0;bottom:0;padding:9px 11px;background:linear-gradient(transparent,rgba(0,0,0,.85))"><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div><div style="display:flex;justify-content:space-between;font:600 10px ui-monospace,monospace;color:#C6CBD6;margin-top:6px"><span>13:44</span><span>1:02:14</span></div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2025 · Freedom</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:02:14</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Red Rocks 2024 · GRiZMAS in July</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:18:30</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Electric Forest 2024</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">59:22</span></span></div>
+            </div>
+            <div style="font:500 12px/1.45 Inter;color:#877FA4">Click the tick to raise — ×1 → ×2 → ×3 → clear. <b style="color:#D8B4FE">★</b> makes it a must; <b style="color:#C6CBD6">✕</b> is “not for me”, reversible and quiet.</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;gap:20px;align-items:flex-start">
+              <div style="flex:1;border:1px solid #2B2440;border-radius:12px;background:#141021;padding:18px">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">The crew</span><span style="font:600 10px Inter;color:#877FA4">picks + recommend-ahead</span></div>
+                <div style="display:flex;flex-direction:column;gap:13px;font:600 13px Inter;color:#C6CBD6">
+                  <div style="display:flex;align-items:center;gap:11px"><span style="height:20px;min-width:28px;border-radius:999px;border:1.5px solid hsl(305,85%,82%);background:hsla(305,90%,62%,.5);color:#fff;font:800 10px Inter;display:flex;align-items:center;justify-content:center">R</span><span style="flex:1">Ren</span><span style="font:700 11px Inter;color:#877FA4">★ must</span></div>
+                  <div style="display:flex;align-items:center;gap:11px"><span style="height:20px;min-width:28px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 10px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="flex:1">Drew</span><span style="height:18px;width:7px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">×2</span></div>
+                  <div style="display:flex;align-items:center;gap:11px"><span style="height:20px;min-width:28px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 10px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="flex:1">You</span><span style="height:18px;width:7px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">×2</span></div>
+                  <div style="display:flex;align-items:center;gap:11px;opacity:.55"><span style="height:20px;min-width:28px;border-radius:999px;border:1.5px solid hsl(150,70%,82%);background:hsla(150,70%,50%,.35);color:#fff;font:800 10px Inter;display:flex;align-items:center;justify-content:center">M</span><span style="flex:1">Mara</span><span style="font:700 11px Inter;color:#877FA4">passed</span></div>
+                  <div style="display:flex;align-items:center;gap:11px"><span style="height:20px;min-width:28px;border-radius:999px;border:1.5px dashed hsl(42,90%,72%);background:transparent;color:hsl(42,90%,82%);font:800 10px Inter;display:flex;align-items:center;justify-content:center">Sa</span><span style="flex:1">Sam <span style="font:600 11px Inter;color:#877FA4">· hasn't opened</span></span><span style="font:700 11px Inter;color:#D8B4FE">recommend →</span></div>
+                </div>
+              </div>
+              <div style="flex:1;border:1px solid #2B2440;border-radius:12px;background:#141021;padding:18px">
+                <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:14px">Notes · 2</div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                  <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:11px 13px"><div style="display:flex;align-items:center;gap:7px;margin-bottom:4px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="font:700 10px Inter;color:#EDEAF4">Drew</span></div><div style="font:500 12.5px/1.45 Inter;color:#fff">Caught the b2b at EF — insane energy. Worth skipping dinner for.</div></div>
+                  <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:11px 13px"><div style="display:flex;align-items:center;gap:7px;margin-bottom:4px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="font:700 10px Inter;color:#EDEAF4">You</span></div><div style="font:500 12.5px/1.45 Inter;color:#fff">Right after Four Tet — easy walk, same end of the field.</div></div>
+                </div>
+                <div style="margin-top:10px;border:1px dashed #322A4D;border-radius:10px;padding:11px 13px;font:600 12px Inter;color:#877FA4">✎ Add a note…</div>
+              </div>
+            </div>
+            <div style="border:1px solid #2B2440;border-radius:12px;background:#141021;padding:18px">
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:14px">Similar artists · and when they play</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid rgb(192,132,252);border-radius:10px;padding:13px 14px;background:rgba(192,132,252,.08)"><span><span style="font:700 14px Inter;color:#fff;display:block">phrva</span><span style="font:600 11px Inter;color:#877FA4">Sat · 5:00 · Bud Light</span></span><span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 10px;font:800 9px Inter;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid rgb(192,132,252);border-radius:10px;padding:13px 14px;background:rgba(192,132,252,.08)"><span><span style="font:700 14px Inter;color:#fff;display:block">San Holo (Wholesome Riddim Set)</span><span style="font:600 11px Inter;color:#877FA4">Sat · 4:30 · Tito's</span></span><span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 10px;font:800 9px Inter;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:13px 14px;background:#0A0812"><span><span style="font:700 14px Inter;color:#EDEAF4;display:block">Wooli</span><span style="font:600 11px Inter;color:#877FA4">Sat · 7:00 · clashes with GRiZ</span></span><span style="color:#877FA4;font-size:16px">›</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:13px 14px;background:#0A0812"><span><span style="font:700 14px Inter;color:#EDEAF4;display:block">Jessica Audiffred</span><span style="font:600 11px Inter;color:#877FA4">Sun · 8:00 · Sherwood Court</span></span><span style="color:#877FA4;font-size:16px">›</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:600px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Desktop is genuinely re-laid-out: hero + sample + pick on the left rail, crew &amp; notes side by side, similar artists as a 2-col grid. Shell caps at 1120 so line lengths stay sane on a 1440 canvas.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 5c · Discovery — desktop 1440 ═══════ -->
+    <div id="5c" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">5c</span><span style="font:800 16px system-ui;color:{{ ink }}">Discovery · desktop 1440</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">three panes · filters · ranked wall · focused sample</div>
+      <div style="width:1440px;background:#0C0A14;border:1px solid #241E38;border-radius:16px;overflow:hidden;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+        <div style="height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #241E38;background:#0A0812">
+          <div style="display:flex;align-items:center;gap:16px"><span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:rgb(74,201,155)">ELECTRIC FOREST '26</span><span style="display:flex;gap:18px;font:800 13px Inter;margin-left:8px"><span style="color:#8E86A8">Wall</span><span style="color:#EDEAF4;border-bottom:2px solid rgb(192,132,252);padding-bottom:22px">Discover</span><span style="color:#8E86A8">Timetable</span></span></div>
+          <div style="display:flex;align-items:center;gap:16px"><span style="display:flex;align-items:center;gap:7px;font:600 12px Inter;color:#877FA4"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span>Synced</span><span style="height:34px;border-radius:999px;border:1px solid #2B2440;padding:0 14px;display:flex;align-items:center;gap:7px;font:700 11px Inter;color:#C6CBD6"><span style="width:18px;height:18px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 8px Inter;display:flex;align-items:center;justify-content:center">You</span>Ren's crew</span></div>
+        </div>
+        <div style="display:flex;gap:28px;padding:28px 40px 40px;align-items:flex-start">
+          <div style="width:216px;flex:none;display:flex;flex-direction:column;gap:20px">
+            <div><div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Sort — top picks first</div><div style="display:flex;flex-direction:column;border:1px solid #322A4D;border-radius:10px;overflow:hidden;font:700 12px Inter"><span style="padding:10px 12px;background:rgba(192,132,252,.13);color:#D8B4FE">For you</span><span style="padding:10px 12px;color:#8E86A8;border-top:1px solid #241E38">Popularity</span><span style="padding:10px 12px;color:#8E86A8;border-top:1px solid #241E38">A–Z</span></div></div>
+            <div><div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Show</div><div style="display:flex;border:1px solid #322A4D;border-radius:999px;overflow:hidden;font:800 11px Inter"><span style="flex:1;text-align:center;padding:9px 0;background:rgba(192,132,252,.16);color:#D8B4FE">Undecided</span><span style="flex:1;text-align:center;padding:9px 0;color:#8E86A8;border-left:1px solid #241E38">Passed</span><span style="flex:1;text-align:center;padding:9px 0;color:#8E86A8;border-left:1px solid #241E38">All</span></div></div>
+            <div><div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Genres</div><div style="display:flex;flex-wrap:wrap;gap:6px"><span style="border-radius:999px;padding:5px 10px;font:700 10.5px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">Bass House ✓</span><span style="border-radius:999px;padding:5px 10px;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">Riddim</span><span style="border-radius:999px;padding:5px 10px;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">Melodic Techno</span><span style="border-radius:999px;padding:5px 10px;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">Trance</span></div></div>
+            <div><div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Day</div><div style="display:flex;gap:6px"><span style="flex:1;text-align:center;border-radius:999px;padding:7px 0;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">All</span><span style="flex:1;text-align:center;border-radius:999px;padding:7px 0;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">Fri</span><span style="flex:1;text-align:center;border-radius:999px;padding:7px 0;font:800 10.5px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">Sat</span><span style="flex:1;text-align:center;border-radius:999px;padding:7px 0;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">Sun</span></div></div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12px Inter;color:#C6CBD6">Picked by the crew</span><span style="width:38px;height:22px;border-radius:999px;background:rgb(192,132,252);display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-end"><span style="width:16px;height:16px;border-radius:999px;background:#fff"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 12px Inter;color:#C6CBD6">Has a live set</span><span style="width:38px;height:22px;border-radius:999px;background:#2B2440;display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-start"><span style="width:16px;height:16px;border-radius:999px;background:#8E86A8"></span></span></div>
+            </div>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px"><span style="font:800 18px Inter;color:#fff">For you</span><span style="font:600 12px Inter;color:#877FA4">31 of 176 · every card shows why</span></div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+              <div style="position:relative;border-radius:8px;min-height:116px;background:#1C1731;border:1px solid #2B2440;overflow:hidden;display:flex;flex-direction:column"><div style="background:rgba(192,132,252,.16);color:#D8B4FE;font:800 9px Inter;letter-spacing:.04em;padding:5px 8px;text-align:center">★ SHARES BASS HOUSE WITH 3 MUSTS</div><div style="flex:1;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="font:700 14px Inter;color:#B9B3CC;text-align:center">Mau P</div><div style="font:600 10px Inter;color:#877FA4;margin-top:3px">Tech House</div></div></div>
+              <div style="position:relative;border-radius:8px;min-height:116px;background:#1C1731;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden"><div style="font:700 14px Inter;color:#B9B3CC;text-align:center">LAYZ</div><div style="font:600 10px Inter;color:#877FA4;margin-top:3px">Bass House</div><span style="position:absolute;right:8px;bottom:8px;height:16px;min-width:24px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">Dr</span></div>
+              <div style="position:relative;border-radius:8px;min-height:116px;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), #1C1731"><div style="font:700 14px Inter;color:#fff;text-align:center">Chris Lorenzo</div><div style="font:600 10px Inter;color:rgba(255,255,255,.75);margin-top:3px">Bass House</div><span style="position:absolute;right:8px;bottom:8px;height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span></div>
+              <div style="position:relative;border-radius:8px;min-height:116px;background:#1C1731;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden"><div style="font:700 14px Inter;color:#B9B3CC;text-align:center">Prospa</div><div style="font:600 10px Inter;color:#877FA4;margin-top:3px">Bass House</div></div>
+              <div style="position:relative;border-radius:8px;min-height:116px;background:#1C1731;border:1px solid #2B2440;overflow:hidden;display:flex;flex-direction:column"><div style="background:rgba(192,132,252,.16);color:#D8B4FE;font:800 9px Inter;letter-spacing:.04em;padding:5px 8px;text-align:center">★ DREW HAS THIS AS A MUST</div><div style="flex:1;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div style="font:700 12.5px/1.2 Inter;color:#B9B3CC;text-align:center">Marlon Hoffstadt</div><div style="font:600 10px Inter;color:#877FA4;margin-top:3px">Bass House · Melodic</div></div></div>
+              <div style="position:relative;border-radius:8px;min-height:116px;background:#17132a;border:1px solid #241E38;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;opacity:.55"><div style="font:700 14px Inter;color:#877FA4;text-align:center">Yana</div><div style="font:600 10px Inter;color:#6B6280;margin-top:3px">Trance</div><span style="position:absolute;right:8px;top:8px;font:800 8.5px Inter;letter-spacing:.08em;color:#8E86A8;border:1px solid #322A4D;border-radius:999px;padding:2px 7px">PASSED</span></div>
+            </div>
+          </div>
+          <div style="width:320px;flex:none;border:1px solid #2B2440;border-radius:12px;background:#141021;overflow:hidden;position:relative">
+            <div style="padding:16px;position:relative;overflow:hidden">
+              <div style="position:absolute;inset:0;background:radial-gradient(120% 130% at 20% 115%, hsla(221,90%,62%,.4) 0%, transparent 70%), #1C1731"></div>
+              <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==&quot;);opacity:.35;mix-blend-mode:overlay"></div>
+              <div style="position:relative;z-index:1"><div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Now sampling</div><div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:8px">
+                <div style="min-width:0"><div style="font:800 20px/1.1 Inter;color:#fff">Mau P</div><div style="font:600 10px Inter;color:#C6CBD6;margin-top:6px">Tech House</div></div>
+                <div style="display:flex;align-items:stretch;gap:7px;flex:none">
+                  <span style="position:relative;width:32px;height:92px;border-radius:11px;border:1.5px solid #fff;background:rgba(10,8,18,.5);overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+                    <span style="position:absolute;left:0;right:0;bottom:0;height:33.4%;background:hsla(270,90%,72%,.9)"></span>
+                    <span style="position:relative;font:800 11px Inter;color:#fff;padding-bottom:6px">×1</span>
+                  </span>
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <span style="width:42px;height:43px;border-radius:999px;border:1px solid rgba(192,132,252,.55);background:rgba(10,8,18,.5);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font-size:15px">★</span>
+                    <span style="width:42px;height:43px;border-radius:999px;border:1px dashed #4A4270;background:rgba(10,8,18,.5);color:#8E86A8;display:flex;align-items:center;justify-content:center;font-size:12px">✕</span>
+                  </div>
+                </div>
+              </div></div>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:inline-flex;align-self:flex-start;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 11px;font:700 11px Inter">★ shares Bass House with 3 musts</div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+              <div style="display:flex;align-items:center;gap:11px"><span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">❚❚</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span><div style="flex:1;min-width:0"><div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Freedom Stage</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 58:04</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Freedom Stage</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">58:04</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ADE 2024 · Warehouse Elementenstraat</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:12:40</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Las Vegas 2025</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">59:31</span></span></div>
+              <div style="font:500 10.5px/1.45 Inter;color:#877FA4;border-top:1px solid #241E38;padding-top:10px">Click the tick to raise — ×1 → ×2 → ×3 → clear. <b style="color:#D8B4FE">★</b> must; <b style="color:#C6CBD6">✕</b> not for me.</div>
+              <div style="text-align:center;font:600 11px Inter;color:#877FA4">Open full artist page ›</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:600px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Desktop turns the swipe deck into a persistent three-pane: filters stay open on the left, the ranked wall scans in the middle, and the focused sample + pick actions live on the right — no modal, pick without leaving the grid. The focus pane carries the same headline tick as the artist page — one pick vocabulary across deck, pane and page.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 5d · Schedule — desktop 1440 ═══════ -->
+    <div id="5d" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">5d</span><span style="font:800 16px system-ui;color:{{ ink }}">My schedule · desktop 1440</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">your day + an assist rail (gaps &amp; clashes)</div>
+      <div style="width:1440px;background:#0C0A14;border:1px solid #241E38;border-radius:16px;overflow:hidden;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+        <div style="height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #241E38;background:#0A0812">
+          <div style="display:flex;align-items:center;gap:16px"><span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:rgb(74,201,155)">ELECTRIC FOREST '26</span><span style="display:flex;gap:18px;font:800 13px Inter;margin-left:8px"><span style="color:#8E86A8">Wall</span><span style="color:#8E86A8">Discover</span><span style="color:#EDEAF4;border-bottom:2px solid rgb(192,132,252);padding-bottom:22px">Timetable</span></span></div>
+          <div style="display:flex;align-items:center;gap:16px"><span style="display:flex;align-items:center;gap:7px;font:600 12px Inter;color:#877FA4"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span>Synced</span><span style="height:34px;border-radius:999px;border:1px solid #2B2440;padding:0 14px;display:flex;align-items:center;gap:7px;font:700 11px Inter;color:#C6CBD6"><span style="width:18px;height:18px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 8px Inter;display:flex;align-items:center;justify-content:center">You</span>Ren's crew</span></div>
+        </div>
+        <div style="display:flex;gap:32px;padding:28px 40px 40px;align-items:flex-start">
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:26px;border-bottom:1px solid #241E38;margin-bottom:20px"><span style="font-family:Anton,sans-serif;font-size:20px;letter-spacing:.05em;color:#EDEAF4;padding-bottom:12px">YOUR DAY</span><span style="font:800 14px Inter;color:#8E86A8;padding-bottom:12px">Fri</span><span style="font:800 14px Inter;color:rgb(74,201,155);border-bottom:2px solid rgb(74,201,155);padding-bottom:12px">Sat</span><span style="font:800 14px Inter;color:#8E86A8;padding-bottom:12px">Sun</span></div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;gap:16px;align-items:stretch"><span style="width:52px;font:700 12px Inter;color:#877FA4;padding-top:16px;flex:none">2:00</span><div style="flex:1;border-radius:8px;border:1px solid #2B2440;padding:15px;position:relative;overflow:hidden;background:radial-gradient(120% 130% at 15% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), #1C1731"><div style="font:700 16px Inter;color:#fff">Four Tet</div><div style="font:600 12px Inter;color:rgba(255,255,255,.75);margin-top:3px">The Grove · 2:00–3:00 · your must</div><span style="position:absolute;right:12px;top:14px;height:16px;min-width:24px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">You</span></div></div>
+              <div style="display:flex;gap:16px;align-items:stretch"><span style="width:52px;font:700 12px Inter;color:#877FA4;padding-top:16px;flex:none">4:00</span><div style="flex:1;border-radius:8px;border:1px dashed #3A3354;padding:15px;background:repeating-linear-gradient(45deg,#141021,#141021 8px,#17132a 8px,#17132a 16px)"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4">Open · 4:00 – 6:00 PM</span><span style="font:700 12px Inter;color:#D8B4FE">3 you'd like ›</span></div><div style="display:flex;gap:8px;margin-top:12px"><span style="border:1px solid #322A4D;border-radius:999px;padding:7px 12px;font:700 12px Inter;color:#C6CBD6;background:#141021">San Holo · 4:30</span><span style="border:1px solid #322A4D;border-radius:999px;padding:7px 12px;font:700 12px Inter;color:#C6CBD6;background:#141021">phrva · 5:00</span><span style="border:1px solid #322A4D;border-radius:999px;padding:7px 12px;font:700 12px Inter;color:#C6CBD6;background:#141021">Prospa · 5:15</span></div></div></div>
+              <div style="display:flex;gap:16px;align-items:stretch"><span style="width:52px;font:700 12px Inter;color:#877FA4;padding-top:16px;flex:none">6:30</span><div style="flex:1;border-radius:8px;border:1px solid #2B2440;padding:15px;position:relative;overflow:hidden;background:radial-gradient(120% 130% at 15% 120%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(120% 130% at 85% -20%, hsla(221,90%,62%,.5) 0%, transparent 72%), #1C1731"><div style="font:700 16px Inter;color:#fff">GRiZ</div><div style="font:600 12px Inter;color:rgba(255,255,255,.75);margin-top:3px">Lakeshore · 6:30–8:00 · picked ×2</div><div style="position:absolute;right:12px;top:14px;display:flex;gap:4px"><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:33%"></span></span></div></div></div>
+              <div style="display:flex;gap:16px;align-items:stretch"><span style="width:52px;font:700 12px Inter;color:#877FA4;padding-top:16px;flex:none">9:00</span><div style="flex:1;border-radius:8px;border:1px solid rgb(192,132,252);padding:15px;background:#17132a"><div style="font:800 10px Inter;letter-spacing:.1em;text-transform:uppercase;color:#D8B4FE">⚡ Clash · 2 of your musts</div><div style="font:700 16px Inter;color:#fff;margin-top:6px">Skrillex <span style="color:#877FA4;font-weight:600;font-size:13px">vs</span> Alison Wonderland</div><div style="display:inline-flex;margin-top:12px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:7px 14px;font:800 12px Inter">Decide ›</div></div></div>
+            </div>
+          </div>
+          <div style="width:340px;flex:none;display:flex;flex-direction:column;gap:16px">
+            <div style="border:1px solid #2B2440;border-radius:12px;background:#141021;padding:18px">
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:12px">Fill your gaps</div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="border:1px solid #2B2440;border-radius:10px;background:#0A0812;padding:12px"><div style="font:700 12px Inter;color:#fff">4:00 – 6:00 PM · 2 hrs free</div><div style="font:500 11px/1.5 Inter;color:#877FA4;margin-top:3px">Early-day gap — highest discovery value. 3 artists you'd like are on.</div><div style="font:700 11px Inter;color:#D8B4FE;margin-top:8px">See who ›</div></div>
+                <div style="border:1px solid #2B2440;border-radius:10px;background:#0A0812;padding:12px"><div style="font:700 12px Inter;color:#fff">11:00 PM – close · 1.5 hrs</div><div style="font:500 11px/1.5 Inter;color:#877FA4;margin-top:3px">Late slot — mostly headliners you've already weighed.</div></div>
+              </div>
+            </div>
+            <div style="border:1px solid rgb(192,132,252);border-radius:12px;background:rgba(192,132,252,.06);padding:18px">
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#D8B4FE;margin-bottom:10px">⚡ 1 clash to resolve</div>
+              <div style="font:700 13px Inter;color:#fff">Skrillex vs Alison Wonderland</div>
+              <div style="font:500 11px Inter;color:#877FA4;margin-top:3px">Sat 9:00 PM · both your musts</div>
+              <div style="margin-top:12px;height:40px;border-radius:999px;background:rgba(192,132,252,.13);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 12px Inter">Open Decide</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:600px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Desktop keeps your day as the spine and lifts the two Phase-2 jobs into a persistent rail: gaps to fill (ranked by discovery value) and clashes to resolve — both one click from the timeline.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 5e · Decide — desktop 1440 ═══════ -->
+    <div id="5e" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">5e</span><span style="font:800 16px system-ui;color:{{ ink }}">Decide · desktop 1440</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">options side by side · full player each</div>
+      <div style="width:1440px;background:#0C0A14;border:1px solid #241E38;border-radius:16px;overflow:hidden;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+        <div style="height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid #241E38;background:#0A0812">
+          <div style="display:flex;align-items:center;gap:16px"><span style="width:38px;height:38px;border-radius:999px;border:1px solid #2B2440;color:#C6CBD6;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span><span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:rgb(74,201,155)">ELECTRIC FOREST '26</span><span style="font:600 12px Inter;color:#877FA4">/ Decide</span></div>
+          <div style="display:flex;align-items:center;gap:7px;font:600 12px Inter;color:#877FA4"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span>Synced</div>
+        </div>
+        <div style="max-width:980px;margin:0 auto;padding:36px 40px 44px">
+          <div style="text-align:center;margin-bottom:26px"><div style="font-family:Anton,sans-serif;font-size:30px;letter-spacing:.05em;color:#EDEAF4;text-transform:uppercase">Decide</div><div style="font:600 13px Inter;color:#877FA4;margin-top:6px">Sat · 9:00 PM · 2 of your musts play at once, 1 slot</div></div>
+          <div style="display:flex;gap:20px;align-items:stretch">
+            <div style="flex:1;border:1px solid rgb(192,132,252);border-radius:14px;background:#141021;padding:20px;display:flex;flex-direction:column;gap:13px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:6px 10px;flex-wrap:wrap"><span style="font:800 22px/1.15 Inter;color:#fff;min-width:0">Skrillex</span><span style="font:600 11px Inter;color:#877FA4">Dubstep · Riddim</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+              <div style="position:relative;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:52px;height:52px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px">❚❚</span><div style="position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85))"><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div></div></div>
+              <div style="display:flex;align-items:center;gap:11px"><div style="flex:1;min-width:0"><div style="font:700 13px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 1:00:12</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:11px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:00:12</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Coachella 2023 · Weekend 1</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">55:41</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Las Vegas 2022</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:03:58</span></span></div>
+              <div style="display:flex;align-items:center;gap:7px"><span style="height:18px;min-width:24px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">You</span><span style="font:700 12px Inter;color:#EDEAF4">×3</span><span style="font:600 12px Inter;color:#877FA4">· 4 of the crew have it as a must</span></div>
+              <div style="border-top:1px solid #241E38;padding-top:13px;display:flex;flex-direction:column;gap:6px;font:500 12px Inter;color:#877FA4"><span><b style="color:#C6CBD6">Give up:</b> nothing else marked</span><span><b style="color:#C6CBD6">Plays again:</b> never this festival</span></div>
+              <div style="margin-top:auto;height:48px;border-radius:999px;background:rgba(192,132,252,.13);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 14px Inter">Choose Skrillex</div>
+            </div>
+            <div style="width:64px;flex:none;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:18px;color:#877FA4;letter-spacing:.05em">VS</div>
+            <div style="flex:1;border:1px solid #2B2440;border-radius:14px;background:#141021;padding:20px;display:flex;flex-direction:column;gap:13px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:6px 10px;flex-wrap:wrap"><span style="font:800 22px/1.15 Inter;color:#fff;min-width:0">Alison Wonderland</span><span style="font:600 11px Inter;color:#877FA4;white-space:nowrap">Future Bass · Trap</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span></div>
+              <div style="position:relative;aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:52px;height:52px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px">❚❚</span><div style="position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85))"><div style="height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden"><div style="height:100%;width:22%;background:#FF4E45"></div></div></div></div>
+              <div style="display:flex;align-items:center;gap:11px"><div style="flex:1;min-width:0"><div style="font:700 13px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Rise</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 52:38</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:11px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Rise</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">52:38</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Orlando 2024</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">48:15</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Splendour 2023</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:01:20</span></span></div>
+              <div style="display:flex;align-items:center;gap:7px"><span style="height:18px;min-width:24px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">You</span><span style="font:700 12px Inter;color:#EDEAF4">must</span><span style="font:600 12px Inter;color:#877FA4">· Drew has it as a must too</span></div>
+              <div style="border-top:1px solid #241E38;padding-top:13px;display:flex;flex-direction:column;gap:6px;font:500 12px Inter;color:#877FA4"><span><b style="color:#C6CBD6">Give up:</b> Skrillex</span><span><b style="color:#C6CBD6">Plays again:</b> Sun 2:00, Tito's</span></div>
+              <div style="margin-top:auto;height:48px;border-radius:999px;border:1px solid #322A4D;color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 14px Inter">Choose Alison</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:20px;align-items:center;justify-content:center"><div style="border:1px dashed #322A4D;border-radius:999px;padding:12px 18px;font:700 12px Inter;color:#C6CBD6">Split it — 45 min each, then walk ›</div><div style="font:600 12px Inter;color:#877FA4">or keep both starred and decide on-site</div></div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:600px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">With room, the clash becomes a true side-by-side compare — a full player on each — tabs, the auto-picked set and its alternates, so you can A/B the two sets without leaving the decision — and the "plays again Sunday" line making Alison the cheaper skip. Still never auto-picks.</div></sc-if>
+    </div>
+
+<!--R3-->
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ showStates }}" hint-placeholder-val="{{ true }}">
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:{{ ink }};letter-spacing:-.01em">States &amp; the Decide screen</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ accent }};margin-top:6px">the §7 edge cases + the clash resolver · build-ready</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start">
+    <!-- ═══════ 4a · Decide (clash) ═══════ -->
+    <div id="4a" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">4a</span><span style="font:800 16px system-ui;color:{{ ink }}">Decide — resolve a clash</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">the screen 2b's clash card opens</div>
+      <div style="width:390px;height:1200px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="padding:6px 18px 12px;flex:none">
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:40px;height:40px;border-radius:999px;border:1px solid #2B2440;color:#C6CBD6;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span><div><div style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:#EDEAF4">DECIDE</div><div style="font:600 11px Inter;color:#877FA4">Sat · 9:00 PM · 2 musts, 1 slot</div></div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:0 18px;display:flex;flex-direction:column;gap:11px">
+          <div style="border:1px solid rgb(192,132,252);border-radius:12px;background:#141021;padding:13px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:5px 8px;flex-wrap:wrap"><span style="font:800 17px/1.15 Inter;color:#fff;min-width:0">Skrillex</span><span style="font:600 10px Inter;color:#877FA4;white-space:nowrap">Dubstep · Riddim</span></div>
+            <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+            <div style="display:flex;align-items:center;gap:11px"><span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">❚❚</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span><div style="flex:1;min-width:0"><div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 1:00:12</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:9px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:00:12</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Coachella 2023 · Weekend 1</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">55:41</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Las Vegas 2022</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:03:58</span></span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center;padding:0 4px">You</span><span style="font:700 11px Inter;color:#EDEAF4">×3</span><span style="font:600 11px Inter;color:#877FA4">· 4 of the crew have it as a must</span></div>
+            <div style="display:flex;gap:18px;border-top:1px solid #241E38;padding-top:9px;font:500 11px Inter;color:#877FA4"><span><b style="color:#C6CBD6">Give up:</b> nothing marked</span><span><b style="color:#C6CBD6">Plays again:</b> never this fest</span></div>
+            <div style="height:44px;border-radius:999px;background:rgba(192,132,252,.13);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 13px Inter">Choose Skrillex</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex:none"><span style="flex:1;height:1px;background:#241E38"></span><span style="font-family:Anton,sans-serif;font-size:15px;letter-spacing:.08em;color:#877FA4">VS</span><span style="flex:1;height:1px;background:#241E38"></span></div>
+          <div style="border:1px solid #2B2440;border-radius:12px;background:#141021;padding:13px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:5px 8px;flex-wrap:wrap"><span style="font:800 17px/1.15 Inter;color:#fff;min-width:0">Alison Wonderland</span><span style="font:600 10px Inter;color:#877FA4;white-space:nowrap">Future Bass · Trap</span></div>
+            <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span></div>
+            <div style="display:flex;align-items:center;gap:11px"><span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">❚❚</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span><div style="flex:1;min-width:0"><div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Rise</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 52:38</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:9px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Rise</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">52:38</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Orlando 2024</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">48:15</span></span><span style="display:flex;align-items:center;gap:9px;min-height:34px;padding:5px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Splendour 2023</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:01:20</span></span></div>
+            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center;padding:0 4px">You</span><span style="font:700 11px Inter;color:#EDEAF4">must</span><span style="font:600 11px Inter;color:#877FA4">· Drew has it as a must too</span></div>
+            <div style="display:flex;gap:18px;border-top:1px solid #241E38;padding-top:9px;font:500 11px Inter;color:#877FA4"><span><b style="color:#C6CBD6">Give up:</b> Skrillex</span><span><b style="color:#C6CBD6">Plays again:</b> Sun 2:00</span></div>
+            <div style="height:44px;border-radius:999px;border:1px solid #322A4D;color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 13px Inter">Choose Alison</div>
+          </div>
+          <div style="border:1px dashed #322A4D;border-radius:10px;padding:11px 12px;display:flex;align-items:center;justify-content:space-between;flex:none"><span style="font:600 12px Inter;color:#C6CBD6">Split it — 45 min each, then walk</span><span style="font:700 11px Inter;color:#D8B4FE;white-space:nowrap">Plan both ›</span></div>
+        </div>
+        <div style="padding:12px 18px 24px;border-top:1px solid #241E38;background:#0A0812;flex:none;font:500 11px/1.45 Inter;color:#877FA4">Every option is <b style="color:#C6CBD6">informed</b>: why it's worth it, what you give up, whether it plays again, and where the crew leans. It never picks for you.</div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">The "plays again Sun" line is the cheap-skip signal — Alison returns, Skrillex doesn't, so the clash is easier than it looks. Split + decide-later keep it non-committal.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 4b · No metadata ═══════ -->
+    <div id="4b" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">4b</span><span style="font:800 16px system-ui;color:{{ ink }}">No metadata</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">no genres, no sources — no dead controls</div>
+      <div style="width:390px;height:912px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="padding:6px 18px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+          <span style="width:40px;height:40px;border-radius:999px;border:1px solid #2B2440;color:#EDEAF4;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span>
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+            <div style="min-width:0">
+              <div style="font:800 24px/1.1 Inter;color:#fff">Detroit Party Marching Band</div>
+              <div style="font:600 11px Inter;color:#877FA4;margin-top:8px">No genres tagged yet</div>
+            </div>
+            <div style="display:flex;align-items:stretch;gap:8px;flex:none">
+              <span style="position:relative;width:34px;height:96px;border-radius:11px;border:1.5px solid #fff;background:rgba(10,8,18,.5);overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+                <span style="position:absolute;left:0;right:0;bottom:0;height:0%;background:hsla(270,90%,72%,.9)"></span>
+                <span style="position:relative;font:800 11px Inter;color:#8E86A8;padding-bottom:7px">＋</span>
+              </span>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <span style="width:44px;height:44px;border-radius:999px;border:1px solid rgba(192,132,252,.55);background:rgba(10,8,18,.5);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font-size:16px">★</span>
+                <span style="width:44px;height:44px;border-radius:999px;border:1px dashed #4A4270;background:rgba(10,8,18,.5);color:#8E86A8;display:flex;align-items:center;justify-content:center;font-size:13px">✕</span>
+              </div>
+            </div>
+          </div>
+          <div style="border:1px dashed #322A4D;border-radius:10px;background:#0A0812;padding:16px;text-align:center">
+            <div style="font:700 13px Inter;color:#C6CBD6">Nothing to sample yet</div>
+            <div style="font:500 11px/1.5 Inter;color:#877FA4;margin-top:5px">No SoundCloud, YouTube or Spotify found for this artist. We'll add players the moment a source turns up — no empty buttons in the meantime.</div>
+          </div>
+          <div>
+            <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">The crew</div>
+            <div style="display:flex;flex-direction:column;gap:10px;font:600 12.5px Inter;color:#C6CBD6">
+              <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="flex:1">You</span><span style="font:700 11px Inter;color:#877FA4">not picked</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(150,70%,82%);background:hsla(150,70%,50%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">M</span><span style="flex:1">Mara</span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(150,70%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(150,70%,50%,.9);height:33%"></span></span><span style="font:700 11px Inter;color:#877FA4">picked ×1</span></div>
+            </div>
+          </div>
+          <div style="font:500 11px/1.45 Inter;color:#877FA4">Unpicked: the tick sits empty at the top. Tap to raise — ×1 → ×2 → ×3 → clear. <b style="color:#D8B4FE">★</b> must; <b style="color:#C6CBD6">✕</b> not for me. Missing metadata never disables a decision.</div>
+          <div>
+            <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Notes · 0</div>
+            <div style="border:1px dashed #322A4D;border-radius:10px;padding:12px;font:600 12px Inter;color:#877FA4;display:flex;align-items:center;gap:7px">✎ Add a note…</div>
+          </div>
+          <div style="font:500 11.5px Inter;color:#877FA4">Never seen live</div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">The page still does its real job — picking, crew, pass — when there's nothing to hear. The sample block collapses to a single honest line instead of showing three dead tabs.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 4c · Offline ═══════ -->
+    <div id="4c" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">4c</span><span style="font:800 16px system-ui;color:{{ ink }}">Offline</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">grey, not red · picking still works</div>
+      <div style="width:390px;height:720px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="margin:0 18px 12px;border:1px solid #322A4D;border-radius:10px;background:#0A0812;padding:9px 12px;display:flex;align-items:center;gap:9px;flex:none"><span style="width:9px;height:9px;border-radius:999px;background:#6B7280;flex:none"></span><span style="font:600 11px Inter;color:#8E86A8">Offline — sampling paused. Picks + timetable work; we'll sync when you're back.</span></div>
+        <div style="flex:1;overflow:hidden;padding:0 18px;display:flex;flex-direction:column;gap:12px">
+          <div style="flex:1;border-radius:8px;background:#1C1731;border:1px solid #2B2440;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:0">
+            <div style="display:flex;gap:6px"><span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Riddim</span><span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Dubstep</span></div>
+            <div style="font:800 20px/1.15 Inter;color:#fff">Jessica Audiffred</div>
+            <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 11px;font:700 11px Inter">★ Ren has this as a must</div>
+            <div style="border:1px solid #241E38;border-radius:10px;background:#141021;padding:13px;margin-top:auto;opacity:.5">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#8E86A8">needs a connection</span></div>
+              <div style="display:flex;gap:6px;margin-bottom:10px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#6B7280;border:1px solid #2B2440"><span style="width:7px;height:7px;border-radius:50%;background:#4a4658"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#6B7280;border:1px solid #2B2440"><span style="width:7px;height:7px;border-radius:50%;background:#4a4658"></span>SoundCloud</span></div>
+              <div style="display:flex;align-items:center;gap:11px"><span style="width:44px;height:44px;border-radius:999px;border:1px solid #322A4D;color:#6B7280;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">▶</span><span style="flex:1;height:32px;border-radius:6px;background:repeating-linear-gradient(90deg,#241E38,#241E38 2px,#17132a 2px,#17132a 5px)"></span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:14px 18px 26px;display:flex;gap:10px;border-top:1px solid #241E38;background:#0A0812;flex:none">
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;color:#8E86A8;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 13px Inter">Pass</span>
+          <span style="flex:1.5;height:50px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 14px Inter">＋ Pick ×1</span>
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;background:transparent;color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 13px Inter">★ Must</span>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Offline dot is grey (a state, not a fault). Only the player dims; genres, the crew reason and all three pick actions stay fully live — discovery never gates picking.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 4d · Cold start ═══════ -->
+    <div id="4d" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">4d</span><span style="font:800 16px system-ui;color:{{ ink }}">Cold start</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">no taste yet · never an empty screen</div>
+      <div style="width:390px;height:1000px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px;flex:none">
+          <span style="width:40px;height:40px;border-radius:999px;border:1px solid #2B2440;color:#C6CBD6;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span>
+          <span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:#EDEAF4">DISCOVER</span>
+          <span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span></span>
+        </div>
+        <div style="padding:0 18px 14px;flex:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Discovery session</span><span style="font:800 10px Inter;color:#C6CBD6">0 / 176</span></div>
+            <span style="display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:0 11px;border-radius:999px;border:1px solid rgba(192,132,252,.45);background:rgba(192,132,252,.13);color:#D8B4FE;font:800 10.5px Inter"><span style="display:flex;flex-direction:column;gap:2px;align-items:center"><span style="width:11px;height:1.5px;background:#D8B4FE;display:block"></span><span style="width:8px;height:1.5px;background:#D8B4FE;display:block"></span><span style="width:5px;height:1.5px;background:#D8B4FE;display:block"></span></span>Filter</span>
+          </div>
+          <div style="height:6px;border-radius:999px;background:#241E38;margin-top:8px;overflow:hidden"><div style="width:2%;height:100%;background:rgb(192,132,252);border-radius:999px"></div></div>
+          <div style="font:500 11px Inter;color:#877FA4;margin-top:7px">Starting from the top of the bill — the names you know</div>
+        </div>
+        <div style="flex:1;padding:0 18px;position:relative;min-height:0">
+          <div style="position:absolute;left:26px;right:26px;top:14px;bottom:6px;border-radius:8px;background:#1C1731;border:1px solid #2B2440"></div>
+          <div style="position:absolute;left:22px;right:22px;top:7px;bottom:3px;border-radius:8px;background:#1C1731;border:1px solid #2B2440"></div>
+          <div style="position:absolute;inset:0 18px;border-radius:8px;background:#1C1731;border:1px solid #2B2440;overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:16px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Dubstep</span><span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Riddim</span></div>
+            <div style="font:800 22px/1.1 Inter;color:#fff">Skrillex</div>
+            <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 11px;font:700 11px Inter">★ #2 on the bill — a headliner</div>
+            <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:13px;display:flex;flex-direction:column;gap:11px;margin-top:auto">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#877FA4">plays in full · no account</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#67B98A"></span>Spotify</span></div>
+              <div style="display:flex;align-items:center;gap:11px"><span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">❚❚</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span><div style="flex:1;min-width:0"><div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 1:00:12</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tomorrowland 2024 · Mainstage</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:00:12</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Coachella 2023 · Weekend 1</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">55:41</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Las Vegas 2022</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:03:58</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:14px 18px 26px;display:flex;gap:10px;border-top:1px solid #241E38;background:#0A0812;flex:none">
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;color:#8E86A8;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 13px Inter">Pass</span>
+          <span style="flex:1.5;height:50px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 14px Inter">＋ Pick ×1</span>
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;background:transparent;color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 13px Inter">★ Must</span>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">No separate cold-start UI — first run just deals the normal 2a deck top-down by billing order, so the very first card is always a name you recognise. Genres unlock as you sample.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 4e · Zero artists ═══════ -->
+    <div id="4e" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">4e</span><span style="font:800 16px system-ui;color:{{ ink }}">Zero artists</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">announced, no lineup · a real state</div>
+      <div style="width:390px;height:720px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="padding:6px 18px 12px;flex:none"><div style="font-family:Anton,sans-serif;font-size:26px;letter-spacing:.05em;color:rgb(74,201,155)">TOMORROWLAND WINTER '27</div></div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 30px;gap:14px">
+          <div style="width:56px;height:56px;border-radius:999px;border:1.5px dashed #3A3354;display:flex;align-items:center;justify-content:center;font-size:22px;color:#877FA4">♪</div>
+          <div style="font:800 19px/1.2 Inter;color:#fff">Lineup not announced yet</div>
+          <div style="font:500 12.5px/1.55 Inter;color:#877FA4">The festival's confirmed, but no artists have dropped. This is normal — lineups land months ahead. Nothing to browse or pick until then.</div>
+          <div style="display:flex;align-items:center;gap:9px;border:1px solid #322A4D;border-radius:999px;padding:11px 16px;margin-top:4px"><span style="font:700 12px Inter;color:#D8B4FE">Notify me when it drops</span><span style="width:40px;height:24px;border-radius:999px;background:rgb(192,132,252);display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-end"><span style="width:18px;height:18px;border-radius:999px;background:#fff"></span></span></div>
+        </div>
+        <div style="padding:14px 18px 26px;border-top:1px solid #241E38;background:#0A0812;flex:none;display:flex;gap:20px;justify-content:center;font:700 11px Inter;color:#877FA4"><span>WALL</span><span style="color:#8E86A8">TIMETABLE</span><span>SETTINGS</span></div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Handled as a state, not an error — the fest name still wears its accent (1 of the 4 places), and the only useful action (get notified) is offered instead of a blank wall.</div></sc-if>
+    </div>
+
+
+  </div>
+</section>
+</sc-if>
+
+<sc-if value="{{ showMid }}" hint-placeholder-val="{{ true }}">
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:{{ ink }};letter-spacing:-.01em">Round 2 — mid-fidelity</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ accent }};margin-top:6px">390px · dark · real tokens · still the only version of these three screens</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start">
+
+    <!-- ═══════ 2a · Discovery ═══════ -->
+    <div style="display:flex;flex-direction:column;gap:11px;align-items:flex-start">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">2a</span><span style="font:800 16px system-ui;color:{{ ink }}">Discovery — swipe &amp; sample</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">evolves 1b · progress + all sources</div>
+      <div style="width:390px;height:812px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px;flex:none">
+          <span style="width:40px;height:40px;border-radius:999px;border:1px solid #2B2440;color:#C6CBD6;display:flex;align-items:center;justify-content:center;font-size:16px">‹</span>
+          <span style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:#EDEAF4">DISCOVER</span>
+          <span style="width:40px;height:40px;display:flex;align-items:center;justify-content:center"><span style="width:9px;height:9px;border-radius:999px;background:#10B981"></span></span>
+        </div>
+        <div style="padding:0 18px 14px;flex:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Discovery session</span><span style="font:800 10px Inter;color:#C6CBD6">7 / 20</span></div>
+            <span style="display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:0 11px;border-radius:999px;border:1px solid rgba(192,132,252,.45);background:rgba(192,132,252,.13);color:#D8B4FE;font:800 10.5px Inter"><span style="display:flex;flex-direction:column;gap:2px;align-items:center"><span style="width:11px;height:1.5px;background:#D8B4FE;display:block"></span><span style="width:8px;height:1.5px;background:#D8B4FE;display:block"></span><span style="width:5px;height:1.5px;background:#D8B4FE;display:block"></span></span>Filter<span style="min-width:16px;height:16px;border-radius:999px;background:rgba(192,132,252,.3);color:#EDD9FF;display:inline-flex;align-items:center;justify-content:center;font:800 9px Inter">2</span></span>
+          </div>
+          <div style="height:6px;border-radius:999px;background:#241E38;margin-top:8px;overflow:hidden;display:flex;gap:2px">
+            <div style="width:35%;height:100%;background:rgb(192,132,252);border-radius:999px"></div>
+          </div>
+          <div style="font:500 11px Inter;color:#877FA4;margin-top:7px">13 unheard left — sampling Riddim &amp; Dubstep</div>
+        </div>
+        <div style="flex:1;padding:0 18px;position:relative;min-height:0">
+          <div style="position:absolute;left:26px;right:26px;top:14px;bottom:6px;border-radius:8px;background:#1C1731;border:1px solid #2B2440"></div>
+          <div style="position:absolute;left:22px;right:22px;top:7px;bottom:3px;border-radius:8px;background:#1C1731;border:1px solid #2B2440"></div>
+          <div style="position:absolute;inset:0 18px;border-radius:8px;background:#1C1731;border:1px solid #2B2440;overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:16px">
+            <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==&quot;);opacity:.3;mix-blend-mode:overlay;pointer-events:none"></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1">
+              <span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Riddim</span>
+              <span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#C6CBD6">Dubstep</span>
+            </div>
+            <div style="font:800 21px/1.15 Inter;color:#fff;position:relative;z-index:1">Skull Machine <span style="color:#C6CBD6;font-weight:700;font-size:15px">(Black Tiger Sex Machine × Kai Wachi)</span></div>
+            <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 11px;font:700 11px Inter;position:relative;z-index:1">★ 3 of your crew like Riddim</div>
+            <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:13px;display:flex;flex-direction:column;gap:11px;position:relative;z-index:1;margin-top:auto">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Sample</span><span style="font:600 10px Inter;color:#877FA4">plays in full · no account</span></div>
+              <div style="display:flex;gap:6px"><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#fff;border:1px solid #FF4E45;background:#1C1731"><span style="width:7px;height:7px;border-radius:50%;background:#FF4E45"></span>YouTube</span><span style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:34px;border-radius:8px;font:700 10.5px Inter;color:#8E86A8;border:1px solid #2B2440;background:transparent"><span style="width:7px;height:7px;border-radius:50%;background:#FF7A2F"></span>SoundCloud</span></div>
+              <div style="display:flex;align-items:center;gap:11px"><span style="position:relative;width:82px;height:46px;flex:none;border-radius:6px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center"><span style="width:26px;height:26px;border-radius:999px;background:rgba(255,78,69,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px">❚❚</span><span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.28)"><span style="display:block;height:100%;width:22%;background:#FF4E45"></span></span></span><div style="flex:1;min-width:0"><div style="font:700 12px Inter;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Vegas 2025 · Full Set</div><div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">Set 1 of 3 · 1:04:22</div></div></div>
+              <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 9.5px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4;white-space:nowrap">Live sets</span><span style="font:600 9.5px Inter;color:#877FA4;white-space:nowrap">tap to switch</span></div><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #C084FC;background:rgba(192,132,252,.13);color:#fff"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#C084FC">1</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">EDC Vegas 2025 · Full Set</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:04:22</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">2</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Electric Forest 2024</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">58:47</span></span><span style="display:flex;align-items:center;gap:9px;min-height:36px;padding:6px 9px;border-radius:8px;font:600 11.5px Inter;border:1px solid #241E38;background:#1C1731;color:#C6CBD6"><span style="width:13px;font:700 10.5px ui-monospace,monospace;color:#8E86A8">3</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lost Lands 2021</span><span style="font:600 10px ui-monospace,monospace;color:#877FA4">1:02:10</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div style="padding:14px 18px 26px;display:flex;gap:10px;border-top:1px solid #241E38;background:#0A0812;flex:none">
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;color:#8E86A8;border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 13px Inter">Pass</span>
+          <span style="flex:1.5;height:50px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 14px Inter">＋ Pick ×1</span>
+          <span style="flex:.9;height:50px;border:1px solid #322A4D;background:transparent;color:#D8B4FE;border-radius:999px;display:flex;align-items:center;justify-content:center;font:800 13px Inter">★ Must</span>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Sources reflect what each site actually allows with no login: SoundCloud plays the artist's posted tracks in full (usually the live set); YouTube runs a cached search so you can pick a representative clip; Spotify plays 30-sec top-track previews (the studio sound). The <b>Filter</b> button in the session header opens the pool filter → <a href="#2e">2e</a>; its badge counts the facets currently on, so a narrowed pool is never silent.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 2e · Discovery filter ═══════ -->
+    <div id="2e" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">2e</span><span style="font:800 16px system-ui;color:{{ ink }}">Discovery filter</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">opens from the session Filter button · narrow the pool</div>
+      <div style="width:390px;height:812px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="flex:1;position:relative;overflow:hidden">
+          <div style="position:absolute;inset:0;opacity:.32;padding:6px 18px;filter:saturate(.7)">
+            <div style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:#EDEAF4;text-align:center">DISCOVER</div>
+            <div style="height:6px;border-radius:999px;background:#241E38;margin-top:14px;overflow:hidden"><div style="width:35%;height:100%;background:rgb(192,132,252);border-radius:999px"></div></div>
+            <div style="margin-top:16px;border-radius:8px;background:#1C1731;border:1px solid #2B2440;height:360px"></div>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(10,8,18,.66)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;background:#0A0812;border:1px solid #241E38;border-radius:20px 20px 0 0;padding:16px 18px 22px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;justify-content:center"><div style="width:38px;height:4px;border-radius:3px;background:#3A3354"></div></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font:800 15px Inter;color:#fff">Narrow what you're shown</span><span style="font:700 12px Inter;color:#D8B4FE">31 / 176</span></div>
+            <div>
+              <div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:8px">Sort — top picks first</div>
+              <div style="display:flex;border:1px solid #322A4D;border-radius:999px;overflow:hidden;font:800 12px Inter">
+                <span style="flex:1;text-align:center;padding:10px 0;background:rgba(192,132,252,.16);color:#D8B4FE">For you</span>
+                <span style="flex:1;text-align:center;padding:10px 0;color:#8E86A8;border-left:1px solid #241E38">Popularity</span>
+                <span style="flex:1;text-align:center;padding:10px 0;color:#8E86A8;border-left:1px solid #241E38">A–Z</span>
+              </div>
+            </div>
+            <div>
+              <div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:8px">Show</div>
+              <div style="display:flex;border:1px solid #322A4D;border-radius:999px;overflow:hidden;font:800 12px Inter">
+                <span style="flex:1;text-align:center;padding:10px 0;background:rgba(192,132,252,.16);color:#D8B4FE">Undecided</span>
+                <span style="flex:1;text-align:center;padding:10px 0;color:#8E86A8;border-left:1px solid #241E38">Passed</span>
+                <span style="flex:1;text-align:center;padding:10px 0;color:#8E86A8;border-left:1px solid #241E38">All</span>
+              </div>
+            </div>
+            <div>
+              <div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:8px">Genres</div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px">
+                <span style="border-radius:999px;padding:6px 11px;font:700 11px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">Riddim ✓</span>
+                <span style="border-radius:999px;padding:6px 11px;font:700 11px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">Dubstep ✓</span>
+                <span style="border-radius:999px;padding:6px 11px;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">Bass House</span>
+                <span style="border-radius:999px;padding:6px 11px;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">Melodic Techno</span>
+                <span style="border-radius:999px;padding:6px 11px;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">Trance</span>
+              </div>
+            </div>
+            <div>
+              <div style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:8px">Day</div>
+              <div style="display:flex;gap:7px">
+                <span style="flex:1;text-align:center;border-radius:999px;padding:8px 0;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">All</span>
+                <span style="flex:1;text-align:center;border-radius:999px;padding:8px 0;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">Fri</span>
+                <span style="flex:1;text-align:center;border-radius:999px;padding:8px 0;font:800 11px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">Sat</span>
+                <span style="flex:1;text-align:center;border-radius:999px;padding:8px 0;font:700 11px Inter;color:#C6CBD6;border:1px solid #322A4D">Sun</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:11px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 13px Inter;color:#C6CBD6">Picked by the crew <span style="font:600 10px Inter;color:#877FA4">· confirm their choices</span></span><span style="width:40px;height:24px;border-radius:999px;background:rgb(192,132,252);display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-end;flex:none"><span style="width:18px;height:18px;border-radius:999px;background:#fff"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 13px Inter;color:#C6CBD6">Has a live set to sample</span><span style="width:40px;height:24px;border-radius:999px;background:#2B2440;display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-start;flex:none"><span style="width:18px;height:18px;border-radius:999px;background:#8E86A8"></span></span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;opacity:.5"><span style="font:600 13px Inter;color:#C6CBD6">Playing in my open gaps <span style="font:600 10px Inter;color:#877FA4">· needs set times</span></span><span style="width:40px;height:24px;border-radius:999px;background:#2B2440;display:inline-flex;align-items:center;padding:0 3px;justify-content:flex-start;flex:none"><span style="width:18px;height:18px;border-radius:999px;background:#8E86A8"></span></span></div>
+            </div>
+            <div style="height:48px;border-radius:999px;background:rgba(192,132,252,.13);color:#D8B4FE;display:flex;align-items:center;justify-content:center;font:800 14px Inter">Show 31 artists</div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">Sort is the priority lever — you won't hear everyone, so top picks come first (For you / Popularity / A–Z). Show is a single switch (Undecided default · Passed · All), not three toggles. Genre + Day narrow; "Picked by the crew" is for confirming others' choices. The gap facet stays greyed until set times drop.</div></sc-if>
+    </div>
+
+    <!-- ═══════ 2b · My Schedule ═══════ -->
+    <div style="display:flex;flex-direction:column;gap:11px;align-items:flex-start">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:{{ badgeBg }};color:{{ badgeInk }};border-radius:6px;padding:3px 8px">2b</span><span style="font:800 16px system-ui;color:{{ ink }}">My schedule — gaps &amp; clashes</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:{{ mono }}">evolves 1e · your own conflicts &amp; openings</div>
+      <div style="width:390px;height:812px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="padding:6px 18px 10px;flex:none">
+          <div style="font-family:Anton,sans-serif;font-size:22px;letter-spacing:.05em;color:#EDEAF4">YOUR SATURDAY</div>
+          <div style="display:flex;gap:22px;margin-top:12px;font:800 13px Inter;border-bottom:1px solid #241E38;padding-bottom:0">
+            <span style="color:#8E86A8;padding-bottom:9px">Fri</span>
+            <span style="color:rgb(74,201,155);border-bottom:2px solid rgb(74,201,155);padding-bottom:9px">Sat</span>
+            <span style="color:#8E86A8;padding-bottom:9px">Sun</span>
+          </div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:6px 18px 0;display:flex;flex-direction:column;gap:10px">
+          <a href="#5a" style="text-decoration:none;display:flex;gap:12px;align-items:stretch">
+            <span style="width:42px;font:700 11px Inter;color:#877FA4;padding-top:14px;flex:none">2:00</span>
+            <div style="flex:1;border-radius:8px;border:1px solid #2B2440;padding:13px;position:relative;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), #1C1731">
+              <div style="font:700 15px Inter;color:#fff">Four Tet</div>
+              <div style="font:600 11px Inter;color:rgba(255,255,255,.75);margin-top:2px;padding-right:40px">The Grove · your must</div>
+              <span style="position:absolute;right:10px;bottom:10px;height:16px;min-width:24px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">You</span>
+            </div>
+          </a>
+          <div style="display:flex;gap:12px;align-items:stretch">
+            <span style="width:42px;font:700 11px Inter;color:#877FA4;padding-top:14px;flex:none">4:00</span>
+            <div style="flex:1;border-radius:8px;border:1px dashed #3A3354;padding:13px;background:repeating-linear-gradient(45deg,#141021,#141021 7px,#17132a 7px,#17132a 14px)">
+              <div style="font:800 10px Inter;letter-spacing:.1em;text-transform:uppercase;color:#877FA4">Open · 4:00 – 6:00 PM</div>
+              <div style="font:700 13px Inter;color:#D8B4FE;margin-top:5px">3 you'd like are playing then</div>
+              <div style="display:flex;gap:7px;margin-top:10px;flex-wrap:wrap">
+                <a href="#5a" style="text-decoration:none;border:1px solid #322A4D;border-radius:999px;padding:6px 11px;font:700 11px Inter;color:#C6CBD6;background:#141021">San Holo · 4:30 ›</a>
+                <a href="#5a" style="text-decoration:none;border:1px solid #322A4D;border-radius:999px;padding:6px 11px;font:700 11px Inter;color:#C6CBD6;background:#141021">phrva · 5:00 ›</a>
+              </div>
+            </div>
+          </div>
+          <a href="#5a" style="text-decoration:none;display:flex;gap:12px;align-items:stretch">
+            <span style="width:42px;font:700 11px Inter;color:#877FA4;padding-top:14px;flex:none">6:30</span>
+            <div style="flex:1;border-radius:8px;border:1px solid #2B2440;padding:13px;position:relative;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+              <div style="font:700 15px Inter;color:#fff">GRiZ</div>
+              <div style="font:600 11px Inter;color:rgba(255,255,255,.75);margin-top:2px">Lakeshore · picked ×2</div>
+              <div style="position:absolute;right:10px;bottom:10px;display:flex;gap:4px;align-items:center"><span style="height:16px;width:4px;border-radius:999px;background:hsla(10,90%,62%,.5);border:1px solid #fff"></span><span style="height:16px;width:4px;border-radius:999px;background:hsla(221,90%,62%,.5);border:1px solid hsl(221,85%,82%)"></span></div>
+            </div>
+          </a>
+          <a href="#5a" style="text-decoration:none;display:flex;gap:12px;align-items:stretch">
+            <span style="width:42px;font:700 11px Inter;color:#877FA4;padding-top:14px;flex:none">9:00</span>
+            <div style="flex:1;border-radius:8px;border:1px solid rgb(192,132,252);padding:13px;background:#17132a">
+              <div style="font:800 10px Inter;letter-spacing:.1em;text-transform:uppercase;color:#D8B4FE">⚡ Clash · 2 of your musts</div>
+              <div style="font:700 14px Inter;color:#fff;margin-top:6px">Skrillex <span style="color:#877FA4;font-weight:600;font-size:12px">vs</span> Alison Wonderland</div>
+              <div style="display:inline-flex;margin-top:10px;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:6px 12px;font:800 11px Inter">Decide ›</div>
+            </div>
+          </a>
+        </div>
+        <div style="padding:12px 18px 26px;border-top:1px solid #241E38;background:#0A0812;flex:none;font:500 11px/1.45 Inter;color:#877FA4">Tapping any set <b style="color:#C6CBD6">opens the artist</b> — on the timetable it no longer cycles the pick.</div>
+      </div>
+      <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:{{ mono }};border-top:1px dashed {{ rule }};padding-top:10px">One column: your day. Musts/picks carry their aura. Gaps invite discovery; clashes route to a decide view. Active day tab is the only <b>fest accent</b> here (1 of the 4 allowed places).</div></sc-if>
+    </div>
+
+  </div>
+</section>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;surface&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Paper&quot;,&quot;Blueprint&quot;,&quot;Charcoal&quot;],&quot;default&quot;:&quot;Paper&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Presentation&quot;},&quot;detail&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Full notes&quot;,&quot;Frames only&quot;],&quot;default&quot;:&quot;Full notes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Presentation&quot;},&quot;scope&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Everything&quot;,&quot;Flow + hi-fi&quot;,&quot;Mid-fi only&quot;,&quot;States only&quot;],&quot;default&quot;:&quot;Everything&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Presentation&quot;}}">
+const THEMES = {
+  'Paper':     { pageBg:'#E9E6DE', stock:'#FCFBF8', sunk:'#F1EEE6', ink:'#211f1b', body:'#4a463d', mono:'#6b6659', accent:'#a08f6a', rule:'#D8D2C4', ruleSoft:'#cfc8b8', badgeBg:'#3a362e', badgeInk:'#fbfaf6', compBg:'#F6F1FB', compBorder:'#8a6db8', compInk:'#7a5fa8' },
+  'Blueprint': { pageBg:'#0E2133', stock:'#15304A', sunk:'#12293E', ink:'#EAF3FA', body:'#BBD2E2', mono:'#93B0C6', accent:'#6FB0DE', rule:'#28496A', ruleSoft:'#22415F', badgeBg:'#EAF3FA', badgeInk:'#0E2133', compBg:'#1B2F55', compBorder:'#7C8FE0', compInk:'#AEBBF3' },
+  'Charcoal':  { pageBg:'#1A1917', stock:'#242320', sunk:'#1F1E1B', ink:'#F2EFE9', body:'#CFC9BD', mono:'#A29C90', accent:'#C0A96B', rule:'#3A3733', ruleSoft:'#332F2B', badgeBg:'#F2EFE9', badgeInk:'#1A1917', compBg:'#2A2436', compBorder:'#9A83C4', compInk:'#C3AEE8' },
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const t = THEMES[this.props.surface] || THEMES.Paper;
+    const scope = this.props.scope || 'Everything';
+    return Object.assign({}, t, {
+      showNotes: (this.props.detail || 'Full notes') === 'Full notes',
+      showFlow: scope === 'Everything' || scope === 'Flow + hi-fi',
+      showHifi: scope === 'Everything' || scope === 'Flow + hi-fi',
+      showStates: scope === 'Everything' || scope === 'States only',
+      showMid: scope === 'Everything' || scope === 'Mid-fi only',
+    });
+  }
+}
+</script>
+</body>
+</html>

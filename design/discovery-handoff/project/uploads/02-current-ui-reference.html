@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festival Navigator — current UI reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#0C0A14; --dock:#0A0812; --card:#141021; --card-unpicked:#1C1731;
+  --hairline:#241E38; --border-card:#2B2440; --border-input:#322A4D; --border-emphasis:#3A3354;
+  --text-header:#EDEAF4; --text-primary:#FFF; --text-body:#C6CBD6;
+  --text-secondary:#8E86A8; --text-tertiary:#877FA4; --text-unpicked-name:#B9B3CC;
+  --spotify-fill:rgba(18,138,62,.5); --spotify-stroke:rgb(103,185,138);
+  --notes-fill:rgba(108,91,212,.5); --notes-stroke:rgb(196,189,238);
+  --notes-chip-stroke:#8B7BFF; --notes-chip-text:#A99BFF;
+  --tonal-fill:rgba(192,132,252,.13); --tonal-text:#D8B4FE;
+  --brand:192,132,252; --fest:192,132,252;
+  --sync-ok:#10B981; --sync-syncing:#F59E0B; --sync-offline:#6B7280; --sync-error:#F87171;
+  --r-card:8px; --r-row:10px; --r-settings:12px; --r-pill:999px; --r-bubble:8px 8px 8px 2px;
+  --font-display:'Anton',Impact,sans-serif; --font-ui:'Inter',system-ui,sans-serif;
+  --grain:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='140'%20height='140'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'/%3E%3C/filter%3E%3Crect%20width='140'%20height='140'%20filter='url(%23n)'%20opacity='0.6'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text-body);font-family:var(--font-ui);
+  font-size:13px;line-height:1.6;padding:32px 24px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-family:var(--font-display);font-size:40px;letter-spacing:.05em;color:var(--text-header);
+  margin:0 0 4px;text-transform:uppercase}
+h2{font-family:var(--font-display);font-size:19px;letter-spacing:.05em;color:var(--text-header);
+  margin:48px 0 6px;text-transform:uppercase}
+.lede{color:var(--text-secondary);max-width:70ch;margin:0 0 8px}
+.micro{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-tertiary);margin:24px 0 10px}
+.note{color:var(--text-tertiary);font-size:12.5px;max-width:74ch}
+code{background:var(--card);padding:1px 5px;border-radius:4px;font-size:12px;color:var(--tonal-text)}
+hr{border:0;border-top:1px solid var(--hairline);margin:40px 0 0}
+
+/* ---- artist card: the real anatomy ---- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.card{position:relative;border-radius:var(--r-card);min-height:104px;padding:12px;
+  display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+  border:1px solid transparent;cursor:pointer}
+.card .grain{position:absolute;inset:0;background-image:var(--grain);opacity:.3;
+  mix-blend-mode:overlay;pointer-events:none}
+.card .nm{position:relative;font-weight:700;font-size:14.5px;line-height:1.25;z-index:1}
+.card .sub{position:relative;font-size:12px;margin-top:3px;z-index:1}
+.flat{background:var(--card-unpicked)}
+.flat .nm{color:var(--text-unpicked-name)}
+.flat .sub{color:#877FA4}
+.lit .nm{color:#fff}
+.lit .sub{color:rgba(255,255,255,.75)}
+
+/* who-corner (bottom-right): lettered pills = musts, 4px ticks = picks */
+.who{position:absolute;right:8px;bottom:8px;display:flex;gap:4px;align-items:center;z-index:2}
+.who .must{height:16px;min-width:24px;border-radius:var(--r-pill);border:1.5px solid;
+  font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  color:#fff;letter-spacing:.02em}
+.who .tick{height:16px;width:4px;border-radius:var(--r-pill);border:1px solid}
+.who .ghost{height:16px;padding:0 5px;border-radius:var(--r-pill);border:1px solid var(--border-emphasis);
+  color:var(--text-secondary);font-size:9.5px;font-weight:800;display:flex;align-items:center}
+
+/* about-corner (bottom-left): notes bubble then spotify pill */
+.about{position:absolute;left:8px;bottom:8px;display:flex;gap:4px;align-items:center;z-index:2}
+.chip{height:17px;padding:0 6px;display:flex;align-items:center;gap:3px;
+  font-size:9.5px;font-weight:800;border:1px solid}
+.chip.notes{background:var(--notes-fill);border-color:var(--notes-stroke);
+  color:#fff;border-radius:var(--r-bubble)}
+.chip.spot{background:var(--spotify-fill);border-color:var(--spotify-stroke);
+  color:#fff;border-radius:var(--r-pill)}
+.chip.spot.hot{box-shadow:0 0 10px 1px rgba(103,185,138,.55)}
+
+/* swatches */
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+.swatch{border:1px solid var(--hairline);border-radius:var(--r-row);overflow:hidden}
+.swatch .chip2{height:52px}
+.swatch .meta{padding:7px 9px;font-size:11px}
+.swatch .meta b{display:block;color:var(--text-body);font-weight:700}
+.swatch .meta span{color:var(--text-tertiary);font-family:ui-monospace,monospace;font-size:10.5px}
+.board{display:grid;grid-template-columns:repeat(12,1fr);gap:6px}
+.board div{aspect-ratio:1;border-radius:6px}
+.type-row{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--hairline);
+  padding:10px 0;flex-wrap:wrap}
+.type-row .lbl{color:var(--text-tertiary);font-size:11px;font-family:ui-monospace,monospace;
+  min-width:190px}
+.callout{border:1px solid var(--border-card);border-left:3px solid rgb(var(--brand));
+  border-radius:var(--r-row);padding:12px 14px;margin:14px 0;background:var(--card);
+  color:var(--text-body);max-width:80ch}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Current UI reference</h1>
+<p class="lede">This is the visual language Discovery has to live inside. Everything below is
+rendered with the <em>production</em> token values and the real aura math — not a redraw.
+Open <code>01-design-tokens.css</code> alongside it.</p>
+
+<div class="callout">
+<b>The one thing to understand before designing:</b> an artist card's visual budget is
+<em>already fully spent</em>. The background is the crew's picks, the bottom-right corner is
+who picked, the bottom-left is notes + Spotify. Genres, a “why we recommended this” reason,
+and a “passed” state have nowhere obvious to go — and the card a recommendation most needs to
+mark is the <em>flat, unpicked</em> one, which is deliberately the plainest thing on screen.
+</div>
+
+<h2>Artist card — pick states</h2>
+<p class="note">One person (colour slot 0, hue 10°). Levels 1–3 render the same colour at
+alpha .5 / .75 / 1.0. “Must” is level 4 — same full alpha, but it sorts innermost and is
+marked with a lettered pill instead of a tick.</p>
+<div class="micro">Nobody · picked ×1 · ×2 · ×3 · must</div>
+<div class="grid">
+  <div class="card flat"><div class="grain"></div><div><div class="nm">Alison Wonderland</div><div class="sub">Nobody picked</div></div></div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,.5) 0%, hsla(10,90%,62%,.25) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Alison Wonderland</div><div class="sub">picked ×1</div></div>
+    <div class="who"><span class="tick" style="background:hsla(10,90%,62%,.5);border-color:#fff"></span></div>
+  </div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Alison Wonderland</div><div class="sub">picked ×2</div></div>
+    <div class="who"><span class="tick" style="background:hsla(10,90%,62%,.5);border-color:#fff"></span></div>
+  </div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Alison Wonderland</div><div class="sub">picked ×3</div></div>
+    <div class="who"><span class="tick" style="background:hsla(10,90%,62%,.5);border-color:#fff"></span></div>
+  </div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Alison Wonderland</div><div class="sub">must</div></div>
+    <div class="who"><span class="must" style="background:hsla(10,90%,62%,.5);border-color:#fff">R</span></div>
+  </div>
+</div>
+
+<h2>The aura — a crew converging</h2>
+<p class="note">Each person who picked adds one radial-gradient layer in their own colour,
+anchored at a rotating corner (<code>20% 120%</code>, <code>85% -20%</code>,
+<code>-15% 30%</code>, <code>115% 70%</code>). Musts layer first/innermost. <b>This blend is
+the crew-convergence signal</b> — the single most distinctive thing in the product. White
+stroke = you; everyone else gets a tint of their own hue.</p>
+<div class="grid">
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(221,90%,62%,.75) 0%, hsla(221,90%,62%,.375) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Hardwell</div><div class="sub">2 people</div></div>
+    <div class="who"><span class="must" style="background:hsla(10,90%,62%,.5);border-color:#fff">R</span><span class="tick" style="background:hsla(221,90%,62%,.5);border-color:hsl(221,85%,82%)"></span></div>
+  </div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.75) 0%, hsla(221,90%,62%,.375) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Martin Garrix</div><div class="sub">3 people, 2 musts</div></div>
+    <div class="who"><span class="must" style="background:hsla(10,90%,62%,.5);border-color:#fff">R</span><span class="must" style="background:hsla(305,90%,62%,.5);border-color:hsl(305,85%,82%)">D</span><span class="tick" style="background:hsla(221,90%,62%,.5);border-color:hsl(221,85%,82%)"></span></div>
+  </div>
+
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(150,70%,50%,1) 0%, hsla(150,70%,50%,.5) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(305,90%,62%,.75) 0%, hsla(305,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at 115% 70%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Boys Noize B2B Brutalismus 3000</div><div class="sub">the whole crew + overflow</div></div>
+    <div class="who"><span class="must" style="background:hsla(10,90%,62%,.5);border-color:#fff">R</span><span class="must" style="background:hsla(150,70%,50%,.5);border-color:hsl(150,70%,82%)">M</span><span class="tick" style="background:hsla(305,90%,62%,.5);border-color:hsl(305,85%,82%)"></span><span class="tick" style="background:hsla(221,90%,62%,.5);border-color:hsl(221,85%,82%)"></span><span class="ghost">+2</span></div>
+  </div>
+</div>
+
+<h2>The corners — notes &amp; Spotify</h2>
+<p class="note">Bottom-left. The notes bubble keeps its sharp lower-left corner
+(<code>8px 8px 8px 2px</code>) — that shape <em>is</em> the notes identity. The Spotify pill
+is green and <b>never</b> a music-note glyph; it glows when the person demonstrably loves
+that artist (followed + 5&nbsp;saved songs).</p>
+<div class="grid">
+  <div class="card flat"><div class="grain"></div><div><div class="nm">Four Tet</div></div>
+    <div class="about"><span class="chip notes">3</span></div></div>
+  <div class="card flat"><div class="grain"></div><div><div class="nm">Skrillex</div></div>
+    <div class="about"><span class="chip spot">12</span></div></div>
+  <div class="card lit" style="background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,1) 0%, hsla(10,90%,62%,.5) 45%, transparent 78%), #1C1731">
+    <div class="grain"></div><div><div class="nm">Chris Lorenzo</div></div>
+    <div class="about"><span class="chip notes">1</span><span class="chip spot hot">28</span></div>
+    <div class="who"><span class="must" style="background:hsla(10,90%,62%,.5);border-color:#fff">R</span></div></div>
+  <div class="card flat"><div class="grain"></div><div><div class="nm">Skull Machine (Black Tiger Sex Machine x Kai Wachi)</div></div>
+    <div class="about"><span class="chip spot"></span></div></div>
+</div>
+<p class="note" style="margin-top:10px">↑ The last card is a <b>real</b> artist name. Layouts
+that only survive short names will break on contact with a real lineup.</p>
+
+<h2>Surfaces &amp; text</h2>
+<div class="sw">
+  <div class="swatch"><div class="chip2" style="background:#0C0A14"></div><div class="meta"><b>page</b><span>#0C0A14</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#0A0812"></div><div class="meta"><b>dock / sheets</b><span>#0A0812</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#141021"></div><div class="meta"><b>card</b><span>#141021</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#1C1731"></div><div class="meta"><b>card-unpicked</b><span>#1C1731</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#241E38"></div><div class="meta"><b>hairline</b><span>#241E38</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#2B2440"></div><div class="meta"><b>border-card</b><span>#2B2440</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#FFFFFF"></div><div class="meta"><b>text-primary</b><span>#FFFFFF</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#C6CBD6"></div><div class="meta"><b>text-body</b><span>#C6CBD6</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#877FA4"></div><div class="meta"><b>text-tertiary</b><span>#877FA4</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#B9B3CC"></div><div class="meta"><b>unpicked name</b><span>#B9B3CC</span></div></div>
+</div>
+
+<div class="micro">Identity colours — fixed meanings, never reused</div>
+<div class="sw">
+  <div class="swatch"><div class="chip2" style="background:rgba(18,138,62,.5);border-bottom:2px solid rgb(103,185,138)"></div><div class="meta"><b>Spotify</b><span>fill .5 / stroke</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:rgba(108,91,212,.5);border-bottom:2px solid rgb(196,189,238)"></div><div class="meta"><b>Notes</b><span>fill .5 / stroke</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:rgba(192,132,252,.13)"></div><div class="meta"><b>Tonal button</b><span>text #D8B4FE</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:rgb(192,132,252)"></div><div class="meta"><b>Brand violet</b><span>192,132,252</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#10B981"></div><div class="meta"><b>sync ok</b><span>#10B981</span></div></div>
+  <div class="swatch"><div class="chip2" style="background:#6B7280"></div><div class="meta"><b>sync offline</b><span>#6B7280 · grey = a state, not a fault</span></div></div>
+</div>
+
+<h2>The crew board — 24 colours</h2>
+<p class="note">Members are identified by <b>colour + initial</b>, never a photo. Slots are
+assigned lowest-free and are stable for a member's life; the order is hue-spread so people
+who join near each other stay visually far apart. <b>You</b> are the only white-stroked member.</p>
+<div class="board" id="board"></div>
+
+<h2>Type scale</h2>
+<div class="type-row"><span class="lbl">--fs-display / Anton</span><span style="font-family:var(--font-display);font-size:40px;letter-spacing:.05em;color:var(--text-header)">TOMORROWLAND</span></div>
+<div class="type-row"><span class="lbl">--fs-day / Anton</span><span style="font-family:var(--font-display);font-size:19px;letter-spacing:.05em;color:var(--text-header)">SATURDAY</span></div>
+<div class="type-row"><span class="lbl">--fs-card / Inter 700</span><span style="font-weight:700;font-size:15px;color:#fff">Alison Wonderland</span></div>
+<div class="type-row"><span class="lbl">--fs-body / Inter 400</span><span style="font-size:13.5px">Tap an artist to pick — brighter each tap, 4th is a must.</span></div>
+<div class="type-row"><span class="lbl">--fs-micro / Inter 800 .12em</span><span class="micro" style="margin:0">BILLING ORDER</span></div>
+
+<h2>Rules with teeth</h2>
+<div class="callout">
+<b>The festival accent</b> (<code>--fest</code>, a per-festival RGB) appears in <b>exactly four
+places</b>: the festival name, the active day tab, stage headers, and the current-festival
+border in Settings. Nowhere else. Anything else that wants to look “selected” or “ours” uses
+<b>brand violet</b>. The accent once crept into seven places — including the loader shown while
+a crew was still being created, i.e. wearing a festival's colour before a festival had been
+chosen — and had to be pulled back.
+</div>
+<div class="callout">
+<b>44px minimum touch target on every button.</b> It is applied to <code>button</code> as an
+element, not to a list of selectors — the naming <em>was</em> the bug once, and every control
+added after the named six silently got nothing. If you add a control, it inherits the floor by
+being a button.
+</div>
+<div class="callout">
+<b>Motion can never carry meaning.</b> <code>prefers-reduced-motion</code> and a low-power mode
+kill every animation and hide the grain. If a state is only legible while something is moving,
+it is invisible to a real user in a field on 4%&nbsp;battery.
+</div>
+
+<hr>
+<p class="note" style="margin-top:20px">Rendered with production token values from
+<code>01-design-tokens.css</code> and the aura math from <code>js/v3/aura.js</code> +
+<code>js/v3/palette.js</code>. Fonts load from Google Fonts; offline they fall back and the
+letterforms will differ from production.</p>
+
+<script>
+const AURA_H=[10,28,42,72,150,172,200,221,233,262,305,345];
+const CANON=[{h:10,s:90,l:62},{h:221,s:90,l:62},{h:305,s:90,l:62},{h:150,s:70,l:50}];
+const board=[...CANON];
+for(const h of [42,262,172,345,200,72,28,233]) board.push({h,s:90,l:62});
+for(const h of AURA_H){ if(board.length>=24) break; board.push({h,s:75,l:46}); }
+document.getElementById('board').innerHTML = board.slice(0,24)
+  .map((c,i)=>`<div title="slot ${i} — hsl(${c.h},${c.s}%,${c.l}%)" style="background:hsl(${c.h},${c.s}%,${c.l}%)"></div>`).join('');
+</script>
+</div>
+</body>
+</html>

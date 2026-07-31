@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<template id="__bundler_thumbnail" data-bg-color="#E9E6DE">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300"><rect width="400" height="300" fill="#E9E6DE"></rect><g transform="translate(120 90)"><rect x="0" y="0" width="72" height="120" rx="10" fill="#FCFBF8" stroke="#3a362e" stroke-width="4"></rect><rect x="14" y="18" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="14" y="38" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="14" y="58" width="30" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="88" y="0" width="72" height="120" rx="10" fill="#FCFBF8" stroke="#3a362e" stroke-width="4"></rect><rect x="102" y="18" width="44" height="7" rx="3.5" fill="#d9d4c8"></rect><rect x="102" y="38" width="30" height="7" rx="3.5" fill="#d9d4c8"></rect><circle cx="124" cy="86" r="16" fill="none" stroke="#a08f6a" stroke-width="4"></circle></g></svg>
+</template>
+<style>
+  body { margin:0; background:#E9E6DE; color:#2a2a28; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  a { color:#7d6f45; text-decoration: underline dotted; }
+  a:hover { color:#2a2a28; }
+</style>
+</helmet>
+
+<div style="padding:40px 44px 12px;max-width:1180px">
+  <div style="font:800 30px/1.05 system-ui;letter-spacing:-.01em;color:#211f1b">Discovery — archive</div>
+  <div style="font:600 13px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#a08f6a;margin-top:8px">superseded work · reference only</div>
+  <div style="font:400 13px/1.6 system-ui;color:#4a463d;max-width:74ch;margin-top:14px">Nothing on this page is the design of record. It is kept so the reasoning behind the current screens stays traceable — options that lost, frames a later round replaced, and the Round 1 concept set. Current work lives in <a href="./Discovery - Screens.dc.html">screens</a> and the <a href="./Discovery - Style Guide.dc.html">style guide</a>.</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+    <a href="./Discovery - Screens.dc.html" style="text-decoration:none;border:1px solid #D8D2C4;background:#FCFBF8;color:#4a463d;border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Screens · current</a>
+    <a href="./Discovery - Style Guide.dc.html" style="text-decoration:none;border:1px solid #D8D2C4;background:#FCFBF8;color:#4a463d;border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Style guide</a>
+    <a href="./Discovery - Sample Player.dc.html" style="text-decoration:none;border:1px solid #D8D2C4;background:#FCFBF8;color:#4a463d;border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Sample player v2</a>
+    <a href="./Discovery - Swipe Demo.dc.html" style="text-decoration:none;border:1px solid #D8D2C4;background:#FCFBF8;color:#4a463d;border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Swipe demo</a>
+    <a href="./Discovery - Archive.dc.html" style="text-decoration:none;border:1px solid #D8D2C4;background:#3a362e;color:#fbfaf6;border-radius:8px;padding:7px 11px;font:700 11px ui-monospace,monospace">Archive · superseded</a>
+  </div>
+</div>
+
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:#211f1b;letter-spacing:-.01em">Superseded frames</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a08f6a;margin-top:6px">replaced by a later round — kept for the reasoning, not for build</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start">
+
+    <div style="width:390px;flex:none;font:500 11px/1.55 ui-monospace,monospace;color:#6b6659;border:1px dashed #cfc8b8;border-radius:10px;padding:12px 14px;align-self:flex-start">2c → replaced by the hi-fi artist page (<b>5a</b> mobile, <b>5b</b> desktop). 2d's card study is settled in the style guide, §03. 4f was cut — the app's existing timetable already serves it.</div>
+
+    <!-- ═══════ 2c · Artist page ═══════ -->
+    <div id="2c" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">2c</span><span style="font:800 16px system-ui;color:#211f1b">Artist page — the about screen</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">evolves 1h · + similar artists &amp; their slots</div>
+      <div style="width:390px;height:1128px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+          <div style="padding:6px 18px 14px;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;background:radial-gradient(120% 130% at 20% 110%, hsla(10,90%,62%,.55) 0%, transparent 70%), radial-gradient(110% 120% at 90% -10%, hsla(305,90%,62%,.4) 0%, transparent 65%)"></div>
+            <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44NSIgbnVtT2N0YXZlcz0iMiIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==&quot;);opacity:.4;mix-blend-mode:overlay;pointer-events:none"></div>
+            <div style="position:relative;z-index:1">
+              <span style="width:40px;height:40px;border-radius:999px;border:1px solid #2B2440;color:#EDEAF4;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(10,8,18,.5)">‹</span>
+              <div style="font:800 25px/1.1 Inter;color:#fff;margin-top:14px">GRiZ</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+                <span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.4)">Future Bass</span>
+                <span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.4)">Bass House</span>
+                <span style="border:1px solid #322A4D;border-radius:999px;padding:4px 10px;font:700 10px Inter;color:#EDEAF4;background:rgba(10,8,18,.4)">Disco</span>
+              </div>
+              <div style="margin-top:12px;font:700 12px Inter;color:#EDEAF4">SAT · 6:30 – 8:00 PM · <span style="color:rgb(74,201,155)">LAKESHORE</span></div>
+            </div>
+          </div>
+          <div style="padding:0 18px;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+            <div style="border:1px solid #2B2440;border-radius:10px;background:#141021;padding:13px;display:flex;flex-direction:column;gap:11px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">Hear them</span><span style="font:600 10px Inter;color:#877FA4">no account needed</span></div>
+              <div style="display:flex;gap:7px">
+                <span style="flex:1;text-align:center;border-radius:8px;padding:7px 0;font:800 10.5px Inter;background:rgba(192,132,252,.13);color:#D8B4FE;border:1px solid rgba(192,132,252,.4)">SoundCloud</span>
+                <span style="flex:1;text-align:center;border-radius:8px;padding:7px 0;font:700 10.5px Inter;color:#C6CBD6;border:1px solid #322A4D">YouTube</span>
+                <span style="flex:1;text-align:center;border-radius:8px;padding:7px 0;font:700 10.5px Inter;color:#fff;border:1px solid rgb(103,185,138);background:rgba(18,138,62,.5)">Spotify</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px">
+                <span style="width:44px;height:44px;border-radius:999px;border:1px solid rgb(192,132,252);color:#fff;background:rgba(192,132,252,.16);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none">▶</span>
+                <span style="flex:1;height:32px;border-radius:6px;background:repeating-linear-gradient(90deg,#2B2440,#2B2440 2px,#141021 2px,#141021 5px)"></span>
+              </div>
+              <div style="font:500 10.5px/1.4 Inter;color:#877FA4">SoundCloud plays their posted tracks — usually the live set. Most people stay on one source; the others are here if it isn't representative.</div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <div style="display:flex;border:1px solid #322A4D;border-radius:999px;overflow:hidden;font:800 12px Inter;flex:1">
+                <span style="padding:11px 0;flex:1;text-align:center;color:#8E86A8">Clear</span>
+                <span style="padding:11px 0;flex:1;text-align:center;color:#C6CBD6;border-left:1px solid #241E38">×1</span>
+                <span style="padding:11px 0;flex:1;text-align:center;color:#fff;background:rgba(192,132,252,.2);border-left:1px solid #241E38;border-right:1px solid #241E38">×2</span>
+                <span style="padding:11px 0;flex:1;text-align:center;color:#C6CBD6">×3</span>
+                <span style="padding:11px 0;flex:1;text-align:center;color:#D8B4FE;background:rgba(192,132,252,.13)">Must</span>
+              </div>
+              <span style="border:1px dashed #322A4D;color:#8E86A8;border-radius:999px;padding:11px 13px;font:700 11px Inter;white-space:nowrap">Not for me</span>
+            </div>
+            <div>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px"><span style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4">The crew</span><span style="font:600 10px Inter;color:#877FA4">picks + who we'd recommend it to</span></div>
+              <div style="display:flex;flex-direction:column;gap:10px;font:600 12.5px Inter;color:#C6CBD6">
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(305,85%,82%);background:hsla(305,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">R</span><span style="flex:1">Ren</span><span style="font:700 11px Inter;color:#877FA4">★ must</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="flex:1">Drew</span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">picked ×2</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="flex:1">You</span><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span><span style="font:700 11px Inter;color:#877FA4">picked ×2</span></div>
+                <div style="display:flex;align-items:center;gap:10px;opacity:.55"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px solid hsl(150,70%,82%);background:hsla(150,70%,50%,.35);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">M</span><span style="flex:1">Mara</span><span style="font:700 11px Inter;color:#877FA4">passed · considered</span></div>
+                <div style="display:flex;align-items:center;gap:10px"><span style="height:18px;min-width:26px;border-radius:999px;border:1.5px dashed hsl(42,90%,72%);background:transparent;color:hsl(42,90%,82%);font:800 9.5px Inter;display:flex;align-items:center;justify-content:center">Sa</span><span style="flex:1">Sam <span style="font:600 11px Inter;color:#877FA4">· hasn't opened yet</span></span><span style="font:700 11px Inter;color:#D8B4FE;text-align:right;line-height:1.2">recommend →<br>pick ahead?</span></div>
+              </div>
+            </div>
+            <div>
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Notes · 2</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:9px 11px">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">Dr</span><span style="font:700 10px Inter;color:#EDEAF4">Drew</span></div>
+                  <div style="font:500 12px/1.4 Inter;color:#fff">Caught the b2b at EF — insane energy. Worth skipping dinner for.</div>
+                </div>
+                <div style="background:rgba(108,91,212,.5);border:1px solid rgb(196,189,238);border-radius:8px 8px 8px 2px;padding:9px 11px">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px"><span style="height:16px;min-width:22px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center">You</span><span style="font:700 10px Inter;color:#EDEAF4">You</span></div>
+                  <div style="font:500 12px/1.4 Inter;color:#fff">Right after Four Tet — easy walk, same end of the field.</div>
+                </div>
+              </div>
+              <div style="margin-top:9px;border:1px dashed #322A4D;border-radius:10px;padding:10px 12px;font:600 12px Inter;color:#877FA4;display:flex;align-items:center;gap:7px">✎ Add a note…</div>
+            </div>
+            <div style="font:500 11.5px Inter;color:#877FA4">You've seen GRiZ <b style="color:#C6CBD6">4×</b> · last Jul 2024</div>
+            <div>
+              <div style="font:800 10px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;margin-bottom:9px">Similar artists · and when they play</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <a href="#2c" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;border:1px solid rgb(192,132,252);border-radius:10px;padding:11px 12px;background:rgba(192,132,252,.08)">
+                  <span><span style="font:700 13px Inter;color:#fff;display:block">phrva</span><span style="font:600 11px Inter;color:#877FA4">Sat · 5:00 · Bud Light</span></span>
+                  <span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 9px;font:800 9px Inter;letter-spacing:.04em;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span>
+                </a>
+                <a href="#2c" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:11px 12px;background:#141021">
+                  <span><span style="font:700 13px Inter;color:#EDEAF4;display:block">San Holo (Wholesome Riddim Set)</span><span style="font:600 11px Inter;color:#877FA4">Sat · 4:30 · Tito's</span></span>
+                  <span style="background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;padding:5px 9px;font:800 9px Inter;letter-spacing:.04em;text-align:right;line-height:1.2">IN YOUR<br>4–6 GAP</span>
+                </a>
+                <a href="#2c" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;border:1px solid #2B2440;border-radius:10px;padding:11px 12px;background:#141021">
+                  <span><span style="font:700 13px Inter;color:#EDEAF4;display:block">Wooli</span><span style="font:600 11px Inter;color:#877FA4">Sat · 7:00 · clashes with GRiZ</span></span>
+                  <span style="color:#877FA4;font-size:15px">›</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:10px">Everything the card can't hold lives here: all sources, crew decisions incl. passes (warm, dimmed — never a verdict), seen-history, notes. Similar artists show their slot and light up when they fill an open gap. The crew list carries picks <b>and</b> a taste-based recommendation for members who haven't opened the app yet (Sam) — so you can pick ahead for friends.</div>
+    </div>
+
+    <!-- ═══════ 2d · Card study ═══════ -->
+    <div style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;max-width:430px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">2d</span><span style="font:800 16px system-ui;color:#211f1b">Artist card — fitting the new functions</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">the card's budget is already spent — where do genres / reason / passed go?</div>
+      <div style="width:430px;background:#0C0A14;border:1px solid #241E38;border-radius:18px;padding:18px;font-family:Inter,system-ui,sans-serif;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="font:500 12px/1.55 Inter;color:#C6CBD6;margin-bottom:14px">Proposal: <b style="color:#fff">genres</b> = one quiet centred sub-line under the name. <b style="color:#fff">Reason</b> = a thin tonal-violet ribbon on top, shown <i>only</i> when the reason is about taste ("shares Bass House…"). When the reason is a <b style="color:#fff">crew signal</b>, the who-corner icon already says it — no ribbon, no words. The who-corner now reads pick <b style="color:#fff">level</b> (fill height), not just musts. <b style="color:#fff">Passed</b> recedes + a small tag; still searchable, never a thumbs-down.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;padding:12px 14px;border:1px solid #241E38;border-radius:10px;background:#0A0812;margin-bottom:16px">
+          <span style="font:800 9px Inter;letter-spacing:.12em;text-transform:uppercase;color:#877FA4;width:100%">Who-corner key — one glyph per crew member</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;width:6px;border-radius:3px;border:1px dashed #8E86A8;background:transparent"></span>reco / taste</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #8E86A8;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:rgba(192,132,252,.9);height:33%"></span></span>×1</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #8E86A8;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:rgba(192,132,252,.9);height:66%"></span></span>×2</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #8E86A8;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:rgba(192,132,252,.9);height:100%"></span></span>×3</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;min-width:24px;border-radius:999px;border:1.5px solid #fff;background:hsla(10,90%,62%,.5);color:#fff;font:800 9px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">R</span>must</span>
+          <span style="display:flex;align-items:center;gap:6px;font:600 11px Inter;color:#C6CBD6"><span style="height:16px;padding:0 5px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 9px Inter;display:flex;align-items:center">+2</span>overflow</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;background:#1C1731;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+              <div style="font:700 14px Inter;color:#B9B3CC;text-align:center">Marlon Hoffstadt</div>
+              <div style="font:600 10.5px Inter;color:#877FA4;margin-top:3px">Bass House · Tech House</div>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">flat + genres sub-line</div>
+          </div>
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;background:#1C1731;border:1px solid #2B2440;overflow:hidden;display:flex;flex-direction:column">
+              <div style="background:rgba(192,132,252,.16);color:#D8B4FE;font:800 9px Inter;letter-spacing:.04em;padding:5px 8px;text-align:center">★ SHARES BASS HOUSE WITH 3 MUSTS</div>
+              <div style="flex:1;padding:10px 12px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <div style="font:700 14px Inter;color:#B9B3CC;text-align:center">Mau P</div>
+                <div style="font:600 10.5px Inter;color:#877FA4;margin-top:3px">Tech House</div>
+              </div>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">taste reason → ribbon</div>
+          </div>
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;background:#1C1731;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+              <div style="font:700 14px Inter;color:#B9B3CC;text-align:center">LAYZ</div>
+              <div style="font:600 10.5px Inter;color:#877FA4;margin-top:3px">Bass House</div>
+              <span style="position:absolute;right:8px;bottom:8px;height:16px;min-width:24px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">Dr</span>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">crew reason → Drew's must pill, no words</div>
+          </div>
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+              <div style="font:700 14px Inter;color:#fff;text-align:center">Chris Lorenzo</div>
+              <div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Bass House</div>
+              <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:4px;align-items:center">
+                <span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span>
+                <span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:33%"></span></span>
+              </div>
+              <span style="position:absolute;left:8px;bottom:8px;display:inline-flex;align-items:center;gap:3px;background:rgba(18,138,62,.5);border:1px solid rgb(103,185,138);color:#fff;border-radius:999px;padding:2px 7px;font:800 9px Inter">28</span>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">you ×2, Drew ×1 — level reads in the ticks</div>
+          </div>
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;background:#17132a;border:1px solid #241E38;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;opacity:.55">
+              <div style="font:700 14px Inter;color:#877FA4;text-align:center">Yana</div>
+              <div style="font:600 10.5px Inter;color:#6B6280;margin-top:3px">Trance</div>
+              <span style="position:absolute;right:8px;top:8px;font:800 8.5px Inter;letter-spacing:.08em;color:#8E86A8;border:1px solid #322A4D;border-radius:999px;padding:2px 7px">PASSED</span>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">passed · recedes, not deleted</div>
+          </div>
+
+          <div>
+            <div style="position:relative;border-radius:8px;min-height:104px;background:#1C1731;border:1px solid #2B2440;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden">
+              <div style="font:700 13px/1.2 Inter;color:#B9B3CC;text-align:center">Boys Noize B2B Brutalismus 3000</div>
+              <div style="font:600 10.5px Inter;color:#877FA4;margin-top:4px">Techno · Hard Techno</div>
+              <span style="position:absolute;right:8px;bottom:8px;height:16px;min-width:24px;border-radius:999px;border:1.5px solid hsl(221,85%,82%);background:hsla(221,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">Dr</span>
+            </div>
+            <div style="font:600 10px ui-monospace;color:#8a8372;margin-top:6px">long name, crew reason — icon marks it, not a label</div>
+          </div>
+
+        </div>
+      </div>
+      <div style="width:430px;font:500 11px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:10px">The ribbon appears only for a taste reason; a crew reason is carried by the who-corner glyph itself, so cards stay calm and the aura is never muddied. Ticks now encode level (×1/×2/×3) by fill height — musts keep the lettered pill, taste/reco shows a hollow tick.</div>
+    </div>
+
+    <!-- 4f removed — the app's existing timetable already serves this -->
+    <div id="4f" style="display:flex;flex-direction:column;gap:11px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">4f</span><span style="font:800 16px system-ui;color:#211f1b">Dense timetable</span></div>
+      <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">15 stages × 14 hours · your plan in context</div>
+      <div style="width:390px;height:812px;background:#0C0A14;border:1px solid #241E38;border-radius:34px;overflow:hidden;position:relative;font-family:Inter,system-ui,sans-serif;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45)">
+        <div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font:600 13px Inter;color:#EDEAF4;flex:none"><span>9:41</span><span style="font-size:11px;letter-spacing:2px">● ▲ ▮</span></div>
+        <div style="padding:6px 16px 8px;display:flex;align-items:center;justify-content:space-between;flex:none"><div style="font-family:Anton,sans-serif;font-size:20px;letter-spacing:.05em;color:#EDEAF4">TIMETABLE</div><div style="display:flex;gap:14px;font:800 12px Inter"><span style="color:#8E86A8">Fri</span><span style="color:rgb(74,201,155);border-bottom:2px solid rgb(74,201,155);padding-bottom:4px">Sat</span><span style="color:#8E86A8">Sun</span></div></div>
+        <div style="display:flex;padding:0 0 0 34px;flex:none;position:relative">
+          <div style="display:flex;font:800 8px Inter;letter-spacing:.04em;color:rgb(74,201,155);text-transform:uppercase">
+            <span style="width:62px;padding:6px 4px;border-left:1px solid #241E38;line-height:1.1">Main<br>stage</span>
+            <span style="width:62px;padding:6px 4px;border-left:1px solid #241E38;line-height:1.1">Freedom<br>by Bud</span>
+            <span style="width:62px;padding:6px 4px;border-left:1px solid #241E38;line-height:1.1">Crystal<br>Garden</span>
+            <span style="width:62px;padding:6px 4px;border-left:1px solid #241E38;line-height:1.1">The Great<br>Library</span>
+            <span style="width:62px;padding:6px 4px;border-left:1px solid #241E38;line-height:1.1">Rise</span>
+          </div>
+          <div style="position:absolute;right:0;top:0;bottom:0;width:34px;background:linear-gradient(90deg,transparent,#0C0A14);display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font:800 8px Inter;color:#877FA4">+10›</div>
+        </div>
+        <div style="flex:1;overflow:hidden;display:flex;padding-left:0;position:relative">
+          <div style="width:34px;flex:none;display:flex;flex-direction:column;font:700 8px Inter;color:#877FA4;padding-top:2px">
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38">4p</span>
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38">6p</span>
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38">8p</span>
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38;color:#D8B4FE">9p⚡</span>
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38">11p</span>
+            <span style="flex:1;padding:2px 4px;border-top:1px solid #241E38">1a</span>
+          </div>
+          <div style="flex:1;display:flex;gap:0;overflow:hidden">
+            <div style="width:62px;flex:none;display:flex;flex-direction:column;gap:2px;padding:2px;border-left:1px solid #241E38">
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38;font:700 7px Inter;color:#8E86A8;padding:3px">Yana</div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+              <div style="flex:3;border-radius:4px;border:1px solid #fff;font:800 7px/1.05 Inter;color:#fff;padding:3px;background:radial-gradient(130% 130% at 30% 120%, hsla(10,90%,62%,.9) 0%, hsla(10,90%,62%,.4) 50%, transparent 80%), #1C1731">Skrillex ★</div>
+            </div>
+            <div style="width:62px;flex:none;display:flex;flex-direction:column;gap:2px;padding:2px;border-left:1px solid #241E38">
+              <div style="flex:3;border-radius:4px;border:1px solid #2B2440;font:700 7px/1.05 Inter;color:#fff;padding:3px;background:radial-gradient(130% 130% at 30% 120%, hsla(10,90%,62%,.6) 0%, transparent 75%), #1C1731">GRiZ</div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+              <div style="flex:2;border-radius:4px;border:1px solid #fff;font:800 7px/1.05 Inter;color:#fff;padding:3px;background:radial-gradient(130% 130% at 30% 120%, hsla(305,90%,62%,.8) 0%, transparent 78%), #1C1731">Alison W ★</div>
+            </div>
+            <div style="width:62px;flex:none;display:flex;flex-direction:column;gap:2px;padding:2px;border-left:1px solid #241E38">
+              <div style="flex:1;border-radius:4px;background:#17132a;border:1px solid #241E38;font:700 6.5px Inter;color:#8E86A8;padding:2px">30m set</div>
+              <div style="flex:1;border-radius:4px;border:1px dashed #3A3354;background:repeating-linear-gradient(45deg,#141021,#141021 4px,#17132a 4px,#17132a 8px);font:700 6.5px Inter;color:#D8B4FE;padding:2px">＋free</div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38;font:700 7px Inter;color:#8E86A8;padding:3px">Mau P</div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+            </div>
+            <div style="width:62px;flex:none;display:flex;flex-direction:column;gap:2px;padding:2px;border-left:1px solid #241E38">
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38;font:700 6.5px Inter;color:#8E86A8;padding:3px">phrva</div>
+              <div style="flex:3;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+            </div>
+            <div style="width:62px;flex:none;display:flex;flex-direction:column;gap:2px;padding:2px;border-left:1px solid #241E38">
+              <div style="flex:3;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38;font:700 7px Inter;color:#8E86A8;padding:3px">Wooli</div>
+              <div style="flex:2;border-radius:4px;background:#17132a;border:1px solid #241E38"></div>
+            </div>
+          </div>
+          <div style="position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,#0C0A14)"></div>
+        </div>
+        <div style="padding:10px 16px 24px;border-top:1px solid #241E38;background:#0A0812;flex:none;font:500 11px/1.4 Inter;color:#877FA4">Your 3 picks glow across the grid; ⚡ 9p marks where two collide → <a href="./Discovery - Screens.dc.html#4a">Decide</a>. Scroll for 10 more stages.</div>
+      </div>
+      <div style="width:390px;font:500 11px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:10px">Density survives: stage headers wear the fest accent + wrap, 30-min sets read at the same scale as 2-hour ones, empty cells offer gap-fill, and clashes surface on the time axis. Horizontal scroll for the full 15.</div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding:20px 44px 30px;display:flex;flex-direction:column;gap:22px">
+  <div>
+    <div style="font:800 24px system-ui;color:#211f1b;letter-spacing:-.01em">Crew-glyph options</div>
+    <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a08f6a;margin-top:6px">who-corner · same card in every option (You ×2 · Drew ×1 · Ren must · +2) · pick one for 2d</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+
+    <!-- current / reference -->
+    <div id="3cur" style="width:238px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#8a8372;color:#fbfaf6;border-radius:6px;padding:3px 8px">now</span><span style="font:800 15px system-ui;color:#211f1b">Fill-height ticks</span></div>
+      <div style="width:238px;position:relative;border-radius:8px;min-height:120px;border:1px solid #2B2440;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+        <div><div style="font:700 14px Inter;color:#fff">Martin Garrix</div><div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Big Room</div></div>
+        <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:4px;align-items:center">
+          <span style="height:16px;min-width:24px;border-radius:999px;border:1.5px solid hsl(305,85%,82%);background:hsla(305,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">R</span>
+          <span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid #fff;overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(10,90%,62%,.9);height:66%"></span></span>
+          <span style="height:16px;width:6px;border-radius:3px;background:#241E38;border:1px solid hsl(221,85%,82%);overflow:hidden;display:flex;align-items:flex-end"><span style="width:100%;background:hsla(221,90%,62%,.9);height:33%"></span></span>
+          <span style="height:16px;padding:0 5px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 9px Inter;display:flex;align-items:center">+2</span>
+        </div>
+      </div>
+      <div style="width:238px;font:500 10.5px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:9px">Shipping baseline. Subtle at card scale — level reads only on close look.</div>
+    </div>
+
+    <!-- 3a segmented bars -->
+    <div id="3a" style="width:238px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">3a</span><span style="font:800 15px system-ui;color:#211f1b">Signal bars</span></div>
+      <div style="width:238px;position:relative;border-radius:8px;min-height:120px;border:1px solid #2B2440;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+        <div><div style="font:700 14px Inter;color:#fff">Martin Garrix</div><div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Big Room</div></div>
+        <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:4px;align-items:center">
+          <span style="height:16px;min-width:24px;border-radius:999px;border:1.5px solid hsl(305,85%,82%);background:hsla(305,90%,62%,.5);color:#fff;font:800 9.5px Inter;display:flex;align-items:center;justify-content:center;padding:0 5px">R</span>
+          <span style="display:flex;flex-direction:column;justify-content:flex-end;gap:1.5px;height:16px;width:5px"><span style="height:4px;border-radius:1px;background:#2B2440"></span><span style="height:4px;border-radius:1px;background:hsl(10,90%,66%);box-shadow:0 0 0 1px #fff inset"></span><span style="height:4px;border-radius:1px;background:hsl(10,90%,66%);box-shadow:0 0 0 1px #fff inset"></span></span>
+          <span style="display:flex;flex-direction:column;justify-content:flex-end;gap:1.5px;height:16px;width:5px"><span style="height:4px;border-radius:1px;background:#2B2440"></span><span style="height:4px;border-radius:1px;background:#2B2440"></span><span style="height:4px;border-radius:1px;background:hsl(221,90%,68%)"></span></span>
+          <span style="height:16px;padding:0 5px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 9px Inter;display:flex;align-items:center">+2</span>
+        </div>
+      </div>
+      <div style="width:238px;font:500 10.5px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:9px">Discrete 3-segment bars — level is countable, louder than fill. Must still the lettered pill.</div>
+    </div>
+
+    <!-- 3b ring arc -->
+    <div id="3b" style="width:238px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">3b</span><span style="font:800 15px system-ui;color:#211f1b">Ring arcs</span></div>
+      <div style="width:238px;position:relative;border-radius:8px;min-height:120px;border:1px solid #2B2440;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+        <div><div style="font:700 14px Inter;color:#fff">Martin Garrix</div><div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Big Room</div></div>
+        <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:4px;align-items:center">
+          <span style="width:17px;height:17px;border-radius:999px;background:hsl(305,80%,60%);border:1.5px solid hsl(305,85%,85%);display:flex;align-items:center;justify-content:center;font:800 8.5px Inter;color:#fff">R</span>
+          <span style="width:16px;height:16px;border-radius:999px;background:conic-gradient(hsl(10,90%,66%) 240deg,#2B2440 0);border:1.5px solid #fff;display:flex;align-items:center;justify-content:center"><span style="width:7px;height:7px;border-radius:999px;background:#241E38"></span></span>
+          <span style="width:16px;height:16px;border-radius:999px;background:conic-gradient(hsl(221,90%,68%) 120deg,#2B2440 0);display:flex;align-items:center;justify-content:center"><span style="width:7px;height:7px;border-radius:999px;background:#241E38"></span></span>
+          <span style="height:16px;padding:0 5px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 9px Inter;display:flex;align-items:center">+2</span>
+        </div>
+      </div>
+      <div style="width:238px;font:500 10.5px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:9px">Arc fill (⅓/⅔/full) echoes the radial aura. Must = solid disc + initial. Densest at a glance.</div>
+    </div>
+
+    <!-- 3c identity chips -->
+    <div id="3c" style="width:238px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">3c</span><span style="font:800 15px system-ui;color:#211f1b">Initial + level</span></div>
+      <div style="width:238px;position:relative;border-radius:8px;min-height:120px;border:1px solid #2B2440;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+        <div><div style="font:700 14px Inter;color:#fff">Martin Garrix</div><div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Big Room</div></div>
+        <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:3px;align-items:center">
+          <span style="height:16px;border-radius:999px;padding:0 5px;display:flex;align-items:center;gap:2px;font:800 9px Inter;color:#fff;background:hsla(305,90%,62%,.6);border:1px solid hsl(305,85%,82%)">R<span style="font-size:8px">★</span></span>
+          <span style="height:16px;border-radius:999px;padding:0 5px;display:flex;align-items:center;gap:1px;font:800 9px Inter;color:#fff;background:hsla(10,90%,62%,.45);border:1px solid #fff">Y<span style="font-size:8px;opacity:.85">²</span></span>
+          <span style="height:16px;border-radius:999px;padding:0 5px;display:flex;align-items:center;gap:1px;font:800 9px Inter;color:#fff;background:hsla(221,90%,62%,.45);border:1px solid hsl(221,85%,82%)">D<span style="font-size:8px;opacity:.85">¹</span></span>
+          <span style="height:16px;padding:0 4px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 9px Inter;display:flex;align-items:center">+2</span>
+        </div>
+      </div>
+      <div style="width:238px;font:500 10.5px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:9px">Who is always legible (identity-first). Cost: widest — hits the +n cap soonest on a busy card.</div>
+    </div>
+
+    <!-- 3d size dots -->
+    <div id="3d" style="width:238px;flex:none;display:flex;flex-direction:column;gap:10px;align-items:flex-start;scroll-margin:40px">
+      <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">3d</span><span style="font:800 15px system-ui;color:#211f1b">Weighted dots</span></div>
+      <div style="width:238px;position:relative;border-radius:8px;min-height:120px;border:1px solid #2B2440;padding:12px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:radial-gradient(130% 130% at 20% 120%, hsla(305,90%,62%,1) 0%, hsla(305,90%,62%,.5) 45%, transparent 78%), radial-gradient(130% 130% at 85% -20%, hsla(10,90%,62%,.75) 0%, hsla(10,90%,62%,.375) 45%, transparent 78%), radial-gradient(130% 130% at -15% 30%, hsla(221,90%,62%,.5) 0%, hsla(221,90%,62%,.25) 45%, transparent 78%), #1C1731">
+        <div><div style="font:700 14px Inter;color:#fff">Martin Garrix</div><div style="font:600 10.5px Inter;color:rgba(255,255,255,.75);margin-top:3px">Big Room</div></div>
+        <div style="position:absolute;right:8px;bottom:8px;display:flex;gap:5px;align-items:center">
+          <span style="width:14px;height:14px;border-radius:999px;background:hsl(305,80%,58%);border:1.5px solid hsl(305,85%,85%);display:flex;align-items:center;justify-content:center;font:800 7px Inter;color:#fff">R</span>
+          <span style="width:10px;height:10px;border-radius:999px;background:hsla(10,90%,62%,.9);border:1.5px solid #fff"></span>
+          <span style="width:7px;height:7px;border-radius:999px;background:hsla(221,90%,62%,.6);border:1px solid hsl(221,85%,82%)"></span>
+          <span style="height:14px;padding:0 4px;border-radius:999px;border:1px solid #3A3354;color:#8E86A8;font:800 8px Inter;display:flex;align-items:center">+2</span>
+        </div>
+      </div>
+      <div style="width:238px;font:500 10.5px/1.5 ui-monospace,monospace;color:#6b6659;border-top:1px dashed #D8D2C4;padding-top:9px">Size + opacity carry weight; ambient and calm. Level is relative, not exact — reads "how invested", not "×2".</div>
+    </div>
+
+  </div>
+</section>
+
+<div style="padding:8px 44px 0">
+  <div style="font:800 24px system-ui;color:#211f1b;letter-spacing:-.01em">Round 1 — wide &amp; rough</div>
+  <div style="font:600 12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a08f6a;margin-top:6px">the 14 concepts the current work was chosen from</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font:600 10.5px ui-monospace,monospace;color:#6b6659">
+    <span><b style="color:#a89a72">REACHED</b> how you get to it</span>
+    <span><b style="color:#a89a72">UNIT</b> what you look at</span>
+    <span><b style="color:#a89a72">PASS</b> where "not for me" lives</span>
+    <span><b style="color:#a89a72">PHASE</b> lineup ↔ times</span>
+    <span><b style="color:#a89a72">SAMPLE</b> how you hear it</span>
+  </div>
+</div>
+
+<section style="padding:20px 44px 80px;display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start">
+
+  <!-- ══════════════ 1a ══════════════ -->
+  <div id="1a" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1a</span><span style="font:800 16px system-ui;color:#211f1b">For-You Wall</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#9a7f3d">◆ contrarian · no Discover surface</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font:700 11px ui-monospace,monospace;color:#3a362e"><span>ARTIST WALL</span><span style="border:1.5px solid #3a362e;border-radius:999px;padding:3px 9px;font-size:9.5px">Sort: For you ▾</span></div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:8px;background:#fff;position:relative"><div style="font:700 11px system-ui;color:#2a2a28">Mau P ↑</div><div style="font:500 9.5px ui-monospace,monospace;color:#8a8372;margin-top:2px">why: shares Tech House with 3 musts</div><div style="position:absolute;top:7px;right:8px;font:700 9px ui-monospace;color:#a89a72">▲ risen</div></div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:8px;background:#fff"><div style="font:700 11px system-ui;color:#2a2a28">phrva ↑</div><div style="font:500 9.5px ui-monospace,monospace;color:#8a8372;margin-top:2px">why: Drew has this as a must</div></div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:6px;padding:8px;background:#fff;font:600 11px system-ui;color:#4a463d">Skrillex</div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:6px;padding:8px;background:#fff;font:600 11px system-ui;color:#4a463d">Four Tet</div>
+      <div style="flex:1"></div>
+      <div style="border-top:1px dashed #cfc8b8;padding-top:7px;font:700 8.5px ui-monospace;letter-spacing:.1em;color:#b3a98f;text-transform:uppercase">Passed · tucked below the fold</div>
+      <div style="border:1.5px dashed #d5cfc0;border-radius:6px;padding:7px 8px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 5px,#ebe7dd 5px,#ebe7dd 10px);font:500 10px system-ui;color:#a49c88">Yana &nbsp;·&nbsp; passed, still searchable</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> a sort mode on the wall — nothing new</div>
+      <div><b style="color:#a89a72">UNIT</b> ranked list, "why" line on risers</div>
+      <div><b style="color:#a89a72">PASS</b> swipe row → dims &amp; sinks below fold</div>
+      <div><b style="color:#a89a72">PHASE</b> same wall; P2 re-ranks by gaps</div>
+      <div><b style="color:#a89a72">SAMPLE</b> artist page only (deliberately thin)</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1b ══════════════ -->
+  <div id="1b" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1b</span><span style="font:800 16px system-ui;color:#211f1b">Swipe Card Stack</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">focused session · one at a time</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:9px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e;text-align:center">DISCOVERY SESSION · 12 left</div>
+      <div style="position:relative;flex:1;margin:2px 6px">
+        <div style="position:absolute;inset:8px -4px 0 -4px;border:1.5px solid #dcd6c8;border-radius:12px;background:#fff"></div>
+        <div style="position:absolute;inset:4px -2px 0 -2px;border:1.5px solid #d0cabb;border-radius:12px;background:#fff"></div>
+        <div style="position:absolute;inset:0;border:1.5px solid #3a362e;border-radius:12px;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px">
+          <div style="font:800 13px system-ui;color:#211f1b;line-height:1.15">Skull Machine (Black Tiger Sex Machine x Kai Wachi)</div>
+          <div style="font:600 9.5px ui-monospace;color:#8a8372">Riddim · Dubstep</div>
+          <div style="border:1.5px solid #c9c3b4;border-radius:8px;flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:repeating-linear-gradient(90deg,#f2efe8,#f2efe8 3px,#eae6dc 3px,#eae6dc 6px)"><div style="width:34px;height:34px;border-radius:999px;border:1.5px solid #3a362e;background:#fbfaf6;display:flex;align-items:center;justify-content:center">▶</div><span style="font:600 9px ui-monospace;color:#6b6659">LIVE SET · SoundCloud</span></div>
+          <div style="font:600 9.5px ui-monospace;color:#7d6f45;text-align:center">why: 3 of your crew like Riddim</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-around;align-items:center;padding:4px 2px">
+        <div style="width:44px;height:44px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 11px system-ui">pass</div>
+        <div style="width:44px;height:44px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 15px system-ui">＋</div>
+        <div style="width:44px;height:44px;border-radius:999px;border:2px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 11px system-ui">must</div>
+      </div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> a "session" button on the wall</div>
+      <div><b style="color:#a89a72">UNIT</b> one artist, full-screen</div>
+      <div><b style="color:#a89a72">PASS</b> swipe left = a first-class action</div>
+      <div><b style="color:#a89a72">PHASE</b> P1 explore; feeds gaps in P2</div>
+      <div><b style="color:#a89a72">SAMPLE</b> big inline live-set player</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1c ══════════════ -->
+  <div id="1c" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1c</span><span style="font:800 16px system-ui;color:#211f1b">Genre-First Browse</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">Phase 1 · the primary lens</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">BROWSE BY GENRE</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <span style="border:1.5px solid #3a362e;border-radius:999px;padding:4px 9px;font:700 9.5px system-ui;background:#efeadd">Big Room</span>
+        <span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:4px 9px;font:600 9.5px system-ui;color:#6b6659">Riddim</span>
+        <span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:4px 9px;font:600 9.5px system-ui;color:#6b6659">Melodic Techno</span>
+        <span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:4px 9px;font:600 9.5px system-ui;color:#6b6659">Bass House</span>
+        <span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:4px 9px;font:600 9.5px system-ui;color:#6b6659">Trance</span>
+      </div>
+      <div style="font:700 9px ui-monospace;color:#a89a72;margin-top:2px;letter-spacing:.08em">BIG ROOM · 14 playing</div>
+      <div style="display:flex;gap:7px;overflow:hidden">
+        <div style="min-width:78px;height:82px;border:1.5px solid #c9c3b4;border-radius:8px;background:#fff;padding:7px;display:flex;flex-direction:column;justify-content:space-between"><span style="font:700 9.5px system-ui">Alok</span><div style="width:24px;height:24px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:10px">▶</div></div>
+        <div style="min-width:78px;height:82px;border:1.5px solid #c9c3b4;border-radius:8px;background:#fff;padding:7px;display:flex;flex-direction:column;justify-content:space-between"><span style="font:700 9.5px system-ui">Martin Garrix</span><div style="width:24px;height:24px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:10px">▶</div></div>
+        <div style="min-width:40px;height:82px;border:1.5px dashed #d0cabb;border-radius:8px"></div>
+      </div>
+      <div style="font:700 9px ui-monospace;color:#a89a72;letter-spacing:.08em">RIDDIM · 9 playing</div>
+      <div style="display:flex;gap:7px;overflow:hidden">
+        <div style="min-width:78px;height:82px;border:1.5px solid #c9c3b4;border-radius:8px;background:#fff;padding:7px;font:700 9.5px system-ui">Wooli</div>
+        <div style="min-width:78px;height:82px;border:1.5px solid #c9c3b4;border-radius:8px;background:#fff;padding:7px;font:700 9.5px system-ui">Sippy</div>
+        <div style="min-width:40px;height:82px;border:1.5px dashed #d0cabb;border-radius:8px"></div>
+      </div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:6px;padding:6px;font:500 9px ui-monospace;color:#a49c88;text-align:center">"electronic" tag hidden — too vague to shelve</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> Discover tab → genre grid entry</div>
+      <div><b style="color:#a89a72">UNIT</b> genre → shelf of artists</div>
+      <div><b style="color:#a89a72">PASS</b> long-press card → recedes from shelf</div>
+      <div><b style="color:#a89a72">PHASE</b> P1 home; genres persist as P2 filter</div>
+      <div><b style="color:#a89a72">SAMPLE</b> ▶ on every shelf card</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1d ══════════════ -->
+  <div id="1d" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1d</span><span style="font:800 16px system-ui;color:#211f1b">Discover Tab (feed)</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">the straight-ahead option</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">FOR YOU</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:8px;padding:9px;background:#fff;display:flex;flex-direction:column;gap:6px"><div style="font:700 11px system-ui">Marlon Hoffstadt</div><div style="font:500 9.5px ui-monospace;color:#7d6f45">shares Bass House with 3 of your musts</div><div style="display:flex;gap:6px;align-items:center"><div style="width:26px;height:26px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:10px">▶</div><span style="border:1.5px solid #3a362e;border-radius:999px;padding:3px 9px;font:700 9px system-ui">＋ pick</span><span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:3px 9px;font:600 9px system-ui;color:#8a8372">pass</span></div></div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:8px;padding:9px;background:#fff;display:flex;flex-direction:column;gap:6px"><div style="font:700 11px system-ui">LAYZ</div><div style="font:500 9.5px ui-monospace;color:#7d6f45">Drew &amp; Mara both picked</div><div style="display:flex;gap:6px;align-items:center"><div style="width:26px;height:26px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:10px">▶</div><span style="border:1.5px solid #3a362e;border-radius:999px;padding:3px 9px;font:700 9px system-ui">＋ pick</span><span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:3px 9px;font:600 9px system-ui;color:#8a8372">pass</span></div></div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:8px;padding:9px;background:#fff;font:600 10.5px system-ui;color:#4a463d">Prospa &nbsp;<span style="font:500 9px ui-monospace;color:#8a8372">· new to you</span></div>
+      <div style="flex:1"></div>
+      <div style="display:flex;justify-content:space-around;border-top:1.5px solid #d0cabb;padding-top:8px;font:700 9px ui-monospace;color:#8a8372"><span>WALL</span><span style="color:#3a362e;border-bottom:2px solid #3a362e;padding-bottom:2px">DISCOVER</span><span>TIMETABLE</span></div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> 3rd tab beside wall/timetable</div>
+      <div><b style="color:#a89a72">UNIT</b> ranked feed of reco cards</div>
+      <div><b style="color:#a89a72">PASS</b> explicit "pass" next to pick</div>
+      <div><b style="color:#a89a72">PHASE</b> feed re-themes to gaps in P2</div>
+      <div><b style="color:#a89a72">SAMPLE</b> ▶ inline on each card</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1e ══════════════ -->
+  <div id="1e" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1e</span><span style="font:800 16px system-ui;color:#211f1b">Browse Hours, Not Artists</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#9a7f3d">◆ contrarian · time-slot-first P2</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:7px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="display:flex;justify-content:space-between;font:700 11px ui-monospace;color:#3a362e"><span>YOUR SATURDAY</span><span style="color:#8a8372">gaps ▾</span></div>
+      <div style="display:flex;gap:8px;align-items:stretch"><span style="font:700 9px ui-monospace;color:#a89a72;width:38px;padding-top:6px">2 PM</span><div style="flex:1;border:1.5px solid #3a362e;border-radius:6px;padding:7px;background:#efeadd;font:700 10px system-ui">Four Tet <span style="font:500 8.5px ui-monospace;color:#6b6659">· your must</span></div></div>
+      <div style="display:flex;gap:8px;align-items:stretch"><span style="font:700 9px ui-monospace;color:#a89a72;width:38px;padding-top:8px">4 PM</span><div style="flex:1;border:1.5px dashed #b3a98f;border-radius:6px;padding:9px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 6px,#ece8de 6px,#ece8de 12px)"><div style="font:700 10px system-ui;color:#7d6f45">OPEN · 4–6 PM</div><div style="font:500 9px ui-monospace;color:#6b6659;margin-top:3px">3 you'd like are on now ▸</div><div style="display:flex;gap:5px;margin-top:6px"><span style="border:1.5px solid #c9c3b4;border-radius:5px;padding:3px 7px;background:#fff;font:700 9px system-ui">San Holo</span><span style="border:1.5px solid #c9c3b4;border-radius:5px;padding:3px 7px;background:#fff;font:700 9px system-ui">phrva</span></div></div></div>
+      <div style="display:flex;gap:8px;align-items:stretch"><span style="font:700 9px ui-monospace;color:#a89a72;width:38px;padding-top:6px">6 PM</span><div style="flex:1;border:1.5px solid #3a362e;border-radius:6px;padding:7px;background:#efeadd;font:700 10px system-ui">GRiZ <span style="font:500 8.5px ui-monospace;color:#6b6659">· ×2</span></div></div>
+      <div style="display:flex;gap:8px;align-items:stretch"><span style="font:700 9px ui-monospace;color:#a89a72;width:38px;padding-top:8px">9 PM</span><div style="flex:1;border:1.5px solid #7d6f45;border-radius:6px;padding:9px;background:#fff"><div style="font:700 10px system-ui;color:#7d6f45">CLASH · 2 musts collide ▸</div><div style="font:500 9px ui-monospace;color:#6b6659;margin-top:3px">Skrillex vs Alison W. — decide</div></div></div>
+      <div style="font:500 9px ui-monospace;color:#a49c88;text-align:center;margin-top:2px">early gaps wide (unknowns) · late = clashes</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> the timetable itself, "gaps" view</div>
+      <div><b style="color:#a89a72">UNIT</b> a time slot — you browse holes</div>
+      <div><b style="color:#a89a72">PASS</b> N/A here — pass lives in P1</div>
+      <div><b style="color:#a89a72">PHASE</b> P2 only; exploits back-loaded bills</div>
+      <div><b style="color:#a89a72">SAMPLE</b> tap suggestion → sheet</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1f ══════════════ -->
+  <div id="1f" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1f</span><span style="font:800 16px system-ui;color:#211f1b">Gap-Fill in the Grid</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">Phase 2 · discovery inside timetable</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:7px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">TIMETABLE · SAT</div>
+      <div style="display:flex;gap:5px;font:700 8px ui-monospace;color:#a89a72;text-align:center"><span style="width:30px"></span><span style="flex:1">MAIN</span><span style="flex:1">LAKE</span><span style="flex:1">BUD</span></div>
+      <div style="flex:1;display:flex;gap:5px">
+        <div style="width:30px;display:flex;flex-direction:column;justify-content:space-between;font:700 8px ui-monospace;color:#a89a72;padding:4px 0"><span>3</span><span>4</span><span>5</span><span>6</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+          <div style="flex:2;border:1.5px solid #3a362e;border-radius:5px;background:#efeadd;font:700 8.5px system-ui;padding:5px">GRiZ ★</div>
+          <div style="flex:2;border:1.5px dashed #b3a98f;border-radius:5px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 4px,#ece8de 4px,#ece8de 8px);font:600 8px ui-monospace;color:#7d6f45;padding:5px;display:flex;align-items:center">＋ Sippy?</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+          <div style="flex:1;border:1.5px dashed #d0cabb;border-radius:5px"></div>
+          <div style="flex:2;border:1.5px solid #3a362e;border-radius:5px;background:#efeadd;font:700 8.5px system-ui;padding:5px">Mau P</div>
+          <div style="flex:1;border:1.5px dashed #b3a98f;border-radius:5px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 4px,#ece8de 4px,#ece8de 8px);font:600 8px ui-monospace;color:#7d6f45;padding:4px">＋ LAYZ?</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+          <div style="flex:3;border:1.5px dashed #b3a98f;border-radius:5px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 4px,#ece8de 4px,#ece8de 8px);font:600 8px ui-monospace;color:#7d6f45;padding:5px">＋ 3 for you</div>
+          <div style="flex:1;border:1.5px solid #dcd6c8;border-radius:5px;background:#fff"></div>
+        </div>
+      </div>
+      <div style="font:500 9px ui-monospace;color:#a49c88;text-align:center">ghost chips = "you're free, here's who's on"</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> it's just the timetable</div>
+      <div><b style="color:#a89a72">UNIT</b> the empty grid cell</div>
+      <div><b style="color:#a89a72">PASS</b> dismiss a ghost → cell stays empty</div>
+      <div><b style="color:#a89a72">PHASE</b> P2 only (needs set times)</div>
+      <div><b style="color:#a89a72">SAMPLE</b> tap ghost → preview sheet</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1g ══════════════ -->
+  <div id="1g" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1g</span><span style="font:800 16px system-ui;color:#211f1b">Overlap Compare</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">Phase 2 · dedicated clash view</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">CLASH · SAT 9 PM</div>
+      <div style="font:500 9px ui-monospace;color:#8a8372">3 you like play at once — pick one</div>
+      <div style="flex:1;display:flex;gap:6px">
+        <div style="flex:1;border:2px solid #3a362e;border-radius:8px;padding:7px;background:#efeadd;display:flex;flex-direction:column;gap:5px"><div style="font:800 9.5px system-ui;line-height:1.1">Skrillex</div><div style="width:22px;height:22px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:9px">▶</div><div style="font:500 8px ui-monospace;color:#6b6659;line-height:1.3">your ×3 · 4 crew musts</div><div style="flex:1"></div><div style="font:500 8px ui-monospace;color:#a49c88">give up: —</div></div>
+        <div style="flex:1;border:1.5px solid #c9c3b4;border-radius:8px;padding:7px;background:#fff;display:flex;flex-direction:column;gap:5px"><div style="font:800 9.5px system-ui;line-height:1.1">Alison Wonderland</div><div style="width:22px;height:22px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:9px">▶</div><div style="font:500 8px ui-monospace;color:#6b6659;line-height:1.3">your ×2 · Drew must</div><div style="flex:1"></div><div style="font:500 8px ui-monospace;color:#a49c88">give up: Skrillex</div></div>
+        <div style="flex:1;border:1.5px solid #c9c3b4;border-radius:8px;padding:7px;background:#fff;display:flex;flex-direction:column;gap:5px"><div style="font:800 9.5px system-ui;line-height:1.1">Mau P</div><div style="width:22px;height:22px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font-size:9px">▶</div><div style="font:500 8px ui-monospace;color:#6b6659;line-height:1.3">new · in your Tech House</div><div style="flex:1"></div><div style="font:500 8px ui-monospace;color:#a49c88">plays again Sun</div></div>
+      </div>
+      <div style="border:1.5px solid #3a362e;border-radius:8px;padding:9px;text-align:center;font:700 10px system-ui">Lock Skrillex for 9 PM</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> tap a clash badge on timetable</div>
+      <div><b style="color:#a89a72">UNIT</b> 2–3 clashing artists, side by side</div>
+      <div><b style="color:#a89a72">PASS</b> "plays again" surfaces the cheap skip</div>
+      <div><b style="color:#a89a72">PHASE</b> P2 only</div>
+      <div><b style="color:#a89a72">SAMPLE</b> ▶ per column, quick A/B</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1h ══════════════ -->
+  <div id="1h" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1h</span><span style="font:800 16px system-ui;color:#211f1b">Enriched Card Sheet</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">no new surface · sheet from any card</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+      <div style="padding:11px 11px 0;display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="padding:8px 11px 0;font:700 11px ui-monospace;color:#c9c3b4">ARTIST WALL (dimmed)</div>
+      <div style="flex:1"></div>
+      <div style="border:2px solid #3a362e;border-bottom:none;border-radius:18px 18px 0 0;background:#fff;padding:12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -6px 14px rgba(0,0,0,.08)">
+        <div style="display:flex;justify-content:center"><div style="width:36px;height:4px;border-radius:3px;background:#d0cabb"></div></div>
+        <div style="font:800 12px system-ui;line-height:1.15">Boys Noize B2B Brutalismus 3000</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap"><span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:2px 8px;font:700 8.5px system-ui">Techno</span><span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:2px 8px;font:700 8.5px system-ui">Hard Techno</span></div>
+        <div style="display:flex;gap:6px"><div style="flex:1;border:1.5px solid #3a362e;border-radius:6px;padding:6px;text-align:center;font:700 8.5px system-ui">▶ Live set</div><div style="flex:1;border:1.5px solid #c9c3b4;border-radius:6px;padding:6px;text-align:center;font:700 8.5px system-ui;color:#6b6659">Spotify</div><div style="flex:1;border:1.5px solid #c9c3b4;border-radius:6px;padding:6px;text-align:center;font:700 8.5px system-ui;color:#6b6659">Tour</div></div>
+        <div style="border-top:1px dashed #d0cabb;padding-top:7px;font:700 8px ui-monospace;letter-spacing:.1em;color:#a89a72">CREW DECISIONS</div>
+        <div style="font:500 9px ui-monospace;color:#6b6659;line-height:1.5">Ren ★ must · Drew ×2 · <span style="color:#a49c88">Mara passed</span></div>
+        <div style="font:500 9px ui-monospace;color:#6b6659">You: seen 2× · last Jul 2024</div>
+        <div style="display:flex;gap:6px;margin-top:2px"><div style="flex:1;border:1.5px solid #3a362e;border-radius:6px;padding:7px;text-align:center;font:700 9.5px system-ui">＋ pick</div><div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:7px 10px;text-align:center;font:700 9.5px system-ui;color:#8a8372">Not for me</div></div>
+      </div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> tap ⓘ / long-press any card</div>
+      <div><b style="color:#a89a72">UNIT</b> one artist, everything in a sheet</div>
+      <div><b style="color:#a89a72">PASS</b> quiet "Not for me" button in sheet</div>
+      <div><b style="color:#a89a72">PHASE</b> identical both phases</div>
+      <div><b style="color:#a89a72">SAMPLE</b> role-labelled source buttons</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1i ══════════════ -->
+  <div id="1i" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1i</span><span style="font:800 16px system-ui;color:#211f1b">Audio-First Radio</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">hands-free · sampling is the unit</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:9px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">DISCOVERY RADIO</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:10px;padding:12px;background:#fff;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <div style="font:500 8.5px ui-monospace;color:#a89a72;letter-spacing:.1em">NOW · LIVE SET · YouTube</div>
+        <div style="font:800 13px system-ui;text-align:center">Jessica Audiffred</div>
+        <div style="width:100%;height:30px;border:1.5px solid #c9c3b4;border-radius:6px;background:repeating-linear-gradient(90deg,#f2efe8,#f2efe8 2px,#e6e2d8 2px,#e6e2d8 4px)"></div>
+        <div style="font:500 8.5px ui-monospace;color:#7d6f45">why: like Wooli, whom Ren has as a must</div>
+      </div>
+      <div style="display:flex;justify-content:space-around;align-items:center;padding:2px">
+        <div style="width:48px;height:48px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 11px system-ui">👎<span style="display:none">down</span></div>
+        <div style="width:52px;height:52px;border-radius:999px;border:2px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 12px system-ui">↦ skip</div>
+        <div style="width:48px;height:48px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font:700 12px system-ui">＋</div>
+      </div>
+      <div style="font:700 8px ui-monospace;color:#a89a72;letter-spacing:.1em;margin-top:2px">UP NEXT</div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:6px;padding:6px 8px;background:#fff;font:600 10px system-ui">Nourished by Time</div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:6px;padding:6px 8px;background:#fff;font:600 10px system-ui">CØNTRA</div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:6px;padding:6px;font:500 9px ui-monospace;color:#a49c88;text-align:center">plays screen-off · queue caches offline</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> "Play discovery radio" button</div>
+      <div><b style="color:#a89a72">UNIT</b> an audio snippet in a queue</div>
+      <div><b style="color:#a89a72">PASS</b> 👎 = pass; skip ≠ pass (undecided)</div>
+      <div><b style="color:#a89a72">PHASE</b> P1 (needs online for streams)</div>
+      <div><b style="color:#a89a72">SAMPLE</b> IS the interface — ears first</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1j ══════════════ -->
+  <div id="1j" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1j</span><span style="font:800 16px system-ui;color:#211f1b">Crew-Convergence Feed</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">social signal is the recommender</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:9px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">WHAT THE CREW'S DOING</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:8px;padding:9px;background:#fff;display:flex;gap:8px;align-items:center"><div style="width:22px;height:22px;border-radius:999px;border:1.5px solid #3a362e;display:flex;align-items:center;justify-content:center;font:800 8px system-ui">Dr</div><div style="font:500 10px system-ui;line-height:1.35"><b>Drew</b> made <b>Mau P</b> a must — you don't have it yet ▸</div></div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:8px;padding:9px;background:#fff;font:500 10px system-ui;line-height:1.35">You + 2 crew like <b>Melodic Techno</b> → nobody's picked <b>Marlon Hoffstadt</b> (also Melodic Techno) ▸</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:8px;padding:9px;background:#fff;font:500 10px system-ui;line-height:1.35"><b>3 of you</b> are converging on the <b>Lakeshore</b> stage Fri night ▸</div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:8px;padding:9px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 6px,#ece8de 6px,#ece8de 12px);font:500 9.5px system-ui;color:#7d6f45;line-height:1.35"><b>Mara passed</b> Skrillex — shown so you know it was considered, not a verdict</div>
+      <div style="flex:1"></div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:6px;padding:6px;font:500 9px ui-monospace;color:#a49c88;text-align:center">cold start: seeds from crew before your taste exists</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> Discover tab, "crew" as default</div>
+      <div><b style="color:#a89a72">UNIT</b> a crew event / convergence</div>
+      <div><b style="color:#a89a72">PASS</b> shown warmly as "considered"</div>
+      <div><b style="color:#a89a72">PHASE</b> both; leans on existing aura</div>
+      <div><b style="color:#a89a72">SAMPLE</b> tap event → artist sheet</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1k ══════════════ -->
+  <div id="1k" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1k</span><span style="font:800 16px system-ui;color:#211f1b">Similar-Artist Clusters</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">groups of similar · "more like this"</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:8px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">NEIGHBOURHOODS</div>
+      <div style="font:500 9px ui-monospace;color:#8a8372">near artists you already like</div>
+      <div style="flex:1;position:relative;border:1.5px dashed #d0cabb;border-radius:10px;margin-top:2px">
+        <div style="position:absolute;left:22%;top:16%;width:66px;height:66px;border:2px solid #3a362e;border-radius:999px;background:#efeadd;display:flex;align-items:center;justify-content:center;text-align:center;font:700 8px system-ui;padding:6px">Skrillex <span style="font:500 7px ui-monospace;color:#6b6659">(your must)</span></div>
+        <div style="position:absolute;left:58%;top:34%;width:52px;height:52px;border:1.5px solid #c9c3b4;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font:700 8px system-ui;padding:5px">Wooli</div>
+        <div style="position:absolute;left:30%;top:56%;width:56px;height:56px;border:1.5px solid #c9c3b4;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font:700 7.5px system-ui;padding:5px">Jessica Audiffred</div>
+        <div style="position:absolute;left:66%;top:66%;width:46px;height:46px;border:1.5px dashed #b3a98f;border-radius:999px;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font:700 8px system-ui;padding:4px">Sippy</div>
+        <div style="position:absolute;left:30%;top:28%;width:44px;height:2px;background:#c9c3b4;transform:rotate(20deg);transform-origin:left"></div>
+        <div style="position:absolute;left:34%;top:44%;width:36px;height:2px;background:#c9c3b4;transform:rotate(60deg);transform-origin:left"></div>
+      </div>
+      <div style="font:500 9px ui-monospace;color:#a49c88;text-align:center">tap a node → artist sheet · pinch to zoom out</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> Discover tab · or "more like X"</div>
+      <div><b style="color:#a89a72">UNIT</b> a cluster of similar artists</div>
+      <div><b style="color:#a89a72">PASS</b> node shrinks &amp; greys, stays on map</div>
+      <div><b style="color:#a89a72">PHASE</b> P1 explore; risky map on one bar</div>
+      <div><b style="color:#a89a72">SAMPLE</b> long-press node = preview</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1l ══════════════ -->
+  <div id="1l" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1l</span><span style="font:800 16px system-ui;color:#211f1b">Faceted Filter Funnel</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">discovery = progressive filtering</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:7px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="display:flex;justify-content:space-between;font:700 11px ui-monospace;color:#3a362e"><span>WALL</span><span style="color:#8a8372">31 of 176</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <span style="border:1.5px solid #3a362e;border-radius:999px;padding:4px 9px;font:700 9px system-ui;background:#efeadd">Bass House ✕</span>
+        <span style="border:1.5px solid #3a362e;border-radius:999px;padding:4px 9px;font:700 9px system-ui;background:#efeadd">Unheard only ✕</span>
+        <span style="border:1.5px solid #3a362e;border-radius:999px;padding:4px 9px;font:700 9px system-ui;background:#efeadd">Playing in my gaps ✕</span>
+        <span style="border:1.5px dashed #b3a98f;border-radius:999px;padding:4px 9px;font:600 9px system-ui;color:#7d6f45">＋ crew likes</span>
+        <span style="border:1.5px dashed #b3a98f;border-radius:999px;padding:4px 9px;font:600 9px system-ui;color:#7d6f45">＋ hide passed ✓</span>
+      </div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:7px 8px;background:#fff;font:600 10.5px system-ui">Chris Lorenzo</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:7px 8px;background:#fff;font:600 10.5px system-ui">Marlon Hoffstadt</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:7px 8px;background:#fff;font:600 10.5px system-ui">Prospa</div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:6px;padding:7px 8px;background:#fff;font:600 10.5px system-ui">AYYBO</div>
+      <div style="flex:1"></div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:6px;padding:6px;font:500 9px ui-monospace;color:#a49c88;text-align:center">"hide passed" is a filter, not a delete — reversible</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> filter bar on the existing wall</div>
+      <div><b style="color:#a89a72">UNIT</b> the filtered result set</div>
+      <div><b style="color:#a89a72">PASS</b> a facet: "hide passed" toggles</div>
+      <div><b style="color:#a89a72">PHASE</b> "playing in my gaps" facet = P2</div>
+      <div><b style="color:#a89a72">SAMPLE</b> row → artist page</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1m ══════════════ -->
+  <div id="1m" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1m</span><span style="font:800 16px system-ui;color:#211f1b">One Morphing Surface</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">answers: how P1 &amp; P2 relate</div>
+    <div style="align-self:center;display:flex;align-items:center;gap:6px">
+      <div style="width:110px;height:466px;border:2px solid #3a362e;border-radius:22px;background:#fbfaf6;padding:8px;display:flex;flex-direction:column;gap:6px">
+        <div style="font:700 8px ui-monospace;color:#a89a72;text-align:center">LINEUP ONLY</div>
+        <div style="font:700 9px system-ui;color:#3a362e">EXPLORE</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px"><span style="border:1.5px solid #3a362e;border-radius:999px;padding:2px 5px;font:700 7px system-ui;background:#efeadd">Techno</span><span style="border:1.5px solid #c9c3b4;border-radius:999px;padding:2px 5px;font:600 7px system-ui;color:#8a8372">Bass</span></div>
+        <div style="border:1.5px solid #c9c3b4;border-radius:5px;padding:5px;background:#fff;font:600 8px system-ui">Mau P ▶</div>
+        <div style="border:1.5px solid #c9c3b4;border-radius:5px;padding:5px;background:#fff;font:600 8px system-ui">LAYZ ▶</div>
+        <div style="border:1.5px solid #dcd6c8;border-radius:5px;padding:5px;background:#fff;font:600 8px system-ui;color:#4a463d">Prospa</div>
+        <div style="flex:1"></div>
+        <div style="font:500 7px ui-monospace;color:#a49c88;text-align:center">genre-led</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;width:34px"><div style="font:700 8px ui-monospace;color:#7d6f45;text-align:center;line-height:1.2">times drop</div><div style="font-size:18px;color:#3a362e">→</div></div>
+      <div style="width:110px;height:466px;border:2px solid #3a362e;border-radius:22px;background:#fbfaf6;padding:8px;display:flex;flex-direction:column;gap:6px">
+        <div style="font:700 8px ui-monospace;color:#a89a72;text-align:center">TIMES LIVE</div>
+        <div style="font:700 9px system-ui;color:#3a362e">DECIDE</div>
+        <div style="border:1.5px solid #7d6f45;border-radius:5px;padding:5px;background:#fff;font:600 7.5px system-ui;color:#7d6f45">CLASH 9pm ▸</div>
+        <div style="border:1.5px dashed #b3a98f;border-radius:5px;padding:5px;background:repeating-linear-gradient(45deg,#f4f1ea,#f4f1ea 4px,#ece8de 4px,#ece8de 8px);font:600 7.5px system-ui;color:#7d6f45">GAP 4–6 ▸</div>
+        <div style="border:1.5px solid #c9c3b4;border-radius:5px;padding:5px;background:#fff;font:600 8px system-ui">Mau P <span style="font-size:7px;color:#8a8372">4pm</span></div>
+        <div style="border:1.5px solid #c9c3b4;border-radius:5px;padding:5px;background:#fff;font:600 8px system-ui">LAYZ <span style="font-size:7px;color:#8a8372">7pm</span></div>
+        <div style="flex:1"></div>
+        <div style="font:500 7px ui-monospace;color:#a49c88;text-align:center">gap/clash-led</div>
+      </div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> same Discover tab, always</div>
+      <div><b style="color:#a89a72">UNIT</b> shifts: artists → time problems</div>
+      <div><b style="color:#a89a72">PASS</b> carried across the transition</div>
+      <div><b style="color:#a89a72">PHASE</b> IS the concept — one surface morphs</div>
+      <div><b style="color:#a89a72">SAMPLE</b> consistent ▶ in both modes</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ 1n ══════════════ -->
+  <div id="1n" style="width:352px;flex:none;background:#FCFBF8;border:1px solid #D8D2C4;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:13px;box-shadow:3px 4px 0 rgba(58,54,46,.05)">
+    <div style="display:flex;align-items:center;gap:9px"><span style="font:700 12px ui-monospace,monospace;background:#3a362e;color:#fbfaf6;border-radius:6px;padding:3px 8px">1n</span><span style="font:800 16px system-ui;color:#211f1b">On-Site: Now &amp; Next</span></div>
+    <div style="font:700 10px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8372">the third context · one bar, 20 min</div>
+    <div style="align-self:center;width:246px;height:466px;border:2px solid #3a362e;border-radius:26px;background:#fbfaf6;padding:11px;display:flex;flex-direction:column;gap:9px;position:relative">
+      <div style="display:flex;justify-content:center"><div style="width:56px;height:5px;border-radius:3px;background:#d9d4c8"></div></div>
+      <div style="border:1.5px dashed #c9c3b4;border-radius:6px;padding:5px 8px;font:600 9px ui-monospace;color:#8a8372;display:flex;justify-content:space-between;align-items:center"><span>◦ offline — expected</span><span style="color:#a49c88">cached</span></div>
+      <div style="font:700 11px ui-monospace;color:#3a362e">ON NOW YOU'D LIKE</div>
+      <div style="border:2px solid #3a362e;border-radius:10px;padding:11px;background:#efeadd;display:flex;flex-direction:column;gap:4px"><div style="font:800 14px system-ui">GRiZ</div><div style="font:500 9.5px ui-monospace;color:#6b6659">Lakeshore · 6 min walk · ends 7:20</div><div style="font:600 9px ui-monospace;color:#7d6f45">your ×2 · Ren must</div></div>
+      <div style="border:1.5px solid #c9c3b4;border-radius:10px;padding:11px;background:#fff;display:flex;flex-direction:column;gap:4px"><div style="font:800 13px system-ui">Mau P</div><div style="font:500 9.5px ui-monospace;color:#6b6659">Bud Light · 3 min · in your Tech House</div></div>
+      <div style="font:700 11px ui-monospace;color:#a89a72;margin-top:2px">NEXT (starts ≤30 min)</div>
+      <div style="border:1.5px solid #dcd6c8;border-radius:8px;padding:8px;background:#fff;font:600 10px system-ui">Sippy <span style="font:500 8.5px ui-monospace;color:#8a8372">· 7:30 · The Grove</span></div>
+      <div style="flex:1"></div>
+      <div style="border:1.5px dashed #d0cabb;border-radius:6px;padding:6px;font:500 9px ui-monospace;color:#a49c88;text-align:center">no sampling here — just the call. ranks, never gates.</div>
+    </div>
+    <div style="border-top:1px dashed #D8D2C4;padding-top:11px;font:500 10.5px/1.55 ui-monospace,monospace;color:#6b6659;display:flex;flex-direction:column;gap:3px">
+      <div><b style="color:#a89a72">REACHED</b> auto when on-site (time+geo)</div>
+      <div><b style="color:#a89a72">UNIT</b> what's playable right now</div>
+      <div><b style="color:#a89a72">PASS</b> hidden here — decided earlier</div>
+      <div><b style="color:#a89a72">PHASE</b> P2 compressed to the moment</div>
+      <div><b style="color:#a89a72">SAMPLE</b> none — offline, no time</div>
+    </div>
+  </div>
+
+</section>
+</x-dc>
+</body>
+</html>
