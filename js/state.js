@@ -10,6 +10,7 @@ import { deepMerge, subtractLeaves } from './merge.js';
 import { computeDayArtists } from './time.js';
 import { loadJSON, saveLS } from './util.js';
 import { FESTIVALS, FESTIVAL_INDEX, defaultFestivalId } from './festivals.js';
+import { readLevel, isPassed } from './v3/model.js';
 
 export { FESTIVALS };
 
@@ -143,6 +144,66 @@ export function recordSelectionFor(fid, artist, person, level) {
   const s = (entry.selections = entry.selections || {});
   (s[artist] = s[artist] || {})[person] = level;
   editSeq++; persistPending();
+}
+
+// Passes are keyed objects (never arrays), same discipline as notes.
+// Double-write: local doc for instant render — the artist page renders a
+// pass immediately — pending for the push. `leaf` is the whole tombstone
+// shape ({ts} active, {ts, removed:true} un-passed) per spec §3.4 /
+// validatePasses (api/_lib/crew-shared.mjs); callers build it (see
+// applyPass below for the high-level mutual-exclusion write).
+export function recordPass(fid, artist, person, leaf) {
+  const build = (root) => {
+    const f = (root.festivals = root.festivals || {});
+    const entry = (f[fid] = f[fid] || {});
+    const passes = (entry.passes = entry.passes || {});
+    (passes[artist] = passes[artist] || {})[person] = leaf;
+  };
+  build(pendingChanges);
+  build(crewDoc);
+  editSeq++; persistPending(); persist();
+}
+
+// Recs: same shape/discipline as recordPass. `leaf` = {by, ts, removed?}
+// (validateRecs, api/_lib/crew-shared.mjs) — one rec per (artist,
+// forPerson); a later sender overwrites by/ts.
+export function recordRec(fid, artist, forPerson, leaf) {
+  const build = (root) => {
+    const f = (root.festivals = root.festivals || {});
+    const entry = (f[fid] = f[fid] || {});
+    const recs = (entry.recs = entry.recs || {});
+    (recs[artist] = recs[artist] || {})[forPerson] = leaf;
+  };
+  build(pendingChanges);
+  build(crewDoc);
+  editSeq++; persistPending(); persist();
+}
+
+// High-level pass write: picks and passes are mutually exclusive by client
+// enforcement only (spec §3.4 — the server does not arbitrate; see
+// model.effectiveState's resolution rule for what happens when concurrent
+// writes leave both). `on=true` marks the artist passed; `on=false` undoes
+// it. Passing over an existing pick tombstones the pick (writes level 0)
+// the same way applyPickLevel un-passes an existing pass below.
+export function applyPass(fid, artist, person, on) {
+  const now = new Date().toISOString();
+  recordPass(fid, artist, person, on ? { ts: now } : { ts: now, removed: true });
+  if (on) {
+    const raw = crewDoc.festivals?.[fid]?.selections?.[artist]?.[person];
+    if (readLevel(crewDoc, raw) >= 1) recordSelectionFor(fid, artist, person, 0);
+  }
+}
+
+// High-level pick write: the mirror of applyPass. Picking (level >= 1) over
+// an existing ACTIVE pass un-passes it (writes the pass tombstone) so the
+// two states don't linger together on this device's own writes — see
+// model.effectiveState for what a remote device racing this can still
+// produce, and how it resolves.
+export function applyPickLevel(fid, artist, person, level) {
+  recordSelectionFor(fid, artist, person, level);
+  if (level >= 1 && isPassed(crewDoc, fid, artist, person)) {
+    recordPass(fid, artist, person, { ts: new Date().toISOString(), removed: true });
+  }
 }
 
 // Notes are keyed objects (never arrays — deep-merge would eat concurrent
@@ -309,10 +370,15 @@ export function clearCachedPending(token) { localStorage.removeItem(LS.pending(t
 export function applyRemoteDoc(remote) {
   // The "visible slice" must cover everything the wall renders — notes and
   // meta included, or a note-only remote change never repaints (CORE-6).
+  // passes/recs joined the slice for Discovery (spec §3.4): without them a
+  // remote crewmate's pass (or a rec addressed to you) never triggers a
+  // repaint — same bug, same fix.
   const visible = () => JSON.stringify({
     p: crewDoc.people,
     s: (crewDoc.festivals[activeFestivalId] || {}).selections || {},
     n: (crewDoc.festivals[activeFestivalId] || {}).notes || {},
+    pa: (crewDoc.festivals[activeFestivalId] || {}).passes || {},
+    r: (crewDoc.festivals[activeFestivalId] || {}).recs || {},
     a: crewDoc.affinity || {},
     m: crewDoc.meta || {},
   });

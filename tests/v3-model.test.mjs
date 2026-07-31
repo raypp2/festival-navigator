@@ -7,6 +7,7 @@ import {
   docVersion, readLevel, picksFor, needsMigration, nextTapLevel,
   makeNoteId, notesFor, noteCount, totalNoteCount, noteOverlay,
   togglePin, sortWithPins, canonicalStages,
+  passesFor, isPassed, recsFor, recsForPerson, effectiveState,
 } from '../js/v3/model.js';
 import { deepMerge, validateIncoming, newCrewDoc } from '../api/_lib/crew-shared.mjs';
 
@@ -169,4 +170,122 @@ test('canonicalStages: tolerates missing days, missing stages, empty fest', () =
   assert.deepEqual(canonicalStages({}), []);
   assert.deepEqual(canonicalStages(null), []);
   assert.deepEqual(canonicalStages({ days: { Friday: {} } }), []);
+});
+
+// ---- passes & recs (Discovery, spec §3.4) ----------------------------------------
+
+test('passesFor drops tombstones, keeps active leaves', () => {
+  const doc = {
+    v: 4,
+    festivals: {
+      'portola-2026': {
+        passes: {
+          Robyn: { Kevin: { ts: '2026-07-10T06:00:00Z' }, Maya: { ts: '2026-07-10T06:05:00Z', removed: true } },
+          GRiZ: { Kevin: { ts: '2026-07-10T06:01:00Z', removed: false } },
+        },
+      },
+    },
+  };
+  assert.deepEqual(passesFor(doc, 'portola-2026'), {
+    Robyn: { Kevin: { ts: '2026-07-10T06:00:00Z' } },
+    GRiZ: { Kevin: { ts: '2026-07-10T06:01:00Z' } },
+  });
+  assert.equal(isPassed(doc, 'portola-2026', 'Robyn', 'Kevin'), true);
+  assert.equal(isPassed(doc, 'portola-2026', 'Robyn', 'Maya'), false, 'tombstoned pass reads as not-passed');
+  assert.equal(isPassed(doc, 'portola-2026', 'Robyn', 'NoOne'), false, 'never-passed reads as not-passed');
+  assert.deepEqual(passesFor(doc, 'nonexistent-fest'), {}, 'missing festival is an empty map, not a throw');
+});
+
+test('recsFor drops tombstones and reflects a second sender overwriting by/ts', () => {
+  const base = deepMerge(newCrewDoc('T', '2026-07-10T06:00:00Z'), {
+    people: { Kevin: { colorIndex: 0 }, Maya: { colorIndex: 1 }, Sam: { colorIndex: 2 } },
+  });
+  const firstRec = { festivals: { 'portola-2026': { recs: { Robyn: { Sam: { by: 'Kevin', ts: '2026-07-10T06:00:00Z' } } } } } };
+  const withFirst = deepMerge(base, firstRec);
+  assert.deepEqual(recsFor(withFirst, 'portola-2026'), { Robyn: { Sam: { by: 'Kevin', ts: '2026-07-10T06:00:00Z' } } });
+
+  // A second sender overwrites by/ts — one rec per (artist, forPerson), per spec §3.4.
+  const secondRec = { festivals: { 'portola-2026': { recs: { Robyn: { Sam: { by: 'Maya', ts: '2026-07-10T06:10:00Z' } } } } } };
+  const withSecond = deepMerge(withFirst, secondRec);
+  assert.deepEqual(recsFor(withSecond, 'portola-2026'), { Robyn: { Sam: { by: 'Maya', ts: '2026-07-10T06:10:00Z' } } });
+
+  // Sam picks/passes -> the rec is tombstoned and drops out of recsFor.
+  const tombstoned = deepMerge(withSecond, {
+    festivals: { 'portola-2026': { recs: { Robyn: { Sam: { by: 'Maya', ts: '2026-07-10T06:10:00Z', removed: true } } } } },
+  });
+  assert.deepEqual(recsFor(tombstoned, 'portola-2026'), {});
+
+  // Both writes pass server validation (crew-shared.mjs validateRecs).
+  assert.equal(validateIncoming(firstRec).ok, true);
+  assert.equal(validateIncoming(secondRec).ok, true);
+});
+
+test('recsForPerson: one person\'s first-open queue, newest recommendation first', () => {
+  const doc = {
+    v: 4,
+    festivals: {
+      'portola-2026': {
+        recs: {
+          Robyn: { Sam: { by: 'Kevin', ts: '2026-07-10T06:00:00Z' } },
+          GRiZ: { Sam: { by: 'Maya', ts: '2026-07-10T06:10:00Z' }, Kevin: { by: 'Sam', ts: '2026-07-10T06:20:00Z' } },
+          Muzz: { Sam: { by: 'Kevin', ts: '2026-07-10T06:05:00Z', removed: true } }, // tombstoned, excluded
+          Alleycvt: { Colby: { by: 'Kevin', ts: '2026-07-10T06:30:00Z' } }, // addressed to someone else
+        },
+      },
+    },
+  };
+  const queue = recsForPerson(doc, 'portola-2026', 'Sam');
+  assert.deepEqual(queue.map((r) => r.artist), ['GRiZ', 'Robyn'], 'newest ts first, tombstones and other-person recs excluded');
+  assert.equal(queue[0].by, 'Maya');
+});
+
+test('effectiveState: must, picked, passed, none, and legacy v3 mapping', () => {
+  const v4 = {
+    v: 4,
+    festivals: {
+      f: {
+        selections: { Must: { Kevin: 4 }, Picked: { Kevin: 2 }, ClearedPick: { Kevin: 0 } },
+        passes: { Passed: { Kevin: { ts: '2026-07-10T06:00:00Z' } } },
+      },
+    },
+  };
+  assert.equal(effectiveState(v4, 'f', 'Must', 'Kevin'), 'must');
+  assert.equal(effectiveState(v4, 'f', 'Picked', 'Kevin'), 'picked');
+  assert.equal(effectiveState(v4, 'f', 'Passed', 'Kevin'), 'passed');
+  assert.equal(effectiveState(v4, 'f', 'ClearedPick', 'Kevin'), 'none');
+  assert.equal(effectiveState(v4, 'f', 'NeverTouched', 'Kevin'), 'none');
+
+  // Legacy v3 doc: old level 3 ("Must See") reads as must via readLevel's mapping.
+  const legacy = {
+    v: 3,
+    festivals: { f: { selections: { OldMust: { Kevin: 3 }, OldHighlight: { Kevin: 2 } } } },
+  };
+  assert.equal(effectiveState(legacy, 'f', 'OldMust', 'Kevin'), 'must');
+  assert.equal(effectiveState(legacy, 'f', 'OldHighlight', 'Kevin'), 'picked');
+
+  // RESOLUTION RULE: concurrent writes leave both an active pass and a pick
+  // >= 1 on the same (artist, person) — the pick wins (positive intent stays
+  // visible; the latent pass is healed by the next local write, js/state.js
+  // applyPass/applyPickLevel).
+  const both = {
+    v: 4,
+    festivals: {
+      f: {
+        selections: { Contested: { Kevin: 2 } },
+        passes: { Contested: { Kevin: { ts: '2026-07-10T06:00:00Z' } } },
+      },
+    },
+  };
+  assert.equal(effectiveState(both, 'f', 'Contested', 'Kevin'), 'picked', 'pick wins over a concurrently-held pass');
+
+  const bothMust = {
+    v: 4,
+    festivals: {
+      f: {
+        selections: { Contested: { Kevin: 4 } },
+        passes: { Contested: { Kevin: { ts: '2026-07-10T06:00:00Z' } } },
+      },
+    },
+  };
+  assert.equal(effectiveState(bothMust, 'f', 'Contested', 'Kevin'), 'must', 'must also wins over a concurrent pass');
 });

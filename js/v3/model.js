@@ -85,6 +85,79 @@ export function nextTapLevel(current) {
   return c >= 4 ? 0 : c + 1;
 }
 
+// ---- passes & recs (Discovery, spec §3.4) ---------------------------------------
+// Storage: festivals[fid].passes[artist][person] = {ts, removed?}
+//          festivals[fid].recs[artist][forPerson] = {by, ts, removed?}
+// Same keyed-object/tombstone discipline as selections and notes (never
+// arrays); unlike notes' one-way `deleted`, the tombstone here is a plain
+// `removed: boolean` so a pass can be reversed (validatePasses/validateRecs,
+// api/_lib/crew-shared.mjs). Active leaf = present && removed !== true.
+
+// Passes for a festival: {artist: {person: {ts}}}, tombstoned leaves dropped.
+export function passesFor(doc, fid) {
+  const passes = doc?.festivals?.[fid]?.passes || {};
+  const out = {};
+  for (const [artist, byPerson] of Object.entries(passes)) {
+    for (const [person, leaf] of Object.entries(byPerson)) {
+      if (!leaf || leaf.removed === true) continue;
+      (out[artist] = out[artist] || {})[person] = { ts: leaf.ts };
+    }
+  }
+  return out;
+}
+
+export function isPassed(doc, fid, artist, person) {
+  const leaf = doc?.festivals?.[fid]?.passes?.[artist]?.[person];
+  return !!leaf && leaf.removed !== true;
+}
+
+// Recs for a festival: {artist: {forPerson: {by, ts}}}, tombstoned leaves dropped.
+export function recsFor(doc, fid) {
+  const recs = doc?.festivals?.[fid]?.recs || {};
+  const out = {};
+  for (const [artist, byForPerson] of Object.entries(recs)) {
+    for (const [forPerson, leaf] of Object.entries(byForPerson)) {
+      if (!leaf || leaf.removed === true) continue;
+      (out[artist] = out[artist] || {})[forPerson] = { by: leaf.by, ts: leaf.ts };
+    }
+  }
+  return out;
+}
+
+// One person's first-open queue: every active rec addressed to them, newest
+// recommendation first (spec §3.4 / DISCOVERY_SPEC.md §5 "Sam sees a queue
+// on first open").
+export function recsForPerson(doc, fid, person) {
+  const out = [];
+  for (const [artist, byForPerson] of Object.entries(recsFor(doc, fid))) {
+    const leaf = byForPerson[person];
+    if (leaf) out.push({ artist, by: leaf.by, ts: leaf.ts });
+  }
+  return out.sort((a, b) => Date.parse(b.ts) - Date.parse(a.ts));
+}
+
+// Resolved pick/pass/must state for one (artist, person).
+//
+// RESOLUTION RULE: passes and picks are meant to be mutually exclusive
+// (spec §3.4), but that exclusion is client-enforced only (js/state.js
+// applyPass/applyPickLevel) — the server accepts both leaves independently
+// (crew-shared.mjs), so two concurrent writes (a pass from one device, a
+// pick from another, both racing the same merge) can briefly leave BOTH an
+// active pass and a pick level >= 1 on the same (artist, person). Pick
+// leaves are bare integers with no timestamp of their own, so there is no
+// newer-ts tiebreak available between the two. When both are present, the
+// PICK wins: positive intent is explicit and should stay visible, while the
+// latent pass sits inert until the next local write (a future pass or pick
+// on this artist) heals it via the tombstone dance in state.js.
+export function effectiveState(doc, fid, artist, person) {
+  const raw = doc?.festivals?.[fid]?.selections?.[artist]?.[person];
+  const level = readLevel(doc, raw);
+  if (level >= 4) return 'must';
+  if (level >= 1) return 'picked';
+  if (isPassed(doc, fid, artist, person)) return 'passed';
+  return 'none';
+}
+
 // ---- notes ---------------------------------------------------------------------
 // Storage: festivals[fid].notes[scope][targetId][noteId] = {author, ts, text,
 // deleted?} for scope 'artist'|'day'; scope 'fest' skips targetId.
