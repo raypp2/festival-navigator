@@ -10,203 +10,420 @@
   "artists": [
     {
       "name": "Kx5",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "edm",
+        "progressive house"
+      ],
+      "soundcloudSlug": "kx5official",
+      "spotifyId": "2avRYQUWQpIkzJOEkf0MdY",
+      "youtubeQuery": "Kx5 live set"
     },
     {
       "name": "Alesso",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "progressive house",
+        "big room house",
+        "dance-pop",
+        "edm",
+        "electro house",
+        "future bass"
+      ],
+      "soundcloudSlug": "alesso",
+      "spotifyId": "4AVFqumd2ogHFlRbKIjp1t",
+      "youtubeQuery": "Alesso live set"
     },
     {
       "name": "Tape B",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "dubstep",
+        "edm",
+        "trap"
+      ],
+      "soundcloudSlug": "tape-b-official",
+      "spotifyId": "59tlsKpLWoLTxjNNS2wdPi",
+      "youtubeQuery": "Tape B live set"
     },
     {
       "name": "TroyBoi",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "trap edm",
+        "bounce",
+        "electronic",
+        "trap"
+      ],
+      "soundcloudSlug": "troyboi",
+      "spotifyId": "0tvpihdAsKiNnP6sWS3jUI",
+      "youtubeQuery": "TroyBoi live set"
     },
     {
       "name": "OMNOM",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "omnom",
+      "spotifyId": "3PYRXP25JcbqhvNaJYcnWy",
+      "youtubeQuery": "Omnom live set"
     },
     {
       "name": "Starjunk 95",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "starjunk95",
+      "spotifyId": "523iXWyHL26prJR3GKjRhx",
+      "youtubeQuery": "Starjunk 95 live set"
     },
     {
       "name": "Gravagerz",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "gravagerzarchive",
+      "spotifyId": "2zoy9aYWHueNXCIqh2MStc",
+      "youtubeQuery": "Gravagerz live set"
     },
     {
       "name": "RayRay",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "missing releases"
+      ],
+      "soundcloudSlug": "djrayray",
+      "spotifyId": "4FS6bomikvJR2E9JHNwiAM",
+      "youtubeQuery": "RayRay live set"
     },
     {
       "name": "Within The Void",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "withinthevoid",
+      "spotifyId": "4tO0a1UK4Enm5X8HpbM8bX",
+      "youtubeQuery": "Within The Void live set"
     },
     {
       "name": "Of The Trees",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "electronic",
+        "dubstep",
+        "bassline",
+        "breakbeat",
+        "breaks",
+        "dance",
+        "drum and bass",
+        "electronica"
+      ],
+      "soundcloudSlug": "ofthetrees",
+      "spotifyId": "5V7NIXgCnX2KuQ01Bxg20c",
+      "youtubeQuery": "Of The Trees live set"
     },
     {
       "name": "Jade Cicada",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "downtempo",
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "jadecicada",
+      "spotifyId": "6HFxqZ6WaTb7TQUhNsK25o",
+      "youtubeQuery": "Jade Cicada live set"
     },
     {
       "name": "Whethan",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "electronic",
+        "electropop",
+        "future bass",
+        "hyperpop",
+        "trap edm"
+      ],
+      "soundcloudSlug": "whethan",
+      "spotifyId": "0vqJkZ0RpLZixt3lTmD8vP",
+      "youtubeQuery": "Whethan live set"
     },
     {
       "name": "San Holo",
-      "day": "Friday"
+      "day": "Friday",
+      "genres": [
+        "future bass",
+        "edm",
+        "electronic",
+        "trap"
+      ],
+      "soundcloudSlug": "sanholobeats",
+      "spotifyId": "0jNDKefhfSbLR9sFvcPLHo",
+      "youtubeQuery": "San Holo live set"
     },
     {
       "name": "Kaivon",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "kaivonmusic",
+      "spotifyId": "55FVjkpZs1zuo3zqBgrKtC",
+      "youtubeQuery": "Kaivon live set"
     },
     {
       "name": "Capochino",
-      "day": "Friday"
+      "day": "Friday",
+      "spotifyId": "70qOCKE1NFO6q1a1pC0KRE",
+      "youtubeQuery": "Capochino live set"
     },
     {
       "name": "ONHELL",
-      "day": "Friday"
+      "day": "Friday",
+      "soundcloudSlug": "onhellmusic",
+      "spotifyId": "66SJhirDGiBwr3tfvu3a0t",
+      "youtubeQuery": "ONHELL live set"
     },
     {
       "name": "DOT",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "DOT live set"
     },
     {
       "name": "Deluluz",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "Deluluz live set"
     },
     {
       "name": "Riordan",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "Riordan live set"
     },
     {
       "name": "Obskür",
-      "day": "Friday"
+      "day": "Friday",
+      "spotifyId": "29MTNlaVntQaQiDyj8KGwx",
+      "youtubeQuery": "Obskür live set"
     },
     {
       "name": "Omar+",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "Omar+ live set"
     },
     {
       "name": "HoneyLuv",
-      "day": "Friday"
+      "day": "Friday",
+      "spotifyId": "1sl3gVNz3Nxd4poA8f76sl",
+      "youtubeQuery": "HoneyLuv live set"
     },
     {
       "name": "SLAMM",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "SLAMM live set"
     },
     {
       "name": "Bakkus",
-      "day": "Friday"
+      "day": "Friday",
+      "youtubeQuery": "Bakkus live set"
     },
     {
       "name": "Zedd",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "edm",
+        "electro house",
+        "dance-pop",
+        "electronic",
+        "progressive house",
+        "complextro",
+        "electropop",
+        "house"
+      ],
+      "soundcloudSlug": "zedd",
+      "spotifyId": "2qxJFvFYMEDqd7ui6kSAcq",
+      "youtubeQuery": "Zedd live set"
     },
     {
       "name": "Cloonee",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "cloonee",
+      "spotifyId": "7MdlXmq2HViAJWo9cf30sR",
+      "youtubeQuery": "Cloonee live set"
     },
     {
       "name": "BUNT.",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "BUNT. live set"
     },
     {
       "name": "Loud Luxury",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "spotifyId": "6t1gpxYbY8OlLA7D2RiikQ",
+      "youtubeQuery": "Loud Luxury live set"
     },
     {
       "name": "Wilkinson",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "wilkinsonuk",
+      "spotifyId": "6m8itYST9ADjBIYevXSb1r",
+      "youtubeQuery": "Wilkinson live set"
     },
     {
       "name": "TWINSICK",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "twinsick",
+      "spotifyId": "4WfO14YgktUYkdLMrHgTeF",
+      "youtubeQuery": "TWINSICK live set"
     },
     {
       "name": "Xandra",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "xanddara",
+      "spotifyId": "2qdz7njMAjbxNVns5bj4rN",
+      "youtubeQuery": "Xandra live set"
     },
     {
       "name": "Skilah",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "0ILzznvRwQsrGX7BsaDer0",
+      "youtubeQuery": "Skilah live set"
     },
     {
       "name": "Taylol",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Taylol live set"
     },
     {
       "name": "Ganja White Night",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "ganjawhitenight",
+      "spotifyId": "1a6oIpEh4DGgaqgWg5xwd3",
+      "youtubeQuery": "Ganja White Night live set"
     },
     {
       "name": "Kai Wachi",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kaiwachi",
+      "spotifyId": "2fNr4ldujwq97v1jWeqs8K",
+      "youtubeQuery": "Kai Wachi live set"
     },
     {
       "name": "Space Laces",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "electro house",
+        "bass house",
+        "complextro"
+      ],
+      "soundcloudSlug": "space-laces",
+      "spotifyId": "37PZXblQTqpEWGdjctNcGP",
+      "youtubeQuery": "Space Laces live set"
     },
     {
       "name": "LAYZ",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "layzdubz",
+      "spotifyId": "2ozQcs5XxFaj5fvA02zhwo",
+      "youtubeQuery": "Layz live set"
     },
     {
       "name": "Blanke",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "blankemusicau",
+      "spotifyId": "59Yq0xrABEihHANsfo9QMT",
+      "youtubeQuery": "Blanke live set"
     },
     {
       "name": "CANVAS",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "brony"
+      ],
+      "soundcloudSlug": "yaboicanvas",
+      "spotifyId": "15JiKg1xYOhBFsYJv2w4Rf",
+      "youtubeQuery": "CANVAS live set"
     },
     {
       "name": "TINYKVT",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "TINYKVT",
+      "spotifyId": "0sWZs1jin3oOieFS6lXE5T",
+      "youtubeQuery": "TINYKVT live set"
     },
     {
       "name": "Funkbox",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "66jXGPYj6RAk8LYFWuZdw2",
+      "youtubeQuery": "Funkbox live set"
     },
     {
       "name": "Packet Loss",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Packet Loss live set"
     },
     {
       "name": "Mish",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "65kwwmTEJIlKRldGhmUM0b",
+      "youtubeQuery": "Mish live set"
     },
     {
       "name": "Trym",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "trymofficial",
+      "spotifyId": "5Nd385K2g3s0828W8Ab70z",
+      "youtubeQuery": "Trym live set"
     },
     {
       "name": "Joyhauser",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "peak time techno",
+        "techno"
+      ],
+      "soundcloudSlug": "joyhauser",
+      "spotifyId": "0UZ1b7SBaCqUO3nb68sjbY",
+      "youtubeQuery": "Joyhauser live set"
     },
     {
       "name": "Marie Vaunt",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "marievaunt",
+      "spotifyId": "50KydUSYhBFGorhAgUcrL5",
+      "youtubeQuery": "Marie Vaunt live set"
     },
     {
       "name": "DØMINA",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "DØMINA live set"
     },
     {
       "name": "Alyssa Jolee",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "4339Su9vxGrlufPNpkRRAO",
+      "youtubeQuery": "Alyssa Jolee live set"
     },
     {
       "name": "Madison Palmer",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "7JAIobxc0Rf8NqgsyoRPRj",
+      "youtubeQuery": "Madison Palmer live set"
     },
     {
       "name": "Høldën",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Høldën live set"
     }
   ]
 }

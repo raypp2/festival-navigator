@@ -747,7 +747,12 @@ function renderWallInner(root, ctx) {
     for (const a of list) {
       const tag = showTags && (a.weekends === 'W1' || a.weekends === 'W2') ? a.weekends : undefined;
       const fy = forYouMeta ? forYouMeta.get(a.name) : null;
-      grid.appendChild(renderCard(a.name, ctx, { tag, reason: fy ? fy.reason : null, passed: fy ? fy.passed : false }));
+      // A reason explains a RECOMMENDATION — an artist I already decided on
+      // (picked, musted, or passed) isn't one, so it carries no ribbon even
+      // when it ranks high (my own must "sharing a genre with my musts" was
+      // just noise, caught on the first live For-you render).
+      const undecided = !((ctx.picks[a.name] || {})[ctx.meName]) && !(fy && fy.passed);
+      grid.appendChild(renderCard(a.name, ctx, { tag, reason: fy && undecided ? fy.reason : null, passed: fy ? fy.passed : false }));
     }
     root.appendChild(grid);
     // Day notes with personal pins live under each real day's cards (21e).
