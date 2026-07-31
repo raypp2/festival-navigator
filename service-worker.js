@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v38'; // v38 = Discovery M3: artist page assets added to precache
+const CACHE_VERSION = 'festival-nav-v39'; // v39 = Discovery M4/M5: deck + filter modules added to precache
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
@@ -40,8 +40,15 @@ const APP_CORE = [
   '/js/discovery/score.js',
   '/js/discovery/player.js',
   '/js/discovery/player-core.js',
+  '/js/discovery/deck.js',
+  '/js/discovery/filter.js',
   '/assets/discovery.css',
   '/data/festivals/index.json',
+  // Repo-owned genre canon (js/discovery/genres.js's loadGenreCanon) — every
+  // Discovery surface that ranks (deck, filter sheet, For-you wall, artist
+  // page's Similar section) reads it. Missing from the M3 precache list;
+  // fixed here rather than carried forward into another milestone.
+  '/data/genres.json',
 ];
 
 // Nice-to-have: failures here never block install.

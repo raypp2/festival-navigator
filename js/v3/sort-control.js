@@ -6,6 +6,11 @@
 // first-letter typeahead. createElement-only (XSS rule).
 
 const OPTIONS = [
+  // For you (Discovery M5): rankLineup's ranking — listed first, and the
+  // default sort-control.js's caller (app.js) applies whenever the active
+  // festival has any enriched artist (genres or sources). Everyone else keeps
+  // today's default (billing).
+  { value: 'foryou', label: 'For you' },
   { value: 'billing', label: 'Billing' },
   { value: 'az', label: 'A → Z' },
   { value: 'mine', label: 'My picks' },
@@ -122,5 +127,15 @@ export function createSortControl({ initial = 'billing', onChange }) {
   return {
     el: wrap,
     get value() { return value; },
+    // Programmatic set, no onChange fired — for app.js's one-time smart
+    // default (Discovery M5: "For you" when the festival has enriched data).
+    // A user's own later pick through the control still fires onChange as
+    // normal; this only ever runs before that, syncing the chip's label to
+    // whatever default app.js already applied to ctx.sort.
+    setValue(v) {
+      if (v === value || !OPTIONS.some((o) => o.value === v)) return;
+      value = v;
+      paint();
+    },
   };
 }

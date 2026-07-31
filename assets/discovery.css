@@ -347,3 +347,176 @@
 .ap-similar-left { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .ap-similar-name { font: 700 13px var(--font-ui); color: var(--text-header); }
 .ap-similar-sub { font: 600 11px var(--font-ui); color: var(--text-tertiary); }
+
+/* ---- discover deck ---- */
+/* Toolbar entry (js/v3/app.js inserts this after #sort-control): violet
+ * tonal treatment, same pill footprint as the app's other tonal buttons —
+ * gets the 44px coarse-pointer floor for free by being a <button> (repo law:
+ * that floor is selector-inherited, never enumerated). */
+.discover-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--tonal-fill); border: 1.5px solid rgba(var(--brand), .4);
+  color: var(--tonal-text); font-weight: 700; font-size: 12px;
+  padding: 8px 16px; border-radius: var(--r-pill); cursor: pointer; white-space: nowrap;
+}
+
+/* Discovery M4 (build spec 7.2, frames 2a/2e/4d). A fixed full-screen overlay,
+ * same "build it in JS, one instance, idempotent open" convention as
+ * .artist-page — sits just below it (an artist-name tap inside a card stacks
+ * the artist page ON TOP of the deck) and above the dock/wall chrome. */
+.discover-deck {
+  position: fixed; inset: 0; z-index: 34; background: var(--page);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.dd-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+
+.dd-topbar {
+  flex: none; display: flex; align-items: center; gap: 12px;
+  padding: max(10px, env(safe-area-inset-top)) 18px 10px;
+}
+.dd-back {
+  width: 40px; height: 40px; flex: none; border-radius: var(--r-pill);
+  border: 1px solid var(--border-card); background: transparent;
+  color: var(--text-body); font-size: 16px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.dd-title {
+  font-family: var(--font-display); letter-spacing: var(--track-display);
+  font-size: 20px; color: var(--text-header); flex: 1; text-align: center;
+  margin-right: 40px; /* balances the back button so the title stays centered */
+}
+
+/* ---- session header: label + counter, filter button, progress, sub-line ---- */
+.dd-header { flex: none; padding: 0 18px 12px; }
+.dd-header-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dd-session-label { display: flex; align-items: baseline; gap: 8px; }
+.dd-micro-label {
+  font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.dd-counter { font: 800 10px var(--font-ui); color: var(--text-body); }
+.dd-filter-btn {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 11px;
+  border-radius: var(--r-pill); border: 1px solid rgba(var(--brand), .45);
+  background: var(--tonal-fill); color: var(--tonal-text); font: 800 10.5px var(--font-ui);
+  cursor: pointer;
+}
+.dd-filter-badge {
+  min-width: 16px; height: 16px; border-radius: var(--r-pill); background: rgba(var(--brand), .3);
+  color: #EDD9FF; display: inline-flex; align-items: center; justify-content: center;
+  font: 800 9px var(--font-ui); padding: 0 4px;
+}
+.dd-progress { height: 6px; border-radius: var(--r-pill); background: var(--hairline); margin-top: 8px; overflow: hidden; }
+.dd-progress-fill { height: 100%; background: rgb(var(--brand)); border-radius: var(--r-pill); transition: width .3s ease; }
+.dd-subline { font: 500 11px var(--font-ui); color: var(--text-tertiary); margin-top: 7px; }
+
+/* ---- card stack ---- */
+.dd-stage { flex: 1; min-height: 0; padding: 0 18px 14px; position: relative; }
+.dd-stack { position: relative; height: 100%; }
+.dd-ghost {
+  position: absolute; left: 8px; right: 8px; top: 0; bottom: 0;
+  border-radius: var(--r-row); background: var(--card-unpicked); border: 1px solid var(--border-card);
+}
+.dd-ghost-2 { left: 16px; right: 16px; top: -7px; bottom: 7px; z-index: 1; }
+.dd-ghost-1 { left: 12px; right: 12px; top: -3px; bottom: 3px; z-index: 2; }
+.dd-card {
+  position: relative; z-index: 3; height: 100%; border-radius: var(--r-row);
+  background: var(--card-unpicked); border: 1px solid var(--border-card);
+  overflow: hidden auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;
+  touch-action: pan-y; cursor: grab;
+}
+@media (prefers-reduced-motion: reduce) { .dd-card { transition: none !important; } }
+.dd-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.dd-chip {
+  border: 1px solid var(--border-input); border-radius: var(--r-pill); padding: 4px 10px;
+  font: 700 10px var(--font-ui); color: var(--text-body);
+}
+/* Long names wrap — never truncated into uselessness (build spec: card names
+ * per reference data, e.g. "Skull Machine (Black Tiger Sex Machine × Kai
+ * Wachi)"). Real <button> per repo law, but reads like the artist-page name. */
+.dd-name {
+  background: none; border: none; padding: 0; margin: 0; text-align: left; cursor: pointer;
+  font: 800 clamp(19px, 5vw, 22px)/1.15 var(--font-ui); color: var(--text-primary);
+  word-break: break-word; overflow-wrap: anywhere;
+}
+/* Exactly one reason ribbon, or none — never a placeholder. */
+.dd-reason {
+  align-self: flex-start; background: var(--tonal-fill); color: var(--tonal-text);
+  border-radius: var(--r-pill); padding: 6px 11px; font: 700 11px var(--font-ui);
+}
+.dd-player-host { margin-top: auto; }
+
+/* ---- pool-exhausted completion state ---- */
+.dd-done {
+  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 14px; border: 1px dashed var(--border-card); border-radius: var(--r-row);
+  padding: 24px;
+}
+.dd-done-title { font: 800 20px var(--font-ui); color: var(--text-primary); }
+.dd-done-summary { font: 600 12.5px var(--font-ui); color: var(--text-tertiary); }
+.dd-done-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; justify-content: center; }
+.dd-done-btn { font-size: 12.5px; padding: 11px 18px; }
+
+/* ---- action bar (fixed bottom) ---- */
+.dd-actions {
+  flex: none; display: flex; gap: 10px; padding: 12px 18px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--hairline); background: var(--dock);
+}
+.dd-btn {
+  min-height: 50px; border-radius: var(--r-pill); font: 800 13px var(--font-ui); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+/* Pass is quiet — never a thumbs-down (repo law: brand violet = selected/ours,
+ * a decline stays neutral). */
+.dd-btn-pass { flex: .9; border: 1px solid var(--border-input); background: transparent; color: var(--text-secondary); font-weight: 700; }
+.dd-btn-pick { flex: 1.5; border: none; background: var(--tonal-fill); color: var(--tonal-text); font-size: 14px; }
+.dd-btn-must { flex: .9; border: 1px solid var(--border-input); background: transparent; color: var(--tonal-text); }
+
+/* ---- filter sheet body (bottom sheet chrome — .sheet/.sheet-backdrop are
+ * the shared component from assets/v3.css; this covers only the content) ---- */
+.dd-filter-body { display: flex; flex-direction: column; gap: 16px; }
+.dd-filter-field { display: flex; flex-direction: column; gap: 8px; }
+.dd-filter-label {
+  font: 800 9px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.dd-seg { display: flex; border: 1px solid var(--border-input); border-radius: var(--r-pill); overflow: hidden; }
+.dd-seg .seg { flex: 1; border: none; border-radius: 0; }
+.dd-seg .seg + .seg { border-left: 1px solid var(--hairline); }
+.dd-chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.dd-filter-chip {
+  border-radius: var(--r-pill); padding: 6px 11px; font: 700 11px var(--font-ui);
+  color: var(--text-body); border: 1px solid var(--border-input); background: transparent; cursor: pointer;
+}
+.dd-filter-chip.active { background: var(--tonal-fill); color: var(--tonal-text); border-color: rgba(var(--brand), .4); }
+.dd-toggles { display: flex; flex-direction: column; gap: 4px; }
+.dd-toggle-row { padding: 2px 0; display: flex; align-items: center; gap: 10px; }
+.dd-toggle-disabled { opacity: .5; }
+.dd-toggle-disabled .toggle { cursor: default; }
+.dd-filter-cta {
+  margin-top: 4px; height: 48px; border-radius: var(--r-pill); border: none;
+  background: var(--tonal-fill); color: var(--tonal-text); font: 800 14px var(--font-ui); cursor: pointer;
+}
+.dd-filter-cta-empty { background: var(--hairline); color: var(--text-secondary); }
+
+/* ---- for-you wall ---- */
+/* M5 (build spec 7.3, 5c grid-card anatomy). Extends the existing .card
+ * (assets/v3.css) rather than restructuring it: the ribbon and PASSED chip
+ * are absolute-positioned overlays, same discipline as .corner-about/
+ * .corner-who, with padding-top making room so the ribbon never collides
+ * with the centered name. */
+.card.has-reason { padding-top: 27px; }
+.card-reason-ribbon {
+  position: absolute; z-index: 1; top: 0; left: 0; right: 0;
+  background: var(--tonal-fill); color: var(--tonal-text);
+  font: 800 8px var(--font-ui); letter-spacing: .05em; text-transform: uppercase;
+  padding: 5px 8px; text-align: center; border-radius: var(--r-card) var(--r-card) 0 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.card.wall-passed { opacity: .55; }
+.card-passed-chip {
+  position: absolute; z-index: 1; top: 6px; right: 6px;
+  font: 800 8px var(--font-ui); letter-spacing: .06em; color: var(--text-secondary);
+  border: 1px solid var(--border-card); border-radius: var(--r-pill);
+  padding: 2px 6px; background: rgba(10, 8, 18, .6);
+}

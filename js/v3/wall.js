@@ -13,6 +13,12 @@ import { activityMinutes } from '../time.js';
 import { auraBackground, whoCorner, aboutCorner, nameColor, subColor } from './aura.js';
 import { BOARD } from './palette.js';
 import { notesSection } from './notes.js'; // runtime-only cycle with this module (colorIndexOf) — safe
+import { rankLineup } from '../discovery/score.js'; // For-you sort (M5) — reasons + ranking, same source the deck uses
+
+// Genre canon fallback for a repaint that races ahead of app.js's async load
+// (js/discovery/genres.js's own EMPTY_CANON shape, kept local rather than
+// imported so this module never has to know about the fetch/cache module).
+const EMPTY_CANON = { canon: [], synonyms: {}, suppress: [] };
 
 // ---- person -> board color ---------------------------------------------------
 // v4 people carry colorIndex. Legacy people carry a "R, G, B" string from the
@@ -57,6 +63,11 @@ export function renderCard(artistName, ctx, opts = {}) {
   const el = document.createElement('div');
   el.className = 'card' + (opts.cell ? ' cell' : '') + (opts.time && !opts.cell ? ' timed' : '');
   el.dataset.artist = artistName;
+  // For-you sort (M5): exactly one reason ribbon, or none — crew-type reasons
+  // render NO text ribbon, the who-corner already says it (design notes).
+  const showReasonRibbon = opts.reason && opts.reason.type !== 'crew';
+  if (showReasonRibbon) el.classList.add('has-reason');
+  if (opts.passed) el.classList.add('wall-passed');
   // Keyboard-first card (AX-1): real button semantics, and the accessible
   // name carries what SIGHTED users see — your level, the crew's picks, note
   // count, Spotify badge (audit 4.3). The explicit label overrides children,
@@ -94,6 +105,18 @@ export function renderCard(artistName, ctx, opts = {}) {
     const grain = document.createElement('span');
     grain.className = 'card-grain';
     el.appendChild(grain);
+  }
+  if (showReasonRibbon) {
+    const ribbon = document.createElement('span');
+    ribbon.className = 'card-reason-ribbon';
+    ribbon.textContent = opts.reason.text;
+    el.appendChild(ribbon);
+  }
+  if (opts.passed) {
+    const passedChip = document.createElement('span');
+    passedChip.className = 'card-passed-chip';
+    passedChip.textContent = 'PASSED';
+    el.appendChild(passedChip);
   }
   const nm = document.createElement('span');
   nm.className = 'name';
@@ -325,6 +348,23 @@ export function applyWeekend(artists, weekend) {
   return artists.filter((a) => !a.weekends || a.weekends === 'both' || a.weekends === weekend);
 }
 
+// For-you ranking (M5): rankLineup over the WHOLE billing list (never the
+// already-searched/weekend-filtered subset applySort receives — billing
+// position has to mean the real bill, or a search would skew the score), then
+// looked up by name. ctx.canonData is populated by app.js's one-time genre
+// canon fetch; a repaint that races ahead of it degrades to billing/crew
+// signal only (no genre-driven reasons yet) rather than blocking the wall.
+function forYouRanked(ctx) {
+  const fest = state.fest();
+  return rankLineup({
+    artists: fest.artists || [],
+    picks: ctx.picks || {},
+    passes: ctx.passes || {},
+    me: ctx.meName,
+    canonData: ctx.canonData || EMPTY_CANON,
+  });
+}
+
 export function applySort(artists, mode, ctx) {
   const arr = [...artists];
   const myLevel = (a) => (ctx.picks[a.name] || {})[ctx.meName] || 0;
@@ -332,6 +372,18 @@ export function applySort(artists, mode, ctx) {
   if (mode === 'az') arr.sort((a, b) => a.name.localeCompare(b.name));
   else if (mode === 'mine') arr.sort((a, b) => myLevel(b) - myLevel(a));
   else if (mode === 'crew') arr.sort((a, b) => crewHeat(b) - crewHeat(a));
+  else if (mode === 'foryou') {
+    const rankIndex = new Map(forYouRanked(ctx).map((r, i) => [r.name, i]));
+    const isPassed = (a) => !!(ctx.passes && ctx.passes[a.name] && ctx.passes[a.name][ctx.meName]);
+    arr.sort((a, b) => {
+      // My passed artists sink to the bottom, regardless of score.
+      const ap = isPassed(a), bp = isPassed(b);
+      if (ap !== bp) return ap ? 1 : -1;
+      const ai = rankIndex.has(a.name) ? rankIndex.get(a.name) : Infinity;
+      const bi = rankIndex.has(b.name) ? rankIndex.get(b.name) : Infinity;
+      return ai - bi;
+    });
+  }
   return arr; // 'billing' and 'day' keep source order; day grouping handles days
 }
 
@@ -675,11 +727,15 @@ function renderWallInner(root, ctx) {
   const grouped = ctx.sort === 'billing' || ctx.sort === 'day'
     ? groupByDay(artists, knownDaysOf(fest))
     : new Map([['', artists]]);
+  // For-you (M5): one reason lookup per repaint, reused for every card in the
+  // flat list — rankLineup already ran once inside applySort to order this
+  // same `artists` array; this is the metadata half of that same ranking.
+  const forYouMeta = ctx.sort === 'foryou' ? new Map(forYouRanked(ctx).map((r) => [r.name, r])) : null;
   for (const [day, list] of grouped) {
     const meta = (fest.dayMeta || {})[day];
     root.appendChild(dayHeader(
-      day || 'THE LINEUP',
-      day ? dayRuleSub(meta) : (ctx.sort === 'billing' ? 'BILLING ORDER' : ''),
+      day || (ctx.sort === 'foryou' ? 'FOR YOU' : 'THE LINEUP'),
+      day ? dayRuleSub(meta) : (ctx.sort === 'billing' ? 'BILLING ORDER' : (ctx.sort === 'foryou' ? 'EVERY CARD SHOWS WHY' : '')),
       day && ctx.onOpenDayNotes ? {
         noteCount: model.noteCount(state.crewDoc, ctx.fid, 'day', day),
         onOpenNotes: () => ctx.onOpenDayNotes(day),
@@ -690,7 +746,8 @@ function renderWallInner(root, ctx) {
     const showTags = !ctx.weekend || ctx.weekend === 'all';
     for (const a of list) {
       const tag = showTags && (a.weekends === 'W1' || a.weekends === 'W2') ? a.weekends : undefined;
-      grid.appendChild(renderCard(a.name, ctx, { tag }));
+      const fy = forYouMeta ? forYouMeta.get(a.name) : null;
+      grid.appendChild(renderCard(a.name, ctx, { tag, reason: fy ? fy.reason : null, passed: fy ? fy.passed : false }));
     }
     root.appendChild(grid);
     // Day notes with personal pins live under each real day's cards (21e).

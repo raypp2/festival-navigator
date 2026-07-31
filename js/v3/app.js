@@ -13,6 +13,8 @@ import { renderWall, refreshCard, showUndoToast, showToast, wireScrollspy, color
 import { disclosureFold, eqLoader, festRow } from './tools.js';
 import { openArtistSheet, openDayNotes, openAllNotes, closeSheet, refreshOpenSheet, sheetChrome, dialogize, rememberOpener } from './notes.js';
 import { openArtistPage, closeArtistPage, refreshOpenArtistPage } from '../discovery/artist-page.js';
+import { openDeck, closeDeck, openDiscoverFilterSheet } from '../discovery/deck.js';
+import { loadGenreCanon } from '../discovery/genres.js';
 import { renderSettings, appSettings, openSubviewByKey } from './settings.js';
 import { onStorageWriteFail, saveLS } from '../util.js';
 import { router } from './router.js';
@@ -28,7 +30,9 @@ const ctx = {
   fid: null,
   meName: null,
   picks: {},
+  passes: {},
   affinity: null,
+  canonData: null, // Discovery genre canon (js/discovery/genres.js) — filled once, async, by init()
   query: '',
   sort: 'billing',
   lowPower: false,
@@ -59,6 +63,7 @@ function refreshCtx() {
   ctx.fid = state.activeFestivalId;
   ctx.meName = crew.me(state.getCrewToken());
   ctx.picks = model.picksFor(state.crewDoc, ctx.fid);
+  ctx.passes = model.passesFor(state.crewDoc, ctx.fid); // For-you sort (M5) + the deck's own ranking need both
   ctx.affinity = state.affinityLookup(ctx.meName);
   // Weekend view is a device-local preference per fest (ST-3): set it once
   // ("I'm going W2") and wrong-weekend picks announce themselves.
@@ -82,6 +87,19 @@ function handleTap(artistName) {
   router.push('artist:' + artistName);
 }
 
+// Discover entry (build spec 7.2): same identity + migration gate as any
+// other pick-writing surface, since the deck's action bar writes picks.
+function openDiscoverDeck() {
+  if (!ctx.meName) return;
+  if (ctx.migrationPending) {
+    showToast($('toast-root'), 'Updating this crew — picks unlock in a moment');
+    return;
+  }
+  refreshCtx();
+  openDeck(ctx, artistPageActions);
+  router.push('discover');
+}
+
 // recordSelection(For) writes pending only; mirror into the local doc for
 // instant render — the artist page's pick/pass writes reuse this exact
 // function (passed through artistPageActions) rather than duplicating it.
@@ -96,10 +114,33 @@ export function applyLocalPick(artist, person, level) {
 // circular import: the local-doc mirror above, and an undo toast bound to
 // this shell's toast-root. Built once; ctx (also referenced) is the same
 // live object the rest of the shell mutates in place via refreshCtx.
+// The deck (js/discovery/deck.js) reuses this exact object — same shape,
+// same "write + mirror + undo toast" contract, no reason to duplicate it.
 const artistPageActions = {
   applyLocalPick,
   showUndoToast: (message, onUndo) => showUndoToast($('toast-root'), message, onUndo),
 };
+
+// ---- sort control (mounted once in init(); referenced again here for the smart default) ----
+let sortCtl = null;
+
+// Discovery M5: "For you" becomes the default sort the moment a festival has
+// ANY enriched artist (genres or a sample source) — everyone else keeps the
+// existing default (billing). Runs once per festival entry (fresh boot,
+// crew switch, or Settings' "switch festival"), before that entry's first
+// repaint; it never fights a sort the person picks afterward this session —
+// there is no live persistence to fight (sort-control.js keeps none today).
+function applySortDefault() {
+  if (!sortCtl) return;
+  const fest = state.fest();
+  const enriched = (fest.artists || []).some((a) => (
+    (a.genres && a.genres.length) || a.soundcloudSlug || a.spotifyId
+    || a.youtubeQuery || (a.youtubeVideoIds && a.youtubeVideoIds.length)
+  ));
+  const next = enriched ? 'foryou' : 'billing';
+  ctx.sort = next;
+  sortCtl.setValue(next);
+}
 
 // ---- header / toolbar / dock ------------------------------------------------------
 function applyFestTheme() {
@@ -885,6 +926,7 @@ function openSettings() {
       state.setActiveFestivalId(fid);
       state.ensureFestivalState(fid);
       state.setCurrentDay(null);
+      applySortDefault(); // Discovery M5 — this festival's own enrichment decides its default
       // Drop the search query with the festival it belonged to. It used to
       // survive the switch, so arriving at a festival you had never searched
       // showed you "No artists match" over a full lineup — the app reporting an
@@ -1393,6 +1435,7 @@ async function enterApp(token, doc, current = () => true) {
   refreshCtx();
   renderPersonChips();
   renderYou();
+  applySortDefault(); // Discovery M5 — before the first repaint, so the wall never flashes billing-then-foryou
   repaintWall();
   history.replaceState(savedLayers ? { layers: savedLayers } : null, '', `/#g=${token}`);
   sync.pollSync();
@@ -1618,9 +1661,16 @@ export function init() {
     if (key === 'sheet:all') openAllNotes(ctx);
     else if (key === 'sheet:share') openShareMoment();
     else if (key === 'sheet:add-member') openAddMember();
+    else if (key === 'sheet:discover-filter') openDiscoverFilterSheet(ctx, artistPageActions);
     else if (key.startsWith('sheet:day:')) openDayNotes(key.slice('sheet:day:'.length), ctx, onNotesChange);
     else if (key.startsWith('sheet:notes:')) openArtistSheet(key.slice('sheet:notes:'.length), ctx, onNotesChange);
   }, () => closeSheet());
+  // Discover deck (build spec 7.2): a full-screen layer like the artist page,
+  // fixed key (no per-artist suffix) — idempotent open/close, same pattern as
+  // 'artist:'. The filter sheet ('sheet:discover-filter' above) stacks on top
+  // of it through the ordinary 'sheet:' registration; closing the sheet pops
+  // back to this layer, which is already showing underneath.
+  router.registerKind('discover', () => openDeck(ctx, artistPageActions), () => closeDeck());
   // The one overlay element persists across artist-to-artist navigation
   // (tapping a Similar row re-renders it in place, per artist-page.js), but
   // the router still gets one stack entry PER artist — so back steps
@@ -1654,8 +1704,30 @@ export function init() {
       }
     }, 150);
   });
-  const sortCtl = createSortControl({ initial: ctx.sort, onChange: (v) => { ctx.sort = v; repaintWall(); } });
+  sortCtl = createSortControl({ initial: ctx.sort, onChange: (v) => { ctx.sort = v; repaintWall(); } });
   $('sort-control').appendChild(sortCtl.el);
+  // Discover entry (build spec 7.2): inserted into the existing toolbar row —
+  // index.html carries no static markup for it, same "build it in JS"
+  // convention as every other Discovery surface (artist page, share moment).
+  // Violet tonal treatment (repo law: brand violet = selected/ours; the fest
+  // accent adds no new place here).
+  const discoverBtn = document.createElement('button');
+  discoverBtn.className = 'discover-chip';
+  discoverBtn.id = 'discover-btn';
+  discoverBtn.textContent = 'Discover';
+  discoverBtn.setAttribute('aria-label', 'Open Discover');
+  discoverBtn.addEventListener('click', openDiscoverDeck);
+  $('sort-control').insertAdjacentElement('afterend', discoverBtn);
+  // Genre canon (js/discovery/genres.js): one repo-owned static fetch, warmed
+  // here rather than per-surface. The deck/artist page/filter sheet also
+  // await loadGenreCanon() themselves for their own first paint (it resolves
+  // instantly from this same cache by then); this copy is for ctx.canonData,
+  // which the WALL needs synchronously on every repaint and has no async
+  // moment of its own to await one in.
+  loadGenreCanon().then((canonData) => {
+    ctx.canonData = canonData;
+    if (state.crewDoc && $('screen-app').style.display !== 'none') repaintWall();
+  });
   const dock = $('dock');
   $('search-input').addEventListener('focus', () => dock.classList.add('hidden'));
   $('search-input').addEventListener('blur', () => dock.classList.remove('hidden'));
