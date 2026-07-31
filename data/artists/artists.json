@@ -1533,8 +1533,13 @@
   },
   "dj heather": {
     "youtubeQuery": "DJ Heather live set",
+    "youtubeVideoIds": [
+      "dTspV7RiZlM",
+      "IyJDwBTa7oo",
+      "DnTsr_ZSloA"
+    ],
     "mbid": "8c2d581b-4482-4653-9d02-f44506604b57",
-    "enrichedAt": "2026-07-31T02:17:21.948Z"
+    "enrichedAt": "2026-07-31T04:06:14.398Z"
   },
   "the symposium": {
     "genres": [
@@ -1547,8 +1552,13 @@
     "soundcloudSlug": "thesymposium",
     "spotifyId": "2FQgnKHydnhSnRS17BSy28",
     "youtubeQuery": "The Symposium live set",
+    "youtubeVideoIds": [
+      "E_7U9ZG2Zgg",
+      "Yb23pCapFp0",
+      "7X40zEKLxwc"
+    ],
     "mbid": "ef15c574-cf5f-4cc8-823f-f4a9e82833f3",
-    "enrichedAt": "2026-07-31T02:17:26.353Z"
+    "enrichedAt": "2026-07-31T04:06:14.799Z"
   },
   "torren foot b2b rawolf paradiso": {
     "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set",
@@ -1563,8 +1573,13 @@
   "girl tones": {
     "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
     "youtubeQuery": "Girl Tones live set",
+    "youtubeVideoIds": [
+      "6CcMWQF6bAs",
+      "5pupGgiFzEQ",
+      "-biDXeAhATk"
+    ],
     "mbid": "4771a96d-bd64-4da2-9acc-da68e52dbd35",
-    "enrichedAt": "2026-07-31T02:17:33.386Z"
+    "enrichedAt": "2026-07-31T04:06:16.039Z"
   },
   "nourished by time": {
     "genres": [
@@ -1583,8 +1598,13 @@
     ],
     "spotifyId": "5MKl9FP3O6MpQhVx7QRFyc",
     "youtubeQuery": "The Droptines live set",
+    "youtubeVideoIds": [
+      "x2L7mVK8Trs",
+      "M5sj8NhSWjI",
+      "LR8VGy4A6v8"
+    ],
     "mbid": "34fd1f98-630a-4a43-92c1-723225fb7e9e",
-    "enrichedAt": "2026-07-31T02:17:38.548Z"
+    "enrichedAt": "2026-07-31T04:06:16.319Z"
   },
   "black party": {
     "genres": [
@@ -1598,8 +1618,13 @@
   "azzecca": {
     "spotifyId": "2k5DY2QDU3kBi5DX7OQlWj",
     "youtubeQuery": "Azzecca live set",
+    "youtubeVideoIds": [
+      "jkVakJ0ODv4",
+      "gUSt3UFBHpM",
+      "dJ6gzd4t2kk"
+    ],
     "mbid": "f55e5016-c424-467f-b90c-8db26a017ea8",
-    "enrichedAt": "2026-07-31T02:17:48.473Z"
+    "enrichedAt": "2026-07-31T04:06:16.727Z"
   },
   "julie": {
     "youtubeQuery": "Julie live set",
@@ -1644,7 +1669,12 @@
   },
   "yana": {
     "youtubeQuery": "Yana live set",
-    "enrichedAt": "2026-07-31T02:18:14.522Z"
+    "youtubeVideoIds": [
+      "jkaMqrrLzlE",
+      "JylblmOHXbI",
+      "diCTH3MW6Ho"
+    ],
+    "enrichedAt": "2026-07-31T04:06:20.145Z"
   },
   "half•alive": {
     "genres": [
@@ -1676,8 +1706,13 @@
     "soundcloudSlug": "himattchampion",
     "spotifyId": "29Oq9Nv8zLgu3IvX1tIpbm",
     "youtubeQuery": "Matt Champion live set",
+    "youtubeVideoIds": [
+      "-k_pffTHXIY",
+      "dtxPNf433TQ",
+      "p_Uscl2J7x4"
+    ],
     "mbid": "b4d4301c-d88f-4d5e-9ccc-bf2933a0a297",
-    "enrichedAt": "2026-07-31T02:18:22.960Z"
+    "enrichedAt": "2026-07-31T04:06:20.567Z"
   },
   "the blessed madonna": {
     "genres": [
@@ -1695,8 +1730,13 @@
   "bo staloch": {
     "spotifyId": "2EtiCherSxAKu7mnbU8Poh",
     "youtubeQuery": "Bo Staloch live set",
+    "youtubeVideoIds": [
+      "MAQP3bHL3Zc",
+      "k8mtXwtapX4",
+      "yFTvbcNhEgc"
+    ],
     "mbid": "c353dd11-40c4-493c-ad23-063b19d89ba0",
-    "enrichedAt": "2026-07-31T02:18:27.896Z"
+    "enrichedAt": "2026-07-31T04:06:20.843Z"
   },
   "sierra ferrell": {
     "genres": [
@@ -1728,8 +1768,13 @@
     "soundcloudSlug": "glassbeams",
     "spotifyId": "1LTFJvVvRw7ghAyThxYmnF",
     "youtubeQuery": "Glass Beams live set",
+    "youtubeVideoIds": [
+      "E4X56wIOZns",
+      "jWLt5ZnHho8",
+      "UMwPs_oonzY"
+    ],
     "mbid": "5bb54b77-2caa-4377-bdc3-3b8c0f5e507f",
-    "enrichedAt": "2026-07-31T02:18:38.908Z"
+    "enrichedAt": "2026-07-31T04:06:21.612Z"
   },
   "colby acuff": {
     "spotifyId": "2L9DVKDXY3W8uRl5TwLbMC",
@@ -1743,8 +1788,13 @@
     ],
     "spotifyId": "1dy5WNgIKQU6ezkpZs4y8z",
     "youtubeQuery": "Role Model live set",
+    "youtubeVideoIds": [
+      "YUozYwdLcOM",
+      "0Gz_mBCR8v4",
+      "QuwGINjmnqo"
+    ],
     "mbid": "4c76d2ab-cc32-47b9-8bfe-d382bed617f6",
-    "enrichedAt": "2026-07-31T02:18:46.202Z"
+    "enrichedAt": "2026-07-31T04:06:21.958Z"
   },
   "cloonee": {
     "soundcloudSlug": "cloonee",
@@ -1772,8 +1822,13 @@
     "soundcloudSlug": "magbae",
     "spotifyId": "1oPRcJUkloHaRLYx0olBLJ",
     "youtubeQuery": "Magdalena Bay live set",
+    "youtubeVideoIds": [
+      "m9eM3M_PFsc",
+      "0p5OYyUOOCs",
+      "yapotUKKw-8"
+    ],
     "mbid": "68c261d5-48c8-4ea9-9466-9fc908dc79bb",
-    "enrichedAt": "2026-07-31T02:18:53.713Z"
+    "enrichedAt": "2026-07-31T04:06:22.330Z"
   },
   "overmono": {
     "genres": [
@@ -1786,8 +1841,13 @@
     "soundcloudSlug": "overmono",
     "spotifyId": "01PnN11ovfen6xUOHfNpn3",
     "youtubeQuery": "Overmono live set",
+    "youtubeVideoIds": [
+      "xgJBhezlMoE",
+      "9Stt4wq3KCE",
+      "BpA2n8bvpOk"
+    ],
     "mbid": "b841d0f2-0a2a-4cb2-a2d8-9895b7f90bfa",
-    "enrichedAt": "2026-07-31T02:18:56.313Z"
+    "enrichedAt": "2026-07-31T04:06:22.662Z"
   },
   "cage the elephant": {
     "genres": [
@@ -1816,8 +1876,13 @@
     "soundcloudSlug": "motorola2k7",
     "spotifyId": "2oM7LMPFu882oC6jSwEqjd",
     "youtubeQuery": "Xaviersobased live set",
+    "youtubeVideoIds": [
+      "cOGgsTayAh0",
+      "Ixlv_NoxIKk",
+      "EIN21Lg8b_I"
+    ],
     "mbid": "155cfd40-dcde-471e-acc0-32179916165c",
-    "enrichedAt": "2026-07-31T02:19:03.949Z"
+    "enrichedAt": "2026-07-31T04:06:23.032Z"
   },
   "mau p": {
     "spotifyId": "0w1sbtZVQoK6GzV4A4OkCv",
@@ -1870,8 +1935,13 @@
     ],
     "spotifyId": "5b5bt4mZQpJMoCRbiQ7diH",
     "youtubeQuery": "Royel Otis live set",
+    "youtubeVideoIds": [
+      "3UAe9ux2RXc",
+      "uC6pmFKh25w",
+      "N_usgAaPo6I"
+    ],
     "mbid": "2244c1f9-773f-4541-a4fe-ee6dc4f2ce60",
-    "enrichedAt": "2026-07-31T02:19:17.710Z"
+    "enrichedAt": "2026-07-31T04:06:23.712Z"
   },
   "dom dolla": {
     "soundcloudSlug": "domdolla",
@@ -1898,8 +1968,13 @@
     ],
     "spotifyId": "1khChLj7REGqjM043PlYyn",
     "youtubeQuery": "Xdinary Heroes live set",
+    "youtubeVideoIds": [
+      "ROtw1Wpu3CQ",
+      "RIVjHpgSsII",
+      "F2OWXsdDPXo"
+    ],
     "mbid": "d95a463f-e7d3-4c97-98ba-57f75cb4fda2",
-    "enrichedAt": "2026-07-31T02:19:25.679Z"
+    "enrichedAt": "2026-07-31T04:06:24.235Z"
   },
   "tyler, the creator": {
     "genres": [
@@ -1940,8 +2015,13 @@
     "soundcloudSlug": "fosterthepeoplemusic",
     "spotifyId": "7gP3bB2nilZXLfPHJhMdvc",
     "youtubeQuery": "Foster the People live set",
+    "youtubeVideoIds": [
+      "JGk6SyXKD8Y",
+      "AEjXDCNww9c",
+      "3S_KXAQBBvA"
+    ],
     "mbid": "e0e1a584-dd0a-4bd1-88d1-c4c62895039d",
-    "enrichedAt": "2026-07-31T02:19:41.593Z"
+    "enrichedAt": "2026-07-31T04:06:24.951Z"
   },
   "djo": {
     "genres": [
@@ -1970,8 +2050,13 @@
     "soundcloudSlug": "oliviarodrigo",
     "spotifyId": "1McMsnEElThX1knmY4oliG",
     "youtubeQuery": "Olivia Rodrigo live set",
+    "youtubeVideoIds": [
+      "dTP19ZcGngY",
+      "jmh3iruf4RA",
+      "ro39l9DyS7Y"
+    ],
     "mbid": "6925db17-f35e-42f3-a4eb-84ee6bf5d4b0",
-    "enrichedAt": "2026-07-31T02:19:54.286Z"
+    "enrichedAt": "2026-07-31T04:06:25.474Z"
   },
   "hex cougar": {
     "genres": [
@@ -1998,8 +2083,13 @@
     "soundcloudSlug": "murdabeatz9",
     "spotifyId": "3CbYyyd8wH3RT6t0jwpdzC",
     "youtubeQuery": "Murda Beatz live set",
+    "youtubeVideoIds": [
+      "l3lNYD9J7V8",
+      "FN83Wpl6m60",
+      "B11G57_GFEY"
+    ],
     "mbid": "91376b53-c37d-4eed-ac24-63d167af6885",
-    "enrichedAt": "2026-07-31T02:20:04.468Z"
+    "enrichedAt": "2026-07-31T04:06:26.010Z"
   },
   "bunt.": {
     "youtubeQuery": "BUNT. live set",
@@ -2050,8 +2140,13 @@
     ],
     "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
     "youtubeQuery": "Isabel LaRosa live set",
+    "youtubeVideoIds": [
+      "XWKjY8Je2u8",
+      "QVAskXAAAD8",
+      "53wrUCIDdq8"
+    ],
     "mbid": "fa22eeda-8db9-4ae5-97c9-6d0b9ceb7cf3",
-    "enrichedAt": "2026-07-31T02:20:26.487Z"
+    "enrichedAt": "2026-07-31T04:06:26.701Z"
   },
   "ravyn lenae": {
     "genres": [
@@ -2079,8 +2174,13 @@
     ],
     "spotifyId": "21UPYSRWFKwtqvSAnFnSvS",
     "youtubeQuery": "Amaarae live set",
+    "youtubeVideoIds": [
+      "gGyP2VGUQMY",
+      "N7AZ7zdQncQ",
+      "ZbgbcoN3n10"
+    ],
     "mbid": "29fab96f-c3a2-4251-80f6-7ccda50da706",
-    "enrichedAt": "2026-07-31T02:20:38.030Z"
+    "enrichedAt": "2026-07-31T04:06:27.155Z"
   },
   "wallows": {
     "genres": [
@@ -2110,8 +2210,13 @@
   "caroline kingsbury": {
     "spotifyId": "0uE0bzpIfuZ9XVduu0byzg",
     "youtubeQuery": "Caroline Kingsbury live set",
+    "youtubeVideoIds": [
+      "EYHDM96lnkE",
+      "hMap7PRzRGg",
+      "acV2V1kS69U"
+    ],
     "mbid": "a7515be2-3bd8-402f-87bc-a77e01c9de73",
-    "enrichedAt": "2026-07-31T02:20:50.474Z"
+    "enrichedAt": "2026-07-31T04:06:27.573Z"
   },
   "carol ades": {
     "genres": [
@@ -2177,8 +2282,13 @@
     "soundcloudSlug": "itsthedare",
     "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
     "youtubeQuery": "The Dare live set",
+    "youtubeVideoIds": [
+      "axntFHFkRL4",
+      "utvDi43sXvI",
+      "hZsAdBdS7u4"
+    ],
     "mbid": "7fe3380a-8e35-48d1-ac5a-174fe6b5060b",
-    "enrichedAt": "2026-07-31T02:21:30.879Z"
+    "enrichedAt": "2026-07-31T04:06:28.268Z"
   },
   "ocean alley": {
     "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
@@ -2265,8 +2375,13 @@
     "soundcloudSlug": "janeremover",
     "spotifyId": "2rLGlNI6htigNxx172qxLu",
     "youtubeQuery": "Jane Remover live set",
+    "youtubeVideoIds": [
+      "hHON5zyQUE4",
+      "0x48KpDr_mY",
+      "PkqmbvX9nM0"
+    ],
     "mbid": "f4b6e451-5dce-4842-a555-f793892299b3",
-    "enrichedAt": "2026-07-31T02:22:09.964Z"
+    "enrichedAt": "2026-07-31T04:06:29.149Z"
   },
   "otoboke beaver": {
     "youtubeQuery": "Otoboke Beaver live set",
@@ -2307,8 +2422,13 @@
     "soundcloudSlug": "thisistess",
     "spotifyId": "3bIr4g7fZxrqbUbAEqFsCS",
     "youtubeQuery": "Tessla live set",
+    "youtubeVideoIds": [
+      "xHjJIyB6FGU",
+      "ZC6bEn15_UM",
+      "Hlw8sUGAtw0"
+    ],
     "mbid": "f9878db4-79c0-4ad3-8a8f-73e498cef686",
-    "enrichedAt": "2026-07-31T02:22:26.735Z"
+    "enrichedAt": "2026-07-31T04:06:31.105Z"
   },
   "birds of a feather": {
     "youtubeQuery": "Birds of a Feather live set",

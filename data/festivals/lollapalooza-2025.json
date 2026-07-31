@@ -1042,7 +1042,12 @@
       "name": "DJ Heather",
       "day": "Thursday",
       "stage": "DOLLAPALOOZA",
-      "youtubeQuery": "DJ Heather live set"
+      "youtubeQuery": "DJ Heather live set",
+      "youtubeVideoIds": [
+        "dTspV7RiZlM",
+        "IyJDwBTa7oo",
+        "DnTsr_ZSloA"
+      ]
     },
     {
       "name": "The Symposium",
@@ -1057,7 +1062,12 @@
       ],
       "soundcloudSlug": "thesymposium",
       "spotifyId": "2FQgnKHydnhSnRS17BSy28",
-      "youtubeQuery": "The Symposium live set"
+      "youtubeQuery": "The Symposium live set",
+      "youtubeVideoIds": [
+        "E_7U9ZG2Zgg",
+        "Yb23pCapFp0",
+        "7X40zEKLxwc"
+      ]
     },
     {
       "name": "Torren Foot B2B Rawolf Paradiso",
@@ -1077,7 +1087,12 @@
       "day": "Thursday",
       "stage": "BMI",
       "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
-      "youtubeQuery": "Girl Tones live set"
+      "youtubeQuery": "Girl Tones live set",
+      "youtubeVideoIds": [
+        "6CcMWQF6bAs",
+        "5pupGgiFzEQ",
+        "-biDXeAhATk"
+      ]
     },
     {
       "name": "Nourished by Time",
@@ -1099,7 +1114,12 @@
         "americana"
       ],
       "spotifyId": "5MKl9FP3O6MpQhVx7QRFyc",
-      "youtubeQuery": "The Droptines live set"
+      "youtubeQuery": "The Droptines live set",
+      "youtubeVideoIds": [
+        "x2L7mVK8Trs",
+        "M5sj8NhSWjI",
+        "LR8VGy4A6v8"
+      ]
     },
     {
       "name": "Black Party",
@@ -1116,7 +1136,12 @@
       "day": "Thursday",
       "stage": "DOLLAPALOOZA",
       "spotifyId": "2k5DY2QDU3kBi5DX7OQlWj",
-      "youtubeQuery": "Azzecca live set"
+      "youtubeQuery": "Azzecca live set",
+      "youtubeVideoIds": [
+        "jkVakJ0ODv4",
+        "gUSt3UFBHpM",
+        "dJ6gzd4t2kk"
+      ]
     },
     {
       "name": "Julie",
@@ -1171,7 +1196,12 @@
       "name": "Yana",
       "day": "Thursday",
       "stage": "BMI",
-      "youtubeQuery": "Yana live set"
+      "youtubeQuery": "Yana live set",
+      "youtubeVideoIds": [
+        "jkaMqrrLzlE",
+        "JylblmOHXbI",
+        "diCTH3MW6Ho"
+      ]
     },
     {
       "name": "half•alive",
@@ -1207,7 +1237,12 @@
       ],
       "soundcloudSlug": "himattchampion",
       "spotifyId": "29Oq9Nv8zLgu3IvX1tIpbm",
-      "youtubeQuery": "Matt Champion live set"
+      "youtubeQuery": "Matt Champion live set",
+      "youtubeVideoIds": [
+        "-k_pffTHXIY",
+        "dtxPNf433TQ",
+        "p_Uscl2J7x4"
+      ]
     },
     {
       "name": "The Blessed Madonna",
@@ -1228,7 +1263,12 @@
       "day": "Thursday",
       "stage": "BMI",
       "spotifyId": "2EtiCherSxAKu7mnbU8Poh",
-      "youtubeQuery": "Bo Staloch live set"
+      "youtubeQuery": "Bo Staloch live set",
+      "youtubeVideoIds": [
+        "MAQP3bHL3Zc",
+        "k8mtXwtapX4",
+        "yFTvbcNhEgc"
+      ]
     },
     {
       "name": "Sierra Ferrell",
@@ -1265,7 +1305,12 @@
       ],
       "soundcloudSlug": "glassbeams",
       "spotifyId": "1LTFJvVvRw7ghAyThxYmnF",
-      "youtubeQuery": "Glass Beams live set"
+      "youtubeQuery": "Glass Beams live set",
+      "youtubeVideoIds": [
+        "E4X56wIOZns",
+        "jWLt5ZnHho8",
+        "UMwPs_oonzY"
+      ]
     },
     {
       "name": "Colby Acuff",
@@ -1282,7 +1327,12 @@
         "pop"
       ],
       "spotifyId": "1dy5WNgIKQU6ezkpZs4y8z",
-      "youtubeQuery": "Role Model live set"
+      "youtubeQuery": "Role Model live set",
+      "youtubeVideoIds": [
+        "YUozYwdLcOM",
+        "0Gz_mBCR8v4",
+        "QuwGINjmnqo"
+      ]
     },
     {
       "name": "Cloonee",
@@ -1290,7 +1340,12 @@
       "stage": "DOLLAPALOOZA",
       "soundcloudSlug": "cloonee",
       "spotifyId": "7MdlXmq2HViAJWo9cf30sR",
-      "youtubeQuery": "Cloonee live set"
+      "youtubeQuery": "Cloonee live set",
+      "youtubeVideoIds": [
+        "UE6wjxvMRz0",
+        "sotQaR--0Kw",
+        "3mOMDdX6miw"
+      ]
     },
     {
       "name": "Magdalena Bay",
@@ -1308,7 +1363,12 @@
       ],
       "soundcloudSlug": "magbae",
       "spotifyId": "1oPRcJUkloHaRLYx0olBLJ",
-      "youtubeQuery": "Magdalena Bay live set"
+      "youtubeQuery": "Magdalena Bay live set",
+      "youtubeVideoIds": [
+        "m9eM3M_PFsc",
+        "0p5OYyUOOCs",
+        "yapotUKKw-8"
+      ]
     },
     {
       "name": "Overmono",
@@ -1323,7 +1383,12 @@
       ],
       "soundcloudSlug": "overmono",
       "spotifyId": "01PnN11ovfen6xUOHfNpn3",
-      "youtubeQuery": "Overmono live set"
+      "youtubeQuery": "Overmono live set",
+      "youtubeVideoIds": [
+        "xgJBhezlMoE",
+        "9Stt4wq3KCE",
+        "BpA2n8bvpOk"
+      ]
     },
     {
       "name": "Cage the Elephant",
@@ -1355,7 +1420,12 @@
       ],
       "soundcloudSlug": "motorola2k7",
       "spotifyId": "2oM7LMPFu882oC6jSwEqjd",
-      "youtubeQuery": "Xaviersobased live set"
+      "youtubeQuery": "Xaviersobased live set",
+      "youtubeVideoIds": [
+        "cOGgsTayAh0",
+        "Ixlv_NoxIKk",
+        "EIN21Lg8b_I"
+      ]
     },
     {
       "name": "Mau P",
@@ -1414,7 +1484,12 @@
         "pop"
       ],
       "spotifyId": "5b5bt4mZQpJMoCRbiQ7diH",
-      "youtubeQuery": "Royel Otis live set"
+      "youtubeQuery": "Royel Otis live set",
+      "youtubeVideoIds": [
+        "3UAe9ux2RXc",
+        "uC6pmFKh25w",
+        "N_usgAaPo6I"
+      ]
     },
     {
       "name": "Dom Dolla",
@@ -1445,7 +1520,12 @@
         "metal"
       ],
       "spotifyId": "1khChLj7REGqjM043PlYyn",
-      "youtubeQuery": "Xdinary Heroes live set"
+      "youtubeQuery": "Xdinary Heroes live set",
+      "youtubeVideoIds": [
+        "ROtw1Wpu3CQ",
+        "RIVjHpgSsII",
+        "F2OWXsdDPXo"
+      ]
     },
     {
       "name": "Tyler, the Creator",
@@ -1491,7 +1571,12 @@
       ],
       "soundcloudSlug": "fosterthepeoplemusic",
       "spotifyId": "7gP3bB2nilZXLfPHJhMdvc",
-      "youtubeQuery": "Foster the People live set"
+      "youtubeQuery": "Foster the People live set",
+      "youtubeVideoIds": [
+        "JGk6SyXKD8Y",
+        "AEjXDCNww9c",
+        "3S_KXAQBBvA"
+      ]
     },
     {
       "name": "Djo",
@@ -1523,7 +1608,12 @@
       ],
       "soundcloudSlug": "oliviarodrigo",
       "spotifyId": "1McMsnEElThX1knmY4oliG",
-      "youtubeQuery": "Olivia Rodrigo live set"
+      "youtubeQuery": "Olivia Rodrigo live set",
+      "youtubeVideoIds": [
+        "dTP19ZcGngY",
+        "jmh3iruf4RA",
+        "ro39l9DyS7Y"
+      ]
     },
     {
       "name": "Mary Droppinz",
@@ -1562,20 +1652,35 @@
       ],
       "soundcloudSlug": "murdabeatz9",
       "spotifyId": "3CbYyyd8wH3RT6t0jwpdzC",
-      "youtubeQuery": "Murda Beatz live set"
+      "youtubeQuery": "Murda Beatz live set",
+      "youtubeVideoIds": [
+        "l3lNYD9J7V8",
+        "FN83Wpl6m60",
+        "B11G57_GFEY"
+      ]
     },
     {
       "name": "Alleycvt",
       "day": "Friday",
       "stage": "Perry's",
       "spotifyId": "4JxRK2gxmri7L7OWaxnVD1",
-      "youtubeQuery": "Alleycvt live set"
+      "youtubeQuery": "Alleycvt live set",
+      "youtubeVideoIds": [
+        "yGXyuoeSwBU",
+        "t0zryekEWao",
+        "oEkQ6gU3VFs"
+      ]
     },
     {
       "name": "BUNT.",
       "day": "Friday",
       "stage": "Perry's",
-      "youtubeQuery": "BUNT. live set"
+      "youtubeQuery": "BUNT. live set",
+      "youtubeVideoIds": [
+        "2BKazr739po",
+        "7t4FwxR_ymw",
+        "fymynxNKFI4"
+      ]
     },
     {
       "name": "Tape B",
@@ -1588,7 +1693,12 @@
       ],
       "soundcloudSlug": "tape-b-official",
       "spotifyId": "59tlsKpLWoLTxjNNS2wdPi",
-      "youtubeQuery": "Tape B live set"
+      "youtubeQuery": "Tape B live set",
+      "youtubeVideoIds": [
+        "x-fYL7jm7eg",
+        "zNk3348-NkQ",
+        "OH7F-bc_8bs"
+      ]
     },
     {
       "name": "Isoxo",
@@ -1632,7 +1742,12 @@
         "alternative pop"
       ],
       "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
-      "youtubeQuery": "Isabel LaRosa live set"
+      "youtubeQuery": "Isabel LaRosa live set",
+      "youtubeVideoIds": [
+        "XWKjY8Je2u8",
+        "QVAskXAAAD8",
+        "53wrUCIDdq8"
+      ]
     },
     {
       "name": "Ravyn Lenae",
@@ -1663,7 +1778,12 @@
         "r&b"
       ],
       "spotifyId": "21UPYSRWFKwtqvSAnFnSvS",
-      "youtubeQuery": "Amaarae live set"
+      "youtubeQuery": "Amaarae live set",
+      "youtubeVideoIds": [
+        "gGyP2VGUQMY",
+        "N7AZ7zdQncQ",
+        "ZbgbcoN3n10"
+      ]
     },
     {
       "name": "Wallows",
@@ -1698,14 +1818,24 @@
       "day": "Friday",
       "stage": "BMI",
       "spotifyId": "0uE0bzpIfuZ9XVduu0byzg",
-      "youtubeQuery": "Caroline Kingsbury live set"
+      "youtubeQuery": "Caroline Kingsbury live set",
+      "youtubeVideoIds": [
+        "EYHDM96lnkE",
+        "hMap7PRzRGg",
+        "acV2V1kS69U"
+      ]
     },
     {
       "name": "Midnight Generation",
       "day": "Friday",
       "stage": "BMI",
       "spotifyId": "4CKIGHCZRzNoiNDSaW5eaq",
-      "youtubeQuery": "Midnight Generation live set"
+      "youtubeQuery": "Midnight Generation live set",
+      "youtubeVideoIds": [
+        "Ko2IxE-mY50",
+        "ab4VdLongGs",
+        "0czmXDQG8F8"
+      ]
     },
     {
       "name": "Carol Ades",
@@ -1780,7 +1910,12 @@
       ],
       "soundcloudSlug": "itsthedare",
       "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
-      "youtubeQuery": "The Dare live set"
+      "youtubeQuery": "The Dare live set",
+      "youtubeVideoIds": [
+        "axntFHFkRL4",
+        "utvDi43sXvI",
+        "hZsAdBdS7u4"
+      ]
     },
     {
       "name": "Ocean Alley",
@@ -1876,7 +2011,12 @@
       ],
       "soundcloudSlug": "janeremover",
       "spotifyId": "2rLGlNI6htigNxx172qxLu",
-      "youtubeQuery": "Jane Remover live set"
+      "youtubeQuery": "Jane Remover live set",
+      "youtubeVideoIds": [
+        "hHON5zyQUE4",
+        "0x48KpDr_mY",
+        "PkqmbvX9nM0"
+      ]
     },
     {
       "name": "Otoboke Beaver",
@@ -1925,7 +2065,12 @@
       "stage": "Perry's",
       "soundcloudSlug": "thisistess",
       "spotifyId": "3bIr4g7fZxrqbUbAEqFsCS",
-      "youtubeQuery": "Tessla live set"
+      "youtubeQuery": "Tessla live set",
+      "youtubeVideoIds": [
+        "xHjJIyB6FGU",
+        "ZC6bEn15_UM",
+        "Hlw8sUGAtw0"
+      ]
     },
     {
       "name": "Birds of a Feather",

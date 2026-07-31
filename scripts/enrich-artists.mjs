@@ -213,19 +213,26 @@ async function enrichOne(entry, cache, { youtubeKey, dryRun, log }) {
 
   if (!isNonEmpty(preMerged.youtubeQuery)) fetched.youtubeQuery = `${entry.name} live set`;
 
-  if (youtubeKey && !isNonEmpty(preMerged.youtubeVideoIds)) {
+  // A search costs 100 units against a 10k/day quota whether or not it finds
+  // anything — so a no-result is remembered in the cache (youtubeSearchedAt)
+  // and never re-searched. (First Lolla run burnt 6.1k units re-searchable
+  // no-results before this existed.) Clear the field by hand to force a redo.
+  let youtubeSearchedAt = cached.youtubeSearchedAt;
+  if (youtubeKey && !isNonEmpty(preMerged.youtubeVideoIds) && !cached.youtubeSearchedAt) {
     const query = preMerged.youtubeQuery || fetched.youtubeQuery;
     const ids = await youtubeSearchTop3(query, youtubeKey);
     if (ids.length) fetched.youtubeVideoIds = ids;
+    else youtubeSearchedAt = new Date().toISOString();
   }
 
   const entryFields = mergeEnrichment(entry, cached, fetched);
   const cacheFields = mergeEnrichment(cached, entry, fetched);
   const cacheChanged = Object.keys(fetched).length > 0
+    || youtubeSearchedAt !== cached.youtubeSearchedAt
     || ENRICH_FIELDS.some((f) => cacheFields[f] !== undefined && cached[f] === undefined);
 
   return {
-    key, entryFields, cacheFields, cacheChanged, mbid: fetched.mbid || cached.mbid,
+    key, entryFields, cacheFields, cacheChanged, mbid: fetched.mbid || cached.mbid, youtubeSearchedAt,
   };
 }
 
@@ -291,6 +298,7 @@ async function main() {
       cache[result.key] = {
         ...result.cacheFields,
         ...(result.mbid ? { mbid: result.mbid } : {}),
+        ...(result.youtubeSearchedAt ? { youtubeSearchedAt: result.youtubeSearchedAt } : {}),
         enrichedAt: new Date().toISOString(),
       };
     }
