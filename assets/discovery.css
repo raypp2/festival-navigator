@@ -1,0 +1,234 @@
+/* Discovery epic — component styles. Values looked up from assets/v3-tokens.css
+ * wherever one matches; --disc-* custom properties below cover the handful of
+ * design-sheet values with no existing token. No new colors beyond what the
+ * handoff sheets draw. Sections are added per milestone — this file currently
+ * holds only the M2 sample player. */
+
+:root {
+  /* SoundCloud / YouTube identity colors — Spotify reuses --spotify-stroke
+   * (#67B98A), which is already an exact match, so no --disc-sp is needed.
+   * Source: design/discovery-handoff/project/Discovery - Sample Player.dc.html,
+   * the inline SRC const (yt #FF4E45, sc #FF7A2F). */
+  --disc-yt: #FF4E45;
+  --disc-sc: #FF7A2F;
+
+  /* Fixed embed stage shapes (build spec section 6 / design sheet "What the
+   * research changed" — YouTube 16:9, SoundCloud 166px, Spotify 352px. Panel
+   * height varies by tab; these are the per-tab constants, not a lock. */
+  --disc-stage-sc-h: 166px;
+  --disc-stage-sp-h: 352px;
+
+  /* Compact (deck-card) now-playing thumbnail — design sheet "02 · Compact",
+   * the 82x46 row a video source never hides behind a round play button. */
+  --disc-np-thumb-w: 82px;
+  --disc-np-thumb-h: 46px;
+}
+
+/* ---- sample player ---- */
+
+.sample-player { display: flex; flex-direction: column; font-family: var(--font-ui); color: var(--text-body); }
+.sample-player * { box-sizing: border-box; }
+
+/* full: artist page / bottom sheet — no outer card, the host provides chrome */
+.sample-player--full { gap: 0; }
+
+/* compact: deck card — its own bordered card, mirrors design sheet "02" */
+.sample-player--compact {
+  gap: 10px; border: 1px solid var(--border-card); border-radius: var(--r-row);
+  background: var(--card); padding: 12px;
+}
+
+/* desktop: artist-page wide layout — bordered panel, stage-beside-rail grid */
+.sample-player--desktop {
+  gap: 0; border: 1px solid var(--border-card); border-radius: var(--r-settings);
+  background: var(--card); overflow: hidden;
+}
+
+.sample-player.is-offline { opacity: .5; }
+
+/* ---- header ---- */
+.sample-player-head { padding: 18px 18px 14px; }
+.sample-player--compact .sample-player-head { padding: 0; display: flex; align-items: center; justify-content: space-between; }
+.sample-player-head-name { margin: 0; color: var(--text-primary); font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); line-height: 1.2; }
+.sample-player-head-genres { color: var(--text-secondary); font-size: 13px; margin-top: 3px; }
+.sample-player-label {
+  font: 800 10px/1 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.sample-player-status {
+  display: inline-flex; align-items: center; gap: 6px; font: 600 10px var(--font-ui); color: var(--text-tertiary);
+}
+.sample-player-status-dot { width: 8px; height: 8px; border-radius: var(--r-pill); background: var(--sync-offline); }
+
+/* ---- tabs ---- */
+.sample-player-tabs { display: flex; gap: 8px; padding: 0 18px 14px; flex-wrap: wrap; }
+.sample-player--compact .sample-player-tabs { padding: 0; gap: 6px; }
+.sample-player--desktop .sample-player-tabs { padding: 0 18px 14px; }
+.sample-player-tab {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 44px; padding: 0 14px; border-radius: var(--r-pill);
+  font: 700 13px var(--font-ui); border: 1px solid var(--border-card);
+  background: transparent; color: var(--text-secondary);
+}
+.sample-player--compact .sample-player-tab { flex: 1; min-height: 34px; padding: 0 6px; font-size: 10.5px; gap: 6px; }
+.sample-player-tab-dot { width: 9px; height: 9px; border-radius: var(--r-pill); flex: none; }
+.sample-player--compact .sample-player-tab-dot { width: 7px; height: 7px; }
+.sample-player-tab.is-current { color: var(--text-primary); background: var(--card-unpicked); }
+.sample-player-tab.is-failed {
+  color: var(--text-secondary); border-style: dashed; border-color: var(--border-input);
+  text-decoration: line-through; opacity: .85;
+}
+.sample-player-tab:disabled { cursor: default; opacity: .5; }
+
+/* ---- stage (full / desktop) ---- */
+.sample-player-stage {
+  position: relative; background: #000;
+}
+.sample-player-stage[data-shape="yt"] { aspect-ratio: 16 / 9; }
+.sample-player-stage[data-shape="sc"] {
+  height: var(--disc-stage-sc-h); background: var(--dock);
+  border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+.sample-player-stage[data-shape="sp"] {
+  height: var(--disc-stage-sp-h); background: var(--dock);
+  border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+.sample-player-stage-embed, .sample-player-stage-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* Mounting: dark stage with "loading…" text — never a spinner over an empty box. */
+.sample-player-stage[data-state="mounting"] { min-height: 96px; }
+.sample-player-stage[data-state="mounting"]::after {
+  content: "loading…"; position: absolute; inset: 0; display: grid; place-items: center;
+  color: var(--text-secondary); font: 600 12px ui-monospace, Menlo, monospace;
+}
+
+/* desktop: stage left, alternates rail right (>=1120px). 960-1119 stays
+ * single column (bigger stage). Spotify spans full width at every size —
+ * player.js only adds .is-split for yt/sc. */
+.sample-player-body { display: block; }
+@media (min-width: 1120px) {
+  .sample-player--desktop .sample-player-body.is-split {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); align-items: start;
+  }
+  .sample-player--desktop .sample-player-body.is-split .sample-player-clips {
+    border-left: 1px solid var(--hairline); max-height: 520px; overflow: auto;
+  }
+}
+
+/* ---- compact now-playing row ---- */
+.sample-player-np { display: flex; align-items: center; gap: 11px; }
+.sample-player-np-thumb {
+  position: relative; width: var(--disc-np-thumb-w); height: var(--disc-np-thumb-h); flex: none;
+  border-radius: var(--r-card); background: #000; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.sample-player-np-thumb .sample-player-stage-embed,
+.sample-player-np-thumb .sample-player-stage-embed iframe { width: 100%; height: 100%; }
+.sample-player-np-progress {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255, 255, 255, .28);
+}
+.sample-player-np-progress-fill { display: block; height: 100%; background: var(--disc-yt); }
+.sample-player-np-btn {
+  position: absolute; inset: 0; margin: auto; width: 44px; height: 44px; flex: none;
+  border-radius: var(--r-pill); border: none;
+  background: rgba(255, 122, 47, .92); color: #fff; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+}
+.sample-player-np-btn:disabled { opacity: .5; }
+
+/* full/desktop YouTube stage: custom overlay controls (compact intentionally
+ * has NO overlay — it keeps YouTube's own tiny native chrome instead, per
+ * the design sheet's "never hides behind a round play button" rule). */
+.sample-player-yt-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.sample-player-yt-overlay-btn {
+  pointer-events: auto; width: 64px; height: 64px; border-radius: var(--r-pill); border: none;
+  background: rgba(255, 78, 69, .9); color: #fff; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.sample-player-yt-overlay-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .85)); pointer-events: none;
+}
+.sample-player-yt-overlay-time {
+  display: flex; justify-content: space-between; font: 600 10.5px ui-monospace, Menlo, monospace;
+  color: var(--text-body); margin-top: 7px;
+}
+.sample-player-np-meta { flex: 1; min-width: 0; }
+.sample-player-np-title { font: 700 12px var(--font-ui); color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sample-player-np-sub { font: 600 10.5px var(--font-ui); color: var(--text-tertiary); margin-top: 2px; }
+
+/* ---- spotify preview chip (always visible whenever no Premium session; we
+ * never detect Premium — this ships as an honesty label, not a probe) ---- */
+.sample-player-sp-chip {
+  display: inline-flex; align-items: center; flex: none; border: 1px solid var(--spotify-stroke);
+  color: var(--spotify-stroke); border-radius: var(--r-pill); padding: 4px 9px;
+  font: 700 9.5px var(--font-ui); letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* ---- alternates (clip list) ---- */
+.sample-player-clips { padding: 14px 18px 18px; }
+.sample-player--compact .sample-player-clips { padding: 10px 0 0; border-top: 1px solid var(--hairline); }
+.sample-player-clips-head {
+  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;
+  font: 800 11px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-secondary);
+}
+.sample-player--compact .sample-player-clips-head { font-size: 9.5px; margin-bottom: 6px; }
+.sample-player-clips-hint { font: 600 11px var(--font-ui); color: var(--text-tertiary); text-transform: none; letter-spacing: 0; }
+.sample-player-cliprow { display: flex; flex-direction: column; gap: 7px; }
+.sample-player--compact .sample-player-cliprow { gap: 6px; }
+.sample-player-clip {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 44px;
+  padding: 9px 11px; border-radius: var(--r-row); border: 1px solid var(--hairline);
+  background: var(--card-unpicked); color: var(--text-body); text-align: left; font: 600 13px var(--font-ui);
+}
+.sample-player--compact .sample-player-clip { min-height: 38px; padding: 6px 9px; font-size: 11.5px; gap: 9px; }
+.sample-player-clip.is-current {
+  border-color: rgb(var(--brand)); background: var(--tonal-fill); color: var(--text-primary);
+}
+.sample-player-clip:disabled { opacity: .55; cursor: default; }
+.sample-player-clip-n { flex: none; width: 18px; font: 700 12px ui-monospace, Menlo, monospace; color: var(--text-secondary); }
+.sample-player-clip.is-current .sample-player-clip-n { color: rgb(var(--brand)); }
+.sample-player-clip-t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sample-player-clip-d { font: 600 11px ui-monospace, Menlo, monospace; color: var(--text-tertiary); flex: none; }
+.sample-player-clip-eq { flex: none; display: none; gap: 2px; align-items: flex-end; height: 14px; }
+.sample-player-clip.is-current .sample-player-clip-eq { display: flex; }
+.sample-player-clip-eq i { width: 3px; border-radius: 2px; background: rgb(var(--brand)); height: 9px; animation: disc-eq 1s ease-in-out infinite; }
+.sample-player-clip-eq i:nth-child(2) { animation-delay: .2s; }
+.sample-player-clip-eq i:nth-child(3) { animation-delay: .4s; }
+@keyframes disc-eq { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+/* The reduced-motion + low-power floors in v3-tokens.css already force
+ * animation:none globally; the eq bars fall back to their static height and
+ * the current row's border/background carry the same meaning without motion. */
+
+/* ---- SoundCloud attribution (required by SC terms) ---- */
+.sample-player-attr { font: 500 11px/1.5 var(--font-ui); color: var(--text-secondary); margin-top: 8px; }
+.sample-player-attr a { color: var(--tonal-text); text-decoration: none; font-weight: 700; }
+.sample-player-attr a:hover { text-decoration: underline; }
+
+.sample-player-foot { font: 500 12px/1.5 var(--font-ui); color: var(--text-secondary); margin-top: 11px; }
+
+/* ---- source-failed state (distinct from offline) ---- */
+.sample-player-error { font: 500 11px/1.5 var(--font-ui); color: var(--text-tertiary); padding: 0 18px 14px; }
+.sample-player--compact .sample-player-error { padding: 0; }
+.sample-player-retry {
+  color: var(--tonal-text); font-weight: 700; background: none; border: none; padding: 0;
+  font: inherit; text-decoration: underline; text-underline-offset: 2px;
+}
+
+/* ---- offline note ---- */
+.sample-player-offline-row { display: flex; align-items: center; gap: 11px; padding: 0 18px 14px; }
+.sample-player--compact .sample-player-offline-row { padding: 0; }
+.sample-player-offline-btn {
+  width: 44px; height: 44px; flex: none; border-radius: var(--r-pill); border: 1px solid var(--border-input);
+  color: var(--text-tertiary); background: transparent; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; cursor: default;
+}
+.sample-player-offline-note { font: 600 11px var(--font-ui); color: var(--text-tertiary); }
+
+/* ---- collapse: "Nothing to sample yet" (zero sources, or all sources failed) ---- */
+.sample-player-collapse {
+  border: 1px dashed var(--border-input); border-radius: var(--r-row); background: var(--dock);
+  padding: 16px; text-align: center;
+}
+.sample-player-collapse-title { font: 700 13px var(--font-ui); color: var(--text-body); }
+.sample-player-collapse-sub { font: 500 11px/1.5 var(--font-ui); color: var(--text-tertiary); margin-top: 5px; }

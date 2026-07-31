@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sample Player v2 — manual harness</title>
+<!--
+  Manual browser test surface for js/discovery/player.js + player-core.js
+  (Discovery M2). Not part of the app shell — a standalone page, same spirit
+  as specifications/player-research/*.html.
+
+  IMPORTANT — secure context: YouTube's IFrame player requires a secure
+  context. Open this file via `http://localhost:<port>/design/player-harness.html`
+  (any static server) or a deployed HTTPS URL. Plain-HTTP LAN IPs and
+  file:// are NOT secure contexts — YouTube will throw error 150/153 there
+  while SoundCloud and Spotify keep working, which is itself a reasonable
+  way to see the error-fallthrough path (see js/discovery/player-core.js
+  markFailed) even without a bad video id.
+
+  `node --test tests/player-core.test.mjs` covers the state machine. Nothing
+  in js/discovery/player.js (DOM + three third-party iframes) can be
+  exercised by node:test — this page is that verification.
+-->
+<link rel="stylesheet" href="../assets/v3-tokens.css">
+<link rel="stylesheet" href="../assets/discovery.css">
+<style>
+  body { margin: 0; background: var(--page); color: var(--text-body); font-family: var(--font-ui); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 18px 60px; }
+  h1 { font-family: var(--font-display); letter-spacing: var(--track-display); color: var(--text-header);
+       font-size: clamp(22px, 4vw, 30px); text-transform: uppercase; margin: 0 0 4px; }
+  .sub { color: var(--text-secondary); font-size: 13px; max-width: 74ch; margin: 0 0 18px; }
+  .warn { border: 1px solid var(--danger); background: rgba(248,113,113,.08); color: var(--text-body);
+          border-radius: var(--r-row); padding: 10px 14px; font-size: 12.5px; margin-bottom: 18px; display: none; }
+  .warn.show { display: block; }
+  .cols { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; } }
+  .panel { border: 1px solid var(--border-card); border-radius: var(--r-settings); background: var(--card); padding: 14px; }
+  .panel + .panel { margin-top: 14px; }
+  .panel h2 { font: 800 11px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+              color: var(--text-secondary); margin: 0 0 10px; }
+  .artist-btn {
+    display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; min-height: 44px;
+    padding: 8px 10px; border-radius: var(--r-row); border: 1px solid var(--border-card);
+    background: var(--card-unpicked); color: var(--text-body); font: 600 12.5px var(--font-ui); margin-bottom: 7px;
+  }
+  .artist-btn.is-current { border-color: rgb(var(--brand)); background: var(--tonal-fill); color: #fff; }
+  .artist-btn .dots { display: flex; gap: 4px; margin-left: auto; }
+  .artist-btn .dot { width: 7px; height: 7px; border-radius: 999px; }
+  .seg { display: flex; gap: 6px; }
+  .seg button {
+    flex: 1; min-height: 40px; border-radius: var(--r-row); border: 1px solid var(--border-card);
+    background: var(--card-unpicked); color: var(--text-secondary); font: 700 11.5px var(--font-ui);
+  }
+  .seg button.is-current { color: #fff; border-color: rgb(var(--brand)); background: var(--tonal-fill); }
+  .slot { border: 1px dashed var(--border-input); border-radius: var(--r-settings); padding: 14px; min-height: 120px; }
+  .slot-label { font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+                color: var(--text-tertiary); margin-bottom: 10px; }
+  .handover-row { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+  .handover-row button {
+    min-height: 40px; padding: 0 14px; border-radius: var(--r-pill); border: 1px solid var(--border-card);
+    background: var(--card-unpicked); color: var(--text-body); font: 700 12px var(--font-ui);
+  }
+  .log { background: #07060D; border: 1px solid var(--hairline); border-radius: var(--r-row); padding: 10px;
+         height: 150px; overflow: auto; font: 11px/1.5 ui-monospace, Menlo, monospace; color: var(--text-body);
+         white-space: pre-wrap; margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Sample Player v2 — harness</h1>
+  <p class="sub">Pick an artist, switch layouts, and use "Hand over" to move the live embed between the
+    card slot and the sheet slot without restarting playback. Only one embed exists at a time across both
+    slots — that's the thing to watch.</p>
+  <p class="warn" id="insecure-warn">⚠ Insecure context. YouTube's player needs a secure context — open this
+    page via <code>http://localhost</code> or a deployed HTTPS URL. SoundCloud and Spotify still work here;
+    tapping the YouTube tab is a quick way to see the error-fallthrough state.</p>
+
+  <div class="cols">
+    <div>
+      <div class="panel">
+        <h2>Artist</h2>
+        <div id="artist-list"></div>
+      </div>
+      <div class="panel">
+        <h2>Layout</h2>
+        <div class="seg" id="layout-seg">
+          <button data-layout="full">Full</button>
+          <button data-layout="compact">Compact</button>
+          <button data-layout="desktop">Desktop</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="handover-row">
+        <button id="handover-card">← Hand over to card slot</button>
+        <button id="handover-sheet">Hand over to sheet slot →</button>
+      </div>
+      <div class="slot">
+        <div class="slot-label">Card slot</div>
+        <div id="card-host"></div>
+      </div>
+      <div class="slot" style="margin-top:14px">
+        <div class="slot-label">Sheet slot</div>
+        <div id="sheet-host"></div>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { mountPlayer, PRIORITY, SOURCE_META } from '../js/discovery/player.js';
+
+// Verified reference dataset — specifications/player-research/TEST-PLAN.md
+// (2026-07-24). Do not invent ids here; add more only once verified the same
+// way (Spotify/SoundCloud oEmbed, YouTube playableInEmbed on the watch page).
+const ARTISTS = [
+  { id: 'cdw', name: 'Charlotte de Witte', genres: ['Hard Techno', 'Melodic Techno'],
+    sources: { youtubeVideoIds: ['MuuWGXVLrPc'], youtubeLabels: ['Tomorrowland 2022'], soundcloudSlug: 'charlottedewittemusic', spotifyId: '1lJhME1ZpzsEa5M0wW6Mso' } },
+  { id: 'al', name: 'Amelie Lens', genres: ['Techno', 'Acid'],
+    sources: { youtubeVideoIds: ['_Dy_Cn0HEZU'], youtubeLabels: ['Tomorrowland 2023'], soundcloudSlug: 'amelielens', spotifyId: '5Ho1vKl1Uz8bJlk4vbmvmf' } },
+  { id: 'ab', name: 'Adam Beyer', genres: ['Techno', 'Drumcode'],
+    sources: { youtubeVideoIds: ['7R5yo5FznTI'], youtubeLabels: ['Tomorrowland 2024 · WE2'], soundcloudSlug: 'adambeyer' } }, // no Spotify — real missing-source case
+  { id: 'btsm', name: 'Skull Machine (Black Tiger Sex Machine × Kai Wachi)', genres: ['Dubstep', 'Riddim'],
+    sources: { youtubeVideoIds: ['VR-KzGFQBTE'], youtubeLabels: ['EDC Vegas 2025 · Full Set'], soundcloudSlug: 'blacktigersexmachine' } }, // long name + no Spotify
+  { id: 'unannounced', name: 'Unannounced B2B', genres: [], sources: {} }, // zero sources -> "Nothing to sample yet"
+];
+
+const el = (id) => document.getElementById(id);
+function log(msg) {
+  const l = el('log');
+  l.textContent += new Date().toLocaleTimeString() + '  ' + msg + '\n';
+  l.scrollTop = l.scrollHeight;
+}
+
+if (!window.isSecureContext) el('insecure-warn').classList.add('show');
+
+let currentArtist = ARTISTS[0];
+let currentLayout = 'full';
+let currentSlot = 'card'; // which host currently owns the live player
+let controller = null;
+
+function hostFor(slot) { return slot === 'card' ? el('card-host') : el('sheet-host'); }
+
+function renderArtistList() {
+  el('artist-list').innerHTML = '';
+  ARTISTS.forEach((a) => {
+    const btn = document.createElement('button');
+    btn.className = 'artist-btn' + (a.id === currentArtist.id ? ' is-current' : '');
+    const dots = PRIORITY.filter((k) => (k === 'yt' ? a.sources.youtubeVideoIds?.length : k === 'sc' ? a.sources.soundcloudSlug : a.sources.spotifyId))
+      .map((k) => `<span class="dot" style="background:${SOURCE_META[k].color}"></span>`).join('');
+    btn.innerHTML = `<span>${a.name}</span><span class="dots">${dots || '<span style=\"color:var(--text-tertiary);font-size:10px\">none</span>'}</span>`;
+    btn.addEventListener('click', () => { currentArtist = a; mount(); });
+    el('artist-list').appendChild(btn);
+  });
+}
+
+function renderLayoutSeg() {
+  el('layout-seg').querySelectorAll('button').forEach((b) => {
+    b.classList.toggle('is-current', b.dataset.layout === currentLayout);
+    b.onclick = () => { currentLayout = b.dataset.layout; mount(); };
+  });
+}
+
+function mount() {
+  renderArtistList();
+  renderLayoutSeg();
+  const host = hostFor(currentSlot);
+  hostFor(currentSlot === 'card' ? 'sheet' : 'card').innerHTML = '';
+  log(`mount → ${currentArtist.name} · ${currentLayout} · ${currentSlot} slot (ONE PLAYER, ALWAYS — tearing down any previous embed first)`);
+  controller = mountPlayer({
+    host,
+    artist: { id: currentArtist.id, name: currentArtist.name, genres: currentArtist.genres },
+    sources: currentArtist.sources,
+    layout: currentLayout,
+    onStateChange: (snap) => log(`state → src=${snap.currentSource} clip=${snap.clipIndex} play=${snap.play} collapsed=${snap.collapsed} failed=[${snap.failed.join(',')}]`),
+  });
+}
+
+el('handover-sheet').addEventListener('click', () => {
+  if (!controller) return;
+  currentSlot = 'sheet';
+  currentLayout = 'full';
+  renderLayoutSeg();
+  const ok = controller.handoverTo(hostFor('sheet'), 'full');
+  log('handoverTo(sheet, full) → ' + (ok ? 'moved live embed, did not restart' : 'failed'));
+});
+el('handover-card').addEventListener('click', () => {
+  if (!controller) return;
+  currentSlot = 'card';
+  currentLayout = 'compact';
+  renderLayoutSeg();
+  const ok = controller.handoverTo(hostFor('card'), 'compact');
+  log('handoverTo(card, compact) → ' + (ok ? 'moved live embed, did not restart' : 'failed'));
+});
+
+mount();
+</script>
+</body>
+</html>
