@@ -1091,837 +1091,1502 @@
     {
       "name": "Effin",
       "day": "Day 1",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "effin",
+      "spotifyId": "6l0u1oM2imxw0isrGcXpmH",
+      "youtubeQuery": "Effin live set"
     },
     {
       "name": "Midnight Generation",
       "day": "Day 1",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "spotifyId": "4CKIGHCZRzNoiNDSaW5eaq",
+      "youtubeQuery": "Midnight Generation live set"
     },
     {
       "name": "Disco Lines",
       "day": "Day 1",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "spotifyId": "5Kmr0b3ip8g9P2i0dLTC3Z",
+      "youtubeQuery": "Disco Lines live set"
     },
     {
       "name": "Excision",
       "day": "Day 1",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "excision",
+      "spotifyId": "5FKchcZpQOkqFvXBj1aCvb",
+      "youtubeQuery": "Excision live set"
     },
     {
       "name": "Eggy",
       "day": "Day 1",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "dance",
+        "funk",
+        "indie rock",
+        "jam band",
+        "psychedelic",
+        "psychedelic rock"
+      ],
+      "youtubeQuery": "Eggy live set"
     },
     {
       "name": "Night Tapes",
       "day": "Day 1",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "dream pop",
+        "electronic"
+      ],
+      "spotifyId": "5APEQlUaQ5K70LgPqAdTuU",
+      "youtubeQuery": "Night Tapes live set"
     },
     {
       "name": "Alleycvt",
       "day": "Day 1",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "spotifyId": "4JxRK2gxmri7L7OWaxnVD1",
+      "youtubeQuery": "Alleycvt live set"
     },
     {
       "name": "Ganja White Night",
       "day": "Day 1",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "ganjawhitenight",
+      "spotifyId": "1a6oIpEh4DGgaqgWg5xwd3",
+      "youtubeQuery": "Ganja White Night live set"
     },
     {
       "name": "H&RRY",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "H&RRY live set"
     },
     {
       "name": "Close Friends Only",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Close Friends Only live set"
     },
     {
       "name": "Jackie Hollander",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "5ykY9Uweo3gl5VFpb6z6pQ",
+      "youtubeQuery": "Jackie Hollander live set"
     },
     {
       "name": "Daniel Allan",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "5JQ1XqKJ2Art01rF4tu1Ra",
+      "youtubeQuery": "Daniel Allan live set"
     },
     {
       "name": "Devault",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "soundcloudSlug": "devaultmusic",
+      "spotifyId": "1VBAKMui4zm5MnBWNn3NbL",
+      "youtubeQuery": "Devault live set"
     },
     {
       "name": "Westend",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Westend live set"
     },
     {
       "name": "D.O.D",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "edm",
+        "electro house",
+        "house"
+      ],
+      "soundcloudSlug": "d-o-d",
+      "spotifyId": "0Cs47vvRsPgEfliBU9KDiB",
+      "youtubeQuery": "D.O.D live set"
     },
     {
       "name": "Odd Mob",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "oddmob",
+      "spotifyId": "4qLwtWhlhyAoQ4S9mSrDW9",
+      "youtubeQuery": "Odd Mob live set"
     },
     {
       "name": "Eli Brown",
       "day": "Day 1",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "5lVNSw2GPci8kebrAQpZqU",
+      "youtubeQuery": "Eli Brown live set"
     },
     {
       "name": "Dixon's Violin",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "Dixon's Violin live set"
     },
     {
       "name": "Shima",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "Shima live set"
     },
     {
       "name": "Hershe",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "djhershe",
+      "spotifyId": "572W2DIMj2JYViwkIpae6J",
+      "youtubeQuery": "Hershe live set"
     },
     {
       "name": "Jkyl & Hyde",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "jkylxhyde",
+      "spotifyId": "23AH13eC6V0NB0QCkV6206",
+      "youtubeQuery": "Jkyl & Hyde live set"
     },
     {
       "name": "ProbCause",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "probcause",
+      "spotifyId": "1ZcfGrGrm9aHnUNVQz3sCY",
+      "youtubeQuery": "ProbCause live set"
     },
     {
       "name": "LSDream (Surprise Set)",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "LSDream (Surprise Set) live set"
     },
     {
       "name": "All.Lo Collective",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "All.Lo Collective live set"
     },
     {
       "name": "LSD Clownsystem",
       "day": "Day 1",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "LSD Clownsystem live set"
     },
     {
       "name": "Suzanne (Opening)",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Suzanne (Opening) live set"
     },
     {
       "name": "Bipolar Sunshine",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "genres": [
+        "alternative r&b"
+      ],
+      "soundcloudSlug": "bipolarsunshine",
+      "spotifyId": "0CjWKoS55T7DOt0HJuwF1H",
+      "youtubeQuery": "Bipolar Sunshine live set"
     },
     {
       "name": "Magoo",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "genres": [
+        "jamgrass",
+        "progressive bluegrass"
+      ],
+      "spotifyId": "5WekSJls7QTlBwgvrUvVDy",
+      "youtubeQuery": "Magoo live set"
     },
     {
       "name": "Laszewo",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Laszewo live set"
     },
     {
       "name": "MCR-T",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "soundcloudSlug": "mcr-t",
+      "spotifyId": "4m7q9onIm2bqhwHy9utqmw",
+      "youtubeQuery": "MCR-T live set"
     },
     {
       "name": "Bardo",
       "day": "Day 1",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Bardo live set"
     },
     {
       "name": "Shauhiin Davari",
       "day": "Day 1",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Shauhiin Davari live set"
     },
     {
       "name": "Cofresi",
       "day": "Day 1",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "soundcloudSlug": "cofresimusic",
+      "spotifyId": "5qqc3uTsdX82MR0IpU5jsY",
+      "youtubeQuery": "Cofresi live set"
     },
     {
       "name": "Fireflower",
       "day": "Day 1",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Fireflower live set"
     },
     {
       "name": "Supertaste",
       "day": "Day 1",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "soundcloudSlug": "supertastemusic",
+      "spotifyId": "6C4cWzfNlyH0l5xTQPLQa6",
+      "youtubeQuery": "Supertaste live set"
     },
     {
       "name": "Flying Mojito Bros",
       "day": "Day 1",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "soundcloudSlug": "flying-mojito-bros",
+      "spotifyId": "6tH2rLIDBEaniiX5mVsozq",
+      "youtubeQuery": "Flying Mojito Bros live set"
     },
     {
       "name": "Cry Queen",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Cry Queen live set"
     },
     {
       "name": "Public Works Dept",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Public Works Dept live set"
     },
     {
       "name": "Keys",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Keys live set"
     },
     {
       "name": "Mr. Wobbles",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Mr. Wobbles live set"
     },
     {
       "name": "Rambo Party",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Rambo Party live set"
     },
     {
       "name": "Jerome Joyce",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "spotifyId": "0nQYjRuDRrubcXnFxLGUUr",
+      "youtubeQuery": "Jerome Joyce live set"
     },
     {
       "name": "King Bubble",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "King Bubble live set"
     },
     {
       "name": "Tomcat Trumpet",
       "day": "Day 1",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Tomcat Trumpet live set"
     },
     {
       "name": "Motifv",
       "day": "Day 2",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "spotifyId": "3Q3g3xC2lDdLo3a04uK3Wp",
+      "youtubeQuery": "Motifv live set"
     },
     {
       "name": "Swimming Paul",
       "day": "Day 2",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "dance",
+        "french house",
+        "melodic house"
+      ],
+      "soundcloudSlug": "swimmingpaul_music",
+      "spotifyId": "5rEwPEAHq2q1yW3wF4av5s",
+      "youtubeQuery": "Swimming Paul live set"
     },
     {
       "name": "Daily Bread",
       "day": "Day 2",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "youtubeQuery": "Daily Bread live set"
     },
     {
       "name": "Levity",
       "day": "Day 2",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "soundcloudSlug": "levity-pl",
+      "youtubeQuery": "Levity live set"
     },
     {
       "name": "GRiZ",
       "day": "Day 2",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "electronic",
+        "funk",
+        "trip hop"
+      ],
+      "soundcloudSlug": "griz",
+      "spotifyId": "25oLRSUjJk4YHNUsQXk7Ut",
+      "youtubeQuery": "GRiZ live set"
     },
     {
       "name": "Kaleena Zanders",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "vocal house"
+      ],
+      "soundcloudSlug": "kaleenazanders",
+      "spotifyId": "0Sz2jslaxjcw2VM5zYh2jK",
+      "youtubeQuery": "Kaleena Zanders live set"
     },
     {
       "name": "Couch",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "spotifyId": "7mpIBUZxR4ZfMA7jaGGyyR",
+      "youtubeQuery": "Couch live set"
     },
     {
       "name": "Ship Wrek",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "soundcloudSlug": "theshipwrek",
+      "spotifyId": "1ic0FHNGIjXZAWH6O6Reif",
+      "youtubeQuery": "Ship Wrek live set"
     },
     {
       "name": "Sidepiece",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "spotifyId": "5czbzNZZfWpyFgZyfT3Mkk",
+      "youtubeQuery": "Sidepiece live set"
     },
     {
       "name": "Passion Pit",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "indietronica"
+      ],
+      "soundcloudSlug": "passionpit",
+      "spotifyId": "7gjAu1qr5C2grXeQFFOGeh",
+      "youtubeQuery": "Passion Pit live set"
     },
     {
       "name": "Sammy Virji",
       "day": "Day 2",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "bass house",
+        "bassline",
+        "dance",
+        "electronic",
+        "uk funky",
+        "uk garage"
+      ],
+      "soundcloudSlug": "sammyvirji",
+      "spotifyId": "1GuqTQbuixFHD6eBkFwVcb",
+      "youtubeQuery": "Sammy Virji live set"
     },
     {
       "name": "Yoga with Hannah Muse",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Yoga with Hannah Muse live set"
     },
     {
       "name": "Discovery Project",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Discovery Project live set"
     },
     {
       "name": "Saint Ludo",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "soundcloudSlug": "saintludo",
+      "spotifyId": "3UBYL8t0DhD4uhJxF0FtGT",
+      "youtubeQuery": "Saint Ludo live set"
     },
     {
       "name": "Muzz",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "drum and bass",
+        "electronic",
+        "dancefloor drum and bass",
+        "edm"
+      ],
+      "soundcloudSlug": "muzzhq",
+      "spotifyId": "4UNnRb4LN2hGtbtMfPzMhg",
+      "youtubeQuery": "Muzz live set"
     },
     {
       "name": "Nitepunk",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "bass house",
+        "drum and bass",
+        "dubstep",
+        "edm",
+        "electro house",
+        "hybrid trap",
+        "nu skool breaks"
+      ],
+      "soundcloudSlug": "nitepunk",
+      "spotifyId": "6iPbI11utXY9CVhX6SPXEg",
+      "youtubeQuery": "Nitepunk live set"
     },
     {
       "name": "Nikita, The Wicked",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "0Kc65Qv0ju9H2cMNnP3Tqd",
+      "youtubeQuery": "Nikita, The Wicked live set"
     },
     {
       "name": "Ivy Lab",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "drum and bass",
+        "electronic",
+        "halftime",
+        "instrumental hip hop",
+        "trap",
+        "future bass",
+        "hip hop",
+        "wonky"
+      ],
+      "soundcloudSlug": "ivylab",
+      "spotifyId": "3VXCvo9Sr0hbZ4mk6VOKBs",
+      "youtubeQuery": "Ivy Lab live set"
     },
     {
       "name": "Wilkinson",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "wilkinsonuk",
+      "spotifyId": "6m8itYST9ADjBIYevXSb1r",
+      "youtubeQuery": "Wilkinson live set"
     },
     {
       "name": "Andy C",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "drum and bass",
+        "jungle",
+        "electronic",
+        "afro house",
+        "breakbeat",
+        "breaks",
+        "club",
+        "dance"
+      ],
+      "soundcloudSlug": "andyc_ram",
+      "spotifyId": "75HK7rgkmDMTnWwwmcN53N",
+      "youtubeQuery": "Andy C live set"
     },
     {
       "name": "Galantis",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "progressive house",
+        "edm",
+        "dance-pop",
+        "electro house",
+        "big room house",
+        "club",
+        "dance",
+        "deep house"
+      ],
+      "soundcloudSlug": "wearegalantis",
+      "spotifyId": "4sTQVOfp9vEMCemLw50sbu",
+      "youtubeQuery": "Galantis live set"
     },
     {
       "name": "Claude VonStroke",
       "day": "Day 2",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "tech house",
+        "deep house",
+        "house"
+      ],
+      "soundcloudSlug": "claudevonstroke",
+      "spotifyId": "5CYAFhywQTXdZmppCp0ukd",
+      "youtubeQuery": "Claude VonStroke live set"
     },
     {
       "name": "Casey Club",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "spotifyId": "2bmnpyZiHHOCrU988FwaJj",
+      "youtubeQuery": "Casey Club live set"
     },
     {
       "name": "Mild Minds",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "electronic"
+      ],
+      "soundcloudSlug": "mildminds",
+      "spotifyId": "3Ka3k9K2WStR52UJVtbJZW",
+      "youtubeQuery": "Mild Minds live set"
     },
     {
       "name": "Iniko",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "alternative r&b"
+      ],
+      "spotifyId": "2ih5M0aTrQ97JX1nZuxDQY",
+      "youtubeQuery": "Iniko live set"
     },
     {
       "name": "Dogs in a Pile",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "jam band",
+        "rock"
+      ],
+      "soundcloudSlug": "dogsinapile",
+      "youtubeQuery": "Dogs in a Pile live set"
     },
     {
       "name": "Ranger Trucco",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "spotifyId": "36N80lh8tNu7XedcW55NC3",
+      "youtubeQuery": "Ranger Trucco live set"
     },
     {
       "name": "SBTRKT",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "dubstep",
+        "future garage",
+        "post-dubstep"
+      ],
+      "soundcloudSlug": "sbtrkt",
+      "spotifyId": "1O10apSOoAPjOu6UhUNmeI",
+      "youtubeQuery": "SBTRKT live set"
     },
     {
       "name": "Richard Finger",
       "day": "Day 2",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "Richard Finger live set"
     },
     {
       "name": "Humanity Circles",
       "day": "Day 2",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Humanity Circles live set"
     },
     {
       "name": "Rumble in the Bumble Dance Battle",
       "day": "Day 2",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Rumble in the Bumble Dance Battle live set"
     },
     {
       "name": "Creg",
       "day": "Day 2",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "spotifyId": "3BoSgaNGMiAiEyRxECZgc9",
+      "youtubeQuery": "Creg live set"
     },
     {
       "name": "Brunello",
       "day": "Day 2",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Brunello live set"
     },
     {
       "name": "Jkyl, The Wicked",
       "day": "Day 2",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Jkyl, The Wicked live set"
     },
     {
       "name": "Sound Bath Journey",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Sound Bath Journey live set"
     },
     {
       "name": "Ecstatic Dance",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Ecstatic Dance live set"
     },
     {
       "name": "Tricksters",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Tricksters live set"
     },
     {
       "name": "Mary Lattimore",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "genres": [
+        "ambient",
+        "electronic",
+        "experimental",
+        "instrumental",
+        "new age"
+      ],
+      "soundcloudSlug": "mary-lattimore",
+      "spotifyId": "38MKhZmMRHAZRz8LqtKIBw",
+      "youtubeQuery": "Mary Lattimore live set"
     },
     {
       "name": "Jojo Abot",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "genres": [
+        "afrobeat",
+        "electronic",
+        "folk",
+        "jazz",
+        "reggae",
+        "soul"
+      ],
+      "soundcloudSlug": "jojoabot",
+      "spotifyId": "7yR9zhQxEi9sc3vJxS2YG5",
+      "youtubeQuery": "Jojo Abot live set"
     },
     {
       "name": "Black House Radio",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Black House Radio live set"
     },
     {
       "name": "Gilligan Moss",
       "day": "Day 2",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "soundcloudSlug": "gilligan-moss",
+      "spotifyId": "2fo0F81pRzdXjmWP6MkQqB",
+      "youtubeQuery": "Gilligan Moss live set"
     },
     {
       "name": "Family Blood Feud",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Family Blood Feud live set"
     },
     {
       "name": "Kiyoka",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Kiyoka live set"
     },
     {
       "name": "The Wandering Menstrails",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "The Wandering Menstrails live set"
     },
     {
       "name": "Future Joy",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "spotifyId": "53edzonDiwy96Ne5MyCDj2",
+      "youtubeQuery": "Future Joy live set"
     },
     {
       "name": "Raedy Lex",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Raedy Lex live set"
     },
     {
       "name": "Red Giant Project",
       "day": "Day 2",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "genres": [
+        "electronic",
+        "experimental",
+        "hip hop",
+        "neo soul",
+        "r&b",
+        "soul"
+      ],
+      "soundcloudSlug": "redgiantproject",
+      "spotifyId": "6w17z0QsctPCHEMW1EV0xY",
+      "youtubeQuery": "Red Giant Project live set"
     },
     {
       "name": "Inji",
       "day": "Day 3",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "dance-pop",
+        "electropop",
+        "hip house",
+        "tech house"
+      ],
+      "soundcloudSlug": "injimusic",
+      "spotifyId": "0Z4Ir8usNVcAdCSQl0fQki",
+      "youtubeQuery": "Inji live set"
     },
     {
       "name": "The String Cheese Incident",
       "day": "Day 3",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "bluegrass",
+        "jam band",
+        "rock",
+        "folk",
+        "funk"
+      ],
+      "spotifyId": "7N3JfLDzzjXdPbsyco7X0l",
+      "youtubeQuery": "The String Cheese Incident live set"
     },
     {
       "name": "Channel Tres",
       "day": "Day 3",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "club",
+        "dance",
+        "hip house",
+        "house",
+        "alternative r&b",
+        "deep house",
+        "disco",
+        "edm"
+      ],
+      "soundcloudSlug": "channeltres",
+      "spotifyId": "4cUkGQyhLFqKHBtL58HYVp",
+      "youtubeQuery": "Channel Tres live set"
     },
     {
       "name": "Chris Lake",
       "day": "Day 3",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "house",
+        "edm",
+        "electro house",
+        "electronic",
+        "tech house",
+        "bass house",
+        "bassline",
+        "club"
+      ],
+      "spotifyId": "5Igpc9iLZ3YGtKeYfSrrOE",
+      "youtubeQuery": "Chris Lake live set"
     },
     {
       "name": "The Sponges",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "spotifyId": "3cj6O7NrjS5l0CVo8LhpV1",
+      "youtubeQuery": "The Sponges live set"
     },
     {
       "name": "Starjunk 95",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "soundcloudSlug": "starjunk95",
+      "spotifyId": "523iXWyHL26prJR3GKjRhx",
+      "youtubeQuery": "Starjunk 95 live set"
     },
     {
       "name": "Sam Gellaitry",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "electronic",
+        "electronica",
+        "future bass",
+        "trap edm"
+      ],
+      "soundcloudSlug": "samgellaitry",
+      "spotifyId": "07UJz804RJxqNvxFXC3h9H",
+      "youtubeQuery": "Sam Gellaitry live set"
     },
     {
       "name": "Madeon",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "electronic",
+        "electropop",
+        "electro house",
+        "house",
+        "french house",
+        "nu disco",
+        "dance",
+        "edm"
+      ],
+      "soundcloudSlug": "madeon",
+      "spotifyId": "4pb4rqWSoGUgxm63xmJ8xc",
+      "youtubeQuery": "Madeon live set"
     },
     {
       "name": "Shpongle",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "psybient",
+        "psytrance",
+        "electronic",
+        "ambient",
+        "chillout",
+        "electronica",
+        "trance",
+        "goa trance"
+      ],
+      "soundcloudSlug": "shponglemusic",
+      "spotifyId": "0m5XJwKGYyUjd3VMfcINCQ",
+      "youtubeQuery": "Shpongle live set"
     },
     {
       "name": "Isoxo",
       "day": "Day 3",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "genres": [
+        "dubstep",
+        "edm",
+        "electronic",
+        "hybrid trap",
+        "trap edm"
+      ],
+      "soundcloudSlug": "isoxo",
+      "spotifyId": "4zVCMnjw54nkhGHU4e1Pav",
+      "youtubeQuery": "Isoxo live set"
     },
     {
       "name": "Costa",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Costa live set"
     },
     {
       "name": "Steller",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "7fNu9x4iV166BQmQQKOmXl",
+      "youtubeQuery": "Steller live set"
     },
     {
       "name": "Riot",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "Riot live set"
     },
     {
       "name": "Capochino",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "70qOCKE1NFO6q1a1pC0KRE",
+      "youtubeQuery": "Capochino live set"
     },
     {
       "name": "Avello",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "1ZR5GnPw0Jkb5M4hnBwzuZ",
+      "youtubeQuery": "Avello live set"
     },
     {
       "name": "Sippy",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "soundcloudSlug": "sippyau",
+      "spotifyId": "4LLYqe8ogaK9wC1xHlvR5S",
+      "youtubeQuery": "Sippy live set"
     },
     {
       "name": "Heyz",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "soundcloudSlug": "heyzmsc",
+      "spotifyId": "5X1EM1jg35YB5jmw7qVIlh",
+      "youtubeQuery": "Heyz live set"
     },
     {
       "name": "Ravenscoon",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "7vfvYuEyJbh1Tf3QlOTAmZ",
+      "youtubeQuery": "Ravenscoon live set"
     },
     {
       "name": "Whethan",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "electronic",
+        "electropop",
+        "future bass",
+        "hyperpop",
+        "trap edm"
+      ],
+      "soundcloudSlug": "whethan",
+      "spotifyId": "0vqJkZ0RpLZixt3lTmD8vP",
+      "youtubeQuery": "Whethan live set"
     },
     {
       "name": "Kai Wachi",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kaiwachi",
+      "spotifyId": "2fNr4ldujwq97v1jWeqs8K",
+      "youtubeQuery": "Kai Wachi live set"
     },
     {
       "name": "Sullivan King",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "sullivankingmusic",
+      "spotifyId": "1CXuuw8HJhyN80HlNzvL1e",
+      "youtubeQuery": "Sullivan King live set"
     },
     {
       "name": "DJ Diesel B2B Teddy Pain",
       "day": "Day 3",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "youtubeQuery": "DJ Diesel B2B Teddy Pain live set"
     },
     {
       "name": "Tiffany Day",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "spotifyId": "5D5Qbe1lf3aMnLsPSzXItu",
+      "youtubeQuery": "Tiffany Day live set"
     },
     {
       "name": "Rio Kosta",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "Rio Kosta live set"
     },
     {
       "name": "Lyrah",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "lyrah",
+      "spotifyId": "5JyKQ4MQ2HkU1n1BYiKMWW",
+      "youtubeQuery": "Lyrah live set"
     },
     {
       "name": "Vandelux",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "spotifyId": "2rdSCmWgrIWA8pmwhS1T2k",
+      "youtubeQuery": "Vandelux live set"
     },
     {
       "name": "Tourist",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "electronic",
+        "chillwave",
+        "deep house",
+        "downtempo",
+        "future garage",
+        "indietronica",
+        "melodic house",
+        "progressive breaks"
+      ],
+      "soundcloudSlug": "touristmusic",
+      "spotifyId": "2ABBMkcUeM9hdpimo86mo6",
+      "youtubeQuery": "Tourist live set"
     },
     {
       "name": "Jigitz",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "jigitz",
+      "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
+      "youtubeQuery": "Jigitz live set"
     },
     {
       "name": "EOTO",
       "day": "Day 3",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "eoto",
+      "spotifyId": "71YgkzZVmQsmWGDsu0jmqR",
+      "youtubeQuery": "EOTO live set"
     },
     {
       "name": "Hannah Muse Community",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Hannah Muse Community live set"
     },
     {
       "name": "Pride 360",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Pride 360 live set"
     },
     {
       "name": "Cain Culto",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "spotifyId": "7IFepbBZvGSOYFzTk5Shub",
+      "youtubeQuery": "Cain Culto live set"
     },
     {
       "name": "Snow Wife",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "soundcloudSlug": "snowwife-music",
+      "spotifyId": "7CV3dQkhJB2dEqb85ICD33",
+      "youtubeQuery": "Snow Wife live set"
     },
     {
       "name": "Rochelle Jordan",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "genres": [
+        "alternative r&b"
+      ],
+      "soundcloudSlug": "rojoproto",
+      "spotifyId": "3MM3uKNdJbvefUael12dl3",
+      "youtubeQuery": "Rochelle Jordan live set"
     },
     {
       "name": "Chmura",
       "day": "Day 3",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "soundcloudSlug": "chmuramusic",
+      "spotifyId": "3lklyEZwBA2agqoBBiofOm",
+      "youtubeQuery": "Chmura live set"
     },
     {
       "name": "Detroit Party Marching Band",
       "day": "Day 3",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Detroit Party Marching Band live set"
     },
     {
       "name": "J Rose Loops & Fungi Flows",
       "day": "Day 3",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "J Rose Loops & Fungi Flows live set"
     },
     {
       "name": "Big Sis",
       "day": "Day 3",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "spotifyId": "6BXcNAZ4A4vmgqskvbizeL",
+      "youtubeQuery": "Big Sis live set"
     },
     {
       "name": "Emmie and Ryan",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Emmie and Ryan live set"
     },
     {
       "name": "The Grand Auction",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "The Grand Auction live set"
     },
     {
       "name": "Caitlin Cusack",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Caitlin Cusack live set"
     },
     {
       "name": "Grand Artique Talent Show",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Grand Artique Talent Show live set"
     },
     {
       "name": "Shane Hall",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Shane Hall live set"
     },
     {
       "name": "Vincent Antone",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "soundcloudSlug": "vincentantone",
+      "spotifyId": "5k3Gs1EcCa9LW1bfR4wWb9",
+      "youtubeQuery": "Vincent Antone live set"
     },
     {
       "name": "Bob Moses",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "genres": [
+        "deep house",
+        "electronic",
+        "house",
+        "jazz"
+      ],
+      "soundcloudSlug": "the-bob-moses",
+      "spotifyId": "6LHsnRBUYhFyt01PdKXAF5",
+      "youtubeQuery": "Bob Moses live set"
     },
     {
       "name": "Logie",
       "day": "Day 3",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Logie live set"
     },
     {
       "name": "Lightcode",
       "day": "Day 4",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "spotifyId": "0Nfr5f8rhhP04vt0U8kC28",
+      "youtubeQuery": "Lightcode live set"
     },
     {
       "name": "Underscores",
       "day": "Day 4",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "hyperpop",
+        "electronic",
+        "pop",
+        "glitch hop",
+        "indie pop",
+        "indie rock",
+        "indietronica"
+      ],
+      "soundcloudSlug": "underscores",
+      "spotifyId": "7HfUJxeVTgrvhk0eWHFzV7",
+      "youtubeQuery": "Underscores live set"
     },
     {
       "name": "Jean Dawson",
       "day": "Day 4",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "spotifyId": "7vNNmjV14SKQzlQAEg0BXP",
+      "youtubeQuery": "Jean Dawson live set"
     },
     {
       "name": "Kaskade",
       "day": "Day 4",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "kaskade",
+      "spotifyId": "6TQj5BFPooTa08A7pk8AQ1",
+      "youtubeQuery": "Kaskade live set"
     },
     {
       "name": "Illenium",
       "day": "Day 4",
-      "stage": "Ranch Arena"
+      "stage": "Ranch Arena",
+      "genres": [
+        "dubstep",
+        "melodic dubstep",
+        "trap edm",
+        "edm",
+        "electronic",
+        "future bass",
+        "club",
+        "dance"
+      ],
+      "soundcloudSlug": "illeniumofficial",
+      "spotifyId": "45eNHdiiabvmbp4erw26rg",
+      "youtubeQuery": "Illenium live set"
     },
     {
       "name": "Daniel Donato's Cosmic Jam",
       "day": "Day 4",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "youtubeQuery": "Daniel Donato's Cosmic Jam live set"
     },
     {
       "name": "Wooli",
       "day": "Day 4",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "soundcloudSlug": "woolimusic",
+      "spotifyId": "1Uyqa2sdHm1bL5JK4IC4zc",
+      "youtubeQuery": "Wooli live set"
     },
     {
       "name": "LSDream",
       "day": "Day 4",
-      "stage": "Sherwood Court"
+      "stage": "Sherwood Court",
+      "soundcloudSlug": "lsdream",
+      "spotifyId": "3Hrqjumb6WHg2aAUHJHLND",
+      "youtubeQuery": "LSDream live set"
     },
     {
       "name": "Wes Mills",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "spotifyId": "0EuHfcxMPDNkOjGVF4e1KT",
+      "youtubeQuery": "Wes Mills live set"
     },
     {
       "name": "Qrion",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "deep house"
+      ],
+      "soundcloudSlug": "qrionqrionqrion",
+      "spotifyId": "0bGDTQ78MVgI5Snqo9KJZw",
+      "youtubeQuery": "Qrion live set"
     },
     {
       "name": "Chris Luno",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "electronic",
+        "organic house"
+      ],
+      "soundcloudSlug": "chrisluno",
+      "spotifyId": "2fttFhhXMsCbJgf9KqSGcq",
+      "youtubeQuery": "Chris Luno live set"
     },
     {
       "name": "Omnom",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "soundcloudSlug": "omnom",
+      "spotifyId": "3PYRXP25JcbqhvNaJYcnWy",
+      "youtubeQuery": "Omnom live set"
     },
     {
       "name": "Yaeji",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "downtempo",
+        "edm",
+        "hip hop",
+        "house"
+      ],
+      "spotifyId": "2RqrWplViWHSGLzlhmDcbt",
+      "youtubeQuery": "Yaeji live set"
     },
     {
       "name": "Lane 8",
       "day": "Day 4",
-      "stage": "Tripolee"
+      "stage": "Tripolee",
+      "genres": [
+        "deep house",
+        "club",
+        "dance",
+        "disco",
+        "drum and bass",
+        "edm",
+        "electronic",
+        "house"
+      ],
+      "spotifyId": "27gtK7m9vYwCyJ04zz0kIb",
+      "youtubeQuery": "Lane 8 live set"
     },
     {
       "name": "GITF Party",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "GITF Party live set"
     },
     {
       "name": "Bricknasty",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "spotifyId": "3BcbwxzJm5f0yppgo2Vatd",
+      "youtubeQuery": "Bricknasty live set"
     },
     {
       "name": "Bombargo",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "youtubeQuery": "Bombargo live set"
     },
     {
       "name": "Oppidan",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "speed garage",
+        "stutter house",
+        "uk garage"
+      ],
+      "soundcloudSlug": "oppidanmusic",
+      "spotifyId": "338p7qzZTDJSHJzSjIZMFK",
+      "youtubeQuery": "Oppidan live set"
     },
     {
       "name": "Mary Droppinz",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "soundcloudSlug": "marydroppinz",
+      "spotifyId": "4tPVnr7VB15UA9TRsie3cS",
+      "youtubeQuery": "Mary Droppinz live set"
     },
     {
       "name": "MPH",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "tech house",
+        "uk garage"
+      ],
+      "soundcloudSlug": "mph-uk",
+      "spotifyId": "62SCu33InHVq97VaWw3eof",
+      "youtubeQuery": "MPH live set"
     },
     {
       "name": "Frost Children",
       "day": "Day 4",
-      "stage": "The Observatory"
+      "stage": "The Observatory",
+      "genres": [
+        "hyperpop",
+        "pop",
+        "digital hardcore",
+        "electro house",
+        "electropop",
+        "indie pop",
+        "indie rock"
+      ],
+      "spotifyId": "2armP2pVQFy1awZ8HLbCib",
+      "youtubeQuery": "Frost Children live set"
     },
     {
       "name": "Rumble in the Bumble Beatbox Battle",
       "day": "Day 4",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Rumble in the Bumble Beatbox Battle live set"
     },
     {
       "name": "Wax Monkey",
       "day": "Day 4",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Wax Monkey live set"
     },
     {
       "name": "River Tiber",
       "day": "Day 4",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "soundcloudSlug": "rivertiber",
+      "spotifyId": "1FHDMgGdmIP4IsoFkAwbS0",
+      "youtubeQuery": "River Tiber live set"
     },
     {
       "name": "Deadtronica",
       "day": "Day 4",
-      "stage": "Honeycomb"
+      "stage": "Honeycomb",
+      "youtubeQuery": "Deadtronica live set"
     },
     {
       "name": "Solid Gold Disco / LCD Clownsystem",
       "day": "Day 4",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Solid Gold Disco / LCD Clownsystem live set"
     },
     {
       "name": "Party Pupils",
       "day": "Day 4",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "soundcloudSlug": "partypupils",
+      "spotifyId": "4F61H4lx1js4wtWfb2Rfnt",
+      "youtubeQuery": "Party Pupils live set"
     },
     {
       "name": "Party Pupils (Late)",
       "day": "Day 4",
-      "stage": "Center Stage"
+      "stage": "Center Stage",
+      "youtubeQuery": "Party Pupils (Late) live set"
     },
     {
       "name": "Culturefies",
       "day": "Day 4",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Culturefies live set"
     },
     {
       "name": "Polyjamorous",
       "day": "Day 4",
-      "stage": "Grand Artique"
+      "stage": "Grand Artique",
+      "youtubeQuery": "Polyjamorous live set"
     }
   ],
   "activities": {
