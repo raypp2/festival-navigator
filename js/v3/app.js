@@ -14,6 +14,8 @@ import { disclosureFold, eqLoader, festRow } from './tools.js';
 import { openArtistSheet, openDayNotes, openAllNotes, closeSheet, refreshOpenSheet, sheetChrome, dialogize, rememberOpener } from './notes.js';
 import { openArtistPage, closeArtistPage, refreshOpenArtistPage } from '../discovery/artist-page.js';
 import { openDeck, closeDeck, openDiscoverFilterSheet } from '../discovery/deck.js';
+import { openMyDay, closeMyDay, refreshOpenMyDay } from '../discovery/my-day.js';
+import { openDecide, closeDecide, parseKey as parseDecideKey } from '../discovery/decide.js';
 import { loadGenreCanon } from '../discovery/genres.js';
 import { renderSettings, appSettings, openSubviewByKey } from './settings.js';
 import { onStorageWriteFail, saveLS } from '../util.js';
@@ -57,6 +59,10 @@ function onNotesChange() {
   // must show up in the page's own inline notes preview without a manual
   // reopen, same as the wall repaints underneath it.
   refreshOpenArtistPage();
+  // A pick write from ANYWHERE (artist page, deck, Decide's choose/undo) can
+  // shift my-day's gaps/clashes for the open day — same live-repaint
+  // discipline as the artist page above.
+  refreshOpenMyDay();
 }
 
 function refreshCtx() {
@@ -100,6 +106,19 @@ function openDiscoverDeck() {
   router.push('discover');
 }
 
+// My day (build spec 7.4): same identity + migration gate as any other
+// pick-writing surface — the day view's clash resolutions write picks too.
+function openMyDayLayer() {
+  if (!ctx.meName) return;
+  if (ctx.migrationPending) {
+    showToast($('toast-root'), 'Updating this crew — picks unlock in a moment');
+    return;
+  }
+  refreshCtx();
+  openMyDay(ctx, artistPageActions);
+  router.push('myday');
+}
+
 // recordSelection(For) writes pending only; mirror into the local doc for
 // instant render — the artist page's pick/pass writes reuse this exact
 // function (passed through artistPageActions) rather than duplicating it.
@@ -119,6 +138,10 @@ export function applyLocalPick(artist, person, level) {
 const artistPageActions = {
   applyLocalPick,
   showUndoToast: (message, onUndo) => showUndoToast($('toast-root'), message, onUndo),
+  // decide.js's own device-local dismissals ('split'/'on-site') never touch
+  // the shared doc, so they don't route through onNotesChange's sync — this
+  // is the narrower "just repaint my-day" hook for that path.
+  refreshMyDay: () => refreshOpenMyDay(),
 };
 
 // ---- sort control (mounted once in init(); referenced again here for the smart default) ----
@@ -292,6 +315,12 @@ function repaintWall() {
   // (CORE-5). Searching a scheduled fest sorts chronologically by design.
   const scheduled = !!(state.fest().days && Object.keys(state.fest().days).length);
   $('sort-control').style.display = scheduled ? 'none' : '';
+  // My day (build spec 7.4) only exists for a festival with real set times —
+  // a lineup-only fest has no gaps/clashes to assist with (Phase 2 note in
+  // the build spec: this surface doesn't exist there, so the entry hides
+  // rather than opening to a dead view).
+  const myDayBtn = $('myday-btn');
+  if (myDayBtn) myDayBtn.style.display = scheduled ? '' : 'none';
   updateMigrationBanner();
   updateWeekendRow();
   updateArchiveNote();
@@ -1625,7 +1654,7 @@ export function init() {
   sync.initSync({
     // Everything that renders identity/state repaints together — the dock
     // avatar was the one holdout showing a stale color (audit 1.5).
-    onRemoteChange: () => { repaintWall(); renderPersonChips(); renderYou(); refreshOpenSheet(); refreshOpenArtistPage(); },
+    onRemoteChange: () => { repaintWall(); renderPersonChips(); renderYou(); refreshOpenSheet(); refreshOpenArtistPage(); refreshOpenMyDay(); },
     onCrewGone: (token) => {
       // The server said this crew no longer exists — a dead row on the
       // landing list would just 404 again (FLOW-3).
@@ -1683,6 +1712,15 @@ export function init() {
     if (top && top.startsWith('artist:')) openArtistPage(top.slice('artist:'.length), ctx, artistPageActions);
     else closeArtistPage();
   });
+  // My day (build spec 7.4, frames 2b/5d): full-screen layer like Discover,
+  // fixed key, idempotent open/close. Decide (7.5) stacks ON TOP of it, one
+  // router entry per clash — same artist-by-artist stacking discipline as
+  // the artist page over the deck.
+  router.registerKind('myday', () => openMyDay(ctx, artistPageActions), () => closeMyDay());
+  router.registerKind('decide:', (key) => {
+    const { day, idx } = parseDecideKey(key);
+    openDecide(day, idx, ctx, artistPageActions);
+  }, () => closeDecide());
   window.addEventListener('popstate', (e) => router.onPopState(e.state));
   $('search-input').addEventListener('input', (e) => {
     ctx.query = e.target.value;
@@ -1718,6 +1756,18 @@ export function init() {
   discoverBtn.setAttribute('aria-label', 'Open Discover');
   discoverBtn.addEventListener('click', openDiscoverDeck);
   $('sort-control').insertAdjacentElement('afterend', discoverBtn);
+  // My day entry (build spec 7.4): same violet tonal chip, next to Discover.
+  // Only meaningful once a festival has real set times — a lineup-only fest
+  // has no gaps/clashes to assist with, so the entry stays hidden (never a
+  // dead control) until repaintWall's scheduled check below shows it.
+  const myDayBtn = document.createElement('button');
+  myDayBtn.className = 'discover-chip myday-chip';
+  myDayBtn.id = 'myday-btn';
+  myDayBtn.textContent = 'My day';
+  myDayBtn.setAttribute('aria-label', 'Open your day — gaps and clashes');
+  myDayBtn.style.display = 'none';
+  myDayBtn.addEventListener('click', openMyDayLayer);
+  discoverBtn.insertAdjacentElement('afterend', myDayBtn);
   // Genre canon (js/discovery/genres.js): one repo-owned static fetch, warmed
   // here rather than per-surface. The deck/artist page/filter sheet also
   // await loadGenreCanon() themselves for their own first paint (it resolves

@@ -9,8 +9,10 @@
 // pre-narrowed subset), then filters and reorders that ranked list per the
 // facets. The deck deals straight from the returned array — every entry
 // already carries the one-reason-or-null this festival's rankLineup produced.
-import { rankLineup } from './score.js';
+import { rankLineup, derivePopularity } from './score.js';
 import { canonicalize } from './genres.js';
+import { computeDayArtists } from '../time.js';
+import { dayPlan, computeDayBounds, findGaps, gapCandidates } from './gaps.js';
 
 // One shape, one place — deck.js and the filter sheet both start from this.
 export const DEFAULT_FACETS = {
@@ -20,6 +22,7 @@ export const DEFAULT_FACETS = {
   day: 'all',           // 'all' or an exact day token
   crewPicked: false,    // someone else picked, I haven't decided
   hasLiveSet: false,    // any sample source resolved
+  gap: false,           // playing inside one of MY open gaps (timed festivals only — build spec 7.4/M6)
 };
 
 function withDefaults(facets) {
@@ -60,7 +63,29 @@ export function activeFacetCount(facets) {
   if (f.day !== 'all') n++;
   if (f.crewPicked) n++;
   if (f.hasLiveSet) n++;
+  if (f.gap) n++;
   return n;
+}
+
+// Every artist name playing inside any of MY current open gaps, across every
+// scheduled day (js/discovery/gaps.js's own findGaps/gapCandidates — reused,
+// not re-derived: the "undecided by me" exclusion and the 30-min overlap
+// floor both come straight from gapCandidates). `ranked` is intentionally
+// omitted (empty) — this only needs SET MEMBERSHIP, not a score ordering.
+function gapArtistNames(fest, picks, passes, me) {
+  const names = new Set();
+  for (const day of Object.keys(fest?.days || {})) {
+    const dayData = fest.days[day];
+    if (!dayData?.artists?.length) continue;
+    const dayArtists = computeDayArtists(dayData);
+    const plan = dayPlan({ dayArtists, picks, me });
+    const bounds = computeDayBounds(dayArtists);
+    for (const gap of findGaps(plan, bounds)) {
+      const cands = gapCandidates({ gap, dayArtists, ranked: [], me, picks, passes, limit: Infinity });
+      for (const c of cands) names.add(c.name);
+    }
+  }
+  return names;
 }
 
 // Canonical genres actually present in this pool, most-specific-first (same
@@ -89,20 +114,33 @@ export function availableDays(artists) {
   return seen;
 }
 
-// applyFilters(artists, picks, passes, facets, me, canonData) -> pool
+// applyFilters(artists, picks, passes, facets, me, canonData, fest) -> pool
 // artists = festival artists[] (billing order); picks = picksFor output
 // ({artist:{person:level}}); passes = passesFor output
 // ({artist:{person:{ts}}}); pool = ranked entries
 // ({name, index, score, reason, passed, primary, secondary}), filtered and
 // ordered per facets.sort. `passed` on each entry means "I passed this",
-// straight from score.js (same `me`) — no re-derivation needed.
-export function applyFilters(artists, picks, passes, facets, me, canonData) {
+// straight from score.js (same `me`) — no re-derivation needed. `fest` is
+// optional and only consulted when facets.gap is set (it needs fest.days —
+// the gap facet is meaningless, and the caller keeps it hidden, on a
+// lineup-only festival with no `fest.days` to compute against).
+export function applyFilters(artists, picks, passes, facets, me, canonData, fest) {
   const f = withDefaults(facets);
   const list = Array.isArray(artists) ? artists : [];
   const byName = indexByName(list);
-  const ranked = rankLineup({ artists: list, picks, passes, me, canonData });
+  // Schedule-ordered festivals (artistOrder:"schedule") replace the array-
+  // position billing prior with derived popularity — same wiring as
+  // wall.js's forYouRanked; rankLineup suppresses "#n on the bill" copy.
+  const order = fest?.artistOrder || 'billing';
+  const ranked = rankLineup({
+    artists: list, picks, passes, me, canonData,
+    order, popularity: order === 'schedule' ? derivePopularity(fest) : undefined,
+  });
 
   const genreSet = new Set(f.genres);
+  const gapNames = (f.gap && fest?.days && Object.keys(fest.days).length)
+    ? gapArtistNames(fest, picks, passes, me)
+    : null;
 
   const filtered = ranked.filter((r) => {
     const meta = byName[r.name];
@@ -128,6 +166,8 @@ export function applyFilters(artists, picks, passes, facets, me, canonData) {
     }
 
     if (f.hasLiveSet && !hasLiveSetSource(meta)) return false;
+
+    if (gapNames && !gapNames.has(r.name)) return false;
 
     return true;
   });

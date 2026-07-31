@@ -574,3 +574,227 @@
   border: 1px solid var(--border-card); border-radius: var(--r-pill);
   padding: 2px 6px; background: rgba(10, 8, 18, .6);
 }
+
+/* ---- my day ---- */
+/* Schedule assist (Discovery M6, build spec 7.4, frames 2b/5d). Full-screen
+ * layer like .discover-deck — same "build it in JS, one instance, idempotent
+ * open" convention, sits below .artist-page/.decide-screen (a set tap or a
+ * clash tap stacks one of those ON TOP of this). Toolbar entry
+ * (js/v3/app.js's #myday-btn) reuses .discover-chip's violet tonal look —
+ * no new component needed there. */
+.my-day {
+  position: fixed; inset: 0; z-index: 33; background: var(--page);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.md-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+
+.md-topbar {
+  flex: none; display: flex; align-items: center; gap: 12px;
+  padding: max(10px, env(safe-area-inset-top)) 18px 4px;
+}
+.md-back {
+  width: 40px; height: 40px; flex: none; border-radius: var(--r-pill);
+  border: 1px solid var(--border-card); background: transparent;
+  color: var(--text-body); font-size: 16px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.md-title {
+  font-family: var(--font-display); letter-spacing: var(--track-display);
+  font-size: 22px; color: var(--text-header);
+}
+.md-tabs {
+  flex: none; display: flex; gap: 22px; padding: 12px 18px 0;
+  border-bottom: 1px solid var(--border-card);
+}
+.md-tab {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  padding: 0 0 9px; font: 800 13px var(--font-ui); color: var(--text-secondary); cursor: pointer;
+}
+/* Active day tab in the fest accent — one of its four allowed places
+ * (build spec 7.7 audit). Everything else "selected" here stays brand violet. */
+.md-tab.active { color: rgb(var(--fest)); border-bottom-color: rgb(var(--fest)); }
+
+.md-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px 18px calc(24px + env(safe-area-inset-bottom)); }
+.md-layout { display: flex; flex-direction: column; gap: 16px; }
+.md-spine { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+/* ---- row anatomy: a time label + a card, one <button> (frame 2b: tapping
+ * any set opens the artist page; the timetable's own inline-cycle tap
+ * behavior does not apply here). ---- */
+.md-row {
+  display: flex; gap: 12px; align-items: stretch; width: 100%;
+  background: none; border: none; padding: 0; margin: 0; cursor: pointer; text-align: left; font: inherit;
+}
+.md-time { width: 42px; flex: none; padding-top: 14px; font: 700 11px var(--font-ui); color: var(--text-tertiary); }
+
+/* ---- marked-set card: aura background from js/v3/aura.js, same visual
+ * language as the wall's cards, different content (stage + time + level,
+ * not a name-only tile). ---- */
+.md-set-card {
+  flex: 1; min-width: 0; border-radius: var(--r-row); border: 1px solid var(--border-card);
+  padding: 13px; position: relative; overflow: hidden;
+}
+.md-set-name { font: 700 15px var(--font-ui); color: #fff; }
+.md-set-sub { font: 600 11px var(--font-ui); color: rgba(255, 255, 255, .75); margin-top: 2px; padding-right: 44px; }
+.md-set-who { position: absolute; bottom: 10px; right: 10px; display: flex; align-items: center; z-index: 1; }
+
+/* ---- gap slot: dashed border + a diagonal stripe, reusing --card/
+ * --card-unpicked (no new colors — build spec 7.7). ---- */
+.md-gap-card {
+  flex: 1; min-width: 0; border-radius: var(--r-row); border: 1px dashed var(--border-emphasis);
+  padding: 13px;
+  background: repeating-linear-gradient(45deg, var(--card) 0 7px, var(--card-unpicked) 7px 14px);
+}
+.md-gap-label { font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-tertiary); }
+.md-gap-hint { font: 700 13px var(--font-ui); color: var(--tonal-text); margin-top: 5px; }
+.md-gap-chips { display: flex; gap: 7px; margin-top: 10px; flex-wrap: wrap; }
+.md-gap-chip, .md-gap-more {
+  border: 1px solid var(--border-card); border-radius: var(--r-pill); padding: 6px 11px;
+  font: 700 11px var(--font-ui); color: var(--text-body); background: var(--dock); cursor: pointer;
+}
+.md-gap-more { color: var(--tonal-text); border-color: rgba(var(--brand), .4); background: var(--tonal-fill); }
+
+/* ---- clash card: violet border + urgency copy, quiets to a plain card once
+ * device-locally dismissed (split / on-site — js/discovery/decide.js). ---- */
+.md-clash-card {
+  flex: 1; min-width: 0; border-radius: var(--r-row); border: 1px solid rgb(var(--brand));
+  padding: 13px; background: var(--card);
+}
+.md-clash.is-resolved .md-clash-card { border-color: var(--border-card); }
+.md-clash-label { font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--tonal-text); }
+.md-clash.is-resolved .md-clash-label { color: var(--text-tertiary); text-transform: none; letter-spacing: 0; font-weight: 700; }
+.md-clash-names { font: 700 14px var(--font-ui); color: #fff; margin-top: 6px; }
+.md-clash-decide {
+  display: inline-flex; margin-top: 10px; background: var(--tonal-fill); color: var(--tonal-text);
+  border-radius: var(--r-pill); padding: 6px 12px; font: 800 11px var(--font-ui);
+}
+
+/* ---- empty state: nothing marked yet (frame 2b's edge case) ---- */
+.md-empty {
+  border: 1px dashed var(--border-card); border-radius: var(--r-row); background: var(--card);
+  padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.md-empty-title { font: 800 16px var(--font-ui); color: var(--text-primary); }
+.md-empty-sub { font: 500 12px/1.5 var(--font-ui); color: var(--text-tertiary); max-width: 46ch; }
+.md-empty-btn {
+  margin-top: 6px; min-height: 44px; padding: 0 18px; border-radius: var(--r-pill); border: none;
+  background: var(--tonal-fill); color: var(--tonal-text); font: 800 13px var(--font-ui); cursor: pointer;
+}
+
+/* ---- desktop assist rail (frame 5d, >=1200px). CSS-first, same "widen the
+ * shell, add a rail" treatment as the artist page's 5b — the DOM is built
+ * once, this media query only repositions it. ---- */
+@media (min-width: 1200px) {
+  .md-topbar, .md-tabs, .md-scroll { padding-left: 40px; padding-right: 40px; }
+  .md-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: start; max-width: 1440px; margin: 0 auto; }
+  .md-rail { display: flex !important; }
+}
+.md-rail { display: none; flex-direction: column; gap: 16px; }
+.md-rail-card {
+  border: 1px solid var(--border-card); border-radius: var(--r-settings); background: var(--card); padding: 18px;
+}
+.md-rail-title {
+  font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: 12px;
+}
+.md-rail-gap {
+  border: 1px solid var(--border-card); border-radius: var(--r-row); background: var(--dock); padding: 12px;
+}
+.md-rail-gap + .md-rail-gap { margin-top: 10px; }
+.md-rail-gap-win { font: 700 12px var(--font-ui); color: #fff; }
+.md-rail-gap-note { font: 500 11px/1.5 var(--font-ui); color: var(--text-tertiary); margin-top: 3px; }
+.md-rail-seewho {
+  margin-top: 8px; background: none; border: none; padding: 0; cursor: pointer;
+  font: 700 11px var(--font-ui); color: var(--tonal-text);
+}
+.md-rail-empty { font: 500 12px var(--font-ui); color: var(--text-tertiary); }
+.md-rail-clash { border-color: rgb(var(--brand)); background: var(--tonal-fill); }
+.md-rail-clash-title { color: var(--tonal-text); }
+.md-rail-clash-names { font: 700 13px var(--font-ui); color: #fff; }
+.md-rail-opendecide {
+  margin-top: 12px; width: 100%; height: 40px; border-radius: var(--r-pill); border: none; cursor: pointer;
+  background: var(--tonal-fill); color: var(--tonal-text); font: 800 12px var(--font-ui);
+}
+
+/* ---- decide ---- */
+/* Resolve a schedule clash (Discovery M6, build spec 7.5, frames 4a/5e).
+ * Same full-screen-overlay convention as .my-day/.artist-page; sits ABOVE
+ * .my-day (opened from a clash card, one router layer up) and above
+ * .artist-page too — it is always the topmost layer when present. */
+.decide-screen {
+  position: fixed; inset: 0; z-index: 36; background: var(--page);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.dc-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.dc-topbar {
+  flex: none; display: flex; align-items: center; gap: 12px;
+  padding: max(10px, env(safe-area-inset-top)) 18px 12px;
+}
+.dc-title {
+  font-family: var(--font-display); letter-spacing: var(--track-display);
+  font-size: 22px; color: var(--text-header);
+}
+.dc-sub { font: 600 11px var(--font-ui); color: var(--text-tertiary); margin-top: 2px; }
+.dc-scroll { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 18px calc(24px + env(safe-area-inset-bottom)); }
+
+/* ---- clashing-artist cards: stacked + a VS divider on mobile (4a), side by
+ * side at >=1200px (5e) — CSS-first, one DOM. ---- */
+.dc-cards { display: flex; flex-direction: column; gap: 11px; }
+.dc-card {
+  border: 1px solid var(--border-card); border-radius: var(--r-settings); background: var(--card);
+  padding: 16px; display: flex; flex-direction: column; gap: 12px;
+}
+.dc-vs {
+  flex: none; align-self: center; font-family: var(--font-display); letter-spacing: var(--track-display);
+  font-size: 15px; color: var(--text-tertiary);
+}
+.dc-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 10px; flex-wrap: wrap; }
+.dc-card-name { font: 800 clamp(18px, 5vw, 22px)/1.15 var(--font-ui); color: #fff; min-width: 0; word-break: break-word; }
+.dc-card-genre { font: 600 11px var(--font-ui); color: var(--text-tertiary); white-space: nowrap; }
+.dc-card-player { min-height: 44px; }
+.dc-play-trigger {
+  width: 100%; min-height: 44px; border-radius: var(--r-row); border: 1px dashed var(--border-emphasis);
+  background: var(--dock); color: var(--text-secondary); font: 700 12.5px var(--font-ui); cursor: pointer;
+}
+.dc-card-crew { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.dc-pill {
+  height: 18px; min-width: 26px; padding: 0 5px; border-radius: var(--r-pill);
+  border: 1.5px solid #fff; background: rgba(var(--brand), .5); color: #fff;
+  font: 800 9.5px var(--font-ui); display: inline-flex; align-items: center; justify-content: center; flex: none;
+}
+.dc-card-level { font: 700 12px var(--font-ui); color: var(--text-header); }
+.dc-card-crewline { font: 600 12px var(--font-ui); color: var(--text-tertiary); }
+.dc-card-meta {
+  display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--hairline); padding-top: 11px;
+  font: 500 12px var(--font-ui); color: var(--text-tertiary);
+}
+.dc-card-meta b { color: var(--text-body); }
+.dc-choose {
+  margin-top: auto; height: 46px; border-radius: var(--r-pill); border: 1px solid var(--border-card); cursor: pointer;
+  background: var(--tonal-fill); color: var(--tonal-text); font: 800 13px var(--font-ui);
+}
+
+.dc-footer { display: flex; flex-direction: column; gap: 10px; align-items: center; margin-top: 18px; text-align: center; }
+.dc-split {
+  border: 1px dashed var(--border-emphasis); border-radius: var(--r-pill); padding: 12px 18px; cursor: pointer;
+  background: none; font: 700 12px var(--font-ui); color: var(--text-body);
+}
+.dc-onsite { border: none; background: none; padding: 0; cursor: pointer; font: 600 12px var(--font-ui); color: var(--text-tertiary); }
+.dc-foot { font: 500 11px/1.45 var(--font-ui); color: var(--text-tertiary); margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hairline); }
+
+.dc-gone { padding: 40px 18px; text-align: center; font: 600 13px var(--font-ui); color: var(--text-tertiary); }
+.dc-gone-back {
+  margin-top: 14px; min-height: 44px; padding: 0 18px; border-radius: var(--r-pill); border: 1px solid var(--border-card);
+  background: transparent; color: var(--text-body); font: 700 13px var(--font-ui); cursor: pointer;
+}
+
+/* ---- decide · desktop (5e): side-by-side cards, full players each ---- */
+@media (min-width: 1200px) {
+  .dc-topbar, .dc-scroll { padding-left: 40px; padding-right: 40px; }
+  .dc-scroll { padding-top: 8px; }
+  .dc-cards { flex-direction: row; align-items: stretch; max-width: 980px; margin: 0 auto; }
+  .dc-cards .dc-card { flex: 1; min-width: 0; }
+  .dc-vs { align-self: center; }
+  .dc-footer { max-width: 980px; margin-left: auto; margin-right: auto; flex-direction: row; justify-content: center; gap: 16px; }
+  .dc-foot { max-width: 980px; margin-left: auto; margin-right: auto; }
+}

@@ -75,7 +75,7 @@ function buildPool(ctx, facets, canonData) {
   const fest = state.FESTIVALS[ctx.fid] || {};
   const picks = model.picksFor(state.crewDoc, ctx.fid);
   const passes = model.passesFor(state.crewDoc, ctx.fid);
-  return applyFilters(fest.artists || [], picks, passes, facets, ctx.meName, canonData);
+  return applyFilters(fest.artists || [], picks, passes, facets, ctx.meName, canonData, fest);
 }
 
 function startSession(ctx, facets, canonData) {
@@ -622,17 +622,17 @@ export function openDiscoverFilterSheet(ctx, actions = {}) {
       'Has a live set to sample', null,
       draft.hasLiveSet, (v) => { draft = { ...draft, hasLiveSet: v }; paint(); },
     ));
+    // Live on timed festivals (build spec 7.4/M6 — js/discovery/gaps.js);
+    // stays hidden entirely on a lineup-only festival, which has no set
+    // times to compute a gap against (never a control that silently does
+    // nothing).
     const scheduled = !!(fest.days && Object.keys(fest.days).length);
-    if (!scheduled) {
-      const gapRow = toggleField('Playing in my open gaps', 'needs set times', false, () => {});
-      gapRow.classList.add('dd-toggle-disabled');
-      gapRow.querySelector('.toggle').disabled = true;
-      togglesWrap.appendChild(gapRow);
+    if (scheduled) {
+      togglesWrap.appendChild(toggleField(
+        'Playing in my open gaps', 'undecided artists actually on then',
+        draft.gap, (v) => { draft = { ...draft, gap: v }; paint(); },
+      ));
     }
-    // Scheduled festivals hide the gap facet entirely: gap computation isn't
-    // implemented yet (Phase 2 / M6), and showing it enabled-looking on a
-    // festival that DOES have set times would read as a working control that
-    // silently does nothing — worse than not showing it at all.
     body.appendChild(togglesWrap);
 
     const n = liveCount();

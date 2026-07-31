@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v42'; // v42 = artist page desktop (5b)
+const CACHE_VERSION = 'festival-nav-v43'; // v43 = schedule assist + Decide (M6: gaps.js/my-day.js/decide.js)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
@@ -42,6 +42,9 @@ const APP_CORE = [
   '/js/discovery/player-core.js',
   '/js/discovery/deck.js',
   '/js/discovery/filter.js',
+  '/js/discovery/gaps.js',
+  '/js/discovery/my-day.js',
+  '/js/discovery/decide.js',
   '/assets/discovery.css',
   '/data/festivals/index.json',
   // Repo-owned genre canon (js/discovery/genres.js's loadGenreCanon) — every
