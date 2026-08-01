@@ -4,7 +4,7 @@
 // scripts/validate-festivals.mjs's new-field + genres.json validators.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mergeEnrichment, normalizeName, pickMbHit, extractGenres, extractSoundcloudSlug, extractSpotifyId } from '../scripts/enrich-artists.mjs';
+import { mergeEnrichment, normalizeName, pickMbHit, extractGenres, extractSoundcloudSlug, extractSpotifyId, youtubeSearchTop3 } from '../scripts/enrich-artists.mjs';
 import { validateArtistExtras, validateGenresDoc, validateArtistOrder, ARTIST_ORDERS } from '../scripts/validate-festivals.mjs';
 
 // ---------------------------------------------------------------------------
@@ -262,4 +262,64 @@ test('the shipped data/genres.json passes validateGenresDoc', async () => {
   const doc = JSON.parse(readFileSync(path, 'utf8'));
   const r = validateGenresDoc(doc);
   assert.deepEqual(r.errors, []);
+});
+
+// ---------------------------------------------------------------------------
+// youtubeSearchTop3 — "did not run" must never look like "found nothing"
+//
+// The caller stamps youtubeSearchedAt on an empty result and never re-searches
+// that artist. Before this, a quota-exceeded 403 returned [] just like a real
+// no-result, so the first bulk run to hit the daily wall would permanently
+// mark every remaining artist as searched without ever searching one.
+// ---------------------------------------------------------------------------
+
+const fakeFetch = (status, body) => async () => ({
+  ok: status >= 200 && status < 300,
+  status,
+  json: async () => body,
+});
+
+test('youtubeSearchTop3 returns ok with ids when the search finds videos', async () => {
+  const r = await youtubeSearchTop3('griz live set', 'k', fakeFetch(200, {
+    items: [{ id: { videoId: 'a' } }, { id: { videoId: 'b' } }, { id: { videoId: 'c' } }, { id: { videoId: 'd' } }],
+  }));
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.ids, ['a', 'b', 'c']); // capped at 3
+});
+
+test('youtubeSearchTop3 returns ok with an empty list for a genuine no-result', async () => {
+  const r = await youtubeSearchTop3('nobody live set', 'k', fakeFetch(200, { items: [] }));
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.ids, []);
+});
+
+test('youtubeSearchTop3 reports quotaExceeded as a fatal non-run, not an empty result', async () => {
+  const r = await youtubeSearchTop3('griz live set', 'k', fakeFetch(403, {
+    error: { errors: [{ reason: 'quotaExceeded' }] },
+  }));
+  assert.equal(r.ok, false);
+  assert.equal(r.fatal, true);
+  assert.match(r.reason, /quotaExceeded/);
+  assert.equal(r.ids, undefined); // no empty list to mistake for "searched, found nothing"
+});
+
+test('youtubeSearchTop3 treats a 5xx as a non-fatal non-run (retryable, no quota burnt)', async () => {
+  const r = await youtubeSearchTop3('griz live set', 'k', fakeFetch(503, {}));
+  assert.equal(r.ok, false);
+  assert.equal(r.fatal, false);
+});
+
+test('youtubeSearchTop3 survives a non-JSON error body', async () => {
+  const r = await youtubeSearchTop3('griz live set', 'k', async () => ({
+    ok: false, status: 500, json: async () => { throw new Error('not json'); },
+  }));
+  assert.equal(r.ok, false);
+  assert.match(r.reason, /500/);
+});
+
+test('youtubeSearchTop3 reports a thrown network error as a non-run', async () => {
+  const r = await youtubeSearchTop3('griz live set', 'k', async () => { throw new Error('ECONNRESET'); });
+  assert.equal(r.ok, false);
+  assert.equal(r.fatal, false);
+  assert.match(r.reason, /ECONNRESET/);
 });

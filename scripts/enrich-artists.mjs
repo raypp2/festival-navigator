@@ -159,15 +159,42 @@ async function verifySoundcloudSlug(slug) {
   }
 }
 
-async function youtubeSearchTop3(query, apiKey) {
+// Three outcomes, and the caller MUST be able to tell them apart:
+//   { ok: true,  ids: [...] }  — the search ran and found videos
+//   { ok: true,  ids: [] }     — the search ran and genuinely found nothing
+//   { ok: false, ... }         — the search never ran (quota, network, 5xx)
+// Collapsing the third into the second is what makes a bulk run destructive:
+// youtubeSearchedAt would be stamped on every artist after the quota wall,
+// permanently marking as "searched, no results" artists nobody ever searched.
+// `fatal` means do not keep asking today — the quota is gone.
+async function youtubeSearchTop3(query, apiKey, fetchImpl = fetch) {
   const params = new URLSearchParams({
     key: apiKey, q: query, part: 'id', type: 'video', videoEmbeddable: 'true', maxResults: '5',
   });
-  const res = await fetch(`https://www.googleapis.com/youtube/v3/search?${params.toString()}`);
-  if (!res.ok) return [];
+  let res;
+  try {
+    res = await fetchImpl(`https://www.googleapis.com/youtube/v3/search?${params.toString()}`);
+  } catch (e) {
+    return { ok: false, fatal: false, reason: `network error: ${e.message}` };
+  }
+  if (!res.ok) {
+    let reason = `HTTP ${res.status}`;
+    let quota = false;
+    try {
+      const body = await res.json();
+      const err = body?.error?.errors?.[0] || {};
+      if (err.reason) reason = `HTTP ${res.status} (${err.reason})`;
+      quota = err.reason === 'quotaExceeded' || err.reason === 'dailyLimitExceeded';
+    } catch { /* non-JSON error body — the status alone is the reason */ }
+    // 403 without a parseable reason is quota far more often than not; treat
+    // it as fatal rather than burning the rest of the run on certain failures.
+    return { ok: false, fatal: quota || res.status === 403, reason };
+  }
   const body = await res.json();
-  return (body.items || []).map((it) => it?.id?.videoId).filter(Boolean).slice(0, 3);
+  const ids = (body.items || []).map((it) => it?.id?.videoId).filter(Boolean).slice(0, 3);
+  return { ok: true, ids };
 }
+export { youtubeSearchTop3 };
 
 function loadJson(path, fallback) {
   if (!existsSync(path)) return fallback;
@@ -218,11 +245,21 @@ async function enrichOne(entry, cache, { youtubeKey, dryRun, log }) {
   // and never re-searched. (First Lolla run burnt 6.1k units re-searchable
   // no-results before this existed.) Clear the field by hand to force a redo.
   let youtubeSearchedAt = cached.youtubeSearchedAt;
+  let youtubeSpent = 0;
+  let youtubeFatal = null;
   if (youtubeKey && !isNonEmpty(preMerged.youtubeVideoIds) && !cached.youtubeSearchedAt) {
     const query = preMerged.youtubeQuery || fetched.youtubeQuery;
-    const ids = await youtubeSearchTop3(query, youtubeKey);
-    if (ids.length) fetched.youtubeVideoIds = ids;
-    else youtubeSearchedAt = new Date().toISOString();
+    const r = await youtubeSearchTop3(query, youtubeKey);
+    if (r.ok) {
+      youtubeSpent = 100;
+      if (r.ids.length) fetched.youtubeVideoIds = r.ids;
+      else youtubeSearchedAt = new Date().toISOString();
+    } else {
+      // The search never ran — leave youtubeSearchedAt untouched so this
+      // artist stays searchable tomorrow. A failed call costs no quota.
+      log(`  YouTube search for "${entry.name}" did not run — ${r.reason}`);
+      if (r.fatal) youtubeFatal = r.reason;
+    }
   }
 
   const entryFields = mergeEnrichment(entry, cached, fetched);
@@ -233,6 +270,7 @@ async function enrichOne(entry, cache, { youtubeKey, dryRun, log }) {
 
   return {
     key, entryFields, cacheFields, cacheChanged, mbid: fetched.mbid || cached.mbid, youtubeSearchedAt,
+    youtubeSpent, youtubeFatal,
   };
 }
 
@@ -254,9 +292,15 @@ async function main() {
   const dryRun = args.includes('--dry-run');
   const onlyIdx = args.indexOf('--only');
   const only = onlyIdx !== -1 ? args[onlyIdx + 1] : null;
+  // Quota units to spend on YouTube in THIS run (a search costs 100 against a
+  // 10k/day default). Cap it so a multi-festival session can leave room for
+  // the next festival instead of the first one eating the whole day.
+  const ytBudgetIdx = args.indexOf('--yt-budget');
+  const ytBudget = ytBudgetIdx !== -1 ? Number(args[ytBudgetIdx + 1]) : Infinity;
+  const noYoutube = args.includes('--no-youtube');
 
   if (!festivalId) {
-    console.error('Usage: node scripts/enrich-artists.mjs <festival-id> [--limit N] [--dry-run] [--only "Artist Name"]');
+    console.error('Usage: node scripts/enrich-artists.mjs <festival-id> [--limit N] [--dry-run] [--only "Artist Name"] [--yt-budget UNITS] [--no-youtube]');
     process.exit(1);
   }
 
@@ -272,20 +316,30 @@ async function main() {
   }
 
   const cache = loadJson(CACHE_PATH, { _comment: '' });
-  const youtubeKey = process.env.YOUTUBE_API_KEY || null;
-  if (!youtubeKey) console.log('YOUTUBE_API_KEY not set — youtubeVideoIds will be skipped (expected mode today).');
+  let youtubeKey = (!noYoutube && process.env.YOUTUBE_API_KEY) || null;
+  if (noYoutube) console.log('--no-youtube: MusicBrainz only, no quota spent.');
+  else if (!youtubeKey) console.log('YOUTUBE_API_KEY not set — youtubeVideoIds will be skipped (expected mode today).');
 
   let candidates = fest.artists.filter((a) => a && a.name && needsAnyField(a));
   if (only) candidates = candidates.filter((a) => normalizeName(a.name) === normalizeName(only));
   candidates = candidates.slice(0, limit);
 
-  console.log(`${festivalId}: ${fest.artists.length} artists, ${candidates.length} candidate(s) for enrichment (limit ${Number.isFinite(limit) ? limit : '∞'}).`);
+  console.log(`${festivalId}: ${fest.artists.length} artists, ${candidates.length} candidate(s) for enrichment (limit ${Number.isFinite(limit) ? limit : '∞'}, yt budget ${Number.isFinite(ytBudget) ? `${ytBudget} units` : '∞'}).`);
+
+  const flush = () => {
+    writeFileSync(festPath, `${JSON.stringify(fest, null, 2)}\n`);
+    writeFileSync(CACHE_PATH, `${JSON.stringify(cache, null, 2)}\n`);
+  };
 
   let touched = 0;
+  let spent = 0;
+  let stoppedReason = null;
+  let processed = 0;
   for (const entry of candidates) {
     const before = { ...entry };
     // eslint-disable-next-line no-await-in-loop
     const result = await enrichOne(entry, cache, { youtubeKey, dryRun, log: console.log });
+    spent += result.youtubeSpent || 0;
     const changed = diffFields(before, result.entryFields);
     if (Object.keys(changed).length) {
       touched += 1;
@@ -302,16 +356,35 @@ async function main() {
         enrichedAt: new Date().toISOString(),
       };
     }
+
+    // MusicBrainz work is ~2s/artist and unrecoverable if the process dies —
+    // checkpoint so a long run never has to start over.
+    processed += 1;
+    if (!dryRun && processed % 10 === 0) flush();
+
+    // Stop BUYING YouTube, keep enriching from MusicBrainz (which is free):
+    // a dead quota is not a reason to abandon genres and link-outs.
+    if (youtubeKey && result.youtubeFatal) {
+      stoppedReason = `YouTube quota/auth wall hit (${result.youtubeFatal})`;
+      console.log(`\n!! ${stoppedReason} — continuing with MusicBrainz only. No artist was falsely marked as searched.`);
+      youtubeKey = null;
+    } else if (youtubeKey && spent >= ytBudget) {
+      stoppedReason = `--yt-budget of ${ytBudget} units reached`;
+      console.log(`\n-- ${stoppedReason} — continuing with MusicBrainz only.`);
+      youtubeKey = null;
+    }
   }
+
+  const summary = `YouTube spend this run: ${spent} units (${spent / 100} searches).${stoppedReason ? ` Stopped early: ${stoppedReason}.` : ''}`;
 
   if (dryRun) {
     console.log(`\n[dry-run] would update ${touched} artist(s) in ${festivalId}.json — nothing written.`);
     return;
   }
 
-  writeFileSync(festPath, `${JSON.stringify(fest, null, 2)}\n`);
-  writeFileSync(CACHE_PATH, `${JSON.stringify(cache, null, 2)}\n`);
+  flush();
   console.log(`\nUpdated ${touched} artist(s). Wrote ${festPath} and ${CACHE_PATH}.`);
+  console.log(summary);
 }
 
 const isMain = process.argv[1] && process.argv[1] === fileURLToPath(import.meta.url);
