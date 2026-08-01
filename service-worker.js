@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v43'; // v43 = schedule assist + Decide (M6: gaps.js/my-day.js/decide.js)
+const CACHE_VERSION = 'festival-nav-v44'; // v44 = Discover desktop three-pane (5c: deck.js's dd2-* render branch)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

@@ -26,7 +26,7 @@ const state = await import('../js/state.js');
 const model = await import('../js/v3/model.js');
 const { FESTIVAL_INDEX } = await import('../js/festivals.js');
 const {
-  renderDeckForTest, closeDeck, openDiscoverFilterSheet,
+  renderDeckForTest, renderDesktopForTest, closeDeck, openDiscoverFilterSheet,
 } = await import('../js/discovery/deck.js');
 const { activeFacetCount } = await import('../js/discovery/filter.js');
 
@@ -235,4 +235,101 @@ test('zero-result facets show the 0-artists reset affordance and committing it r
   assert.equal(activeFacetCount(JSON.parse(localStorage.getItem('fp.discoverFilter.' + FID))), 0);
   assert.equal(overlay().querySelector('.dd-filter-badge'), null);
   assert.equal(cardName(), 'RankTarget');
+});
+
+// ---- desktop three-pane (frame 5c) ---------------------------------------------
+// forced via renderDesktopForTest — jsdom has no real matchMedia, so this is
+// the "callable directly" seam build spec asked for, mirroring
+// renderDeckForTest's own mobile-forcing convention above.
+function gridCard(name) { return overlay().querySelector(`.dd2-gridcard[data-artist="${name}"]`); }
+function paneName() { return overlay().querySelector('.dd2-pane-name')?.textContent; }
+
+test('desktop render shows the rail, the ranked grid, and the sticky focus pane, focused on the top-ranked artist', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  assert.ok(overlay().querySelector('.dd2-rail'), 'the facets rail renders');
+  assert.ok(overlay().querySelector('.dd2-grid'), 'the ranked grid renders');
+  assert.ok(overlay().querySelector('.dd2-pane'), 'the focus pane renders');
+  assert.equal(gridCard('RankTarget')?.textContent.includes('RankTarget'), true, 'the ranked grid carries the top-ranked card');
+  assert.equal(paneName(), 'RankTarget', 'default focus is the pool\'s top-ranked artist');
+  // mobile-only chrome must not leak into the desktop tree
+  assert.equal(overlay().querySelector('.dd-actions'), null);
+  assert.equal(overlay().querySelector('.dd-stack'), null);
+});
+
+test('clicking a grid card focuses the pane and writes nothing', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  const before = model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin);
+  gridCard('PickFlow1').click();
+  assert.equal(paneName(), 'PickFlow1', 'the click focused the pane');
+  const after = model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin);
+  assert.equal(after, before, 'focusing a card never writes a pick');
+  assert.ok(!model.isPassed(state.crewDoc, FID, 'PickFlow1', 'Kevin'), 'focusing a card never writes a pass');
+});
+
+test('the pane tick writes a pick through the state layer and does not move focus', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow1').click();
+  assert.equal(paneName(), 'PickFlow1');
+  overlay().querySelector('.dd2-pane-tick').click(); // ×0 -> ×1
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin), 1);
+  assert.equal(paneName(), 'PickFlow1', 'the pane stayed on the same artist through the decision');
+});
+
+test('the pane must (★) and pass (✕) controls write through the state layer and do not move focus', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow2').click();
+  overlay().querySelector('.dd2-pane-must').click();
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow2?.Kevin), 4);
+  assert.equal(paneName(), 'PickFlow2');
+
+  gridCard('PickFlow3').click();
+  overlay().querySelector('.dd2-pane-pass').click();
+  assert.ok(model.isPassed(state.crewDoc, FID, 'PickFlow3', 'Kevin'));
+  assert.equal(paneName(), 'PickFlow3', 'a pass — like a pick — never yanks the pane to another card');
+});
+
+test('a pane decision that drops the focused artist out of the pool keeps the pane on it (never yank mid-thought)', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow1').click();
+  overlay().querySelector('.dd2-pane-tick').click(); // picked -> leaves the default Undecided pool
+  assert.equal(gridCard('PickFlow1'), null, 'the decided artist drops out of the (still nonempty) grid');
+  assert.equal(paneName(), 'PickFlow1', 'the pane keeps showing it anyway');
+});
+
+test('a rail facet edit narrows the grid live and persists to the same localStorage key the sheet uses', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  const before = overlay().querySelectorAll('.dd2-gridcard').length;
+  assert.ok(before > 1, 'sanity: more than one card before narrowing');
+  const bassHouseChip = [...overlay().querySelectorAll('.dd-filter-chip')]
+    .find((c) => c.textContent.replace(' ✓', '') === 'Bass House');
+  assert.ok(bassHouseChip, 'the rail offers the same genre chips the sheet does');
+  bassHouseChip.click();
+  const after = overlay().querySelectorAll('.dd2-gridcard');
+  assert.equal(after.length, 1, 'the grid narrowed immediately — no Apply step');
+  assert.equal(after[0].dataset.artist, 'RankTarget');
+  assert.equal(
+    activeFacetCount(JSON.parse(localStorage.getItem('fp.discoverFilter.' + FID))), 1,
+    'the rail commits to the exact same localStorage key the mobile sheet writes',
+  );
+});
+
+test('an empty pool shows the zero state in both the grid and the pane, with a working reset', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  const tranceChip = [...overlay().querySelectorAll('.dd-filter-chip')].find((c) => c.textContent === 'Trance');
+  assert.ok(tranceChip, 'Trance is offered even though nothing in the pool currently carries it');
+  tranceChip.click();
+  assert.equal(overlay().querySelectorAll('.dd2-gridcard').length, 0);
+  assert.ok(overlay().querySelector('.dd2-empty'), 'the grid shows its zero state');
+  assert.ok(overlay().querySelector('.dd2-pane-empty'), 'the pane shows its zero state too');
+
+  overlay().querySelector('.dd2-empty .dd2-empty-btn').click();
+  assert.equal(activeFacetCount(JSON.parse(localStorage.getItem('fp.discoverFilter.' + FID))), 0);
+  assert.equal(paneName(), 'RankTarget', 'resetting restores the pool and its top-ranked focus');
 });

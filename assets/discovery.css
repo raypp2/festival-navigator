@@ -798,3 +798,111 @@
   .dc-footer { max-width: 980px; margin-left: auto; margin-right: auto; flex-direction: row; justify-content: center; gap: 16px; }
   .dc-foot { max-width: 980px; margin-left: auto; margin-right: auto; }
 }
+
+/* ---- discover · desktop (5c) ---- */
+/* Frame 5c: "three panes · filters · ranked wall · focused sample". Unlike
+ * the artist page's 5b (a pure CSS reflow of one identical DOM) this is a
+ * genuinely different DOM — js/discovery/deck.js's renderDeckBody swaps in a
+ * whole different tree above 1200px (rail + ranked grid + sticky pane)
+ * instead of the card-stack/session chrome; the mobile deck's own .dd-*
+ * classes above are untouched. Everything below is scoped inside
+ * #discover-deck-overlay so it can never leak onto the mobile tree, and is
+ * additive-only — no edits to the .dd-* rules above this section. */
+#discover-deck-overlay .dd2-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+
+/* ---- header: fest name (the fest accent — this surface's one allowed place
+ * for it), Wall/Timetable + Discover + My day nav, sync dot + crew chip ---- */
+.dd2-header {
+  flex: none; height: 66px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; border-bottom: 1px solid var(--hairline); background: var(--dock);
+}
+.dd2-header-left { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.dd2-fest-name {
+  font-family: var(--font-display); letter-spacing: var(--track-display); font-size: 20px;
+  color: rgb(var(--fest)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dd2-nav { display: flex; align-items: center; gap: 20px; margin-left: 6px; }
+.dd2-navtab {
+  background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer;
+  padding: 8px 0; font: 800 13px var(--font-ui); color: var(--text-secondary); line-height: 1;
+}
+.dd2-navtab-active { color: var(--text-header); border-bottom-color: rgb(var(--brand)); cursor: default; }
+.dd2-header-right { display: flex; align-items: center; gap: 16px; flex: none; }
+.dd2-crew-chip {
+  height: 34px; border-radius: var(--r-pill); border: 1px solid var(--border-input);
+  padding: 0 14px; display: inline-flex; align-items: center; gap: 8px;
+  font: 700 11px var(--font-ui); color: var(--text-body); white-space: nowrap;
+}
+.dd2-crew-pill {
+  width: 18px; height: 18px; border-radius: var(--r-pill); color: #fff; flex: none;
+  font: 800 8px var(--font-ui); display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* ---- body: rail + middle + pane ---- */
+.dd2-body { flex: 1; min-height: 0; overflow-y: auto; display: flex; gap: 28px; padding: 28px 40px 40px; align-items: flex-start; }
+
+/* ---- left rail: the identical facets object the mobile sheet edits
+ * (js/discovery/deck.js's loadFacets/saveFacets, one localStorage key),
+ * rendered persistent instead of inside a bottom sheet — segRow/toggleField
+ * are the SAME builders the sheet's .dd-filter-body uses. ---- */
+.dd2-rail { width: 216px; flex: none; display: flex; flex-direction: column; gap: 20px; }
+.dd2-sort-list { display: flex; flex-direction: column; border: 1px solid var(--border-input); border-radius: var(--r-row); overflow: hidden; }
+.dd2-sort-opt {
+  text-align: left; padding: 10px 12px; background: none; border: none; border-top: 1px solid var(--hairline);
+  font: 700 12px var(--font-ui); color: var(--text-secondary); cursor: pointer;
+}
+.dd2-sort-list .dd2-sort-opt:first-child { border-top: none; }
+.dd2-sort-opt.active { background: var(--tonal-fill); color: var(--tonal-text); }
+
+/* ---- middle: the ranked wall, a 3-across grid of simplified cards.
+ * .dd2-gridcard extends the SAME .card/.has-reason/.card-reason-ribbon/
+ * .wall-passed/.card-passed-chip/.corner-who/.mark classes the main wall
+ * (assets/v3.css, "for-you wall" rules above) already uses — one visual
+ * language for "picked"/"reason"/"passed", not a second copy of it. ---- */
+.dd2-middle { flex: 1; min-width: 0; }
+.dd2-middle-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.dd2-middle-title { font: 800 18px var(--font-ui); color: #fff; }
+.dd2-middle-count { font: 600 12px var(--font-ui); color: var(--text-tertiary); white-space: nowrap; }
+.dd2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.dd2-gridcard { flex-direction: column; min-height: 116px; gap: 3px; padding: 12px; }
+.dd2-gridcard .name { font-size: 14px; }
+.dd2-gridcard-genre { font: 600 10px var(--font-ui); color: var(--text-tertiary); }
+.dd2-empty {
+  border: 1px dashed var(--border-card); border-radius: var(--r-row); background: var(--card);
+  padding: 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.dd2-empty-title { font: 800 15px var(--font-ui); color: var(--text-primary); }
+
+/* ---- right pane: sticky "now sampling" — same headline tick/★/✕ contract as
+ * the artist page (.ap-tick/.ap-must/.ap-pass/.ap-pick-side, reused as-is —
+ * "one pick vocabulary across deck, pane and page"), plus the compact sample
+ * player (js/discovery/player.js's own .sample-player-* CSS, unmodified). ---- */
+.dd2-pane {
+  width: 320px; flex: none; border: 1px solid var(--border-card); border-radius: var(--r-settings);
+  background: var(--card); overflow: hidden; position: sticky; top: 0;
+}
+.dd2-pane-hero { position: relative; padding: 16px; overflow: hidden; }
+.dd2-pane-hero-bg { position: absolute; inset: 0; }
+.dd2-pane-hero-content { position: relative; z-index: 1; }
+.dd2-pane-label { font: 800 9px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-tertiary); }
+.dd2-pane-hero-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 8px; }
+.dd2-pane-namewrap { min-width: 0; }
+.dd2-pane-name { font: 800 20px/1.1 var(--font-ui); color: #fff; word-break: break-word; overflow-wrap: anywhere; }
+.dd2-pane-genre { font: 600 10px var(--font-ui); color: var(--text-body); margin-top: 6px; }
+.dd2-pane-pick { display: flex; align-items: stretch; gap: 7px; flex: none; }
+/* Sized down from the artist page's 34x96/44x44 (hero real estate here is
+ * ~150px narrower) — same shapes, same fill math, smaller footprint. */
+.dd2-pane-tick { width: 30px; height: 84px; border-radius: 10px; }
+.dd2-pane-must, .dd2-pane-pass { width: 38px; height: 38px; }
+.dd2-pane-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.dd2-pane-reason {
+  align-self: flex-start; background: var(--tonal-fill); color: var(--tonal-text);
+  border-radius: var(--r-pill); padding: 6px 11px; font: 700 11px var(--font-ui);
+}
+.dd2-pane-open {
+  width: 100%; margin-top: 4px; padding-top: 10px; border: none; border-top: 1px solid var(--hairline);
+  background: none; cursor: pointer; text-align: center; font: 600 11px var(--font-ui); color: var(--text-tertiary);
+}
+.dd2-pane-empty { padding: 40px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.dd2-pane-empty-title { font: 800 15px var(--font-ui); color: var(--text-primary); }
+.dd2-pane-empty-sub { font: 500 12px/1.5 var(--font-ui); color: var(--text-tertiary); max-width: 34ch; }

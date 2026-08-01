@@ -13,7 +13,7 @@ import { renderWall, refreshCard, showUndoToast, showToast, wireScrollspy, color
 import { disclosureFold, eqLoader, festRow } from './tools.js';
 import { openArtistSheet, openDayNotes, openAllNotes, closeSheet, refreshOpenSheet, sheetChrome, dialogize, rememberOpener } from './notes.js';
 import { openArtistPage, closeArtistPage, refreshOpenArtistPage } from '../discovery/artist-page.js';
-import { openDeck, closeDeck, openDiscoverFilterSheet } from '../discovery/deck.js';
+import { openDeck, closeDeck, openDiscoverFilterSheet, refreshOpenDeck } from '../discovery/deck.js';
 import { openMyDay, closeMyDay, refreshOpenMyDay } from '../discovery/my-day.js';
 import { openDecide, closeDecide, parseKey as parseDecideKey } from '../discovery/decide.js';
 import { loadGenreCanon } from '../discovery/genres.js';
@@ -1710,7 +1710,13 @@ export function init() {
   router.registerKind('artist:', (key) => openArtistPage(key.slice('artist:'.length), ctx, artistPageActions), () => {
     const top = router.top();
     if (top && top.startsWith('artist:')) openArtistPage(top.slice('artist:'.length), ctx, artistPageActions);
-    else closeArtistPage();
+    else {
+      closeArtistPage();
+      // The page's player claimed the singleton; a deck underneath came back
+      // with an empty player host (the router never re-opens unchanged
+      // layers). Re-render it in place — session and focus survive.
+      if (top === 'discover') refreshOpenDeck(ctx, artistPageActions);
+    }
   });
   // My day (build spec 7.4, frames 2b/5d): full-screen layer like Discover,
   // fixed key, idempotent open/close. Decide (7.5) stacks ON TOP of it, one

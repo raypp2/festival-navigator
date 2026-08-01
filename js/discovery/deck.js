@@ -30,15 +30,91 @@ import { sheetChrome, dialogize, rememberOpener, closeSheet } from '../v3/notes.
 import { loadGenreCanon, canonicalize } from './genres.js';
 import { mountPlayer as realMountPlayer } from './player.js';
 import { applyFilters, activeFacetCount, availableGenres, availableDays, DEFAULT_FACETS } from './filter.js';
+import { colorIndexOf } from '../v3/wall.js';
+import { hslOf, strokeOf } from '../v3/palette.js';
+import { auraBackground, whoCorner, nameColor, subColor } from '../v3/aura.js';
+// openMyDay is loaded lazily (see buildDesktopHeader's My-day tab) rather than
+// imported statically: my-day.js itself imports openDeck from THIS module, so
+// a static import here would be a real circular edge. The codebase already
+// steers around this exact cycle once (decide.js -> my-day.js goes through an
+// injected actions.refreshMyDay callback rather than an import) — a lazy
+// dynamic import is the same discipline without needing a new ctx/actions
+// field from app.js, which is out of scope for this file.
 
 const OVERLAY_ID = 'discover-deck-overlay';
 const LS_FILTER_PREFIX = 'fp.discoverFilter.';
+// Desktop three-pane (frame 5c) kicks in at the same 1200px breakpoint the
+// artist page's own desktop layout (5b) uses. Unlike 5b — which is a pure CSS
+// reflow of one identical DOM (grid-template-areas over .ap-body's children)
+// — 5c is a genuinely different DOM shape (a persistent rail + ranked grid +
+// sticky focus pane replaces the card-stack/session chrome entirely), so this
+// is a real render branch, not a media query. A matchMedia listener re-renders
+// on crossing the boundary; jsdom has no real matchMedia, so `forcedLayout`
+// is the test-only escape hatch (renderDeckForTest forces 'mobile',
+// renderDesktopForTest forces 'desktop') — mirrors how REDUCED_MOTION() below
+// already guards a matchMedia call that jsdom doesn't implement.
+const DESKTOP_MQ = '(min-width: 1200px)';
 
 // ---- module state: one deck instance, ever ---------------------------------------
 let playerHandle = null;
-let session = null;      // { pool, position, decided } — reset per open (or per filter commit)
+let session = null;      // { pool, position, decided } — reset per open (or per filter commit); MOBILE only
 let deckOpen = false;
 let pendingOpenGen = 0;  // guards a stale async canon-load landing after a newer navigation
+let forcedLayout = null; // test-only: 'mobile' | 'desktop' | null (real matchMedia governs)
+let layoutMq = null;     // the live matchMedia handle while the deck is open
+// Desktop-only: the right pane's current artist. `focusedSnapshot` is the last
+// ranked entry we had for it — kept so the pane can stay put ("never yank the
+// pane mid-thought") after a decision drops the artist out of a still-nonempty
+// pool (e.g. picked while Show=Undecided), even though it no longer has a live
+// pool entry to read reason/genre text from.
+let focusedName = null;
+let focusedSnapshot = null;
+
+function isDesktopLayout() {
+  if (forcedLayout) return forcedLayout === 'desktop';
+  try { return !!(window.matchMedia && window.matchMedia(DESKTOP_MQ).matches); }
+  catch { return false; } // jsdom / no matchMedia support
+}
+
+function watchLayout(ctx, actions) {
+  try {
+    layoutMq = window.matchMedia(DESKTOP_MQ);
+    const handler = () => renderDeckBody(ctx, actions);
+    if (layoutMq.addEventListener) layoutMq.addEventListener('change', handler);
+    else if (layoutMq.addListener) layoutMq.addListener(handler); // older Safari
+    layoutMq._handler = handler;
+  } catch { layoutMq = null; }
+}
+function unwatchLayout() {
+  if (!layoutMq) return;
+  try {
+    if (layoutMq.removeEventListener) layoutMq.removeEventListener('change', layoutMq._handler);
+    else if (layoutMq.removeListener) layoutMq.removeListener(layoutMq._handler);
+  } catch { /* best-effort */ }
+  layoutMq = null;
+}
+
+function setFocus(entry) {
+  focusedName = entry ? entry.name : null;
+  focusedSnapshot = entry || null;
+}
+
+// pool -> the entry the right pane should show. Empty pool -> null (zero
+// state, build spec: "empty pool -> the pane shows the zero-state"). A
+// non-empty pool that still contains focusedName refreshes the snapshot to
+// the live entry (reason text tracks the current ranking); one that no longer
+// contains it falls back to the frozen snapshot rather than reassigning focus
+// out from under the user. No prior focus at all -> the pool's top entry.
+function resolveFocusEntry(pool) {
+  if (!pool.length) return null;
+  const live = pool.find((e) => e.name === focusedName);
+  if (live) { focusedSnapshot = live; return live; }
+  if (focusedName && focusedSnapshot) return focusedSnapshot;
+  const top = pool[0];
+  focusedName = top.name;
+  focusedSnapshot = top;
+  return top;
+}
 
 // ---- filter persistence (device-local; never the shared doc) ---------------------
 function loadFacets(fid) {
@@ -389,6 +465,552 @@ function wireSwipe(cardStack, ctx, actions) {
   card.addEventListener('pointercancel', () => { dragging = false; card.style.transform = ''; dx = 0; });
 }
 
+// ---- desktop three-pane (frame 5c) --------------------------------------------------
+// "For you" stacked list — distinct from the sheet/rail's `segRow` (5c draws
+// Sort as a vertical list, Show as a segmented pill; segRow is reused below
+// for Show/Day since those ARE segmented pills in the mock).
+function sortListRow(current, onPick) {
+  const wrap = document.createElement('div');
+  wrap.className = 'dd-filter-field';
+  const lbl = document.createElement('div');
+  lbl.className = 'dd-filter-label';
+  lbl.textContent = 'Sort — top picks first';
+  const list = document.createElement('div');
+  list.className = 'dd2-sort-list';
+  const opts = [
+    { value: 'foryou', label: 'For you' },
+    { value: 'popularity', label: 'Popularity' },
+    { value: 'az', label: 'A–Z' },
+  ];
+  for (const opt of opts) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dd2-sort-opt' + (opt.value === current ? ' active' : '');
+    btn.textContent = opt.label;
+    btn.addEventListener('click', () => onPick(opt.value));
+    list.appendChild(btn);
+  }
+  wrap.append(lbl, list);
+  return wrap;
+}
+
+// Commits a facet change straight to localStorage (no draft/Apply step — the
+// rail is live, per spec) and restarts the mobile session too, so a resize
+// back down to the deck picks up the same facets rather than a stale pool.
+function commitFacets(ctx, actions, next) {
+  saveFacets(ctx.fid, next);
+  startSession(ctx, next, currentCanonData);
+  renderDeckBody(ctx, actions);
+}
+
+function resetFiltersAndRerender(ctx, actions) {
+  commitFacets(ctx, actions, { ...DEFAULT_FACETS, genres: [] });
+}
+
+// LEFT RAIL — the identical facets object + localStorage key the mobile sheet
+// edits (openDiscoverFilterSheet below); segRow/toggleField are the same
+// builders the sheet uses, just wired to commit immediately instead of into a
+// draft. One source of truth, two renderings.
+function buildRail(ctx, actions, facets, fest, canonData, scheduled) {
+  const rail = document.createElement('div');
+  rail.className = 'dd2-rail';
+
+  rail.appendChild(sortListRow(facets.sort, (v) => commitFacets(ctx, actions, { ...facets, sort: v })));
+
+  rail.appendChild(segRow('Show', [
+    { value: 'undecided', label: 'Undecided' },
+    { value: 'passed', label: 'Passed' },
+    { value: 'all', label: 'All' },
+  ], facets.show, (v) => commitFacets(ctx, actions, { ...facets, show: v })));
+
+  const genresField = document.createElement('div');
+  genresField.className = 'dd-filter-field';
+  const gLabel = document.createElement('div');
+  gLabel.className = 'dd-filter-label';
+  gLabel.textContent = 'Genres';
+  genresField.appendChild(gLabel);
+  const chipsRow = document.createElement('div');
+  chipsRow.className = 'dd-chip-row';
+  const genres = availableGenres(fest.artists || [], canonData);
+  for (const g of genres) {
+    const on = facets.genres.includes(g);
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'dd-filter-chip' + (on ? ' active' : '');
+    chip.textContent = on ? `${g} ✓` : g;
+    chip.addEventListener('click', () => {
+      const nextGenres = on ? facets.genres.filter((x) => x !== g) : [...facets.genres, g];
+      commitFacets(ctx, actions, { ...facets, genres: nextGenres });
+    });
+    chipsRow.appendChild(chip);
+  }
+  genresField.appendChild(chipsRow);
+  rail.appendChild(genresField);
+
+  const days = availableDays(fest.artists || []);
+  if (days.length) {
+    const dayLabel = (d) => {
+      const wd = (fest.dayMeta || {})[d]?.wd;
+      return wd ? wd.slice(0, 3).toUpperCase() : d;
+    };
+    rail.appendChild(segRow('Day', [
+      { value: 'all', label: 'All' },
+      ...days.map((d) => ({ value: d, label: dayLabel(d) })),
+    ], facets.day, (v) => commitFacets(ctx, actions, { ...facets, day: v })));
+  }
+
+  const togglesWrap = document.createElement('div');
+  togglesWrap.className = 'dd-toggles';
+  togglesWrap.appendChild(toggleField(
+    'Picked by the crew', null, facets.crewPicked,
+    (v) => commitFacets(ctx, actions, { ...facets, crewPicked: v }),
+  ));
+  togglesWrap.appendChild(toggleField(
+    'Has a live set to sample', null, facets.hasLiveSet,
+    (v) => commitFacets(ctx, actions, { ...facets, hasLiveSet: v }),
+  ));
+  if (scheduled) {
+    togglesWrap.appendChild(toggleField(
+      'Playing in my open gaps', null, facets.gap,
+      (v) => commitFacets(ctx, actions, { ...facets, gap: v }),
+    ));
+  }
+  rail.appendChild(togglesWrap);
+
+  return rail;
+}
+
+// people who picked this artist — same cardPeople shape aura.js expects
+// (mirrors wall.js's private cardPeople / artist-page.js's cardPeopleFor;
+// each surface keeps its own small copy rather than sharing one).
+function cardPeopleFor(artistName, ctx) {
+  const byPerson = model.picksFor(state.crewDoc, ctx.fid)[artistName] || {};
+  const peopleObj = state.people();
+  const out = [];
+  for (const [person, level] of Object.entries(byPerson)) {
+    const p = peopleObj[person];
+    if (!state.isActivePerson(p)) continue;
+    out.push({ name: person, colorIndex: colorIndexOf(person, p), isYou: person === ctx.meName, level });
+  }
+  return out;
+}
+
+// MIDDLE — the ranked wall. A simplified card (no notes/Spotify chips, no
+// player, no long-press): reason strip for a taste/billing reason, crew
+// reasons show as a who-corner glyph only — same rule wall.js's renderCard
+// applies to .card-reason-ribbon. Click FOCUSES the right pane; never writes,
+// never opens the artist page (unlike the mobile deck's dd-name).
+function buildGridCard(entry, ctx, actions) {
+  const people = cardPeopleFor(entry.name, ctx);
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'card dd2-gridcard';
+  btn.dataset.artist = entry.name;
+  const lvl = myLevel(entry.name, ctx);
+  const undecided = lvl < 1 && !entry.passed;
+  const showRibbon = undecided && entry.reason && entry.reason.type !== 'crew';
+  if (showRibbon) btn.classList.add('has-reason');
+  if (entry.passed) btn.classList.add('wall-passed');
+  btn.setAttribute('aria-label', `Focus ${entry.name} in the sample pane`);
+
+  const { background, animated } = auraBackground(people);
+  btn.style.background = background;
+  if (animated && !ctx.lowPower) {
+    btn.classList.add('animated');
+    const grain = document.createElement('span');
+    grain.className = 'card-grain';
+    btn.appendChild(grain);
+  }
+  if (showRibbon) {
+    const ribbon = document.createElement('span');
+    ribbon.className = 'card-reason-ribbon';
+    ribbon.textContent = entry.reason.text;
+    btn.appendChild(ribbon);
+  }
+  if (entry.passed) {
+    const chip = document.createElement('span');
+    chip.className = 'card-passed-chip';
+    chip.textContent = 'PASSED';
+    btn.appendChild(chip);
+  }
+  const nm = document.createElement('span');
+  nm.className = 'name';
+  nm.style.color = nameColor(people);
+  nm.textContent = entry.name;
+  btn.appendChild(nm);
+  const genreLine = [entry.primary, ...(entry.secondary || [])].filter(Boolean).join(' · ');
+  if (genreLine) {
+    const sub = document.createElement('span');
+    sub.className = 'dd2-gridcard-genre';
+    sub.style.color = subColor(people);
+    sub.textContent = genreLine;
+    btn.appendChild(sub);
+  }
+  const who = document.createElement('span');
+  who.className = 'corner-who';
+  for (const m of whoCorner(people)) {
+    const s = document.createElement('span');
+    s.className = 'mark' + (m.kind === 'ghost' ? ' ghost' : '');
+    if (m.kind !== 'ghost') {
+      s.style.width = m.width + 'px';
+      s.style.background = m.fill;
+      s.style.border = '1px solid ' + m.stroke;
+      s.style.fontSize = m.kind === 'must' ? '7.5px' : '0px';
+    }
+    s.textContent = m.label;
+    who.appendChild(s);
+  }
+  btn.appendChild(who);
+
+  btn.addEventListener('click', () => {
+    setFocus(entry);
+    renderDeckBody(ctx, actions);
+  });
+  return btn;
+}
+
+function buildGridZeroState(ctx, actions) {
+  const wrap = document.createElement('div');
+  wrap.className = 'dd2-empty';
+  const title = document.createElement('div');
+  title.className = 'dd2-empty-title';
+  title.textContent = 'Nothing matches these filters';
+  const resetBtn = document.createElement('button');
+  resetBtn.type = 'button';
+  resetBtn.className = 'btn-tonal dd2-empty-btn';
+  resetBtn.textContent = 'Reset filters';
+  resetBtn.addEventListener('click', () => resetFiltersAndRerender(ctx, actions));
+  wrap.append(title, resetBtn);
+  return wrap;
+}
+
+function buildMiddle(ctx, actions, pool, fest) {
+  const middle = document.createElement('div');
+  middle.className = 'dd2-middle';
+  const head = document.createElement('div');
+  head.className = 'dd2-middle-head';
+  const label = document.createElement('span');
+  label.className = 'dd2-middle-title';
+  label.textContent = 'For you';
+  const count = document.createElement('span');
+  count.className = 'dd2-middle-count';
+  const total = (fest.artists || []).length;
+  count.textContent = `${pool.length} of ${total} · every card shows why`;
+  head.append(label, count);
+  middle.appendChild(head);
+
+  if (!pool.length) {
+    middle.appendChild(buildGridZeroState(ctx, actions));
+    return middle;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'dd2-grid';
+  for (const entry of pool) grid.appendChild(buildGridCard(entry, ctx, actions));
+  middle.appendChild(grid);
+  return middle;
+}
+
+// RIGHT PANE — "pick without leaving the grid": the same headline tick/★/✕
+// contract as artist-page.js's buildPickControl, sized down, writing through
+// the identical state.applyPickLevel/applyPass + actions.applyLocalPick +
+// actions.showUndoToast wiring. A decision here re-renders the WHOLE desktop
+// body (grid aura updates live) but never touches focusedName/focusedSnapshot
+// — the pane stays put by construction.
+function tickNextDesktop(level) {
+  if (level === 4) return level;
+  if (level >= 3) return 0;
+  return level + 1;
+}
+
+function paneWritePick(artistName, level, ctx, actions) {
+  const before = myLevel(artistName, ctx);
+  state.applyPickLevel(ctx.fid, artistName, ctx.meName, level);
+  actions.applyLocalPick(artistName, ctx.meName, level);
+  if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
+  ctx.onNotesChange();
+  renderDeckBody(ctx, actions);
+  if (before === 4 && level === 0 && actions.showUndoToast) {
+    actions.showUndoToast(`Cleared your must for ${artistName}`, () => {
+      state.applyPickLevel(ctx.fid, artistName, ctx.meName, 4);
+      actions.applyLocalPick(artistName, ctx.meName, 4);
+      if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
+      ctx.onNotesChange();
+      renderDeckBody(ctx, actions);
+    });
+  }
+}
+
+function paneWritePass(artistName, on, ctx, actions) {
+  state.applyPass(ctx.fid, artistName, ctx.meName, on);
+  if (on) actions.applyLocalPick(artistName, ctx.meName, 0);
+  if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
+  ctx.onNotesChange();
+  renderDeckBody(ctx, actions);
+  if (on && actions.showUndoToast) {
+    actions.showUndoToast(`Passed on ${artistName}`, () => {
+      state.applyPass(ctx.fid, artistName, ctx.meName, false);
+      if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
+      ctx.onNotesChange();
+      renderDeckBody(ctx, actions);
+    });
+  }
+}
+
+function buildPanePickControl(artistName, ctx, actions) {
+  const level = myLevel(artistName, ctx);
+  const passed = model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
+  const myIdx = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
+
+  const tick = document.createElement('button');
+  tick.type = 'button';
+  tick.className = 'ap-tick dd2-pane-tick';
+  tick.setAttribute('aria-label', `Pick level for ${artistName} — currently ${level >= 4 ? 'must' : level >= 1 ? `×${level}` : 'not picked'}`);
+  const fillPct = level <= 0 ? 0 : level === 1 ? 33.4 : level === 2 ? 66.8 : 100;
+  const alpha = level <= 0 ? 0 : level === 1 ? 0.5 : level === 2 ? 0.75 : 1;
+  const fill = document.createElement('span');
+  fill.className = 'ap-tick-fill';
+  fill.style.height = fillPct + '%';
+  fill.style.background = hslOf(myIdx, alpha);
+  const lbl = document.createElement('span');
+  lbl.className = 'ap-tick-label';
+  lbl.textContent = level >= 1 && level <= 3 ? `×${level}` : '';
+  tick.append(fill, lbl);
+  tick.addEventListener('click', () => {
+    const next = tickNextDesktop(level);
+    if (next === level) return;
+    paneWritePick(artistName, next, ctx, actions);
+  });
+
+  const must = document.createElement('button');
+  must.type = 'button';
+  must.className = 'ap-must dd2-pane-must' + (level === 4 ? ' is-on' : '');
+  must.setAttribute('aria-label', level === 4 ? `Clear must for ${artistName}` : `Mark ${artistName} a must`);
+  must.textContent = '★';
+  must.addEventListener('click', () => paneWritePick(artistName, level === 4 ? 0 : 4, ctx, actions));
+
+  const pass = document.createElement('button');
+  pass.type = 'button';
+  pass.className = 'ap-pass dd2-pane-pass' + (passed ? ' is-on' : '');
+  pass.setAttribute('aria-label', passed ? `Undo pass on ${artistName}` : `Pass on ${artistName}`);
+  pass.textContent = '✕';
+  pass.addEventListener('click', () => paneWritePass(artistName, !passed, ctx, actions));
+
+  const side = document.createElement('div');
+  side.className = 'ap-pick-side';
+  side.append(must, pass);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'dd2-pane-pick';
+  wrap.append(tick, side);
+  return wrap;
+}
+
+function buildPaneEmptyState(ctx, actions) {
+  const wrap = document.createElement('div');
+  wrap.className = 'dd2-pane-empty';
+  const title = document.createElement('div');
+  title.className = 'dd2-pane-empty-title';
+  title.textContent = 'Nothing to sample';
+  const sub = document.createElement('div');
+  sub.className = 'dd2-pane-empty-sub';
+  sub.textContent = 'No artists match these filters.';
+  const resetBtn = document.createElement('button');
+  resetBtn.type = 'button';
+  resetBtn.className = 'btn-tonal dd2-pane-empty-btn';
+  resetBtn.textContent = 'Reset filters';
+  resetBtn.addEventListener('click', () => resetFiltersAndRerender(ctx, actions));
+  wrap.append(title, sub, resetBtn);
+  return wrap;
+}
+
+function buildFocusPane(ctx, actions, focusEntry, canonData) {
+  const pane = document.createElement('div');
+  pane.className = 'dd2-pane';
+  if (!focusEntry) {
+    pane.appendChild(buildPaneEmptyState(ctx, actions));
+    return pane;
+  }
+
+  const fest = state.FESTIVALS[ctx.fid] || {};
+  const meta = findArtistMeta(fest, focusEntry.name);
+  const lvl = myLevel(focusEntry.name, ctx);
+  const passed = model.isPassed(state.crewDoc, ctx.fid, focusEntry.name, ctx.meName);
+  const undecided = lvl < 1 && !passed;
+
+  const hero = document.createElement('div');
+  hero.className = 'dd2-pane-hero';
+  const bg = document.createElement('div');
+  bg.className = 'dd2-pane-hero-bg';
+  const people = cardPeopleFor(focusEntry.name, ctx);
+  bg.style.background = auraBackground(people).background;
+  const grain = document.createElement('div');
+  grain.className = 'hero-grain';
+  const content = document.createElement('div');
+  content.className = 'dd2-pane-hero-content';
+
+  const label = document.createElement('div');
+  label.className = 'dd2-pane-label';
+  label.textContent = 'NOW SAMPLING';
+
+  const row = document.createElement('div');
+  row.className = 'dd2-pane-hero-row';
+  const nameWrap = document.createElement('div');
+  nameWrap.className = 'dd2-pane-namewrap';
+  const nm = document.createElement('div');
+  nm.className = 'dd2-pane-name';
+  nm.textContent = focusEntry.name;
+  nameWrap.appendChild(nm);
+  const genreLine = [focusEntry.primary, ...(focusEntry.secondary || [])].filter(Boolean).join(' · ');
+  if (genreLine) {
+    const genre = document.createElement('div');
+    genre.className = 'dd2-pane-genre';
+    genre.textContent = genreLine;
+    nameWrap.appendChild(genre);
+  }
+  row.append(nameWrap, buildPanePickControl(focusEntry.name, ctx, actions));
+  content.append(label, row);
+  hero.append(bg, grain, content);
+  pane.appendChild(hero);
+
+  const body = document.createElement('div');
+  body.className = 'dd2-pane-body';
+
+  if (undecided && focusEntry.reason) {
+    const ribbon = document.createElement('div');
+    ribbon.className = 'dd2-pane-reason';
+    ribbon.textContent = focusEntry.reason.text;
+    body.appendChild(ribbon);
+  }
+
+  const playerHost = document.createElement('div');
+  body.appendChild(playerHost);
+  const { primary, secondary } = canonicalize(meta.genres, canonData);
+  const playerGenres = [primary, ...secondary].filter(Boolean);
+  const sources = {
+    youtubeVideoIds: meta.youtubeVideoIds,
+    soundcloudSlug: meta.soundcloudSlug,
+    spotifyId: meta.spotifyId,
+  };
+  const mount = (actions && actions.mountPlayer) || realMountPlayer;
+  // compact layout, mounted paused (tap-to-play) — same call the grid's
+  // sibling mobile card build (buildCard) already makes.
+  playerHandle = mount({
+    host: playerHost, artist: { name: focusEntry.name, genres: playerGenres }, sources, layout: 'compact',
+  });
+
+  const openBtn = document.createElement('button');
+  openBtn.type = 'button';
+  openBtn.className = 'dd2-pane-open';
+  openBtn.textContent = 'Open full artist page ›';
+  openBtn.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(focusEntry.name); });
+  body.appendChild(openBtn);
+
+  pane.appendChild(body);
+  return pane;
+}
+
+// HEADER — festival name (Anton, the fest accent: this surface's one allowed
+// place for it, per repo law), Wall/Timetable (closes back to the app
+// screen), Discover (active), My day (scheduled fests only). Right: the sync
+// dot and a crew chip. The dot is a bare `.sync-dot` — sync.js's own
+// setSyncStatus() does `querySelectorAll('.sync-dot')` on every status
+// change, so this element gets the SAME live updates the dock/rail dots get
+// for free; its class is seeded from an existing dot so the very first paint
+// (before the next sync tick) isn't wrong either.
+function buildDesktopHeader(ctx, actions, fest, scheduled) {
+  const header = document.createElement('div');
+  header.className = 'dd2-header';
+
+  const left = document.createElement('div');
+  left.className = 'dd2-header-left';
+  const festName = document.createElement('span');
+  festName.className = 'dd2-fest-name';
+  festName.textContent = `${fest.name || ''} ${fest.year || ''}`.trim().toUpperCase();
+  left.appendChild(festName);
+
+  const nav = document.createElement('div');
+  nav.className = 'dd2-nav';
+
+  const wallTab = document.createElement('button');
+  wallTab.type = 'button';
+  wallTab.className = 'dd2-navtab';
+  wallTab.textContent = scheduled ? 'Timetable' : 'Wall';
+  wallTab.setAttribute('aria-label', `Close Discover — back to the ${scheduled ? 'timetable' : 'wall'}`);
+  wallTab.addEventListener('click', () => { if (!router.requestClose()) closeDeck(); });
+  nav.appendChild(wallTab);
+
+  const discoverTab = document.createElement('span');
+  discoverTab.className = 'dd2-navtab dd2-navtab-active';
+  discoverTab.textContent = 'Discover';
+  nav.appendChild(discoverTab);
+
+  if (scheduled) {
+    const myDayTab = document.createElement('button');
+    myDayTab.type = 'button';
+    myDayTab.className = 'dd2-navtab';
+    myDayTab.textContent = 'My day';
+    myDayTab.setAttribute('aria-label', 'Open your day — gaps and clashes');
+    myDayTab.addEventListener('click', () => {
+      if (!ctx.meName || ctx.migrationPending) return;
+      // Lazy import — see the top-of-file note on why this isn't static.
+      import('./my-day.js').then(({ openMyDay }) => {
+        openMyDay(ctx, actions);
+        router.push('myday');
+      });
+    });
+    nav.appendChild(myDayTab);
+  }
+  left.appendChild(nav);
+
+  const right = document.createElement('div');
+  right.className = 'dd2-header-right';
+  const existingDot = document.querySelector('.sync-dot');
+  const dot = document.createElement('span');
+  dot.className = existingDot ? existingDot.className : 'sync-dot';
+  right.appendChild(dot);
+
+  const crewChip = document.createElement('span');
+  crewChip.className = 'dd2-crew-chip';
+  if (ctx.meName) {
+    const pill = document.createElement('span');
+    pill.className = 'dd2-crew-pill';
+    pill.setAttribute('aria-hidden', 'true');
+    const ci = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
+    pill.style.background = hslOf(ci, 0.5);
+    pill.style.border = '1px solid ' + strokeOf(ci, true);
+    pill.textContent = ctx.meName.charAt(0).toUpperCase();
+    crewChip.appendChild(pill);
+  }
+  const crewNameEl = document.createElement('span');
+  crewNameEl.textContent = state.crewName();
+  crewChip.appendChild(crewNameEl);
+  right.appendChild(crewChip);
+
+  header.append(left, right);
+  return header;
+}
+
+function renderDesktopBody(overlay, ctx, actions, facets) {
+  const fest = state.FESTIVALS[ctx.fid] || {};
+  const scheduled = !!(fest.days && Object.keys(fest.days).length);
+  const pool = buildPool(ctx, facets, currentCanonData);
+  const focusEntry = resolveFocusEntry(pool);
+
+  const shell = document.createElement('div');
+  shell.className = 'dd2-shell';
+  shell.appendChild(buildDesktopHeader(ctx, actions, fest, scheduled));
+
+  const body = document.createElement('div');
+  body.className = 'dd2-body';
+  body.appendChild(buildRail(ctx, actions, facets, fest, currentCanonData, scheduled));
+  body.appendChild(buildMiddle(ctx, actions, pool, fest));
+  body.appendChild(buildFocusPane(ctx, actions, focusEntry, currentCanonData));
+  shell.appendChild(body);
+
+  overlay.appendChild(shell);
+}
+
 // ---- deck body (re-rendered on every advance/undo/filter change) -------------------
 let currentCanonData = null;
 function renderDeckBody(ctx, actions) {
@@ -396,6 +1018,15 @@ function renderDeckBody(ctx, actions) {
   if (!overlay) return;
   const facets = loadFacets(ctx.fid);
   overlay.textContent = '';
+  // Both layouts mount their own fresh player (grid's sibling desktop pane,
+  // or the mobile card) — always tear down whatever was live first, same
+  // "ONE PLAYER, ALWAYS" discipline player.js itself enforces.
+  if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
+
+  if (isDesktopLayout()) {
+    renderDesktopBody(overlay, ctx, actions, facets);
+    return;
+  }
 
   const shell = document.createElement('div');
   shell.className = 'dd-shell';
@@ -418,8 +1049,6 @@ function renderDeckBody(ctx, actions) {
 
   const stageWrap = document.createElement('div');
   stageWrap.className = 'dd-stage';
-
-  if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
 
   if (!session.pool.length || session.position >= session.pool.length) {
     stageWrap.appendChild(buildCompletion(ctx, facets, actions));
@@ -452,6 +1081,8 @@ function ensureOverlay() {
 export function openDeck(ctx, actions = {}) {
   ensureOverlay();
   deckOpen = true;
+  forcedLayout = null; // real usage always defers to the real matchMedia, regardless of any test residue
+  watchLayout(ctx, actions);
   const gen = ++pendingOpenGen;
   const finish = (canonData) => {
     if (gen !== pendingOpenGen) return; // superseded by a newer open/close
@@ -465,14 +1096,28 @@ export function openDeck(ctx, actions = {}) {
 
 export function closeDeck() {
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
+  unwatchLayout();
   const overlay = document.getElementById(OVERLAY_ID);
   if (overlay) overlay.remove();
   deckOpen = false;
   session = null; // a fresh open deals a fresh session, per spec
+  setFocus(null); // desktop's right-pane focus is per-open too
   pendingOpenGen++;
 }
 
 export function isDeckOpen() { return deckOpen; }
+
+// Re-render the open deck in place, preserving session/focus module state.
+// The artist page's close path calls this: stacking the page tore down the
+// deck's live player (one instance, always), and the router's layer diff
+// never re-invokes open() for a layer that didn't change — so without this
+// the card/pane resurfaced with an empty player host. Latent since M4,
+// surfaced by the 5c focus pane. The remounted player is paused, per the
+// no-autoplay-on-mount rule.
+export function refreshOpenDeck(ctx, actions = {}) {
+  if (!deckOpen || !currentCanonData) return;
+  renderDeckBody(ctx, actions);
+}
 
 // ---- filter sheet -------------------------------------------------------------------
 function segRow(labelText, options, current, onPick) {
@@ -658,12 +1303,33 @@ export function openDiscoverFilterSheet(ctx, actions = {}) {
 
 // Exposed for tests only — the pure-ish render core, callable without the
 // async canon load or the router. Mirrors artist-page.js's
-// renderArtistPageForTest.
+// renderArtistPageForTest. Forces the mobile layout explicitly — jsdom has no
+// real matchMedia, so without this every existing mobile-deck test would be
+// at the mercy of isDesktopLayout()'s try/catch fallback rather than an
+// intentional choice.
 export function renderDeckForTest(ctx, actions, canonData) {
   ensureOverlay();
   deckOpen = true;
+  forcedLayout = 'mobile';
   currentCanonData = canonData || { canon: [], synonyms: {}, suppress: [] };
   session = null;
+  setFocus(null);
+  startSession(ctx, loadFacets(ctx.fid), currentCanonData);
+  renderDeckBody(ctx, actions);
+  return document.getElementById(OVERLAY_ID);
+}
+
+// Exposed for tests only — same idea as renderDeckForTest, forced to the
+// desktop three-pane (frame 5c) instead. jsdom can't cross a real matchMedia
+// boundary, so this is the "callable directly" seam the desktop render path
+// needs for coverage (build spec's own test-plan note).
+export function renderDesktopForTest(ctx, actions, canonData) {
+  ensureOverlay();
+  deckOpen = true;
+  forcedLayout = 'desktop';
+  currentCanonData = canonData || { canon: [], synonyms: {}, suppress: [] };
+  session = null;
+  setFocus(null);
   startSession(ctx, loadFacets(ctx.fid), currentCanonData);
   renderDeckBody(ctx, actions);
   return document.getElementById(OVERLAY_ID);
