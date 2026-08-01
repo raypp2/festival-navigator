@@ -10,251 +10,773 @@
   "artists": [
     {
       "name": "Robyn",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "pop",
+        "dance-pop",
+        "alternative dance",
+        "club",
+        "contemporary r&b",
+        "dance",
+        "disco",
+        "edm"
+      ],
+      "soundcloudSlug": "robyn",
+      "spotifyId": "6UE7nl9mha6s8z0wFQFIZ2",
+      "youtubeQuery": "Robyn live set",
+      "youtubeVideoIds": [
+        "wCPrjEgS0pI",
+        "OMf3W7xw42w",
+        "l3yMAq_opUo"
+      ]
     },
     {
       "name": "Dog Blood",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "bass house",
+        "complextro",
+        "electro house",
+        "tech house",
+        "trap edm"
+      ],
+      "soundcloudSlug": "dogblood",
+      "spotifyId": "2amyu5pkgYMYdNQZmB3GgY",
+      "youtubeQuery": "Dog Blood live set",
+      "youtubeVideoIds": [
+        "qouscYka1B4",
+        "YJgSlsTGoS0",
+        "CcDACYgGKZs"
+      ]
     },
     {
       "name": "Soulwax",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "indie rock",
+        "alternative rock",
+        "electronic",
+        "dance-punk",
+        "electro house",
+        "electroclash",
+        "new rave",
+        "rock"
+      ],
+      "soundcloudSlug": "soulwaxofficial",
+      "spotifyId": "43mWhBXSflupNLuNjM5vff",
+      "youtubeQuery": "Soulwax live set",
+      "youtubeVideoIds": [
+        "KcQUpDP8040",
+        "TS7Otq_V_hU",
+        "SlK06y367Ww"
+      ]
     },
     {
       "name": "Prospa",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "prospauk",
+      "spotifyId": "6HabM2PUM519iIxervGWSb",
+      "youtubeQuery": "Prospa live set",
+      "youtubeVideoIds": [
+        "UE6wjxvMRz0",
+        "CWO9NQU5x-o",
+        "zVrVHMf7k74"
+      ]
     },
     {
       "name": "Kettama",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "kettamabro",
+      "spotifyId": "3an9rnsXKPCAMlZgH4A0n4",
+      "youtubeQuery": "Kettama live set",
+      "youtubeVideoIds": [
+        "zVrVHMf7k74",
+        "JUDUC87VuPU",
+        "dVwrRRiQNCs"
+      ]
     },
     {
       "name": "Fatboy Slim",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "big beat",
+        "electronic"
+      ],
+      "soundcloudSlug": "fatboyslim",
+      "spotifyId": "4Y7tXHSEejGu1vQ9bwDdXW",
+      "youtubeQuery": "Fatboy Slim live set",
+      "youtubeVideoIds": [
+        "fQqusBEnwM4",
+        "ET-hf8B-tI4",
+        "Fz5kEbC5qH8"
+      ]
     },
     {
       "name": "Skepta",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "grime",
+        "hip hop",
+        "house"
+      ],
+      "soundcloudSlug": "skepta",
+      "spotifyId": "2p1fiYHYiXz9qi0JJyxBzN",
+      "youtubeQuery": "Skepta live set",
+      "youtubeVideoIds": [
+        "4JbaSxHAJRg",
+        "YeiuTYkve6k",
+        "dTzNbRhVkr0"
+      ]
     },
     {
       "name": "Tove Lo",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electropop",
+        "dance-pop",
+        "alternative pop",
+        "contemporary r&b",
+        "indie pop",
+        "pop"
+      ],
+      "soundcloudSlug": "tovelo",
+      "spotifyId": "4NHQUGzhtTLFvgF5SZesLK",
+      "youtubeQuery": "Tove Lo live set",
+      "youtubeVideoIds": [
+        "2Tanj42oBXw",
+        "r38y6JjeYCM",
+        "5Z7eYX9mKXg"
+      ]
     },
     {
       "name": "Max Styler",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "tech house"
+      ],
+      "soundcloudSlug": "maxstyler",
+      "spotifyId": "3NKKngINK1tP6BFy0WOyWk",
+      "youtubeQuery": "Max Styler live set",
+      "youtubeVideoIds": [
+        "98PbnkVqv1s",
+        "N40pkDgwNfg",
+        "Xmily-bP8Q0"
+      ]
     },
     {
       "name": "Beltran b2b Ben Sterling",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Beltran b2b Ben Sterling live set",
+      "youtubeVideoIds": [
+        "GeUK-qStbeo",
+        "6pFXKra0WT0",
+        "3ZSyA1VTYrM"
+      ]
     },
     {
       "name": "Fcukers",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electro house",
+        "electronic"
+      ],
+      "soundcloudSlug": "fcukers",
+      "spotifyId": "3UtzOHYm3lQALkKzVD4wyO",
+      "youtubeQuery": "Fcukers live set",
+      "youtubeVideoIds": [
+        "D_flQsBigEA",
+        "3jIVX95zSWM",
+        "haLVNR2c2Us"
+      ]
     },
     {
       "name": "Mike D 5D",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Mike D 5D live set",
+      "youtubeVideoIds": [
+        "m_rViz68dtg",
+        "eUcDPvdv80I",
+        "EzauF6IAM0s"
+      ]
     },
     {
       "name": "Groove Armada",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "big beat",
+        "downtempo",
+        "house",
+        "alternative dance",
+        "electropop",
+        "funky house",
+        "synth-pop"
+      ],
+      "soundcloudSlug": "groove-armada-1",
+      "spotifyId": "67tgMwUfnmqzYsNAtnP6YJ",
+      "youtubeQuery": "Groove Armada live set",
+      "youtubeVideoIds": [
+        "KA9McrkYiIU",
+        "ccWcik7TjNI",
+        "FJFJx1V8xHs"
+      ]
     },
     {
       "name": "DJ Shadow",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "hip hop",
+        "turntablism",
+        "instrumental hip hop",
+        "trip hop",
+        "experimental hip hop",
+        "experimental",
+        "downtempo"
+      ],
+      "soundcloudSlug": "djshadow",
+      "spotifyId": "5CE2IfdYZEQGIDsfiRm8SI",
+      "youtubeQuery": "DJ Shadow live set",
+      "youtubeVideoIds": [
+        "eK6bdim2Vuc",
+        "2i_aw_uPIoc",
+        "3ArSb3lCc28"
+      ]
     },
     {
       "name": "Bassvictim",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electroclash",
+        "electronic",
+        "electropop"
+      ],
+      "soundcloudSlug": "bassvictimm",
+      "spotifyId": "7f8ydynRRnrJBqWxevKLcM",
+      "youtubeQuery": "Bassvictim live set",
+      "youtubeVideoIds": [
+        "YAarFC3s5Iw",
+        "JCglK7kJhyw",
+        "VCxNcHjExpI"
+      ]
     },
     {
       "name": "Nimino",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic"
+      ],
+      "soundcloudSlug": "milo-good-evans",
+      "spotifyId": "5x0R3zoC09GMiRJomoexLV",
+      "youtubeQuery": "Nimino live set",
+      "youtubeVideoIds": [
+        "Hx3M325ns4Y",
+        "X4maOu_5-sA",
+        "Vrcl2py7bz8"
+      ]
     },
     {
       "name": "Melanie C",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "pop"
+      ],
+      "soundcloudSlug": "melaniecmusic",
+      "spotifyId": "60vX3zLcdKRXvKLITVh5Df",
+      "youtubeQuery": "Melanie C live set",
+      "youtubeVideoIds": [
+        "7hXr2Z81XHM",
+        "IF_YnsnYZCs",
+        "lPE5_eQd5xI"
+      ]
     },
     {
       "name": "Oskar Med K",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "deep house",
+        "edm",
+        "house"
+      ],
+      "spotifyId": "28ntgpEkMU9Zm7F3gLDMhZ",
+      "youtubeQuery": "Oskar Med K live set",
+      "youtubeVideoIds": [
+        "Fjv6MGIuznQ",
+        "P2bMM5pkziY",
+        "Te3KBmDV9Qk"
+      ]
     },
     {
       "name": "Jigitz",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "jigitz",
+      "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
+      "youtubeQuery": "Jigitz live set",
+      "youtubeVideoIds": [
+        "jtsm4bbaOHY",
+        "eW939HVoPFc",
+        "GtemQO_rWIA"
+      ]
     },
     {
       "name": "Tricky",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "trip hop",
+        "hip hop",
+        "electronic"
+      ],
+      "soundcloudSlug": "trickyofficial",
+      "spotifyId": "6hhA8TKRNryM8FNzqCqdDO",
+      "youtubeQuery": "Tricky live set",
+      "youtubeVideoIds": [
+        "RlSQVjpzxXk",
+        "PFkfpMg5Jxc",
+        "0sbw8cfkY6Y"
+      ]
     },
     {
       "name": "Chloé Caillet",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "house"
+      ],
+      "soundcloudSlug": "chloecaillet",
+      "spotifyId": "68ywCN6ZpInbcilOfLBa3a",
+      "youtubeQuery": "Chloé Caillet live set",
+      "youtubeVideoIds": [
+        "evPRP3y7SFI",
+        "uMvEaObWvgc",
+        "Z30VhruGGqA"
+      ]
     },
     {
       "name": "Jyoty",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "jyotysingh",
+      "youtubeQuery": "Jyoty live set",
+      "youtubeVideoIds": [
+        "eruuZfu_GMI",
+        "0d48qTYiUK0",
+        "M-1UCpkih4M"
+      ]
     },
     {
       "name": "Ranger Trucco b2b Alisha",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Ranger Trucco b2b Alisha live set",
+      "youtubeVideoIds": [
+        "Kvsm8pH4awA",
+        "_s7P_p_u5Ss",
+        "--pWNwDDOu4"
+      ]
     },
     {
       "name": "Six Sex",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "latin",
+        "neoperreo"
+      ],
+      "soundcloudSlug": "sixsex",
+      "spotifyId": "29rvPhemBdOLYdLr2xI8dr",
+      "youtubeQuery": "Six Sex live set"
     },
     {
       "name": "Nate Sib",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "natesib",
+      "spotifyId": "4TNu2ZIE566yKwEhOT8eTv",
+      "youtubeQuery": "Nate Sib live set",
+      "youtubeVideoIds": [
+        "UQTy36cQQcc",
+        "DoGVt34Ak3E",
+        "lHCqiffKrwg"
+      ]
     },
     {
       "name": "MGNA Crrrta",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "mgna-crrrta",
+      "spotifyId": "1pNs3qwMBJ0q4lyASth9Ye",
+      "youtubeQuery": "MGNA Crrrta live set"
     },
     {
       "name": "Sam Alfred",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "progressive breaks",
+        "uk garage"
+      ],
+      "spotifyId": "4PVzoVUDxey3mxGdkf4HgR",
+      "youtubeQuery": "Sam Alfred live set"
     },
     {
       "name": "Gelli Haha",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "electropop"
+      ],
+      "spotifyId": "4O0acxqHYUQGGMqOICiSeI",
+      "youtubeQuery": "Gelli Haha live set"
     },
     {
       "name": "Airwolf Paradise",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic"
+      ],
+      "spotifyId": "0c3I7EPZUCCG7khbUwQDjl",
+      "youtubeQuery": "Airwolf Paradise live set"
     },
     {
       "name": "erika b2b sfcowboy",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "erika b2b sfcowboy live set"
     },
     {
       "name": "Felly Fell",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Felly Fell live set"
     },
     {
       "name": "Swedish House Mafia",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "house",
+        "electro house",
+        "electronic",
+        "progressive house",
+        "dance",
+        "dance-pop",
+        "edm",
+        "electropop"
+      ],
+      "soundcloudSlug": "officialswedishhousemafia",
+      "spotifyId": "1h6Cn3P4NGzXbaXidqURXs",
+      "youtubeQuery": "Swedish House Mafia live set"
     },
     {
       "name": "Tiësto",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "trance",
+        "electronic",
+        "dance",
+        "electro house",
+        "house",
+        "dance-pop",
+        "edm",
+        "progressive house"
+      ],
+      "soundcloudSlug": "tiesto",
+      "spotifyId": "2o5jDhtHVPhrJdv3cEQ99Z",
+      "youtubeQuery": "Tiësto live set"
     },
     {
       "name": "Zara Larsson",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dance-pop",
+        "electropop",
+        "pop",
+        "contemporary r&b",
+        "alternative pop",
+        "dance",
+        "disco",
+        "hip hop"
+      ],
+      "soundcloudSlug": "zaralarssonofficial",
+      "spotifyId": "1Xylc3o4UrD53lo9CvFvVg",
+      "youtubeQuery": "Zara Larsson live set"
     },
     {
       "name": "Four Tet",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "electronic",
+        "downtempo",
+        "idm",
+        "folktronica",
+        "microhouse",
+        "club",
+        "dance",
+        "dubstep"
+      ],
+      "soundcloudSlug": "four-tet",
+      "spotifyId": "7Eu1txygG6nJttLHbZdQOh",
+      "youtubeQuery": "Four Tet live set"
     },
     {
       "name": "Parcels",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "boogie",
+        "disco",
+        "electronic",
+        "indietronica",
+        "nu disco"
+      ],
+      "soundcloudSlug": "parcels-music",
+      "spotifyId": "3oKRxpszQKUjjaHz388fVA",
+      "youtubeQuery": "Parcels live set"
     },
     {
       "name": "Mochakk",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "mochakkmusic",
+      "spotifyId": "0rTh1tAdrEbdKZBTiiAQSo",
+      "youtubeQuery": "Mochakk live set"
     },
     {
       "name": "Marlon Hoffstadt",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "marlonhoffstadt",
+      "spotifyId": "0HHa7ZJZxUQlg5l2mB0N0f",
+      "youtubeQuery": "Marlon Hoffstadt live set"
     },
     {
       "name": "horsegiirL",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "happy hardcore",
+        "hyperpop"
+      ],
+      "soundcloudSlug": "horsegiirl",
+      "spotifyId": "0auP293abZeTWwMUi3fZw2",
+      "youtubeQuery": "horsegiirL live set"
     },
     {
       "name": "Overmono",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "ambient",
+        "breakbeat",
+        "edm",
+        "electronic",
+        "uk garage"
+      ],
+      "soundcloudSlug": "overmono",
+      "spotifyId": "01PnN11ovfen6xUOHfNpn3",
+      "youtubeQuery": "Overmono live set",
+      "youtubeVideoIds": [
+        "xgJBhezlMoE",
+        "9Stt4wq3KCE",
+        "BpA2n8bvpOk"
+      ]
     },
     {
       "name": "Zulan",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "2Yz9F5lQVc0p6SDxkw2BvF",
+      "youtubeQuery": "Zulan live set"
     },
     {
       "name": "Ninajirachi",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "edm",
+        "electronic",
+        "electropop",
+        "bubblegum bass",
+        "complextro",
+        "electro house",
+        "trance"
+      ],
+      "soundcloudSlug": "ninajirachi",
+      "spotifyId": "3MekbRujJg5VZThubOlrkR",
+      "youtubeQuery": "Ninajirachi live set"
     },
     {
       "name": "underscores",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "hyperpop",
+        "electronic",
+        "pop",
+        "glitch hop",
+        "indie pop",
+        "indie rock",
+        "indietronica"
+      ],
+      "soundcloudSlug": "underscores",
+      "spotifyId": "7HfUJxeVTgrvhk0eWHFzV7",
+      "youtubeQuery": "Underscores live set"
     },
     {
       "name": "Adéla",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "pop",
+        "singer-songwriter"
+      ],
+      "spotifyId": "2qanRMyA5bNuTvz1dK45OP",
+      "youtubeQuery": "Adéla live set"
     },
     {
       "name": "SG Lewis",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "electropop",
+        "nu disco",
+        "alternative r&b",
+        "club",
+        "dance",
+        "disco",
+        "edm",
+        "electronic"
+      ],
+      "soundcloudSlug": "sglewis",
+      "spotifyId": "0GG2cWaonE4JPrjcCCQ1EG",
+      "youtubeQuery": "SG Lewis live set"
     },
     {
       "name": "Kelela",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "alternative r&b",
+        "grime"
+      ],
+      "soundcloudSlug": "kelelam",
+      "spotifyId": "1U0sIzpRtDkvu1hXXzxh60",
+      "youtubeQuery": "Kelela live set"
     },
     {
       "name": "Daphni",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "spotifyId": "4nhvb6x9ZhPiYCzrHDNia9",
+      "youtubeQuery": "Daphni live set"
     },
     {
       "name": "JT",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "JT live set"
     },
     {
       "name": "Baby J",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "hip hop"
+      ],
+      "spotifyId": "0aGsTkWhQhUagv2JNesv1o",
+      "youtubeQuery": "Baby J live set"
     },
     {
       "name": "Channel Tres",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "club",
+        "dance",
+        "hip house",
+        "house",
+        "alternative r&b",
+        "deep house",
+        "disco",
+        "edm"
+      ],
+      "soundcloudSlug": "channeltres",
+      "spotifyId": "4cUkGQyhLFqKHBtL58HYVp",
+      "youtubeQuery": "Channel Tres live set"
     },
     {
       "name": "VTSS",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "electronic",
+        "techno"
+      ],
+      "soundcloudSlug": "vitiosus",
+      "spotifyId": "0zo109NM3S7CqHpvlXwqEN",
+      "youtubeQuery": "VTSS live set"
     },
     {
       "name": "ear",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "huepow00",
+      "spotifyId": "5DttiQGsYd6HSp0NKlNDql",
+      "youtubeQuery": "ear live set"
     },
     {
       "name": "Brunello",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "Brunello live set"
     },
     {
       "name": "Ben UFO",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "house",
+        "post-dubstep",
+        "techno"
+      ],
+      "soundcloudSlug": "benufo",
+      "youtubeQuery": "Ben UFO live set"
     },
     {
       "name": "Silva Bumpa",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "2dPLkqesvPXpIlP65JoLrf",
+      "youtubeQuery": "Silva Bumpa live set"
     },
     {
       "name": "Mind Enterprises",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "electronic",
+        "italo-disco"
+      ],
+      "soundcloudSlug": "mndntrprss",
+      "spotifyId": "5pN1DJhPFDKso4OtC0QhnB",
+      "youtubeQuery": "Mind Enterprises live set"
     },
     {
       "name": "Azzecca",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "2k5DY2QDU3kBi5DX7OQlWj",
+      "youtubeQuery": "Azzecca live set",
+      "youtubeVideoIds": [
+        "jkVakJ0ODv4",
+        "gUSt3UFBHpM",
+        "dJ6gzd4t2kk"
+      ]
     },
     {
       "name": "Dean Turnley",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "3BcWcwYXVjvLWHMGKsuvsd",
+      "youtubeQuery": "Dean Turnley live set"
     },
     {
       "name": "riria",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "riria live set"
     },
     {
       "name": "Torren Foot",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "house"
+      ],
+      "soundcloudSlug": "torrenfoot",
+      "spotifyId": "7lQOxDl96wmNoqGoW4kgv4",
+      "youtubeQuery": "Torren Foot live set"
     },
     {
       "name": "Clearcast",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "3dRhjQBCaVo5zMuXyjv7Su",
+      "youtubeQuery": "Clearcast live set"
     },
     {
       "name": "Despacio",
-      "day": "Saturday & Sunday"
+      "day": "Saturday & Sunday",
+      "youtubeQuery": "Despacio live set"
     }
   ],
   "meta": {

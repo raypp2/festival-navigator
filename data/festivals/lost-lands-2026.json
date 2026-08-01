@@ -9,376 +9,1252 @@
   "status": "lineup",
   "artists": [
     {
-      "name": "Adventure Club"
-    },
-    {
-      "name": "Æon:Mode"
-    },
-    {
-      "name": "ALLEYCVT"
-    },
-    {
-      "name": "ARMNHMR"
-    },
-    {
-      "name": "ATLiens"
-    },
-    {
-      "name": "Audiofreq"
-    },
-    {
-      "name": "Barely Alive"
-    },
-    {
-      "name": "Bear Grillz"
-    },
-    {
-      "name": "Benda"
-    },
-    {
-      "name": "Blossom"
-    },
-    {
-      "name": "Boogie T"
-    },
-    {
-      "name": "Borgore"
-    },
-    {
-      "name": "Bou"
-    },
-    {
-      "name": "Calcium"
-    },
-    {
-      "name": "Canabliss"
-    },
-    {
-      "name": "Caspa"
-    },
-    {
-      "name": "Crankdat"
-    },
-    {
-      "name": "Craze"
-    },
-    {
-      "name": "Culture Shock"
-    },
-    {
-      "name": "Cyclops"
-    },
-    {
-      "name": "Delta Heavy"
-    },
-    {
-      "name": "Dieselboy"
-    },
-    {
-      "name": "Dion Timmer"
-    },
-    {
-      "name": "Dirt Monkey"
-    },
-    {
-      "name": "Dirtyphonics"
-    },
-    {
-      "name": "Distinct Motive"
-    },
-    {
-      "name": "Doctor P"
-    },
-    {
-      "name": "Dr. Fresch"
-    },
-    {
-      "name": "DRINKURWATER"
-    },
-    {
-      "name": "Effin"
-    },
-    {
-      "name": "Emorfik"
-    },
-    {
-      "name": "Eptic"
-    },
-    {
-      "name": "Excision (2-Hour Set)"
-    },
-    {
-      "name": "Excision (Detox Set)"
-    },
-    {
-      "name": "Excision B2B Space Laces"
-    },
-    {
-      "name": "Flosstradamus"
-    },
-    {
-      "name": "Flux Pavilion"
-    },
-    {
-      "name": "FuntCase"
-    },
-    {
-      "name": "Ganja White Night"
-    },
-    {
-      "name": "Ghastly"
-    },
-    {
-      "name": "GHENGAR"
-    },
-    {
-      "name": "gladde paling"
-    },
-    {
-      "name": "Grabbitz"
-    },
-    {
-      "name": "Hairitage"
-    },
-    {
-      "name": "Hedex"
-    },
-    {
-      "name": "HEYZ"
-    },
-    {
-      "name": "HOL!"
-    },
-    {
-      "name": "Illenium"
-    },
-    {
-      "name": "INFEKT"
-    },
-    {
-      "name": "Ivy Lab"
-    },
-    {
-      "name": "Jantsen"
-    },
-    {
-      "name": "Jessica Audiffred"
-    },
-    {
-      "name": "Jkyl & Hyde"
-    },
-    {
-      "name": "Kai Wachi"
-    },
-    {
-      "name": "Know Good"
-    },
-    {
-      "name": "Kompany"
-    },
-    {
-      "name": "Krewella"
-    },
-    {
-      "name": "LAYZ"
-    },
-    {
-      "name": "Level Up"
-    },
-    {
-      "name": "Levity"
-    },
-    {
-      "name": "Lil Texas"
-    },
-    {
-      "name": "Liquid Stranger"
-    },
-    {
-      "name": "LYNY"
-    },
-    {
-      "name": "Mefjus"
-    },
-    {
-      "name": "NGHTMRE"
-    },
-    {
-      "name": "Oliverse"
-    },
-    {
-      "name": "Passport"
-    },
-    {
-      "name": "PhaseOne"
-    },
-    {
-      "name": "Ravenscoon"
-    },
-    {
-      "name": "Ray Volpe"
-    },
-    {
-      "name": "Reaper"
-    },
-    {
-      "name": "THE RESISTANCE"
-    },
-    {
-      "name": "Riot Ten"
-    },
-    {
-      "name": "Samplifire"
-    },
-    {
-      "name": "Seven Lions"
-    },
-    {
-      "name": "Sigma"
-    },
-    {
-      "name": "SIPPY"
-    },
-    {
-      "name": "SLANDER"
-    },
-    {
-      "name": "Smoakland"
-    },
-    {
-      "name": "SoDown"
-    },
-    {
-      "name": "Stumpi"
-    },
-    {
-      "name": "Subtronics"
-    },
-    {
-      "name": "Sullivan King"
-    },
-    {
-      "name": "Taiki Nulight"
-    },
-    {
-      "name": "Trivecta"
-    },
-    {
-      "name": "TRUTH"
-    },
-    {
-      "name": "Virtual Riot"
-    },
-    {
-      "name": "Wax Motif"
-    },
-    {
-      "name": "Whethan"
-    },
-    {
-      "name": "The Widdler"
-    },
-    {
-      "name": "William Black"
-    },
-    {
-      "name": "WonkyWilla"
-    },
-    {
-      "name": "Wooli"
-    },
-    {
-      "name": "YOOKiE"
-    },
-    {
-      "name": "Zingara"
-    },
-    {
-      "name": "Zomboy"
+      "name": "Adventure Club",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "edm",
+        "electro house",
+        "electronic"
+      ],
+      "soundcloudSlug": "adventureclub",
+      "spotifyId": "5CdJjUi9f0cVgo9nFuJrFa",
+      "youtubeQuery": "Adventure Club live set",
+      "youtubeVideoIds": [
+        "-SoGOUE9Yug",
+        "l_GY3SDwrgc",
+        "eQ7_6BVh8co"
+      ]
+    },
+    {
+      "name": "Æon:Mode",
+      "soundcloudSlug": "aeon_mode",
+      "spotifyId": "41ouHqoKXNijIMFsQTmFQV",
+      "youtubeQuery": "Æon:Mode live set",
+      "youtubeVideoIds": [
+        "I02YBw_-vw8",
+        "vWhvo-hkp30",
+        "gfop6g8YJTE"
+      ]
+    },
+    {
+      "name": "ALLEYCVT",
+      "spotifyId": "4JxRK2gxmri7L7OWaxnVD1",
+      "youtubeQuery": "Alleycvt live set",
+      "youtubeVideoIds": [
+        "yGXyuoeSwBU",
+        "t0zryekEWao",
+        "oEkQ6gU3VFs"
+      ]
+    },
+    {
+      "name": "ARMNHMR",
+      "soundcloudSlug": "ARMNHMR",
+      "spotifyId": "0P2bZXPyjHYRW4guHVAFl1",
+      "youtubeQuery": "ARMNHMR live set",
+      "youtubeVideoIds": [
+        "vnFv8HHYBMY",
+        "J-VJpI0cQjo",
+        "PUMXKSvmElA"
+      ]
+    },
+    {
+      "name": "ATLiens",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "trap edm"
+      ],
+      "soundcloudSlug": "atliens",
+      "spotifyId": "74RET4rCZPTGzhsLjD0i3g",
+      "youtubeQuery": "ATLiens live set",
+      "youtubeVideoIds": [
+        "wdOe276EGz8",
+        "vpmP8fWSJlE",
+        "OUce4P-04S0"
+      ]
+    },
+    {
+      "name": "Audiofreq",
+      "spotifyId": "0hHKtZEXHNsXfgrNgU7Zkl",
+      "youtubeQuery": "Audiofreq live set",
+      "youtubeVideoIds": [
+        "xsBgfKnOiVI",
+        "MPERXgi1_q0",
+        "6I8-YIizwdY"
+      ]
+    },
+    {
+      "name": "Barely Alive",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "brostep",
+        "complextro",
+        "edm",
+        "briddim",
+        "electro house",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "barelyalive",
+      "spotifyId": "5c3akKV3CUqAVOnGZqf4S3",
+      "youtubeQuery": "Barely Alive live set",
+      "youtubeVideoIds": [
+        "9y_pwrMVXhs",
+        "8mtnAbltJkg",
+        "oEScPBoIgXA"
+      ]
+    },
+    {
+      "name": "Bear Grillz",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "itsbeargrillz",
+      "spotifyId": "04vdWVjgi45nrMAxeCEVQe",
+      "youtubeQuery": "Bear Grillz live set",
+      "youtubeVideoIds": [
+        "G8Alvy6wWOA",
+        "umlyi0CXbvE",
+        "YOYhBsh_og8"
+      ]
+    },
+    {
+      "name": "Benda",
+      "soundcloudSlug": "bendamusic",
+      "spotifyId": "0md3NIXueJZSFZ82HMu26M",
+      "youtubeQuery": "Benda live set",
+      "youtubeVideoIds": [
+        "O-nciQ2XIXU",
+        "iHCUKluNUpk",
+        "qmgh3BwUuwg"
+      ]
+    },
+    {
+      "name": "Blossom",
+      "youtubeQuery": "Blossom live set",
+      "youtubeVideoIds": [
+        "K08CmHOEpYI",
+        "bhE-F_FAx8Y",
+        "z4zyQSWCFd8"
+      ]
+    },
+    {
+      "name": "Boogie T",
+      "soundcloudSlug": "boogie-t",
+      "spotifyId": "4zlw0jXUzd4dRcqI3Y1OiY",
+      "youtubeQuery": "Boogie T live set",
+      "youtubeVideoIds": [
+        "KMUW2qwKTsc",
+        "WL1ms-g0m_Y",
+        "qLRjXN8TMg8"
+      ]
+    },
+    {
+      "name": "Borgore",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "borgore",
+      "spotifyId": "7u160I5qtBYZTQMLEIJmyz",
+      "youtubeQuery": "Borgore live set",
+      "youtubeVideoIds": [
+        "sy4xFIBfgTs",
+        "U2o-qA8QXO8",
+        "-vxt55Rohl8"
+      ]
+    },
+    {
+      "name": "Bou",
+      "genres": [
+        "drum and bass"
+      ],
+      "soundcloudSlug": "boudnb",
+      "spotifyId": "35dxfY1wywqVRUEaVuMm13",
+      "youtubeQuery": "Bou live set",
+      "youtubeVideoIds": [
+        "6ePDlq3Mtto",
+        "uWTFON_DZDU",
+        "7-pIAf_h5rg"
+      ]
+    },
+    {
+      "name": "Calcium",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "calcium-dubs",
+      "spotifyId": "1s6bMklFjSRcrMy2FtobWM",
+      "youtubeQuery": "Calcium live set",
+      "youtubeVideoIds": [
+        "_7DcOTYBThg",
+        "jkv2am1MiAA",
+        "JLOGcVzxvmw"
+      ]
+    },
+    {
+      "name": "Canabliss",
+      "youtubeQuery": "Canabliss live set",
+      "youtubeVideoIds": [
+        "ZDFy3UJm-M0",
+        "8GHkKyeGllY",
+        "rD9dSUcqzmM"
+      ]
+    },
+    {
+      "name": "Caspa",
+      "genres": [
+        "dubstep",
+        "uk garage",
+        "bassline",
+        "club",
+        "drum and bass",
+        "dub",
+        "electronic",
+        "electronica"
+      ],
+      "soundcloudSlug": "caspaofficial",
+      "spotifyId": "1U2KDt0Rf44nHbX3eyJzhL",
+      "youtubeQuery": "Caspa live set",
+      "youtubeVideoIds": [
+        "8rYlC1fimaw",
+        "bL_w7ZV4tKg",
+        "A6RQKcOvYiE"
+      ]
+    },
+    {
+      "name": "Crankdat",
+      "soundcloudSlug": "crankdatmusic",
+      "spotifyId": "0k2oLuxLX4aWrqYG7D5vxF",
+      "youtubeQuery": "Crankdat live set",
+      "youtubeVideoIds": [
+        "U_4HE3DjmNY",
+        "n2USUJb8dew",
+        "uMPCJlIhLNg"
+      ]
+    },
+    {
+      "name": "Craze",
+      "youtubeQuery": "Craze live set",
+      "youtubeVideoIds": [
+        "dfgpVI4zNzA",
+        "cnUgld_in2E",
+        "MBqWw9HIF1U"
+      ]
+    },
+    {
+      "name": "Culture Shock",
+      "genres": [
+        "punk",
+        "ska punk"
+      ],
+      "youtubeQuery": "Culture Shock live set",
+      "youtubeVideoIds": [
+        "eOvEHvaDoAE",
+        "iJyxx84Jo4Q",
+        "xVmFUs2FXqU"
+      ]
+    },
+    {
+      "name": "Cyclops",
+      "soundcloudSlug": "officialcyclops",
+      "spotifyId": "1vOTVnnyLvVTeuwrZLghCN",
+      "youtubeQuery": "Cyclops live set",
+      "youtubeVideoIds": [
+        "5ch-xuSaX8o",
+        "RfgFD1HpICA",
+        "PxgqtjPfqV4"
+      ]
+    },
+    {
+      "name": "Delta Heavy",
+      "genres": [
+        "drum and bass",
+        "deep house",
+        "electronic",
+        "jungle"
+      ],
+      "soundcloudSlug": "deltaheavyuk",
+      "spotifyId": "7GvVTb8yFV0ZrdI30Qce6T",
+      "youtubeQuery": "Delta Heavy live set",
+      "youtubeVideoIds": [
+        "_oEiJGLkcc8",
+        "d3jGvBzglCI",
+        "ZD4UNXbYvL0"
+      ]
+    },
+    {
+      "name": "Dieselboy",
+      "genres": [
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "dieselboy",
+      "youtubeQuery": "Dieselboy live set",
+      "youtubeVideoIds": [
+        "wV2MpeQvxJI",
+        "WYtijadumA8",
+        "wbpjPSPdngI"
+      ]
+    },
+    {
+      "name": "Dion Timmer",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "diontimmer",
+      "spotifyId": "06VibSJEr3GLxLBBZhRums",
+      "youtubeQuery": "Dion Timmer live set",
+      "youtubeVideoIds": [
+        "7fSFmxZWdq8",
+        "tie0ruyheaY",
+        "ciavrnjW8YA"
+      ]
+    },
+    {
+      "name": "Dirt Monkey",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "dirtmonkey",
+      "spotifyId": "5dNqUwGTZcQQ09ecTKkCGH",
+      "youtubeQuery": "Dirt Monkey live set",
+      "youtubeVideoIds": [
+        "urF9FQMyeWU",
+        "LpW4rkSPb0A",
+        "aVhnJOL4qIA"
+      ]
+    },
+    {
+      "name": "Dirtyphonics",
+      "genres": [
+        "drum and bass",
+        "dubstep"
+      ],
+      "soundcloudSlug": "dirtyphonics",
+      "spotifyId": "4zymhxzJ0UJc74tMHGyoWs",
+      "youtubeQuery": "Dirtyphonics live set",
+      "youtubeVideoIds": [
+        "lKi7D07U9hg",
+        "bawxm6qZqNE",
+        "ZmEpqgzk6zc"
+      ]
+    },
+    {
+      "name": "Distinct Motive",
+      "soundcloudSlug": "distinctmotive",
+      "spotifyId": "5KfqHG8bhfI18ZuTzZSdSM",
+      "youtubeQuery": "Distinct Motive live set",
+      "youtubeVideoIds": [
+        "V-wWBcZh9Cc",
+        "6nnx18d9cRg",
+        "WL1ms-g0m_Y"
+      ]
+    },
+    {
+      "name": "Doctor P",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "doctorpcircus",
+      "spotifyId": "0tgjwsn1Lpjj8kKEvWm0KQ",
+      "youtubeQuery": "Doctor P live set",
+      "youtubeVideoIds": [
+        "yo_ZPj9pWzU",
+        "pAoVak76UqQ",
+        "SbBK1lF2xcg"
+      ]
+    },
+    {
+      "name": "Dr. Fresch",
+      "soundcloudSlug": "drfresch",
+      "spotifyId": "1htHgbGwgCWJBfGiQwcRqC",
+      "youtubeQuery": "Dr. Fresch live set",
+      "youtubeVideoIds": [
+        "PnhCSIUYVXw",
+        "6W30o8L08i0",
+        "SepjUbyF47A"
+      ]
+    },
+    {
+      "name": "DRINKURWATER",
+      "spotifyId": "4P4PUC5CstzTajr5dhwQZk",
+      "youtubeQuery": "DRINKURWATER live set",
+      "youtubeVideoIds": [
+        "eAU8zlvV0GM",
+        "9ypOup1qiDk",
+        "Qf23khaNRBo"
+      ]
+    },
+    {
+      "name": "Effin",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "effin",
+      "spotifyId": "6l0u1oM2imxw0isrGcXpmH",
+      "youtubeQuery": "Effin live set",
+      "youtubeVideoIds": [
+        "wu801rrpRtk",
+        "SbDrE2dB14c",
+        "65yoSnu_SkM"
+      ]
+    },
+    {
+      "name": "Emorfik",
+      "spotifyId": "34bGTqa9HJUnf14IOHt6pc",
+      "youtubeQuery": "Emorfik live set",
+      "youtubeVideoIds": [
+        "EDQwGmnmcTk",
+        "6UQ3f6tB7ME",
+        "cs4oise_Dic"
+      ]
+    },
+    {
+      "name": "Eptic",
+      "genres": [
+        "dubstep",
+        "drumstep",
+        "electronic",
+        "house",
+        "trap"
+      ],
+      "soundcloudSlug": "eptic",
+      "spotifyId": "4dvZ0abeUaiHm7Fu9Gj0PQ",
+      "youtubeQuery": "Eptic live set",
+      "youtubeVideoIds": [
+        "sZfCy6sB5qk",
+        "S1YQ4VFkyXg",
+        "QvF2RmH9oMc"
+      ]
+    },
+    {
+      "name": "Excision (2-Hour Set)",
+      "youtubeQuery": "Excision (2-Hour Set) live set",
+      "youtubeVideoIds": [
+        "b29GV8RODIc",
+        "RRDavrjyxik",
+        "VTYNl9j1oCA"
+      ]
+    },
+    {
+      "name": "Excision (Detox Set)",
+      "youtubeQuery": "Excision (Detox Set) live set",
+      "youtubeVideoIds": [
+        "yopdqCswvWE",
+        "zqK6ADIfTEA",
+        "_FVvEwnd9Do"
+      ]
+    },
+    {
+      "name": "Excision B2B Space Laces",
+      "youtubeQuery": "Excision B2B Space Laces live set",
+      "youtubeVideoIds": [
+        "RRDavrjyxik",
+        "b29GV8RODIc",
+        "S1YQ4VFkyXg"
+      ]
+    },
+    {
+      "name": "Flosstradamus",
+      "genres": [
+        "festival trap",
+        "hip hop",
+        "trap",
+        "trap edm"
+      ],
+      "soundcloudSlug": "flosstradamus",
+      "spotifyId": "2FmzVitXZjIkFolH8HXd4j",
+      "youtubeQuery": "Flosstradamus live set",
+      "youtubeVideoIds": [
+        "KZU5dNmFGpQ",
+        "jR2swYCqYV4",
+        "adeXFz-djoQ"
+      ]
+    },
+    {
+      "name": "Flux Pavilion",
+      "genres": [
+        "dubstep",
+        "edm",
+        "electronic",
+        "dance",
+        "uk garage",
+        "club",
+        "dub"
+      ],
+      "soundcloudSlug": "flux-pavilion",
+      "spotifyId": "7muzHifhMdnfN1xncRLOqk",
+      "youtubeQuery": "Flux Pavilion live set",
+      "youtubeVideoIds": [
+        "kf624ZDp2D8",
+        "XouoZyVj-Ks",
+        "lQJetgN58qE"
+      ]
+    },
+    {
+      "name": "FuntCase",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "funtcaseuk",
+      "spotifyId": "6v1BAWFVNPbPJlnFHWR78D",
+      "youtubeQuery": "FuntCase live set",
+      "youtubeVideoIds": [
+        "9b4xDhtyEWM",
+        "GYnlAhT_YcY",
+        "ZMZaw-DUB94"
+      ]
+    },
+    {
+      "name": "Ganja White Night",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "ganjawhitenight",
+      "spotifyId": "1a6oIpEh4DGgaqgWg5xwd3",
+      "youtubeQuery": "Ganja White Night live set",
+      "youtubeVideoIds": [
+        "f4zHRGzMG7c",
+        "7RV8xYka7Yg",
+        "pWfLeXmvJ8A"
+      ]
+    },
+    {
+      "name": "Ghastly",
+      "genres": [
+        "dance",
+        "dubstep",
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "ghastly",
+      "spotifyId": "2Sa4c9qKaI7ILJs8D6gUCh",
+      "youtubeQuery": "Ghastly live set",
+      "youtubeVideoIds": [
+        "9sR302z6Pyk",
+        "OFvT9bzNNqc",
+        "FMwU4RSulK8"
+      ]
+    },
+    {
+      "name": "GHENGAR",
+      "soundcloudSlug": "ghengarmusic",
+      "spotifyId": "6g6OqIpMMbEkhhtEODZaGf",
+      "youtubeQuery": "GHENGAR live set",
+      "youtubeVideoIds": [
+        "rWcft58AigY",
+        "fnBPxj9Sq1Y",
+        "Lx7LLdKOzzQ"
+      ]
+    },
+    {
+      "name": "gladde paling",
+      "soundcloudSlug": "gladdepaling",
+      "spotifyId": "6GVd3327JY65jGWX4X3wHS",
+      "youtubeQuery": "gladde paling live set",
+      "youtubeVideoIds": [
+        "GhpGOO7W4q8",
+        "s7hpJHrZcG8",
+        "gG8pNchQ2SY"
+      ]
+    },
+    {
+      "name": "Grabbitz",
+      "genres": [
+        "edm",
+        "electronic",
+        "dubstep",
+        "rock",
+        "trap"
+      ],
+      "soundcloudSlug": "grabbitz",
+      "spotifyId": "4fv1OFJywZ7DHCz3mVQQ45",
+      "youtubeQuery": "Grabbitz live set",
+      "youtubeVideoIds": [
+        "wxR6rIhOFsc",
+        "Kj7nwfcQdxA",
+        "xmoWc_hLZ0Q"
+      ]
+    },
+    {
+      "name": "Hairitage",
+      "soundcloudSlug": "hairitage",
+      "spotifyId": "6Cqy862jSCV7qdNrCDqvNK",
+      "youtubeQuery": "Hairitage live set"
+    },
+    {
+      "name": "Hedex",
+      "spotifyId": "22I9QWygJ2IfxR855VsA3t",
+      "youtubeQuery": "Hedex live set"
+    },
+    {
+      "name": "HEYZ",
+      "soundcloudSlug": "heyzmsc",
+      "spotifyId": "5X1EM1jg35YB5jmw7qVIlh",
+      "youtubeQuery": "Heyz live set"
+    },
+    {
+      "name": "HOL!",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "hollmusic",
+      "spotifyId": "4qkeEVKn6rvIuOmo7BOawi",
+      "youtubeQuery": "HOL! live set"
+    },
+    {
+      "name": "Illenium",
+      "genres": [
+        "dubstep",
+        "melodic dubstep",
+        "trap edm",
+        "edm",
+        "electronic",
+        "future bass",
+        "club",
+        "dance"
+      ],
+      "soundcloudSlug": "illeniumofficial",
+      "spotifyId": "45eNHdiiabvmbp4erw26rg",
+      "youtubeQuery": "Illenium live set"
+    },
+    {
+      "name": "INFEKT",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "infektdubstep",
+      "spotifyId": "3I6KMDdmPiLE5UQ4XF8Kpl",
+      "youtubeQuery": "INFEKT live set"
+    },
+    {
+      "name": "Ivy Lab",
+      "genres": [
+        "drum and bass",
+        "electronic",
+        "halftime",
+        "instrumental hip hop",
+        "trap",
+        "future bass",
+        "hip hop",
+        "wonky"
+      ],
+      "soundcloudSlug": "ivylab",
+      "spotifyId": "3VXCvo9Sr0hbZ4mk6VOKBs",
+      "youtubeQuery": "Ivy Lab live set"
+    },
+    {
+      "name": "Jantsen",
+      "spotifyId": "6rhTnHtyVcRrtuzS1wnLZg",
+      "youtubeQuery": "Jantsen live set"
+    },
+    {
+      "name": "Jessica Audiffred",
+      "soundcloudSlug": "jessicaaudiffred",
+      "spotifyId": "4odLDriBk6oEZotzLPTSnD",
+      "youtubeQuery": "Jessica Audiffred live set"
+    },
+    {
+      "name": "Jkyl & Hyde",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "jkylxhyde",
+      "spotifyId": "23AH13eC6V0NB0QCkV6206",
+      "youtubeQuery": "Jkyl & Hyde live set",
+      "youtubeVideoIds": [
+        "OqDVzImD3P4",
+        "7WnPfivWHC4",
+        "kAkgtIRASWE"
+      ]
+    },
+    {
+      "name": "Kai Wachi",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kaiwachi",
+      "spotifyId": "2fNr4ldujwq97v1jWeqs8K",
+      "youtubeQuery": "Kai Wachi live set",
+      "youtubeVideoIds": [
+        "-P9OsHzjEjM",
+        "3le_lSPKokA",
+        "m5kcQdmGdFw"
+      ]
+    },
+    {
+      "name": "Know Good",
+      "genres": [
+        "classic rock",
+        "dubstep",
+        "experimental",
+        "pop",
+        "rap rock",
+        "rock"
+      ],
+      "soundcloudSlug": "weareknowgood",
+      "spotifyId": "4iogDJBJ2BO2jl8OkPrfpx",
+      "youtubeQuery": "Know Good live set"
+    },
+    {
+      "name": "Kompany",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kompanymusic",
+      "spotifyId": "7dtX3ykcuyVmts2HQnWgSP",
+      "youtubeQuery": "Kompany live set"
+    },
+    {
+      "name": "Krewella",
+      "genres": [
+        "edm",
+        "electro house",
+        "electropop",
+        "techno",
+        "trap edm"
+      ],
+      "soundcloudSlug": "krewella",
+      "spotifyId": "0Cd6nHYwecCNM1sVEXKlYr",
+      "youtubeQuery": "Krewella live set"
+    },
+    {
+      "name": "LAYZ",
+      "soundcloudSlug": "layzdubz",
+      "spotifyId": "2ozQcs5XxFaj5fvA02zhwo",
+      "youtubeQuery": "Layz live set",
+      "youtubeVideoIds": [
+        "HjFt1lO_glU",
+        "tifOB17nUAA",
+        "Z2TN6pXqiNA"
+      ]
+    },
+    {
+      "name": "Level Up",
+      "soundcloudSlug": "levelup999",
+      "spotifyId": "1ZpDxqXS6HAvoZyCzQfKRb",
+      "youtubeQuery": "Level Up live set"
+    },
+    {
+      "name": "Levity",
+      "soundcloudSlug": "levity-pl",
+      "youtubeQuery": "Levity live set"
+    },
+    {
+      "name": "Lil Texas",
+      "genres": [
+        "frenchcore",
+        "nu style gabber",
+        "uptempo hardcore",
+        "rawstyle"
+      ],
+      "soundcloudSlug": "liltexas",
+      "spotifyId": "76raIy8boaM9sf9gMGXGJ5",
+      "youtubeQuery": "Lil Texas live set"
+    },
+    {
+      "name": "Liquid Stranger",
+      "genres": [
+        "dub",
+        "dubstep",
+        "ambient dub",
+        "brostep",
+        "downtempo",
+        "drum and bass",
+        "psybient",
+        "tearout"
+      ],
+      "soundcloudSlug": "Liquidstranger",
+      "spotifyId": "4YJsSCuag8W1TFTgSeEc2k",
+      "youtubeQuery": "Liquid Stranger live set"
+    },
+    {
+      "name": "LYNY",
+      "genres": [
+        "dubstep",
+        "trap",
+        "trap edm"
+      ],
+      "soundcloudSlug": "lynyofficial",
+      "spotifyId": "7xqIp1044Z2vd9v9ZphjLa",
+      "youtubeQuery": "LYNY live set"
+    },
+    {
+      "name": "Mefjus",
+      "genres": [
+        "drum and bass",
+        "electronic",
+        "neurofunk",
+        "halftime"
+      ],
+      "soundcloudSlug": "mefjus",
+      "spotifyId": "54qqaSH6byJIb8eFWxe3Pj",
+      "youtubeQuery": "Mefjus live set"
+    },
+    {
+      "name": "NGHTMRE",
+      "genres": [
+        "dubstep",
+        "trap edm",
+        "electronic",
+        "future bass",
+        "house",
+        "progressive house",
+        "trap"
+      ],
+      "soundcloudSlug": "nghtmre",
+      "spotifyId": "76M2Ekj8bG8W7X2nbx2CpF",
+      "youtubeQuery": "NGHTMRE live set"
+    },
+    {
+      "name": "Oliverse",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "future bass"
+      ],
+      "soundcloudSlug": "oliverse",
+      "spotifyId": "3fFMSweDNwFGyHcxjN7MWp",
+      "youtubeQuery": "Oliverse live set"
+    },
+    {
+      "name": "Passport",
+      "genres": [
+        "jazz",
+        "jazz fusion",
+        "jazz rock",
+        "krautrock"
+      ],
+      "spotifyId": "6e9Ex9Qjrbzae5ivbHzaG9",
+      "youtubeQuery": "Passport live set"
+    },
+    {
+      "name": "PhaseOne",
+      "genres": [
+        "hip hop",
+        "instrumental"
+      ],
+      "youtubeQuery": "PhaseOne live set"
+    },
+    {
+      "name": "Ravenscoon",
+      "spotifyId": "7vfvYuEyJbh1Tf3QlOTAmZ",
+      "youtubeQuery": "Ravenscoon live set"
+    },
+    {
+      "name": "Ray Volpe",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "rayvolpemusic",
+      "spotifyId": "2K9qsrYnsu1EWt7ZQkkuXb",
+      "youtubeQuery": "Ray Volpe live set"
+    },
+    {
+      "name": "Reaper",
+      "youtubeQuery": "Reaper live set"
+    },
+    {
+      "name": "THE RESISTANCE",
+      "youtubeQuery": "THE RESISTANCE live set"
+    },
+    {
+      "name": "Riot Ten",
+      "soundcloudSlug": "riotten",
+      "spotifyId": "2Zxy5LwBatI5kw4uponwHQ",
+      "youtubeQuery": "Riot Ten live set"
+    },
+    {
+      "name": "Samplifire",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "samplifire",
+      "spotifyId": "57gGqESEggWfCpE3KOzdVa",
+      "youtubeQuery": "Samplifire live set"
+    },
+    {
+      "name": "Seven Lions",
+      "genres": [
+        "dubstep",
+        "melodic dubstep",
+        "edm",
+        "electro house",
+        "progressive house",
+        "electronic",
+        "chillstep",
+        "club"
+      ],
+      "soundcloudSlug": "seven-lions",
+      "spotifyId": "6fcTRFpz0yH79qSKfof7lp",
+      "youtubeQuery": "Seven Lions live set"
+    },
+    {
+      "name": "Sigma",
+      "genres": [
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "sigmahq",
+      "spotifyId": "01pKrlgPJhm5dB4lneYAqS",
+      "youtubeQuery": "Sigma live set"
+    },
+    {
+      "name": "SIPPY",
+      "soundcloudSlug": "sippyau",
+      "spotifyId": "4LLYqe8ogaK9wC1xHlvR5S",
+      "youtubeQuery": "Sippy live set"
+    },
+    {
+      "name": "SLANDER",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "slanderofficial",
+      "spotifyId": "20DZAfCuP1TKZl5KcY7z3Q",
+      "youtubeQuery": "SLANDER live set"
+    },
+    {
+      "name": "Smoakland",
+      "soundcloudSlug": "smoakland",
+      "spotifyId": "6409kgOB4tZEkNZci6BiUs",
+      "youtubeQuery": "Smoakland live set"
+    },
+    {
+      "name": "SoDown",
+      "soundcloudSlug": "sodownbassmusic",
+      "spotifyId": "61u2rGJj9r6d7utXK0J0oS",
+      "youtubeQuery": "SoDown live set"
+    },
+    {
+      "name": "Stumpi",
+      "spotifyId": "5ADBt5Q860eEVH9GoQApm6",
+      "youtubeQuery": "Stumpi live set"
+    },
+    {
+      "name": "Subtronics",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "subtronics",
+      "spotifyId": "3NJ94iuAmmMjbszODYT6pO",
+      "youtubeQuery": "Subtronics live set"
+    },
+    {
+      "name": "Sullivan King",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "sullivankingmusic",
+      "spotifyId": "1CXuuw8HJhyN80HlNzvL1e",
+      "youtubeQuery": "Sullivan King live set"
+    },
+    {
+      "name": "Taiki Nulight",
+      "soundcloudSlug": "taiki-nulight-uk",
+      "spotifyId": "4QWmN97HRZya55JvxN3I5a",
+      "youtubeQuery": "Taiki Nulight live set"
+    },
+    {
+      "name": "Trivecta",
+      "soundcloudSlug": "trivectamusic",
+      "spotifyId": "4AT7XlLBevgZIiKvZQ83ye",
+      "youtubeQuery": "Trivecta live set"
+    },
+    {
+      "name": "TRUTH",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "truthdubstep",
+      "spotifyId": "0ZDCCJSvjcdJZH9hOl1uYc",
+      "youtubeQuery": "TRUTH live set"
+    },
+    {
+      "name": "Virtual Riot",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electronic",
+        "complextro",
+        "electro house",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "virtual-riot",
+      "spotifyId": "4FXGRMSHh2JjHxVwS8dhH1",
+      "youtubeQuery": "Virtual Riot live set"
+    },
+    {
+      "name": "Wax Motif",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "waxmotif",
+      "spotifyId": "7zm3aSdmGiOkTt0aZFSO8R",
+      "youtubeQuery": "Wax Motif live set"
+    },
+    {
+      "name": "Whethan",
+      "genres": [
+        "electronic",
+        "electropop",
+        "future bass",
+        "hyperpop",
+        "trap edm"
+      ],
+      "soundcloudSlug": "whethan",
+      "spotifyId": "0vqJkZ0RpLZixt3lTmD8vP",
+      "youtubeQuery": "Whethan live set",
+      "youtubeVideoIds": [
+        "1Q-j11Nlm4k",
+        "hM3vKINv5bM",
+        "u945TiL1zBQ"
+      ]
+    },
+    {
+      "name": "The Widdler",
+      "soundcloudSlug": "The_Widdler",
+      "spotifyId": "3SCAEdZEfpatrvdFeDLD2p",
+      "youtubeQuery": "The Widdler live set"
+    },
+    {
+      "name": "William Black",
+      "genres": [
+        "future bass"
+      ],
+      "soundcloudSlug": "williamblack",
+      "spotifyId": "7d5SfGXKpgS3JK8BFIq59h",
+      "youtubeQuery": "William Black live set"
+    },
+    {
+      "name": "WonkyWilla",
+      "spotifyId": "2Aa5prvbqcjMJTHURdKyOO",
+      "youtubeQuery": "WonkyWilla live set"
+    },
+    {
+      "name": "Wooli",
+      "soundcloudSlug": "woolimusic",
+      "spotifyId": "1Uyqa2sdHm1bL5JK4IC4zc",
+      "youtubeQuery": "Wooli live set"
+    },
+    {
+      "name": "YOOKiE",
+      "soundcloudSlug": "yookiemusic",
+      "spotifyId": "26RHyTSsP5JoS4udf8txU5",
+      "youtubeQuery": "YOOKiE live set"
+    },
+    {
+      "name": "Zingara",
+      "genres": [
+        "dubstep"
+      ],
+      "soundcloudSlug": "zingaraa",
+      "spotifyId": "5LxbXRVEMOw6i1WSa2YQn1",
+      "youtubeQuery": "Zingara live set"
+    },
+    {
+      "name": "Zomboy",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "glitch hop",
+        "drumstep",
+        "hybrid trap",
+        "complextro",
+        "electro house",
+        "trap edm"
+      ],
+      "soundcloudSlug": "zomboy",
+      "spotifyId": "0ycHhPwPvoaO4VGzmMnXGq",
+      "youtubeQuery": "Zomboy live set"
     },
     {
       "name": "Chassi",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "chassimusic",
+      "spotifyId": "3uSdOouuT7NoUXdDSeJnky",
+      "youtubeQuery": "Chassi live set"
     },
     {
       "name": "Gardella",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "gardella",
+      "spotifyId": "3CCAetE0sFpegAh0V8xJLf",
+      "youtubeQuery": "Gardella live set"
     },
     {
       "name": "HerShe",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "djhershe",
+      "spotifyId": "572W2DIMj2JYViwkIpae6J",
+      "youtubeQuery": "Hershe live set",
+      "youtubeVideoIds": [
+        "QAvQK5yjfC0",
+        "Ixo2N1Fkfpk",
+        "TUXMBbVuxWw"
+      ]
     },
     {
       "name": "Hydraulix",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "itshydraulix",
+      "spotifyId": "0v6pkn5nWfqK3vgeg0gl0W",
+      "youtubeQuery": "Hydraulix live set"
     },
     {
       "name": "Izzy Vadim",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "spotifyId": "3mEgLhTVxuUG4n1ezLNY5l",
+      "youtubeQuery": "Izzy Vadim live set"
     },
     {
       "name": "Jaenga",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "jaenga",
+      "spotifyId": "6eANYjiwIF3p73lhirhxGI",
+      "youtubeQuery": "Jaenga live set"
     },
     {
       "name": "Mad Dubz",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "genres": [
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "maddubzmusic",
+      "spotifyId": "4TQ72C7aaARXGuHB7qBPk7",
+      "youtubeQuery": "Mad Dubz live set"
     },
     {
       "name": "Mile32",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "youtubeQuery": "Mile32 live set"
     },
     {
       "name": "Mport",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "spotifyId": "0TQIx7Ez77HgFFk4bhIuuF",
+      "youtubeQuery": "Mport live set"
     },
     {
       "name": "Muerte",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "muerteisdead",
+      "spotifyId": "6TWscSE05GH5UvJpVq8y7y",
+      "youtubeQuery": "Muerte live set"
     },
     {
       "name": "Nikita The Wicked",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "youtubeQuery": "Nikita The Wicked live set"
     },
     {
       "name": "Usaybflow",
-      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)"
+      "day": "Wednesday, Sept 16 (Early Arrival Pre-Party)",
+      "spotifyId": "4lZyQiNEwbXNpy5WBG8P9i",
+      "youtubeQuery": "Usaybflow live set"
     },
     {
       "name": "AlienPark",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "spotifyId": "7xtEdHtZ1CdyPAY4px5N3R",
+      "youtubeQuery": "AlienPark live set"
     },
     {
       "name": "Deadcrow",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "genres": [
+        "trap",
+        "breakbeat",
+        "breaks",
+        "dance",
+        "dubstep",
+        "electronic",
+        "electronica",
+        "future bass"
+      ],
+      "soundcloudSlug": "deadcrxw",
+      "spotifyId": "4ufkY8hmhmYl4aCnzv3dLE",
+      "youtubeQuery": "Deadcrow live set"
     },
     {
       "name": "Machaki",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "spotifyId": "7q7lcKyRzbFGozvjfwjtHZ",
+      "youtubeQuery": "Machaki live set"
     },
     {
       "name": "Mindset",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "youtubeQuery": "Mindset live set"
     },
     {
       "name": "Phrva",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "phrva",
+      "spotifyId": "2gUjbFSv34ZRVw5qkwKTO7",
+      "youtubeQuery": "Phrva live set"
     },
     {
       "name": "rSUN",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "genres": [
+        "dubstep",
+        "house"
+      ],
+      "soundcloudSlug": "bonsaicollct",
+      "spotifyId": "6Xeaz1BUIz3AHiT87zNAIo",
+      "youtubeQuery": "rSUN live set"
     },
     {
       "name": "RZRKT",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "spotifyId": "28H813zcseKDMDftpws5ZC",
+      "youtubeQuery": "RZRKT live set"
     },
     {
       "name": "Super Future",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "genres": [
+        "bass house",
+        "bassline",
+        "breakbeat",
+        "breaks",
+        "dance",
+        "drum and bass",
+        "dubstep",
+        "edm"
+      ],
+      "spotifyId": "6Xri2X6xp5SDLr08hva6Bb",
+      "youtubeQuery": "Super Future live set"
     },
     {
       "name": "Zen Selekta",
-      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)"
+      "day": "Thursday, Sept 17 (Early Arrival Pre-Party)",
+      "soundcloudSlug": "zenselekta",
+      "youtubeQuery": "Zen Selekta live set"
     }
   ],
   "meta": {

@@ -9,103 +9,271 @@
   "status": "lineup",
   "artists": [
     {
-      "name": "Above & Beyond"
+      "name": "Above & Beyond",
+      "genres": [
+        "trance",
+        "progressive trance",
+        "progressive house",
+        "vocal trance",
+        "electronic",
+        "ambient",
+        "ambient trance",
+        "breakbeat"
+      ],
+      "soundcloudSlug": "above-6",
+      "spotifyId": "10gzBoINW3cLJfZUka8Zoe",
+      "youtubeQuery": "Above & Beyond live set"
     },
     {
-      "name": "horsegiirl"
+      "name": "horsegiirl",
+      "genres": [
+        "happy hardcore",
+        "hyperpop"
+      ],
+      "soundcloudSlug": "horsegiirl",
+      "spotifyId": "0auP293abZeTWwMUi3fZw2",
+      "youtubeQuery": "horsegiirL live set"
     },
     {
-      "name": "Sara Landry"
+      "name": "Sara Landry",
+      "genres": [
+        "acid techno",
+        "hard techno",
+        "industrial techno",
+        "psytrance",
+        "techno"
+      ],
+      "soundcloudSlug": "sara-landry-dj",
+      "spotifyId": "7eILArMiTFTQf8SEh5fFHK",
+      "youtubeQuery": "Sara Landry live set"
     },
     {
-      "name": "Porter Robinson"
+      "name": "Porter Robinson",
+      "genres": [
+        "electronic",
+        "synth-pop",
+        "complextro",
+        "edm",
+        "electropop",
+        "pop"
+      ],
+      "soundcloudSlug": "porter-robinson",
+      "spotifyId": "3dz0NnIZhtKKeXZxLOxCam",
+      "youtubeQuery": "Porter Robinson live set"
     },
     {
-      "name": "KI/KI"
+      "name": "KI/KI",
+      "youtubeQuery": "KI/KI live set"
     },
     {
-      "name": "SG Lewis"
+      "name": "SG Lewis",
+      "genres": [
+        "electropop",
+        "nu disco",
+        "alternative r&b",
+        "club",
+        "dance",
+        "disco",
+        "edm",
+        "electronic"
+      ],
+      "soundcloudSlug": "sglewis",
+      "spotifyId": "0GG2cWaonE4JPrjcCCQ1EG",
+      "youtubeQuery": "SG Lewis live set"
     },
     {
-      "name": "Chris Lorenzo"
+      "name": "Chris Lorenzo",
+      "genres": [
+        "edm",
+        "tech house"
+      ],
+      "spotifyId": "7tm9Tuc70geXOOyKhtZHIj",
+      "youtubeQuery": "Chris Lorenzo live set"
     },
     {
-      "name": "Max Styler"
+      "name": "Max Styler",
+      "genres": [
+        "tech house"
+      ],
+      "soundcloudSlug": "maxstyler",
+      "spotifyId": "3NKKngINK1tP6BFy0WOyWk",
+      "youtubeQuery": "Max Styler live set",
+      "youtubeVideoIds": [
+        "98PbnkVqv1s",
+        "N40pkDgwNfg",
+        "Xmily-bP8Q0"
+      ]
     },
     {
-      "name": "Layton Giordani"
+      "name": "Layton Giordani",
+      "soundcloudSlug": "laytongiordani",
+      "spotifyId": "7mC3RkNNTV6p2j9w4F8Ip4",
+      "youtubeQuery": "Layton Giordani live set"
     },
     {
-      "name": "MPH"
+      "name": "MPH",
+      "genres": [
+        "tech house",
+        "uk garage"
+      ],
+      "soundcloudSlug": "mph-uk",
+      "spotifyId": "62SCu33InHVq97VaWw3eof",
+      "youtubeQuery": "MPH live set"
     },
     {
-      "name": "Notion"
+      "name": "Notion",
+      "soundcloudSlug": "notiondj",
+      "spotifyId": "1uRVM0wBdtyEuU582EeKJM",
+      "youtubeQuery": "Notion live set"
     },
     {
-      "name": "Diffrent"
+      "name": "Diffrent",
+      "soundcloudSlug": "diffrentdj",
+      "spotifyId": "7mycnkT3eOskxxGbN9skkV",
+      "youtubeQuery": "Diffrent live set"
     },
     {
-      "name": "Smokey Bubblin' B"
+      "name": "Smokey Bubblin' B",
+      "youtubeQuery": "Smokey Bubblin' B live set"
     },
     {
-      "name": "Brutalismus 3000"
+      "name": "Brutalismus 3000",
+      "soundcloudSlug": "brutalismus-3000",
+      "spotifyId": "6LtXxYMIiKSy2EGHnz1f5j",
+      "youtubeQuery": "Brutalismus 3000 live set"
     },
     {
-      "name": "VTSS"
+      "name": "VTSS",
+      "genres": [
+        "electronic",
+        "techno"
+      ],
+      "soundcloudSlug": "vitiosus",
+      "spotifyId": "0zo109NM3S7CqHpvlXwqEN",
+      "youtubeQuery": "VTSS live set"
     },
     {
-      "name": "Luke Alessi"
+      "name": "Luke Alessi",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "lukealessiofficial",
+      "spotifyId": "3Foat3c8Ui3HkvZghZAzQp",
+      "youtubeQuery": "Luke Alessi live set"
     },
     {
-      "name": "Devault"
+      "name": "Devault",
+      "soundcloudSlug": "devaultmusic",
+      "spotifyId": "1VBAKMui4zm5MnBWNn3NbL",
+      "youtubeQuery": "Devault live set",
+      "youtubeVideoIds": [
+        "h6PvAp66s_c",
+        "UhXrLjOvElE",
+        "LOYh1JnmK6k"
+      ]
     },
     {
-      "name": "HNTR"
+      "name": "HNTR",
+      "soundcloudSlug": "HNTRnet",
+      "spotifyId": "3R0yz9xgTmCOLQMPcJ6MuU",
+      "youtubeQuery": "HNTR live set"
     },
     {
-      "name": "Kyle Starkey"
+      "name": "Kyle Starkey",
+      "soundcloudSlug": "kyle_starkey43",
+      "spotifyId": "1crvHImsszKXTJr4wsOPhe",
+      "youtubeQuery": "Kyle Starkey live set"
     },
     {
-      "name": "Adam Sellouk"
+      "name": "Adam Sellouk",
+      "genres": [
+        "house",
+        "melodic house",
+        "melodic techno",
+        "nu disco",
+        "progressive house",
+        "techno"
+      ],
+      "soundcloudSlug": "adamselloukmusic",
+      "spotifyId": "2T7HN3rqTpIn8OiVb0I5oq",
+      "youtubeQuery": "Adam Sellouk live set"
     },
     {
-      "name": "1TBSP"
+      "name": "1TBSP",
+      "spotifyId": "6G01WYFYF91rjG5LtwMhY4",
+      "youtubeQuery": "1TBSP live set"
     },
     {
-      "name": "BOLO"
+      "name": "BOLO",
+      "youtubeQuery": "BOLO live set"
     },
     {
-      "name": "Kamino"
+      "name": "Kamino",
+      "spotifyId": "3LscVu2SvmARuWuA5RS19M",
+      "youtubeQuery": "Kamino live set"
     },
     {
-      "name": "Brunello"
+      "name": "Brunello",
+      "youtubeQuery": "Brunello live set"
     },
     {
-      "name": "Cole Knight b2b Dreya V"
+      "name": "Cole Knight b2b Dreya V",
+      "youtubeQuery": "Cole Knight b2b Dreya V live set"
     },
     {
-      "name": "Welker"
+      "name": "Welker",
+      "spotifyId": "2cKII1nypeEZZ1JsRSPs3t",
+      "youtubeQuery": "Welker live set"
     },
     {
-      "name": "Benwal"
+      "name": "Benwal",
+      "soundcloudSlug": "benwalmusic",
+      "spotifyId": "38nG2aneQSUwlhbhXXZhxl",
+      "youtubeQuery": "Benwal live set"
     },
     {
-      "name": "Joss Dean"
+      "name": "Joss Dean",
+      "youtubeQuery": "Joss Dean live set"
     },
     {
-      "name": "Conrad Taylor"
+      "name": "Conrad Taylor",
+      "spotifyId": "2xycbnmcCACddcAnOanEnw",
+      "youtubeQuery": "Conrad Taylor live set"
     },
     {
-      "name": "Mestiza"
+      "name": "Mestiza",
+      "genres": [
+        "afro house",
+        "club",
+        "dance-pop",
+        "edm",
+        "electronic",
+        "flamenco",
+        "latin house",
+        "pop"
+      ],
+      "spotifyId": "1l6pQ0SDItjXzbG9zloE2n",
+      "youtubeQuery": "Mestiza live set"
     },
     {
-      "name": "Fallon"
+      "name": "Fallon",
+      "youtubeQuery": "Fallon live set"
     },
     {
-      "name": "Hills"
+      "name": "Hills",
+      "youtubeQuery": "Hills live set"
     },
     {
-      "name": "Starjunk 95"
+      "name": "Starjunk 95",
+      "soundcloudSlug": "starjunk95",
+      "spotifyId": "523iXWyHL26prJR3GKjRhx",
+      "youtubeQuery": "Starjunk 95 live set",
+      "youtubeVideoIds": [
+        "boTjmV-ONtI",
+        "Mu6K7IrwBxE",
+        "jexzQYWlPYg"
+      ]
     }
   ],
   "meta": {
