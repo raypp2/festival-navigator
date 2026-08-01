@@ -22,7 +22,12 @@
       ],
       "soundcloudSlug": "above-6",
       "spotifyId": "10gzBoINW3cLJfZUka8Zoe",
-      "youtubeQuery": "Above & Beyond live set"
+      "youtubeQuery": "Above & Beyond live set",
+      "youtubeVideoIds": [
+        "OI02QgEA1Zw",
+        "eZL4AgKNvVI",
+        "cS6Hi2Avoww"
+      ]
     },
     {
       "name": "horsegiirl",
@@ -32,7 +37,12 @@
       ],
       "soundcloudSlug": "horsegiirl",
       "spotifyId": "0auP293abZeTWwMUi3fZw2",
-      "youtubeQuery": "horsegiirL live set"
+      "youtubeQuery": "horsegiirL live set",
+      "youtubeVideoIds": [
+        "Q9FaUe4b0wI",
+        "lqOWI4P9F-E",
+        "ngCR1aZZo_A"
+      ]
     },
     {
       "name": "Sara Landry",
@@ -45,7 +55,12 @@
       ],
       "soundcloudSlug": "sara-landry-dj",
       "spotifyId": "7eILArMiTFTQf8SEh5fFHK",
-      "youtubeQuery": "Sara Landry live set"
+      "youtubeQuery": "Sara Landry live set",
+      "youtubeVideoIds": [
+        "EuqrehK1XFw",
+        "aDAWctObTvI",
+        "EIQlDpgAY5Y"
+      ]
     },
     {
       "name": "Porter Robinson",
@@ -59,11 +74,21 @@
       ],
       "soundcloudSlug": "porter-robinson",
       "spotifyId": "3dz0NnIZhtKKeXZxLOxCam",
-      "youtubeQuery": "Porter Robinson live set"
+      "youtubeQuery": "Porter Robinson live set",
+      "youtubeVideoIds": [
+        "zkT8FjfBjYI",
+        "THjekE5p2aw",
+        "4KGsgpFiswQ"
+      ]
     },
     {
       "name": "KI/KI",
-      "youtubeQuery": "KI/KI live set"
+      "youtubeQuery": "KI/KI live set",
+      "youtubeVideoIds": [
+        "S3lL68DA7eY",
+        "Rm2I3OUw6Bs",
+        "E-6LmxvUiMk"
+      ]
     },
     {
       "name": "SG Lewis",
@@ -79,7 +104,12 @@
       ],
       "soundcloudSlug": "sglewis",
       "spotifyId": "0GG2cWaonE4JPrjcCCQ1EG",
-      "youtubeQuery": "SG Lewis live set"
+      "youtubeQuery": "SG Lewis live set",
+      "youtubeVideoIds": [
+        "PiPUF_GcDSA",
+        "u6Cd9p1-SSc",
+        "2Tanj42oBXw"
+      ]
     },
     {
       "name": "Chris Lorenzo",
@@ -88,7 +118,12 @@
         "tech house"
       ],
       "spotifyId": "7tm9Tuc70geXOOyKhtZHIj",
-      "youtubeQuery": "Chris Lorenzo live set"
+      "youtubeQuery": "Chris Lorenzo live set",
+      "youtubeVideoIds": [
+        "ZFyvcZq7iqQ",
+        "aps8NBP8dyQ",
+        "b8o4lj_sEpQ"
+      ]
     },
     {
       "name": "Max Styler",
@@ -108,7 +143,12 @@
       "name": "Layton Giordani",
       "soundcloudSlug": "laytongiordani",
       "spotifyId": "7mC3RkNNTV6p2j9w4F8Ip4",
-      "youtubeQuery": "Layton Giordani live set"
+      "youtubeQuery": "Layton Giordani live set",
+      "youtubeVideoIds": [
+        "euV8srBycPM",
+        "l7aEKG4ujgc",
+        "ErIqPsTDq1U"
+      ]
     },
     {
       "name": "MPH",
@@ -118,29 +158,54 @@
       ],
       "soundcloudSlug": "mph-uk",
       "spotifyId": "62SCu33InHVq97VaWw3eof",
-      "youtubeQuery": "MPH live set"
+      "youtubeQuery": "MPH live set",
+      "youtubeVideoIds": [
+        "cZsP_4luaHU",
+        "KEszhQvHH-s",
+        "CCmm6IUMmlQ"
+      ]
     },
     {
       "name": "Notion",
       "soundcloudSlug": "notiondj",
       "spotifyId": "1uRVM0wBdtyEuU582EeKJM",
-      "youtubeQuery": "Notion live set"
+      "youtubeQuery": "Notion live set",
+      "youtubeVideoIds": [
+        "opsHKBTBApo",
+        "udE4hBAyz2U",
+        "5KZldQ-Gytw"
+      ]
     },
     {
       "name": "Diffrent",
       "soundcloudSlug": "diffrentdj",
       "spotifyId": "7mycnkT3eOskxxGbN9skkV",
-      "youtubeQuery": "Diffrent live set"
+      "youtubeQuery": "Diffrent live set",
+      "youtubeVideoIds": [
+        "so_4wtc1zzs",
+        "_IeVvqgn3BE",
+        "yxklDZB1z3Q"
+      ]
     },
     {
       "name": "Smokey Bubblin' B",
-      "youtubeQuery": "Smokey Bubblin' B live set"
+      "youtubeQuery": "Smokey Bubblin' B live set",
+      "youtubeVideoIds": [
+        "ig1D13z-g6E",
+        "0rpgpR0tvew",
+        "i0Ir3li9aEY"
+      ]
     },
     {
       "name": "Brutalismus 3000",
       "soundcloudSlug": "brutalismus-3000",
       "spotifyId": "6LtXxYMIiKSy2EGHnz1f5j",
-      "youtubeQuery": "Brutalismus 3000 live set"
+      "youtubeQuery": "Brutalismus 3000 live set",
+      "youtubeVideoIds": [
+        "VaE5DSKkdm4",
+        "U4NJ-ozqoKc",
+        "pZhUS_q4jkc"
+      ]
     },
     {
       "name": "VTSS",
@@ -150,7 +215,12 @@
       ],
       "soundcloudSlug": "vitiosus",
       "spotifyId": "0zo109NM3S7CqHpvlXwqEN",
-      "youtubeQuery": "VTSS live set"
+      "youtubeQuery": "VTSS live set",
+      "youtubeVideoIds": [
+        "C4BkbUETBfM",
+        "I1mhJjxtJx4",
+        "9piX0eeBjZo"
+      ]
     },
     {
       "name": "Luke Alessi",
@@ -160,7 +230,12 @@
       ],
       "soundcloudSlug": "lukealessiofficial",
       "spotifyId": "3Foat3c8Ui3HkvZghZAzQp",
-      "youtubeQuery": "Luke Alessi live set"
+      "youtubeQuery": "Luke Alessi live set",
+      "youtubeVideoIds": [
+        "in__QK13w3w",
+        "xZZMPp7M82Q",
+        "XJOIxRDU1zs"
+      ]
     },
     {
       "name": "Devault",
@@ -177,13 +252,23 @@
       "name": "HNTR",
       "soundcloudSlug": "HNTRnet",
       "spotifyId": "3R0yz9xgTmCOLQMPcJ6MuU",
-      "youtubeQuery": "HNTR live set"
+      "youtubeQuery": "HNTR live set",
+      "youtubeVideoIds": [
+        "evExq8QiGsY",
+        "TeTLHMx-BfA",
+        "OjZF2bVFFpw"
+      ]
     },
     {
       "name": "Kyle Starkey",
       "soundcloudSlug": "kyle_starkey43",
       "spotifyId": "1crvHImsszKXTJr4wsOPhe",
-      "youtubeQuery": "Kyle Starkey live set"
+      "youtubeQuery": "Kyle Starkey live set",
+      "youtubeVideoIds": [
+        "X8s7EKuVtBI",
+        "2fXLW1i0iAg",
+        "0O-79-j07yg"
+      ]
     },
     {
       "name": "Adam Sellouk",
@@ -197,49 +282,97 @@
       ],
       "soundcloudSlug": "adamselloukmusic",
       "spotifyId": "2T7HN3rqTpIn8OiVb0I5oq",
-      "youtubeQuery": "Adam Sellouk live set"
+      "youtubeQuery": "Adam Sellouk live set",
+      "youtubeVideoIds": [
+        "miEprFVEphY",
+        "6tT8JUj5uqs",
+        "LkgbgrGSa2c"
+      ]
     },
     {
       "name": "1TBSP",
       "spotifyId": "6G01WYFYF91rjG5LtwMhY4",
-      "youtubeQuery": "1TBSP live set"
+      "youtubeQuery": "1TBSP live set",
+      "youtubeVideoIds": [
+        "jPdw8wfbt90",
+        "E4m6_IY8B58",
+        "FoJZHEk8_18"
+      ]
     },
     {
       "name": "BOLO",
-      "youtubeQuery": "BOLO live set"
+      "youtubeQuery": "BOLO live set",
+      "youtubeVideoIds": [
+        "ZmgUoUZnODA",
+        "QfDNmpRmlcY",
+        "12cTQ74hlwo"
+      ]
     },
     {
       "name": "Kamino",
       "spotifyId": "3LscVu2SvmARuWuA5RS19M",
-      "youtubeQuery": "Kamino live set"
+      "youtubeQuery": "Kamino live set",
+      "youtubeVideoIds": [
+        "us5OzAGVGNo",
+        "ItRRqDlb94o",
+        "eK_nZ-eN_AY"
+      ]
     },
     {
       "name": "Brunello",
-      "youtubeQuery": "Brunello live set"
+      "youtubeQuery": "Brunello live set",
+      "youtubeVideoIds": [
+        "ndvf_Q-Yz0A",
+        "0qX8Q8LSjdM",
+        "baDz12J2uNo"
+      ]
     },
     {
       "name": "Cole Knight b2b Dreya V",
-      "youtubeQuery": "Cole Knight b2b Dreya V live set"
+      "youtubeQuery": "Cole Knight b2b Dreya V live set",
+      "youtubeVideoIds": [
+        "ujPF3AxPrKI"
+      ]
     },
     {
       "name": "Welker",
       "spotifyId": "2cKII1nypeEZZ1JsRSPs3t",
-      "youtubeQuery": "Welker live set"
+      "youtubeQuery": "Welker live set",
+      "youtubeVideoIds": [
+        "h977BBPbVtw",
+        "sRiHLr_yT6o",
+        "1TapczsYE5U"
+      ]
     },
     {
       "name": "Benwal",
       "soundcloudSlug": "benwalmusic",
       "spotifyId": "38nG2aneQSUwlhbhXXZhxl",
-      "youtubeQuery": "Benwal live set"
+      "youtubeQuery": "Benwal live set",
+      "youtubeVideoIds": [
+        "PAEwXkzVyEw",
+        "URyZOUfDYgs",
+        "0FUTK_kY7GI"
+      ]
     },
     {
       "name": "Joss Dean",
-      "youtubeQuery": "Joss Dean live set"
+      "youtubeQuery": "Joss Dean live set",
+      "youtubeVideoIds": [
+        "hyM2h3C7Fq4",
+        "Kvsm8pH4awA",
+        "rVcHHhYh8NE"
+      ]
     },
     {
       "name": "Conrad Taylor",
       "spotifyId": "2xycbnmcCACddcAnOanEnw",
-      "youtubeQuery": "Conrad Taylor live set"
+      "youtubeQuery": "Conrad Taylor live set",
+      "youtubeVideoIds": [
+        "f8ou5PxY1f8",
+        "e-uTDS6O_iY",
+        "7FYTrXjJLmE"
+      ]
     },
     {
       "name": "Mestiza",
@@ -258,11 +391,21 @@
     },
     {
       "name": "Fallon",
-      "youtubeQuery": "Fallon live set"
+      "youtubeQuery": "Fallon live set",
+      "youtubeVideoIds": [
+        "EFBwIW0y5mQ",
+        "JZx-hG7GChU",
+        "K3eRvUCNNp8"
+      ]
     },
     {
       "name": "Hills",
-      "youtubeQuery": "Hills live set"
+      "youtubeQuery": "Hills live set",
+      "youtubeVideoIds": [
+        "nA3XCFm0xqg",
+        "9xVp-94l7FM",
+        "KcXCfCKuwkY"
+      ]
     },
     {
       "name": "Starjunk 95",
