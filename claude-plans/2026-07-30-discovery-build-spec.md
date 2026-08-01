@@ -375,6 +375,15 @@ understood).
 
 ## 9. Milestones
 
+> **Status (2026-07-31): M0–M7 complete** on branch `discovery` (18 commits, 376 tests).
+> M0 was already done by Ray pre-spec. Deviations from plan, all documented in commit
+> messages: desktop 5b/5c pulled forward during desktop testing; `artistOrder:
+> billing|schedule` + `derivePopularity` added after discovering EF/Lolla arrays are
+> schedule-ordered (EF's derived popularity limited by absent end times); the sample
+> player gained seek + SoundCloud monetization honesty from live testing. Remaining
+> operational (not spec) work: YouTube enrichment tail (~100 searches/day quota),
+> remaining lineups' enrichment, preview deploy + phone pass, rec-queue surfacing (§11.2).
+
 Each milestone is shippable and gated on the prior. AC = acceptance criteria
 (numbers reference `DISCOVERY_SPEC.md` §9).
 
