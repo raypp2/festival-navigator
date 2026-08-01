@@ -76,6 +76,7 @@ const ctx = { fid: FID, meName: 'Kevin', onNotesChange: () => {}, onTap: () => {
 
 function mkActions(mountCalls = [], destroyCounter = { n: 0 }) {
   let lastUndo = null;
+  let lastUndoMessage = null;
   return {
     applyLocalPick: (artist, person, level) => {
       state.ensureFestivalState(ctx.fid);
@@ -83,8 +84,16 @@ function mkActions(mountCalls = [], destroyCounter = { n: 0 }) {
       (sels[artist] = sels[artist] || {})[person] = level;
       state.persist();
     },
-    showUndoToast: (message, onUndo) => { lastUndo = onUndo; },
+    showUndoToast: (message, onUndo) => { lastUndo = onUndo; lastUndoMessage = message; },
     getLastUndo: () => lastUndo,
+    getLastUndoMessage: () => lastUndoMessage,
+    // The deck's decision flow is a timed chain: Pick opens a 1s cycle, then a
+    // celebrate overlay holds, then the card exits, then the deck advances.
+    // A synchronous scheduler collapses the whole chain into the calling tick
+    // so these tests stay deterministic and assert on end state. Tests that
+    // care about the INTERMEDIATE states drive the steps by hand instead
+    // (see the pick-cycle block at the bottom of this file).
+    schedule: (fn) => { fn(); return null; },
     canonData: CANON,
     mountPlayer: (opts) => {
       mountCalls.push(opts);
@@ -421,4 +430,179 @@ test('every swipe has a visible button equivalent — no gesture is ever require
   for (const cls of ['.dd-btn-pass', '.dd-btn-pick', '.dd-btn-must']) {
     assert.ok(overlay().querySelector(cls), `${cls} is present alongside the gestures`);
   }
+});
+
+// ---------------------------------------------------------------------------
+// The pick cycle and the confirmation overlay
+// (design/discovery-handoff/project/Discovery - Swipe Demo.dc.html — its
+// pickTap/begin/renderVals). Pick is NOT one tap: it opens a ×1 → ×2 → ×3
+// cycle that locks in after 1s idle, and the overlay is where the level is
+// read. These tests drive the scheduler by hand so the intermediate states —
+// which the collapsed scheduler in mkActions skips straight past — are visible.
+// ---------------------------------------------------------------------------
+
+function mkManualActions(mountCalls = []) {
+  const queue = [];
+  const a = mkActions(mountCalls);
+  a.schedule = (fn) => {
+    const slot = { fn, cancelled: false };
+    queue.push(slot);
+    return () => { slot.cancelled = true; };
+  };
+  a.flush = () => {
+    // Drain, including anything scheduled BY a callback (celebrate -> exit).
+    while (queue.length) {
+      const slot = queue.shift();
+      if (!slot.cancelled) slot.fn();
+    }
+  };
+  a.queued = () => queue.filter((s) => !s.cancelled).length;
+  return a;
+}
+
+const cel = () => overlay().querySelector('.dd-celebrate');
+const celOn = () => cel()?.classList.contains('is-on');
+const levelOf = (name) => model.readLevel(
+  state.crewDoc, state.crewDoc.festivals[FID].selections[name]?.Kevin,
+);
+
+test('nextPickLevel cycles 1 → 2 → 3 → 1 and never lands on clear', async () => {
+  const { nextPickLevel } = await import('../js/discovery/deck.js');
+  assert.equal(nextPickLevel(null), 1);
+  assert.equal(nextPickLevel(1), 2);
+  assert.equal(nextPickLevel(2), 3);
+  assert.equal(nextPickLevel(3), 1, 'wraps to ×1 — Pass is how the deck says "not picked"');
+});
+
+test('one Pick tap opens the overlay at ×1 and commits NOTHING yet', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  overlay().querySelector('.dd-btn-pick').click();
+
+  assert.ok(celOn(), 'the confirmation overlay is up');
+  assert.equal(cel().querySelector('.dd-cel-times').textContent, '×1');
+  assert.equal(cel().querySelectorAll('.dd-cel-pip.is-on').length, 1);
+  assert.match(cel().querySelector('.dd-cel-hint').textContent, /tap Pick again to raise/);
+  assert.equal(overlay().querySelector('.dd-btn-pick').textContent, '＋ Pick ×1');
+  assert.equal(levelOf('RankTarget'), 0, 'nothing written until the cycle locks in');
+  assert.equal(cardName(), 'RankTarget', 'and the deck has not advanced');
+});
+
+test('tapping Pick again raises the level instead of deciding twice', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const btn = () => overlay().querySelector('.dd-btn-pick');
+  btn().click();
+  btn().click();
+  btn().click();
+
+  assert.equal(cel().querySelector('.dd-cel-times').textContent, '×3');
+  assert.equal(cel().querySelectorAll('.dd-cel-pip.is-on').length, 3);
+  assert.equal(levelOf('RankTarget'), 0, 'still uncommitted');
+
+  actions.flush();
+  assert.equal(levelOf('RankTarget'), 3, 'the idle timer locks in the level that was showing');
+  assert.equal(cardName(), 'PickFlow1');
+});
+
+test('a fourth tap wraps to ×1 rather than overflowing past must', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const btn = () => overlay().querySelector('.dd-btn-pick');
+  for (let i = 0; i < 4; i++) btn().click();
+
+  assert.equal(cel().querySelector('.dd-cel-times').textContent, '×1');
+  actions.flush();
+  assert.equal(levelOf('RankTarget'), 1);
+});
+
+test('each Pick tap supersedes the previous timer — three taps decide once', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const btn = () => overlay().querySelector('.dd-btn-pick');
+  btn().click(); btn().click(); btn().click();
+
+  assert.equal(actions.queued(), 1, 'two superseded timers were cancelled, not left armed');
+  actions.flush();
+  assert.equal(levelOf('RankTarget'), 3);
+  assert.equal(levelOf('PickFlow1'), 0, 'no stray decision landed on the next card');
+});
+
+test('raising the level does not remount the sample player (the set keeps playing)', () => {
+  const mounts = [];
+  const actions = mkManualActions(mounts);
+  renderDeckForTest(ctx, actions, CANON);
+  const after = mounts.length;
+  const btn = () => overlay().querySelector('.dd-btn-pick');
+  btn().click(); btn().click(); btn().click();
+
+  assert.equal(mounts.length, after, 'the overlay is painted in place, never through a re-render');
+});
+
+test('the undo message carries the level that was actually committed', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const btn = () => overlay().querySelector('.dd-btn-pick');
+  btn().click(); btn().click();
+  actions.flush();
+
+  assert.match(actions.getLastUndoMessage(), /×2/);
+});
+
+test('Must shows the ★ MUST confirmation, Pass shows NOT FOR ME', () => {
+  const a1 = mkManualActions();
+  renderDeckForTest(ctx, a1, CANON);
+  overlay().querySelector('.dd-btn-must').click();
+  assert.ok(celOn());
+  assert.equal(cel().querySelector('.dd-cel-star').textContent, '★');
+  assert.equal(cel().querySelector('.dd-cel-label').textContent, 'MUST');
+  a1.flush();
+  closeDeck();
+
+  state.crewDoc.festivals[FID].selections = JSON.parse(JSON.stringify(PRISTINE_SELECTIONS));
+  state.crewDoc.festivals[FID].passes = JSON.parse(JSON.stringify(PRISTINE_PASSES));
+
+  const a2 = mkManualActions();
+  renderDeckForTest(ctx, a2, CANON);
+  overlay().querySelector('.dd-btn-pass').click();
+  assert.equal(cel().querySelector('.dd-cel-thumb').textContent, '👎');
+  assert.equal(cel().querySelector('.dd-cel-label').textContent, 'NOT FOR ME');
+});
+
+test('Pass and Must commit immediately — only Pick negotiates', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  overlay().querySelector('.dd-btn-must').click();
+
+  assert.equal(levelOf('RankTarget'), 4, 'written before any timer runs');
+  assert.equal(cardName(), 'RankTarget', 'but the card is still on screen showing the confirmation');
+  actions.flush();
+  assert.equal(cardName(), 'PickFlow1', 'and only then does the deck advance');
+});
+
+test('touching the card abandons an open pick cycle instead of firing it mid-gesture', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  overlay().querySelector('.dd-btn-pick').click();
+  assert.ok(celOn());
+
+  overlay().querySelector('.dd-card').dispatchEvent(
+    new dom.window.MouseEvent('pointerdown', { clientX: 100, clientY: 300, bubbles: true }),
+  );
+  assert.equal(celOn(), false, 'the overlay is dismissed');
+  assert.equal(overlay().querySelector('.dd-btn-pick').textContent, '＋ Pick');
+
+  actions.flush();
+  assert.equal(levelOf('RankTarget'), 0, 'the abandoned cycle never commits');
+  assert.equal(cardName(), 'RankTarget');
+});
+
+test('closing the deck cancels a pending pick — it cannot land on the next session', () => {
+  const actions = mkManualActions();
+  renderDeckForTest(ctx, actions, CANON);
+  overlay().querySelector('.dd-btn-pick').click();
+  closeDeck();
+  actions.flush();
+
+  assert.equal(levelOf('RankTarget'), 0, 'no write from a deck that is gone');
 });

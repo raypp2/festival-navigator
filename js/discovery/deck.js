@@ -155,6 +155,9 @@ function buildPool(ctx, facets, canonData) {
 }
 
 function startSession(ctx, facets, canonData) {
+  // A new pool means new cards at every index — any pending pick or in-flight
+  // celebrate belongs to a card that is about to stop existing.
+  clearDeckTimers();
   session = { pool: buildPool(ctx, facets, canonData), position: 0, decided: 0 };
 }
 
@@ -233,7 +236,17 @@ function buildCard(entry, ctx, actions, canonData) {
     host: playerHost, artist: { name: entry.name, genres: playerGenres }, sources, layout: 'compact',
   });
 
-  stack.append(ghost2, ghost1, card);
+  // The drag hint and the confirmation overlay are siblings of the card, not
+  // children of it: .dd-card is a scroll container (`overflow: hidden auto`),
+  // and an inset:0 child of a scrolled container is positioned from the top of
+  // its CONTENT — so on a card scrolled down to the player, the overlay would
+  // render off-screen. As siblings inside the non-scrolling .dd-stack they
+  // always cover the card exactly; beginDecision carries them off with it.
+  const hint = document.createElement('div');
+  hint.className = 'dd-hint';
+  hint.setAttribute('aria-hidden', 'true');
+
+  stack.append(ghost2, ghost1, card, hint, buildCelebrateOverlay());
   return stack;
 }
 
@@ -345,75 +358,173 @@ function buildHeader(ctx, facets, actions) {
   header.append(top, bar, sub);
   return header;
 }
-
-// ---- deck-advance motion --------------------------------------------------------------
-// "Deck advance — the acted card leaves, the next rises from the stack."
+// ---- the decision flow ----------------------------------------------------------------
+// Modelled directly on "Discovery - Swipe Demo.dc.html", which is the deck's
+// interaction reference (its begin/pickTap/renderVals). Three things there that
+// a reading of the style guide alone misses, and that this file shipped without:
 //
-// The re-render is synchronous and stays that way: state and DOM move together,
-// which is what the deck tests assert on and what keeps a fast tapper from
-// racing an animation. So the exit is a CLONE of the outgoing card, layered
-// over the freshly-rendered deck and thrown away when it finishes. If it never
-// runs — reduced motion, no live card, a browser that skips the event — the
-// deck has already advanced correctly and nothing is lost but the flourish.
-function captureExitCard() {
-  if (REDUCED_MOTION()) return null;
-  const live = document.querySelector(`#${OVERLAY_ID} .dd-card`);
-  if (!live) return null;
-  const rect = live.getBoundingClientRect();
-  if (!rect.height) return null;
-  const clone = live.cloneNode(true);
-  // The clone must never be reachable: no controls, no tab stops, nothing for
-  // a screen reader to find. It is a picture of a card that no longer exists.
-  clone.removeAttribute('id');
-  clone.setAttribute('aria-hidden', 'true');
-  clone.inert = true;
-  for (const el of clone.querySelectorAll('button, a, input, select, textarea, iframe')) {
-    el.setAttribute('tabindex', '-1');
-    // An iframe clone would spawn a SECOND embed — one player, always.
-    if (el.tagName === 'IFRAME') el.remove();
+//  1. PICK IS NOT ONE TAP. Tapping Pick opens a pending cycle — ×1 → ×2 → ×3 →
+//     back to ×1 — and locks in after 1s of no further taps. The prototype's
+//     `pickTap`: `pending ? (pending.level % 3) + 1 : 1`, committed on a 1000ms
+//     idle timer. Pass and Must are immediate; only Pick negotiates.
+//  2. EVERY DECISION SHOWS A CONFIRMATION OVERLAY over the card — ★ MUST, 👎 NOT
+//     FOR ME, or the filling tick with ×N and pips. For Pick it is not
+//     decoration: it IS the level control, which is why one-tap-commit left it
+//     with nothing to say.
+//  3. The card then EXITS — translate ±520px, dy 40, rotate ±16° — and the deck
+//     advances. The prototype's timings, kept exactly.
+//
+// Reduced motion is faster overall (520+0 vs 420+300), not slower: the celebrate
+// holds a beat longer so it is still readable without the exit animation to sell
+// it, and there is no exit to wait on. Pick skips most of it (160ms) because the
+// 1s cycle already confirmed the choice.
+const CELEBRATE_MS = 420;
+const CELEBRATE_RM_MS = (kind) => (kind === 'pick' ? 160 : 520);
+const EXIT_MS = 300;
+const PICK_IDLE_MS = 1000;
+
+const REDUCED_MOTION = () => {
+  try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  catch { return false; }
+};
+
+// Timers are module state because the deck is a singleton overlay. Every path
+// that tears the deck down or jumps cards MUST clear them — a pending pick that
+// fires after its card is gone would write a level onto the wrong artist.
+let pendingPick = null;   // { level } while the Pick cycle is open
+let celebrating = null;   // { kind, level } while the confirmation overlay is up
+let pickTimer = null, celebrateTimer = null, exitTimer = null;
+
+export function clearDeckTimers() {
+  for (const cancel of [pickTimer, celebrateTimer, exitTimer]) {
+    if (typeof cancel === 'function') cancel();
   }
-  return { clone, rect };
+  pickTimer = celebrateTimer = exitTimer = null;
+  pendingPick = null; celebrating = null;
 }
 
-function spawnExitGhost(captured, kind) {
-  if (!captured) return;
-  const { clone, rect } = captured;
-  const stage = document.querySelector(`#${OVERLAY_ID} .dd-stage`);
-  if (!stage) return;
-  const layer = document.createElement('div');
-  layer.className = `dd-exit dd-exit--${kind === 'must' ? 'must' : kind === 'pass' ? 'pass' : 'pick'}`;
-  layer.setAttribute('aria-hidden', 'true');
-  layer.appendChild(clone);
-  // Geometry comes from the card we actually measured, not from re-deriving
-  // the stage's padding in CSS — the stage pads asymmetrically, the completion
-  // screen has no card-shaped slot at all, and a ghost that is 20px shorter
-  // than the card it replaces squashes visibly at the moment of the swap.
-  // (Absolute positioning resolves against the padding box; .dd-stage has no
-  // border, so its border-box origin from getBoundingClientRect is that box.)
-  const stageRect = stage.getBoundingClientRect();
-  layer.style.left = `${rect.left - stageRect.left}px`;
-  layer.style.top = `${rect.top - stageRect.top}px`;
-  layer.style.width = `${rect.width}px`;
-  layer.style.height = `${rect.height}px`;
-  layer.style.right = 'auto';
-  layer.style.bottom = 'auto';
-  stage.appendChild(layer);
-  const remove = () => layer.remove();
-  layer.addEventListener('animationend', remove);
-  // animationend can be skipped entirely (background tab, zero duration, a
-  // browser that never fires it) — a ghost that outlives its animation would
-  // sit on top of the live deck forever, so time it out regardless.
-  setTimeout(remove, 1000);
+// schedule() always returns a CANCEL FUNCTION, never a timer id. An injected
+// scheduler cannot produce an id that clearTimeout understands, so cancelling
+// through clearTimeout would silently do nothing under a test scheduler — and
+// the one thing this flow must get right is cancelling a superseded pick timer.
+// Tests inject a scheduler to control (or collapse) the chain; production gets
+// setTimeout.
+function schedule(actions, fn, ms) {
+  if (actions && typeof actions.schedule === 'function') return actions.schedule(fn, ms);
+  const id = setTimeout(fn, ms);
+  return () => clearTimeout(id);
 }
 
-// ---- action bar -----------------------------------------------------------------------
-function decide(kind, level, ctx, actions) {
+// The deck cycles ×1 → ×2 → ×3 → ×1. It never cycles to clear the way the
+// artist page's tick does — "not picked" is a decision the deck spells Pass,
+// and a tick that silently emptied would leave the card undecided while looking
+// like it had been acted on.
+export function nextPickLevel(current) {
+  return current ? (current % 3) + 1 : 1;
+}
+
+// ---- the confirmation overlay ---------------------------------------------------------
+function buildCelebrateOverlay() {
+  const el = document.createElement('div');
+  el.className = 'dd-celebrate';
+  el.setAttribute('aria-hidden', 'true'); // the undo toast + tick state carry this to AT
+  return el;
+}
+
+// Mutated IN PLACE, never re-rendered through renderDeckBody: re-rendering
+// remounts the sample player, so a second Pick tap would restart the audio
+// mid-listen. The overlay changes; the card underneath it does not move.
+function paintCelebrate(root, ctx) {
+  const el = root.querySelector('.dd-celebrate');
+  if (!el) return;
+  const cardEl = root.querySelector('.dd-card');
+  const state_ = celebrating || (pendingPick ? { kind: 'pick', level: pendingPick.level } : null);
+  if (!state_) {
+    el.classList.remove('is-on');
+    el.textContent = '';
+    if (cardEl) cardEl.dataset.intent = '';
+    paintPickButton(root);
+    return;
+  }
+  el.textContent = '';
+  el.classList.add('is-on');
+  if (cardEl) cardEl.dataset.intent = state_.kind;
+
+  if (state_.kind === 'must') {
+    const g = document.createElement('div');
+    g.className = 'dd-cel-star';
+    g.textContent = '★';
+    const l = document.createElement('div');
+    l.className = 'dd-cel-label';
+    l.textContent = 'MUST';
+    el.append(g, l);
+  } else if (state_.kind === 'pass') {
+    const g = document.createElement('div');
+    g.className = 'dd-cel-thumb';
+    g.textContent = '👎';
+    const l = document.createElement('div');
+    l.className = 'dd-cel-label dd-cel-label-quiet';
+    l.textContent = 'NOT FOR ME';
+    el.append(g, l);
+  } else {
+    const level = state_.level || 1;
+    const tick = document.createElement('div');
+    tick.className = 'dd-cel-tick';
+    const fill = document.createElement('div');
+    fill.className = 'dd-cel-tick-fill';
+    fill.style.height = `${level * 33.4}%`; // prototype's tickFill
+    tick.appendChild(fill);
+    const times = document.createElement('div');
+    times.className = 'dd-cel-times';
+    times.textContent = `×${level}`;
+    const pips = document.createElement('div');
+    pips.className = 'dd-cel-pips';
+    for (let n = 1; n <= 3; n++) {
+      const p = document.createElement('span');
+      p.className = n <= level ? 'dd-cel-pip is-on' : 'dd-cel-pip';
+      pips.appendChild(p);
+    }
+    el.append(tick, times, pips);
+    // The hint only makes sense while the cycle is still open — once it has
+    // locked in, telling someone to tap again would be a lie.
+    if (pendingPick && !celebrating) {
+      const hint = document.createElement('div');
+      hint.className = 'dd-cel-hint';
+      hint.textContent = 'tap Pick again to raise · locks in 1s';
+      el.appendChild(hint);
+    }
+  }
+  paintPickButton(root);
+}
+
+// `＋ Pick` becomes `＋ Pick ×N` and pulses while the cycle is open, so the
+// level is legible from the button too — not only from the overlay.
+function paintPickButton(root) {
+  const btn = root.querySelector('.dd-btn-pick');
+  if (!btn) return;
+  if (pendingPick) {
+    btn.textContent = `＋ Pick ×${pendingPick.level}`;
+    btn.classList.add('is-pending');
+  } else {
+    btn.textContent = '＋ Pick';
+    btn.classList.remove('is-pending');
+  }
+}
+
+// ---- committing a decision ------------------------------------------------------------
+function beginDecision(kind, level, ctx, actions) {
   if (!session || session.position >= session.pool.length) return;
+  if (celebrating) return; // a decision is already playing out
   const entry = session.pool[session.position];
   const name = entry.name;
   const prevLevel = myLevel(name, ctx);
   const prevPassed = model.isPassed(state.crewDoc, ctx.fid, name, ctx.meName);
   const decidedAt = session.position;
+
+  if (pickTimer) pickTimer();
+  pickTimer = null;
+  pendingPick = null;
+  celebrating = { kind, level };
 
   const commit = () => {
     if (kind === 'pass') {
@@ -440,31 +551,73 @@ function decide(kind, level, ctx, actions) {
     }
   };
 
-  // Snapshot the outgoing card BEFORE the re-render blows it away, so it can
-  // fly off over the new one. Decorative only — see spawnExitGhost.
-  const exiting = captureExitCard();
-
+  // The write lands NOW, not when the animation ends. The prototype can afford
+  // to record its decision at the end of the sequence because its deck is
+  // local state; ours is a synced crew doc, and 720ms of animation is 720ms in
+  // which a backgrounded tab or a closed lid would lose the pick outright.
   commit();
-  session.decided++;
-  session.position++;
   ctx.onNotesChange();
-  renderDeckBody(ctx, actions);
-  spawnExitGhost(exiting, kind);
 
-  const label = kind === 'pass' ? `Passed on ${name} — undo`
-    : kind === 'must' ? `Made ${name} a must — undo`
-      : `Picked ${name} ×1 — undo`;
-  if (actions.showUndoToast) {
-    actions.showUndoToast(label, () => {
-      revert();
-      session.decided--;
-      session.position = decidedAt;
-      ctx.onNotesChange();
-      renderDeckBody(ctx, actions);
-    });
-  }
+  const overlay = document.getElementById(OVERLAY_ID);
+  const rm = REDUCED_MOTION();
+  if (overlay) paintCelebrate(overlay, ctx);
+
+  const advance = () => {
+    session.decided++;
+    session.position++;
+    celebrating = null;
+    renderDeckBody(ctx, actions);
+
+    const label = kind === 'pass' ? `Passed on ${name} — undo`
+      : kind === 'must' ? `Made ${name} a must — undo`
+        : `Picked ${name} ×${level} — undo`;
+    if (actions.showUndoToast) {
+      actions.showUndoToast(label, () => {
+        clearDeckTimers();
+        revert();
+        session.decided--;
+        session.position = decidedAt;
+        ctx.onNotesChange();
+        renderDeckBody(ctx, actions);
+      });
+    }
+  };
+
+  celebrateTimer = schedule(actions, () => {
+    const ov = document.getElementById(OVERLAY_ID);
+    const card = ov && ov.querySelector('.dd-card');
+    if (card && !rm) {
+      // Prototype exit: ±520px out, 40px down, ±16°, fading. The overlay rides
+      // along so the confirmation leaves with the card it confirmed.
+      const t = `translate(${kind === 'pass' ? -520 : 520}px, 40px) rotate(${kind === 'pass' ? -16 : 16}deg)`;
+      for (const el of [card, ov.querySelector('.dd-celebrate')]) {
+        if (!el) continue;
+        el.classList.add('is-exiting');
+        el.style.transform = t;
+        el.style.opacity = '0';
+      }
+    }
+    exitTimer = schedule(actions, advance, rm ? 0 : EXIT_MS);
+  }, rm ? CELEBRATE_RM_MS(kind) : CELEBRATE_MS);
 }
 
+// Pass and Must are immediate. Pick opens the cycle.
+function pickTap(ctx, actions) {
+  if (!session || session.position >= session.pool.length || celebrating) return;
+  if (pickTimer) pickTimer(); // a new tap supersedes the previous idle timer
+  pendingPick = { level: nextPickLevel(pendingPick && pendingPick.level) };
+  const overlay = document.getElementById(OVERLAY_ID);
+  if (overlay) paintCelebrate(overlay, ctx);
+  const level = pendingPick.level;
+  pickTimer = schedule(actions, () => {
+    // Read the level off the pending state at fire time, not the closure — a
+    // later tap raised it and did not get its own timer.
+    const lvl = pendingPick ? pendingPick.level : level;
+    beginDecision('pick', lvl, ctx, actions);
+  }, PICK_IDLE_MS);
+}
+
+// ---- action bar -----------------------------------------------------------------------
 function buildActionBar(ctx, actions) {
   const bar = document.createElement('div');
   bar.className = 'dd-actions';
@@ -473,59 +626,77 @@ function buildActionBar(ctx, actions) {
   pass.type = 'button';
   pass.className = 'dd-btn dd-btn-pass';
   pass.textContent = 'Pass';
-  pass.addEventListener('click', () => decide('pass', 0, ctx, actions));
+  pass.addEventListener('click', () => beginDecision('pass', 0, ctx, actions));
 
   const pick = document.createElement('button');
   pick.type = 'button';
   pick.className = 'dd-btn dd-btn-pick';
-  pick.textContent = '＋ Pick ×1';
-  pick.addEventListener('click', () => decide('pick', 1, ctx, actions));
+  pick.textContent = '＋ Pick';
+  pick.addEventListener('click', () => pickTap(ctx, actions));
 
   const must = document.createElement('button');
   must.type = 'button';
   must.className = 'dd-btn dd-btn-must';
   must.textContent = '★ Must';
-  must.addEventListener('click', () => decide('must', 4, ctx, actions));
+  must.addEventListener('click', () => beginDecision('must', 4, ctx, actions));
 
   bar.append(pass, pick, must);
   return bar;
 }
 
-// ---- swipe gestures (feel per Discovery - Swipe Demo.dc.html; every action also
-// works as a plain tap — nothing here is load-bearing) ------------------------------
-const REDUCED_MOTION = () => {
-  try { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-  catch { return false; }
-};
-
+// ---- swipe gestures --------------------------------------------------------------------
+// Prototype thresholds exactly: must = dy < -90 with the vertical dominant,
+// pick = dx > 90, pass = dx < -90. Every one of them also has a button.
 function wireSwipe(cardStack, ctx, actions) {
   const card = cardStack.querySelector('.dd-card');
   if (!card) return;
   let startX = 0, startY = 0, dx = 0, dy = 0, dragging = false;
   const THRESHOLD = 90;
-  // Up = must is a bigger commitment than a sideways flick and the card has a
-  // scrollable body above it, so it asks for a longer, more deliberate pull.
-  const UP_THRESHOLD = 110;
 
-  // Which gesture a drag currently IS — decided by the dominant axis, and
-  // re-evaluated every move so a drag that starts ambiguous can resolve.
-  const gestureOf = (x, y) => (Math.abs(y) > Math.abs(x) ? (y < 0 ? 'up' : null) : (x > 0 ? 'right' : 'left'));
+  const intentOf = (x, y) => {
+    if (y < -40 && Math.abs(y) > Math.abs(x)) return 'must';
+    if (x > 40) return 'pick';
+    if (x < -40) return 'pass';
+    return null;
+  };
+
+  const hint = cardStack.querySelector('.dd-hint');
+  const paintHint = () => {
+    if (!hint) return;
+    const intent = dragging ? intentOf(dx, dy) : null;
+    if (!intent || celebrating || pendingPick) { hint.style.opacity = '0'; return; }
+    hint.textContent = intent === 'must' ? 'MUST' : intent === 'pick' ? 'PICK' : 'PASS';
+    hint.dataset.intent = intent;
+    // The prototype's ramp: nothing below 25px, full by 105px.
+    const mag = Math.max(Math.abs(dx), Math.abs(dy));
+    hint.style.opacity = String(Math.min(1, Math.max(0, (mag - 25) / 80)));
+    card.dataset.intent = intent;
+  };
 
   const clearDrag = () => {
     dragging = false;
-    // Settle back under the base token instead of snapping. The class is
-    // removed once the transition lands so the next drag is untransitioned.
     if (!REDUCED_MOTION() && card.style.transform) {
       card.classList.add('is-settling');
       const done = () => { card.classList.remove('is-settling'); card.removeEventListener('transitionend', done); };
       card.addEventListener('transitionend', done);
     }
     card.style.transform = '';
+    if (!celebrating && !pendingPick) card.dataset.intent = '';
     dx = 0; dy = 0;
+    paintHint();
   };
 
   card.addEventListener('pointerdown', (e) => {
     if (e.target.closest('button')) return; // player controls, name button
+    if (celebrating) return;
+    // Touching the card abandons an open Pick cycle rather than letting its
+    // timer fire mid-gesture — same as the prototype's onDown clearing pending.
+    if (pendingPick) {
+      if (pickTimer) pickTimer();
+      pickTimer = null; pendingPick = null;
+      const ov = document.getElementById(OVERLAY_ID);
+      if (ov) paintCelebrate(ov, ctx);
+    }
     dragging = true; startX = e.clientX; startY = e.clientY; dx = 0; dy = 0;
     card.classList.remove('is-settling');
     try { card.setPointerCapture(e.pointerId); } catch { /* jsdom / unsupported */ }
@@ -534,31 +705,23 @@ function wireSwipe(cardStack, ctx, actions) {
     if (!dragging) return;
     dx = e.clientX - startX;
     dy = e.clientY - startY;
-    if (REDUCED_MOTION()) return;
-    // "card follows the finger" — on whichever axis is currently in charge.
-    // A downward drag is the card's own scroll (touch-action: pan-y), never a
-    // gesture, so it moves nothing.
-    const g = gestureOf(dx, dy);
-    if (g === 'up') card.style.transform = `translateY(${dy}px) scale(${Math.max(.94, 1 + dy / 2600)})`;
-    else if (g) card.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
-    else card.style.transform = '';
+    if (REDUCED_MOTION()) { paintHint(); return; }
+    // "card follows the finger" — the prototype translates on both axes at once
+    // and rotates off dx, so a diagonal drag reads as the gesture it is.
+    card.style.transform = `translate(${dx}px, ${dy}px) rotate(${dx / 18}deg)`;
+    paintHint();
   });
   const release = () => {
     if (!dragging) return;
-    const g = gestureOf(dx, dy);
-    const passed = g === 'up' ? -dy > UP_THRESHOLD : Math.abs(dx) > THRESHOLD;
+    const fx = dx, fy = dy;
     clearDrag();
-    if (!passed || !g) return;
-    // Swipe left = pass, right = pick, up = must — and each is exactly the
-    // action its always-visible button performs. No gesture is ever required.
-    if (g === 'up') decide('must', 4, ctx, actions);
-    else if (g === 'right') decide('pick', 1, ctx, actions);
-    else decide('pass', 0, ctx, actions);
+    if (fy < -THRESHOLD && Math.abs(fy) > Math.abs(fx)) beginDecision('must', 4, ctx, actions);
+    else if (fx > THRESHOLD) beginDecision('pick', 1, ctx, actions);
+    else if (fx < -THRESHOLD) beginDecision('pass', 0, ctx, actions);
   };
   card.addEventListener('pointerup', release);
   card.addEventListener('pointercancel', clearDrag);
 }
-
 // ---- desktop three-pane (frame 5c) --------------------------------------------------
 // "For you" stacked list — distinct from the sheet/rail's `segRow` (5c draws
 // Sort as a vertical list, Show as a segmented pill; segRow is reused below
@@ -1189,6 +1352,9 @@ export function openDeck(ctx, actions = {}) {
 }
 
 export function closeDeck() {
+  // Before anything else: a pick timer that fires after the deck is gone would
+  // write a level onto whatever card the next session deals at that index.
+  clearDeckTimers();
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
   unwatchLayout();
   const overlay = document.getElementById(OVERLAY_ID);

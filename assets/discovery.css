@@ -527,29 +527,97 @@
 .dd-card.is-settling { transition: transform var(--dd-base) var(--dd-ease); }
 @media (prefers-reduced-motion: reduce) { .dd-card { transition: none !important; } }
 
-/* The acted card leaving. deck.js re-renders the deck synchronously (state and
- * DOM stay in lockstep, which is what the tests assert on) and clones the
- * outgoing card into this layer on top, so the exit is purely decorative — if
- * it never runs, nothing is lost but the flourish. aria-hidden + inert in JS. */
-/* left/top/width/height are set inline from the outgoing card's measured rect
- * (deck.js spawnExitGhost) — this rule only carries the layer's behaviour. */
-.dd-exit {
-  position: absolute; z-index: 6; pointer-events: none; overflow: hidden;
-  border-radius: var(--r-row); animation-fill-mode: forwards;
+/* The acted card leaving — the prototype's own exit (translate ±520/40, ±16°,
+ * fading over 300ms), set inline by deck.js's beginDecision. */
+.dd-card.is-exiting, .dd-celebrate.is-exiting {
+  transition: transform .3s var(--dd-ease), opacity .3s ease;
 }
-/* Pass: "card fades, desaturates and recedes" — the desaturation is the point,
- * it reads as the artist draining out of the pool. */
-.dd-exit--pass { animation: dd-exit-pass var(--dd-base) var(--dd-ease); }
-.dd-exit--pick { animation: dd-exit-pick var(--dd-base) var(--dd-ease); }
-.dd-exit--must { animation: dd-exit-must var(--dd-base) var(--dd-ease); }
-@keyframes dd-exit-pass {
-  to { opacity: 0; filter: saturate(.15) brightness(.7); transform: translateX(-58%) rotate(-11deg) scale(.9); }
+
+/* The card signals the intent it is ABOUT to commit — while dragging toward a
+ * gesture, and while the confirmation is up. Aura for pick/must (the same
+ * convergence colour the wall uses), desaturation for pass. */
+.dd-card[data-intent="must"] {
+  background:
+    radial-gradient(130% 130% at 50% 120%, hsla(270, 90%, 70%, 1) 0%, hsla(270, 90%, 70%, .5) 45%, transparent 78%),
+    var(--card-unpicked);
 }
-@keyframes dd-exit-pick {
-  to { opacity: 0; transform: translateX(58%) rotate(11deg) scale(.95); }
+.dd-card[data-intent="pick"] {
+  background:
+    radial-gradient(130% 130% at 50% 120%, hsla(270, 90%, 70%, .7) 0%, hsla(270, 90%, 70%, .35) 45%, transparent 78%),
+    var(--card-unpicked);
 }
-@keyframes dd-exit-must {
-  to { opacity: 0; transform: translateY(-42%) scale(1.03); }
+.dd-card[data-intent="pass"] { filter: grayscale(.7) brightness(.82); }
+.dd-card { transition: background var(--dd-fast) ease, filter var(--dd-fast) ease; }
+
+/* ---- the drag hint: which gesture this drag currently IS ---- */
+.dd-hint {
+  position: absolute; inset: 0; z-index: 4; display: grid; place-items: center;
+  pointer-events: none; opacity: 0;
+  font: 800 34px/1 var(--font-ui); letter-spacing: .14em; color: var(--text-secondary);
+}
+.dd-hint[data-intent="must"], .dd-hint[data-intent="pick"] { color: #D8B4FE; }
+
+/* ---- the confirmation overlay ("celebrate") ----------------------------------
+ * Design source: "Discovery - Swipe Demo.dc.html" line 87 — a scrim over the
+ * card carrying ★ MUST / 👎 NOT FOR ME / the filling tick with ×N and pips.
+ * For Pick this is not a flourish, it IS the level control: the cycle runs
+ * ×1 → ×2 → ×3 and locks in after 1s, and this is where the level is read. */
+.dd-celebrate {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  pointer-events: none;
+  border-radius: var(--r-row);
+  opacity: 0; transition: opacity .15s ease;
+  /* DEVIATION from the prototype's flat rgba(10,8,18,.42), and a deliberate
+   * one. That value was drawn against a sparse card — name, genre, reason. The
+   * real card carries the whole sample player (tabs, now-playing row, seek row,
+   * three set rows) through the vertical middle, exactly where the tick and ×N
+   * sit, and at 42% the confirmation was unreadable against it. Verified in the
+   * browser before changing it. Same colour, enough of it to actually confirm
+   * something, plus a blur so the busy content behind reads as depth rather
+   * than noise. The gradient keeps the card's own aura visible at the edges. */
+  background:
+    radial-gradient(120% 90% at 50% 45%, rgba(10, 8, 18, .93) 0%, rgba(10, 8, 18, .86) 55%, rgba(10, 8, 18, .72) 100%);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.dd-celebrate.is-on { opacity: 1; }
+
+.dd-cel-star {
+  font-size: 70px; line-height: 1; color: #D8B4FE;
+  text-shadow: 0 0 24px rgba(192, 132, 252, .7);
+  animation: dd-pop-star .4s ease both;
+}
+.dd-cel-thumb { font-size: 52px; line-height: 1; filter: grayscale(.4); animation: dd-pop-star .4s ease both; }
+@keyframes dd-pop-star {
+  0% { transform: scale(.4) rotate(-12deg); opacity: 0; }
+  55% { transform: scale(1.18) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.dd-cel-label { font: 800 13px var(--font-ui); letter-spacing: .14em; color: #fff; }
+.dd-cel-label-quiet { color: var(--text-secondary); }
+
+/* The same vertical tick the who-corner and the artist page use, so a level
+ * reads identically everywhere (per the Screens notes). */
+.dd-cel-tick {
+  height: 78px; width: 28px; border-radius: 6px;
+  background: #241E38; border: 1.5px solid #fff;
+  overflow: hidden; display: flex; align-items: flex-end;
+}
+.dd-cel-tick-fill { width: 100%; background: hsla(270, 90%, 72%, .95); transition: height var(--dd-base) ease; }
+.dd-cel-times { font: 800 30px/1 var(--font-ui); color: #fff; }
+.dd-cel-pips { display: flex; gap: 6px; }
+.dd-cel-pip { width: 9px; height: 9px; border-radius: var(--r-pill); background: #2B2440; border: 1px solid #3A3354; }
+.dd-cel-pip.is-on { background: hsla(270, 90%, 72%, .95); border-color: #fff; }
+.dd-cel-hint { font: 700 11px var(--font-ui); color: #D8B4FE; }
+
+/* The Pick button carries the pending level too — the overlay is not the only
+ * place it is legible, which is what keeps this off the motion-carries-meaning
+ * hook even though the pulse is pure motion. */
+.dd-btn-pick.is-pending { animation: dd-pulse-btn 1s ease-in-out infinite; }
+@keyframes dd-pulse-btn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(192, 132, 252, 0); }
+  50% { box-shadow: 0 0 0 5px rgba(192, 132, 252, .28); }
 }
 .dd-chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .dd-chip {
