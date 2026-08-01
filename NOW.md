@@ -1,4 +1,41 @@
-# NOW — festival-navigator: fest-first reshape ON STAGING (v35) · prod at v31
+# NOW — festival-navigator: Discovery epic COMPLETE on branch `discovery` (v44) · not yet deployed
+
+## 2026-08-01 (session close) — Discovery M0-M7, built and verified
+
+The full Discovery build spec (claude-plans/2026-07-30-discovery-build-spec.md,
+design of record in design/discovery-handoff/) landed on branch `discovery`:
+19 commits, 376 tests, every designed surface implemented and browser-verified.
+Orchestration: Fable planned/reviewed, Sonnet agents implemented, every slice
+re-verified live before commit.
+
+- **What exists now:** enrichment pipeline (MusicBrainz + oEmbed + quota-cached
+  YouTube search) with 3 lineups enriched (EF, Lolla, Ubbi Dubbi) · genre canon +
+  client canonicalization · passes + recommend-ahead in the crew doc (reversible
+  tombstones, merge-tested against the real SQL bytes) · deterministic scoring
+  with exactly-one-reason ribbons · sample player v2 (one instance, seek
+  everywhere, SoundCloud monetization honesty — MONETIZE tracks dropped, SNIP
+  badged) · the artist page + THE flow change (every artist tap opens the page;
+  the pick cycle lives on its tick) · Discover deck + filter · For-you wall ·
+  My day (gaps/clashes, cross-midnight honest) · Decide (never auto-picks) ·
+  all four desktop layouts (5b/5c/5d/5e).
+- **Data honesty fix worth knowing:** EF + Lolla artist arrays are SCHEDULE-
+  ordered, not billing-ordered — festivals now declare `artistOrder`, and
+  schedule-ordered ones derive popularity from set lateness x length. EF's
+  derivation is limited by absent end times (documented in commit 5fcd8ed).
+- **Testing traps that bit this session** (all also in fork docs): the SW serves
+  stale modules origin-wide (unregister + clear caches before believing a local
+  check); the ES-module map and heuristic HTTP cache survive more than you think
+  (serve QA with Cache-Control: no-store); browser-pane coordinate clicks
+  mis-hit — use element refs or JS .click(). QA data: open
+  /design/seed-qa-crew.html on any static server, one click seeds a throwaway
+  crew (never syncs).
+- **Next session's list:** Vercel preview deploy + a PHONE pass (the wall-tap
+  flow change is the thing to feel) · YouTube enrichment tail
+  (`node --env-file=<workspace>/.env scripts/enrich-artists.mjs <fid>`,
+  ~100 searches/day quota; no-results are cached and never re-billed) · enrich
+  the remaining 7 lineups · design the rec-queue surfacing (spec §11.2) ·
+  then Epic B (taste profile + seen-log) per PORT_REQUIREMENTS §11.
+
 
 ## 2026-07-14 (session close, v35) — Kevin's staging round + gate rounds 4-5
 
