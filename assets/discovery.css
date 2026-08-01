@@ -165,22 +165,36 @@
 /* full/desktop YouTube stage: custom overlay controls (compact intentionally
  * has NO overlay — it keeps YouTube's own tiny native chrome instead, per
  * the design sheet's "never hides behind a round play button" rule). */
-/* The compact scrubber — one full-width button (the 44px floor is the hit
-   target; the visual track stays thin), fed by the yt ticker / SC
-   PLAY_PROGRESS. Full/desktop YT scrubs via native chrome; full SC via the
-   widget's own waveform; Spotify is self-contained. */
+/* The mini player's scrubber. Redrawn from the 2026-08-01 design corrections:
+   elapsed · rail · duration on ONE line, and the rail carries a visible 13px
+   handle. The old version stacked a hairline over a times row and could only
+   be tapped — the design now calls a player without a usable scrubber
+   unshippable, because jumping into the middle IS how you sample a set.
+   Fed by the yt ticker / SC PLAY_PROGRESS; drag is wired in player.js. */
 .sample-player-seek {
-  display: flex; flex-direction: column; justify-content: center; gap: 5px;
-  width: 100%; border: none; background: none; padding: 4px 0; cursor: pointer; text-align: left;
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; border: none; background: none; padding: 0; cursor: pointer; text-align: left;
+  touch-action: none; /* the row owns the horizontal drag, not the scroller */
 }
-.sample-player-seek-track {
-  display: block; height: 4px; border-radius: 2px; background: var(--hairline); overflow: hidden;
-}
-.sample-player-seek-fill { display: block; height: 100%; background: var(--brand); border-radius: 2px; }
 .sample-player-seek-time {
-  display: flex; justify-content: space-between;
-  font: 600 10px ui-monospace, Menlo, monospace; color: var(--text-tertiary);
+  flex: none; font: 600 9.5px ui-monospace, Menlo, monospace; color: var(--text-body);
 }
+.sample-player-seek-dur { flex: none; font: 600 9.5px ui-monospace, Menlo, monospace; color: var(--text-tertiary); }
+/* 26px of rail keeps the drag target well past the 44px floor once the row's
+   own padding is counted, while the drawn track stays 4px. */
+.sample-player-seek-rail { flex: 1; position: relative; height: 26px; display: flex; align-items: center; }
+.sample-player-seek-track {
+  position: absolute; left: 0; right: 0; height: 4px;
+  border-radius: var(--r-pill); background: var(--border-card);
+}
+.sample-player-seek-fill {
+  position: absolute; left: 0; height: 4px; border-radius: var(--r-pill); background: rgb(var(--brand));
+}
+.sample-player-seek-handle {
+  position: absolute; width: 13px; height: 13px; margin-left: -6.5px;
+  border-radius: var(--r-pill); background: #fff; box-shadow: 0 0 0 3px rgba(var(--brand), .3);
+}
+.sample-player-seek:disabled { opacity: .5; cursor: default; }
 .sample-player-clip-preview {
   flex: none; border: 1px solid var(--spotify-stroke); color: var(--spotify-stroke);
   border-radius: var(--r-pill); padding: 2px 7px;
@@ -279,7 +293,30 @@
   overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .ap-scroll { display: flex; flex-direction: column; min-height: 100%; }
-.ap-body { display: flex; flex-direction: column; gap: 22px; padding: 0 18px 40px; }
+/* 132px of tail clears the pinned action bar — the design's own frame budgets
+ * exactly that, so the last section never hides under the dock. */
+.ap-body { display: flex; flex-direction: column; gap: 22px; padding: 0 18px 132px; }
+
+/* ---- pinned primary actions (mobile) ----
+ * "not for me · pick · must ... along the bottom on every surface."
+ * STICKY, not fixed or absolute: the overlay is the scroller, so an absolute
+ * bar would ride the content up and out of reach, and a fixed one would
+ * escape the desktop grid below. Sticky pins it to the bottom of the
+ * scrollport on mobile and drops back into normal flow at ≥1200px, where the
+ * design puts it in the left rail instead. The gradient + blur let the page
+ * show through, so it reads as a dock over content, not a second page. */
+.ap-actions {
+  position: sticky; bottom: 0; z-index: 2; margin-top: auto;
+  padding: 14px 16px calc(20px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--hairline);
+  background: linear-gradient(rgba(10, 8, 18, .3), rgba(10, 8, 18, .97) 40%);
+  backdrop-filter: blur(8px);
+  display: flex; flex-direction: column; gap: 9px;
+}
+.ap-actions .dd-btn-pass { background: rgba(28, 23, 49, .7); }
+.ap-actions .dd-btn-must { background: rgba(10, 8, 18, .5); }
+/* Passed is a state the bar has to show, not just write. */
+.dd-btn-pass.is-on { color: var(--text-body); border-color: var(--border-emphasis); }
 
 /* ---- hero: crew-aura background (js/v3/aura.js) + grain, name, chips, set
  * line, headline pick control. .hero-grain is the shared v3 token class
@@ -311,18 +348,29 @@
 .ap-setline { margin-top: 14px; font: 700 12px var(--font-ui); color: var(--text-header); letter-spacing: .01em; }
 .ap-stage { color: rgb(var(--fest)); } /* one of the four allowed fest-accent places */
 
-/* ---- headline pick control: fixed-height tick + must/pass, hero right side ---- */
-.ap-pick-control { display: flex; align-items: stretch; gap: 8px; flex: none; }
+/* ---- hero pick chip: READ-ONLY state, not a control ----
+ * The headline tick + ★/✕ cluster that used to live here moved to the pinned
+ * bottom bar (.ap-actions) in the 2026-08-01 corrections. Two reasons, both
+ * in the design notes: the primary actions belong on the bottom on every
+ * surface, and on a long artist page a control in the hero scrolls away
+ * exactly when you have finished reading and want to decide. */
+.ap-pick-chip-host { flex: none; }
+.ap-pick-chip {
+  display: inline-flex; align-items: center; white-space: nowrap;
+  border: 1px solid rgba(var(--brand), .55); border-radius: var(--r-pill);
+  background: rgba(10, 8, 18, .5); color: #fff;
+  padding: 5px 11px; font: 800 10px var(--font-ui); letter-spacing: .06em;
+}
+.ap-pick-chip.is-passed { border-color: var(--border-input); color: var(--text-secondary); }
+
+/* Retained for the crew list's glyphs — the tick is the who-corner's shape,
+ * which is the job it was built for. */
 .ap-tick {
   position: relative; width: 34px; height: 96px; flex: none; padding: 0;
   border-radius: 11px; border: 1.5px solid #fff; background: rgba(10, 8, 18, .5);
   overflow: hidden; cursor: pointer;
   display: flex; align-items: flex-end; justify-content: center;
 }
-/* "Pick cycle — tap advances ×1→×2→×3→must→clear; aura brightens one step,
- * who-corner tick GROWS (base)." The height and the alpha are the state; the
- * tween is only how it gets there, and reduced-motion drops straight to the
- * new height with the level still perfectly legible. */
 .ap-tick-fill {
   position: absolute; left: 0; right: 0; bottom: 0;
   transition: height var(--dd-base) var(--dd-ease), background-color var(--dd-base) var(--dd-ease);
@@ -403,14 +451,34 @@
     padding: 36px 40px 60px;
     grid-template-columns: 440px minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
-      'hero   crew  notes'
-      'sample crew  notes'
-      'sample sim   sim';
+      'hero    crew  notes'
+      'actions crew  notes'
+      'sample  crew  notes'
+      'sample  sim   sim';
     gap: 20px;
     align-items: start;
     min-height: 0;
   }
   #artist-page-overlay .ap-body { display: contents; }
+  /* "Desktop puts the same three actions directly under the name, above the
+   * player — the top of the left rail is where the eye and the cursor already
+   * are." No dock, no blur, no sticky: on a 1440 canvas nothing scrolls out
+   * of reach, so the bar is just the next thing in the rail. */
+  #artist-page-overlay .ap-actions {
+    grid-area: actions; position: static; margin-top: 0;
+    padding: 0; border-top: none; background: none; backdrop-filter: none;
+  }
+  #artist-page-overlay .ap-actions .dd-actions-row { gap: 10px; }
+  #artist-page-overlay .ap-actions .dd-btn { min-height: 60px; border-radius: 16px; }
+  #artist-page-overlay .ap-actions .dd-btn-pass,
+  #artist-page-overlay .ap-actions .dd-btn-must { width: 96px; }
+  #artist-page-overlay .ap-actions .dd-btn-pass { background: var(--card); }
+  #artist-page-overlay .ap-actions .dd-btn-must { background: rgba(var(--brand), .06); }
+  #artist-page-overlay .ap-actions .dd-btn-pick { gap: 8px; }
+  #artist-page-overlay .ap-actions .dd-btn-label { font-size: 8.5px; }
+  #artist-page-overlay .ap-actions .dd-btn-seg { width: 30px; }
+  /* One line at 96px — the mobile bar's two-line break would look broken here. */
+  #artist-page-overlay .ap-actions .dd-btn-pass .dd-btn-label br { display: none; }
   #artist-page-overlay .ap-hero {
     grid-area: hero;
     border: 1px solid var(--border-card);
@@ -650,20 +718,63 @@
 .dd-done-actions { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; justify-content: center; }
 .dd-done-btn { font-size: 12.5px; padding: 11px 18px; }
 
-/* ---- action bar (fixed bottom) ---- */
+/* ---- primary action bar ----------------------------------------------------
+ * "Not for me · pick · must, in that order, along the bottom on every surface
+ * — deck, artist page, desktop focus pane. Never in a header: these are the
+ * primary actions." (Style guide §05, 2026-08-01 corrections.)
+ *
+ * Two rules with teeth here. (1) The three pick segments are ALWAYS drawn,
+ * lit or not — that is what makes "tap again to raise" legible BEFORE the
+ * first tap; the old three-pill bar hid the whole multi-tap cycle until you
+ * had already used it. (2) The bar is one component, shared verbatim by all
+ * three surfaces, so nothing moves between screens; only its metrics shift.
+ *
+ * This is also the reason the artist page no longer carries the vertical tick
+ * in its hero — the tick went back to being what it was built for, the
+ * who-corner glyph on cards. */
 .dd-actions {
-  flex: none; display: flex; gap: 10px; padding: 12px 18px calc(14px + env(safe-area-inset-bottom));
+  flex: none; display: flex; flex-direction: column; gap: 9px;
+  padding: 14px 16px calc(22px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--hairline); background: var(--dock);
 }
+/* Undo lives INSIDE the bar and the bar grows to hold it — never a floating
+ * snackbar over the deck (style guide §07: "undo has a place of its own, so
+ * it never covers content"). */
+.dd-actions-row { display: flex; gap: 8px; align-items: stretch; }
 .dd-btn {
-  min-height: 50px; border-radius: var(--r-pill); font: 800 13px var(--font-ui); cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 14px; cursor: pointer; min-height: 58px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.dd-btn-glyph { font-size: 15px; line-height: 1; }
+.dd-btn-label {
+  font: 800 8px var(--font-ui); letter-spacing: .06em; text-align: center; line-height: 1.2;
 }
 /* Pass is quiet — never a thumbs-down (repo law: brand violet = selected/ours,
  * a decline stays neutral). */
-.dd-btn-pass { flex: .9; border: 1px solid var(--border-input); background: transparent; color: var(--text-secondary); font-weight: 700; }
-.dd-btn-pick { flex: 1.5; border: none; background: var(--tonal-fill); color: var(--tonal-text); font-size: 14px; }
-.dd-btn-must { flex: .9; border: 1px solid var(--border-input); background: transparent; color: var(--tonal-text); }
+.dd-btn-pass {
+  width: 66px; flex: none; border: 1px solid var(--border-input);
+  background: var(--card); color: var(--text-secondary);
+}
+.dd-btn-must {
+  width: 66px; flex: none; border: 1px solid rgba(var(--brand), .5);
+  background: rgba(var(--brand), .06); color: var(--tonal-text);
+}
+.dd-btn-pick {
+  flex: 1; gap: 7px; border: 1px solid rgb(var(--brand)); background: rgba(var(--brand), .18);
+  box-shadow: 0 0 0 3px rgba(var(--brand), .13);
+}
+.dd-btn-pick-label { font: 800 15px var(--font-ui); color: #fff; line-height: 1; }
+.dd-btn-pick-segs { display: flex; gap: 5px; }
+/* The segment IS the state — flat colour, no tween needed to read it, which
+ * is what keeps the pick cycle legible under reduced motion. */
+.dd-btn-seg { width: 26px; height: 5px; border-radius: 3px; background: var(--border-emphasis); }
+.dd-btn-seg.is-on { background: hsla(270, 90%, 75%, .95); }
+/* The 1.05x bump on each tap (style guide §07). Motion only — the lit
+ * segments already carry the level, so the global reduced-motion floor in
+ * v3-tokens.css kills this with nothing lost. */
+.dd-btn-pick.is-pending { box-shadow: 0 0 0 4px rgba(var(--brand), .2); }
+.dd-btn-pick.is-bumping { animation: dd-pick-bump 200ms var(--dd-ease); }
+@keyframes dd-pick-bump { 0%, 100% { transform: scale(1); } 32% { transform: scale(1.05); } }
 
 /* ---- filter sheet body (bottom sheet chrome — .sheet/.sheet-backdrop are
  * the shared component from assets/v3.css; this covers only the content) ---- */
@@ -1026,15 +1137,22 @@
 }
 .dd2-empty-title { font: 800 15px var(--font-ui); color: var(--text-primary); }
 
-/* ---- right pane: sticky "now sampling" — same headline tick/★/✕ contract as
- * the artist page (.ap-tick/.ap-must/.ap-pass/.ap-pick-side, reused as-is —
- * "one pick vocabulary across deck, pane and page"), plus the compact sample
- * player (js/discovery/player.js's own .sample-player-* CSS, unmodified). ---- */
+/* ---- right pane: sticky "now sampling" — the FULL sample player (the pane
+ * has room for a 16:9 stage; the mini row was a mobile compromise) closed by
+ * the same bottom action bar the artist page uses (.dd-actions-row, reused
+ * as-is — "one pick vocabulary across deck, pane and page"). ---- */
+/* Capped to the scrollport (max-height:100% against .dd2-body's content box)
+ * and laid out as a column, so the action bar at its foot is ALWAYS on
+ * screen. Without the cap a tall pane runs past the fold and clips the three
+ * primary actions — the one thing on this surface that must never be
+ * unreachable. The body scrolls inside instead. */
 .dd2-pane {
   width: 320px; flex: none; border: 1px solid var(--border-card); border-radius: var(--r-settings);
   background: var(--card); overflow: hidden; position: sticky; top: 0;
+  max-height: 100%; display: flex; flex-direction: column;
 }
-.dd2-pane-hero { position: relative; padding: 16px; overflow: hidden; }
+.dd2-pane-actions { flex: none; }
+.dd2-pane-hero { position: relative; padding: 16px; overflow: hidden; flex: none; }
 .dd2-pane-hero-bg { position: absolute; inset: 0; }
 .dd2-pane-hero-content { position: relative; z-index: 1; }
 .dd2-pane-label { font: 800 9px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-tertiary); }
@@ -1042,12 +1160,22 @@
 .dd2-pane-namewrap { min-width: 0; }
 .dd2-pane-name { font: 800 20px/1.1 var(--font-ui); color: #fff; word-break: break-word; overflow-wrap: anywhere; }
 .dd2-pane-genre { font: 600 10px var(--font-ui); color: var(--text-body); margin-top: 6px; }
-.dd2-pane-pick { display: flex; align-items: stretch; gap: 7px; flex: none; }
-/* Sized down from the artist page's 34x96/44x44 (hero real estate here is
- * ~150px narrower) — same shapes, same fill math, smaller footprint. */
-.dd2-pane-tick { width: 30px; height: 84px; border-radius: 10px; }
-.dd2-pane-must, .dd2-pane-pass { width: 38px; height: 38px; }
-.dd2-pane-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+/* The pane "closes with the same bottom action bar as the artist page" — same
+ * component, sized down for a 320px pane (the mobile bar's 66px cheeks would
+ * leave Pick barely wider than its own label here). */
+.dd2-pane-actions { padding: 0 16px 16px; }
+.dd2-pane-actions .dd-actions-row { gap: 7px; }
+.dd2-pane-actions .dd-btn { min-height: 54px; border-radius: 12px; gap: 4px; }
+.dd2-pane-actions .dd-btn-pass,
+.dd2-pane-actions .dd-btn-must { width: 56px; }
+.dd2-pane-actions .dd-btn-pass { background: var(--card-unpicked); }
+.dd2-pane-actions .dd-btn-glyph { font-size: 14px; }
+.dd2-pane-actions .dd-btn-label { font-size: 7.5px; }
+.dd2-pane-actions .dd-btn-pick { gap: 6px; }
+.dd2-pane-actions .dd-btn-pick-label { font-size: 14px; }
+.dd2-pane-actions .dd-btn-pick-segs { gap: 4px; }
+.dd2-pane-actions .dd-btn-seg { width: 22px; }
+.dd2-pane-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; min-height: 0; }
 .dd2-pane-reason {
   align-self: flex-start; background: var(--tonal-fill); color: var(--tonal-text);
   border-radius: var(--r-pill); padding: 6px 11px; font: 700 11px var(--font-ui);

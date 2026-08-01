@@ -143,6 +143,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   let lastSnap = null;
   let destroyed = false;
   let ytTicker = null; // interval id for the full/desktop custom progress bar
+  let seekDragging = false; // a finger owns the scrubber — ticker frames must not fight it
+  let lastSeekFrac = 0; // last painted position, 0..1 (the keyboard step reads from it)
 
   function notify(snap) {
     if (typeof onStateChange === 'function') onStateChange(snap);
@@ -306,29 +308,91 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     }
   }
 
-  // The compact scrubber: one full-width button (44px hit target, thin visual
-  // track) — tap or drag anywhere on it to seek the live embed. Position/time
-  // update from the yt ticker or SC's PLAY_PROGRESS via updateSeekRow().
+  // The mini player's scrubber: elapsed · draggable rail · duration.
+  //
+  // Redrawn 2026-08-01 from the design corrections. Two things changed and
+  // both are load-bearing: the rail carries a VISIBLE handle (a bare hairline
+  // reads as a progress readout, not a control), and the row is genuinely
+  // DRAGGABLE, not tap-only. The design's line is that the front of a set
+  // tells you nothing, so jumping into the middle is the primary way to
+  // sample — which makes a tap-only scrubber a decorative bar with extra
+  // steps. Position/time still arrive from the yt ticker or SC's
+  // PLAY_PROGRESS via updateSeekRow().
+  //
+  // While a drag is live the fill/handle follow the FINGER, not the embed:
+  // seekTo is async on both YT and the SC widget, so painting from the
+  // adapter would drag the handle backwards under the user's own thumb.
   function buildSeekRow(snap) {
     const row = document.createElement('button');
     row.type = 'button';
     row.className = 'sample-player-seek';
     row.setAttribute('aria-label', 'Seek');
     row.disabled = !snap.online;
-    row.innerHTML = '<span class="sample-player-seek-track"><span class="sample-player-seek-fill" data-seek-fill style="width:0%"></span></span>' +
-      '<span class="sample-player-seek-time"><span data-seek-cur>0:00</span><span data-seek-dur>0:00</span></span>';
-    const seekAt = (clientX) => {
-      const rect = row.getBoundingClientRect();
-      const frac = seekFraction(clientX - rect.left, rect.width);
+    row.innerHTML = '<span class="sample-player-seek-time" data-seek-cur>0:00</span>' +
+      '<span class="sample-player-seek-rail" data-seek-rail>' +
+        '<span class="sample-player-seek-track"></span>' +
+        '<span class="sample-player-seek-fill" data-seek-fill style="width:0%"></span>' +
+        '<span class="sample-player-seek-handle" data-seek-handle style="left:0%"></span>' +
+      '</span>' +
+      '<span class="sample-player-seek-dur" data-seek-dur>0:00</span>';
+
+    const rail = row.querySelector('[data-seek-rail]');
+    const fracAt = (clientX) => {
+      const rect = rail.getBoundingClientRect();
+      return seekFraction(clientX - rect.left, rect.width);
+    };
+    const commit = (frac) => {
       if (embedAdapter && embedAdapter.seekTo) embedAdapter.seekTo(frac);
     };
-    row.addEventListener('click', (e) => seekAt(e.clientX));
+
+    row.addEventListener('pointerdown', (e) => {
+      if (row.disabled) return;
+      seekDragging = true;
+      try { row.setPointerCapture(e.pointerId); } catch { /* capture is best-effort */ }
+      const frac = fracAt(e.clientX);
+      paintSeek(frac);
+      commit(frac);
+    });
+    row.addEventListener('pointermove', (e) => {
+      if (!seekDragging) return;
+      const frac = fracAt(e.clientX);
+      paintSeek(frac);
+      commit(frac);
+    });
+    const end = (e) => {
+      if (!seekDragging) return;
+      seekDragging = false;
+      commit(fracAt(e.clientX));
+    };
+    row.addEventListener('pointerup', end);
+    row.addEventListener('pointercancel', () => { seekDragging = false; });
+    // Keyboard parity — the drag is a mouse/touch affordance, not the only one.
+    row.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const step = (e.key === 'ArrowRight' ? 1 : -1) * 0.02;
+      const frac = Math.min(1, Math.max(0, lastSeekFrac + step));
+      paintSeek(frac);
+      commit(frac);
+    });
     return row;
   }
 
-  function updateSeekRow(cur, dur) {
+  // Paints the rail to a 0..1 fraction. Split out so the drag can drive it
+  // directly, without waiting for the embed's next progress frame.
+  function paintSeek(frac) {
+    lastSeekFrac = Math.min(1, Math.max(0, frac));
+    const pct = `${lastSeekFrac * 100}%`;
     const fill = root.querySelector('[data-seek-fill]');
-    if (fill && dur > 0) fill.style.width = `${Math.min(100, (cur / dur) * 100)}%`;
+    if (fill) fill.style.width = pct;
+    const handle = root.querySelector('[data-seek-handle]');
+    if (handle) handle.style.left = pct;
+  }
+
+  function updateSeekRow(cur, dur) {
+    // A live drag owns the position; a ticker frame from the old playhead
+    // would otherwise yank the handle back mid-gesture.
+    if (!seekDragging && dur > 0) paintSeek(cur / dur);
     const curEl = root.querySelector('[data-seek-cur]');
     const durEl = root.querySelector('[data-seek-dur]');
     if (curEl) curEl.textContent = fmtTime(cur);
@@ -658,9 +722,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       try {
         const dur = player.getDuration ? player.getDuration() : 0;
         const cur = player.getCurrentTime ? player.getCurrentTime() : 0;
-        const pct = dur > 0 ? Math.min(100, Math.round((cur / dur) * 100)) : 0;
-        const fill = root.querySelector('.sample-player-np-progress-fill');
-        if (fill) fill.style.width = pct + '%';
+        // updateSeekRow owns the rail, and it is the one that knows to stand
+        // down while a finger is dragging it.
         updateSeekRow(cur, dur);
       } catch { /* embed may be mid-teardown */ }
     }, 500);

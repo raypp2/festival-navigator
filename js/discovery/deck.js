@@ -497,18 +497,13 @@ function paintCelebrate(root, ctx) {
   paintPickButton(root);
 }
 
-// `＋ Pick` becomes `＋ Pick ×N` and pulses while the cycle is open, so the
-// level is legible from the button too — not only from the overlay.
-function paintPickButton(root) {
-  const btn = root.querySelector('.dd-btn-pick');
-  if (!btn) return;
-  if (pendingPick) {
-    btn.textContent = `＋ Pick ×${pendingPick.level}`;
-    btn.classList.add('is-pending');
-  } else {
-    btn.textContent = '＋ Pick';
-    btn.classList.remove('is-pending');
-  }
+// `Pick` becomes `Picked ×N` and lights the next segment while the cycle is
+// open, so the level is legible from the button too — not only the overlay.
+// The overlay is the celebration; the segments are the state.
+function paintPickButton(root, bump = false) {
+  // The bar lives inside the deck overlay alongside the card, so the overlay
+  // root reaches it directly.
+  paintPrimaryActions(root.querySelector('.dd-actions-row'), pendingPick ? pendingPick.level : 0, bump);
 }
 
 // ---- committing a decision ------------------------------------------------------------
@@ -607,7 +602,10 @@ function pickTap(ctx, actions) {
   if (pickTimer) pickTimer(); // a new tap supersedes the previous idle timer
   pendingPick = { level: nextPickLevel(pendingPick && pendingPick.level) };
   const overlay = document.getElementById(OVERLAY_ID);
-  if (overlay) paintCelebrate(overlay, ctx);
+  if (overlay) {
+    paintCelebrate(overlay, ctx);
+    paintPickButton(overlay, true); // the 1.05x tap bump — a tap always answers
+  }
   const level = pendingPick.level;
   pickTimer = schedule(actions, () => {
     // Read the level off the pending state at fire time, not the closure — a
@@ -618,29 +616,77 @@ function pickTap(ctx, actions) {
 }
 
 // ---- action bar -----------------------------------------------------------------------
-function buildActionBar(ctx, actions) {
-  const bar = document.createElement('div');
-  bar.className = 'dd-actions';
+// "Not for me · pick · must, in that order, along the bottom on every surface"
+// (style guide §05). Exported so the artist page and the desktop focus pane
+// build the SAME control rather than three lookalikes — the design's whole
+// point is that nothing moves between screens.
+export function buildPrimaryActions({ onPass, onPick, onMust, level = 0 }) {
+  const row = document.createElement('div');
+  row.className = 'dd-actions-row';
 
   const pass = document.createElement('button');
   pass.type = 'button';
   pass.className = 'dd-btn dd-btn-pass';
-  pass.textContent = 'Pass';
-  pass.addEventListener('click', () => beginDecision('pass', 0, ctx, actions));
+  pass.innerHTML = '<span class="dd-btn-glyph">✕</span><span class="dd-btn-label">NOT<br>FOR ME</span>';
+  pass.setAttribute('aria-label', 'Not for me');
+  pass.addEventListener('click', onPass);
 
   const pick = document.createElement('button');
   pick.type = 'button';
   pick.className = 'dd-btn dd-btn-pick';
-  pick.textContent = '＋ Pick';
-  pick.addEventListener('click', () => pickTap(ctx, actions));
+  const label = document.createElement('span');
+  label.className = 'dd-btn-pick-label';
+  const segs = document.createElement('span');
+  segs.className = 'dd-btn-pick-segs';
+  for (let n = 1; n <= 3; n++) {
+    const s = document.createElement('span');
+    s.className = 'dd-btn-seg';
+    segs.appendChild(s);
+  }
+  pick.append(label, segs);
+  pick.addEventListener('click', onPick);
 
   const must = document.createElement('button');
   must.type = 'button';
   must.className = 'dd-btn dd-btn-must';
-  must.textContent = '★ Must';
-  must.addEventListener('click', () => beginDecision('must', 4, ctx, actions));
+  must.innerHTML = '<span class="dd-btn-glyph">★</span><span class="dd-btn-label">MUST</span>';
+  must.setAttribute('aria-label', 'Must see');
+  must.addEventListener('click', onMust);
 
-  bar.append(pass, pick, must);
+  row.append(pass, pick, must);
+  paintPrimaryActions(row, level);
+  return row;
+}
+
+// Repaints label + segments from a pick level (0 = unpicked, 1–3 = ×N, 4 =
+// must). The segments are drawn either way — an unpicked Pick still shows
+// three dark segments, which is how the multi-tap is legible before the first
+// tap. `bump` fires the 1.05x tap animation; motion never carries the state.
+export function paintPrimaryActions(row, level, bump = false) {
+  if (!row) return;
+  const pick = row.querySelector('.dd-btn-pick');
+  const label = row.querySelector('.dd-btn-pick-label');
+  const must = row.querySelector('.dd-btn-must');
+  if (label) label.textContent = level >= 1 && level <= 3 ? `Picked ×${level}` : 'Pick';
+  const segs = row.querySelectorAll('.dd-btn-seg');
+  segs.forEach((s, i) => s.classList.toggle('is-on', level >= 1 && level <= 3 && i < level));
+  if (pick) pick.classList.toggle('is-pending', level >= 1 && level <= 3);
+  if (must) must.classList.toggle('is-on', level === 4);
+  if (pick && bump) {
+    pick.classList.remove('is-bumping');
+    void pick.offsetWidth; // restart the animation on a repeat tap
+    pick.classList.add('is-bumping');
+  }
+}
+
+function buildActionBar(ctx, actions) {
+  const bar = document.createElement('div');
+  bar.className = 'dd-actions';
+  bar.appendChild(buildPrimaryActions({
+    onPass: () => beginDecision('pass', 0, ctx, actions),
+    onPick: () => pickTap(ctx, actions),
+    onMust: () => beginDecision('must', 4, ctx, actions),
+  }));
   return bar;
 }
 
@@ -968,8 +1014,8 @@ function buildMiddle(ctx, actions, pool, fest) {
   return middle;
 }
 
-// RIGHT PANE — "pick without leaving the grid": the same headline tick/★/✕
-// contract as artist-page.js's buildPickControl, sized down, writing through
+// RIGHT PANE — "pick without leaving the grid": the same bottom action bar as
+// the artist page (buildPrimaryActions), sized down, writing through
 // the identical state.applyPickLevel/applyPass + actions.applyLocalPick +
 // actions.showUndoToast wiring. A decision here re-renders the WHOLE desktop
 // body (grid aura updates live) but never touches focusedName/focusedSnapshot
@@ -1014,52 +1060,29 @@ function paneWritePass(artistName, on, ctx, actions) {
   }
 }
 
+// The focus pane "closes with the same bottom action bar as the artist page:
+// one pick vocabulary across deck, pane and page" (screens 5c, 2026-08-01).
+// It sits at the FOOT of the pane, under the player — the pane's headline
+// tick is gone for the same reason the artist page's is.
 function buildPanePickControl(artistName, ctx, actions) {
   const level = myLevel(artistName, ctx);
   const passed = model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
-  const myIdx = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
-
-  const tick = document.createElement('button');
-  tick.type = 'button';
-  tick.className = 'ap-tick dd2-pane-tick';
-  tick.setAttribute('aria-label', `Pick level for ${artistName} — currently ${level >= 4 ? 'must' : level >= 1 ? `×${level}` : 'not picked'}`);
-  const fillPct = level <= 0 ? 0 : level === 1 ? 33.4 : level === 2 ? 66.8 : 100;
-  const alpha = level <= 0 ? 0 : level === 1 ? 0.5 : level === 2 ? 0.75 : 1;
-  const fill = document.createElement('span');
-  fill.className = 'ap-tick-fill';
-  fill.style.height = fillPct + '%';
-  fill.style.background = hslOf(myIdx, alpha);
-  const lbl = document.createElement('span');
-  lbl.className = 'ap-tick-label';
-  lbl.textContent = level >= 1 && level <= 3 ? `×${level}` : '';
-  tick.append(fill, lbl);
-  tick.addEventListener('click', () => {
-    const next = tickNextDesktop(level);
-    if (next === level) return;
-    paneWritePick(artistName, next, ctx, actions);
-  });
-
-  const must = document.createElement('button');
-  must.type = 'button';
-  must.className = 'ap-must dd2-pane-must' + (level === 4 ? ' is-on' : '');
-  must.setAttribute('aria-label', level === 4 ? `Clear must for ${artistName}` : `Mark ${artistName} a must`);
-  must.textContent = '★';
-  must.addEventListener('click', () => paneWritePick(artistName, level === 4 ? 0 : 4, ctx, actions));
-
-  const pass = document.createElement('button');
-  pass.type = 'button';
-  pass.className = 'ap-pass dd2-pane-pass' + (passed ? ' is-on' : '');
-  pass.setAttribute('aria-label', passed ? `Undo pass on ${artistName}` : `Pass on ${artistName}`);
-  pass.textContent = '✕';
-  pass.addEventListener('click', () => paneWritePass(artistName, !passed, ctx, actions));
-
-  const side = document.createElement('div');
-  side.className = 'ap-pick-side';
-  side.append(must, pass);
 
   const wrap = document.createElement('div');
-  wrap.className = 'dd2-pane-pick';
-  wrap.append(tick, side);
+  wrap.className = 'dd2-pane-actions';
+  const row = buildPrimaryActions({
+    onPass: () => paneWritePass(artistName, !passed, ctx, actions),
+    onPick: () => {
+      const next = tickNextDesktop(level);
+      if (next === level) return;
+      paneWritePick(artistName, next, ctx, actions);
+    },
+    onMust: () => paneWritePick(artistName, level === 4 ? 0 : 4, ctx, actions),
+    level,
+  });
+  const pass = row.querySelector('.dd-btn-pass');
+  if (pass) pass.classList.toggle('is-on', passed);
+  wrap.appendChild(row);
   return wrap;
 }
 
@@ -1125,7 +1148,7 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
     genre.textContent = genreLine;
     nameWrap.appendChild(genre);
   }
-  row.append(nameWrap, buildPanePickControl(focusEntry.name, ctx, actions));
+  row.append(nameWrap);
   content.append(label, row);
   hero.append(bg, grain, content);
   pane.appendChild(hero);
@@ -1150,10 +1173,12 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
     spotifyId: meta.spotifyId,
   };
   const mount = (actions && actions.mountPlayer) || realMountPlayer;
-  // compact layout, mounted paused (tap-to-play) — same call the grid's
-  // sibling mobile card build (buildCard) already makes.
+  // "The pane runs the FULL player, not the mini one — the first 30 seconds
+  // of a set tells you nothing, so a draggable scrubber is non-negotiable"
+  // (screens 5c, 2026-08-01). The pane has the room for a 16:9 stage; the
+  // 82x46 thumb was a mobile compromise being paid for on a 1440 canvas.
   playerHandle = mount({
-    host: playerHost, artist: { name: focusEntry.name, genres: playerGenres }, sources, layout: 'compact',
+    host: playerHost, artist: { name: focusEntry.name, genres: playerGenres }, sources, layout: 'full',
   });
 
   const openBtn = document.createElement('button');
@@ -1164,6 +1189,7 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
   body.appendChild(openBtn);
 
   pane.appendChild(body);
+  pane.appendChild(buildPanePickControl(focusEntry.name, ctx, actions));
   return pane;
 }
 

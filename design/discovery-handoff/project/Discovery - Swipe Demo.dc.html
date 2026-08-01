@@ -68,6 +68,15 @@
               <div style="font:600 10.5px Inter;color:#877FA4;margin-top:2px">{{ sampleMeta }}</div>
             </div>
           </div>
+          <div onPointerDown="{{ scrubDown }}" onPointerMove="{{ scrubMove }}" onPointerUp="{{ scrubUp }}" style="display:flex;align-items:center;gap:9px;touch-action:none;cursor:pointer;user-select:none">
+            <span style="flex:none;width:36px;font:600 9.5px ui-monospace,monospace;color:#C6CBD6">{{ elapsed }}</span>
+            <span style="flex:1;position:relative;height:26px;display:flex;align-items:center">
+              <span style="position:absolute;left:0;right:0;height:4px;border-radius:999px;background:#2B2440"></span>
+              <span style="position:absolute;left:0;height:4px;border-radius:999px;background:#C084FC;width:{{ posPct }}%"></span>
+              <span style="position:absolute;width:13px;height:13px;margin-left:-6.5px;border-radius:999px;background:#fff;box-shadow:0 0 0 3px rgba(192,132,252,.3);left:{{ posPct }}%"></span>
+            </span>
+            <span style="flex:none;font:600 9.5px ui-monospace,monospace;color:#877FA4">{{ duration }}</span>
+          </div>
           <sc-if value="{{ canAlts }}" hint-placeholder-val="{{ true }}">
             <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #241E38;padding-top:10px">
               <div style="display:flex;justify-content:space-between;align-items:baseline">
@@ -111,25 +120,35 @@
     </sc-if>
   </div>
 
-  <div style="display:flex;gap:10px">
-    <button onClick="{{ pass }}" style="flex:.9;min-height:54px;border:1px solid #322A4D;background:transparent;color:#8E86A8;border-radius:999px;font:700 13px Inter">Pass</button>
-    <button onClick="{{ pick }}" style="flex:1.5;min-height:54px;border:none;background:rgba(192,132,252,.13);color:#D8B4FE;border-radius:999px;font:800 14px Inter;animation:{{ pickPulse }}">{{ pickBtnLabel }}</button>
-    <button onClick="{{ must }}" style="flex:.9;min-height:54px;border:1px solid #322A4D;background:transparent;color:#D8B4FE;border-radius:999px;font:800 13px Inter">★ Must</button>
+  <div style="border:1px solid #241E38;border-radius:20px;background:#0A0812;padding:11px 10px;display:flex;flex-direction:column;gap:9px">
+    <sc-if value="{{ undoVisible }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 6px;animation:{{ undoAnim }}">
+        <span style="min-width:0;font:600 12px Inter;color:#877FA4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ undoText }}</span>
+        <button onClick="{{ undoLast }}" style="flex:none;border:none;background:transparent;color:#D8B4FE;font:800 12px Inter;padding:2px 0">Undo</button>
+      </div>
+    </sc-if>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <button onClick="{{ pass }}" style="flex:none;width:70px;min-height:60px;border-radius:16px;border:1px solid #322A4D;background:#141021;color:#8E86A8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px"><span style="font-size:15px;line-height:1">✕</span><span style="font:800 8px Inter;letter-spacing:.06em;text-align:center;line-height:1.2">NOT<br>FOR ME</span></button>
+      <button onClick="{{ pick }}" style="flex:1;min-height:60px;border-radius:16px;border:1px solid rgb(192,132,252);background:rgba(192,132,252,.18);box-shadow:{{ pickRing }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;animation:{{ pickAnim }}">
+        <span style="font:800 15px Inter;color:#fff;line-height:1">{{ pickBtnLabel }}</span>
+        <span style="display:flex;gap:5px">
+          <span style="width:26px;height:5px;border-radius:3px;background:{{ s1 }}"></span>
+          <span style="width:26px;height:5px;border-radius:3px;background:{{ s2 }}"></span>
+          <span style="width:26px;height:5px;border-radius:3px;background:{{ s3 }}"></span>
+        </span>
+      </button>
+      <button onClick="{{ must }}" style="flex:none;width:70px;min-height:60px;border-radius:16px;border:1px solid rgba(192,132,252,.5);background:rgba(192,132,252,.06);color:#D8B4FE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px"><span style="font-size:15px;line-height:1">★</span><span style="font:800 8px Inter;letter-spacing:.06em">MUST</span></button>
+    </div>
   </div>
 
-  <sc-if value="{{ undoVisible }}" hint-placeholder-val="{{ false }}">
-    <div style="display:flex;align-items:center;justify-content:space-between;border:1px solid #322A4D;border-radius:10px;background:#141021;padding:10px 14px">
-      <span style="font:600 12.5px Inter;color:#C6CBD6">{{ undoText }}</span>
-      <button onClick="{{ undoLast }}" style="border:none;background:transparent;color:#D8B4FE;font:800 12px Inter;padding:4px 6px">Undo</button>
-    </div>
-  </sc-if>
-
-  <div style="font:500 11px/1.5 Inter;color:#6B6280;text-align:center;margin-top:2px">Toggle reduced motion to feel the instant fallback — level still reads from the tick + aura, never from the animation.</div>
+  <div style="font:500 11px/1.5 Inter;color:#6B6280;text-align:center;margin-top:2px">Undo is one line of text inside the action bar — the bar grows to hold it, then collapses. It never floats over the deck. Toggle reduced motion to feel the instant fallback: level still reads from the segments + aura, never from the animation.</div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:760}}">
 const SRC = { yt: { label: 'YouTube', color: '#FF4E45', soft: 'rgba(255,78,69,.18)' }, sc: { label: 'SoundCloud', color: '#FF7A2F', soft: 'rgba(255,122,47,.18)' }, sp: { label: 'Spotify', color: '#67B98A', soft: 'rgba(103,185,138,.18)' } };
 const ORDER = ['yt', 'sc', 'sp'];
+const secs = (d) => String(d || '0:00').split(':').map(Number).reduce((a, x) => a * 60 + x, 0);
+const fmt = (t) => { t = Math.max(0, Math.round(t)); const h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s = t % 60; const p = (n) => String(n).padStart(2, '0'); return h ? `${h}:${p(m)}:${p(s)}` : `${m}:${p(s)}`; };
 
 class Component extends DCLogic {
   deck = [
@@ -150,18 +169,39 @@ class Component extends DCLogic {
     { name: 'phrva', genres: 'Bass House', reason: '★ Drew has this as a must',
       src: { sc: [{ t: 'phrva — warehouse mix 04', d: '41:26' }, { t: 'submerged', d: '5:12' }, { t: 'low tide (club edit)', d: '4:48' }] } },
   ];
-  state = { i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null, rm: false, src: 'yt', clip: 0, playing: false, alts: false };
+  state = { i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null, undoLeft: 0, rm: false, src: 'yt', clip: 0, playing: false, alts: false, pos: 0, scrubbing: false, bump: 0 };
   _start = { x: 0, y: 0 };
-  _undoTimer = null; _pickTimer = null; _t1 = null; _t2 = null;
+  _undoTimer = null; _pickTimer = null; _t1 = null; _t2 = null; _undoInt = null; _tick = null; _dur = 0;
 
   componentDidMount() {
     try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ rm: true }); } catch (e) {}
+    this._tick = setInterval(() => {
+      const s = this.state;
+      if (s.playing && !s.scrubbing && this._dur) this.setState({ pos: Math.min(1, s.pos + 1 / this._dur) });
+    }, 1000);
   }
+  componentWillUnmount() { clearInterval(this._tick); clearInterval(this._undoInt); this._clearAll(); clearTimeout(this._undoTimer); }
+
+  _startUndo(u) {
+    clearInterval(this._undoInt);
+    this._undoAt = Date.now() + 5000;
+    this.setState({ undo: u, undoLeft: 1 });
+    this._undoInt = setInterval(() => {
+      const left = (this._undoAt - Date.now()) / 5000;
+      if (left <= 0) { clearInterval(this._undoInt); this.setState({ undo: null, undoLeft: 0 }); }
+      else this.setState({ undoLeft: left });
+    }, 150);
+  }
+
+  _scrubAt = (e) => { const r = e.currentTarget.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); };
+  scrubDown = (e) => { e.stopPropagation(); try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} this.setState({ scrubbing: true, playing: true, pos: this._scrubAt(e) }); };
+  scrubMove = (e) => { if (!this.state.scrubbing) return; e.stopPropagation(); this.setState({ pos: this._scrubAt(e) }); };
+  scrubUp = (e) => { if (!this.state.scrubbing) return; e.stopPropagation(); this.setState({ scrubbing: false }); };
   _clearAll() { clearTimeout(this._pickTimer); clearTimeout(this._t1); clearTimeout(this._t2); }
   toggleRm = () => this.setState(s => ({ rm: !s.rm }));
   stopDrag = (e) => { e.stopPropagation(); };
-  setSrc = (k) => this.setState({ src: k, clip: 0, playing: true, alts: false });  // source choice is remembered across cards
-  setClip = (n) => this.setState({ clip: n, playing: true });
+  setSrc = (k) => this.setState({ src: k, clip: 0, playing: true, alts: false, pos: 0 });  // source choice is remembered across cards
+  setClip = (n) => this.setState({ clip: n, playing: true, pos: 0 });
   toggleSample = () => this.setState(s => ({ playing: !s.playing }));
 
   onDown = (e) => {
@@ -188,7 +228,8 @@ class Component extends DCLogic {
   pickTap = () => {
     if (this.state.exiting || this.state.celebrate || this.state.i >= this.deck.length) return;
     clearTimeout(this._pickTimer);
-    this.setState(s => ({ pending: { level: s.pending ? (s.pending.level % 3) + 1 : 1 }, dragging: false, dx: 0, dy: 0 }));
+    if (this.state.pending && this.state.pending.level >= 3) { this.setState(s => ({ pending: null, bump: s.bump + 1 })); return; }  // 4th tap clears
+    this.setState(s => ({ pending: { level: s.pending ? s.pending.level + 1 : 1 }, bump: s.bump + 1, dragging: false, dx: 0, dy: 0 }));
     this._pickTimer = setTimeout(() => {
       const lvl = this.state.pending ? this.state.pending.level : 1;
       this.begin('pick', lvl);
@@ -205,20 +246,19 @@ class Component extends DCLogic {
       const tx = kind === 'pass' ? -520 : 520;
       this.setState({ exiting: kind, dx: tx, dy: 40 });
       this._t2 = setTimeout(() => {
-        this.setState(s => ({ i: s.i + 1, dx: 0, dy: 0, exiting: null, celebrate: null, playing: false, clip: 0, alts: false, decisions: [...s.decisions, { name: cur.name, kind, level }], undo: { name: cur.name, kind, level } }));
-        clearTimeout(this._undoTimer);
-        this._undoTimer = setTimeout(() => this.setState({ undo: null }), 5000);
+        this.setState(s => ({ i: s.i + 1, dx: 0, dy: 0, exiting: null, celebrate: null, playing: false, clip: 0, alts: false, pos: 0, decisions: [...s.decisions, { name: cur.name, kind, level }] }));
+        this._startUndo({ name: cur.name, kind, level });
       }, rm ? 0 : 300);
     }, rm ? (kind === 'pick' ? 160 : 520) : 420);
   };
 
   undoLast = () => {
-    this._clearAll(); clearTimeout(this._undoTimer);
-    this.setState(s => s.i > 0 ? ({ i: s.i - 1, dx: 0, dy: 0, exiting: null, celebrate: null, pending: null, dragging: false, decisions: s.decisions.slice(0, -1), undo: null }) : s);
+    this._clearAll(); clearTimeout(this._undoTimer); clearInterval(this._undoInt);
+    this.setState(s => s.i > 0 ? ({ i: s.i - 1, dx: 0, dy: 0, exiting: null, celebrate: null, pending: null, dragging: false, pos: 0, decisions: s.decisions.slice(0, -1), undo: null, undoLeft: 0 }) : s);
   };
   reset = () => {
-    this._clearAll(); clearTimeout(this._undoTimer);
-    this.setState({ i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null });
+    this._clearAll(); clearTimeout(this._undoTimer); clearInterval(this._undoInt);
+    this.setState({ i: 0, dx: 0, dy: 0, dragging: false, exiting: null, celebrate: null, pending: null, decisions: [], undo: null, undoLeft: 0, pos: 0 });
   };
 
   renderVals() {
@@ -255,7 +295,7 @@ class Component extends DCLogic {
     const counts = s.decisions.reduce((a, x) => { a[x.kind] = (a[x.kind] || 0) + 1; return a; }, {});
     const pipsEls = [1, 2, 3].map(n => React.createElement('span', { key: n, style: { width: '9px', height: '9px', borderRadius: '999px', background: n <= level ? 'hsla(270,90%,72%,.95)' : '#2B2440', border: '1px solid ' + (n <= level ? '#fff' : '#3A3354') } }));
     let undoText = '';
-    if (s.undo) undoText = s.undo.kind === 'pass' ? `Passed ${s.undo.name}` : s.undo.kind === 'must' ? `Made ${s.undo.name} a must` : `Picked ${s.undo.name} ×${s.undo.level}`;
+    if (s.undo) undoText = s.undo.kind === 'pass' ? `Not for me — ${s.undo.name}` : s.undo.kind === 'must' ? `Made ${s.undo.name} a must` : `Picked ${s.undo.name} ×${s.undo.level}`;
 
     // sample block — presence-driven tabs, remembered source, one player at a time
     const avail = cur ? ORDER.filter(k => cur.src[k]) : [];
@@ -271,6 +311,9 @@ class Component extends DCLogic {
       on: () => this.setSrc(k),
     }));
     const kindWord = src === 'sp' ? 'Top track' : src === 'sc' ? 'Track' : 'Set';
+    const dur = track ? secs(track.d) : 0;
+    this._dur = dur;
+    const posPct = Math.round(Math.min(1, Math.max(0, s.pos)) * 1000) / 10;
     // Spotify lists its own top tracks inside the embed — no alternates pane for it
     const canAlts = !!src && src !== 'sp' && list.length > 1;
     const altRows = list.slice(0, 3).map((r, n) => ({
@@ -291,7 +334,9 @@ class Component extends DCLogic {
       sampleGlyph: s.playing ? '❚❚' : '▶',
       isVideo: src === 'yt', isAudio: !!src && src !== 'yt', samplePct: s.playing ? 22 : 0,
       sampleTitle: track ? track.t : 'Nothing to sample yet',
-      sampleMeta: track ? `${kindWord} ${ci + 1} of ${list.length} · ${track.d}` : 'No source resolved — picking is unaffected',
+      sampleMeta: track ? `${kindWord} ${ci + 1} of ${list.length}` : 'No source resolved — picking is unaffected',
+      elapsed: track ? fmt(dur * s.pos) : '0:00', duration: track ? track.d : '—', posPct,
+      scrubDown: this.scrubDown, scrubMove: this.scrubMove, scrubUp: this.scrubUp,
       altRows, canAlts,
       altsLabel: src === 'sc' ? 'Tracks' : 'Live sets',
       name: cur ? cur.name : '', genres: cur ? cur.genres : '', reason: cur ? cur.reason : '',
@@ -301,9 +346,17 @@ class Component extends DCLogic {
       popAnim: s.rm ? 'none' : 'popStar .4s ease both', tickFill: level * 33.4, pendingLevel: level, pips: pipsEls,
       onDown: this.onDown, onMove: this.onMove, onUp: this.onUp,
       pass: () => this.begin('pass', 0), pick: this.pickTap, must: () => this.begin('must', 4),
-      pickBtnLabel: s.pending ? `＋ Pick ×${s.pending.level}` : '＋ Pick', pickPulse: (s.pending && !s.rm) ? 'pulseBtn 1s ease-in-out infinite' : 'none',
+      pickBtnLabel: s.pending ? `Picked ×${s.pending.level}` : 'Pick',
+      pickHint: s.pending ? (s.pending.level >= 3 ? 'locks in 1s · tap again to clear' : `locks in 1s · tap again for ×${s.pending.level + 1}`) : 'tap again to raise · ×3 then clears',
+      pickRing: s.pending ? '0 0 0 4px rgba(192,132,252,.2)' : '0 0 0 3px rgba(192,132,252,.1)',
+      pickAnim: (s.bump === 0 || s.rm) ? 'none' : (s.bump % 2 ? 'bumpA .2s ease' : 'bumpB .2s ease'),
+      s1: s.pending && s.pending.level >= 1 ? 'hsla(270,90%,75%,.95)' : '#3A3354',
+      s2: s.pending && s.pending.level >= 2 ? 'hsla(270,90%,75%,.95)' : '#3A3354',
+      s3: s.pending && s.pending.level >= 3 ? 'hsla(270,90%,75%,.95)' : '#3A3354',
+      pickPulse: 'none',
       pendingHintVisible: !!s.pending,
-      undoLast: this.undoLast, undoVisible: !!s.undo, undoText,
+      undoLast: this.undoLast, undoVisible: !!s.undo, undoText, undoPct: Math.round(s.undoLeft * 100),
+      undoAnim: s.rm ? 'none' : 'undoIn .18s cubic-bezier(.2,.7,.3,1) both',
       reset: this.reset, rm: s.rm, toggleRm: this.toggleRm, rmLabel: s.rm ? 'Reduced motion: ON' : 'Reduced motion: off',
       pct: Math.round((s.i / d.length) * 100), counter: `${Math.min(s.i + 1, d.length)} / ${d.length}`,
       picks: counts.pick || 0, musts: counts.must || 0, passes: counts.pass || 0,

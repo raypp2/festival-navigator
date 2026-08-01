@@ -277,12 +277,12 @@ test('clicking a grid card focuses the pane and writes nothing', () => {
   assert.ok(!model.isPassed(state.crewDoc, FID, 'PickFlow1', 'Kevin'), 'focusing a card never writes a pass');
 });
 
-test('the pane tick writes a pick through the state layer and does not move focus', () => {
+test('the pane Pick button writes a pick through the state layer and does not move focus', () => {
   const actions = mkActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
   assert.equal(paneName(), 'PickFlow1');
-  overlay().querySelector('.dd2-pane-tick').click(); // ×0 -> ×1
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // ×0 -> ×1
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin), 1);
   assert.equal(paneName(), 'PickFlow1', 'the pane stayed on the same artist through the decision');
 });
@@ -291,12 +291,12 @@ test('the pane must (★) and pass (✕) controls write through the state layer 
   const actions = mkActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow2').click();
-  overlay().querySelector('.dd2-pane-must').click();
+  overlay().querySelector('.dd2-pane-actions .dd-btn-must').click();
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow2?.Kevin), 4);
   assert.equal(paneName(), 'PickFlow2');
 
   gridCard('PickFlow3').click();
-  overlay().querySelector('.dd2-pane-pass').click();
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pass').click();
   assert.ok(model.isPassed(state.crewDoc, FID, 'PickFlow3', 'Kevin'));
   assert.equal(paneName(), 'PickFlow3', 'a pass — like a pick — never yanks the pane to another card');
 });
@@ -305,7 +305,7 @@ test('a pane decision that drops the focused artist out of the pool keeps the pa
   const actions = mkActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
-  overlay().querySelector('.dd2-pane-tick').click(); // picked -> leaves the default Undecided pool
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // picked -> leaves the default Undecided pool
   assert.equal(gridCard('PickFlow1'), null, 'the decided artist drops out of the (still nonempty) grid');
   assert.equal(paneName(), 'PickFlow1', 'the pane keeps showing it anyway');
 });
@@ -483,7 +483,9 @@ test('one Pick tap opens the overlay at ×1 and commits NOTHING yet', () => {
   assert.equal(cel().querySelector('.dd-cel-times').textContent, '×1');
   assert.equal(cel().querySelectorAll('.dd-cel-pip.is-on').length, 1);
   assert.match(cel().querySelector('.dd-cel-hint').textContent, /tap Pick again to raise/);
-  assert.equal(overlay().querySelector('.dd-btn-pick').textContent, '＋ Pick ×1');
+  assert.equal(overlay().querySelector('.dd-btn-pick-label').textContent, 'Picked ×1');
+  assert.equal(overlay().querySelectorAll('.dd-actions .dd-btn-seg').length, 3, 'all three segments are always drawn');
+  assert.equal(overlay().querySelectorAll('.dd-actions .dd-btn-seg.is-on').length, 1);
   assert.equal(levelOf('RankTarget'), 0, 'nothing written until the cycle locks in');
   assert.equal(cardName(), 'RankTarget', 'and the deck has not advanced');
 });
@@ -590,7 +592,8 @@ test('touching the card abandons an open pick cycle instead of firing it mid-ges
     new dom.window.MouseEvent('pointerdown', { clientX: 100, clientY: 300, bubbles: true }),
   );
   assert.equal(celOn(), false, 'the overlay is dismissed');
-  assert.equal(overlay().querySelector('.dd-btn-pick').textContent, '＋ Pick');
+  assert.equal(overlay().querySelector('.dd-btn-pick-label').textContent, 'Pick');
+  assert.equal(overlay().querySelectorAll('.dd-actions .dd-btn-seg.is-on').length, 0);
 
   actions.flush();
   assert.equal(levelOf('RankTarget'), 0, 'the abandoned cycle never commits');

@@ -156,7 +156,7 @@ test('recommend button writes the rec through state/model, then shows recommende
   closeArtistPage();
 });
 
-test('tick tap cycles ×1 → ×2 → ×3 → clear through applyPickLevel, never through must', () => {
+test('Pick tap cycles ×1 → ×2 → ×3 → clear through applyPickLevel, never through must', () => {
   const actions = mkActions();
   openArtistPage('TickArtist', ctx, actions);
   const levelFor = () => model.readLevel(
@@ -165,31 +165,40 @@ test('tick tap cycles ×1 → ×2 → ×3 → clear through applyPickLevel, neve
   );
   assert.equal(levelFor(), 0);
 
-  overlay().querySelector('.ap-tick').click();
+  // The pick control is the pinned bottom bar's Pick button (design
+  // corrections 2026-08-01); the hero carries a read-only chip beside it.
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
   assert.equal(levelFor(), 1);
-  assert.equal(overlay().querySelector('.ap-tick-label').textContent, '×1');
+  assert.equal(overlay().querySelector('.dd-btn-pick-label').textContent, 'Picked ×1');
+  assert.equal(overlay().querySelector('.ap-pick-chip').textContent, 'PICKED ×1');
+  // The segments are always drawn; exactly `level` of them are lit.
+  assert.equal(overlay().querySelectorAll('.ap-actions .dd-btn-seg').length, 3);
+  assert.equal(overlay().querySelectorAll('.ap-actions .dd-btn-seg.is-on').length, 1);
 
-  overlay().querySelector('.ap-tick').click();
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
   assert.equal(levelFor(), 2);
+  assert.equal(overlay().querySelectorAll('.ap-actions .dd-btn-seg.is-on').length, 2);
 
-  overlay().querySelector('.ap-tick').click();
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
   assert.equal(levelFor(), 3);
 
-  // 4th tap clears — the tick cycle never reaches must (4).
-  overlay().querySelector('.ap-tick').click();
+  // 4th tap clears — the pick cycle never reaches must (4).
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
   assert.equal(levelFor(), 0);
+  assert.equal(overlay().querySelector('.dd-btn-pick-label').textContent, 'Pick');
+  assert.equal(overlay().querySelectorAll('.ap-actions .dd-btn-seg.is-on').length, 0);
 
   closeArtistPage();
 });
 
-test('★ toggles must (level 4) independently of the tick cycle', () => {
+test('★ toggles must (level 4) independently of the pick cycle', () => {
   const actions = mkActions();
   openArtistPage('TickArtist', ctx, actions);
-  overlay().querySelector('.ap-must').click();
+  overlay().querySelector('.ap-actions .dd-btn-must').click();
   assert.equal(
     model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.TickArtist.Kevin), 4,
   );
-  overlay().querySelector('.ap-must').click();
+  overlay().querySelector('.ap-actions .dd-btn-must').click();
   assert.equal(
     model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.TickArtist.Kevin), 0,
   );
@@ -201,11 +210,11 @@ test('✕ calls applyPass and tombstones an existing pick', () => {
   openArtistPage('PassArtist', ctx, actions);
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PassArtist.Kevin), 2);
 
-  overlay().querySelector('.ap-pass').click();
+  overlay().querySelector('.ap-actions .dd-btn-pass').click();
   assert.ok(model.isPassed(state.crewDoc, FID, 'PassArtist', 'Kevin'));
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PassArtist.Kevin), 0);
 
-  overlay().querySelector('.ap-pass').click(); // toggle off
+  overlay().querySelector('.ap-actions .dd-btn-pass').click(); // toggle off
   assert.ok(!model.isPassed(state.crewDoc, FID, 'PassArtist', 'Kevin'));
   closeArtistPage();
 });

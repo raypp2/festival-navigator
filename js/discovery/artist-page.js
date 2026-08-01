@@ -41,6 +41,7 @@ import { computeDayArtists } from '../time.js';
 import { loadGenreCanon, canonicalize } from './genres.js';
 import { similarArtists } from './score.js';
 import { mountPlayer as realMountPlayer } from './player.js';
+import { buildPrimaryActions, paintPrimaryActions } from './deck.js';
 
 const OVERLAY_ID = 'artist-page-overlay';
 
@@ -172,51 +173,63 @@ function writePassAction(artistName, on, ctx, actions, refreshPick) {
   }
 }
 
-function buildPickControl(host, artistName, ctx, actions) {
+// The hero's read-only state chip. The pick CONTROL moved to the pinned
+// bottom bar (2026-08-01 design corrections); what stays up here is a quiet
+// indicator, not a target — "the hero keeps a quiet read-only PICKED ×2 chip;
+// the vertical tick stays what it was built for, the who-corner on cards."
+function buildPickChip(host, artistName, ctx) {
   function paint() {
     host.textContent = '';
     const level = myLevel(artistName, ctx);
     const passed = model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
-    const myIdx = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
+    if (!passed && level <= 0) return; // unpicked says nothing — the bar already does
+    const chip = document.createElement('span');
+    chip.className = 'ap-pick-chip' + (passed ? ' is-passed' : '');
+    chip.textContent = passed ? 'PASSED' : level === 4 ? '★ MUST' : `PICKED ×${level}`;
+    if (!passed) {
+      const myIdx = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
+      const alpha = level === 1 ? 0.5 : level === 2 ? 0.75 : 1;
+      chip.style.borderColor = hslOf(myIdx, alpha);
+    }
+    host.appendChild(chip);
+  }
+  paint();
+  return paint;
+}
 
-    const tick = document.createElement('button');
-    tick.type = 'button';
-    tick.className = 'ap-tick';
-    tick.setAttribute('aria-label', `Pick level for ${artistName} — currently ${level >= 4 ? 'must' : level >= 1 ? `×${level}` : 'not picked'}`);
-    const fillPct = level <= 0 ? 0 : level === 1 ? 33.4 : level === 2 ? 66.8 : 100;
-    const alpha = level <= 0 ? 0 : level === 1 ? 0.5 : level === 2 ? 0.75 : 1;
-    const fill = document.createElement('span');
-    fill.className = 'ap-tick-fill';
-    fill.style.height = fillPct + '%';
-    fill.style.background = hslOf(myIdx, alpha);
-    const lbl = document.createElement('span');
-    lbl.className = 'ap-tick-label';
-    lbl.textContent = level >= 1 && level <= 3 ? `×${level}` : '';
-    tick.append(fill, lbl);
-    tick.addEventListener('click', () => {
-      const next = tickNext(level);
-      if (next === level) return;
-      writePick(artistName, next, ctx, actions, paint);
-    });
-
-    const must = document.createElement('button');
-    must.type = 'button';
-    must.className = 'ap-must' + (level === 4 ? ' is-on' : '');
-    must.setAttribute('aria-label', level === 4 ? `Clear must for ${artistName}` : `Mark ${artistName} a must`);
-    must.textContent = '★';
-    must.addEventListener('click', () => writePick(artistName, level === 4 ? 0 : 4, ctx, actions, paint));
-
-    const pass = document.createElement('button');
-    pass.type = 'button';
-    pass.className = 'ap-pass' + (passed ? ' is-on' : '');
-    pass.setAttribute('aria-label', passed ? `Undo pass on ${artistName}` : `Pass on ${artistName}`);
-    pass.textContent = '✕';
-    pass.addEventListener('click', () => writePassAction(artistName, !passed, ctx, actions, paint));
-
-    const side = document.createElement('div');
-    side.className = 'ap-pick-side';
-    side.append(must, pass);
-    host.append(tick, side);
+// The pinned bottom bar — the same component the deck and the focus pane use
+// (deck.js's buildPrimaryActions), so the three primary actions never move
+// between screens. On the artist page Pick cycles ×1 → ×2 → ×3 → clear on
+// each tap and writes immediately; there is no deck to advance, so there is
+// nothing to debounce.
+function buildActionBar(host, artistName, ctx, actions, onChange) {
+  let row = null;
+  function paint(bump = false) {
+    const level = myLevel(artistName, ctx);
+    const passed = model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
+    if (!row) {
+      row = buildPrimaryActions({
+        onPass: () => {
+          const nowPassed = !model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
+          writePassAction(artistName, nowPassed, ctx, actions, () => { paint(); onChange(); });
+        },
+        onPick: () => {
+          const cur = myLevel(artistName, ctx);
+          const next = tickNext(cur);
+          if (next === cur) return;
+          writePick(artistName, next, ctx, actions, () => { paint(true); onChange(); });
+        },
+        onMust: () => {
+          const cur = myLevel(artistName, ctx);
+          writePick(artistName, cur === 4 ? 0 : 4, ctx, actions, () => { paint(); onChange(); });
+        },
+        level,
+      });
+      host.appendChild(row);
+    }
+    paintPrimaryActions(row, level, bump);
+    const pass = row.querySelector('.dd-btn-pass');
+    if (pass) pass.classList.toggle('is-on', passed);
   }
   paint();
   return paint;
@@ -529,8 +542,8 @@ function buildHero(artistName, fest, meta, ctx, actions, canonData) {
   }
 
   const pickHost = document.createElement('div');
-  pickHost.className = 'ap-pick-control';
-  const pickRefresh = buildPickControl(pickHost, artistName, ctx, actions);
+  pickHost.className = 'ap-pick-chip-host';
+  const pickRefresh = buildPickChip(pickHost, artistName, ctx);
 
   bottom.append(nameWrap, pickHost);
   content.append(top, bottom);
@@ -572,10 +585,25 @@ function renderInto(artistName, ctx, actions, canonData) {
   body.appendChild(notesBuilt.el);
   const similar = buildSimilarSection(artistName, fest, meta, canonData, ctx, actions);
   if (similar) body.appendChild(similar);
-  scroll.append(heroBuilt.el, body);
+  // The primary actions sit at the bottom of the SCROLL, sticky — "along the
+  // bottom on every surface ... never in a header". Inside the scroll rather
+  // than over it so the desktop grid below can re-place them into the left
+  // rail without a second DOM shape. They must stay reachable without
+  // scrolling back to the hero, which is exactly what the old headline tick
+  // required on a long artist page.
+  const actionHost = document.createElement('div');
+  actionHost.className = 'ap-actions';
+  const barRefresh = buildActionBar(actionHost, artistName, ctx, actions, () => {
+    if (currentRefresh && currentRefresh.heroPick) currentRefresh.heroPick();
+    if (currentRefresh && currentRefresh.crew) currentRefresh.crew();
+  });
+
+  scroll.append(heroBuilt.el, body, actionHost);
   overlay.appendChild(scroll);
 
-  currentRefresh = { heroPick: heroBuilt.refresh, crew: crewBuilt.refresh, notes: notesBuilt.refresh };
+  currentRefresh = {
+    heroPick: heroBuilt.refresh, crew: crewBuilt.refresh, notes: notesBuilt.refresh, bar: barRefresh,
+  };
 }
 
 // Open (or navigate an already-open page to) an artist. Idempotent: calling
