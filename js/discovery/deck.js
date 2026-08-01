@@ -346,6 +346,66 @@ function buildHeader(ctx, facets, actions) {
   return header;
 }
 
+// ---- deck-advance motion --------------------------------------------------------------
+// "Deck advance — the acted card leaves, the next rises from the stack."
+//
+// The re-render is synchronous and stays that way: state and DOM move together,
+// which is what the deck tests assert on and what keeps a fast tapper from
+// racing an animation. So the exit is a CLONE of the outgoing card, layered
+// over the freshly-rendered deck and thrown away when it finishes. If it never
+// runs — reduced motion, no live card, a browser that skips the event — the
+// deck has already advanced correctly and nothing is lost but the flourish.
+function captureExitCard() {
+  if (REDUCED_MOTION()) return null;
+  const live = document.querySelector(`#${OVERLAY_ID} .dd-card`);
+  if (!live) return null;
+  const rect = live.getBoundingClientRect();
+  if (!rect.height) return null;
+  const clone = live.cloneNode(true);
+  // The clone must never be reachable: no controls, no tab stops, nothing for
+  // a screen reader to find. It is a picture of a card that no longer exists.
+  clone.removeAttribute('id');
+  clone.setAttribute('aria-hidden', 'true');
+  clone.inert = true;
+  for (const el of clone.querySelectorAll('button, a, input, select, textarea, iframe')) {
+    el.setAttribute('tabindex', '-1');
+    // An iframe clone would spawn a SECOND embed — one player, always.
+    if (el.tagName === 'IFRAME') el.remove();
+  }
+  return { clone, rect };
+}
+
+function spawnExitGhost(captured, kind) {
+  if (!captured) return;
+  const { clone, rect } = captured;
+  const stage = document.querySelector(`#${OVERLAY_ID} .dd-stage`);
+  if (!stage) return;
+  const layer = document.createElement('div');
+  layer.className = `dd-exit dd-exit--${kind === 'must' ? 'must' : kind === 'pass' ? 'pass' : 'pick'}`;
+  layer.setAttribute('aria-hidden', 'true');
+  layer.appendChild(clone);
+  // Geometry comes from the card we actually measured, not from re-deriving
+  // the stage's padding in CSS — the stage pads asymmetrically, the completion
+  // screen has no card-shaped slot at all, and a ghost that is 20px shorter
+  // than the card it replaces squashes visibly at the moment of the swap.
+  // (Absolute positioning resolves against the padding box; .dd-stage has no
+  // border, so its border-box origin from getBoundingClientRect is that box.)
+  const stageRect = stage.getBoundingClientRect();
+  layer.style.left = `${rect.left - stageRect.left}px`;
+  layer.style.top = `${rect.top - stageRect.top}px`;
+  layer.style.width = `${rect.width}px`;
+  layer.style.height = `${rect.height}px`;
+  layer.style.right = 'auto';
+  layer.style.bottom = 'auto';
+  stage.appendChild(layer);
+  const remove = () => layer.remove();
+  layer.addEventListener('animationend', remove);
+  // animationend can be skipped entirely (background tab, zero duration, a
+  // browser that never fires it) — a ghost that outlives its animation would
+  // sit on top of the live deck forever, so time it out regardless.
+  setTimeout(remove, 1000);
+}
+
 // ---- action bar -----------------------------------------------------------------------
 function decide(kind, level, ctx, actions) {
   if (!session || session.position >= session.pool.length) return;
@@ -380,11 +440,16 @@ function decide(kind, level, ctx, actions) {
     }
   };
 
+  // Snapshot the outgoing card BEFORE the re-render blows it away, so it can
+  // fly off over the new one. Decorative only — see spawnExitGhost.
+  const exiting = captureExitCard();
+
   commit();
   session.decided++;
   session.position++;
   ctx.onNotesChange();
   renderDeckBody(ctx, actions);
+  spawnExitGhost(exiting, kind);
 
   const label = kind === 'pass' ? `Passed on ${name} — undo`
     : kind === 'must' ? `Made ${name} a must — undo`
@@ -436,33 +501,62 @@ const REDUCED_MOTION = () => {
 function wireSwipe(cardStack, ctx, actions) {
   const card = cardStack.querySelector('.dd-card');
   if (!card) return;
-  let startX = 0, startY = 0, dx = 0, dragging = false;
+  let startX = 0, startY = 0, dx = 0, dy = 0, dragging = false;
   const THRESHOLD = 90;
+  // Up = must is a bigger commitment than a sideways flick and the card has a
+  // scrollable body above it, so it asks for a longer, more deliberate pull.
+  const UP_THRESHOLD = 110;
+
+  // Which gesture a drag currently IS — decided by the dominant axis, and
+  // re-evaluated every move so a drag that starts ambiguous can resolve.
+  const gestureOf = (x, y) => (Math.abs(y) > Math.abs(x) ? (y < 0 ? 'up' : null) : (x > 0 ? 'right' : 'left'));
+
+  const clearDrag = () => {
+    dragging = false;
+    // Settle back under the base token instead of snapping. The class is
+    // removed once the transition lands so the next drag is untransitioned.
+    if (!REDUCED_MOTION() && card.style.transform) {
+      card.classList.add('is-settling');
+      const done = () => { card.classList.remove('is-settling'); card.removeEventListener('transitionend', done); };
+      card.addEventListener('transitionend', done);
+    }
+    card.style.transform = '';
+    dx = 0; dy = 0;
+  };
 
   card.addEventListener('pointerdown', (e) => {
     if (e.target.closest('button')) return; // player controls, name button
-    dragging = true; startX = e.clientX; startY = e.clientY; dx = 0;
+    dragging = true; startX = e.clientX; startY = e.clientY; dx = 0; dy = 0;
+    card.classList.remove('is-settling');
     try { card.setPointerCapture(e.pointerId); } catch { /* jsdom / unsupported */ }
   });
   card.addEventListener('pointermove', (e) => {
     if (!dragging) return;
     dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    if (Math.abs(dx) < Math.abs(dy)) return; // vertical drag isn't a deck gesture
-    if (!REDUCED_MOTION()) {
-      card.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
-    }
+    dy = e.clientY - startY;
+    if (REDUCED_MOTION()) return;
+    // "card follows the finger" — on whichever axis is currently in charge.
+    // A downward drag is the card's own scroll (touch-action: pan-y), never a
+    // gesture, so it moves nothing.
+    const g = gestureOf(dx, dy);
+    if (g === 'up') card.style.transform = `translateY(${dy}px) scale(${Math.max(.94, 1 + dy / 2600)})`;
+    else if (g) card.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
+    else card.style.transform = '';
   });
   const release = () => {
     if (!dragging) return;
-    dragging = false;
-    card.style.transform = '';
-    if (dx > THRESHOLD) decide('pick', 1, ctx, actions);
-    else if (dx < -THRESHOLD) decide('pass', 0, ctx, actions);
-    dx = 0;
+    const g = gestureOf(dx, dy);
+    const passed = g === 'up' ? -dy > UP_THRESHOLD : Math.abs(dx) > THRESHOLD;
+    clearDrag();
+    if (!passed || !g) return;
+    // Swipe left = pass, right = pick, up = must — and each is exactly the
+    // action its always-visible button performs. No gesture is ever required.
+    if (g === 'up') decide('must', 4, ctx, actions);
+    else if (g === 'right') decide('pick', 1, ctx, actions);
+    else decide('pass', 0, ctx, actions);
   };
   card.addEventListener('pointerup', release);
-  card.addEventListener('pointercancel', () => { dragging = false; card.style.transform = ''; dx = 0; });
+  card.addEventListener('pointercancel', clearDrag);
 }
 
 // ---- desktop three-pane (frame 5c) --------------------------------------------------
@@ -1178,11 +1272,16 @@ export function openDiscoverFilterSheet(ctx, actions = {}) {
   const existingBackdrop = document.getElementById('sheet-backdrop');
   if (existingBackdrop) closeSheet();
   const backdrop = document.createElement('div');
-  backdrop.className = 'sheet-backdrop';
+  // dd-scrim opts this backdrop into the style guide's scrim fade. Scoped to
+  // Discovery rather than applied to .sheet-backdrop globally: the app's other
+  // sheets (notes, settings, tools) are Kevin's v3 chrome and are not this
+  // design's to restyle.
+  backdrop.className = 'sheet-backdrop dd-scrim';
   backdrop.id = 'sheet-backdrop';
   backdrop.addEventListener('click', () => { if (!router.requestClose()) closeSheet(); });
   const sheet = document.createElement('div');
-  sheet.className = 'sheet';
+  // dd-sheet swaps v3's scale-fade for the spec'd slide-up at the sheet token.
+  sheet.className = 'sheet dd-sheet';
   sheet.id = 'artist-sheet';
   sheetChrome(sheet, 'NARROW WHAT YOU’RE SHOWN');
 

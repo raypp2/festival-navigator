@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v44'; // v44 = Discover desktop three-pane (5c: deck.js's dd2-* render branch)
+const CACHE_VERSION = 'festival-nav-v45'; // v45 = Discovery motion system (style guide 07: tokens, deck advance, swipe-up, sheet slide, tab crossfade)
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

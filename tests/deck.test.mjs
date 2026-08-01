@@ -333,3 +333,92 @@ test('an empty pool shows the zero state in both the grid and the pane, with a w
   assert.equal(activeFacetCount(JSON.parse(localStorage.getItem('fp.discoverFilter.' + FID))), 0);
   assert.equal(paneName(), 'RankTarget', 'resetting restores the pool and its top-ranked focus');
 });
+
+// ---------------------------------------------------------------------------
+// Swipe gestures (Discovery - Style Guide.dc.html, 07 · Interaction & motion:
+// "swipe left = pass, right = pick, up = must; card follows the finger" —
+// with the buttons always available as the canonical equivalent).
+//
+// jsdom has no PointerEvent, but the handlers only ever read clientX/clientY
+// and e.target, so a MouseEvent carrying the pointer type name drives them
+// exactly as a real pointer would.
+// ---------------------------------------------------------------------------
+
+function drag(card, fromX, fromY, toX, toY) {
+  const ev = (type, x, y) => card.dispatchEvent(new dom.window.MouseEvent(type, {
+    clientX: x, clientY: y, bubbles: true,
+  }));
+  ev('pointerdown', fromX, fromY);
+  ev('pointermove', toX, toY);
+  ev('pointerup', toX, toY);
+}
+
+test('swipe right past the threshold picks ×1 — the same write the Pick button makes', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  assert.equal(cardName(), 'RankTarget');
+  drag(overlay().querySelector('.dd-card'), 100, 300, 260, 305);
+
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 1);
+  assert.equal(cardName(), 'PickFlow1', 'the deck advanced');
+});
+
+test('swipe left past the threshold passes', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  drag(overlay().querySelector('.dd-card'), 260, 300, 100, 305);
+
+  assert.ok(model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'));
+  assert.equal(cardName(), 'PickFlow1');
+});
+
+test('swipe UP past the threshold makes it a must (the third axis the style guide specifies)', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  drag(overlay().querySelector('.dd-card'), 180, 400, 184, 250);
+
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 4);
+  assert.equal(cardName(), 'PickFlow1');
+});
+
+test('a drag short of the threshold decides nothing and leaves the card in place', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  drag(overlay().querySelector('.dd-card'), 100, 300, 150, 300); // 50px < 90px
+
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 0);
+  assert.ok(!model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'));
+  assert.equal(cardName(), 'RankTarget', 'no advance');
+});
+
+test('dragging DOWN is the card scrolling, never a gesture', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  drag(overlay().querySelector('.dd-card'), 180, 250, 184, 420); // well past any threshold
+
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 0);
+  assert.ok(!model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'));
+  assert.equal(cardName(), 'RankTarget');
+});
+
+test('a swipe starting on a button is that button’s business, not the deck’s', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const card = overlay().querySelector('.dd-card');
+  const nameBtn = overlay().querySelector('.dd-name');
+  // pointerdown lands on the artist-name button inside the card…
+  nameBtn.dispatchEvent(new dom.window.MouseEvent('pointerdown', { clientX: 100, clientY: 300, bubbles: true }));
+  card.dispatchEvent(new dom.window.MouseEvent('pointermove', { clientX: 300, clientY: 300, bubbles: true }));
+  card.dispatchEvent(new dom.window.MouseEvent('pointerup', { clientX: 300, clientY: 300, bubbles: true }));
+
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 0);
+  assert.equal(cardName(), 'RankTarget', 'dragging off a control never decides the card');
+});
+
+test('every swipe has a visible button equivalent — no gesture is ever required', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  for (const cls of ['.dd-btn-pass', '.dd-btn-pick', '.dd-btn-must']) {
+    assert.ok(overlay().querySelector(cls), `${cls} is present alongside the gestures`);
+  }
+});

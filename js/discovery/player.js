@@ -535,9 +535,21 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     const container = curLayout === 'compact' ? root.querySelector('.sample-player-np-thumb') : root.querySelector('.sample-player-stage');
     if (container) container.insertBefore(embedHost, container.firstChild);
 
+    // "Player tabs — crossfade between the panes (fast)." The stage is faded
+    // out while the new embed attaches and back in when it reports ready, so
+    // the swap doesn't flash a black box. The tab's own fill already says
+    // which source is current, so a skipped fade changes nothing — hence
+    // clearing the flag from setReady AND from a timeout: a source that never
+    // reports ready must not leave the stage invisible.
+    const stageEl = root.querySelector('.sample-player-stage');
+    if (stageEl) {
+      stageEl.dataset.swapping = '1';
+      setTimeout(() => { delete stageEl.dataset.swapping; }, 600);
+    }
+
     const setReady = () => {
       const stage = root.querySelector('.sample-player-stage');
-      if (stage) stage.dataset.state = 'ready';
+      if (stage) { stage.dataset.state = 'ready'; delete stage.dataset.swapping; }
     };
     const onError = () => applyState(core.markFailed(src));
     const onSounds = ({ items, initialIndex, allUnplayable }) => {

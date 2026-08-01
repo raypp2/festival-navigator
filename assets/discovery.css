@@ -22,6 +22,26 @@
    * the 82x46 row a video source never hides behind a round play button. */
   --disc-np-thumb-w: 82px;
   --disc-np-thumb-h: 46px;
+
+  /* Motion scale — "Discovery - Style Guide.dc.html" section 07 (Interaction &
+   * motion). Three durations and one curve, and nothing in Discovery invents a
+   * fourth. The law that governs all of them: MOTION NEVER CARRIES MEANING —
+   * every state below is legible from a static property (tick height, aura
+   * alpha, the progress counter, tab fill), so killing motion loses nothing. */
+  --dd-fast: 120ms;   /* tab crossfades */
+  --dd-base: 180ms;   /* card + pick-cycle state changes */
+  --dd-sheet: 240ms;  /* the filter sheet */
+  --dd-ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+/* The style guide's "reduced-motion → 0ms". v3-tokens.css already forces
+ * animation/transition to none globally under reduced motion, which is the
+ * real floor; zeroing the tokens too means any JS that TIMES itself off a
+ * token (deck.js reads --dd-base to schedule the exit ghost) collapses to
+ * instant rather than sitting through a wait for an animation that was
+ * already suppressed. */
+@media (prefers-reduced-motion: reduce) {
+  :root { --dd-fast: 0ms; --dd-base: 0ms; --dd-sheet: 0ms; }
 }
 
 /* ---- sample player ---- */
@@ -83,7 +103,14 @@
 /* ---- stage (full / desktop) ---- */
 .sample-player-stage {
   position: relative; background: #000;
+  /* "Player tabs — crossfade between SoundCloud / YouTube / Spotify panes
+   * (fast)." The stage fades out under the old embed and back in on the new
+   * one; the ACTIVE TAB IS MARKED BY FILL (.is-current), never by the fade,
+   * so an instant swap reads identically. */
+  transition: opacity var(--dd-fast) var(--dd-ease);
 }
+.sample-player-stage[data-swapping="1"] { opacity: 0; }
+.sample-player-tab { transition: background-color var(--dd-fast) var(--dd-ease), color var(--dd-fast) var(--dd-ease); }
 .sample-player-stage[data-shape="yt"] { aspect-ratio: 16 / 9; }
 .sample-player-stage[data-shape="sc"] {
   height: var(--disc-stage-sc-h); background: var(--dock);
@@ -292,7 +319,14 @@
   overflow: hidden; cursor: pointer;
   display: flex; align-items: flex-end; justify-content: center;
 }
-.ap-tick-fill { position: absolute; left: 0; right: 0; bottom: 0; }
+/* "Pick cycle — tap advances ×1→×2→×3→must→clear; aura brightens one step,
+ * who-corner tick GROWS (base)." The height and the alpha are the state; the
+ * tween is only how it gets there, and reduced-motion drops straight to the
+ * new height with the level still perfectly legible. */
+.ap-tick-fill {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  transition: height var(--dd-base) var(--dd-ease), background-color var(--dd-base) var(--dd-ease);
+}
 .ap-tick-label { position: relative; font: 800 12px var(--font-ui); color: #fff; padding-bottom: 7px; }
 .ap-pick-side { display: flex; flex-direction: column; gap: 8px; }
 .ap-must, .ap-pass {
@@ -478,8 +512,45 @@
   background: var(--card-unpicked); border: 1px solid var(--border-card);
   overflow: hidden auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;
   touch-action: pan-y; cursor: grab;
+  /* "Deck advance — the acted card leaves, the next RISES FROM THE STACK."
+   * The ghosts behind it are the stack; this is the next one arriving. */
+  animation: dd-rise var(--dd-base) var(--dd-ease);
 }
+@keyframes dd-rise {
+  from { transform: translateY(10px) scale(.972); opacity: .55; }
+}
+
+/* Drag settle. The live drag itself is driven frame-by-frame from pointermove
+ * (deck.js) and must NOT be transitioned — a transition on every move event
+ * makes the card lag the finger. Only the release animates, so the class goes
+ * on at release and comes off at transitionend. */
+.dd-card.is-settling { transition: transform var(--dd-base) var(--dd-ease); }
 @media (prefers-reduced-motion: reduce) { .dd-card { transition: none !important; } }
+
+/* The acted card leaving. deck.js re-renders the deck synchronously (state and
+ * DOM stay in lockstep, which is what the tests assert on) and clones the
+ * outgoing card into this layer on top, so the exit is purely decorative — if
+ * it never runs, nothing is lost but the flourish. aria-hidden + inert in JS. */
+/* left/top/width/height are set inline from the outgoing card's measured rect
+ * (deck.js spawnExitGhost) — this rule only carries the layer's behaviour. */
+.dd-exit {
+  position: absolute; z-index: 6; pointer-events: none; overflow: hidden;
+  border-radius: var(--r-row); animation-fill-mode: forwards;
+}
+/* Pass: "card fades, desaturates and recedes" — the desaturation is the point,
+ * it reads as the artist draining out of the pool. */
+.dd-exit--pass { animation: dd-exit-pass var(--dd-base) var(--dd-ease); }
+.dd-exit--pick { animation: dd-exit-pick var(--dd-base) var(--dd-ease); }
+.dd-exit--must { animation: dd-exit-must var(--dd-base) var(--dd-ease); }
+@keyframes dd-exit-pass {
+  to { opacity: 0; filter: saturate(.15) brightness(.7); transform: translateX(-58%) rotate(-11deg) scale(.9); }
+}
+@keyframes dd-exit-pick {
+  to { opacity: 0; transform: translateX(58%) rotate(11deg) scale(.95); }
+}
+@keyframes dd-exit-must {
+  to { opacity: 0; transform: translateY(-42%) scale(1.03); }
+}
 .dd-chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .dd-chip {
   border: 1px solid var(--border-input); border-radius: var(--r-pill); padding: 4px 10px;
@@ -528,6 +599,20 @@
 
 /* ---- filter sheet body (bottom sheet chrome — .sheet/.sheet-backdrop are
  * the shared component from assets/v3.css; this covers only the content) ---- */
+/* "Filter sheet — Motion: slides up (sheet token) with a scrim fade.
+ * Reduced: appears in place with the scrim, no slide."
+ * Both animations die under the global reduced-motion floor in v3-tokens.css,
+ * which leaves exactly that: the sheet and its scrim, in place, instantly. */
+.dd-sheet { animation: dd-sheet-up var(--dd-sheet) var(--dd-ease); }
+@keyframes dd-sheet-up { from { transform: translateY(100%); } }
+.dd-scrim { animation: dd-scrim-in var(--dd-sheet) var(--dd-ease); }
+@keyframes dd-scrim-in { from { opacity: 0; } }
+/* Desktop draws the sheet as a centred dialog (v3.css DT-2), where sliding up
+ * from the bottom edge is wrong — it fades in place there instead. */
+@media (min-width: 720px) {
+  .dd-sheet { animation: dd-scrim-in var(--dd-sheet) var(--dd-ease); }
+}
+
 .dd-filter-body { display: flex; flex-direction: column; gap: 16px; }
 .dd-filter-field { display: flex; flex-direction: column; gap: 8px; }
 .dd-filter-label {
