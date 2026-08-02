@@ -345,6 +345,23 @@
  * — and a tap near the bottom of "Switch crew" could arm "Forget this crew".
  * A touch-target fix that hands you a destructive mis-tap is not a fix.
  * Unconditional growth is not a floor. (finish pass, 2026-07-12) */
+/* Two fast taps on the SAME button are a double-tap to iOS, which zooms the
+ * page — reported on an iPhone 2026-08-02 against Discovery's Pick button,
+ * where tapping ×1→×2→×3 is the designed interaction and therefore guaranteed
+ * to trigger it. `manipulation` drops double-tap-to-zoom (and the legacy 300ms
+ * click delay) on the element, while leaving pinch-zoom and browser page zoom
+ * untouched — we are NOT disabling user scaling, which stays an accessibility
+ * requirement and is why the viewport meta is not the fix here.
+ *
+ * Deliberately OUTSIDE the (pointer: coarse) block below. Touch laptops and
+ * 2-in-1s report `fine` while still double-tap-zooming, so gating this on
+ * coarse would leave exactly those devices broken; on a mouse-only machine the
+ * declaration is inert. Scoped to `button` for the same reason the height
+ * floor is — a control added later inherits the fix by being a button. A
+ * control that must own a drag (the player scrubber) overrides it with
+ * `touch-action: none` from its own class, which wins on specificity. */
+button { touch-action: manipulation; }
+
 @media (pointer: coarse) {
   /* --- the safe default ------------------------------------------------- */
   button { min-height: 44px; }

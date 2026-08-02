@@ -17,6 +17,12 @@ import { createPlayerCore, PRIORITY, SOURCE_META, mapSoundcloudSounds, seekFract
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+// How long the rail keeps showing the position we ASKED for before conceding
+// the embed is not going to get there. Generous enough for a YouTube buffer
+// on a festival LTE connection; short enough that a refused seek self-heals.
+const SEEK_SETTLE_MS = 2500;
+const SEEK_SETTLE_EPS = 0.01; // "arrived" = within 1% of the track
+
 // ---------------------------------------------------------------------------
 // Lazy SDK loaders — each third-party script is injected at most once per
 // page, cached as a promise so repeated mounts don't re-inject it.
@@ -145,6 +151,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   let ytTicker = null; // interval id for the full/desktop custom progress bar
   let seekDragging = false; // a finger owns the scrubber — ticker frames must not fight it
   let lastSeekFrac = 0; // last painted position, 0..1 (the keyboard step reads from it)
+  let seekTarget = null; // fraction we asked the embed for, until it gets there
+  let seekTargetAt = 0; // when we asked (ms) — bounds the wait on a refused seek
+  let seekTeardown = null; // ends a live drag if the row is rebuilt under it
 
   function notify(snap) {
     if (typeof onStateChange === 'function') onStateChange(snap);
@@ -269,6 +278,11 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     const preserved = !sourceChanged && embedHost ? embedHost : null;
     if (preserved && preserved.parentNode) preserved.parentNode.removeChild(preserved);
 
+    // The old seek row is about to be discarded; if a finger is still down on
+    // it, its window listeners would outlive the element they were painting.
+    if (seekTeardown) { seekTeardown(); seekTeardown = null; }
+    if (sourceChanged) { seekTarget = null; lastSeekFrac = 0; }
+
     root.innerHTML = '';
 
     if (curLayout !== 'compact') {
@@ -292,7 +306,11 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
       body.appendChild(buildSeekRow(snap));
     }
-    body.appendChild(snap.currentSource === 'sp' ? renderSpotifyNote() : renderClips(snap));
+    // Spotify draws no alternates block at all. Its embed already lists its own
+    // top tracks, so a panel restating that — plus a preview caveat the chip on
+    // the row already carries — was pure vertical cost on the surface with the
+    // least room to spare. (Removed on device feedback, 2026-08-02.)
+    if (snap.currentSource !== 'sp') body.appendChild(renderClips(snap));
     root.appendChild(body);
 
     if (snap.failed.length > 0) root.appendChild(renderErrorBanner(snap));
@@ -342,30 +360,64 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       return seekFraction(clientX - rect.left, rect.width);
     };
     const commit = (frac) => {
+      // Remember what we asked for. updateSeekRow refuses to paint the embed's
+      // stale playhead until it has actually arrived here — see seekSettling.
+      seekTarget = frac;
+      seekTargetAt = Date.now();
       if (embedAdapter && embedAdapter.seekTo) embedAdapter.seekTo(frac);
     };
 
+    // The drag listens on WINDOW, not on the row. setPointerCapture is
+    // best-effort (it throws on some engines and is silently dropped by
+    // others), and without it the moves retarget to whatever is under the
+    // finger the instant it leaves the 26px rail — which is most of a real
+    // drag. The row would then stop tracking mid-gesture and the handle would
+    // stick: half of the "erratic scrubbing" reported on-device 2026-08-02.
+    let dragId = null;
+    const onMove = (e) => {
+      if (dragId === null || e.pointerId !== dragId) return;
+      e.preventDefault();
+      const frac = fracAt(e.clientX);
+      paintSeek(frac);
+      commit(frac);
+    };
+    const onEnd = (e) => {
+      if (dragId === null || e.pointerId !== dragId) return;
+      if (e.type === 'pointerup') {
+        // Paint AND commit: the rail has to end where the finger left it.
+        // Without the paint it keeps whatever the last move drew, and while
+        // the seek settles nothing else repaints it — so releasing after a
+        // drag past the rail's edge left the handle parked at the clamp.
+        const frac = fracAt(e.clientX);
+        paintSeek(frac);
+        commit(frac);
+      }
+      dragId = null;
+      seekDragging = false;
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onEnd);
+      window.removeEventListener('pointercancel', onEnd);
+    };
     row.addEventListener('pointerdown', (e) => {
       if (row.disabled) return;
+      // The deck card's swipe handler already skips anything inside a button,
+      // but stop here anyway: this row is a horizontal drag living inside a
+      // surface whose whole gesture vocabulary is horizontal drags, and one
+      // stray listener upstream turns a scrub into a pass.
+      e.stopPropagation();
+      e.preventDefault();
+      dragId = e.pointerId;
       seekDragging = true;
       try { row.setPointerCapture(e.pointerId); } catch { /* capture is best-effort */ }
+      window.addEventListener('pointermove', onMove, { passive: false });
+      window.addEventListener('pointerup', onEnd);
+      window.addEventListener('pointercancel', onEnd);
       const frac = fracAt(e.clientX);
       paintSeek(frac);
       commit(frac);
     });
-    row.addEventListener('pointermove', (e) => {
-      if (!seekDragging) return;
-      const frac = fracAt(e.clientX);
-      paintSeek(frac);
-      commit(frac);
-    });
-    const end = (e) => {
-      if (!seekDragging) return;
-      seekDragging = false;
-      commit(fracAt(e.clientX));
-    };
-    row.addEventListener('pointerup', end);
-    row.addEventListener('pointercancel', () => { seekDragging = false; });
+    // Teardown can strand these if a drag is live when the source switches.
+    seekTeardown = () => { if (dragId !== null) onEnd({ pointerId: dragId, type: 'pointercancel' }); };
     // Keyboard parity — the drag is a mouse/touch affordance, not the only one.
     row.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -389,13 +441,32 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     if (handle) handle.style.left = pct;
   }
 
+  // True while a seek has been requested but the embed still reports the old
+  // playhead. seekTo is async on BOTH backends (YT resolves on its own clock;
+  // the SC widget round-trips through postMessage), and the yt ticker runs
+  // every 500ms — so without this the handle snaps back to where the track
+  // was, then jumps forward when the seek lands. That visible bounce was the
+  // other half of the erratic scrubbing reported on-device 2026-08-02.
+  // Bounded by time as well as convergence: if a seek is refused outright
+  // (an ad roll, a dead embed) the row must start following the real playhead
+  // again rather than lying about a position it never reached.
+  function seekSettling(cur, dur) {
+    if (seekTarget === null) return false;
+    if (Date.now() - seekTargetAt > SEEK_SETTLE_MS) { seekTarget = null; return false; }
+    if (dur > 0 && Math.abs(cur / dur - seekTarget) < SEEK_SETTLE_EPS) { seekTarget = null; return false; }
+    return true;
+  }
+
   function updateSeekRow(cur, dur) {
-    // A live drag owns the position; a ticker frame from the old playhead
-    // would otherwise yank the handle back mid-gesture.
-    if (!seekDragging && dur > 0) paintSeek(cur / dur);
+    // A live drag owns the position outright; a settling seek owns it until
+    // the embed catches up. Only then does the playhead drive the rail.
+    if (!seekDragging && !seekSettling(cur, dur) && dur > 0) paintSeek(cur / dur);
     const curEl = root.querySelector('[data-seek-cur]');
     const durEl = root.querySelector('[data-seek-dur]');
-    if (curEl) curEl.textContent = fmtTime(cur);
+    // The clock follows the rail, not the embed, while either of those holds —
+    // a handle at 40:00 over a readout saying 12:04 reads as a broken player.
+    const shown = (seekDragging || seekTarget !== null) && dur > 0 ? lastSeekFrac * dur : cur;
+    if (curEl) curEl.textContent = fmtTime(shown);
     if (durEl) durEl.textContent = fmtTime(dur);
   }
 
@@ -538,15 +609,6 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
         box.appendChild(attr);
       }
     }
-    return box;
-  }
-
-  function renderSpotifyNote() {
-    const box = document.createElement('div');
-    box.className = 'sample-player-clips';
-    box.innerHTML = `<div class="sample-player-clips-head"><span>Top tracks</span><span class="sample-player-clips-hint">Spotify picks these</span></div>` +
-      `<div class="sample-player-foot">The embed lists them itself — tap a row on the stage above. ` +
-      `<span class="sample-player-sp-chip">30-sec preview</span> unless a Premium session is live.</div>`;
     return box;
   }
 

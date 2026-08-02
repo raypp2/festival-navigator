@@ -253,7 +253,6 @@
 .sample-player-attr a { color: var(--tonal-text); text-decoration: none; font-weight: 700; }
 .sample-player-attr a:hover { text-decoration: underline; }
 
-.sample-player-foot { font: 500 12px/1.5 var(--font-ui); color: var(--text-secondary); margin-top: 11px; }
 
 /* ---- source-failed state (distinct from offline) ---- */
 .sample-player-error { font: 500 11px/1.5 var(--font-ui); color: var(--text-tertiary); padding: 0 18px 14px; }

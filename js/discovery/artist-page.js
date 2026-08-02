@@ -601,6 +601,16 @@ function renderInto(artistName, ctx, actions, canonData) {
   scroll.append(heroBuilt.el, body, actionHost);
   overlay.appendChild(scroll);
 
+  // Navigating to a Similar Artist re-renders THIS overlay in place, so the
+  // scroll offset survives — and you land mid-page on someone else's bio with
+  // no visible transition, which reads as the page having failed to change
+  // rather than as a new artist. Anyone tapping a similar artist means to look
+  // at them from the top. (Reported on device 2026-08-02.)
+  // The overlay is the scroller, not .ap-scroll — reset both rather than
+  // depending on which one the current CSS makes overflow.
+  overlay.scrollTop = 0;
+  scroll.scrollTop = 0;
+
   currentRefresh = {
     heroPick: heroBuilt.refresh, crew: crewBuilt.refresh, notes: notesBuilt.refresh, bar: barRefresh,
   };

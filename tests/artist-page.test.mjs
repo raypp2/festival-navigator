@@ -247,8 +247,14 @@ test('similar-artist row navigates the page in place (replace content, no duplic
   const row = [...overlay().querySelectorAll('.ap-similar-row')]
     .find((r) => r.querySelector('.ap-similar-name').textContent === 'Similaro');
   assert.ok(row, 'GRiZ and Similaro share Bass House, so Similaro appears in Similar');
+  // Scrolled well down GRiZ's page before navigating — the overlay is the
+  // scroller, and it is reused rather than rebuilt, so the offset survives
+  // unless we reset it. Landing mid-page on someone else's bio reads as the
+  // page having failed to change (reported on device 2026-08-02).
+  overlay().scrollTop = 400;
   row.click();
   assert.equal(document.querySelectorAll('#artist-page-overlay').length, 1, 'still exactly one overlay');
   assert.equal(overlay().querySelector('.ap-name').textContent, 'Similaro');
+  assert.equal(overlay().scrollTop, 0, 'a similar-artist navigation lands at the top of the new artist');
   closeArtistPage();
 });
