@@ -119,5 +119,14 @@ Non-inferable facts only (the code answers everything else — read it).
   confusion: `.vercel/project.json` is byte-identical in the upstream clone
   and in this fork, because BOTH local checkouts are linked to Ray's project —
   identical link files are not evidence you are pointed at Kevin's.
+- **The project is git-connected as of 2026-08-02: a push to `main` IS a
+  production release.** No `vercel --prod` needed, and no confirmation step
+  between the push and the live site — other branches get preview URLs
+  instead. `main` was fast-forwarded to the 27-commit `discovery` branch the
+  same day, so the two agree; before that merge, Discovery existed ONLY on
+  `discovery` and a deploy from `main` would have shipped a site with no
+  Discovery in it at all. Connecting the repo needed the Vercel GitHub App
+  installed on the GitHub account — a Vercel *login* connection alone returns
+  a "make sure there aren't any typos" error that has nothing to do with typos.
 - Adding a festival: `docs/add-a-festival.md`. Validate with
   `node scripts/validate-festivals.mjs` before committing — CI enforces it.
