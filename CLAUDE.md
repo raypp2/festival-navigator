@@ -108,7 +108,16 @@ Non-inferable facts only (the code answers everything else — read it).
   which runs the commit even when the scan trips). `.gitignore` denies `*.png`
   by default and allowlists the three icons that ship, because an audit run once
   dumped 50 screenshots into the repo root.
-- Deploy is gated: branch pushes = preview only; production promote is
-  Kevin's call, always.
+- **This is Ray's fork (`raypp2/festival-navigator`), not Kevin's upstream, and
+  it deploys to Ray's OWN Vercel project** — `festival-navigator` under team
+  `raypp2` (`prj_xt5Sgi5RhwTTJfdfF0u47WqpJTHq`), serving
+  `ray-festival.vercel.app`. Promoting to production here is Ray's call and
+  needs no one else's sign-off: nobody is on this deployment yet, so it is
+  effectively pre-release. The old "production promote is Kevin's call,
+  always" rule came from upstream and does NOT govern this repo — it applies
+  only to `khglynn/festival-navigator`. Note the trap that produced that
+  confusion: `.vercel/project.json` is byte-identical in the upstream clone
+  and in this fork, because BOTH local checkouts are linked to Ray's project —
+  identical link files are not evidence you are pointed at Kevin's.
 - Adding a festival: `docs/add-a-festival.md`. Validate with
   `node scripts/validate-festivals.mjs` before committing — CI enforces it.
