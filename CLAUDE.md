@@ -11,6 +11,22 @@ Non-inferable facts only (the code answers everything else — read it).
   the green pill). Notes are stored as keyed objects, never arrays
   (jsonb_deep_merge replaces arrays — an array eats concurrent notes).
 
+- **The three primary actions are ONE component on every surface, and the
+  pick segments are always drawn.** `buildPrimaryActions`/`paintPrimaryActions`
+  are exported from `js/discovery/deck.js` and used verbatim by the deck, the
+  artist page (`ap-actions`) and the desktop focus pane (`dd2-pane-actions`) —
+  only metrics differ, via CSS. Do not re-implement them per surface: that is
+  exactly the state this replaced on 2026-08-01, when three screens each had
+  their own idea of "pick" and the artist page kept its control in the hero.
+  Two rules with teeth: (1) the bar goes along the BOTTOM, never in a header,
+  because it holds the primary actions; (2) all three pick segments render
+  whether lit or not — that is the only thing making "tap again to raise"
+  legible *before* the first tap, and dropping the unlit ones re-hides the
+  multi-tap cycle from anyone who has not already found it. On the artist page
+  the bar is `position: sticky` inside `.ap-scroll`, NOT absolute or fixed:
+  the overlay is itself the scroller, so an absolutely-placed bar rides the
+  content up and out of reach, and a fixed one escapes the ≥1200px grid that
+  re-places it into the left rail.
 - **The festival accent (`--fest`) appears in exactly FOUR places**: the fest
   name, the active day tab, stage headers, and the current-fest border in
   Settings. Anything else that wants to look selected or "ours" uses `--brand`.
@@ -91,10 +107,18 @@ Non-inferable facts only (the code answers everything else — read it).
   edited JS only reloads on a REAL document load (hop via about:blank), and
   the ES-module cache also survives `Network.clearBrowserCache`** (burned a
   test cycle 2026-07-14).
-- **Staging (stage.fest.kevinhg.com preview deploys) shares the PRODUCTION
-  DATABASE_URL** — verified empirically 2026-07-14 (a person row created on
-  staging was deleted through the prod Neon connection). Staging writes are
-  prod writes; test with throwaway crews/persons and delete them after.
+- **Preview deploys share the PRODUCTION DATABASE_URL — on this fork too, and
+  as of 2026-08-02 that fires automatically.** Verified empirically on
+  upstream 2026-07-14 (a person row created on staging was deleted through the
+  prod Neon connection), and re-confirmed on THIS project 2026-08-02: the
+  `DATABASE_URL` and `DATABASE_URL_UNPOOLED` env vars are scoped to
+  `production,preview`, not production alone. Now that the repo is
+  git-connected, **every push to any branch builds a preview that writes to
+  the production database** — there is no isolated environment to develop
+  against, and no step where you opt in. Preview writes are prod writes: test
+  with throwaway crews/persons and delete them after. If you want a real
+  staging boundary, it needs a separate Neon branch bound to the preview
+  target; nothing today provides one.
 - Styling is hand-written CSS in `assets/v3-tokens.css` (tokens) and
   `assets/v3.css` (components) — no build step, no framework. (Tailwind was
   dropped in v3; there is no `npm run css`.)
