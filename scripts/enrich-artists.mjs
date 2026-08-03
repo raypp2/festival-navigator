@@ -24,8 +24,8 @@ const USER_AGENT = 'festival-navigator-fork/2.0 (https://github.com/raypp2/festi
 const MB_MIN_INTERVAL_MS = 1100; // MusicBrainz bans clients that exceed ~1 req/sec.
 const MB_SCORE_THRESHOLD = 90;
 
-const ENRICH_FIELDS = ['genres', 'soundcloudSlug', 'spotifyId', 'youtubeQuery', 'youtubeVideoIds', 'bandsintownId'];
-const CAPS = { genres: 8, youtubeVideoIds: 4 };
+const ENRICH_FIELDS = ['genres', 'soundcloudSlug', 'spotifyId', 'youtubeQuery', 'youtubeVideoIds', 'youtubeLabels', 'bandsintownId'];
+const CAPS = { genres: 8, youtubeVideoIds: 4, youtubeLabels: 4 };
 
 // ---------------------------------------------------------------------------
 // Pure helpers (exported for tests/enrich.test.mjs — no network, no fs).
@@ -168,8 +168,12 @@ async function verifySoundcloudSlug(slug) {
 // permanently marking as "searched, no results" artists nobody ever searched.
 // `fatal` means do not keep asking today — the quota is gone.
 async function youtubeSearchTop3(query, apiKey, fetchImpl = fetch) {
+  // `snippet` costs nothing extra — search.list is 100 units whatever the
+  // parts — and without it every set row fell back to "Set 1/2/3", which tells
+  // you nothing about which of three hour-long sets you are about to hear
+  // (reported 2026-08-02).
   const params = new URLSearchParams({
-    key: apiKey, q: query, part: 'id', type: 'video', videoEmbeddable: 'true', maxResults: '5',
+    key: apiKey, q: query, part: 'id,snippet', type: 'video', videoEmbeddable: 'true', maxResults: '5',
   });
   let res;
   try {
@@ -191,10 +195,43 @@ async function youtubeSearchTop3(query, apiKey, fetchImpl = fetch) {
     return { ok: false, fatal: quota || res.status === 403, reason };
   }
   const body = await res.json();
-  const ids = (body.items || []).map((it) => it?.id?.videoId).filter(Boolean).slice(0, 3);
-  return { ok: true, ids };
+  const hits = (body.items || []).filter((it) => it?.id?.videoId).slice(0, 3);
+  const ids = hits.map((it) => it.id.videoId);
+  const labels = hits.map((it) => cleanYoutubeTitle(it?.snippet?.title || '', query));
+  return { ok: true, ids, labels };
 }
-export { youtubeSearchTop3 };
+
+// YouTube titles are written for YouTube's own search results, so they lead
+// with the artist and pad with boilerplate: "MAU P - Live @ Tomorrowland 2024
+// (Official 4K Video)". On a row that already sits under the artist's name,
+// the only part carrying information is the middle. Strip the leading artist
+// prefix and the trailing marketing, and decode the entities the API returns
+// pre-escaped (&amp;, &#39;).
+//
+// Conservative on purpose: if stripping would leave nothing useful, keep the
+// original. A wrong-but-complete title beats a confidently empty one.
+function cleanYoutubeTitle(raw, query) {
+  const decoded = String(raw)
+    .replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .trim();
+  if (!decoded) return '';
+  // The query is "<artist> live set" — recover the artist part.
+  const artist = String(query || '').replace(/\s+live set$/i, '').trim();
+  let out = decoded;
+  if (artist) {
+    const esc = artist.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // "Artist - rest", "Artist | rest", "Artist: rest", "Artist – rest"
+    out = out.replace(new RegExp(`^\\s*${esc}\\s*[-–—|:·]+\\s*`, 'i'), '');
+  }
+  out = out
+    .replace(/\s*[([](?:official\s*)?(?:4k|hd|full\s*)?(?:music\s*)?video[)\]]\s*/gi, ' ')
+    .replace(/\s*[([]official[^)\]]*[)\]]\s*/gi, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  return out.length >= 3 ? out : decoded;
+}
+export { youtubeSearchTop3, cleanYoutubeTitle };
 
 function loadJson(path, fallback) {
   if (!existsSync(path)) return fallback;
@@ -252,7 +289,12 @@ async function enrichOne(entry, cache, { youtubeKey, dryRun, log }) {
     const r = await youtubeSearchTop3(query, youtubeKey);
     if (r.ok) {
       youtubeSpent = 100;
-      if (r.ids.length) fetched.youtubeVideoIds = r.ids;
+      if (r.ids.length) {
+        fetched.youtubeVideoIds = r.ids;
+        // Labels ride alongside the ids, index for index — player-core reads
+        // youtubeLabels[i] for youtubeVideoIds[i].
+        if (r.labels && r.labels.some(Boolean)) fetched.youtubeLabels = r.labels;
+      }
       else youtubeSearchedAt = new Date().toISOString();
     } else {
       // The search never ran — leave youtubeSearchedAt untouched so this

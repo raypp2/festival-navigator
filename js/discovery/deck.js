@@ -228,6 +228,7 @@ function buildCard(entry, ctx, actions, canonData) {
   const playerGenres = [primary, ...secondary].filter(Boolean);
   const sources = {
     youtubeVideoIds: meta.youtubeVideoIds,
+    youtubeLabels: meta.youtubeLabels,
     soundcloudSlug: meta.soundcloudSlug,
     spotifyId: meta.spotifyId,
   };
@@ -563,19 +564,22 @@ function beginDecision(kind, level, ctx, actions) {
     celebrating = null;
     renderDeckBody(ctx, actions);
 
-    const label = kind === 'pass' ? `Passed on ${name} — undo`
-      : kind === 'must' ? `Made ${name} a must — undo`
-        : `Picked ${name} ×${level} — undo`;
-    if (actions.showUndoToast) {
-      actions.showUndoToast(label, () => {
-        clearDeckTimers();
-        revert();
-        session.decided--;
-        session.position = decidedAt;
-        ctx.onNotesChange();
-        renderDeckBody(ctx, actions);
-      });
-    }
+    // Vocabulary matches the buttons: the control says "Not for me", so the
+    // confirmation does too.
+    const label = kind === 'pass' ? `Not for me — ${name}`
+      : kind === 'must' ? `Made ${name} a must`
+        : `Picked ${name} ×${level}`;
+    // In the bar, not over it (style guide §07). renderDeckBody has already
+    // rebuilt the bar above, so this attaches to the live one.
+    const ov = document.getElementById(OVERLAY_ID);
+    showBarUndo(ov && ov.querySelector('.dd-actions'), label, () => {
+      clearDeckTimers();
+      revert();
+      session.decided--;
+      session.position = decidedAt;
+      ctx.onNotesChange();
+      renderDeckBody(ctx, actions);
+    });
   };
 
   celebrateTimer = schedule(actions, () => {
@@ -613,6 +617,49 @@ function pickTap(ctx, actions) {
     const lvl = pendingPick ? pendingPick.level : level;
     beginDecision('pick', lvl, ctx, actions);
   }, PICK_IDLE_MS);
+}
+
+// ---- in-bar undo ----------------------------------------------------------------------
+// "Undo EXPANDS the action bar — a row grows in above the buttons with a 5s
+// countdown hairline, then the bar collapses back." And: "Never a floating
+// snackbar over the deck or over the action bar — undo has a place of its own,
+// so it never covers content." (Style guide §07.)
+//
+// The build had kept the app-wide toast, which is exactly the floating
+// snackbar the design rules out — on the deck it landed on top of the bar it
+// was describing. The toast stays for surfaces with no action bar (the wall),
+// where it remains the right component.
+//
+// Exported so the artist page's bar gets the same treatment.
+const UNDO_MS = 5000;
+export function showBarUndo(bar, message, onUndo) {
+  if (!bar) return;
+  clearBarUndo(bar);
+  const row = document.createElement('div');
+  row.className = 'dd-undo';
+  const msg = document.createElement('span');
+  msg.className = 'dd-undo-msg';
+  msg.textContent = message;
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'dd-undo-btn';
+  btn.textContent = 'Undo';
+  const bar_ = document.createElement('span');
+  bar_.className = 'dd-undo-countdown';
+  row.append(msg, btn, bar_);
+  bar.insertBefore(row, bar.firstChild); // above the buttons, per the design
+  const done = () => { clearBarUndo(bar); };
+  btn.addEventListener('click', () => { done(); onUndo(); });
+  // Time is carried by the hairline AND by the row disappearing — never by
+  // motion alone, so reduced-motion loses nothing but the sweep.
+  row._t = setTimeout(done, UNDO_MS);
+}
+
+export function clearBarUndo(bar) {
+  const old = bar && bar.querySelector('.dd-undo');
+  if (!old) return;
+  clearTimeout(old._t);
+  old.remove();
 }
 
 // ---- action bar -----------------------------------------------------------------------
@@ -671,12 +718,42 @@ export function paintPrimaryActions(row, level, bump = false) {
   const segs = row.querySelectorAll('.dd-btn-seg');
   segs.forEach((s, i) => s.classList.toggle('is-on', level >= 1 && level <= 3 && i < level));
   if (pick) pick.classList.toggle('is-pending', level >= 1 && level <= 3);
+  // Only ONE of the two ever wears the bright outline. Pick carries the violet
+  // treatment by default (it is the primary action, and the design's unpicked
+  // frames draw it that way), but a must moves the selection to Must — and
+  // leaving Pick lit there made the screen claim two selections at once
+  // (reported 2026-08-02).
+  if (pick) pick.classList.toggle('is-muted', level === 4);
   if (must) must.classList.toggle('is-on', level === 4);
   if (pick && bump) {
     pick.classList.remove('is-bumping');
     void pick.offsetWidth; // restart the animation on a repeat tap
     pick.classList.add('is-bumping');
   }
+}
+
+// Skip: move on without recording anything.
+//
+// Not a fourth primary action — the design's three are "not for me · pick ·
+// must" and a decline already has a home. This is the escape from being made
+// to decide at all, and the distinction matters to the data: "not for me" is
+// considered-and-rejected and is visible to the crew, while a skip says
+// nothing about the artist, so they stay in the pool and come back in a later
+// session. Rendered as a quiet full-width row UNDER the buttons, so the three
+// primary actions keep their weight (requested 2026-08-02).
+function skipCurrent(ctx, actions) {
+  if (!session || session.position >= session.pool.length || celebrating) return;
+  clearDeckTimers();
+  pendingPick = null;
+  const name = session.pool[session.position].name;
+  const from = session.position;
+  session.position++;
+  renderDeckBody(ctx, actions);
+  const ov = document.getElementById(OVERLAY_ID);
+  showBarUndo(ov && ov.querySelector('.dd-actions'), `Skipped ${name}`, () => {
+    session.position = from;
+    renderDeckBody(ctx, actions);
+  });
 }
 
 function buildActionBar(ctx, actions) {
@@ -687,6 +764,13 @@ function buildActionBar(ctx, actions) {
     onPick: () => pickTap(ctx, actions),
     onMust: () => beginDecision('must', 4, ctx, actions),
   }));
+  const skip = document.createElement('button');
+  skip.type = 'button';
+  skip.className = 'dd-skip';
+  skip.textContent = 'Skip for now';
+  skip.setAttribute('aria-label', 'Skip this artist without deciding');
+  skip.addEventListener('click', () => skipCurrent(ctx, actions));
+  bar.appendChild(skip);
   return bar;
 }
 
@@ -933,7 +1017,9 @@ function buildGridCard(entry, ctx, actions) {
   if (entry.passed) {
     const chip = document.createElement('span');
     chip.className = 'card-passed-chip';
-    chip.textContent = 'PASSED';
+    // The tag says what the button said. "Passed" was internal vocabulary
+    // leaking to users who had only ever seen "Not for me" (2026-08-02).
+    chip.textContent = 'NOT FOR ME';
     btn.appendChild(chip);
   }
   const nm = document.createElement('span');
@@ -1020,8 +1106,13 @@ function buildMiddle(ctx, actions, pool, fest) {
 // actions.showUndoToast wiring. A decision here re-renders the WHOLE desktop
 // body (grid aura updates live) but never touches focusedName/focusedSnapshot
 // — the pane stays put by construction.
+// Pick cycles ×1 → ×2 → ×3 → clear. From a must it drops straight to ×1:
+// Pick and Must are TOGGLES between two states, not a ladder with a locked
+// top. It used to return `level` unchanged at 4, which made Pick simply dead
+// while a must was set — you had to know to clear Must first, and nothing on
+// screen said so (reported 2026-08-02).
 function tickNextDesktop(level) {
-  if (level === 4) return level;
+  if (level === 4) return 1;
   if (level >= 3) return 0;
   return level + 1;
 }
@@ -1169,6 +1260,7 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
   const playerGenres = [primary, ...secondary].filter(Boolean);
   const sources = {
     youtubeVideoIds: meta.youtubeVideoIds,
+    youtubeLabels: meta.youtubeLabels,
     soundcloudSlug: meta.soundcloudSlug,
     spotifyId: meta.spotifyId,
   };

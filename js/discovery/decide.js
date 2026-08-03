@@ -171,6 +171,7 @@ function buildCard(setEntry, day, clash, ctx, actions, canonData, fest, slotIdx)
   if (slotIdx === activeSlot) {
     const sources = {
       youtubeVideoIds: meta.youtubeVideoIds,
+    youtubeLabels: meta.youtubeLabels,
       soundcloudSlug: meta.soundcloudSlug,
       spotifyId: meta.spotifyId,
     };

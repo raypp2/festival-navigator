@@ -22,7 +22,10 @@ const GENRES_PATH = join(dirname(fileURLToPath(import.meta.url)), '..', 'data', 
 // a malformed enrichment field silently breaks the sample player / genre
 // filter at read time, so it fails CI the same as a bad `time`.
 const EXTRA_STRING_FIELDS = ['soundcloudSlug', 'spotifyId', 'youtubeQuery', 'bandsintownId'];
-const EXTRA_ARRAY_FIELD_CAPS = { genres: 8, youtubeVideoIds: 4 };
+// youtubeLabels is positional against youtubeVideoIds — labels[i] names ids[i]
+// — so it shares the cap. A shorter array is fine (player-core falls back to
+// "Set N" per index); a longer one means the two drifted apart.
+const EXTRA_ARRAY_FIELD_CAPS = { genres: 8, youtubeVideoIds: 4, youtubeLabels: 4 };
 
 // Validate the optional Discovery enrichment fields on a festival's
 // artists[] entries. Pure — takes the array, returns {errors, warnings}.

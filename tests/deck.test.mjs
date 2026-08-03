@@ -161,6 +161,24 @@ test('Must writes applyPickLevel(4) and advances', () => {
   assert.equal(cardName(), 'PickFlow1');
 });
 
+test('Skip advances without recording anything, and is undoable', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  assert.equal(cardName(), 'RankTarget');
+
+  overlay().querySelector('.dd-skip').click();
+  assert.equal(cardName(), 'PickFlow1', 'the deck moved on');
+  // The distinction that matters: a skip says NOTHING about the artist, so no
+  // pick and no pass is written and they stay in the pool for a later session.
+  assert.equal(
+    model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 0);
+  assert.ok(!model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'),
+    'skip is not a quiet "not for me"');
+
+  overlay().querySelector('.dd-actions .dd-undo-btn').click();
+  assert.equal(cardName(), 'RankTarget', 'undo brings the skipped card back');
+});
+
 test('undo restores the previous pick state AND returns the same card', () => {
   const actions = mkActions();
   renderDeckForTest(ctx, actions, CANON);
@@ -169,9 +187,11 @@ test('undo restores the previous pick state AND returns the same card', () => {
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 1);
   assert.equal(cardName(), 'PickFlow1');
 
-  const undo = actions.getLastUndo();
-  assert.ok(typeof undo === 'function', 'a decision offers an undo callback');
-  undo();
+  // Undo lives IN the action bar now, not in a floating toast — the design
+  // rules a snackbar over the deck out entirely (style guide §07).
+  const undo = overlay().querySelector('.dd-actions .dd-undo-btn');
+  assert.ok(undo, 'a decision grows an undo row inside the action bar');
+  undo.click();
 
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 0);
   assert.equal(cardName(), 'RankTarget', 'the card comes back, not just the state');
@@ -184,7 +204,7 @@ test('undo after a Pass restores the prior pass-free state', () => {
   overlay().querySelector('.dd-btn-pass').click();
   assert.ok(model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'));
 
-  actions.getLastUndo()();
+  overlay().querySelector('.dd-actions .dd-undo-btn').click();
   assert.ok(!model.isPassed(state.crewDoc, FID, 'RankTarget', 'Kevin'));
   assert.equal(cardName(), 'RankTarget');
 });
@@ -548,7 +568,7 @@ test('the undo message carries the level that was actually committed', () => {
   btn().click(); btn().click();
   actions.flush();
 
-  assert.match(actions.getLastUndoMessage(), /×2/);
+  assert.match(overlay().querySelector('.dd-undo-msg').textContent, /×2/);
 });
 
 test('Must shows the ★ MUST confirmation, Pass shows NOT FOR ME', () => {

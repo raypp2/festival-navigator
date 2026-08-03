@@ -154,6 +154,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   let seekTarget = null; // fraction we asked the embed for, until it gets there
   let seekTargetAt = 0; // when we asked (ms) — bounds the wait on a refused seek
   let seekTeardown = null; // ends a live drag if the row is rebuilt under it
+  let playingNow = false; // the EMBED says it is playing — not merely that we asked it to
 
   function notify(snap) {
     if (typeof onStateChange === 'function') onStateChange(snap);
@@ -281,6 +282,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     // The old seek row is about to be discarded; if a finger is still down on
     // it, its window listeners would outlive the element they were painting.
     if (seekTeardown) { seekTeardown(); seekTeardown = null; }
+    // A rebuild drops the class with the old DOM; re-assert it from the flag
+    // below so a chrome rebuild mid-playback does not silently stop the eq.
+    setPlaying(false);
     if (sourceChanged) { seekTarget = null; lastSeekFrac = 0; }
 
     root.innerHTML = '';
@@ -457,6 +461,17 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     return true;
   }
 
+  // The equaliser beside the current set is a claim that sound is coming out.
+  // It used to render off `.is-current` alone, so it danced on a mounted-paused
+  // player before anyone pressed anything (reported 2026-08-02). Only the
+  // embed's own play/pause events move it now — asking a player to start is
+  // not the same as it having started.
+  function setPlaying(on) {
+    if (playingNow === on) return;
+    playingNow = on;
+    if (root) root.classList.toggle('is-playing', on);
+  }
+
   function updateSeekRow(cur, dur) {
     // A live drag owns the position outright; a settling seek owns it until
     // the embed catches up. Only then does the playhead drive the rail.
@@ -489,10 +504,17 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   function renderCompactBadge(snap) {
     const badge = document.createElement('div');
     badge.className = 'sample-player-head';
-    badge.innerHTML = `<span class="sample-player-label">Sample</span>` +
-      (!snap.online
-        ? '<span class="sample-player-status"><span class="sample-player-status-dot"></span>offline</span>'
-        : `<span class="sample-player-status">${snap.currentSource === 'sp' ? '30-sec preview' : 'plays in full · no account'}</span>`);
+    // Spotify says nothing here: the green chip on the now-playing row already
+    // carries "30-sec preview", and printing it twice ~150px apart was the
+    // same wasted space as the block removed below (device feedback,
+    // 2026-08-02). The other sources' status is not duplicated anywhere, so
+    // it stays.
+    const status = !snap.online
+      ? '<span class="sample-player-status"><span class="sample-player-status-dot"></span>offline</span>'
+      : snap.currentSource === 'sp'
+        ? ''
+        : '<span class="sample-player-status">plays in full · no account</span>';
+    badge.innerHTML = `<span class="sample-player-label">Sample</span>${status}`;
     return badge;
   }
 
@@ -756,8 +778,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
         events: {
           onReady: () => { setReady(); if (snap.play) startYtTicker(player); },
           onStateChange: (e) => {
-            if (e.data === 1) startYtTicker(player);
-            if (e.data === 2 || e.data === 0) stopYtTicker();
+            if (e.data === 1) { startYtTicker(player); setPlaying(true); }
+            if (e.data === 2 || e.data === 0) { stopYtTicker(); setPlaying(false); }
           },
           // 101/150/153 = uploader disabled embedding, 100 = removed, 2 = bad id
           onError: () => onError(),
@@ -830,6 +852,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       // about the current track was exactly the reported bug.
       widget.bind(E.PLAY, () => {
         if (torn) return;
+        setPlaying(true);
         widget.getCurrentSound((s) => {
           if (torn || !s) return;
           scDurMs = s.duration || 0;
@@ -843,6 +866,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
         if (torn || !e) return;
         updateSeekRow((e.currentPosition || 0) / 1000, scDurMs / 1000);
       });
+      widget.bind(E.PAUSE, () => { if (!torn) setPlaying(false); });
+      widget.bind(E.FINISH, () => { if (!torn) setPlaying(false); });
       widget.bind(E.ERROR, () => onError());
     });
 

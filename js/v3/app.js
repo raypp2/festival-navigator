@@ -324,7 +324,6 @@ function repaintWall() {
   updateMigrationBanner();
   updateWeekendRow();
   updateArchiveNote();
-  maybeShowCoachMark();
   measureStickyChrome();
 }
 
@@ -365,41 +364,6 @@ function updateWeekendRow() {
 // First-wall coach mark (CT-1): the pick mechanic and long-press are
 // un-inferable — one dismissible line, once per device, pointing at the
 // full legend for more.
-const LS_COACH = 'fn_coach_v1';
-function maybeShowCoachMark() {
-  if (document.getElementById('coach-mark')) return;
-  try { if (localStorage.getItem(LS_COACH)) return; } catch { return; }
-  if (!ctx.meName) return;
-  const bar = document.createElement('div');
-  bar.id = 'coach-mark';
-  bar.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-top: 11px; padding: 10px 13px; border: 1px solid var(--notes-chip-stroke); border-radius: var(--r-row); background: rgba(139, 123, 255, .07);';
-  const msg = document.createElement('span');
-  msg.style.cssText = 'flex: 1; color: var(--text-body); font-size: 12px; font-weight: 600; line-height: 1.45;';
-  // Copy tracks the Discovery flow change: a tap OPENS the artist now; the
-  // pick cycle lives on the page's tick.
-  msg.append('Tap an artist to open it — sample a set, see the crew, and pick right there. ');
-  const how = document.createElement('button');
-  how.style.cssText = 'background: none; border: none; padding: 0; cursor: pointer; color: var(--notes-chip-text); font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 2px;';
-  how.textContent = 'How it works';
-  how.addEventListener('click', () => {
-    openSettings();
-    router.push('settings');
-    openSubviewByKey('sub:how', ctx, settingsActions);
-    router.push('sub:how');
-  });
-  msg.appendChild(how);
-  const dismiss = document.createElement('button');
-  dismiss.setAttribute('aria-label', 'Dismiss');
-  dismiss.style.cssText = 'background: none; border: none; cursor: pointer; color: var(--text-tertiary); font-size: 13px; flex: none; padding: 2px 4px;';
-  dismiss.textContent = '✕';
-  dismiss.addEventListener('click', () => {
-    try { localStorage.setItem(LS_COACH, '1'); } catch { /* private mode */ }
-    bar.remove();
-  });
-  bar.append(msg, dismiss);
-  insertStrip(bar);
-}
-
 // An archived fest reads as a memory, not a live plan (ST-5).
 //
 // The banner is keyed to the fest it was written for. It used to bail out with
@@ -407,25 +371,24 @@ function maybeShowCoachMark() {
 // another left the PREVIOUS festival's name sitting above the new one's wall —
 // the screen calmly saying you were looking at Electric Forest while showing
 // you Lollapalooza (finish pass, 2026-07-12).
+// It lives in the HEADER now, under the dates, rather than as a bordered strip
+// above the wall (2026-08-02). A full-width bar spent a row of vertical space
+// restating something that belongs to the festival's identity, and it sat
+// between the toolbar and the artists as if it were an alert. The header
+// already says which festival you are looking at; this is one more fact about
+// it. Text only — the bar chrome is gone with the bar.
+//
+// The element is static markup, so there is no insert/remove dance: switching
+// from one archived fest straight to another just rewrites it, which is what
+// the old `if (existing) return` got wrong (it left the PREVIOUS festival's
+// name above the new one's wall — finish pass, 2026-07-12).
 function updateArchiveNote() {
-  const existing = document.getElementById('archive-note');
+  const el = document.getElementById('fest-archived');
+  if (!el) return;
   const fest = state.fest();
-  if (fest.status !== 'archived') { if (existing) existing.remove(); return; }
-
-  const text = `${fest.name} ${fest.year || ''} already happened — this wall is the memory. Picks still work for the record.`.replace('  ', ' ');
-  if (existing) {
-    if (existing.dataset.fid !== fest.id) {
-      existing.dataset.fid = fest.id;
-      existing.textContent = text;
-    }
-    return;
-  }
-  const bar = document.createElement('div');
-  bar.id = 'archive-note';
-  bar.dataset.fid = fest.id;
-  bar.style.cssText = 'margin-top: 11px; padding: 9px 13px; border: 1px solid var(--border-card); border-radius: var(--r-row); color: var(--text-secondary); font-size: 12px; font-weight: 600; line-height: 1.45; background: var(--card);';
-  bar.textContent = text;
-  insertStrip(bar);
+  el.textContent = fest.status === 'archived'
+    ? `${fest.name} ${fest.year || ''} already happened — picks still work for the record.`.replace('  ', ' ')
+    : '';
 }
 
 

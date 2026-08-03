@@ -132,13 +132,34 @@ test('crew rows reflect effectiveState: must, picked, passed (reduced opacity), 
   assert.match(byName.Kevin.querySelector('.ap-crew-status').textContent, /×2/);
 
   assert.ok(byName.Mara.classList.contains('ap-crew-row-passed'), 'passed row carries the reduced-opacity class');
-  assert.equal(byName.Mara.querySelector('.ap-crew-status').textContent, 'passed');
+  // The user-facing word is "not for me" everywhere — "passed" was internal
+  // vocabulary leaking into the crew list (2026-08-02).
+  assert.equal(byName.Mara.querySelector('.ap-crew-status').textContent, 'not for me');
 
   assert.ok(byName.Sam.classList.contains('ap-crew-row-dashed'));
   assert.ok(byName.Sam.textContent.includes('hasn’t opened'));
   const recBtn = byName.Sam.querySelector('.ap-recommend');
-  assert.ok(recBtn, 'a member with zero activity anywhere gets a recommend button');
+  assert.ok(recBtn, 'a member who has never opened the app gets a recommend button');
   closeArtistPage();
+});
+
+test('a member who HAS opened but has not rated this artist is not called “hasn’t opened”', () => {
+  // Sam carries no picks or passes anywhere — the old proxy for "never opened"
+  // — but a pid proves a human claimed that identity on a device. Rating
+  // nothing is not the same as never showing up (reported 2026-08-02).
+  const people = state.people();
+  const before = people.Sam.pid;
+  people.Sam.pid = 'p_sam_has_opened_0001';
+  try {
+    openArtistPage('GRiZ', ctx, mkActions());
+    const row = [...overlay().querySelectorAll('.ap-crew-row')]
+      .find((r) => r.querySelector('.ap-crew-name').firstChild.textContent === 'Sam');
+    assert.ok(!row.textContent.includes('hasn’t opened'), 'no false “hasn’t opened” for someone who is here');
+    assert.ok(!row.classList.contains('ap-crew-row-dashed'), 'and no dashed treatment either');
+    closeArtistPage();
+  } finally {
+    if (before === undefined) delete people.Sam.pid; else people.Sam.pid = before;
+  }
 });
 
 test('recommend button writes the rec through state/model, then shows recommended ✓', () => {
@@ -188,6 +209,46 @@ test('Pick tap cycles ×1 → ×2 → ×3 → clear through applyPickLevel, neve
   assert.equal(overlay().querySelector('.dd-btn-pick-label').textContent, 'Pick');
   assert.equal(overlay().querySelectorAll('.ap-actions .dd-btn-seg.is-on').length, 0);
 
+  closeArtistPage();
+});
+
+test('the hero aura repaints on the same tap as the pick', () => {
+  const actions = mkActions();
+  openArtistPage('TickArtist', ctx, actions);
+  const bg = () => overlay().querySelector('.ap-hero-bg').getAttribute('style') || '';
+  const before = bg();
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
+  // The aura IS the pick rendered; it used to lag until you left and came
+  // back, so the tap read as a miss. This regressed silently once because the
+  // repaint was wired into writePick but never added to the refresh set —
+  // assert the visible result, not the plumbing (2026-08-02).
+  assert.notEqual(bg(), before, 'picking repaints the hero aura immediately');
+  const afterOne = bg();
+  overlay().querySelector('.ap-actions .dd-btn-pick').click();
+  assert.notEqual(bg(), afterOne, 'and again as the level rises');
+  closeArtistPage();
+});
+
+test('Pick works while a must is set — they are toggles, not a locked ladder', () => {
+  const actions = mkActions();
+  openArtistPage('TickArtist', ctx, actions);
+  const lvl = () => model.readLevel(
+    state.crewDoc, state.crewDoc.festivals[FID].selections.TickArtist?.Kevin);
+  const bar = () => overlay().querySelector('.ap-actions');
+
+  bar().querySelector('.dd-btn-must').click();
+  assert.equal(lvl(), 4, 'must set');
+  // Only ONE control may read as chosen.
+  assert.ok(bar().querySelector('.dd-btn-must').classList.contains('is-on'));
+  assert.ok(bar().querySelector('.dd-btn-pick').classList.contains('is-muted'),
+    'Pick drops its bright outline while Must owns the selection');
+
+  // Pick used to be dead here — you had to clear Must first, with nothing
+  // on screen saying so (reported 2026-08-02).
+  bar().querySelector('.dd-btn-pick').click();
+  assert.equal(lvl(), 1, 'Pick moves straight from must to ×1');
+  assert.ok(!bar().querySelector('.dd-btn-must').classList.contains('is-on'));
+  assert.ok(!bar().querySelector('.dd-btn-pick').classList.contains('is-muted'));
   closeArtistPage();
 });
 

@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v48'; // v48 = device-test fixes: no double-tap zoom, scrubber drag, scroll-to-top
+const CACHE_VERSION = 'festival-nav-v49'; // v49 = device-feedback batch: skip, in-bar undo, real set titles, toggles
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

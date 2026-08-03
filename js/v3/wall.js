@@ -115,7 +115,7 @@ export function renderCard(artistName, ctx, opts = {}) {
   if (opts.passed) {
     const passedChip = document.createElement('span');
     passedChip.className = 'card-passed-chip';
-    passedChip.textContent = 'PASSED';
+    passedChip.textContent = 'NOT FOR ME';
     el.appendChild(passedChip);
   }
   const nm = document.createElement('span');

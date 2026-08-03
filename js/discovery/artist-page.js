@@ -41,7 +41,7 @@ import { computeDayArtists } from '../time.js';
 import { loadGenreCanon, canonicalize } from './genres.js';
 import { similarArtists } from './score.js';
 import { mountPlayer as realMountPlayer } from './player.js';
-import { buildPrimaryActions, paintPrimaryActions } from './deck.js';
+import { buildPrimaryActions, paintPrimaryActions, showBarUndo } from './deck.js';
 
 const OVERLAY_ID = 'artist-page-overlay';
 
@@ -109,9 +109,21 @@ function cardPeopleFor(artistName, ctx) {
   return out;
 }
 
-// A member with zero activity ANYWHERE in this crew doc (not just this
-// artist) gets the dashed "hasn't opened" + recommend treatment (spec 7.1).
-function personHasAnyActivity(fid, person) {
+// A member who has genuinely never opened the app gets the dashed "hasn't
+// opened" + recommend treatment (spec 7.1).
+//
+// The test used to be "has no pick or pass anywhere in this festival", which
+// is a proxy, and a wrong one: someone who opened the app, read the lineup and
+// rated nothing was labelled as never having shown up. That misreports a real
+// person to their own crew (reported 2026-08-02).
+//
+// `pid` is the honest signal. It is stamped only when a human opens the app
+// and claims that identity on a device (app.js's stampPersonCrew) — a name
+// typed in by someone else carries none until its owner actually arrives. The
+// activity check stays as a fallback for docs written before pids existed:
+// picks prove an open even when the stamp is missing.
+function personHasOpened(fid, person, personObj) {
+  if (personObj && personObj.pid) return true;
   const picks = model.picksFor(state.crewDoc, fid);
   for (const byPerson of Object.values(picks)) if (byPerson[person]) return true;
   const passes = model.passesFor(state.crewDoc, fid);
@@ -125,12 +137,13 @@ function myLevel(artistName, ctx) {
 }
 
 // ---- the headline pick control (hero, right side) -------------------------------------
-// Tick cycles ×1 -> ×2 -> ×3 -> clear ONLY (never through must — design note,
-// spec 7.1); ★ toggles must (level 4) independently; ✕ toggles pass. Tapping
-// the tick while a must is active is a no-op — must is cleared via ★ first,
-// so the two controls never fight over the same tap.
+// Pick cycles ×1 → ×2 → ×3 → clear. From a must it drops straight to ×1:
+// Pick and Must are TOGGLES between two states, not a ladder with a locked
+// top. It used to return `level` unchanged at 4, which made Pick simply dead
+// while a must was set — you had to know to clear Must first, and nothing on
+// screen said so (reported 2026-08-02).
 function tickNext(level) {
-  if (level === 4) return level;
+  if (level === 4) return 1;
   if (level >= 3) return 0;
   return level + 1;
 }
@@ -140,12 +153,18 @@ function writePick(artistName, level, ctx, actions, refreshPick) {
   state.applyPickLevel(ctx.fid, artistName, ctx.meName, level);
   actions.applyLocalPick(artistName, ctx.meName, level);
   refreshPick();
-  if (currentRefresh) currentRefresh.crew();
+  if (currentRefresh) {
+    currentRefresh.crew();
+    // The hero aura is a rendering of the picks — repaint it on the same tap,
+    // from every write path, not just the action bar's.
+    if (currentRefresh.aura) currentRefresh.aura();
+  }
   ctx.onNotesChange();
   // Same undo-toast condition as the old wall tap cycle (app.js handleTap):
   // only the must-cleared case gets an undo offer.
-  if (before === 4 && level === 0 && actions.showUndoToast) {
-    actions.showUndoToast(`Cleared your must for ${artistName}`, () => {
+  // In the bar, not floating over it — same rule as the deck (style guide §07).
+  if (before === 4 && level === 0) {
+    showBarUndo(document.querySelector('#artist-page-overlay .ap-actions'), `Cleared your must for ${artistName}`, () => {
       state.applyPickLevel(ctx.fid, artistName, ctx.meName, 4);
       actions.applyLocalPick(artistName, ctx.meName, 4);
       refreshPick();
@@ -161,10 +180,15 @@ function writePassAction(artistName, on, ctx, actions, refreshPick) {
   // mirror it into the rendered doc the same way pick writes are mirrored.
   if (on) actions.applyLocalPick(artistName, ctx.meName, 0);
   refreshPick();
-  if (currentRefresh) currentRefresh.crew();
+  if (currentRefresh) {
+    currentRefresh.crew();
+    // The hero aura is a rendering of the picks — repaint it on the same tap,
+    // from every write path, not just the action bar's.
+    if (currentRefresh.aura) currentRefresh.aura();
+  }
   ctx.onNotesChange();
-  if (on && actions.showUndoToast) {
-    actions.showUndoToast(`Passed on ${artistName}`, () => {
+  if (on) {
+    showBarUndo(document.querySelector('#artist-page-overlay .ap-actions'), `Not for me — ${artistName}`, () => {
       state.applyPass(ctx.fid, artistName, ctx.meName, false);
       refreshPick();
       if (currentRefresh) currentRefresh.crew();
@@ -185,7 +209,7 @@ function buildPickChip(host, artistName, ctx) {
     if (!passed && level <= 0) return; // unpicked says nothing — the bar already does
     const chip = document.createElement('span');
     chip.className = 'ap-pick-chip' + (passed ? ' is-passed' : '');
-    chip.textContent = passed ? 'PASSED' : level === 4 ? '★ MUST' : `PICKED ×${level}`;
+    chip.textContent = passed ? 'NOT FOR ME' : level === 4 ? '★ MUST' : `PICKED ×${level}`;
     if (!passed) {
       const myIdx = colorIndexOf(ctx.meName, state.people()[ctx.meName]);
       const alpha = level === 1 ? 0.5 : level === 2 ? 0.75 : 1;
@@ -248,12 +272,12 @@ function buildCrewRow(artistName, person, personObj, peopleForInitials, ctx, ref
   const kind = model.effectiveState(state.crewDoc, ctx.fid, artistName, person);
   const ci = colorIndexOf(person, personObj);
   const isYou = person === ctx.meName;
-  const hasActivity = personHasAnyActivity(ctx.fid, person);
+  const hasOpened = personHasOpened(ctx.fid, person, personObj);
 
   const pill = document.createElement('span');
   pill.className = 'ap-pill';
   pill.textContent = initialFor({ name: person }, peopleForInitials);
-  if (kind === 'none' && !hasActivity) {
+  if (kind === 'none' && !hasOpened) {
     pill.classList.add('ap-pill-dashed');
     pill.style.borderColor = strokeOf(ci, isYou);
     pill.style.color = strokeOf(ci, isYou);
@@ -265,7 +289,7 @@ function buildCrewRow(artistName, person, personObj, peopleForInitials, ctx, ref
   const nm = document.createElement('span');
   nm.className = 'ap-crew-name';
   nm.textContent = person;
-  if (kind === 'none' && !hasActivity) {
+  if (kind === 'none' && !hasOpened) {
     const hint = document.createElement('span');
     hint.className = 'ap-crew-hint';
     hint.textContent = ' · hasn’t opened';
@@ -292,8 +316,8 @@ function buildCrewRow(artistName, person, personObj, peopleForInitials, ctx, ref
     right.append(mini, lvlText);
   } else if (kind === 'passed') {
     row.classList.add('ap-crew-row-passed');
-    right.textContent = 'passed';
-  } else if (!hasActivity) {
+    right.textContent = 'not for me';
+  } else if (!hasOpened) {
     row.classList.add('ap-crew-row-dashed');
     const recLeaf = (model.recsFor(state.crewDoc, ctx.fid)[artistName] || {})[person];
     if (recLeaf) {
@@ -308,8 +332,9 @@ function buildCrewRow(artistName, person, personObj, peopleForInitials, ctx, ref
       right.appendChild(rec);
     }
   }
-  // kind === 'none' && hasActivity: an active member with no opinion on THIS
-  // artist yet — quiet, no trailing label (they've clearly opened the app).
+  // kind === 'none' && hasOpened: a member who is here but has no opinion on
+  // THIS artist yet — quiet, no trailing label. Saying anything at all would
+  // be inventing a state; "hasn't opened" in particular would be a lie.
 
   row.append(pill, nm, right);
   return row;
@@ -406,6 +431,7 @@ function buildSampleSection(artistName, meta, canonData, actions) {
   const genres = [primary, ...secondary].filter(Boolean);
   const sources = {
     youtubeVideoIds: meta.youtubeVideoIds,
+    youtubeLabels: meta.youtubeLabels,
     soundcloudSlug: meta.soundcloudSlug,
     spotifyId: meta.spotifyId,
   };
@@ -479,8 +505,12 @@ function buildHero(artistName, fest, meta, ctx, actions, canonData) {
   hero.className = 'ap-hero';
   const bg = document.createElement('div');
   bg.className = 'ap-hero-bg';
-  const { background } = auraBackground(cardPeopleFor(artistName, ctx));
-  bg.style.background = background;
+  // The aura IS the pick, rendered — "the convergence signal is the blend".
+  // Repainting it only on the next render meant your own pick did not show up
+  // until you left the page and came back, so the tap read as having missed
+  // (reported 2026-08-02). paintHeroAura is handed to the refresh set below.
+  const paintHeroAura = () => { bg.style.background = auraBackground(cardPeopleFor(artistName, ctx)).background; };
+  paintHeroAura();
   const grain = document.createElement('div');
   grain.className = 'hero-grain'; // shared v3 token class — hero grain at .4, per v3-tokens.css
   const content = document.createElement('div');
@@ -493,7 +523,12 @@ function buildHero(artistName, fest, meta, ctx, actions, canonData) {
   back.className = 'ap-back';
   back.textContent = '‹';
   back.setAttribute('aria-label', 'Back');
-  back.addEventListener('click', () => { if (!router.requestClose()) closeArtistPage(); });
+  // Back leaves the artist page entirely rather than stepping one artist at a
+  // time. Chaining Similar → Similar → Similar used to bury the way out under
+  // as many presses as you had made hops, which nobody counts (reported
+  // 2026-08-02). The browser's own back button still walks the stack; this
+  // control is "done looking at artists".
+  back.addEventListener('click', () => closeArtistPage());
   top.appendChild(back);
 
   const bottom = document.createElement('div');
@@ -548,7 +583,7 @@ function buildHero(artistName, fest, meta, ctx, actions, canonData) {
   bottom.append(nameWrap, pickHost);
   content.append(top, bottom);
   hero.append(bg, grain, content);
-  return { el: hero, refresh: pickRefresh };
+  return { el: hero, refresh: pickRefresh, aura: paintHeroAura };
 }
 
 // ---- overlay lifecycle ----------------------------------------------------------------
@@ -612,7 +647,8 @@ function renderInto(artistName, ctx, actions, canonData) {
   scroll.scrollTop = 0;
 
   currentRefresh = {
-    heroPick: heroBuilt.refresh, crew: crewBuilt.refresh, notes: notesBuilt.refresh, bar: barRefresh,
+    heroPick: heroBuilt.refresh, crew: crewBuilt.refresh, notes: notesBuilt.refresh,
+    bar: barRefresh, aura: heroBuilt.aura,
   };
 }
 

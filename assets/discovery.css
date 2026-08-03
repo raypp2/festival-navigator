@@ -239,7 +239,9 @@
 .sample-player-clip-t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sample-player-clip-d { font: 600 11px ui-monospace, Menlo, monospace; color: var(--text-tertiary); flex: none; }
 .sample-player-clip-eq { flex: none; display: none; gap: 2px; align-items: flex-end; height: 14px; }
-.sample-player-clip.is-current .sample-player-clip-eq { display: flex; }
+/* Only when the EMBED reports playing, not merely when a row is selected —
+ * dancing bars over a paused player claim sound that isn't there. */
+.sample-player.is-playing .sample-player-clip.is-current .sample-player-clip-eq { display: flex; }
 .sample-player-clip-eq i { width: 3px; border-radius: 2px; background: rgb(var(--brand)); height: 9px; animation: disc-eq 1s ease-in-out infinite; }
 .sample-player-clip-eq i:nth-child(2) { animation-delay: .2s; }
 .sample-player-clip-eq i:nth-child(3) { animation-delay: .4s; }
@@ -449,10 +451,17 @@
     margin: 0 auto;
     padding: 36px 40px 60px;
     grid-template-columns: 440px minmax(0, 1fr) minmax(0, 1fr);
+    /* crew/notes stop at row 2 so `sim` starts immediately beneath them.
+     * They used to span three rows, which put `sim` in the row BELOW the
+     * player rail — and since that rail is the tallest thing on the page,
+     * Similar was shoved hundreds of px down and read as pinned to the bottom
+     * of the viewport rather than as the next section (reported 2026-08-02).
+     * The left rail now spans the remaining rows instead, so its height stops
+     * dictating where the right column's content lands. */
     grid-template-areas:
       'hero    crew  notes'
       'actions crew  notes'
-      'sample  crew  notes'
+      'sample  sim   sim'
       'sample  sim   sim';
     gap: 20px;
     align-items: start;
@@ -740,6 +749,36 @@
  * snackbar over the deck (style guide §07: "undo has a place of its own, so
  * it never covers content"). */
 .dd-actions-row { display: flex; gap: 8px; align-items: stretch; }
+.dd-undo {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 0 6px 8px;
+  animation: dd-undo-in var(--dd-base) var(--dd-ease);
+}
+@keyframes dd-undo-in { from { opacity: 0; transform: translateY(7px); } }
+.dd-undo-msg {
+  min-width: 0; font: 600 12px var(--font-ui); color: var(--text-tertiary);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.dd-undo-btn {
+  flex: none; border: none; background: none; padding: 2px 0;
+  font: 800 12px var(--font-ui); color: var(--tonal-text); cursor: pointer; min-height: 0;
+}
+/* The 5s countdown hairline. Motion is the nicety; the row vanishing is the
+ * real signal, so reduced-motion loses the sweep and nothing else. */
+.dd-undo-countdown {
+  position: absolute; left: 6px; right: 6px; bottom: 0; height: 1px;
+  background: rgba(var(--brand), .45); transform-origin: left center;
+  animation: dd-undo-count 5s linear forwards;
+}
+@keyframes dd-undo-count { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* Skip — deliberately subordinate. It is an escape from deciding, not a
+ * fourth decision, so it gets text weight rather than a button's. */
+.dd-skip {
+  width: 100%; border: none; background: none; cursor: pointer; padding: 2px 0;
+  font: 700 12px var(--font-ui); color: var(--text-tertiary); min-height: 0;
+}
+.dd-skip:hover { color: var(--text-body); }
 .dd-btn {
   border-radius: 14px; cursor: pointer; min-height: 58px;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
@@ -772,6 +811,18 @@
  * segments already carry the level, so the global reduced-motion floor in
  * v3-tokens.css kills this with nothing lost. */
 .dd-btn-pick.is-pending { box-shadow: 0 0 0 4px rgba(var(--brand), .2); }
+/* Must owns the selection — Pick steps back to the quiet treatment so exactly
+ * one control reads as chosen. Its segments stay drawn (unlit), because the
+ * multi-tap has to remain legible from here too. */
+.dd-btn-pick.is-muted {
+  border-color: var(--border-input); background: transparent; box-shadow: none;
+}
+.dd-btn-pick.is-muted .dd-btn-pick-label { color: var(--text-secondary); }
+/* ...and Must takes it, so the bright outline is never on two things at once. */
+.dd-btn-must.is-on {
+  border-color: rgb(var(--brand)); background: var(--tonal-fill);
+  box-shadow: 0 0 0 3px rgba(var(--brand), .13); color: #fff;
+}
 .dd-btn-pick.is-bumping { animation: dd-pick-bump 200ms var(--dd-ease); }
 @keyframes dd-pick-bump { 0%, 100% { transform: scale(1); } 32% { transform: scale(1.05); } }
 
@@ -1126,7 +1177,11 @@
 .dd2-middle-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
 .dd2-middle-title { font: 800 18px var(--font-ui); color: #fff; }
 .dd2-middle-count { font: 600 12px var(--font-ui); color: var(--text-tertiary); white-space: nowrap; }
-.dd2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+/* Two across, not three. The pane on the right runs the FULL player now (16:9
+ * stage + scrubber + set rows), and at 320px that was cramped while the wall
+ * had width to spare — three narrow cards bought nothing the eye was using
+ * (reported 2026-08-02). The reclaimed width goes to .dd2-pane below. */
+.dd2-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .dd2-gridcard { flex-direction: column; min-height: 116px; gap: 3px; padding: 12px; }
 .dd2-gridcard .name { font-size: 14px; }
 .dd2-gridcard-genre { font: 600 10px var(--font-ui); color: var(--text-tertiary); }
@@ -1146,7 +1201,7 @@
  * primary actions — the one thing on this surface that must never be
  * unreachable. The body scrolls inside instead. */
 .dd2-pane {
-  width: 320px; flex: none; border: 1px solid var(--border-card); border-radius: var(--r-settings);
+  width: 420px; flex: none; border: 1px solid var(--border-card); border-radius: var(--r-settings);
   background: var(--card); overflow: hidden; position: sticky; top: 0;
   max-height: 100%; display: flex; flex-direction: column;
 }
