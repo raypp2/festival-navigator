@@ -151,14 +151,94 @@
 .avatar-cluster .avatar + .avatar { margin-left: -5px; }
 .avatar.lg { width: 30px; height: 30px; font-size: 12px; }
 
-/* ---- toolbar (wall header row) ---------------------------------------------- */
-.search-pill {
-  display: inline-flex; align-items: center; gap: 7px; background: var(--card);
-  border: 1px solid var(--border-card); border-radius: var(--r-pill);
-  padding: 7px 13px; color: var(--text-secondary); font-size: 12.5px;
+/* ---- nav strip (design 6a/6b) --------------------------------------------------
+ * The app's one navigation row: Wall · Discover · My Day on the left, two
+ * quiet 40px utilities on the right. It replaced a row of outlined violet
+ * PILLS, which in this app is the vocabulary for "perform an action" — so the
+ * two destinations read as buttons and search took half the row for a job it
+ * does a fraction of the time.
+ *
+ * Selected is a brand-violet underline, matching what the desktop Discovery
+ * header already teaches (.dd2-navtab), so both ends of the app say
+ * "you are here" the same way. Never the festival accent: that has exactly
+ * four homes (fest name, active day tab, stage headers, current-fest border).
+ *
+ * This is the ONLY thing that pins on the wall besides the stage rail (frame
+ * 6b) — the festival block and the crew chips scroll away and stay away. The
+ * day, the fest name and the sync light already live permanently in the dock,
+ * so re-showing them mid-grid buys nothing and costs 100px of a phone. */
+.nav-strip {
+  position: sticky; top: 0; z-index: 26; /* over .day-rail (25) and .stage-strip (24), under the dock (30) */
+  margin: 0 calc(-1 * var(--sp-gutter));
+  padding-top: env(safe-area-inset-top);  /* black-translucent status bar: the strip owns that band */
+  background: rgba(10, 8, 18, .92);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(10, 8, 18, .55);
 }
-.search-pill input { background: transparent; border: none; outline: none; color: var(--text-primary);
-                     font-size: 12.5px; font-family: var(--font-ui); width: 100%; }
+/* Nothing here may DEPEND on the blur or the shadow to be readable. Where the
+ * compositor won't give us one — no backdrop-filter, or Low power, which kills
+ * every effect — the strip goes flat opaque and reads exactly the same. */
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .nav-strip { background: var(--dock); }
+}
+.low-power .nav-strip {
+  background: var(--dock); box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+/* Design gives this row `padding: 0 18px` — 18px being that mock's own phone
+ * gutter. The app's equivalent is --sp-gutter, so the tabs stay aligned with
+ * the festival name above them at every width instead of at exactly one. */
+.nav-strip-row {
+  height: 46px; display: flex; align-items: stretch; justify-content: space-between;
+  gap: 12px; padding: 0 var(--sp-gutter); border-bottom: 1px solid var(--hairline);
+}
+.nav-tabs { display: flex; gap: 22px; min-width: 0; }
+.nav-tab {
+  display: flex; align-items: center; flex: none;
+  background: none; border: none; padding: 0; cursor: pointer;
+  font: 800 13.5px var(--font-ui); color: var(--text-secondary); white-space: nowrap;
+  /* Full row height, then pulled 1px down so the underline lands ON the row's
+     own hairline rather than floating above it. */
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.nav-tab[aria-current="page"] { color: var(--text-header); border-bottom-color: rgb(var(--brand)); cursor: default; }
+.nav-utils { display: flex; align-items: stretch; gap: 2px; flex: none; }
+/* 40 wide and the full height of the row — which IS the "padded to 44 by the
+ * row's own hit area" the design asks for, and it needs no opt-out from the
+ * coarse-pointer floor to get there. */
+.nav-util {
+  width: 40px; flex: none; padding: 0; background: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-tertiary);
+}
+/* The notes bubble, with its count and nothing else. The sharp lower-left
+ * corner (--r-bubble) is the notes identity across the app — a tonal pill here
+ * would hand it back to the button family it just left. */
+.notes-bubble {
+  min-width: 26px; height: 19px; border-radius: var(--r-bubble); box-sizing: border-box;
+  border: 1px solid rgba(196, 189, 238, .5);  /* --notes-stroke at half */
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 5px; font: 800 10px var(--font-ui); color: #A79CD6;
+}
+
+/* ---- the view's own search + sort row ------------------------------------------
+ * Search left the nav row entirely (design §Search). On a lineup wall it is a
+ * quiet always-on field at the top of the list; on a timetable it starts
+ * collapsed — the grid already answers "when and where" — and the strip's
+ * magnifier expands this same field in place. */
+.wall-controls { display: flex; align-items: center; gap: 8px; margin-top: 13px; }
+.wall-controls:empty, .wall-controls[hidden] { display: none; }
+.wall-search {
+  flex: 1; min-width: 0; display: inline-flex; align-items: center; gap: 9px;
+  min-height: 38px; background: var(--card); border: 1px solid var(--hairline);
+  border-radius: var(--r-row); padding: 0 12px; color: #6E6788;
+}
+.wall-search[hidden] { display: none; }
+.wall-search input {
+  flex: 1; min-width: 0; background: transparent; border: none; outline: none;
+  color: var(--text-primary); font: 500 12.5px var(--font-ui);
+}
+.wall-search input::placeholder { color: #6E6788; font-weight: 500; }
 .sort-chip {
   display: inline-flex; align-items: center; gap: 4px; background: var(--card);
   border: 1px solid var(--border-card); border-radius: var(--r-pill);
@@ -189,18 +269,14 @@
  * reserved for fest name / active day tab / stage headers / current-fest border. */
 .sort-pop [role="option"][aria-selected="true"] { color: rgb(var(--brand)); }
 .sort-pop .check { width: 12px; flex: none; font-size: 11px; }
-.notes-chip {
-  display: inline-flex; align-items: center; gap: 5px; background: transparent;
-  border: 1.5px solid var(--notes-chip-stroke); color: var(--notes-chip-text);
-  font-weight: 700; font-size: 11.5px; padding: 6px 12px; border-radius: var(--r-bubble); cursor: pointer;
-}
-.notes-chip .count { background: rgba(139, 123, 255, .25); border-radius: var(--r-pill);
-                     padding: 0 6px; font-size: 10px; }
-.toolbar-divider { width: 1px; height: 22px; background: var(--hairline); margin: 0 6px; }
+/* (.notes-chip / .toolbar-divider removed with the pill toolbar — the Notes
+ * entry is .nav-util > .notes-bubble in the strip above, and nothing divides
+ * a row that no longer mixes chips with fields.) */
 
 /* ---- day header rule --------------------------------------------------------- */
-/* Jumping to a day (tab tap) must land the header BELOW the sticky chrome,
- * not under it — app.js measures the rail + stage strip into --jump-offset. */
+/* Jumping to a day (tab tap) must land the header BELOW the sticky chrome, not
+ * under it — app.js measures the nav strip + rail + stage strip into
+ * --jump-offset. */
 .day-rule { display: flex; align-items: baseline; gap: 10px; scroll-margin-top: var(--jump-offset, 8px); }
 .day-rule .day { font-family: var(--font-display); letter-spacing: var(--track-display);
                  font-size: var(--fs-day); color: var(--text-header); }
@@ -208,13 +284,14 @@
 .day-rule .line { flex: 1; height: 1px; background: var(--hairline); }
 
 /* ---- desktop day rail (DT-1) --------------------------------------------------- */
-/* ≥720 the dock dies; the rail is its desktop body — sticky under the top of
- * the window, YOU chip jumps to top, tabs scrollspy with the wall. */
+/* ≥720 the dock dies; the rail is its desktop body — sticky under the NAV
+ * STRIP (--nav-h, measured by app.js: the strip is the one thing above it that
+ * also pins), YOU chip jumps to top, tabs scrollspy with the wall. */
 .day-rail { display: none; }
 @media (min-width: 720px) {
   .day-rail {
     display: flex; align-items: center; gap: 18px;
-    position: sticky; top: 0; z-index: 25;
+    position: sticky; top: var(--nav-h, 0px); z-index: 25;
     margin: 4px calc(-1 * var(--sp-gutter)) 0;
     padding: 9px var(--sp-gutter);
     /* Near-opaque: at .78 the header's subtitle text ghosted through
@@ -374,7 +451,7 @@ button { touch-action: manipulation; }
   .list-row { min-height: 44px; }
 
   /* --- the opt-outs: small controls that take borrowed space instead ------ */
-  .person-chip, .notes-chip, .chip-notes,
+  .person-chip, .chip-notes,
   .dock .day-tab, .day-rail .day-tab,
   .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close,
   button.avatar,
@@ -383,7 +460,7 @@ button { touch-action: manipulation; }
   .card button {
     min-height: 0;
   }
-  .person-chip, .notes-chip, .chip-notes,
+  .person-chip, .chip-notes,
   .dock .day-tab, .day-rail .day-tab,
   .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close,
   button.avatar {
@@ -393,7 +470,7 @@ button { touch-action: manipulation; }
    * unusable (17-28px); horizontal stays at -2px so one chip cannot swallow the
    * tap meant for its neighbour — in a crowd, that is a pick recorded under the
    * wrong person's name. */
-  .person-chip::after, .notes-chip::after,
+  .person-chip::after,
   .dock .day-tab::after, .day-rail .day-tab::after {
     content: ''; position: absolute; inset: -14px -2px;
   }
@@ -510,14 +587,24 @@ button { touch-action: manipulation; }
 /* The sticky stage strip (one for the whole page): stage names pin below the
  * sticky chrome while every day scrolls under them. Lives outside the
  * horizontal scrollers — position:sticky can't escape an overflow container
- * (same physics that put the hour rail outside the scroller). --rail-h is
- * measured by app.js: the day rail's height on desktop, 0 on mobile. */
+ * (same physics that put the hour rail outside the scroller). --nav-h and
+ * --rail-h are measured by app.js: the nav strip, plus the day rail on desktop
+ * (0 on mobile, where the rail is display:none).
+ *
+ * The rail HAS to pin, and it pins directly beneath the strip in the same
+ * translucent treatment (frame 6b): a stage column whose header has scrolled
+ * off is an unlabelled list of times. Strip + rail is the WHOLE of the pinned
+ * top chrome — the festival block and the crew chips go and do not come back. */
 .stage-strip {
-  position: sticky; top: var(--rail-h, 0px); z-index: 24;
-  background: rgba(12, 10, 20, .94);
+  position: sticky; top: calc(var(--nav-h, 0px) + var(--rail-h, 0px)); z-index: 24;
+  background: rgba(10, 8, 18, .92);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  padding-bottom: 4px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--hairline);
 }
+@supports not ((backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px))) {
+  .stage-strip { background: var(--dock); }
+}
+.low-power .stage-strip { background: var(--dock); backdrop-filter: none; -webkit-backdrop-filter: none; }
 .stage-strip .strip-rail { width: 40px; flex: none; } /* aligns with .times-rail */
 .stage-strip .times-scroll { scrollbar-width: none; }
 .stage-strip .times-scroll::-webkit-scrollbar { display: none; }

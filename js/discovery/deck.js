@@ -1013,6 +1013,32 @@ function resetFiltersAndRerender(ctx, actions) {
   commitFacets(ctx, actions, { ...DEFAULT_FACETS, genres: [] });
 }
 
+// The desktop rail's search box (design 6e). Same quiet field as the wall's
+// (.wall-search in assets/v3.css), reused verbatim so the two ends of the app
+// keep one search vocabulary. The value lives here rather than in `facets`
+// because it is per-visit, and re-rendering the whole body on every keystroke
+// is what renderDeckBody's caret restore exists for.
+let deckQuery = '';
+function buildRailSearch(ctx, actions, fest) {
+  const wrap = document.createElement('span');
+  wrap.className = 'wall-search dd2-rail-search';
+  wrap.innerHTML = '<svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true">'
+    + '<circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>'
+    + '<line x1="10.2" y1="10.2" x2="14.4" y2="14.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line></svg>';
+  const input = document.createElement('input');
+  input.id = 'dd2-search-input';
+  input.value = deckQuery;
+  const n = (fest.artists || []).length;
+  input.placeholder = n ? `Search ${n} artist${n === 1 ? '' : 's'}` : 'Search artists';
+  input.setAttribute('aria-label', 'Search artists');
+  input.addEventListener('input', (e) => {
+    deckQuery = e.target.value;
+    renderDeckBody(ctx, actions);
+  });
+  wrap.appendChild(input);
+  return wrap;
+}
+
 // LEFT RAIL — the identical facets object + localStorage key the mobile sheet
 // edits (openDiscoverFilterSheet below); segRow/toggleField are the same
 // builders the sheet uses, just wired to commit immediately instead of into a
@@ -1020,6 +1046,12 @@ function resetFiltersAndRerender(ctx, actions) {
 function buildRail(ctx, actions, facets, fest, canonData, scheduled) {
   const rail = document.createElement('div');
   rail.className = 'dd2-rail';
+
+  // Search sits at the top of the pane where narrowing the lineup already
+  // happens (design 6e) — the top bar is navigation, identity and status only.
+  // Deliberately NOT part of `facets`: a facet is a preference and survives to
+  // the next session in localStorage, a query is a moment and must not.
+  rail.appendChild(buildRailSearch(ctx, actions, fest));
 
   rail.appendChild(sortListRow(facets.sort, (v) => commitFacets(ctx, actions, { ...facets, sort: v })));
 
@@ -1304,7 +1336,11 @@ function refreshDesktopAfterDecision(ctx, actions) {
 
   const facets = loadFacets(ctx.fid);
   const fest = state.FESTIVALS[ctx.fid] || {};
-  const pool = ensureDesktopSession(ctx, facets);
+  // Same merged shape renderDesktopBody uses. Dropping the query here would
+  // change the session key on every decision, rebuilding the succession from
+  // the WHOLE lineup while the rail's search box still shows the words that
+  // narrowed it.
+  const pool = ensureDesktopSession(ctx, { ...facets, q: deckQuery });
 
   const oldMiddle = body.querySelector('.dd2-middle');
   if (oldMiddle) body.replaceChild(buildMiddle(ctx, actions, pool, fest), oldMiddle);
@@ -1605,8 +1641,12 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
 }
 
 // HEADER — festival name (Anton, the fest accent: this surface's one allowed
-// place for it, per repo law), Wall/Timetable (closes back to the app
-// screen), Discover (active), My day (scheduled fests only). Right: the sync
+// place for it, per repo law), then the same three destinations the phone's
+// nav strip carries: Wall (closes back to the app screen), Discover (active),
+// My Day (scheduled fests only). "Wall" is one destination before and after
+// set times drop — the lineup list becomes a timetable, it does not become a
+// different place — so the tab that used to relabel itself "Timetable" was
+// naming a view, not a destination (design 6e). Right: the sync
 // dot and a crew chip. The dot is a bare `.sync-dot` — sync.js's own
 // setSyncStatus() does `querySelectorAll('.sync-dot')` on every status
 // change, so this element gets the SAME live updates the dock/rail dots get
@@ -1623,19 +1663,21 @@ function buildDesktopHeader(ctx, actions, fest, scheduled) {
   festName.textContent = `${fest.name || ''} ${fest.year || ''}`.trim().toUpperCase();
   left.appendChild(festName);
 
-  const nav = document.createElement('div');
+  const nav = document.createElement('nav');
   nav.className = 'dd2-nav';
+  nav.setAttribute('aria-label', 'Views');
 
   const wallTab = document.createElement('button');
   wallTab.type = 'button';
   wallTab.className = 'dd2-navtab';
-  wallTab.textContent = scheduled ? 'Timetable' : 'Wall';
+  wallTab.textContent = 'Wall';
   wallTab.setAttribute('aria-label', `Close Discover — back to the ${scheduled ? 'timetable' : 'wall'}`);
   wallTab.addEventListener('click', () => { if (!router.requestClose()) closeDeck(); });
   nav.appendChild(wallTab);
 
   const discoverTab = document.createElement('span');
   discoverTab.className = 'dd2-navtab dd2-navtab-active';
+  discoverTab.setAttribute('aria-current', 'page');
   discoverTab.textContent = 'Discover';
   nav.appendChild(discoverTab);
 
@@ -1643,7 +1685,7 @@ function buildDesktopHeader(ctx, actions, fest, scheduled) {
     const myDayTab = document.createElement('button');
     myDayTab.type = 'button';
     myDayTab.className = 'dd2-navtab';
-    myDayTab.textContent = 'My day';
+    myDayTab.textContent = 'My Day';
     myDayTab.setAttribute('aria-label', 'Open your day — gaps and clashes');
     myDayTab.addEventListener('click', () => {
       if (!ctx.meName || ctx.migrationPending) return;
@@ -1688,7 +1730,11 @@ function buildDesktopHeader(ctx, actions, fest, scheduled) {
 function renderDesktopBody(overlay, ctx, actions, facets) {
   const fest = state.FESTIVALS[ctx.fid] || {};
   const scheduled = !!(fest.days && Object.keys(fest.days).length);
-  const pool = ensureDesktopSession(ctx, facets);
+  // The rail's query rides alongside the persisted facets, never inside them —
+  // and it goes THROUGH the desktop session rather than around it. The session
+  // is keyed on the facets object, so a typed query re-derives the succession's
+  // order instead of quietly handing the grid a pool the succession never saw.
+  const pool = ensureDesktopSession(ctx, { ...facets, q: deckQuery });
   const focusEntry = resolveFocusEntry(pool);
 
   const shell = document.createElement('div');
@@ -1711,6 +1757,13 @@ function renderDeckBody(ctx, actions) {
   const overlay = document.getElementById(OVERLAY_ID);
   if (!overlay) return;
   const facets = loadFacets(ctx.fid);
+  // Typing in the rail's search box re-renders this whole tree, which throws
+  // away the element the caret was in — the same problem wall.js solves with
+  // harvestEphemera. One input, so one small copy of it rather than a shared
+  // helper: remember where the caret was, put it back after the rebuild.
+  const active = document.activeElement;
+  const caret = (active && active.id === 'dd2-search-input')
+    ? { id: active.id, pos: active.selectionStart } : null;
   overlay.textContent = '';
   // Both layouts mount their own fresh player (grid's sibling desktop pane,
   // or the mobile card) — always tear down whatever was live first, same
@@ -1719,6 +1772,13 @@ function renderDeckBody(ctx, actions) {
 
   if (isDesktopLayout()) {
     renderDesktopBody(overlay, ctx, actions, facets);
+    if (caret) {
+      const back = document.getElementById(caret.id);
+      if (back) {
+        back.focus();
+        try { back.setSelectionRange(caret.pos, caret.pos); } catch { /* type quirks */ }
+      }
+    }
     return;
   }
 
@@ -1799,6 +1859,7 @@ export function closeDeck() {
   if (overlay) overlay.remove();
   deckOpen = false;
   session = null; // a fresh open deals a fresh session, per spec
+  deckQuery = ''; // and a fresh search box — the query was for this visit
   setFocus(null); // desktop's right-pane focus is per-open too
   pendingOpenGen++;
 }

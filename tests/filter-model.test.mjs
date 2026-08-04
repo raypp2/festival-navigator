@@ -152,3 +152,30 @@ test('applyFilters never throws on artists missing genres/day entirely', () => {
   const pool = applyFilters(bare, {}, {}, DEFAULT_FACETS, ME, CANON);
   assert.deepEqual(names(pool), ['Bare']);
 });
+
+// ---- q: the desktop rail's search field (design 6e) -------------------------------
+test('q narrows the pool by name, case-insensitively, on a substring', () => {
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, { ...DEFAULT_FACETS, q: 'skr' }, ME, CANON)), ['Skrillex']);
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, { ...DEFAULT_FACETS, q: 'SKRILLEX' }, ME, CANON)), ['Skrillex']);
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, { ...DEFAULT_FACETS, q: 'ill' }, ME, CANON)), ['Skrillex']);
+});
+
+test('q composes with the other facets rather than replacing them', () => {
+  // Riddim alone is Skrillex + Wooli; adding the query cuts it to one.
+  const facets = { ...DEFAULT_FACETS, genres: ['Riddim'], q: 'woo' };
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, facets, ME, CANON)), ['Wooli']);
+});
+
+test('an empty or whitespace q filters nothing, and no q at all is the same', () => {
+  const all = names(applyFilters(ARTISTS, {}, {}, DEFAULT_FACETS, ME, CANON));
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, { ...DEFAULT_FACETS, q: '' }, ME, CANON)), all);
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, { ...DEFAULT_FACETS, q: '   ' }, ME, CANON)), all);
+  const { q, ...noQ } = DEFAULT_FACETS;
+  assert.deepEqual(names(applyFilters(ARTISTS, {}, {}, noQ, ME, CANON)), all);
+});
+
+// A query is a moment, not a preference: it must never light the filter badge
+// the way a real facet does, or "clear filters" would be offered for typing.
+test('q is not an active facet', () => {
+  assert.equal(activeFacetCount({ ...DEFAULT_FACETS, q: 'skrillex' }), 0);
+});

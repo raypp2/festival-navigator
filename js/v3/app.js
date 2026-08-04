@@ -252,19 +252,23 @@ function renderYou() {
   }
 }
 
-// Sticky-chrome geometry, measured not hardcoded: the stage strip pins below
-// the day rail (--rail-h; 0 on mobile where the rail is display:none), and
-// day jumps land headers below rail + strip (--jump-offset via
-// scroll-margin-top). Re-measured every repaint and on resize — fluid type
-// makes both heights breakpoint-dependent.
+// Sticky-chrome geometry, measured not hardcoded: the nav strip pins at the
+// top (--nav-h, safe-area padding included), the day rail pins under it on
+// desktop (--rail-h; 0 on mobile where the rail is display:none), the stage
+// strip pins under both, and day jumps land headers below all three
+// (--jump-offset via scroll-margin-top). Re-measured every repaint and on
+// resize — fluid type and the safe-area inset make every height contextual.
 function measureStickyChrome() {
+  const nav = $('nav-strip');
+  const navH = nav && nav.offsetHeight ? nav.offsetHeight : 0;
   const rail = $('day-rail');
   const railH = rail && rail.offsetHeight ? rail.offsetHeight : 0;
   const strip = document.querySelector('.stage-strip');
   const stripH = strip ? strip.offsetHeight : 0;
   const rootStyle = document.documentElement.style;
+  rootStyle.setProperty('--nav-h', `${navH}px`);
   rootStyle.setProperty('--rail-h', `${railH}px`);
-  rootStyle.setProperty('--jump-offset', `${railH + stripH + 6}px`);
+  rootStyle.setProperty('--jump-offset', `${navH + railH + stripH + 6}px`);
 }
 
 let unspy = () => {};
@@ -310,21 +314,62 @@ function repaintWall() {
   refreshCtx();
   renderWall($('wall-root'), ctx);
   renderDayNav();
-  $('notes-count').textContent = String(model.totalNoteCount(state.crewDoc, ctx.fid));
+  const noteCount = model.totalNoteCount(state.crewDoc, ctx.fid);
+  $('notes-count').textContent = String(noteCount);
+  // The bubble shows a bare number; the label is where the number gets a noun,
+  // since aria-label replaces the text rather than joining it.
+  $('notes-chip').setAttribute('aria-label', `Notes — ${noteCount}`);
   // A timetable has one true order — a sort control there would be a lie
   // (CORE-5). Searching a scheduled fest sorts chronologically by design.
   const scheduled = !!(state.fest().days && Object.keys(state.fest().days).length);
   $('sort-control').style.display = scheduled ? 'none' : '';
-  // My day (build spec 7.4) only exists for a festival with real set times —
+  // My Day (build spec 7.4) only exists for a festival with real set times —
   // a lineup-only fest has no gaps/clashes to assist with (Phase 2 note in
-  // the build spec: this surface doesn't exist there, so the entry hides
+  // the build spec: this surface doesn't exist there, so the tab hides
   // rather than opening to a dead view).
-  const myDayBtn = $('myday-btn');
-  if (myDayBtn) myDayBtn.style.display = scheduled ? '' : 'none';
+  $('tab-myday').style.display = scheduled ? '' : 'none';
+  syncSearchAffordance();
   updateMigrationBanner();
   updateWeekendRow();
   updateArchiveNote();
   measureStickyChrome();
+}
+
+// Search belongs to the view, not to the nav row (design §Search). Two shapes,
+// one field:
+//   Wall (lineup)  — always on, at the top of the list it filters.
+//   Timetable      — collapsed. The grid already answers "when and where", and
+//                    the strip's magnifier expands this same field in place.
+// Collapsing clears the query rather than hiding a live filter: a wall that is
+// secretly filtered by a box you can't see is the worst of both.
+let searchExpanded = false;
+function searchIsPinnedOpen() {
+  return !(state.fest().days && Object.keys(state.fest().days).length);
+}
+function syncSearchAffordance() {
+  const open = searchIsPinnedOpen() || searchExpanded;
+  $('wall-search').hidden = !open;
+  $('nav-search-btn').setAttribute('aria-expanded', String(open));
+  // A collapsed field and a hidden sort control leave an empty row that still
+  // spends its margin — on a timetable that is 13px of nothing between the
+  // strip and the stage rail.
+  $('wall-controls').hidden = !open && $('sort-control').style.display === 'none';
+  // Real count, never a placeholder number — "Search 312 artists" is a claim
+  // about this festival, and a wrong one reads as a bug the moment you scroll.
+  const n = (state.fest().artists || []).length;
+  $('search-input').placeholder = n ? `Search ${n} artist${n === 1 ? '' : 's'}` : 'Search artists';
+}
+function toggleSearch() {
+  if (searchIsPinnedOpen()) { $('search-input').focus(); return; }
+  searchExpanded = !searchExpanded;
+  if (!searchExpanded && ctx.query) {
+    $('search-input').value = '';
+    ctx.query = '';
+    repaintWall();
+    return;
+  }
+  syncSearchAffordance();
+  if (searchExpanded) $('search-input').focus();
 }
 
 // Multi-weekend fests (ACL) get a weekend view (ST-3): pick yours once and
@@ -356,7 +401,9 @@ function updateWeekendRow() {
       });
       row.appendChild(b);
     }
-    document.querySelector('#screen-app .toolbar').after(row);
+    // Below search + sort: the weekend picker narrows the same list they do,
+    // and the nav strip above stays navigation only.
+    $('wall-controls').after(row);
   }
   row.querySelectorAll('.seg').forEach((b) => b.classList.toggle('active', b.dataset.w === (ctx.weekend || 'all')));
 }
@@ -392,12 +439,15 @@ function updateArchiveNote() {
 }
 
 
-// Toolbar strips insert in call order (audit 1.4): each lands after the last
-// existing strip, so priority order in code IS priority order on screen.
+// Notice strips (migration banner, coach mark, archive note) insert in call
+// order (audit 1.4): each lands after the last existing strip, so priority
+// order in code IS priority order on screen. They anchor under the nav strip —
+// the class keeps its `toolbar-` name because it is a pure JS ordering marker
+// with no stylesheet behind it, and renaming it buys nothing.
 function insertStrip(bar) {
   bar.classList.add('toolbar-strip');
   const strips = document.querySelectorAll('#screen-app .toolbar-strip');
-  const anchor = strips.length ? strips[strips.length - 1] : document.querySelector('#screen-app .toolbar');
+  const anchor = strips.length ? strips[strips.length - 1] : document.getElementById('nav-strip');
   anchor.after(bar);
 }
 
@@ -926,6 +976,7 @@ function openSettings() {
       ctx.query = '';
       const searchBox = $('search-input');
       if (searchBox) searchBox.value = '';
+      searchExpanded = false; // and the field it was typed into closes with it
       // The scanned library is a device asset — switching fests badges the
       // new lineup from the cache, no rescan (SPOT-5).
       // A festival you just added (or switched to) badges itself from the
@@ -1713,30 +1764,15 @@ export function init() {
   });
   sortCtl = createSortControl({ initial: ctx.sort, onChange: (v) => { ctx.sort = v; repaintWall(); } });
   $('sort-control').appendChild(sortCtl.el);
-  // Discover entry (build spec 7.2): inserted into the existing toolbar row —
-  // index.html carries no static markup for it, same "build it in JS"
-  // convention as every other Discovery surface (artist page, share moment).
-  // Violet tonal treatment (repo law: brand violet = selected/ours; the fest
-  // accent adds no new place here).
-  const discoverBtn = document.createElement('button');
-  discoverBtn.className = 'discover-chip';
-  discoverBtn.id = 'discover-btn';
-  discoverBtn.textContent = 'Discover';
-  discoverBtn.setAttribute('aria-label', 'Open Discover');
-  discoverBtn.addEventListener('click', openDiscoverDeck);
-  $('sort-control').insertAdjacentElement('afterend', discoverBtn);
-  // My day entry (build spec 7.4): same violet tonal chip, next to Discover.
-  // Only meaningful once a festival has real set times — a lineup-only fest
-  // has no gaps/clashes to assist with, so the entry stays hidden (never a
-  // dead control) until repaintWall's scheduled check below shows it.
-  const myDayBtn = document.createElement('button');
-  myDayBtn.className = 'discover-chip myday-chip';
-  myDayBtn.id = 'myday-btn';
-  myDayBtn.textContent = 'My day';
-  myDayBtn.setAttribute('aria-label', 'Open your day — gaps and clashes');
-  myDayBtn.style.display = 'none';
-  myDayBtn.addEventListener('click', openMyDayLayer);
-  discoverBtn.insertAdjacentElement('afterend', myDayBtn);
+  // Nav strip (design 6a): Wall is where we already are, so its tab is the
+  // "you are here" marker (aria-current) rather than a trip somewhere — it
+  // stays focusable and jumps to the top of the wall, which is the only thing
+  // left to ask for. Discover and My Day open their layers through the same
+  // identity/migration gates every pick-writing surface goes through.
+  $('tab-wall').addEventListener('click', () => window.scrollTo({ top: 0, behavior: ctx.lowPower ? 'auto' : 'smooth' }));
+  $('tab-discover').addEventListener('click', openDiscoverDeck);
+  $('tab-myday').addEventListener('click', openMyDayLayer);
+  $('nav-search-btn').addEventListener('click', toggleSearch);
   // Genre canon (js/discovery/genres.js): one repo-owned static fetch, warmed
   // here rather than per-surface. The deck/artist page/filter sheet also
   // await loadGenreCanon() themselves for their own first paint (it resolves

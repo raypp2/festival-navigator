@@ -32,8 +32,9 @@
   --spotify-stroke: rgb(103, 185, 138);
   --notes-fill: rgba(108, 91, 212, .5);
   --notes-stroke: rgb(196, 189, 238);
-  --notes-chip-stroke: #8B7BFF;  /* outlined Notes chip variant */
-  --notes-chip-text: #A99BFF;
+  /* (--notes-chip-stroke went with the outlined Notes pill, design 6a. The nav
+   * strip's bubble draws its half-strength border from --notes-stroke above.) */
+  --notes-chip-text: #A99BFF;   /* the ✎ affordance on a hovered card */
   --tonal-fill: rgba(192, 132, 252, .13);
   --tonal-text: #D8B4FE;
   /* The APP's own violet, as an R,G,B triple. Distinct from --fest on purpose:

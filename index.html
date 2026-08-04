@@ -28,21 +28,50 @@
       @media (min-width: 720px) { .shell { padding: 22px var(--sp-gutter) 40px; } }
       .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
       .app-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      /* Long fest names ellipsize instead of shoving the gear out of the row
+         (design 6a acceptance: "truncate rather than pushing the gear
+         off-screen"). */
       .app-header .title { font-family: var(--font-display); letter-spacing: .05em;
-                           color: rgb(var(--fest)); font-size: var(--fs-display); line-height: 1; }
+                           color: rgb(var(--fest)); font-size: var(--fs-display); line-height: 1;
+                           min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .app-header .title .yr { font-size: .45em; vertical-align: super; opacity: .7; margin-left: .1em; }
       /* The dates column, and under it the archived notice — the header is the
          honest home for "this already happened": it belongs with the festival's
          identity, not as a banner competing with the wall. */
       .app-header .sub-col { flex: 1 1 180px; min-width: 0; align-self: flex-end; padding-bottom: 2px;
                              display: flex; flex-direction: column; gap: 2px; }
+      /* Phone: frame 6a's top row is back · name · gear, with the dates on the
+         line beneath. `order` puts the dates after the gear and a 100% basis
+         forces the break, so the name owns the full width of the first row and
+         ellipsizes into it instead of shrinking to nothing beside the dates. */
+      @media (max-width: 719px) {
+        .app-header .sub-col { order: 4; flex: 1 1 100%; align-self: auto; }
+        /* basis 0 means the name never contributes a wrap decision either: it
+           takes what the chevron and the gear leave and ellipsizes into it,
+           rather than breaking to a line of its own and pushing the gear to a
+           third. */
+        .app-header .title { flex: 1 1 0; }
+      }
       .app-header .sub { color: var(--text-tertiary); font-size: 11px; font-weight: 600; min-width: 0;
                          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
       .app-header .fest-archived { color: var(--text-secondary); font-size: 11px; font-weight: 700; }
       .app-header .fest-archived:empty { display: none; }
       .header-right { margin-left: auto; display: none; align-items: center; gap: 6px; }
       @media (min-width: 720px) { .header-right { display: inline-flex; } }
-      .toolbar { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 11px; }
+      /* The crew chips get the row to themselves (frame 6a); the nav strip that
+         used to share it with them is its own component below (v3.css).
+         nowrap + overflow-x is the acceptance criterion "8 members scroll
+         horizontally, strip position unaffected" — wrapping would push the
+         strip down a line per four people. A scroller clips BOTH axes, and
+         .person-chip's 44px hit area is an ::after reaching 14px above and
+         below, so the 10px block padding buys that room back: 26px chip + 20
+         = a 46px target inside the padding box. */
+      .crew-row { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap;
+                  overflow-x: auto; scrollbar-width: none;
+                  margin: 5px calc(-1 * var(--sp-gutter)) 0; padding: 10px var(--sp-gutter); }
+      .crew-row::-webkit-scrollbar { display: none; }
+      .crew-row > * { flex: none; }
+      .crew-row:empty { display: none; }  /* solo spectator: no row, no gap */
       .wall-wrap { margin-top: 13px; display: flex; flex-direction: column; gap: 13px; }
       /* Entry screens center their content on tall viewports and scroll when
          tall (margin-block:auto is overflow-safe, unlike align-items:center). */
@@ -151,16 +180,31 @@
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#8E86A8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
           </button>
         </header>
-        <div class="toolbar">
-          <span id="person-chips" style="display: inline-flex; gap: 5px; flex-wrap: wrap;"></span>
-          <span class="toolbar-divider"></span>
-          <span class="search-pill" style="flex: 1; min-width: 140px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8E86A8" stroke-width="2.5"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
-            <input id="search-input" placeholder="Search…" aria-label="Search artists">
-          </span>
-          <span id="sort-control"></span>
-          <button class="notes-chip" id="notes-chip">Notes <span class="count" id="notes-count">0</span></button>
-        </div>
+        <span class="crew-row" id="person-chips"></span>
+        <!-- Nav strip (design 6a/6b): three destinations, two quiet utilities.
+             Destinations, not actions — an outlined violet pill means "do
+             something" in this app, so a tab that reads as a button is a lie
+             about what it does. Selected = a brand-violet underline, never the
+             festival accent (repo law: the accent has exactly four homes). -->
+        <nav class="nav-strip" id="nav-strip" aria-label="Views">
+          <div class="nav-strip-row">
+            <div class="nav-tabs">
+              <button class="nav-tab" type="button" id="tab-wall" aria-current="page">Wall</button>
+              <button class="nav-tab" type="button" id="tab-discover">Discover</button>
+              <button class="nav-tab" type="button" id="tab-myday">My Day</button>
+            </div>
+            <div class="nav-utils">
+              <button class="nav-util" type="button" id="nav-search-btn" aria-controls="wall-search" aria-expanded="false" aria-label="Search artists">
+                <svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle><line x1="10.2" y1="10.2" x2="14.4" y2="14.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line></svg>
+              </button>
+              <!-- Notes keeps its own identity — the bubble with the sharp
+                   lower-left corner (--r-bubble), not a tonal pill. -->
+              <button class="nav-util" type="button" id="notes-chip" aria-label="Notes">
+                <span class="notes-bubble" id="notes-count">0</span>
+              </button>
+            </div>
+          </div>
+        </nav>
         <!-- Desktop day rail (DT-1): the dock's ≥720 body — same anatomy:
              avatar, day tabs, fest name + sync dot (unified, Kevin note 1.1) -->
         <div class="day-rail" id="day-rail">
@@ -171,6 +215,16 @@
             <span class="sync-dot"></span>
             <span class="sr-only" id="sync-label">online</span>
           </button>
+        </div>
+        <!-- Search belongs to the VIEW, not to the nav row (design §Search):
+             always-on above the lineup wall, collapsed behind the strip's
+             magnifier on a timetable, where the grid is the answer. -->
+        <div class="wall-controls" id="wall-controls">
+          <span class="wall-search" id="wall-search">
+            <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.6" cy="6.6" r="4.6" fill="none" stroke="currentColor" stroke-width="1.6"></circle><line x1="10.2" y1="10.2" x2="14.4" y2="14.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line></svg>
+            <input id="search-input" placeholder="Search artists" aria-label="Search artists">
+          </span>
+          <span id="sort-control"></span>
         </div>
         <div class="wall-wrap" id="wall-root"></div>
       </div>

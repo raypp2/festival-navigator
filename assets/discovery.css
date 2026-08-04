@@ -119,6 +119,21 @@
 .sample-player-stage[data-shape="sp"] {
   height: var(--disc-stage-sp-h); background: var(--dock);
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+  /* content-box, and it is load-bearing. --disc-stage-sp-h is the height the
+   * EMBED needs, not the height of the box around it: Spotify's iframe measures
+   * its own viewport and drops to the squat compact player the moment that
+   * measurement comes in under 352. Under this file's border-box default the
+   * two hairlines ate two of those pixels, the iframe rendered at 350, and the
+   * embed drew its ~150px compact self inside a 352px stage — the ~200px of
+   * dead space under Spotify on the artist page AND the deck (2026-08-04). */
+  box-sizing: content-box;
+}
+/* Spotify's stage appears in the deck card too, and there it is an INSET block
+ * inside the compact card's 12px padding rather than a full-bleed band across
+ * an artist page. Full-bleed hairlines on a floating block read as a seam, so
+ * it takes the card's own corner + a closed border instead. */
+.sample-player--compact .sample-player-stage {
+  border-radius: var(--r-row); overflow: hidden;
 }
 .sample-player-stage-embed, .sample-player-stage-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 /* Mounting: dark stage with "loading…" text — never a spinner over an empty box. */
@@ -513,16 +528,10 @@
 }
 
 /* ---- discover deck ---- */
-/* Toolbar entry (js/v3/app.js inserts this after #sort-control): violet
- * tonal treatment, same pill footprint as the app's other tonal buttons —
- * gets the 44px coarse-pointer floor for free by being a <button> (repo law:
- * that floor is selector-inherited, never enumerated). */
-.discover-chip {
-  display: inline-flex; align-items: center; gap: 5px;
-  background: var(--tonal-fill); border: 1.5px solid rgba(var(--brand), .4);
-  color: var(--tonal-text); font-weight: 700; font-size: 12px;
-  padding: 8px 16px; border-radius: var(--r-pill); cursor: pointer; white-space: nowrap;
-}
+/* (.discover-chip removed with the pill toolbar, design 6a: an outlined violet
+ * pill is this app's vocabulary for "perform an action", so Discover and My
+ * day wearing one read as buttons rather than as the two destinations they
+ * are. Both are tabs in the nav strip now — assets/v3.css, .nav-strip.) */
 
 /* Discovery M4 (build spec 7.2, frames 2a/2e/4d). A fixed full-screen overlay,
  * same "build it in JS, one instance, idempotent open" convention as
@@ -957,9 +966,9 @@
 /* Schedule assist (Discovery M6, build spec 7.4, frames 2b/5d). Full-screen
  * layer like .discover-deck — same "build it in JS, one instance, idempotent
  * open" convention, sits below .artist-page/.decide-screen (a set tap or a
- * clash tap stacks one of those ON TOP of this). Toolbar entry
- * (js/v3/app.js's #myday-btn) reuses .discover-chip's violet tonal look —
- * no new component needed there. */
+ * clash tap stacks one of those ON TOP of this). Reached from the app's nav
+ * strip (#tab-myday), which owns its own styling — this file styles the
+ * layer, not the way in. */
 .my-day {
   position: fixed; inset: 0; z-index: 33; background: var(--page);
   display: flex; flex-direction: column; overflow: hidden;
@@ -1189,20 +1198,32 @@
 #discover-deck-overlay .dd2-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 
 /* ---- header: fest name (the fest accent — this surface's one allowed place
- * for it), Wall/Timetable + Discover + My day nav, sync dot + crew chip ---- */
+ * for it), Wall + Discover + My Day nav, sync dot + crew chip. The same three
+ * destinations, spelled the same way, as the phone's nav strip (design 6e) —
+ * "Timetable" is gone, because the wall before and after set times drop is one
+ * place, not two. Navigation, identity and status only: search moved down into
+ * the filter pane, where narrowing the lineup already happens. ---- */
 .dd2-header {
   flex: none; height: 66px; display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; border-bottom: 1px solid var(--hairline); background: var(--dock);
+  position: sticky; top: 0; z-index: 3;
 }
-.dd2-header-left { display: flex; align-items: center; gap: 16px; min-width: 0; }
+/* Stretches to the bar's full 66px so the tabs inside it can — the fest name
+ * beside them stays vertically centred on its own. */
+.dd2-header-left { display: flex; align-self: stretch; align-items: center; gap: 16px; min-width: 0; }
 .dd2-fest-name {
   font-family: var(--font-display); letter-spacing: var(--track-display); font-size: 20px;
   color: rgb(var(--fest)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.dd2-nav { display: flex; align-items: center; gap: 20px; margin-left: 6px; }
+/* Tabs run the full 66px of the bar and hang 1px past it, so the active
+ * underline lands ON the header's hairline — the same relationship the phone's
+ * .nav-tab has with its 46px row. */
+.dd2-nav { display: flex; align-self: stretch; gap: 22px; margin-left: 6px; }
 .dd2-navtab {
+  display: flex; align-items: center; align-self: stretch; margin-bottom: -1px;
   background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer;
-  padding: 8px 0; font: 800 13px var(--font-ui); color: var(--text-secondary); line-height: 1;
+  padding: 0; font: 800 13.5px var(--font-ui); color: var(--text-secondary); line-height: 1;
+  white-space: nowrap;
 }
 .dd2-navtab-active { color: var(--text-header); border-bottom-color: rgb(var(--brand)); cursor: default; }
 .dd2-header-right { display: flex; align-items: center; gap: 16px; flex: none; }
@@ -1223,7 +1244,15 @@
  * (js/discovery/deck.js's loadFacets/saveFacets, one localStorage key),
  * rendered persistent instead of inside a bottom sheet — segRow/toggleField
  * are the SAME builders the sheet's .dd-filter-body uses. ---- */
-.dd2-rail { width: 216px; flex: none; display: flex; flex-direction: column; gap: 20px; }
+/* Sticks independently of the header (design 6e): the pane is short, the grid
+ * beside it is long, and the filters you are narrowing WITH should not scroll
+ * away from the results you are narrowing. */
+.dd2-rail { width: 216px; flex: none; display: flex; flex-direction: column; gap: 20px;
+            position: sticky; top: 0; }
+/* The quiet field from assets/v3.css, at the pane's 40px size — one search
+ * component across the phone wall and this rail, not two that merely resemble
+ * each other. */
+.dd2-rail-search { min-height: 40px; }
 .dd2-sort-list { display: flex; flex-direction: column; border: 1px solid var(--border-input); border-radius: var(--r-row); overflow: hidden; }
 .dd2-sort-opt {
   text-align: left; padding: 10px 12px; background: none; border: none; border-top: 1px solid var(--hairline);

@@ -806,3 +806,65 @@ test('closing the deck cancels a pending pick — it cannot land on the next ses
 
   assert.equal(levelOf('RankTarget'), 0, 'no write from a deck that is gone');
 });
+
+// ---- desktop header + rail search (design 6e) ------------------------------------
+// The nav change: three destinations spelled the same way at both sizes, and
+// search moved out of the top bar into the pane where narrowing already lives.
+function navTabs() { return [...overlay().querySelectorAll('.dd2-navtab')].map((t) => t.textContent); }
+function railSearch() { return overlay().querySelector('#dd2-search-input'); }
+function gridNames() { return [...overlay().querySelectorAll('.dd2-gridcard .name')].map((n) => n.textContent); }
+
+test('desktop header carries Wall · Discover, never a "Timetable" tab', () => {
+  renderDesktopForTest(ctx, mkActions(), CANON);
+  const tabs = navTabs();
+  assert.equal(tabs.includes('Timetable'), false, 'the wall is one destination before and after set times drop');
+  assert.deepEqual(tabs.slice(0, 2), ['Wall', 'Discover']);
+  // Deck Fest carries no days{}, so My Day would open to a dead view — the tab
+  // stays off rather than becoming a control that does nothing.
+  assert.equal(tabs.includes('My Day'), false);
+  assert.equal(overlay().querySelector('.dd2-navtab-active').getAttribute('aria-current'), 'page');
+});
+
+test('the search field lives at the top of the filter pane, above Sort', () => {
+  renderDesktopForTest(ctx, mkActions(), CANON);
+  const rail = overlay().querySelector('.dd2-rail');
+  assert.equal(rail.firstElementChild.contains(railSearch()), true, 'first thing in the pane');
+  // DOCUMENT_POSITION_FOLLOWING: Sort comes after the field, not before it.
+  const followsSearch = railSearch().compareDocumentPosition(rail.querySelector('.dd2-sort-list'));
+  assert.ok(followsSearch & dom.window.Node.DOCUMENT_POSITION_FOLLOWING, 'Sort comes after it');
+  // and nowhere near the top bar, which is navigation, identity and status only
+  assert.equal(overlay().querySelector('.dd2-header input'), null);
+});
+
+test('typing in the rail search narrows the grid and keeps the caret', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  assert.ok(gridNames().length > 1);
+
+  const input = railSearch();
+  input.focus();
+  input.value = 'ranktar';
+  input.setSelectionRange(7, 7);
+  input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+
+  assert.deepEqual(gridNames(), ['RankTarget'], 'the grid re-renders against the query');
+  const after = railSearch();
+  assert.equal(after.value, 'ranktar');
+  assert.equal(document.activeElement, after, 'the rebuilt field takes focus back');
+  assert.equal(after.selectionStart, 7, 'and the caret with it');
+});
+
+test('the rail query is per-visit: never persisted, gone on close', () => {
+  renderDesktopForTest(ctx, mkActions(), CANON);
+  const input = railSearch();
+  input.value = 'ranktar';
+  input.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
+  assert.deepEqual(gridNames(), ['RankTarget']);
+  // A facet is a preference and survives in localStorage; a query is a moment.
+  assert.equal(localStorage.getItem('fp.discoverFilter.' + FID), null);
+
+  closeDeck();
+  renderDesktopForTest(ctx, mkActions(), CANON);
+  assert.equal(railSearch().value, '', 'a fresh open opens on the whole pool');
+  assert.ok(gridNames().length > 1);
+});

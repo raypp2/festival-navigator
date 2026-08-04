@@ -23,6 +23,11 @@ export const DEFAULT_FACETS = {
   crewPicked: false,    // someone else picked, I haven't decided
   hasLiveSet: false,    // any sample source resolved
   gap: false,           // playing inside one of MY open gaps (timed festivals only — build spec 7.4/M6)
+  // Name search (design 6e — the desktop rail's field). Unlike every facet
+  // above it, this one is NOT persisted: deck.js keeps it in module state and
+  // merges it in per render, so it never reaches the localStorage key and
+  // never counts as an "active filter" in activeFacetCount.
+  q: '',
 };
 
 function withDefaults(facets) {
@@ -138,6 +143,7 @@ export function applyFilters(artists, picks, passes, facets, me, canonData, fest
   });
 
   const genreSet = new Set(f.genres);
+  const query = String(f.q || '').trim().toLowerCase();
   const gapNames = (f.gap && fest?.days && Object.keys(fest.days).length)
     ? gapArtistNames(fest, picks, passes, me)
     : null;
@@ -145,6 +151,10 @@ export function applyFilters(artists, picks, passes, facets, me, canonData, fest
   const filtered = ranked.filter((r) => {
     const meta = byName[r.name];
     if (!meta) return false;
+
+    // Substring on the name, same rule the wall's search uses — one search
+    // behaviour across the app, not a second idea of what "matches" means.
+    if (query && !r.name.toLowerCase().includes(query)) return false;
 
     const myLevel = (picks?.[r.name] || {})[me] || 0;
 

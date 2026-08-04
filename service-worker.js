@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v54'; // v54 = desktop succession: decided cards stay marked, pane advances, styled scrollbars
+const CACHE_VERSION = 'festival-nav-v55'; // v55 = v54 + nav strip: pills + search row out, Wall/Discover/My Day tabs in, strip + stage rail pin
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
