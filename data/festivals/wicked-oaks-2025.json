@@ -10,275 +10,793 @@
   "artists": [
     {
       "name": "Eric Prydz",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "house",
+        "edm",
+        "electronic",
+        "progressive",
+        "progressive house",
+        "trance"
+      ],
+      "soundcloudSlug": "eric-prydz",
+      "spotifyId": "5sm0jQ1mq0dusiLtDJ2b4R",
+      "youtubeQuery": "Eric Prydz live set"
     },
     {
       "name": "Kaskade",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "house"
+      ],
+      "soundcloudSlug": "kaskade",
+      "spotifyId": "6TQj5BFPooTa08A7pk8AQ1",
+      "youtubeQuery": "Kaskade live set",
+      "youtubeVideoIds": [
+        "l5wro3bMZWc",
+        "sBZc8aoUFhk",
+        "2uznwavqsBs"
+      ],
+      "youtubeLabels": [
+        "Kaskade Live at EDC Las Vegas 2026",
+        "Kaskade Live at Sunsoaked Festival 2025",
+        "Kaskade LIVE At The Golden Gate Bridge | San Francisco , CA"
+      ]
     },
     {
       "name": "Bob Moses",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "deep house",
+        "electronic",
+        "house",
+        "jazz"
+      ],
+      "soundcloudSlug": "the-bob-moses",
+      "spotifyId": "6LHsnRBUYhFyt01PdKXAF5",
+      "youtubeQuery": "Bob Moses live set"
     },
     {
       "name": "Max Styler",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "tech house"
+      ],
+      "soundcloudSlug": "maxstyler",
+      "spotifyId": "3NKKngINK1tP6BFy0WOyWk",
+      "youtubeQuery": "Max Styler live set",
+      "youtubeVideoIds": [
+        "98PbnkVqv1s",
+        "N40pkDgwNfg",
+        "Xmily-bP8Q0"
+      ],
+      "youtubeLabels": [
+        "Max Styler WE1 | Tomorrowland 2026",
+        "Max Styler Live @ EDC Vegas 2025",
+        "Max Styler Live @ Club Space Miami 2026"
+      ]
     },
     {
       "name": "Kasablanca",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dance",
+        "edm",
+        "house",
+        "melodic house",
+        "melodic techno",
+        "pop",
+        "progressive house",
+        "tech house"
+      ],
+      "soundcloudSlug": "wearekasablanca",
+      "spotifyId": "297Z0teiCkp5s9eneWROpI",
+      "youtubeQuery": "Kasablanca live set"
     },
     {
       "name": "Jackie Hollander",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "5ykY9Uweo3gl5VFpb6z6pQ",
+      "youtubeQuery": "Jackie Hollander live set",
+      "youtubeVideoIds": [
+        "h0UoFF7MDEU",
+        "rCzMyJtPPT0",
+        "g3-Vi2sJt-s"
+      ],
+      "soundcloudSlug": "jackiehollander",
+      "youtubeLabels": [
+        "Jackie Hollander Live at EDC Las Vegas 2026",
+        "Jackie Hollander at The Concourse Project | Full Set (14 Feb 2026)",
+        "Jackie Hollander Live @Concourse Project 2025"
+      ]
     },
     {
       "name": "JEV",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Jev live set"
     },
     {
       "name": "SHIMA",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Shima live set",
+      "youtubeVideoIds": [
+        "XzBfl8gVHn0",
+        "bw56itX9nrs",
+        "GsUjyvu2250"
+      ],
+      "youtubeLabels": [
+        "ELECTRIC FOREST 2025",
+        "Daytime Café Dance Music Set | AM.RADIO 002",
+        "Shima Full Set Hulaween 2025 ft UTAW"
+      ]
     },
     {
       "name": "Dairy",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Dairy live set"
     },
     {
       "name": "VOYD",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "VOYD live set",
+      "soundcloudSlug": "enterthevoyd"
     },
     {
       "name": "NGHTMRE",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "trap edm",
+        "electronic",
+        "future bass",
+        "house",
+        "progressive house",
+        "trap"
+      ],
+      "soundcloudSlug": "nghtmre",
+      "spotifyId": "76M2Ekj8bG8W7X2nbx2CpF",
+      "youtubeQuery": "NGHTMRE live set",
+      "youtubeVideoIds": [
+        "JsckNFtpHYI",
+        "3CiXDungew4",
+        "6GIA7hXhwNI"
+      ],
+      "youtubeLabels": [
+        "LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2025",
+        "NGHTMRE Presents: MINDFULL - Live at Mission Ballroom",
+        "NGHTMRE @ VIRTUAL VIBES 2020 (MEDUSA SET)"
+      ]
     },
     {
       "name": "Kompany",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kompanymusic",
+      "spotifyId": "7dtX3ykcuyVmts2HQnWgSP",
+      "youtubeQuery": "Kompany live set",
+      "youtubeVideoIds": [
+        "AhaquH-1Bmc",
+        "JFhlrajr4XI",
+        "5f2q0fExmYs"
+      ],
+      "youtubeLabels": [
+        "Kompany Live @ Lost Lands 2025 - Full Set",
+        "Kompany Live at EDC Las Vegas 2025",
+        "KOMPANY DJ SET PARIS | OHLALA FESTIVAL 2025"
+      ]
     },
     {
       "name": "Flux Pavilion",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "edm",
+        "electronic",
+        "dance",
+        "uk garage",
+        "club",
+        "dub"
+      ],
+      "soundcloudSlug": "flux-pavilion",
+      "spotifyId": "7muzHifhMdnfN1xncRLOqk",
+      "youtubeQuery": "Flux Pavilion live set",
+      "youtubeVideoIds": [
+        "kf624ZDp2D8",
+        "XouoZyVj-Ks",
+        "lQJetgN58qE"
+      ],
+      "youtubeLabels": [
+        "Flux Pavilion Live @ Lost Lands 2023 - Full Set",
+        "OHLALA Festival 2024 (Full Set)",
+        "Flux Pavilion live at: Circus 15 | Mission Ballroom, Denver | Full Set"
+      ]
     },
     {
       "name": "INFEKT",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "infektdubstep",
+      "spotifyId": "3I6KMDdmPiLE5UQ4XF8Kpl",
+      "youtubeQuery": "INFEKT live set",
+      "youtubeVideoIds": [
+        "4UL1jRst2U0",
+        "DgzJC3Iir24",
+        "r4B_lg315oA"
+      ],
+      "youtubeLabels": [
+        "INFEKT Live at Mission Ballroom (Full Set)",
+        "INFEKT B2B Samplifire (Trench Time) At Rampage Open Air 2026",
+        "Live From Denver"
+      ]
     },
     {
       "name": "SampliFire",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "samplifire",
+      "spotifyId": "57gGqESEggWfCpE3KOzdVa",
+      "youtubeQuery": "Samplifire live set",
+      "youtubeVideoIds": [
+        "i4Hp1y1wcHA",
+        "QFY1IqfXiaM",
+        "DgzJC3Iir24"
+      ],
+      "youtubeLabels": [
+        "Samplifire Lost Lands 2025 - Live At The Crater",
+        "Infekt B2B Samplifire Live at EDC Las Vegas 2026",
+        "INFEKT B2B Samplifire (Trench Time) At Rampage Open Air 2026"
+      ]
     },
     {
       "name": "Automhate",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "automhate",
+      "spotifyId": "6bWRCpJ69GQnmrL7gE4WHf",
+      "youtubeQuery": "Automhate live set"
     },
     {
       "name": "MAD DUBZ",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "maddubzmusic",
+      "spotifyId": "4TQ72C7aaARXGuHB7qBPk7",
+      "youtubeQuery": "Mad Dubz live set",
+      "youtubeVideoIds": [
+        "F3mup4bDAaM",
+        "WnN5y7pPq8g",
+        "msEJeF8_6Kc"
+      ],
+      "youtubeLabels": [
+        "Live From Denver",
+        "MAD DUBZ @ Mushroom | Riddim live set [Asia/South Korea debut]",
+        "BACK 2 SCHOOL 2024 by ALPHA SQUADRON | @ LE BELMONT MONTREAL [4K]"
+      ]
     },
     {
       "name": "Prosecute",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "29WUwugsDf2hQ5tAZMyR7T",
+      "youtubeQuery": "Prosecute live set",
+      "soundcloudSlug": "prosecutemusic"
     },
     {
       "name": "Simula",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "drum and bass"
+      ],
+      "soundcloudSlug": "simula",
+      "spotifyId": "2KCmoJZgpL6hNFdT4l9PTl",
+      "youtubeQuery": "Simula live set"
     },
     {
       "name": "VAMPA",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "vampaofficial",
+      "spotifyId": "40j5HqwepBedJ5LN4oHkKK",
+      "youtubeQuery": "VAMPA live set"
     },
     {
       "name": "JEANIE",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "JEANIE live set",
+      "soundcloudSlug": "jeaniesounds"
     },
     {
       "name": "Akeos",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electronic",
+        "techno"
+      ],
+      "soundcloudSlug": "akeos",
+      "spotifyId": "01GwQuZRU4oG83fF2ZOyQs",
+      "youtubeQuery": "Akeos live set"
     },
     {
       "name": "HEXX",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "death metal",
+        "power metal",
+        "thrash metal"
+      ],
+      "spotifyId": "5bpqGJZtHYHyczRRL6umyQ",
+      "youtubeQuery": "HEXX live set"
     },
     {
       "name": "Bejalvin",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "bejalvin",
+      "spotifyId": "2tIX1YEoPn5Mzxh2LPzeIb",
+      "youtubeQuery": "Bejalvin live set"
     },
     {
       "name": "Vanfleet",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "electronic",
+        "dubstep",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "vanfleet",
+      "spotifyId": "64CiuxRx160amGnl4YdAr2",
+      "youtubeQuery": "Vanfleet live set"
     },
     {
       "name": "Otsukare",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Otsukare live set"
     },
     {
       "name": "Surf Mesa",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Surf Mesa live set",
+      "soundcloudSlug": "surfmesa"
     },
     {
       "name": "Tony Romera",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "bass house",
+        "dance",
+        "electro",
+        "future house",
+        "house",
+        "progressive",
+        "progressive house",
+        "tech house"
+      ],
+      "soundcloudSlug": "tonyromera",
+      "spotifyId": "7GQsOji7pfixzkLt63awo5",
+      "youtubeQuery": "Tony Romera live set"
     },
     {
       "name": "Sistek",
-      "day": "Saturday"
+      "day": "Saturday",
+      "spotifyId": "7AfIBbjDpPR6FlLWLsAcHu",
+      "youtubeQuery": "Sistek live set",
+      "soundcloudSlug": "sistekofficial"
     },
     {
       "name": "Autograf",
-      "day": "Saturday"
+      "day": "Saturday",
+      "genres": [
+        "dance"
+      ],
+      "soundcloudSlug": "autografmusic",
+      "spotifyId": "0FVj4JuzTyudaXAwfqDQ20",
+      "youtubeQuery": "Autograf live set"
     },
     {
       "name": "Wenzday",
-      "day": "Saturday"
+      "day": "Saturday",
+      "soundcloudSlug": "wenzdaymusic",
+      "spotifyId": "1TOclxL64oLeB45DFWFFU2",
+      "youtubeQuery": "Wenzday live set"
     },
     {
       "name": "Dark Heart",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Dark Heart live set",
+      "soundcloudSlug": "dddarkheart"
     },
     {
       "name": "TRN ME UP",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "TRN ME UP live set"
     },
     {
       "name": "Sonrizas",
-      "day": "Saturday"
+      "day": "Saturday",
+      "youtubeQuery": "Sonrizas live set"
     },
     {
       "name": "Martin Garrix",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "edm",
+        "big room house",
+        "electro house",
+        "dance-pop",
+        "festival progressive house",
+        "tropical house"
+      ],
+      "soundcloudSlug": "martingarrix",
+      "spotifyId": "60d24wfXkVzDSfLS6hyCjZ",
+      "youtubeQuery": "Martin Garrix live set",
+      "youtubeVideoIds": [
+        "sqxFW3RXGdo",
+        "ZBB5gESCsZI",
+        "vBvZaydcCzc"
+      ],
+      "youtubeLabels": [
+        "MARTIN GARRIX LIVE @ TOMORROWLAND 2026 (W2)",
+        "MARTIN GARRIX LIVE @ ULTRA EUROPE 2026",
+        "MARTIN GARRIX B2B ALESSO LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2026"
+      ]
     },
     {
       "name": "Gryffin",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dance-pop",
+        "electronic",
+        "electropop",
+        "pop"
+      ],
+      "soundcloudSlug": "gryffinofficial",
+      "spotifyId": "2ZRQcIgzPCVaT9XKhXZIzh",
+      "youtubeQuery": "Gryffin live set"
     },
     {
       "name": "BUNT.",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "BUNT. live set",
+      "youtubeVideoIds": [
+        "2BKazr739po",
+        "7t4FwxR_ymw",
+        "fymynxNKFI4"
+      ],
+      "youtubeLabels": [
+        "BUNT. at COACHELLA 2026",
+        "LIVE from The Middle Of Nowhere",
+        "BUNT “in the round” @ Electric Love"
+      ]
     },
     {
       "name": "Cloonee",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "cloonee",
+      "spotifyId": "7MdlXmq2HViAJWo9cf30sR",
+      "youtubeQuery": "Cloonee live set",
+      "youtubeVideoIds": [
+        "UE6wjxvMRz0",
+        "sotQaR--0Kw",
+        "3mOMDdX6miw"
+      ],
+      "youtubeLabels": [
+        "Cloonee B2B Prospa - Live at Destino, Ibiza",
+        "Live at Hellbent in Los Angeles",
+        "Live At EDC Orlando"
+      ]
     },
     {
       "name": "LP Giobbi",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "#animaltalk",
+        "#femmehouse"
+      ],
+      "soundcloudSlug": "lpgiobbi",
+      "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
+      "youtubeQuery": "LP Giobbi live set"
     },
     {
       "name": "Angrybaby",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "5TAU3fcCF32FqKMrdbXfRr",
+      "youtubeQuery": "Angrybaby live set",
+      "soundcloudSlug": "angrybabymusic"
     },
     {
       "name": "jigitz",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "jigitz",
+      "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
+      "youtubeQuery": "Jigitz live set",
+      "youtubeVideoIds": [
+        "jtsm4bbaOHY",
+        "eW939HVoPFc",
+        "GtemQO_rWIA"
+      ],
+      "youtubeLabels": [
+        "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
+        "PARDEAUX Live Set | Secret B2B",
+        "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ]
     },
     {
       "name": "Carola",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "jazz",
+        "soul"
+      ],
+      "spotifyId": "2qlQds30O0pDx4WqHEOoqj",
+      "youtubeQuery": "Carola live set",
+      "soundcloudSlug": "listentocarola"
     },
     {
       "name": "Chris Schambacher",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "cschambacher",
+      "spotifyId": "1UHsMWPbRs6jp7ij7nEEZG",
+      "youtubeQuery": "Chris Schambacher live set"
     },
     {
       "name": "SVDDEN DEATH",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "SVDDEN DEATH live set",
+      "soundcloudSlug": "svddendeath"
     },
     {
       "name": "yvm3",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "yvm3 live set"
     },
     {
       "name": "Nimda",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "tearout"
+      ],
+      "soundcloudSlug": "nimda_uk",
+      "spotifyId": "3Au3D8Hsiy5B8z4C2uH02h",
+      "youtubeQuery": "Nimda live set"
     },
     {
       "name": "Kai Wachi",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "kaiwachi",
+      "spotifyId": "2fNr4ldujwq97v1jWeqs8K",
+      "youtubeQuery": "Kai Wachi live set",
+      "youtubeVideoIds": [
+        "-P9OsHzjEjM",
+        "3le_lSPKokA",
+        "m5kcQdmGdFw"
+      ],
+      "youtubeLabels": [
+        "KAI WACHI LIVE IN TORONTO (360 SET)",
+        "KAI WACHI LIVE @ ULTRA MIAMI 2026",
+        "Live at EDC Las Vegas 2026"
+      ]
     },
     {
       "name": "Eptic",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "drumstep",
+        "electronic",
+        "house",
+        "trap"
+      ],
+      "soundcloudSlug": "eptic",
+      "spotifyId": "4dvZ0abeUaiHm7Fu9Gj0PQ",
+      "youtubeQuery": "Eptic live set",
+      "youtubeVideoIds": [
+        "sZfCy6sB5qk",
+        "S1YQ4VFkyXg",
+        "QvF2RmH9oMc"
+      ],
+      "youtubeLabels": [
+        "Eptic Live @ Lost Lands 2025 - Full Set",
+        "Eptic B2B Space Laces Live at EDC Las Vegas 2026",
+        "EPTIC PRESENTS HELL ON EARTH // LIVE FROM MISSION BALLROOM"
+      ]
     },
     {
       "name": "Hedex",
-      "day": "Sunday"
+      "day": "Sunday",
+      "spotifyId": "22I9QWygJ2IfxR855VsA3t",
+      "youtubeQuery": "Hedex live set",
+      "youtubeVideoIds": [
+        "HRGtP191LEc",
+        "r4Znvf63b-I",
+        "6Y7gkEV3luY"
+      ],
+      "youtubeLabels": [
+        "Hedex Live @ Lost Lands 2025 - Full Set",
+        "Live From DnB Allstars 360°",
+        "HEDEX MHITR LIVE @ ULTRA MIAMI 2025 (Full 4 Camera DJ Set)"
+      ]
     },
     {
       "name": "MUST DIE!",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "MUST DIE! live set",
+      "soundcloudSlug": "mustdiemusic"
     },
     {
       "name": "Syzy",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "jersey club",
+        "ambient",
+        "digicore",
+        "hyperpop",
+        "melodic dubstep",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "st-ars-tar-star-sta-r",
+      "spotifyId": "4Uu7oYMJmwNxi1qTXaeRDL",
+      "youtubeQuery": "Syzy live set"
     },
     {
       "name": "PhaseOne",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "hip hop",
+        "instrumental"
+      ],
+      "youtubeQuery": "PhaseOne live set",
+      "youtubeVideoIds": [
+        "tczBTHILtio",
+        "3fRKpka0DzM",
+        "gGMsSWRWCPs"
+      ],
+      "youtubeLabels": [
+        "PhaseOne Live @ Lost Lands 2025 - Full Set",
+        "Live From Denver",
+        "PhaseOne Live @ Lost Lands 2024 (Full Set)"
+      ]
     },
     {
       "name": "HVDES",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "HVDES live set",
+      "soundcloudSlug": "hvdesmusic"
     },
     {
       "name": "Codd Dubz",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "coddmusic",
+      "spotifyId": "3SsxYsQwnhws0qW0fsO1s5",
+      "youtubeQuery": "Codd Dubz live set"
     },
     {
       "name": "PYKE",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "PYKE live set"
     },
     {
       "name": "BLVNKSPVCE",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "blvnkspvce",
+      "spotifyId": "72qYTgSCSu7QFhBhyk00fe",
+      "youtubeQuery": "BLVNKSPVCE live set"
     },
     {
       "name": "HAMRO",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "HAMRO live set",
+      "soundcloudSlug": "djhamro"
     },
     {
       "name": "SQISHI",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "sqishi_dubz",
+      "spotifyId": "0UIHAcihBBHr4dlN4syE1h",
+      "youtubeQuery": "SQISHI live set"
     },
     {
       "name": "Phiso",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "Phiso live set",
+      "soundcloudSlug": "phiso"
     },
     {
       "name": "Aweminus",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep",
+        "electronic",
+        "jump up",
+        "riddim dubstep"
+      ],
+      "soundcloudSlug": "aweminus",
+      "spotifyId": "3sS9RKjrDJMl7zpG3cWHk7",
+      "youtubeQuery": "Aweminus live set"
     },
     {
       "name": "MYTHM",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "dubstep"
+      ],
+      "soundcloudSlug": "mythmofficial",
+      "spotifyId": "1glLUw3XRj8AcWWGgb8CTZ",
+      "youtubeQuery": "MYTHM live set"
     },
     {
       "name": "STVG",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "stvgisnotreal",
+      "spotifyId": "2rx1yiRvSJFvluHaIiv6h7",
+      "youtubeQuery": "STVG live set"
     },
     {
       "name": "SOSA",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "SOSA live set",
+      "soundcloudSlug": "sosamusicuk"
     },
     {
       "name": "Luuk Van Dijk",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "luukvandijkdj",
+      "spotifyId": "1KFfk3NtblIJtGEqyiR31t",
+      "youtubeQuery": "Luuk Van Dijk live set"
     },
     {
       "name": "Classmatic",
-      "day": "Sunday"
+      "day": "Sunday",
+      "soundcloudSlug": "classmatic",
+      "spotifyId": "2vOQkFQDXp4QV77pnlet6m",
+      "youtubeQuery": "Classmatic live set"
     },
     {
       "name": "Mahony",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "Mahony live set",
+      "soundcloudSlug": "mahonydj"
     },
     {
       "name": "Maxinne",
-      "day": "Sunday"
+      "day": "Sunday",
+      "youtubeQuery": "Maxinne live set",
+      "soundcloudSlug": "djmaxinne"
     },
     {
       "name": "BOYCOTT",
-      "day": "Sunday"
+      "day": "Sunday",
+      "genres": [
+        "classic rock",
+        "rock"
+      ],
+      "spotifyId": "5SO0HbJrDq3xwQYwIYXUGi",
+      "youtubeQuery": "BOYCOTT live set",
+      "soundcloudSlug": "itsboycott"
     }
   ]
 }

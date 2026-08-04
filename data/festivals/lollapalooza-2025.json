@@ -1216,7 +1216,17 @@
       "stage": "DOLLAPALOOZA",
       "soundcloudSlug": "prospauk",
       "spotifyId": "6HabM2PUM519iIxervGWSb",
-      "youtubeQuery": "Prospa live set"
+      "youtubeQuery": "Prospa live set",
+      "youtubeVideoIds": [
+        "UE6wjxvMRz0",
+        "CWO9NQU5x-o",
+        "zVrVHMf7k74"
+      ],
+      "youtubeLabels": [
+        "Cloonee B2B Prospa - Live at Destino, Ibiza",
+        "Prospa b2b Josh Baker | Miami Music Week | RAW CUTS",
+        "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
+      ]
     },
     {
       "name": "Yana",
@@ -1255,7 +1265,17 @@
       ],
       "soundcloudSlug": "fcukers",
       "spotifyId": "3UtzOHYm3lQALkKzVD4wyO",
-      "youtubeQuery": "Fcukers live set"
+      "youtubeQuery": "Fcukers live set",
+      "youtubeVideoIds": [
+        "D_flQsBigEA",
+        "3jIVX95zSWM",
+        "haLVNR2c2Us"
+      ],
+      "youtubeLabels": [
+        "Boiler Room: San Francisco",
+        "Boiler Room Ibiza: Live From Earth",
+        "Echoes with Jehnny Beth - ARTE Concert"
+      ]
     },
     {
       "name": "Matt Champion",
@@ -1503,7 +1523,17 @@
       "day": "Thursday",
       "stage": "DOLLAPALOOZA",
       "spotifyId": "0w1sbtZVQoK6GzV4A4OkCv",
-      "youtubeQuery": "Mau P live set"
+      "youtubeQuery": "Mau P live set",
+      "youtubeVideoIds": [
+        "CNGB66x4ygk",
+        "wxKkaBoEWCk",
+        "0mlnJ7Ic7TM"
+      ],
+      "youtubeLabels": [
+        "Awakenings Festival 2026",
+        "Live From Coachella 2025",
+        "MAU P @OfficialClubSpace | Miami - Dj Set presented by Link Miami Rebels."
+      ]
     },
     {
       "name": "Gracie Abrams",
@@ -1932,7 +1962,17 @@
       "day": "Friday",
       "stage": "BMI",
       "spotifyId": "1O6GvgnaHzgcFlCX6RlhYV",
-      "youtubeQuery": "Cassandra Coleman live set"
+      "youtubeQuery": "Cassandra Coleman live set",
+      "youtubeVideoIds": [
+        "BOXCtDA_UVY",
+        "enz6VuutUJA",
+        "PoAXTbm6sLE"
+      ],
+      "youtubeLabels": [
+        "Cassandra Coleman Top 12 Performance is Bone Chilling",
+        "Nashville Debut EP Show at Exit/In!!!",
+        "Coming of Age"
+      ]
     },
     {
       "name": "Caroline Kingsbury",
@@ -2182,7 +2222,17 @@
       ],
       "soundcloudSlug": "bleachers",
       "spotifyId": "2eam0iDomRHGBypaDQLwWI",
-      "youtubeQuery": "Bleachers live set"
+      "youtubeQuery": "Bleachers live set",
+      "youtubeVideoIds": [
+        "468J7e1clU4",
+        "5WjFuWhW8ck",
+        "O47_U_V4Szs"
+      ],
+      "youtubeLabels": [
+        "Live From The Stone Pony (YouTube Music Nights)",
+        "Live at Bowery Ballroom (Amazon Music Songline) | Full Concert Film",
+        "FULL PERFORMANCE (Live from the In-N-Out Burger Sound Space at KROQ)"
+      ]
     },
     {
       "name": "Korn",
@@ -2280,7 +2330,17 @@
       "day": "Saturday",
       "stage": "Perry's",
       "spotifyId": "5JQ1XqKJ2Art01rF4tu1Ra",
-      "youtubeQuery": "Daniel Allan live set"
+      "youtubeQuery": "Daniel Allan live set",
+      "youtubeVideoIds": [
+        "dsA3N2vPP_E",
+        "YSj9Zv7ZUFU",
+        "cytbKbmfWLY"
+      ],
+      "youtubeLabels": [
+        "LOLLAPALOOZA 2025",
+        "High Energy Electronic / UKG / Insane Bass Flips | San Diego DJ Set | BLOCK PARTY 006",
+        "Speed House Coffee Shop Set | AM.RADIO 007"
+      ]
     },
     {
       "name": "Fyütch & Aura V",
@@ -2325,7 +2385,17 @@
       ],
       "soundcloudSlug": "charlotteslawrence",
       "spotifyId": "7LImGq5KnzQobZciDJpeJb",
-      "youtubeQuery": "Charlotte Lawrence live set"
+      "youtubeQuery": "Charlotte Lawrence live set",
+      "youtubeVideoIds": [
+        "BHNO_sKsOKw",
+        "nDuShVDSDL4",
+        "nk_wZKrCuuI"
+      ],
+      "youtubeLabels": [
+        "Enjoy The Silence (Live at The Roxy)",
+        "Charlotte Lawrence live - full concert - Vancouver - 25 July 2025",
+        "\"Charlotte LIVE\" Full Show 🌈 | April 15, 2021"
+      ]
     },
     {
       "name": "Carter Vail",
@@ -2340,7 +2410,17 @@
       "stage": "Perry's",
       "soundcloudSlug": "layzdubz",
       "spotifyId": "2ozQcs5XxFaj5fvA02zhwo",
-      "youtubeQuery": "Layz live set"
+      "youtubeQuery": "Layz live set",
+      "youtubeVideoIds": [
+        "HjFt1lO_glU",
+        "tifOB17nUAA",
+        "Z2TN6pXqiNA"
+      ],
+      "youtubeLabels": [
+        "LAYZ @ THUNDERDOME 2026",
+        "Layz Live @ Lost Lands 2025 - Full Set",
+        "LAYZ @ ULTRA MIAMI 2026"
+      ]
     },
     {
       "name": "Bôa",
@@ -2367,7 +2447,17 @@
       "day": "Saturday",
       "stage": "T-Mobile",
       "spotifyId": "340PS4ZcZ4UCBgyrXzEjcp",
-      "youtubeQuery": "Max McNown live set"
+      "youtubeQuery": "Max McNown live set",
+      "youtubeVideoIds": [
+        "Bn8lhcwM4oE",
+        "QlLqUqB1chw",
+        "uY49GSUw3Ac"
+      ],
+      "youtubeLabels": [
+        "live at Pinkpop 2026",
+        "A Lot More Free (Live in Chattanooga)",
+        "Better Me For You (Brown Eyes)(Live) | Spotify homegrown"
+      ]
     },
     {
       "name": "Divinity Roxx & Divi Roxx Kids",
@@ -2403,7 +2493,17 @@
       ],
       "soundcloudSlug": "flux-pavilion",
       "spotifyId": "7muzHifhMdnfN1xncRLOqk",
-      "youtubeQuery": "Flux Pavilion live set"
+      "youtubeQuery": "Flux Pavilion live set",
+      "youtubeVideoIds": [
+        "kf624ZDp2D8",
+        "XouoZyVj-Ks",
+        "lQJetgN58qE"
+      ],
+      "youtubeLabels": [
+        "Flux Pavilion Live @ Lost Lands 2023 - Full Set",
+        "OHLALA Festival 2024 (Full Set)",
+        "Flux Pavilion live at: Circus 15 | Mission Ballroom, Denver | Full Set"
+      ]
     },
     {
       "name": "Montell Fish",
@@ -2455,7 +2555,17 @@
       ],
       "soundcloudSlug": "youngmiko",
       "spotifyId": "3qsKSpcV3ncke3hw52JSMB",
-      "youtubeQuery": "Young Miko live set"
+      "youtubeQuery": "Young Miko live set",
+      "youtubeVideoIds": [
+        "HCu19HrkuQk",
+        "j0MvYdU1faQ",
+        "-d2JXSUuW9w"
+      ],
+      "youtubeLabels": [
+        "Lollapalooza Chicago 2025 (Full Set)",
+        "Likey Likey | The Tonight Show Starring Jimmy Fallon",
+        "LA VELADA DEL AÑO IV"
+      ]
     },
     {
       "name": "Marina",
@@ -2481,7 +2591,17 @@
       "stage": "Perry's",
       "soundcloudSlug": "drfresch",
       "spotifyId": "1htHgbGwgCWJBfGiQwcRqC",
-      "youtubeQuery": "Dr. Fresch live set"
+      "youtubeQuery": "Dr. Fresch live set",
+      "youtubeVideoIds": [
+        "PnhCSIUYVXw",
+        "6W30o8L08i0",
+        "SepjUbyF47A"
+      ],
+      "youtubeLabels": [
+        "BEYOND WONDERLAND 2025 (Full Set)",
+        "Decadence NYE 2025 (Full Set)",
+        "Red Rocks 2026 (Full Set)"
+      ]
     },
     {
       "name": "Orion Sun",
@@ -2508,7 +2628,17 @@
       "day": "Saturday",
       "stage": "Perry's",
       "soundcloudSlug": "levity-pl",
-      "youtubeQuery": "Levity live set"
+      "youtubeQuery": "Levity live set",
+      "youtubeVideoIds": [
+        "WCaZ6PalOsc",
+        "K6YHeQNpwL8",
+        "rXFGfX3S-X8"
+      ],
+      "youtubeLabels": [
+        "LEVITY at COACHELLA 2026",
+        "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
+        "Levity (LASERSHIP SET) ULTRA 2026"
+      ]
     },
     {
       "name": "Fujii Kaze",
@@ -2655,7 +2785,17 @@
       ],
       "soundcloudSlug": "rufusdusol",
       "spotifyId": "5Pb27ujIyYb33zBqVysBkj",
-      "youtubeQuery": "RÜFÜS du Sol live set"
+      "youtubeQuery": "RÜFÜS du Sol live set",
+      "youtubeVideoIds": [
+        "Zy4KtD98S2c",
+        "A8Mz713rkE4",
+        "eQ-OVsdK-hM"
+      ],
+      "youtubeLabels": [
+        "Live from Joshua Tree",
+        "RÜFÜS DU SOL (DJ SET) Backstage at The Gorge, May 2026",
+        "RÜFÜS DU SOL (DJ SET) - Mayan Warrior - Burning Man 2024"
+      ]
     },
     {
       "name": "Mk.gee",
@@ -2700,7 +2840,17 @@
       "stage": "Perry's",
       "soundcloudSlug": "jigitz",
       "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
-      "youtubeQuery": "Jigitz live set"
+      "youtubeQuery": "Jigitz live set",
+      "youtubeVideoIds": [
+        "jtsm4bbaOHY",
+        "eW939HVoPFc",
+        "GtemQO_rWIA"
+      ],
+      "youtubeLabels": [
+        "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
+        "PARDEAUX Live Set | Secret B2B",
+        "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ]
     },
     {
       "name": "Joe P",
@@ -2752,7 +2902,17 @@
       ],
       "soundcloudSlug": "milo-good-evans",
       "spotifyId": "5x0R3zoC09GMiRJomoexLV",
-      "youtubeQuery": "Nimino live set"
+      "youtubeQuery": "Nimino live set",
+      "youtubeVideoIds": [
+        "Hx3M325ns4Y",
+        "X4maOu_5-sA",
+        "Vrcl2py7bz8"
+      ],
+      "youtubeLabels": [
+        "Autumn Tour - Live in Brooklyn",
+        "niminimix IV (Aerial)",
+        "Ninja Tune Presents: nimino"
+      ]
     },
     {
       "name": "Vincent Lima",
@@ -2810,7 +2970,17 @@
       ],
       "soundcloudSlug": "rebeccareneeblack",
       "spotifyId": "3Vl9fyKMIdLMswk8ai3mm9",
-      "youtubeQuery": "Rebecca Black live set"
+      "youtubeQuery": "Rebecca Black live set",
+      "youtubeVideoIds": [
+        "vkcyXB08BBE",
+        "e-dgt7IQ3bo",
+        "5ebFq0vneK8"
+      ],
+      "youtubeLabels": [
+        "Boiler Room: DC",
+        "Live at Stagecoach 2026 (DJ Set)",
+        "Lollapalooza 2025 - (DJ Set) Live From Perry's Stage"
+      ]
     },
     {
       "name": "Q Brothers",
@@ -2913,7 +3083,17 @@
       "stage": "Perry's",
       "soundcloudSlug": "marlonhoffstadt",
       "spotifyId": "0HHa7ZJZxUQlg5l2mB0N0f",
-      "youtubeQuery": "Marlon Hoffstadt live set"
+      "youtubeQuery": "Marlon Hoffstadt live set",
+      "youtubeVideoIds": [
+        "vpf4LLy42Zc",
+        "rG1DvjvXCls",
+        "PuLuT0yuuBQ"
+      ],
+      "youtubeLabels": [
+        "Marlon Hoffstadt Live @ Coachella 2026",
+        "Marlon Hoffstadt WE1 | Tomorrowland 2026",
+        "Marlon Hoffstadt Live @ Ultra Miami Main Stage 2026"
+      ]
     },
     {
       "name": "Aliyah's Interlude",
@@ -3120,7 +3300,17 @@
       ],
       "soundcloudSlug": "martingarrix",
       "spotifyId": "60d24wfXkVzDSfLS6hyCjZ",
-      "youtubeQuery": "Martin Garrix live set"
+      "youtubeQuery": "Martin Garrix live set",
+      "youtubeVideoIds": [
+        "sqxFW3RXGdo",
+        "ZBB5gESCsZI",
+        "vBvZaydcCzc"
+      ],
+      "youtubeLabels": [
+        "MARTIN GARRIX LIVE @ TOMORROWLAND 2026 (W2)",
+        "MARTIN GARRIX LIVE @ ULTRA EUROPE 2026",
+        "MARTIN GARRIX B2B ALESSO LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2026"
+      ]
     },
     {
       "name": "A$AP Rocky",

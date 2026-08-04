@@ -11,622 +11,1274 @@
     {
       "name": "Hozier",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "blues",
+        "blues rock",
+        "soul",
+        "indie rock",
+        "pop soul",
+        "rock",
+        "chamber pop",
+        "folk rock"
+      ],
+      "soundcloudSlug": "hozier",
+      "spotifyId": "2FXC3k01G6Gw61bmprjgqS",
+      "youtubeQuery": "Hozier live set"
     },
     {
       "name": "Luke Combs",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "country"
+      ],
+      "soundcloudSlug": "lukecombs",
+      "spotifyId": "718COspgdWOnwOFpJHRZHS",
+      "youtubeQuery": "Luke Combs live set"
     },
     {
       "name": "Cage the Elephant",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative rock",
+        "indie rock",
+        "garage rock",
+        "garage rock revival",
+        "psychedelic rock",
+        "punk blues",
+        "punk rock",
+        "acoustic rock"
+      ],
+      "soundcloudSlug": "cagetheelephant",
+      "spotifyId": "26T3LtbuGT1Fu9m0eRq5X3",
+      "youtubeQuery": "Cage the Elephant live set"
     },
     {
       "name": "Empire of the Sun",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "electronic",
+        "electropop",
+        "dance-pop",
+        "indietronica"
+      ],
+      "soundcloudSlug": "empireofthesunsound",
+      "spotifyId": "67hb7towEyKvt5Z8Bx306c",
+      "youtubeQuery": "Empire of the Sun live set"
     },
     {
       "name": "Rilo Kiley",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "indie rock",
+        "indie pop",
+        "rock"
+      ],
+      "spotifyId": "2cevwbv7ISD92VMNLYLHZA",
+      "youtubeQuery": "Rilo Kiley live set"
     },
     {
       "name": "Maren Morris",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "contemporary country",
+        "country",
+        "country pop",
+        "folk rock"
+      ],
+      "soundcloudSlug": "marenmorrisofficial",
+      "spotifyId": "6WY7D3jk8zTrHtmkqqo5GI",
+      "youtubeQuery": "Maren Morris live set"
     },
     {
       "name": "ROLE MODEL",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "pop"
+      ],
+      "spotifyId": "1dy5WNgIKQU6ezkpZs4y8z",
+      "youtubeQuery": "Role Model live set",
+      "youtubeVideoIds": [
+        "YUozYwdLcOM",
+        "0Gz_mBCR8v4",
+        "QuwGINjmnqo"
+      ],
+      "youtubeLabels": [
+        "Role Model ¦ Bonnaroo Music Festival 2026 ¦ Full Set",
+        "Role Model Performance: Writing's on the Wall, Some Protector, Sally | Musicians on Musicians LIVE",
+        "High Hopes 3000 (Live from Bonnaroo 2026)"
+      ]
     },
     {
       "name": "Dr. Dog",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie rock",
+        "indie folk",
+        "neo-psychedelia",
+        "psychedelic rock",
+        "baroque pop",
+        "psychedelic",
+        "rock"
+      ],
+      "spotifyId": "4mLJ3XfOM5FPjSAWdQ2Jk7",
+      "youtubeQuery": "Dr. Dog live set"
     },
     {
       "name": "King Princess",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative pop",
+        "indie pop",
+        "pop",
+        "pop soul",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "kingprincessmusic",
+      "spotifyId": "6beUvFUlKliUYJdLOXNj9C",
+      "youtubeQuery": "King Princess live set"
     },
     {
       "name": "Sam Barber",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "country"
+      ],
+      "spotifyId": "08GfvCW09pv2QP4y9sle2a",
+      "youtubeQuery": "Sam Barber live set"
     },
     {
       "name": "Dylan Gossett",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "4H4M0Y4cN39zIVDHvdW53x",
+      "youtubeQuery": "Dylan Gossett live set"
     },
     {
       "name": "MJ Lenderman",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative country",
+        "singer-songwriter"
+      ],
+      "spotifyId": "4tK6Z8fK7Sc9133byjPGIT",
+      "youtubeQuery": "MJ Lenderman live set"
     },
     {
       "name": "The Favors",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "The Favors live set"
     },
     {
       "name": "Bilmuri",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "post-hardcore",
+        "alternative metal",
+        "alternative rock",
+        "indie rock",
+        "alternative pop",
+        "pop punk",
+        "rock"
+      ],
+      "spotifyId": "5Rc75vGFBWZPgL7EXb4k89",
+      "youtubeQuery": "Bilmuri live set"
     },
     {
       "name": "Willow Avalon",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "6EEkobfnenJF603WO8nUrR",
+      "youtubeQuery": "Willow Avalon live set"
     },
     {
       "name": "Briscoe",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "28NTlcAifzUgF4SIZgxncj",
+      "youtubeQuery": "Briscoe live set"
     },
     {
       "name": "Confidence Man",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative dance",
+        "dance-pop",
+        "nu disco",
+        "electropop",
+        "house",
+        "new rave"
+      ],
+      "soundcloudSlug": "confidenceman",
+      "spotifyId": "0RwXnFrEoI8tltFvYpJgP6",
+      "youtubeQuery": "Confidence Man live set"
     },
     {
       "name": "Panda Bear",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "rock and indie"
+      ],
+      "soundcloudSlug": "panda-bear-official",
+      "spotifyId": "1R84VlXnFFULOsWWV8IrCQ",
+      "youtubeQuery": "Panda Bear live set"
     },
     {
       "name": "Tanner Usrey",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "1ZGVS1OWpdvELiQyx3vkO7",
+      "youtubeQuery": "Tanner Usrey live set"
     },
     {
       "name": "Good Neighbours",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "Good Neighbours live set"
     },
     {
       "name": "spill tab",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative pop",
+        "bedroom pop",
+        "indie pop"
+      ],
+      "soundcloudSlug": "spilltab",
+      "spotifyId": "3qqkHeEhezlIaNj1vFYH2r",
+      "youtubeQuery": "spill tab live set"
     },
     {
       "name": "Jensen McRae",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "Jensen McRae live set"
     },
     {
       "name": "honestav",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "indie folk"
+      ],
+      "spotifyId": "5LvRazQ7EDZLfQU4HYc6XF",
+      "youtubeQuery": "honestav live set"
     },
     {
       "name": "Vincent Lima",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "Vincent Lima live set"
     },
     {
       "name": "Amble",
       "day": "Friday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "Amble live set"
     },
     {
       "name": "Crowe Boys",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "alternative folk",
+        "country",
+        "folk"
+      ],
+      "spotifyId": "5k7X7qq43uKpB09FSYS5id",
+      "youtubeQuery": "Crowe Boys live set"
     },
     {
       "name": "Tiera Kennedy",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Tiera Kennedy live set"
     },
     {
       "name": "Asleep at the Wheel",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "country",
+        "western swing",
+        "folk"
+      ],
+      "spotifyId": "54tWKkrjv4bQgKrQrNlecm",
+      "youtubeQuery": "Asleep at the Wheel live set",
+      "youtubeVideoIds": [
+        "vifUaZQL8pc",
+        "AXKc0XMAPUA",
+        "joNPRTJWlac"
+      ],
+      "youtubeLabels": [
+        "\"Route 66\" | Live on KUTX",
+        "Asleep At The Wheel Festival Evreux 2022",
+        "\"The House Of Blue Lights\" [Live from Austin, TX]"
+      ]
     },
     {
       "name": "Aidan Bissett",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "alternative pop",
+        "indie pop",
+        "pop"
+      ],
+      "spotifyId": "4XQI4hyuy5xun1ou3SM8Oe",
+      "youtubeQuery": "Aidan Bissett live set"
     },
     {
       "name": "Johnny Stimson",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Johnny Stimson live set"
     },
     {
       "name": "Nicky Youre",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "pop",
+        "teen pop"
+      ],
+      "spotifyId": "7qmpXeNz2ojlMl2EEfkeLs",
+      "youtubeQuery": "Nicky Youre live set"
     },
     {
       "name": "Judy Blank",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Judy Blank live set"
     },
     {
       "name": "Skrilla",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "hip hop"
+      ],
+      "soundcloudSlug": "skrilla",
+      "spotifyId": "3qdQnBjEBHrk5nZYxXdV1U",
+      "youtubeQuery": "Skrilla live set"
     },
     {
       "name": "Moody Joody",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "0ndpuECxVStTsHhzq4Euxz",
+      "youtubeQuery": "Moody Joody live set"
     },
     {
       "name": "Chance Emerson",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "2qabc8edZgoWe8DY4HIGED",
+      "youtubeQuery": "Chance Emerson live set"
     },
     {
       "name": "Maggie Antone",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "6mEP6006jfAcrzLbxyEZxp",
+      "youtubeQuery": "Maggie Antone live set"
     },
     {
       "name": "Girl Tones",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
+      "youtubeQuery": "Girl Tones live set",
+      "youtubeVideoIds": [
+        "6CcMWQF6bAs",
+        "5pupGgiFzEQ",
+        "-biDXeAhATk"
+      ],
+      "youtubeLabels": [
+        "Got It (Live Office Takeover)",
+        "The Girl Tones - Full Set - LIVE",
+        "Live @ Funhouse (3/8/25) - Seattle, WA"
+      ]
     },
     {
       "name": "LVVRS",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "soundcloudSlug": "user-502986064",
+      "spotifyId": "6VJa7asxiDZyqRa94XNRLA",
+      "youtubeQuery": "LVVRS live set"
     },
     {
       "name": "The Animeros",
       "day": "Friday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "5LTUoyFqp3m3i3xolfdwPI",
+      "youtubeQuery": "The Animeros live set"
     },
     {
       "name": "Farmer's Wife",
       "day": "Friday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Farmer's Wife live set"
     },
     {
       "name": "Sabrina Carpenter",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "pop",
+        "dance-pop",
+        "electropop"
+      ],
+      "soundcloudSlug": "sabrinacarpenter",
+      "spotifyId": "74KM79TiuVKeVCqs8QtB0B",
+      "youtubeQuery": "Sabrina Carpenter live set"
     },
     {
       "name": "The Strokes",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "The Strokes live set"
     },
     {
       "name": "Doechii",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "hip hop",
+        "pop rap"
+      ],
+      "soundcloudSlug": "iam-doechii",
+      "spotifyId": "4E2rKHVDssGJm2SCDOMMJB",
+      "youtubeQuery": "Doechii live set"
     },
     {
       "name": "Djo",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie pop",
+        "bedroom pop",
+        "indie rock",
+        "neo-psychedelia"
+      ],
+      "soundcloudSlug": "djokyri",
+      "spotifyId": "5p9HO3XC5P3BLxJs5Mtrhm",
+      "youtubeQuery": "Djo live set"
     },
     {
       "name": "Pierce The Veil",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "post-hardcore",
+        "easycore",
+        "melodic hardcore",
+        "pop screamo",
+        "rock"
+      ],
+      "soundcloudSlug": "pierce-the-veil-music",
+      "spotifyId": "4iJLPqClelZOBCBifm8Fzv",
+      "youtubeQuery": "Pierce The Veil live set"
     },
     {
       "name": "Zeds Dead",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Zeds Dead live set"
     },
     {
       "name": "Sammy Virji",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "bass house",
+        "bassline",
+        "dance",
+        "electronic",
+        "uk funky",
+        "uk garage"
+      ],
+      "soundcloudSlug": "sammyvirji",
+      "spotifyId": "1GuqTQbuixFHD6eBkFwVcb",
+      "youtubeQuery": "Sammy Virji live set"
     },
     {
       "name": "The Backseat Lovers",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "indie rock",
+        "rock",
+        "indie pop"
+      ],
+      "spotifyId": "6p2HnfM955TI1bX34dkLnI",
+      "youtubeQuery": "The Backseat Lovers live set"
     },
     {
       "name": "Modest Mouse",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Modest Mouse live set"
     },
     {
       "name": "Japanese Breakfast",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie pop",
+        "indie rock"
+      ],
+      "soundcloudSlug": "japanesebreakfast",
+      "spotifyId": "7MoIc5s9KXolCBH1fy9kkw",
+      "youtubeQuery": "Japanese Breakfast live set"
     },
     {
       "name": "Car Seat Headrest",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Car Seat Headrest live set"
     },
     {
       "name": "Magdalena Bay",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "synth-pop",
+        "alternative pop",
+        "neo-psychedelia",
+        "atmospheric drum and bass",
+        "bubblegum bass",
+        "chillwave",
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "magbae",
+      "spotifyId": "1oPRcJUkloHaRLYx0olBLJ",
+      "youtubeQuery": "Magdalena Bay live set",
+      "youtubeVideoIds": [
+        "m9eM3M_PFsc",
+        "0p5OYyUOOCs",
+        "yapotUKKw-8"
+      ],
+      "youtubeLabels": [
+        "Magdalena Bay Lollapalooza full set 2025",
+        "Magdalena Bay Full Concert - Imaginal Mystery Tour Live in Phoenix",
+        "Magdalena Bay presents The Imaginal Mystery Tour @ Hollywood Forever 9/27"
+      ]
     },
     {
       "name": "Olivia Dean",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "neo soul",
+        "pop soul",
+        "indie pop",
+        "pop"
+      ],
+      "spotifyId": "00x1fYSGhdqScXBRpSj3DW",
+      "youtubeQuery": "Olivia Dean live set"
     },
     {
       "name": "MARINA",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "pop",
+        "electropop",
+        "indie pop",
+        "alternative pop",
+        "dance-pop",
+        "alternative rock",
+        "emo pop",
+        "leftfield"
+      ],
+      "soundcloudSlug": "marinadiamandis",
+      "spotifyId": "1dYg03VTo2pCwwqxjNa3YI",
+      "youtubeQuery": "Marina live set"
     },
     {
       "name": "RIIZE",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "RIIZE live set"
     },
     {
       "name": "Fujii Kaze",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Fujii Kaze live set"
     },
     {
       "name": "LATIN MAFIA",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "LATIN MAFIA live set"
     },
     {
       "name": "Ocean Alley",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
+      "youtubeQuery": "Ocean Alley live set"
     },
     {
       "name": "Joey Valence & Brae",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "hip hop",
+        "boom bap",
+        "rap rock"
+      ],
+      "soundcloudSlug": "joeyvalenceandbrae",
+      "spotifyId": "1q4618qKswelCGLoanFKQh",
+      "youtubeQuery": "Joey Valence & Brae live set"
     },
     {
       "name": "LP Giobbi",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "#animaltalk",
+        "#femmehouse"
+      ],
+      "soundcloudSlug": "lpgiobbi",
+      "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
+      "youtubeQuery": "LP Giobbi live set"
     },
     {
       "name": "LEISURE",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "LEISURE live set"
     },
     {
       "name": "Spacey Jane",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie pop"
+      ],
+      "soundcloudSlug": "spacey-jane",
+      "spotifyId": "6V70yeZQCoSR2M3fyW8qiA",
+      "youtubeQuery": "Spacey Jane live set"
     },
     {
       "name": "Yoke Lore",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "Yoke Lore live set"
     },
     {
       "name": "Mallrat",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "alternative pop",
+        "alternative r&b",
+        "bedroom pop",
+        "indie pop",
+        "indietronica"
+      ],
+      "soundcloudSlug": "lilmallrat",
+      "spotifyId": "4OSArit7O2Jaj4mgf3YN7A",
+      "youtubeQuery": "Mallrat live set"
     },
     {
       "name": "LA LOM",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "soundcloudSlug": "lalom-music",
+      "spotifyId": "01sY3iLJZtSBa0BIbcpddJ",
+      "youtubeQuery": "LA LOM live set"
     },
     {
       "name": "TOPS",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "TOPS live set"
     },
     {
       "name": "Alemeda",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "33Se8kMYeTPkeeM2LnsPF8",
+      "youtubeQuery": "Alemeda live set"
     },
     {
       "name": "Odeal",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Odeal live set"
     },
     {
       "name": "The Heavy Heavy",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "5WSRRbhBJlhqvzgbOm3U2Q",
+      "youtubeQuery": "The Heavy Heavy live set"
     },
     {
       "name": "Hotline TNT",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "shoegaze"
+      ],
+      "youtubeQuery": "Hotline TNT live set"
     },
     {
       "name": "INOHA",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "0uoN6ea8SXzhV7WxyrvT1h",
+      "youtubeQuery": "INOHA live set"
     },
     {
       "name": "Sydney Rose",
       "day": "Saturday",
-      "weekends": "both"
+      "weekends": "both",
+      "soundcloudSlug": "user-380287823",
+      "spotifyId": "5vx4pDmiFDyKMhuOIgpiRv",
+      "youtubeQuery": "Sydney Rose live set"
     },
     {
       "name": "Next of Kin",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Next of Kin live set"
     },
     {
       "name": "Clover County",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "1vOabSI7N1elDhNGoirgU2",
+      "youtubeQuery": "Clover County live set"
     },
     {
       "name": "S.L. Houser",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "S.L. Houser live set"
     },
     {
       "name": "Eric Slick",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "5odtYnxUvkfTC6wmwR53aI",
+      "youtubeQuery": "Eric Slick live set"
     },
     {
       "name": "GoldFord",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "4I2QW85rkIhCRRZt1kuBqS",
+      "youtubeQuery": "GoldFord live set"
     },
     {
       "name": "Southall",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "red dirt"
+      ],
+      "spotifyId": "5fGjyURfvKXXCTcnCfU9Dl",
+      "youtubeQuery": "Southall live set"
     },
     {
       "name": "South Arcade",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "alternative rock",
+        "pop punk"
+      ],
+      "spotifyId": "3vEL65ycUboLH76pgdtqlF",
+      "youtubeQuery": "South Arcade live set"
     },
     {
       "name": "Dizzy Fae",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "soundcloudSlug": "dizzy-fae",
+      "spotifyId": "0jt1EsJCeoQXLNDta4JF6c",
+      "youtubeQuery": "Dizzy Fae live set"
     },
     {
       "name": "Animal Arcade",
       "day": "Saturday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Animal Arcade live set"
     },
     {
       "name": "Shallowater",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "3BV5N0bOmtkavYFUSHsfMQ",
+      "youtubeQuery": "Shallowater live set"
     },
     {
       "name": "Ted Hammig & the Campaign",
       "day": "Saturday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Ted Hammig & the Campaign live set"
     },
     {
       "name": "The Killers",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative rock",
+        "indie rock",
+        "pop rock",
+        "heartland rock",
+        "new wave",
+        "post-punk revival",
+        "rock",
+        "christmas music"
+      ],
+      "soundcloudSlug": "thekillers",
+      "spotifyId": "0C0XlULifJtAgn6ZNCW2eu",
+      "youtubeQuery": "The Killers live set"
     },
     {
       "name": "John Summit",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "dance",
+        "edm",
+        "house",
+        "progressive house"
+      ],
+      "soundcloudSlug": "johnsummit",
+      "spotifyId": "7kNqXtgeIwFtelmRjWv205",
+      "youtubeQuery": "John Summit live set"
     },
     {
       "name": "Feid",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "latin",
+        "reggaeton",
+        "trap latino"
+      ],
+      "soundcloudSlug": "feid_oficial",
+      "spotifyId": "2LRoIwlKmHjgvigdNGBHNo",
+      "youtubeQuery": "Feid live set"
     },
     {
       "name": "T-Pain",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "youtubeQuery": "T-Pain live set"
     },
     {
       "name": "Mk.gee",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "alternative r&b",
+        "ambient pop",
+        "dream pop",
+        "indietronica",
+        "neo-psychedelia"
+      ],
+      "soundcloudSlug": "mkgee",
+      "spotifyId": "7tr9pbgNEKtG0GQTKe08Tz",
+      "youtubeQuery": "Mk.gee live set"
     },
     {
       "name": "Polo & Pan",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "electronic",
+        "electropop",
+        "house",
+        "indie pop",
+        "tropical house"
+      ],
+      "soundcloudSlug": "polo-pan",
+      "spotifyId": "45yEuthJ9yq1rNXAOpBnqM",
+      "youtubeQuery": "Polo & Pan live set"
     },
     {
       "name": "Rainbow Kitten Surprise",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie rock",
+        "alternative rock",
+        "rock"
+      ],
+      "soundcloudSlug": "rainbow-kitten-surprise",
+      "spotifyId": "4hz8tIajF2INpgM0qzPJz2",
+      "youtubeQuery": "Rainbow Kitten Surprise live set"
     },
     {
       "name": "Wet Leg",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie rock",
+        "indie pop",
+        "post-punk revival",
+        "post-punk"
+      ],
+      "spotifyId": "2TwOrUcYnAlIiKmVQkkoSZ",
+      "youtubeQuery": "Wet Leg live set"
     },
     {
       "name": "Gigi Perez",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie folk",
+        "indie pop"
+      ],
+      "soundcloudSlug": "gigiperez",
+      "spotifyId": "1iCnM8foFssWlPRLfAbIwo",
+      "youtubeQuery": "Gigi Perez live set"
     },
     {
       "name": "Disco Lines",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "5Kmr0b3ip8g9P2i0dLTC3Z",
+      "youtubeQuery": "Disco Lines live set",
+      "youtubeVideoIds": [
+        "swc-zm2NV6o",
+        "vsPU3kdB5QY",
+        "e3Oo1ASxr7U"
+      ],
+      "youtubeLabels": [
+        "Disco Lines WE1 | Tomorrowland 2026",
+        "Disco Lines Live @ Factory Town Miami 2026",
+        "Live @ Red Rocks Colorado 2025"
+      ]
     },
     {
       "name": "Gregory Alan Isakov",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "indie folk",
+        "contemporary folk",
+        "country folk",
+        "liedermacher"
+      ],
+      "spotifyId": "5sXaGoRLSpd7VeyZrLkKwt",
+      "youtubeQuery": "Gregory Alan Isakov live set"
     },
     {
       "name": "Phantogram",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "indie pop",
+        "ambient pop",
+        "electropop",
+        "glitch pop",
+        "indietronica",
+        "pop rap"
+      ],
+      "soundcloudSlug": "phantogram",
+      "spotifyId": "1l9d7B8W0IHy3LqWsxP2SH",
+      "youtubeQuery": "Phantogram live set"
     },
     {
       "name": "Passion Pit",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indietronica"
+      ],
+      "soundcloudSlug": "passionpit",
+      "spotifyId": "7gjAu1qr5C2grXeQFFOGeh",
+      "youtubeQuery": "Passion Pit live set"
     },
     {
       "name": "The Dare",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "electroclash",
+        "new rave"
+      ],
+      "soundcloudSlug": "itsthedare",
+      "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
+      "youtubeQuery": "The Dare live set",
+      "youtubeVideoIds": [
+        "axntFHFkRL4",
+        "utvDi43sXvI",
+        "hZsAdBdS7u4"
+      ],
+      "youtubeLabels": [
+        "Boiler Room x HBO's Industry: New York",
+        "Girls (Live)",
+        "“Freakquencies #2” (live @ 131 McCormack Street, Toronto, September 6, 2025)"
+      ]
     },
     {
       "name": "CA7RIEL & Paco Amoroso",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "CA7RIEL & Paco Amoroso live set"
     },
     {
       "name": "Wild Rivers",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "indie folk"
+      ],
+      "soundcloudSlug": "wildriversband",
+      "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
+      "youtubeQuery": "Wild Rivers live set"
     },
     {
       "name": "Anderson East",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "pop",
+        "r&b"
+      ],
+      "spotifyId": "5q6z6GTth6lMbL9I8CAgby",
+      "youtubeQuery": "Anderson East live set"
     },
     {
       "name": "Lucius",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "indie pop",
+        "dance-pop",
+        "hip house",
+        "indie rock",
+        "pop"
+      ],
+      "soundcloudSlug": "ilovelucius",
+      "spotifyId": "0Z21adRvCzdVx4LjgfbQLT",
+      "youtubeQuery": "Lucius live set"
     },
     {
       "name": "Royal & the Serpent",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "electropop",
+        "indie pop",
+        "pop punk"
+      ],
+      "spotifyId": "64EHXDoln95lnccszdPum0",
+      "youtubeQuery": "Royal & the Serpent live set"
     },
     {
       "name": "flowerovlove",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "genres": [
+        "dance-pop",
+        "indie pop"
+      ],
+      "soundcloudSlug": "flower_garden",
+      "spotifyId": "1JspXUvEv3D9ddMeLNqYWj",
+      "youtubeQuery": "Flowerovlove live set"
     },
     {
       "name": "julie",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "Julie live set"
     },
     {
       "name": "Hans Williams",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "3SEkDN2vusR7CIyehzfJaj",
+      "youtubeQuery": "Hans Williams live set"
     },
     {
       "name": "Haute & Freddy",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "soundcloudSlug": "hauteandfreddy",
+      "spotifyId": "66T34XqGkEWbzKWALSBDuR",
+      "youtubeQuery": "Haute & Freddy live set"
     },
     {
       "name": "Midnight Generation",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "4CKIGHCZRzNoiNDSaW5eaq",
+      "youtubeQuery": "Midnight Generation live set",
+      "youtubeVideoIds": [
+        "Ko2IxE-mY50",
+        "ab4VdLongGs",
+        "0czmXDQG8F8"
+      ],
+      "youtubeLabels": [
+        "Midnight Generation on Audiotree Live (Full Session)",
+        "Don't Wait Up (Live in Mexico City)",
+        "Don't Wait Up | Audiotree Live"
+      ]
     },
     {
       "name": "Chezile",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "spotifyId": "1EmdfupUQDpXOcb4Nj2mBH",
+      "youtubeQuery": "Chezile live set"
     },
     {
       "name": "Bebe Stockwell",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "2KPSR6XA83w8XYrwWekhA9",
+      "youtubeQuery": "Bebe Stockwell live set"
     },
     {
       "name": "hey, nothing",
       "day": "Sunday",
-      "weekends": "both"
+      "weekends": "both",
+      "soundcloudSlug": "heynothing-music",
+      "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
+      "youtubeQuery": "Hey, Nothing live set"
     },
     {
       "name": "Case Oats",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "spotifyId": "5Ml0QbIoj7bneIUJDCoMx8",
+      "youtubeQuery": "Case Oats live set"
     },
     {
       "name": "Lamont Landers",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "3avnA23xLmCYfnsivruOgq",
+      "youtubeQuery": "Lamont Landers live set"
     },
     {
       "name": "The Bends",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "The Bends live set"
     },
     {
       "name": "Supertaste",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "soundcloudSlug": "supertastemusic",
+      "spotifyId": "6C4cWzfNlyH0l5xTQPLQa6",
+      "youtubeQuery": "Supertaste live set",
+      "youtubeVideoIds": [
+        "LW0hiPA9JKE",
+        "luPmHAoAoy0",
+        "IyXHkGW-26Y"
+      ],
+      "youtubeLabels": [
+        "Live From The Mustache Bash (San Diego, CA)",
+        "Live From South Holston",
+        "Play2Lose - Supertaste [Live From the Rooftop]"
+      ]
     },
     {
       "name": "The Point.",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "The Point. live set"
     },
     {
       "name": "Chuwi",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "6wF1Cz760dpdbX9RJIDpQW",
+      "youtubeQuery": "Chuwi live set"
     },
     {
       "name": "Zinadelphia",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "genres": [
+        "jazz pop",
+        "pop soul"
+      ],
+      "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
+      "youtubeQuery": "Zinadelphia live set"
     },
     {
       "name": "Tyler Ballgame",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "1pQ0Axx7UF8LDDOqSgdVmK",
+      "youtubeQuery": "Tyler Ballgame live set"
     },
     {
       "name": "Ally Salort",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "pop"
+      ],
+      "spotifyId": "5cCLvnxYLQiKTRLRD2DHxw",
+      "youtubeQuery": "Ally Salort live set"
     },
     {
       "name": "Geto Gala",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "spotifyId": "3GpKTJQ1QqegGNxaNUBn0E",
+      "youtubeQuery": "Geto Gala live set"
     },
     {
       "name": "Alex Amen",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "genres": [
+        "country folk",
+        "folk"
+      ],
+      "spotifyId": "70qCuX4YtspN8K6g4lKHnM",
+      "youtubeQuery": "Alex Amen live set"
     },
     {
       "name": "Aaron Page",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Aaron Page live set"
     },
     {
       "name": "The Huston-Tillotson University Jazz Collective",
       "day": "Sunday",
-      "weekends": "W2"
+      "weekends": "W2",
+      "youtubeQuery": "The Huston-Tillotson University Jazz Collective live set"
     },
     {
       "name": "Disciples of Christ",
       "day": "Sunday",
-      "weekends": "W1"
+      "weekends": "W1",
+      "youtubeQuery": "Disciples of Christ live set"
     }
   ]
 }

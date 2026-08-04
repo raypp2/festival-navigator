@@ -1143,7 +1143,8 @@
         "Disco Lines WE1 | Tomorrowland 2026",
         "Disco Lines Live @ Factory Town Miami 2026",
         "Live @ Red Rocks Colorado 2025"
-      ]
+      ],
+      "soundcloudSlug": "discolines"
     },
     {
       "name": "Excision",
@@ -1227,7 +1228,8 @@
         "ALLEYCVT at The Concourse Project | Full Set (07 Mar 2026)",
         "SUPERSONIC BALLROOM [FULL SET]",
         "ALLEYCVT @ EDC LAS VEGAS 2025 (FULL SET)"
-      ]
+      ],
+      "soundcloudSlug": "alleycvt"
     },
     {
       "name": "Ganja White Night",
@@ -1281,7 +1283,8 @@
         "Close Friends Only Live at Electric Forest 2026",
         "Close Friends Only Live at EDC Las Vegas 2026",
         "Live From Countdown NYE 2025"
-      ]
+      ],
+      "soundcloudSlug": "theclosefriendsonly"
     },
     {
       "name": "Jackie Hollander",
@@ -1298,7 +1301,8 @@
         "Jackie Hollander Live at EDC Las Vegas 2026",
         "Jackie Hollander at The Concourse Project | Full Set (14 Feb 2026)",
         "Jackie Hollander Live @Concourse Project 2025"
-      ]
+      ],
+      "soundcloudSlug": "jackiehollander"
     },
     {
       "name": "Daniel Allan",
@@ -1315,7 +1319,8 @@
         "LOLLAPALOOZA 2025",
         "High Energy Electronic / UKG / Insane Bass Flips | San Diego DJ Set | BLOCK PARTY 006",
         "Speed House Coffee Shop Set | AM.RADIO 007"
-      ]
+      ],
+      "soundcloudSlug": "danielallantunes"
     },
     {
       "name": "Devault",
@@ -1417,7 +1422,8 @@
         "Eli Brown Live @ Ultra Miami 2026 (MegaStructure)",
         "Eli Brown Live @ EDC Las Vegas | May 2026",
         "Eli Brown Live @ Creamfields 2025 (Steelyard)"
-      ]
+      ],
+      "soundcloudSlug": "elibrownbeats"
     },
     {
       "name": "Dixon's Violin",
@@ -1546,7 +1552,8 @@
         "Lo.cate 011: Morning Coffee Live @ Echo Mountain",
         "parkbreezy B2B Thought Process Live from Red Rocks Amphitheater October 26, 2024",
         "parkbreezy Live from Cervantes Ballroom April 26, 2025"
-      ]
+      ],
+      "soundcloudSlug": "all-lo_collective"
     },
     {
       "name": "LSD Clownsystem",
@@ -1636,7 +1643,8 @@
         "Łaszewo - LIVE from NYC Pier 17 2026 | Full Set",
         "Łaszewo - Live from Denver 2025 | Full Set",
         "Laszewo live in Hawaii(4k)"
-      ]
+      ],
+      "soundcloudSlug": "laszewo"
     },
     {
       "name": "MCR-T",
@@ -1784,7 +1792,17 @@
       "name": "Keys",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Keys live set"
+      "youtubeQuery": "Keys live set",
+      "youtubeVideoIds": [
+        "Zs1SzfLCWGE",
+        "XaGPIQeuvvI",
+        "MPEkw48BQi8"
+      ],
+      "youtubeLabels": [
+        "Alicia Keys - Full Set (Live at Capital's Jingle Bell Ball 2023, Night Two) | Capital",
+        "An Evening with Alicia Keys - Live at Baloise Session 2017 (Full Concert)",
+        "The Black Keys - Full Performance (Live from the KROQ Helpful Honda Sound Space)"
+      ]
     },
     {
       "name": "Mr. Wobbles",
@@ -1807,33 +1825,84 @@
       "name": "Rambo Party",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Rambo Party live set"
+      "youtubeQuery": "Rambo Party live set",
+      "youtubeVideoIds": [
+        "ozAM5H8MwOU",
+        "qUCQ9KR5Nag",
+        "1Ef7wMmMeXc"
+      ],
+      "youtubeLabels": [
+        "Funksalot's Live Webstream for Rambo Party Productions 7th Annual Intergalactic Funk Formal",
+        "Ding Dong Down ft. Andy Thorn",
+        "Especial de Vinilos con Rambo DJ en Guadalajara"
+      ]
     },
     {
       "name": "Jerome Joyce",
       "day": "Day 1",
       "stage": "Grand Artique",
       "spotifyId": "0nQYjRuDRrubcXnFxLGUUr",
-      "youtubeQuery": "Jerome Joyce live set"
+      "youtubeQuery": "Jerome Joyce live set",
+      "youtubeVideoIds": [
+        "PiY26iIcqSA",
+        "peBqxAesmNk",
+        "96SamEUMYec"
+      ],
+      "youtubeLabels": [
+        "Jerome Joyce @ Electric Forest 6/23",
+        "MADIS ONE w JEROME JOYCE",
+        "Healing Through Poetry w/ Jerome Joyce | @beatport Live"
+      ]
     },
     {
       "name": "King Bubble",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "King Bubble live set"
+      "youtubeQuery": "King Bubble live set",
+      "youtubeVideoIds": [
+        "y8m6BVxnw9Y",
+        "atXF-ZcLNJU",
+        "3l-gNhCRwM8"
+      ],
+      "youtubeLabels": [
+        "Bubble Day 2022 Afterparty",
+        "Check out this CHAUVET DJ Bubble King Bubble Machine | Is It Worth it?",
+        "What bubble said in TADC Ep.3 #theamazingdigitalcircus #bubble"
+      ]
     },
     {
       "name": "Tomcat Trumpet",
       "day": "Day 1",
       "stage": "Grand Artique",
-      "youtubeQuery": "Tomcat Trumpet live set"
+      "youtubeQuery": "Tomcat Trumpet live set",
+      "youtubeVideoIds": [
+        "Ux0R85rPcEc",
+        "eW3II_V7A9w",
+        "vRQ9sW8ch6E"
+      ],
+      "youtubeLabels": [
+        "TomCat Trumpet live at ChiKaGo X",
+        "TomCat Trumpet live at ChiKaGo X",
+        "House Talk with Ron Carroll & TomCat Trumpet LIVE from Nocturne Chicago LIVE"
+      ]
     },
     {
       "name": "Motifv",
       "day": "Day 2",
       "stage": "Ranch Arena",
       "spotifyId": "3Q3g3xC2lDdLo3a04uK3Wp",
-      "youtubeQuery": "Motifv live set"
+      "youtubeQuery": "Motifv live set",
+      "soundcloudSlug": "motifvmusic",
+      "youtubeVideoIds": [
+        "6TPrc-bVN38",
+        "bhCWc6aNkAg",
+        "Adu2kchECMc"
+      ],
+      "youtubeLabels": [
+        "Motifv LIVE from the Rooftop Pool at X-Denver 🌊",
+        "Motifv (Sonic Bloom 2023)",
+        "Motifv @ Cervantes 1/10/25"
+      ]
     },
     {
       "name": "Swimming Paul",
@@ -1846,20 +1915,52 @@
       ],
       "soundcloudSlug": "swimmingpaul_music",
       "spotifyId": "5rEwPEAHq2q1yW3wF4av5s",
-      "youtubeQuery": "Swimming Paul live set"
+      "youtubeQuery": "Swimming Paul live set",
+      "youtubeVideoIds": [
+        "hPZbSve6RX0",
+        "bvtYU6YiBEY",
+        "mHTFo0c69sA"
+      ],
+      "youtubeLabels": [
+        "Emotional Dance",
+        "Swimming Paul + Peterparker69 @ Kiosk Radio 13.09.2025",
+        "Live at Portola, San Francisco CA 9.21.25"
+      ]
     },
     {
       "name": "Daily Bread",
       "day": "Day 2",
       "stage": "Ranch Arena",
-      "youtubeQuery": "Daily Bread live set"
+      "youtubeQuery": "Daily Bread live set",
+      "soundcloudSlug": "daily-bread",
+      "spotifyId": "4IsiG6RpDyRq6Frd2CvddW",
+      "youtubeVideoIds": [
+        "6_KU9By6SSw",
+        "4Ge3dh9nmJ0",
+        "dGbpZ1CNk5Y"
+      ],
+      "youtubeLabels": [
+        "Cloud Conductor Set from Red Rocks 2025",
+        "Wakaan 2025 - Full Set in 4k/HQ audio",
+        "Bread & Breakfast VI"
+      ]
     },
     {
       "name": "Levity",
       "day": "Day 2",
       "stage": "Ranch Arena",
       "soundcloudSlug": "levity-pl",
-      "youtubeQuery": "Levity live set"
+      "youtubeQuery": "Levity live set",
+      "youtubeVideoIds": [
+        "WCaZ6PalOsc",
+        "K6YHeQNpwL8",
+        "rXFGfX3S-X8"
+      ],
+      "youtubeLabels": [
+        "LEVITY at COACHELLA 2026",
+        "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
+        "Levity (LASERSHIP SET) ULTRA 2026"
+      ]
     },
     {
       "name": "GRiZ",
@@ -1872,7 +1973,17 @@
       ],
       "soundcloudSlug": "griz",
       "spotifyId": "25oLRSUjJk4YHNUsQXk7Ut",
-      "youtubeQuery": "GRiZ live set"
+      "youtubeQuery": "GRiZ live set",
+      "youtubeVideoIds": [
+        "-Ctylz7Yi90",
+        "xq-7nU66OmQ",
+        "UM2LhB_-OXI"
+      ],
+      "youtubeLabels": [
+        "Chasing The Golden Hour (Full Set) - Live at Bonnaroo 2023",
+        "Griz B2B Wooli Live at EDC 2026",
+        "GRiZ ¦ Bonnaroo Music Festival 2026 ¦ Full Set"
+      ]
     },
     {
       "name": "Kaleena Zanders",
@@ -1883,14 +1994,34 @@
       ],
       "soundcloudSlug": "kaleenazanders",
       "spotifyId": "0Sz2jslaxjcw2VM5zYh2jK",
-      "youtubeQuery": "Kaleena Zanders live set"
+      "youtubeQuery": "Kaleena Zanders live set",
+      "youtubeVideoIds": [
+        "dsXv3yXTDn0",
+        "pXbIDWQU--M",
+        "mrHZdLVELsE"
+      ],
+      "youtubeLabels": [
+        "LET EM COOK 005: Kaleena Zanders (DJ Mix)",
+        "@beatport Live | LA",
+        "Kaleena Zanders Set Eternal NYE Afters 2025-2026"
+      ]
     },
     {
       "name": "Couch",
       "day": "Day 2",
       "stage": "Sherwood Court",
       "spotifyId": "7mpIBUZxR4ZfMA7jaGGyyR",
-      "youtubeQuery": "Couch live set"
+      "youtubeQuery": "Couch live set",
+      "youtubeVideoIds": [
+        "rN3HsCbJELo",
+        "u507hVq6uaQ",
+        "mM63VGueYBQ"
+      ],
+      "youtubeLabels": [
+        "Live | Brooklyn Steel NYC | November 13, 2025",
+        "Couch @ Terminal West, Atlanta, GA on 2/1/2026 (Full Live Concert, multi-cam, 4k)",
+        "Live in Portland, Maine (State Theatre)"
+      ]
     },
     {
       "name": "Ship Wrek",
@@ -1898,14 +2029,35 @@
       "stage": "Sherwood Court",
       "soundcloudSlug": "theshipwrek",
       "spotifyId": "1ic0FHNGIjXZAWH6O6Reif",
-      "youtubeQuery": "Ship Wrek live set"
+      "youtubeQuery": "Ship Wrek live set",
+      "youtubeVideoIds": [
+        "B_6j_7ijHV4",
+        "6w7_YmD9Lcs",
+        "eQvlplfpWW0"
+      ],
+      "youtubeLabels": [
+        "Ship Wrek Live at EDC Las Vegas 2026",
+        "Knockdown Center - New York City",
+        "Live @ Mission Ballroom in Denver, CO"
+      ]
     },
     {
       "name": "Sidepiece",
       "day": "Day 2",
       "stage": "Sherwood Court",
       "spotifyId": "5czbzNZZfWpyFgZyfT3Mkk",
-      "youtubeQuery": "Sidepiece live set"
+      "youtubeQuery": "Sidepiece live set",
+      "soundcloudSlug": "sidepiece",
+      "youtubeVideoIds": [
+        "KLpgzqS1o28",
+        "4mEDvQfUf6s",
+        "xoBwEB1NUys"
+      ],
+      "youtubeLabels": [
+        "SIDEPIECE LIVE AT BONNAROO 2026",
+        "SIDEPIECE b2b WESTEND LIVE @DAY TRIP 2026",
+        "SIDEPIECE Live @ EDC Las Vegas 2025 | cosmicMEADOW"
+      ]
     },
     {
       "name": "Passion Pit",
@@ -1916,7 +2068,17 @@
       ],
       "soundcloudSlug": "passionpit",
       "spotifyId": "7gjAu1qr5C2grXeQFFOGeh",
-      "youtubeQuery": "Passion Pit live set"
+      "youtubeQuery": "Passion Pit live set",
+      "youtubeVideoIds": [
+        "pb0e8_9axRc",
+        "Z0ngnzSZPDM",
+        "aNy3r91LruE"
+      ],
+      "youtubeLabels": [
+        "Passion Pit (Full set) - Just Like Heaven 2024",
+        "Passion Pit Full Set LIVE | House of Blues Boston, MA | July 24, 2026",
+        "Full Performance (Live on KEXP)"
+      ]
     },
     {
       "name": "Sammy Virji",
@@ -1932,19 +2094,50 @@
       ],
       "soundcloudSlug": "sammyvirji",
       "spotifyId": "1GuqTQbuixFHD6eBkFwVcb",
-      "youtubeQuery": "Sammy Virji live set"
+      "youtubeQuery": "Sammy Virji live set",
+      "youtubeVideoIds": [
+        "fWNeg6x_1Hg",
+        "6zPr1rk0Ans",
+        "sLcvUGn_4VM"
+      ],
+      "youtubeLabels": [
+        "FULL SET TOKYO | ASIA TOUR 2025",
+        "Boiler Room: Denver",
+        "Sammy Virji's Energetic UKG & Bassline Set From DJ Mag HQ"
+      ]
     },
     {
       "name": "Yoga with Hannah Muse",
       "day": "Day 2",
       "stage": "Tripolee",
-      "youtubeQuery": "Yoga with Hannah Muse live set"
+      "youtubeQuery": "Yoga with Hannah Muse live set",
+      "youtubeVideoIds": [
+        "1QFdofrb_Rs",
+        "EBAyML5w2KY",
+        "KFG-Yf9wJrM"
+      ],
+      "youtubeLabels": [
+        "Mobility For A Healthy Spine 🔥💪 #yoga #shorts #fitness #strength",
+        "This Is Not Normal Behavior",
+        "Miley Cyrus: ‘I Was the First Person to Ever Be Cancelled’ 😭🔥 | #shorts #mileycyrus"
+      ]
     },
     {
       "name": "Discovery Project",
       "day": "Day 2",
       "stage": "Tripolee",
-      "youtubeQuery": "Discovery Project live set"
+      "youtubeQuery": "Discovery Project live set",
+      "youtubeVideoIds": [
+        "soNNKkFpXcU",
+        "nIwXImVCZgE",
+        "XD9pLIigq6w"
+      ],
+      "youtubeLabels": [
+        "EDC Las Vegas 2024 (Live DJ MIX w/ Visuals)",
+        "EDC 2022 (Live DJ MIX w/ Visuals)",
+        "EDC LAS VEGAS DISCOVERY PROJECT - CEASAR AUGUSTUS DISCOVERY PROJECT SUBMISSION MIX (ONLY MY MUSIC)"
+      ],
+      "soundcloudSlug": "discoveryproject"
     },
     {
       "name": "Saint Ludo",
@@ -1952,7 +2145,17 @@
       "stage": "Tripolee",
       "soundcloudSlug": "saintludo",
       "spotifyId": "3UBYL8t0DhD4uhJxF0FtGT",
-      "youtubeQuery": "Saint Ludo live set"
+      "youtubeQuery": "Saint Ludo live set",
+      "youtubeVideoIds": [
+        "lyiMNho6AfE",
+        "SpI625Zl3EU",
+        "crgnx509UBc"
+      ],
+      "youtubeLabels": [
+        "Boiler Room: Mumbai",
+        "Live From Rinse Summer Terrace Party 2025",
+        "Live From Rinse Summer Terrace Party 2024"
+      ]
     },
     {
       "name": "Muzz",
@@ -1966,7 +2169,17 @@
       ],
       "soundcloudSlug": "muzzhq",
       "spotifyId": "4UNnRb4LN2hGtbtMfPzMhg",
-      "youtubeQuery": "Muzz live set"
+      "youtubeQuery": "Muzz live set",
+      "youtubeVideoIds": [
+        "uy9qp5bg78E",
+        "oW7zpUH5Q0c",
+        "QlPfqRYK8Tk"
+      ],
+      "youtubeLabels": [
+        "Muzz Live at EDC Las Vegas 2026",
+        "MUZZ @ Liquicity Festival 2024 🎩",
+        "RAMPAGE OPEN AIR 2025 - MUZZ"
+      ]
     },
     {
       "name": "Nitepunk",
@@ -1983,14 +2196,35 @@
       ],
       "soundcloudSlug": "nitepunk",
       "spotifyId": "6iPbI11utXY9CVhX6SPXEg",
-      "youtubeQuery": "Nitepunk live set"
+      "youtubeQuery": "Nitepunk live set",
+      "youtubeVideoIds": [
+        "XS5rNsHJseY",
+        "BN_ExU7EO9c",
+        "Flymzt2in24"
+      ],
+      "youtubeLabels": [
+        "Nitepunk DJ Set 📍 STUDIO Invites | Bass music",
+        "Nitepunk in Lyon, France at @physicaltoolcrewlyon 9 Years Annyversary 2026",
+        "THE HUMAN EXPERIENCE (LIVE FROM THE UNDERGROUND MALL)"
+      ]
     },
     {
       "name": "Nikita, The Wicked",
       "day": "Day 2",
       "stage": "Tripolee",
       "spotifyId": "0Kc65Qv0ju9H2cMNnP3Tqd",
-      "youtubeQuery": "Nikita, The Wicked live set"
+      "youtubeQuery": "Nikita, The Wicked live set",
+      "soundcloudSlug": "nikitathewicked",
+      "youtubeVideoIds": [
+        "Uqqt5m6iiDs",
+        "uPRREIo_doQ",
+        "RUDLhi-0G3Y"
+      ],
+      "youtubeLabels": [
+        "Nikita, the Wicked's Beautiful & Chaotic DJ Set at DEF: Atlanta",
+        "Nikita, the Wicked Presents: A Wicked Halloween Live @ Soundcheck - Washington, D.C. - 10/31/25",
+        "Nikita, The Wicked Live @ Lost Lands 2025 - Full Set"
+      ]
     },
     {
       "name": "Ivy Lab",
@@ -2008,7 +2242,17 @@
       ],
       "soundcloudSlug": "ivylab",
       "spotifyId": "3VXCvo9Sr0hbZ4mk6VOKBs",
-      "youtubeQuery": "Ivy Lab live set"
+      "youtubeQuery": "Ivy Lab live set",
+      "youtubeVideoIds": [
+        "8BqRPg6ILhs",
+        "f3kP38k31WY",
+        "M58dwpCid34"
+      ],
+      "youtubeLabels": [
+        "Ivy Lab Live @ Lost Lands 2025 - Full Set",
+        "IVY LAB (LIVE) @ DEF: UNDERGROUND",
+        "Ivy Lab DJ Set 📍 STUDIO Invites | Bass music"
+      ]
     },
     {
       "name": "Wilkinson",
@@ -2020,7 +2264,17 @@
       ],
       "soundcloudSlug": "wilkinsonuk",
       "spotifyId": "6m8itYST9ADjBIYevXSb1r",
-      "youtubeQuery": "Wilkinson live set"
+      "youtubeQuery": "Wilkinson live set",
+      "youtubeVideoIds": [
+        "TQiW0Rxr5V4",
+        "Ez3YSUsjFqg",
+        "7s5M3Bd7U0A"
+      ],
+      "youtubeLabels": [
+        "Wilkinson presents NIRVA - LIVE from Alexandra Palace",
+        "WILKINSON @ ULTRA MUSIC FESTIVAL MIAMI 2025",
+        "Beats For Love 2023 | Drum and Bass"
+      ]
     },
     {
       "name": "Andy C",
@@ -2038,7 +2292,17 @@
       ],
       "soundcloudSlug": "andyc_ram",
       "spotifyId": "75HK7rgkmDMTnWwwmcN53N",
-      "youtubeQuery": "Andy C live set"
+      "youtubeQuery": "Andy C live set",
+      "youtubeVideoIds": [
+        "QrggpHiltfM",
+        "23Oh1LHavuE",
+        "lIAalwQyE7E"
+      ],
+      "youtubeLabels": [
+        "ANDY C live from the Worldwide Stage, Ultra Miami 2026 [Drum & Bass DJ Set]",
+        "Boiler Room: London",
+        "ANDY C LIVE @ BASSPOD EDC, LAS VEGAS 2025"
+      ]
     },
     {
       "name": "Galantis",
@@ -2056,7 +2320,17 @@
       ],
       "soundcloudSlug": "wearegalantis",
       "spotifyId": "4sTQVOfp9vEMCemLw50sbu",
-      "youtubeQuery": "Galantis live set"
+      "youtubeQuery": "Galantis live set",
+      "youtubeVideoIds": [
+        "L4lauYB64R8",
+        "wwm7mJfI7ws",
+        "WcpOU_GLQlw"
+      ],
+      "youtubeLabels": [
+        "Tomorrowland Winter 2026",
+        "Galantis Live @ Lollapalooza, 2024",
+        "LIVE at Ultra Music Festival 2017"
+      ]
     },
     {
       "name": "Claude VonStroke",
@@ -2069,14 +2343,35 @@
       ],
       "soundcloudSlug": "claudevonstroke",
       "spotifyId": "5CYAFhywQTXdZmppCp0ukd",
-      "youtubeQuery": "Claude VonStroke live set"
+      "youtubeQuery": "Claude VonStroke live set",
+      "youtubeVideoIds": [
+        "U5GH5uKfKRU",
+        "9T895Mnm4xs",
+        "QSDw4mC5eJc"
+      ],
+      "youtubeLabels": [
+        "HÖR - April 27 / 2026",
+        "Mixmag Lab LA",
+        "Green Velvet & Claude VonStroke [GET REAL] @ Far Away Festival 2022 - Lima, Perú"
+      ]
     },
     {
       "name": "Casey Club",
       "day": "Day 2",
       "stage": "The Observatory",
       "spotifyId": "2bmnpyZiHHOCrU988FwaJj",
-      "youtubeQuery": "Casey Club live set"
+      "youtubeQuery": "Casey Club live set",
+      "soundcloudSlug": "caseyclubofficial",
+      "youtubeVideoIds": [
+        "13FwobVLCxE",
+        "0f4C5dsx3Yo",
+        "qv9Fj1shuks"
+      ],
+      "youtubeLabels": [
+        "Live In London | UKF On Air",
+        "UKF Invites at Colour Factory, London",
+        "Casey Club DJ Set 📍 Ohlala Festival 2025 | Bass Music, deep dubstep, 140,"
+      ]
     },
     {
       "name": "Mild Minds",
@@ -2087,7 +2382,17 @@
       ],
       "soundcloudSlug": "mildminds",
       "spotifyId": "3Ka3k9K2WStR52UJVtbJZW",
-      "youtubeQuery": "Mild Minds live set"
+      "youtubeQuery": "Mild Minds live set",
+      "youtubeVideoIds": [
+        "JM3MBwlJiVg",
+        "34B_wiRPiKo",
+        "aojd_Mn4zZE"
+      ],
+      "youtubeLabels": [
+        "Live at The Independent, San Francisco, CA - 2023.01.28 [Full Show 4K[",
+        "Intermission Broadcast Mix 008",
+        "Mild Minds live @ The Atlantis Club Washington, DC 2/7/2025"
+      ]
     },
     {
       "name": "Iniko",
@@ -2097,7 +2402,17 @@
         "alternative r&b"
       ],
       "spotifyId": "2ih5M0aTrQ97JX1nZuxDQY",
-      "youtubeQuery": "Iniko live set"
+      "youtubeQuery": "Iniko live set",
+      "youtubeVideoIds": [
+        "fF0FcCT7J_Q",
+        "YQR7g891alE",
+        "zqwjA1FIXWQ"
+      ],
+      "youtubeLabels": [
+        "Jericho (live) | KIHARA Concert",
+        "Full Show - Awakening The Empire Tour @ The Underground Philadelphia 10-10-25",
+        "INIKO Indie artist ✨"
+      ]
     },
     {
       "name": "Dogs in a Pile",
@@ -2108,14 +2423,35 @@
         "rock"
       ],
       "soundcloudSlug": "dogsinapile",
-      "youtubeQuery": "Dogs in a Pile live set"
+      "youtubeQuery": "Dogs in a Pile live set",
+      "youtubeVideoIds": [
+        "GQi1DlpRd9E",
+        "wylWpEN49bA",
+        "uk7HP1YskbQ"
+      ],
+      "youtubeLabels": [
+        "Full Show - 04/09/26 - Mr. Smalls Theatre - Millvale, PA",
+        "Full Show - 04/19/2025 - Lincoln Theatre - Raleigh, NC (Remastered Audio)",
+        "Live Stream - 3/25/2026 - Asheville Music Hall - Asheville, NC"
+      ]
     },
     {
       "name": "Ranger Trucco",
       "day": "Day 2",
       "stage": "The Observatory",
       "spotifyId": "36N80lh8tNu7XedcW55NC3",
-      "youtubeQuery": "Ranger Trucco live set"
+      "youtubeQuery": "Ranger Trucco live set",
+      "soundcloudSlug": "ranger-trucco",
+      "youtubeVideoIds": [
+        "TKVw8y1FGgU",
+        "P8AkNNDRh7s",
+        "3N04Gdm-QFs"
+      ],
+      "youtubeLabels": [
+        "Ranger Trucco @ range. x The Concourse Project 2026 | Austin, TX",
+        "Ranger Trucco @ Knockdown Center 2026 | New York City",
+        "Ranger Trucco b2b Luke Dean Live @ EDC Orlando 2025"
+      ]
     },
     {
       "name": "SBTRKT",
@@ -2128,62 +2464,164 @@
       ],
       "soundcloudSlug": "sbtrkt",
       "spotifyId": "1O10apSOoAPjOu6UhUNmeI",
-      "youtubeQuery": "SBTRKT live set"
+      "youtubeQuery": "SBTRKT live set",
+      "youtubeVideoIds": [
+        "HsbRBLlaKRU",
+        "7sev7kbnOVA",
+        "TLSRVUv8nXM"
+      ],
+      "youtubeLabels": [
+        "SBTRKT Live From DJ Mag HQ",
+        "SBTRKT Boiler Room London DJ set",
+        "Sónar Festival 2026 - ARTE Concert"
+      ]
     },
     {
       "name": "Richard Finger",
       "day": "Day 2",
       "stage": "The Observatory",
-      "youtubeQuery": "Richard Finger live set"
+      "youtubeQuery": "Richard Finger live set",
+      "soundcloudSlug": "richardfinger",
+      "youtubeVideoIds": [
+        "6kOdqdU2_6I",
+        "-hvrcs6i0B8",
+        "ioBIL5-0A-Q"
+      ],
+      "youtubeLabels": [
+        "RICHARD FINGER @ Red Rocks Amphitheatre 2025 (FULL SET)",
+        "RICHARD FINGER Electric Forest 2026",
+        "Richard Finger FULL SET live at The Wintrust Arena Chicago 02/07/2026"
+      ]
     },
     {
       "name": "Humanity Circles",
       "day": "Day 2",
       "stage": "Honeycomb",
-      "youtubeQuery": "Humanity Circles live set"
+      "youtubeQuery": "Humanity Circles live set",
+      "youtubeVideoIds": [
+        "n85KukOXc0A",
+        "nxuB96ppBLY",
+        "T1xLQG0OakM"
+      ],
+      "youtubeLabels": [
+        "Post Malone - \"Circles\" (Live on the Runaway Tour)",
+        "Monolink live at Cercle Odyssey, Paris, France",
+        "Post Malone - Circles (Acoustic – One Night in Rome, Italy 2022)"
+      ]
     },
     {
       "name": "Rumble in the Bumble Dance Battle",
       "day": "Day 2",
       "stage": "Honeycomb",
-      "youtubeQuery": "Rumble in the Bumble Dance Battle live set"
+      "youtubeQuery": "Rumble in the Bumble Dance Battle live set",
+      "youtubeVideoIds": [
+        "eyi0NbFD0Qg",
+        "JAFyujIzvmQ",
+        "ALM29upETlA"
+      ],
+      "youtubeLabels": [
+        "Rumble in the Bumble (Dance Showcase Only) - Electric Forest 2022",
+        "Electric Forest 2022 Dance Showcase | @Honeycomb Stage | Rumble in the Bumble",
+        "Rumble in the Bumble | Electric Forest Beatboxing 2023"
+      ]
     },
     {
       "name": "Creg",
       "day": "Day 2",
       "stage": "Honeycomb",
       "spotifyId": "3BoSgaNGMiAiEyRxECZgc9",
-      "youtubeQuery": "Creg live set"
+      "youtubeQuery": "Creg live set",
+      "youtubeVideoIds": [
+        "SkMyxBmuJB8",
+        "JjkfofWcfec",
+        "g5inT2IovNk"
+      ],
+      "youtubeLabels": [
+        "Craig Connelly - Live from EDC Las Vegas 2022",
+        "GREG 99 @ ELROW BRAZIL",
+        "Craig Connelly - Live from Dreamstate, SoCal 2021"
+      ]
     },
     {
       "name": "Brunello",
       "day": "Day 2",
       "stage": "Honeycomb",
-      "youtubeQuery": "Brunello live set"
+      "youtubeQuery": "Brunello live set",
+      "youtubeVideoIds": [
+        "ndvf_Q-Yz0A",
+        "0qX8Q8LSjdM",
+        "baDz12J2uNo"
+      ],
+      "youtubeLabels": [
+        "Dj set at The Terrace @OfficialClubSpace",
+        "Rafael B2B Brunello on the Santa Monica Pier | RAW CUTS",
+        "BRUNELLO @ LIGHTNING IN A BOTTLE 2026"
+      ],
+      "soundcloudSlug": "brunellobeats"
     },
     {
       "name": "Jkyl, The Wicked",
       "day": "Day 2",
       "stage": "Honeycomb",
-      "youtubeQuery": "Jkyl, The Wicked live set"
+      "youtubeQuery": "Jkyl, The Wicked live set",
+      "youtubeVideoIds": [
+        "ELXCLE7eCsQ",
+        "OqDVzImD3P4",
+        "7WnPfivWHC4"
+      ],
+      "youtubeLabels": [
+        "Electric Forest 2026",
+        "Jkyl & Hyde - Thunderdome 2026",
+        "Jkyl & Hyde Live @ Lost Lands 2024 - Full Set"
+      ]
     },
     {
       "name": "Sound Bath Journey",
       "day": "Day 2",
       "stage": "Center Stage",
-      "youtubeQuery": "Sound Bath Journey live set"
+      "youtubeQuery": "Sound Bath Journey live set",
+      "youtubeVideoIds": [
+        "z04eHtJ_-YI",
+        "gkCYXVmv0pM",
+        "CgRGMmH-vKY"
+      ],
+      "youtubeLabels": [
+        "Sound Bath at Women's retreat",
+        "Sound Healing Journey; The Journey | Sound Bath Meditation 🎧",
+        "SOUND HEALING MEDITATION JOURNEY, Handpan, Didgeridoo, Flute, Koshi, Shamanic Drum, ceremony, Calm"
+      ]
     },
     {
       "name": "Ecstatic Dance",
       "day": "Day 2",
       "stage": "Center Stage",
-      "youtubeQuery": "Ecstatic Dance live set"
+      "youtubeQuery": "Ecstatic Dance live set",
+      "youtubeVideoIds": [
+        "0_R6MR9ZQDo",
+        "wKI-ngRQJ90",
+        "W7nUsbnXUiI"
+      ],
+      "youtubeLabels": [
+        "Live Ecstatic Dance - Janax Pacha @ Agape Zoe Festival [Downtempo, Organic House, AfroHouse, Ethnic]",
+        "Mose - Cacao Dance @ Eagles Nest Atitlán",
+        "Mushina | EPIC Ecstatic Dance at GOAT Community Festival | 360° Full Live Ritual"
+      ]
     },
     {
       "name": "Tricksters",
       "day": "Day 2",
       "stage": "Center Stage",
-      "youtubeQuery": "Tricksters live set"
+      "youtubeQuery": "Tricksters live set",
+      "youtubeVideoIds": [
+        "m0MwmqDLpV8",
+        "vJZHFLnbBVo",
+        "Q-ktbEk_XiI"
+      ],
+      "youtubeLabels": [
+        "Radiohead - The Trickster - 4/18/98 - (Last Time Played) - [Hi8 Master/TaperAudio] - RCMH - NYC",
+        "Radiohead - The Trickster (Live in San Francisco '98)",
+        "Radiohead - Trickster (Live)"
+      ]
     },
     {
       "name": "Mary Lattimore",
@@ -2198,7 +2636,17 @@
       ],
       "soundcloudSlug": "mary-lattimore",
       "spotifyId": "38MKhZmMRHAZRz8LqtKIBw",
-      "youtubeQuery": "Mary Lattimore live set"
+      "youtubeQuery": "Mary Lattimore live set",
+      "youtubeVideoIds": [
+        "qS6YnbaleeY",
+        "fbcV_JZ88s8",
+        "1CMbiqySiQ8"
+      ],
+      "youtubeLabels": [
+        "A Concert with Harpist Mary Lattimore",
+        "Mary Lattimore Live at WFMU (2017) -- Full Session",
+        "Julianna Barwick & Mary Lattimore - Full Performance (Live on KEXP)"
+      ]
     },
     {
       "name": "Jojo Abot",
@@ -2214,13 +2662,33 @@
       ],
       "soundcloudSlug": "jojoabot",
       "spotifyId": "7yR9zhQxEi9sc3vJxS2YG5",
-      "youtubeQuery": "Jojo Abot live set"
+      "youtubeQuery": "Jojo Abot live set",
+      "youtubeVideoIds": [
+        "0tMkvTsB7XA",
+        "yxMOHRaM_rI",
+        "fteFyg2bmio"
+      ],
+      "youtubeLabels": [
+        "Millennium Stage (January 11, 2017)",
+        "JOJO ABOT LIVE (AFRICA DAY pt. 1) - GODS AMONG MEN + MARCHING",
+        "AFRO - PSYCHA - DELIA (Live)"
+      ]
     },
     {
       "name": "Black House Radio",
       "day": "Day 2",
       "stage": "Center Stage",
-      "youtubeQuery": "Black House Radio live set"
+      "youtubeQuery": "Black House Radio live set",
+      "youtubeVideoIds": [
+        "ys5G_rgOkQA",
+        "VMUPZTCHsU4",
+        "E2QzBDzOW3g"
+      ],
+      "youtubeLabels": [
+        "KARIZMA DJs a House Party | Black House Radio",
+        "UPBEAT SOULFUL HOUSE MIX at a House Party | Black House Radio",
+        "RNB + HOUSE FT. ZACK FOX | Black House Radio"
+      ]
     },
     {
       "name": "Gilligan Moss",
@@ -2228,19 +2696,49 @@
       "stage": "Center Stage",
       "soundcloudSlug": "gilligan-moss",
       "spotifyId": "2fo0F81pRzdXjmWP6MkQqB",
-      "youtubeQuery": "Gilligan Moss live set"
+      "youtubeQuery": "Gilligan Moss live set",
+      "youtubeVideoIds": [
+        "WywvS7EvNwU",
+        "hhnZfmbbN6o",
+        "8yXlJaWAQ84"
+      ],
+      "youtubeLabels": [
+        "(Toronto 2022)",
+        "School Night Concert",
+        "EARMILK Presents: Livestream with Gilligan Moss"
+      ]
     },
     {
       "name": "Family Blood Feud",
       "day": "Day 2",
       "stage": "Grand Artique",
-      "youtubeQuery": "Family Blood Feud live set"
+      "youtubeQuery": "Family Blood Feud live set",
+      "youtubeVideoIds": [
+        "4HTF0fADPrs",
+        "AP1hGwCjOlE",
+        "WIXvCn6KR_c"
+      ],
+      "youtubeLabels": [
+        "The Blood Feud Family Singers - \"Lonely Night\"",
+        "The Blood Feud Family Singers - \"I Didn't Come Here for Your Honesty (Lie to Me)\"",
+        "Charles Wesley Godwin, Blood Feud (live), San Francisco, October 22, 2022 (4K)"
+      ]
     },
     {
       "name": "Kiyoka",
       "day": "Day 2",
       "stage": "Grand Artique",
-      "youtubeQuery": "Kiyoka live set"
+      "youtubeQuery": "Kiyoka live set",
+      "youtubeVideoIds": [
+        "26lQma5FW2E",
+        "qBpiFZ4u72M",
+        "f2nuOQrggxI"
+      ],
+      "youtubeLabels": [
+        "Kyoka Boiler Room Tokyo Live Set",
+        "He can set fire under water 🔥 the smirk 🤧 #jdrama #japanese #myhappymarriage #shorts",
+        "He can destroy the whole world for her 🔥❤ #jdrama #japanese #myhappymarriage #shorts"
+      ]
     },
     {
       "name": "The Wandering Menstrails",
@@ -2253,13 +2751,33 @@
       "day": "Day 2",
       "stage": "Grand Artique",
       "spotifyId": "53edzonDiwy96Ne5MyCDj2",
-      "youtubeQuery": "Future Joy live set"
+      "youtubeQuery": "Future Joy live set",
+      "youtubeVideoIds": [
+        "4LM9YP3nSIc",
+        "gMhL8A1VH5Y",
+        "S1xMRwKkJPM"
+      ],
+      "youtubeLabels": [
+        "LIVE at Hulaween 10/30/25 (Full Set)",
+        "LIVE @ Resonate Suwannee 2024",
+        "LIVE at Bonnaroo 2026"
+      ]
     },
     {
       "name": "Raedy Lex",
       "day": "Day 2",
       "stage": "Grand Artique",
-      "youtubeQuery": "Raedy Lex live set"
+      "youtubeQuery": "Raedy Lex live set",
+      "youtubeVideoIds": [
+        "OBSRCICbruE",
+        "P0SqOEKinhg",
+        "zgNkO07A0Fk"
+      ],
+      "youtubeLabels": [
+        "Raedy Lex Sets the Tone 🔥 Live DJ Mix @ Industry Sundays | Detroit",
+        "RAEDY LEX Movement Music Festival 2025 || Hart Plaza, Detroit MI",
+        "RAEDY LEX at Sound House for Crune Album Release in Hamtramck, MI"
+      ]
     },
     {
       "name": "Red Giant Project",
@@ -2275,7 +2793,17 @@
       ],
       "soundcloudSlug": "redgiantproject",
       "spotifyId": "6w17z0QsctPCHEMW1EV0xY",
-      "youtubeQuery": "Red Giant Project live set"
+      "youtubeQuery": "Red Giant Project live set",
+      "youtubeVideoIds": [
+        "hRA5KztQzoc",
+        "TJsjcVbJ5YM",
+        "L6Zh7gLPZO4"
+      ],
+      "youtubeLabels": [
+        "Red Giant Project (Live on MobileCoin Radio)",
+        "Red Giant : Live at The 100 Club May 27, 2025 - Full Set",
+        "Red Giant Project Live at The High Dive in Seattle 11/5/2022"
+      ]
     },
     {
       "name": "Inji",
@@ -2289,7 +2817,17 @@
       ],
       "soundcloudSlug": "injimusic",
       "spotifyId": "0Z4Ir8usNVcAdCSQl0fQki",
-      "youtubeQuery": "Inji live set"
+      "youtubeQuery": "Inji live set",
+      "youtubeVideoIds": [
+        "tYIjSy92K0k",
+        "TGqoDpaTSSQ",
+        "Ok0KwP2yEoA"
+      ],
+      "youtubeLabels": [
+        "INJI (Live) (King Tut's Wah Wah Hut, Glasgow, 22/04/2026)",
+        "FULL SHOW | Hinterland | St. Charles, IA | August 1, 2025 | LIVE",
+        "Gaslight / Live for @Akustikhane from @DROMNewYork"
+      ]
     },
     {
       "name": "The String Cheese Incident",
@@ -2303,7 +2841,18 @@
         "funk"
       ],
       "spotifyId": "7N3JfLDzzjXdPbsyco7X0l",
-      "youtubeQuery": "The String Cheese Incident live set"
+      "youtubeQuery": "The String Cheese Incident live set",
+      "soundcloudSlug": "thestringcheeseincident",
+      "youtubeVideoIds": [
+        "70SOzrnHNeY",
+        "hkx_M5bC7co",
+        "LFW8RT5I6N0"
+      ],
+      "youtubeLabels": [
+        "Grateful Dead Medley - Red Rocks 7/17/22",
+        "String Cheese Incident @ Tabernacle, Atlanta, GA on 2/6/2025 Night 1 (Full Live Concert)",
+        "The String Cheese Incident 7/24/26 Cuthbert Amphitheater, Eugene, OR"
+      ]
     },
     {
       "name": "Channel Tres",
@@ -2321,7 +2870,17 @@
       ],
       "soundcloudSlug": "channeltres",
       "spotifyId": "4cUkGQyhLFqKHBtL58HYVp",
-      "youtubeQuery": "Channel Tres live set"
+      "youtubeQuery": "Channel Tres live set",
+      "youtubeVideoIds": [
+        "6JunaikUVag",
+        "3Z1USRhx3Ng",
+        "mFQtj90Q180"
+      ],
+      "youtubeLabels": [
+        "CHANNEL TRES LA rooftop bumpin' house set",
+        "Channel Tres (Live From The Basement) - Defected Broadcasting House Show",
+        "Enigma LA Pop Up (DJ Set)"
+      ]
     },
     {
       "name": "Chris Lake",
@@ -2338,14 +2897,36 @@
         "club"
       ],
       "spotifyId": "5Igpc9iLZ3YGtKeYfSrrOE",
-      "youtubeQuery": "Chris Lake live set"
+      "youtubeQuery": "Chris Lake live set",
+      "soundcloudSlug": "chrislake",
+      "youtubeVideoIds": [
+        "EXKpyYAXtyw",
+        "9LroauyvyYY",
+        "O_B5lTFUg_8"
+      ],
+      "youtubeLabels": [
+        "Chris Lake LIVE from Los Angeles Historic Park 2026",
+        "Chris Lake Live From Omnia Skybar Las Vegas",
+        "Chris Lake LIVE From San Francisco 2025 | Full Set"
+      ]
     },
     {
       "name": "The Sponges",
       "day": "Day 3",
       "stage": "Sherwood Court",
       "spotifyId": "3cj6O7NrjS5l0CVo8LhpV1",
-      "youtubeQuery": "The Sponges live set"
+      "youtubeQuery": "The Sponges live set",
+      "soundcloudSlug": "thesponges",
+      "youtubeVideoIds": [
+        "wtCNXJubkB4",
+        "iK7Vai4C3eo",
+        "gIPRLjOJJFI"
+      ],
+      "youtubeLabels": [
+        "The Sponges live at Bloom Nightclub 2026",
+        "The Sponges Live @ Hulaween 2024",
+        "7 Circles of Funk Mix"
+      ]
     },
     {
       "name": "Starjunk 95",
@@ -2353,7 +2934,17 @@
       "stage": "Sherwood Court",
       "soundcloudSlug": "starjunk95",
       "spotifyId": "523iXWyHL26prJR3GKjRhx",
-      "youtubeQuery": "Starjunk 95 live set"
+      "youtubeQuery": "Starjunk 95 live set",
+      "youtubeVideoIds": [
+        "boTjmV-ONtI",
+        "Mu6K7IrwBxE",
+        "jexzQYWlPYg"
+      ],
+      "youtubeLabels": [
+        "electric cleaners intergalactic mix | dance & electro | EC092",
+        "STARJUNK 95 AT COUNTDOWN NYE 2025 - los angeles [4K]",
+        "SIX5TAR @ Starjunk 95 [08/09/25]"
+      ]
     },
     {
       "name": "Sam Gellaitry",
@@ -2367,7 +2958,17 @@
       ],
       "soundcloudSlug": "samgellaitry",
       "spotifyId": "07UJz804RJxqNvxFXC3h9H",
-      "youtubeQuery": "Sam Gellaitry live set"
+      "youtubeQuery": "Sam Gellaitry live set",
+      "youtubeVideoIds": [
+        "LPbJeZCLqsI",
+        "zP8daPqRimM",
+        "Ao88MluDZlc"
+      ],
+      "youtubeLabels": [
+        "Sam Gellaitry (DJ Set) - Elevator Music",
+        "dj set from brooklyn 2025 (FULL SET)",
+        "Sam Gellaitry @TheLotRadio 11-07-2025"
+      ]
     },
     {
       "name": "Madeon",
@@ -2385,7 +2986,17 @@
       ],
       "soundcloudSlug": "madeon",
       "spotifyId": "4pb4rqWSoGUgxm63xmJ8xc",
-      "youtubeQuery": "Madeon live set"
+      "youtubeQuery": "Madeon live set",
+      "youtubeVideoIds": [
+        "cmxhYd30zxU",
+        "z7ZHPVwV5TE",
+        "e3ZB1yLBhf8"
+      ],
+      "youtubeLabels": [
+        "Live at Red Rocks 2023 (Live Stream)",
+        "Victory Live @ Ultra Music Festival 2026, Miami, Florida",
+        "Madeon B2B San Holo - Live at Ultra Miami 2024 (Full Set)"
+      ]
     },
     {
       "name": "Shpongle",
@@ -2403,7 +3014,17 @@
       ],
       "soundcloudSlug": "shponglemusic",
       "spotifyId": "0m5XJwKGYyUjd3VMfcINCQ",
-      "youtubeQuery": "Shpongle live set"
+      "youtubeQuery": "Shpongle live set",
+      "youtubeVideoIds": [
+        "ZYowY7tvBbY",
+        "uRiTKZfsMQQ",
+        "6psEGx965pE"
+      ],
+      "youtubeLabels": [
+        "Shpongle ‎– Live In London On 25 October, 2013",
+        "Shpongle Live at Red Rocks 5 4 19",
+        "SHPONGLEDROID - [HD PRO-SHOT] Live in Denver, CO 2023"
+      ]
     },
     {
       "name": "Isoxo",
@@ -2418,40 +3039,104 @@
       ],
       "soundcloudSlug": "isoxo",
       "spotifyId": "4zVCMnjw54nkhGHU4e1Pav",
-      "youtubeQuery": "Isoxo live set"
+      "youtubeQuery": "Isoxo live set",
+      "youtubeVideoIds": [
+        "2Ba-ghhuNiM",
+        "3fqz-7T6Y6w",
+        "U9i2SQwKFig"
+      ],
+      "youtubeLabels": [
+        "ISOXO @ ULTRA MUSIC FESTIVAL MIAMI 2026",
+        "Boiler Room: Calgary",
+        "ISOxo Presents kidsgonemad! Live at The Shrine"
+      ]
     },
     {
       "name": "Costa",
       "day": "Day 3",
       "stage": "Tripolee",
-      "youtubeQuery": "Costa live set"
+      "youtubeQuery": "Costa live set",
+      "youtubeVideoIds": [
+        "6ual63S46O0",
+        "LXmlJVX-_H4",
+        "-DnPOPm4Y-0"
+      ],
+      "youtubeLabels": [
+        "Live at Boxpac Project",
+        "Live From Denver",
+        "COSTA Live @ Electric Forest 2026"
+      ]
     },
     {
       "name": "Steller",
       "day": "Day 3",
       "stage": "Tripolee",
       "spotifyId": "7fNu9x4iV166BQmQQKOmXl",
-      "youtubeQuery": "Steller live set"
+      "youtubeQuery": "Steller live set",
+      "soundcloudSlug": "stellersounds",
+      "youtubeVideoIds": [
+        "JhKHTRky7s0",
+        "JOGyQtETCPs",
+        "8oNcSffJjTM"
+      ],
+      "youtubeLabels": [
+        "STELLER EDC LAS VEGAS 2025 LIVE SET",
+        "Live From Denver",
+        "Steller @ Valley Of The Seven Stars • FULL SET 4K • Arrington, VA • October 2025"
+      ]
     },
     {
       "name": "Riot",
       "day": "Day 3",
       "stage": "Tripolee",
-      "youtubeQuery": "Riot live set"
+      "youtubeQuery": "Riot live set",
+      "soundcloudSlug": "weareriot",
+      "youtubeVideoIds": [
+        "7Yot8Fn_WOE",
+        "ODi-o47ywEs",
+        "tT-16ibKUTo"
+      ],
+      "youtubeLabels": [
+        "RIOT Live @ Lost Lands 2025 - Full Set",
+        "RIOT Live at EDC Las Vegas 2026",
+        "RIOT LIVE SET @ THE MACHINE TOUR"
+      ]
     },
     {
       "name": "Capochino",
       "day": "Day 3",
       "stage": "Tripolee",
       "spotifyId": "70qOCKE1NFO6q1a1pC0KRE",
-      "youtubeQuery": "Capochino live set"
+      "youtubeQuery": "Capochino live set",
+      "youtubeVideoIds": [
+        "YXsdYyA1uao",
+        "UWC0p52SjK0",
+        "pkijQJ0Cbx0"
+      ],
+      "youtubeLabels": [
+        "Capochino live @ The Far Out Lounge (Austin, TX)",
+        "Live From Denver",
+        "Live @ The Far Out Lounge"
+      ],
+      "soundcloudSlug": "capochinomusic"
     },
     {
       "name": "Avello",
       "day": "Day 3",
       "stage": "Tripolee",
       "spotifyId": "1ZR5GnPw0Jkb5M4hnBwzuZ",
-      "youtubeQuery": "Avello live set"
+      "youtubeQuery": "Avello live set",
+      "youtubeVideoIds": [
+        "jnfsy2OnKmo",
+        "vMXiBq657PQ",
+        "eBI-Cl_0jiU"
+      ],
+      "youtubeLabels": [
+        "Avello Live at Zombie Apocalypse 2026 🧟‍♂️",
+        "Avello B2B Dennett Live at EDC Las Vegas 2026",
+        "AVELLO Live @ Red Rocks 2024 (Supporting Alison Wonderland)"
+      ],
+      "soundcloudSlug": "avello_music"
     },
     {
       "name": "Sippy",
@@ -2459,7 +3144,17 @@
       "stage": "Tripolee",
       "soundcloudSlug": "sippyau",
       "spotifyId": "4LLYqe8ogaK9wC1xHlvR5S",
-      "youtubeQuery": "Sippy live set"
+      "youtubeQuery": "Sippy live set",
+      "youtubeVideoIds": [
+        "zfQSmw801AU",
+        "CM80hrwF6io",
+        "SUK16EsJ4PY"
+      ],
+      "youtubeLabels": [
+        "Sippy Live @ Lost Lands 2025 - Full Set",
+        "Sippy Live at EDC Las Vegas 2026",
+        "Sippy (Full set) Live @ Lost Lands 2025 - Couch Lands"
+      ]
     },
     {
       "name": "Heyz",
@@ -2467,14 +3162,35 @@
       "stage": "Tripolee",
       "soundcloudSlug": "heyzmsc",
       "spotifyId": "5X1EM1jg35YB5jmw7qVIlh",
-      "youtubeQuery": "Heyz live set"
+      "youtubeQuery": "Heyz live set",
+      "youtubeVideoIds": [
+        "_4VaIKzftAI",
+        "2e_suNrQoQg",
+        "POA588tsFiA"
+      ],
+      "youtubeLabels": [
+        "HEYZ LIVE @ EDC LAS VEGAS 2026 (FULL SET)",
+        "HEYZ'D And Confused Vol. 2 (LIVE from Electric Forest)",
+        "Live at Red Rocks 2025 [Full Set | Deadrocks Night 2]"
+      ]
     },
     {
       "name": "Ravenscoon",
       "day": "Day 3",
       "stage": "Tripolee",
       "spotifyId": "7vfvYuEyJbh1Tf3QlOTAmZ",
-      "youtubeQuery": "Ravenscoon live set"
+      "youtubeQuery": "Ravenscoon live set",
+      "youtubeVideoIds": [
+        "QD0HcAleR3w",
+        "OtqYRPFjBzI",
+        "5451EiyLphs"
+      ],
+      "youtubeLabels": [
+        "Ravenscoon Live @ Lost Lands 2025 - Full Set",
+        "RAVENSCOON Live @ Mission Ballroom 2025",
+        "RAVENSCOON Live @ The Ogden Theatre 2024 RAGE NIGHT, FULL SET"
+      ],
+      "soundcloudSlug": "ravenscoon"
     },
     {
       "name": "Whethan",
@@ -2489,7 +3205,17 @@
       ],
       "soundcloudSlug": "whethan",
       "spotifyId": "0vqJkZ0RpLZixt3lTmD8vP",
-      "youtubeQuery": "Whethan live set"
+      "youtubeQuery": "Whethan live set",
+      "youtubeVideoIds": [
+        "1Q-j11Nlm4k",
+        "hM3vKINv5bM",
+        "u945TiL1zBQ"
+      ],
+      "youtubeLabels": [
+        "Whethan Live at EDC Las Vegas 2026",
+        "WHETHAN LIVE @ HOLLYWOOD PALLADIUM 2026",
+        "Whethan (LIVE) at DEF x SoundCloud®"
+      ]
     },
     {
       "name": "Kai Wachi",
@@ -2501,7 +3227,17 @@
       ],
       "soundcloudSlug": "kaiwachi",
       "spotifyId": "2fNr4ldujwq97v1jWeqs8K",
-      "youtubeQuery": "Kai Wachi live set"
+      "youtubeQuery": "Kai Wachi live set",
+      "youtubeVideoIds": [
+        "-P9OsHzjEjM",
+        "3le_lSPKokA",
+        "m5kcQdmGdFw"
+      ],
+      "youtubeLabels": [
+        "KAI WACHI LIVE IN TORONTO (360 SET)",
+        "KAI WACHI LIVE @ ULTRA MIAMI 2026",
+        "Live at EDC Las Vegas 2026"
+      ]
     },
     {
       "name": "Sullivan King",
@@ -2513,26 +3249,68 @@
       ],
       "soundcloudSlug": "sullivankingmusic",
       "spotifyId": "1CXuuw8HJhyN80HlNzvL1e",
-      "youtubeQuery": "Sullivan King live set"
+      "youtubeQuery": "Sullivan King live set",
+      "youtubeVideoIds": [
+        "WqSCRVlZ5Wo",
+        "ab-EbI6CwzI",
+        "TpkYi4_mPtc"
+      ],
+      "youtubeLabels": [
+        "SULLIVAN KING @ LOST LANDS 2025 (FULL SET)",
+        "Sullivan King Live at Zombie Apocalypse 2026 🧟‍♂️",
+        "SULLIVAN KING @ EDC LAS VEGAS 2025 (FULL SET)"
+      ]
     },
     {
       "name": "DJ Diesel B2B Teddy Pain",
       "day": "Day 3",
       "stage": "Tripolee",
-      "youtubeQuery": "DJ Diesel B2B Teddy Pain live set"
+      "youtubeQuery": "DJ Diesel B2B Teddy Pain live set",
+      "youtubeVideoIds": [
+        "ulm2Sb3-w7I",
+        "yhWXXHm2rGY",
+        "lw-RgtPPq8Y"
+      ],
+      "youtubeLabels": [
+        "DJ Diesel (Shaq) b2b Teddy Pain (T-Pain) @ Electric Forest 2026",
+        "DIESEL B2B TEDDY PAIN Electric Forest 2026",
+        "D Pain (Dj Diesel B2B Teddy Pain) at Electric Forest 2026 (GoPro POV)"
+      ]
     },
     {
       "name": "Tiffany Day",
       "day": "Day 3",
       "stage": "The Observatory",
       "spotifyId": "5D5Qbe1lf3aMnLsPSzXItu",
-      "youtubeQuery": "Tiffany Day live set"
+      "youtubeQuery": "Tiffany Day live set",
+      "soundcloudSlug": "tiffanyday",
+      "youtubeVideoIds": [
+        "z0lBfnsrRiM",
+        "WOrBSXcYZHk",
+        "ewikJhkqnrU"
+      ],
+      "youtubeLabels": [
+        "Boiler Room London: Tiffany Day",
+        "BASS FLUFF AT THE GYM",
+        "Yerr On The Street"
+      ]
     },
     {
       "name": "Rio Kosta",
       "day": "Day 3",
       "stage": "The Observatory",
-      "youtubeQuery": "Rio Kosta live set"
+      "youtubeQuery": "Rio Kosta live set",
+      "soundcloudSlug": "riokosta",
+      "youtubeVideoIds": [
+        "7B-h8F0ogCU",
+        "TeTgybxb2qg",
+        "pwJj7GcMGlE"
+      ],
+      "youtubeLabels": [
+        "Live From KCRW HQ",
+        "Live from Studio A - Rio Kosta",
+        "@RIOKOSTAMUSIC @ Zebulon (7/16/25)"
+      ]
     },
     {
       "name": "Lyrah",
@@ -2540,14 +3318,35 @@
       "stage": "The Observatory",
       "soundcloudSlug": "lyrah",
       "spotifyId": "5JyKQ4MQ2HkU1n1BYiKMWW",
-      "youtubeQuery": "Lyrah live set"
+      "youtubeQuery": "Lyrah live set",
+      "youtubeVideoIds": [
+        "PrLqzqlwCVE",
+        "v2AfJRoi30Y",
+        "jRW87e4M5R8"
+      ],
+      "youtubeLabels": [
+        "Live from the Clubhouse",
+        "Live @ Electric Forest 2026 (Full Set)",
+        "LYRAH @ CORONA CAPITAL 2025 (FULL SET)"
+      ]
     },
     {
       "name": "Vandelux",
       "day": "Day 3",
       "stage": "The Observatory",
       "spotifyId": "2rdSCmWgrIWA8pmwhS1T2k",
-      "youtubeQuery": "Vandelux live set"
+      "youtubeQuery": "Vandelux live set",
+      "soundcloudSlug": "vandelux",
+      "youtubeVideoIds": [
+        "N16nZmLqqSY",
+        "DpBA44ecpaI",
+        "dxVfKCHLlbY"
+      ],
+      "youtubeLabels": [
+        "Groovy Café House Music Set | AM.RADIO 002",
+        "Morning Block Party Set | AM.RADIO 014 Denver",
+        "Vandelux Après-Ski DJ Set in the Colorado Mountains (Disco, House)"
+      ]
     },
     {
       "name": "Tourist",
@@ -2565,7 +3364,17 @@
       ],
       "soundcloudSlug": "touristmusic",
       "spotifyId": "2ABBMkcUeM9hdpimo86mo6",
-      "youtubeQuery": "Tourist live set"
+      "youtubeQuery": "Tourist live set",
+      "youtubeVideoIds": [
+        "gg-uqkwDo3U",
+        "CXjWqpqc-TM",
+        "m7corHzyH2A"
+      ],
+      "youtubeLabels": [
+        "Live at Lost Village 2025",
+        "Tourist Boiler Room London Live Set",
+        "Live at Lost Village 2023"
+      ]
     },
     {
       "name": "Jigitz",
@@ -2573,7 +3382,17 @@
       "stage": "The Observatory",
       "soundcloudSlug": "jigitz",
       "spotifyId": "7sfn5Z6ItzDkOF9cYzxWPZ",
-      "youtubeQuery": "Jigitz live set"
+      "youtubeQuery": "Jigitz live set",
+      "youtubeVideoIds": [
+        "jtsm4bbaOHY",
+        "eW939HVoPFc",
+        "GtemQO_rWIA"
+      ],
+      "youtubeLabels": [
+        "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
+        "PARDEAUX Live Set | Secret B2B",
+        "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ]
     },
     {
       "name": "EOTO",
@@ -2581,26 +3400,66 @@
       "stage": "The Observatory",
       "soundcloudSlug": "eoto",
       "spotifyId": "71YgkzZVmQsmWGDsu0jmqR",
-      "youtubeQuery": "EOTO live set"
+      "youtubeQuery": "EOTO live set",
+      "youtubeVideoIds": [
+        "eBuQIpV_9C0",
+        "VJHYph9WZZE",
+        "xAYokoxpn3c"
+      ],
+      "youtubeLabels": [
+        "EOTO 2013.12.07 Live @ The Fillmore Auditorium Denver, CO [Audio Only]",
+        "full set at Camp Barefoot (pro audio)",
+        "Eoto Live @ Portage Theater Chicago 10/4/2008"
+      ]
     },
     {
       "name": "Hannah Muse Community",
       "day": "Day 3",
       "stage": "Honeycomb",
-      "youtubeQuery": "Hannah Muse Community live set"
+      "youtubeQuery": "Hannah Muse Community live set",
+      "youtubeVideoIds": [
+        "zgFQP2ZtCaI",
+        "tB1SGx1iOg8",
+        "EBAyML5w2KY"
+      ],
+      "youtubeLabels": [
+        "The Muse X #BEATLIFE: DJ Hannah",
+        "The Muse X #BEATLIFE: Elfuego B2B Gehlen",
+        "This Is Not Normal Behavior"
+      ]
     },
     {
       "name": "Pride 360",
       "day": "Day 3",
       "stage": "Honeycomb",
-      "youtubeQuery": "Pride 360 live set"
+      "youtubeQuery": "Pride 360 live set",
+      "youtubeVideoIds": [
+        "49ND7S3F9Ps",
+        "-d0gjBAGu-U",
+        "8AvC05kXS9I"
+      ],
+      "youtubeLabels": [
+        "U2 - Pride (In The Name Of Love) (Live)",
+        "Live Disco Set @ Studio Pride Sunset",
+        "Fatboy Slim @ British Airways i360 in Brighton, United Kingdom for Cercle"
+      ]
     },
     {
       "name": "Cain Culto",
       "day": "Day 3",
       "stage": "Honeycomb",
       "spotifyId": "7IFepbBZvGSOYFzTk5Shub",
-      "youtubeQuery": "Cain Culto live set"
+      "youtubeQuery": "Cain Culto live set",
+      "youtubeVideoIds": [
+        "2aQhQ0owH8o",
+        "C93lcJ-tic8",
+        "1pfh3etjZJc"
+      ],
+      "youtubeLabels": [
+        "Cain Culto & Sudan Archives | Yerr On The Street",
+        "KFC Santería by Cain Culto feat. Sudan Archives live at Fonda Los Angeles",
+        "KFC Santería | A COLORS SHOW"
+      ]
     },
     {
       "name": "Snow Wife",
@@ -2608,7 +3467,17 @@
       "stage": "Honeycomb",
       "soundcloudSlug": "snowwife-music",
       "spotifyId": "7CV3dQkhJB2dEqb85ICD33",
-      "youtubeQuery": "Snow Wife live set"
+      "youtubeQuery": "Snow Wife live set",
+      "youtubeVideoIds": [
+        "9hDseeFLjWg",
+        "2uw68xqVMWc",
+        "mwv6fwIpDLA"
+      ],
+      "youtubeLabels": [
+        "Bodyology, Snow Wife at the Atlantis in DC 5/31/25",
+        "AMERICAN HORROR SHOW (Live at Devil’s Playground at Webster Hall 10.31.25)",
+        "\"Pumps\""
+      ]
     },
     {
       "name": "Rochelle Jordan",
@@ -2619,7 +3488,17 @@
       ],
       "soundcloudSlug": "rojoproto",
       "spotifyId": "3MM3uKNdJbvefUael12dl3",
-      "youtubeQuery": "Rochelle Jordan live set"
+      "youtubeQuery": "Rochelle Jordan live set",
+      "youtubeVideoIds": [
+        "Qunu48ADTUk",
+        "y8GFxCkgTEo",
+        "pzEU3s1G-VA"
+      ],
+      "youtubeLabels": [
+        "Rochelle Jordan Live in Concert | CBC Music Live",
+        "Full Performance (Live on KEXP)",
+        "Live @ El Club in Detroit, Michigan"
+      ]
     },
     {
       "name": "Chmura",
@@ -2633,26 +3512,66 @@
       "name": "Detroit Party Marching Band",
       "day": "Day 3",
       "stage": "Center Stage",
-      "youtubeQuery": "Detroit Party Marching Band live set"
+      "youtubeQuery": "Detroit Party Marching Band live set",
+      "youtubeVideoIds": [
+        "OSKWTMrWSFY",
+        "l3rYmw1iz6E",
+        "So2vCtObLkU"
+      ],
+      "youtubeLabels": [
+        "Detroit Party Marching Band 5/10/25 , and excerpts from 5/9/25 Pittonkatonk, Pittsburgh PA",
+        "American Hipster Presents #26 (Detroit - Music)",
+        "Detroit Party Marching Band 5/9/26 Pittonkatonk, Vietnam Veterans Pavilion, Pittsburgh PA"
+      ]
     },
     {
       "name": "J Rose Loops & Fungi Flows",
       "day": "Day 3",
       "stage": "Center Stage",
-      "youtubeQuery": "J Rose Loops & Fungi Flows live set"
+      "youtubeQuery": "J Rose Loops & Fungi Flows live set",
+      "youtubeVideoIds": [
+        "qKTGMLG_Eqk",
+        "EqnXtH8x-js",
+        "PXxbEfhtDiM"
+      ],
+      "youtubeLabels": [
+        "How To Grow Mushrooms On Your Feet 🤔",
+        "Rhyming On The One | Harry Mack Freestyle",
+        "Lil Baby - Dead Fresh"
+      ]
     },
     {
       "name": "Big Sis",
       "day": "Day 3",
       "stage": "Center Stage",
       "spotifyId": "6BXcNAZ4A4vmgqskvbizeL",
-      "youtubeQuery": "Big Sis live set"
+      "youtubeQuery": "Big Sis live set",
+      "youtubeVideoIds": [
+        "JTu2lZyjguU",
+        "YsyG8FfaN2M",
+        "aF0nthg6ys8"
+      ],
+      "youtubeLabels": [
+        "Big Sis Live at TREEFORT 2025 (Full Set, Shot on MiniDV Tape) | Shambling History",
+        "BIG SIS x Ned Bigby - Federal Bureau of Investigation",
+        "Love Song"
+      ]
     },
     {
       "name": "Emmie and Ryan",
       "day": "Day 3",
       "stage": "Grand Artique",
-      "youtubeQuery": "Emmie and Ryan live set"
+      "youtubeQuery": "Emmie and Ryan live set",
+      "youtubeVideoIds": [
+        "uLQYa6WxQJc",
+        "xjJJJM8L_xM",
+        "Z1lQOnqIECI"
+      ],
+      "youtubeLabels": [
+        "The CRAZIEST transition",
+        "Millie Bobby Brown before her plastic surgeries",
+        "Emmylou Harris - (You Never Can Tell) C'est la Vie (live) • TopPop"
+      ]
     },
     {
       "name": "The Grand Auction",
@@ -2664,7 +3583,17 @@
       "name": "Caitlin Cusack",
       "day": "Day 3",
       "stage": "Grand Artique",
-      "youtubeQuery": "Caitlin Cusack live set"
+      "youtubeQuery": "Caitlin Cusack live set",
+      "youtubeVideoIds": [
+        "8JvZex0W9F8",
+        "BHqfrRNeGz0",
+        "OjXnHWFER3c"
+      ],
+      "youtubeLabels": [
+        "Caitlin Cusack Live from Modales Wines: \"Run To You\"",
+        "Catlin Cusack (Live at GRAM on the Green 2025)",
+        "Caitlin Cusack at Listening Room - Solo Cover Medley"
+      ]
     },
     {
       "name": "Grand Artique Talent Show",
@@ -2676,7 +3605,17 @@
       "name": "Shane Hall",
       "day": "Day 3",
       "stage": "Grand Artique",
-      "youtubeQuery": "Shane Hall live set"
+      "youtubeQuery": "Shane Hall live set",
+      "youtubeVideoIds": [
+        "ejo7Wk1Aid4",
+        "DLI70aIOV4s",
+        "j3fUSqnSO5g"
+      ],
+      "youtubeLabels": [
+        "Jam in the Van (Full Set Live in Los Angeles, CA 2021) #JAMINTHEVAN",
+        "Shane Hall (Live on MobileCoin Radio)",
+        "Voodoo Chile (dirty delta)"
+      ]
     },
     {
       "name": "Vincent Antone",
@@ -2684,7 +3623,17 @@
       "stage": "Grand Artique",
       "soundcloudSlug": "vincentantone",
       "spotifyId": "5k3Gs1EcCa9LW1bfR4wWb9",
-      "youtubeQuery": "Vincent Antone live set"
+      "youtubeQuery": "Vincent Antone live set",
+      "youtubeVideoIds": [
+        "I1zgoDbNKCA",
+        "qgwNkvOOaPc",
+        "h2hUDlSRfm8"
+      ],
+      "youtubeLabels": [
+        "Vincent Antone Live at Golden Hour at Labyrinth Rims, Utah for Organik Society",
+        "Vincent Antone Midnight Set Live from Labyrinth Rim",
+        "Vincent Antone Live Elements Music & Arts Festival 2025 4k"
+      ]
     },
     {
       "name": "Bob Moses",
@@ -2704,14 +3653,25 @@
       "name": "Logie",
       "day": "Day 3",
       "stage": "Grand Artique",
-      "youtubeQuery": "Logie live set"
+      "youtubeQuery": "Logie live set",
+      "youtubeVideoIds": [
+        "8RiHxQMyYxI",
+        "8jOlMF1v19M",
+        "LF2CsIVV4TM"
+      ],
+      "youtubeLabels": [
+        "SINAN LOGIE | NOH - JULY 29 / 2026 / NOH RADIO / LIVE SET",
+        "Logie Live Almost Nakey SantaCon 2024",
+        "Guy Sebastian - Get It Done (Live 2025 TV Week Logie Awards)"
+      ]
     },
     {
       "name": "Lightcode",
       "day": "Day 4",
       "stage": "Ranch Arena",
       "spotifyId": "0Nfr5f8rhhP04vt0U8kC28",
-      "youtubeQuery": "Lightcode live set"
+      "youtubeQuery": "Lightcode live set",
+      "soundcloudSlug": "lightcode"
     },
     {
       "name": "Underscores",
@@ -2728,14 +3688,35 @@
       ],
       "soundcloudSlug": "underscores",
       "spotifyId": "7HfUJxeVTgrvhk0eWHFzV7",
-      "youtubeQuery": "Underscores live set"
+      "youtubeQuery": "Underscores live set",
+      "youtubeVideoIds": [
+        "zZ3XM0YUJSU",
+        "rEWPBuk1bh4",
+        "QWwt5dLvrWk"
+      ],
+      "youtubeLabels": [
+        "FADER Mix: underscores (Live from her FADER cover release party at Elsewhere )",
+        "Live at Washington D.C [FULL SET | 6/11/26]",
+        "Live in San Francisco 2026 - Galleria Tour - Full Show - June 26, 2026"
+      ]
     },
     {
       "name": "Jean Dawson",
       "day": "Day 4",
       "stage": "Ranch Arena",
       "spotifyId": "7vNNmjV14SKQzlQAEg0BXP",
-      "youtubeQuery": "Jean Dawson live set"
+      "youtubeQuery": "Jean Dawson live set",
+      "soundcloudSlug": "jeandawson",
+      "youtubeVideoIds": [
+        "WkOhGDm70T4",
+        "rVUcdWBMrRE",
+        "AQDWF9fha4o"
+      ],
+      "youtubeLabels": [
+        "Live at Baltimore, MD [FULL SET | 8/15/25]",
+        "Live at Washington D.C [FULL SET | 11/2/24]",
+        "Jean Dawson Camp Flog Gnaw 2024"
+      ]
     },
     {
       "name": "Kaskade",
@@ -2747,7 +3728,17 @@
       ],
       "soundcloudSlug": "kaskade",
       "spotifyId": "6TQj5BFPooTa08A7pk8AQ1",
-      "youtubeQuery": "Kaskade live set"
+      "youtubeQuery": "Kaskade live set",
+      "youtubeVideoIds": [
+        "l5wro3bMZWc",
+        "sBZc8aoUFhk",
+        "2uznwavqsBs"
+      ],
+      "youtubeLabels": [
+        "Kaskade Live at EDC Las Vegas 2026",
+        "Kaskade Live at Sunsoaked Festival 2025",
+        "Kaskade LIVE At The Golden Gate Bridge | San Francisco , CA"
+      ]
     },
     {
       "name": "Illenium",
@@ -2765,13 +3756,33 @@
       ],
       "soundcloudSlug": "illeniumofficial",
       "spotifyId": "45eNHdiiabvmbp4erw26rg",
-      "youtubeQuery": "Illenium live set"
+      "youtubeQuery": "Illenium live set",
+      "youtubeVideoIds": [
+        "JssDaUK0_GQ",
+        "9i8XVK77EH8",
+        "E18SIgqPp0A"
+      ],
+      "youtubeLabels": [
+        "Illenium Live @ Lost Lands 2025 - Full Set",
+        "Ultra Music Festival 2026 (FULL SET)",
+        "ILLENIUM LIVE AT SHAMBHALA 2025 (FULL SET)"
+      ]
     },
     {
       "name": "Daniel Donato's Cosmic Jam",
       "day": "Day 4",
       "stage": "Sherwood Court",
-      "youtubeQuery": "Daniel Donato's Cosmic Jam live set"
+      "youtubeQuery": "Daniel Donato's Cosmic Jam live set",
+      "youtubeVideoIds": [
+        "IxI7GsyHyDs",
+        "Up8y4tuioqs",
+        "q2sAT9WPl0Y"
+      ],
+      "youtubeLabels": [
+        "Daniel Donato's Cosmic Country 6/15/2024 Red Rocks Amphitheater (Full Show)",
+        "\"Dark Star - Cumberland Blues\" with Bill Kreutzmann - Daniel Donato's Cosmic Country",
+        "\"Sunshine In The Rain\" - Daniel Donato's Cosmic Country | Ryman Auditorium | 8/22/25 | Relix"
+      ]
     },
     {
       "name": "Wooli",
@@ -2779,7 +3790,17 @@
       "stage": "Sherwood Court",
       "soundcloudSlug": "woolimusic",
       "spotifyId": "1Uyqa2sdHm1bL5JK4IC4zc",
-      "youtubeQuery": "Wooli live set"
+      "youtubeQuery": "Wooli live set",
+      "youtubeVideoIds": [
+        "S16uNih67Vw",
+        "PaBcY8VTZZI",
+        "YCtUNWsIdwI"
+      ],
+      "youtubeLabels": [
+        "WOOLI Live @ Lost Lands 2025 - Full Set",
+        "Wooli Live at EDC Las Vegas 2026",
+        "Wooli Live @ Lost Lands 2023 - Full Set"
+      ]
     },
     {
       "name": "LSDream",
@@ -2787,7 +3808,17 @@
       "stage": "Sherwood Court",
       "soundcloudSlug": "lsdream",
       "spotifyId": "3Hrqjumb6WHg2aAUHJHLND",
-      "youtubeQuery": "LSDream live set"
+      "youtubeQuery": "LSDream live set",
+      "youtubeVideoIds": [
+        "t6UnCvoUcg0",
+        "OFFPMjpWigE",
+        "AsN5fdngBCk"
+      ],
+      "youtubeLabels": [
+        "DREAMROCKS Full Set @ Red Rocks 2023",
+        "LSZEE (LSDREAM & CloZee) - LIVE @ MISSION BALLROOM - NIGHT 2",
+        "LOST LANDS 2022 (FULL SET)"
+      ]
     },
     {
       "name": "Wes Mills",
@@ -2805,7 +3836,17 @@
       ],
       "soundcloudSlug": "qrionqrionqrion",
       "spotifyId": "0bGDTQ78MVgI5Snqo9KJZw",
-      "youtubeQuery": "Qrion live set"
+      "youtubeQuery": "Qrion live set",
+      "youtubeVideoIds": [
+        "DsI2rcHhWzQ",
+        "EBbDXchSZvY",
+        "DOyxDNHJWj0"
+      ],
+      "youtubeLabels": [
+        "Anjunadeep Open Air: London 2025",
+        "Qrion at Seismic Spring 2024 | Full Set (Patio)",
+        "Group Therapy 350 live from O2 Arena, Prague #ABGT350"
+      ]
     },
     {
       "name": "Chris Luno",
@@ -2825,7 +3866,17 @@
       "stage": "Tripolee",
       "soundcloudSlug": "omnom",
       "spotifyId": "3PYRXP25JcbqhvNaJYcnWy",
-      "youtubeQuery": "Omnom live set"
+      "youtubeQuery": "Omnom live set",
+      "youtubeVideoIds": [
+        "cMeZhxoi9RA",
+        "dQ9on1Kq6k8",
+        "1XXBcxHn-RQ"
+      ],
+      "youtubeLabels": [
+        "OMNOM Live @ Boxpac Project 2026",
+        "OMNOM Live @ The Ruins at Knockdown Center",
+        "Omnom @ KDC Ruins with Gray Area"
+      ]
     },
     {
       "name": "Yaeji",
@@ -2838,7 +3889,8 @@
         "house"
       ],
       "spotifyId": "2RqrWplViWHSGLzlhmDcbt",
-      "youtubeQuery": "Yaeji live set"
+      "youtubeQuery": "Yaeji live set",
+      "soundcloudSlug": "kraejiyaeji"
     },
     {
       "name": "Lane 8",
@@ -2855,7 +3907,17 @@
         "house"
       ],
       "spotifyId": "27gtK7m9vYwCyJ04zz0kIb",
-      "youtubeQuery": "Lane 8 live set"
+      "youtubeQuery": "Lane 8 live set",
+      "youtubeVideoIds": [
+        "Vkd8YNt1cs0",
+        "n_LcVqqHSY8",
+        "N_GfH09iP9c"
+      ],
+      "youtubeLabels": [
+        "Lane 8 b2b Sultan + Shepard - Live from Petco Park - San Diego, CA",
+        "Sunrise Set - Grand Lake, CO",
+        "Summer 2026 Mixtape (Live from the Mishawaka, Bellvue CO)"
+      ]
     },
     {
       "name": "GITF Party",
@@ -2868,13 +3930,33 @@
       "day": "Day 4",
       "stage": "The Observatory",
       "spotifyId": "3BcbwxzJm5f0yppgo2Vatd",
-      "youtubeQuery": "Bricknasty live set"
+      "youtubeQuery": "Bricknasty live set",
+      "youtubeVideoIds": [
+        "g24K9M2ApqE",
+        "dvQRjXoccvE",
+        "WL9o6UG7TvY"
+      ],
+      "youtubeLabels": [
+        "Bricknasty on Audiotree Live (Full Session)",
+        "Live | Night Club 101 NYC | February 28, 2026",
+        "Bricknasty at The Academy 2024"
+      ]
     },
     {
       "name": "Bombargo",
       "day": "Day 4",
       "stage": "The Observatory",
-      "youtubeQuery": "Bombargo live set"
+      "youtubeQuery": "Bombargo live set",
+      "youtubeVideoIds": [
+        "Av6bkkdlEiw",
+        "RykQcV2hjp4",
+        "HMmP6YecYMc"
+      ],
+      "youtubeLabels": [
+        "Full Set (Live Music) | Sugarshack Sessions",
+        "Sugarshack Pop-Up Full Set (Live Music) | Sugarshack Sessions",
+        "Bombargo's Movin' & Groovin' Live Series: Oxygen (Acoustic)"
+      ]
     },
     {
       "name": "Oppidan",
@@ -2895,7 +3977,17 @@
       "stage": "The Observatory",
       "soundcloudSlug": "marydroppinz",
       "spotifyId": "4tPVnr7VB15UA9TRsie3cS",
-      "youtubeQuery": "Mary Droppinz live set"
+      "youtubeQuery": "Mary Droppinz live set",
+      "youtubeVideoIds": [
+        "Olx0J33uke0",
+        "4ea_5jbyu8g",
+        "Ccc46qqW5RU"
+      ],
+      "youtubeLabels": [
+        "Live at Boxpac Project",
+        "Mary Droppinz Live at EDC Las Vegas 2026",
+        "Hail Mary Full of Bass 2025 Long Beach w/ Secret Service"
+      ]
     },
     {
       "name": "MPH",
@@ -2907,7 +3999,17 @@
       ],
       "soundcloudSlug": "mph-uk",
       "spotifyId": "62SCu33InHVq97VaWw3eof",
-      "youtubeQuery": "MPH live set"
+      "youtubeQuery": "MPH live set",
+      "youtubeVideoIds": [
+        "cZsP_4luaHU",
+        "KEszhQvHH-s",
+        "CCmm6IUMmlQ"
+      ],
+      "youtubeLabels": [
+        "MPH High Energy UKG DJ Set Live From DJ Mag HQ",
+        "Live in Tokyo, Japan | UKF On Air",
+        "Live In Hollywood"
+      ]
     },
     {
       "name": "Frost Children",
@@ -2923,7 +4025,8 @@
         "indie rock"
       ],
       "spotifyId": "2armP2pVQFy1awZ8HLbCib",
-      "youtubeQuery": "Frost Children live set"
+      "youtubeQuery": "Frost Children live set",
+      "soundcloudSlug": "frostchildren"
     },
     {
       "name": "Rumble in the Bumble Beatbox Battle",
@@ -2935,7 +4038,17 @@
       "name": "Wax Monkey",
       "day": "Day 4",
       "stage": "Honeycomb",
-      "youtubeQuery": "Wax Monkey live set"
+      "youtubeQuery": "Wax Monkey live set",
+      "youtubeVideoIds": [
+        "ivRSnX2bd_c",
+        "6QsTm_G3qeE",
+        "RyTCfwmkt2E"
+      ],
+      "youtubeLabels": [
+        "Mama's Cookin' -- Wax Monkey",
+        "Wax Monkey @ The Fabulous 40 Watt 1/23/26",
+        "\"Feel Like A Stranger\" (Grateful Dead) plus more Wax Monkey at Proud Larrys in Oxford, Mississippi."
+      ]
     },
     {
       "name": "River Tiber",
@@ -2943,7 +4056,17 @@
       "stage": "Honeycomb",
       "soundcloudSlug": "rivertiber",
       "spotifyId": "1FHDMgGdmIP4IsoFkAwbS0",
-      "youtubeQuery": "River Tiber live set"
+      "youtubeQuery": "River Tiber live set",
+      "youtubeVideoIds": [
+        "N79psZne6D0",
+        "ZEHBzjLNnlI",
+        "SdwxJqqA-OY"
+      ],
+      "youtubeLabels": [
+        "Tiny Desk Concert",
+        "River Tiber Live Toronto January 24, 2026",
+        "River Tiber \"I'm A Stone\" (Live in Brooklyn 12/10/16)"
+      ]
     },
     {
       "name": "Deadtronica",

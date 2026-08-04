@@ -314,7 +314,8 @@
         "Capochino live @ The Far Out Lounge (Austin, TX)",
         "Live From Denver",
         "Live @ The Far Out Lounge"
-      ]
+      ],
+      "soundcloudSlug": "capochinomusic"
     },
     {
       "name": "ONHELL",
@@ -346,7 +347,8 @@
         "OMRI. | Dots On Cape Town | DHL Stadium | Folks | South Africa",
         "OMRI. | Dots On Melrose | Est.Today | Stranger Than | Los Angeles",
         "Dot Chandler @ Apokalypsa (Brno/CZ) 25.03.2016"
-      ]
+      ],
+      "soundcloudSlug": "iamdot"
     },
     {
       "name": "Deluluz",
@@ -376,7 +378,8 @@
         "Riordan Live @ The Yuma Tent Coachella 2026",
         "RIORDAN B2B RANGER TRUCCO - LIVE AT ECHOSTAGE",
         "Riordan at The Concourse Project | Full Set (1 Aug 2025)"
-      ]
+      ],
+      "soundcloudSlug": "riordanuk"
     },
     {
       "name": "Obskür",
@@ -392,7 +395,8 @@
         "Obskür Tech House Mix Live From DJ Mag's Miami Pool Party",
         "Saint Patrick's Day | RAW CUTS",
         "Dj set at The Terrace @OfficialClubSpace"
-      ]
+      ],
+      "soundcloudSlug": "obskurofficial"
     },
     {
       "name": "Omar+",
@@ -423,7 +427,8 @@
         "Mixmag Lab Amsterdam | PIV Sunrise Session",
         "HoneyLuv House Set @ Day Trip In The Park, LA",
         "@beatport Live | NY"
-      ]
+      ],
+      "soundcloudSlug": "honeyluvmusic"
     },
     {
       "name": "SLAMM",
@@ -438,7 +443,8 @@
         "Dan Molinari B2B SLAMM Pink Records Party Miami Music Week at Zey Zey Miami",
         "SLAM full set | COLLECTIF LA BRINGUE 2024",
         "Slamm @ ARC Music Festival 2025"
-      ]
+      ],
+      "soundcloudSlug": "slamm-official"
     },
     {
       "name": "Bakkus",
@@ -512,7 +518,8 @@
         "BUNT. at COACHELLA 2026",
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
-      ]
+      ],
+      "soundcloudSlug": "buntmusic"
     },
     {
       "name": "Loud Luxury",
@@ -521,6 +528,7 @@
         "electronic",
         "house"
       ],
+      "soundcloudSlug": "loudluxury",
       "spotifyId": "6t1gpxYbY8OlLA7D2RiikQ",
       "youtubeQuery": "Loud Luxury live set",
       "youtubeVideoIds": [
@@ -898,7 +906,8 @@
         "Madison Palmer Live DJ Set @ SXSW 2025 | Melodic Techno ft. Anyma, Argy, Rebuke",
         "Melodic Techno Live @theconcourseproject - New Release \"I Rise\"",
         "Melodic Techno DJ Set 2025 | Miss Monique, Nora En Pure, Eli & Fur"
-      ]
+      ],
+      "soundcloudSlug": "madisonpalmer"
     },
     {
       "name": "Høldën",
