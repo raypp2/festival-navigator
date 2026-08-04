@@ -1116,6 +1116,11 @@ function buildGridCard(entry, ctx, actions) {
   btn.appendChild(who);
 
   btn.addEventListener('click', () => {
+    // Clicking the card you are ALREADY sampling is a no-op, not a re-render.
+    // Focusing a different artist genuinely needs a new player; re-focusing the
+    // current one would tear down a playing embed and start it over, which is
+    // the same interruption refreshDesktopAfterDecision exists to prevent.
+    if (focusedName === entry.name) return;
     setFocus(entry);
     renderDeckBody(ctx, actions);
   });
@@ -1181,20 +1186,93 @@ function tickNextDesktop(level) {
   return level + 1;
 }
 
+// A decision on the desktop pane repaints WHAT THE DECISION CHANGED and
+// nothing else. It used to call renderDeckBody, which wipes the overlay and
+// destroys the live player — so every pick, must and pass stopped the audio
+// and reset the video mid-listen (reported 2026-08-04). The pane is where you
+// are listening; reaching a verdict on an artist is not a reason to interrupt
+// them, and on desktop the deck is explicitly a "pick without leaving the
+// grid" surface, which the restart made a lie.
+//
+// Surgical rather than a re-render that hands the player over to the new host.
+// player.js does expose handoverTo, but the embed is a live <iframe> and
+// reparenting one reloads it in every engine that matters — and renderDeckBody
+// detaches it from the document first anyway, which is fatal on its own. The
+// only guaranteed way to keep a stream alive is to leave its DOM subtree
+// completely alone, so this never touches .dd2-pane-body.
+//
+// What a decision actually changes: the grid (aura, who-corner, the NOT FOR ME
+// chip, which cards carry a reason ribbon, pool membership and the count
+// line), the pane's hero aura, the pane's reason ribbon — an undecided-only
+// affordance — and the pick control itself. The rail and the header read
+// facets and the full artist list, and a decision moves neither.
+function refreshDesktopAfterDecision(ctx, actions) {
+  const overlay = document.getElementById(OVERLAY_ID);
+  const body = overlay && overlay.querySelector('.dd2-body');
+  const pane = body && body.querySelector('.dd2-pane');
+  // No desktop body or no pane means there is no live player to protect (the
+  // mobile layout, or a pane showing its zero state). The ordinary path is
+  // correct there and cheaper to trust than a second set of edge cases.
+  if (!body || !pane) { renderDeckBody(ctx, actions); return; }
+
+  const facets = loadFacets(ctx.fid);
+  const fest = state.FESTIVALS[ctx.fid] || {};
+  const pool = buildPool(ctx, facets, currentCanonData);
+
+  const oldMiddle = body.querySelector('.dd2-middle');
+  if (oldMiddle) body.replaceChild(buildMiddle(ctx, actions, pool, fest), oldMiddle);
+
+  const name = focusedName;
+  if (!name) return;
+  // Keep the snapshot tracking the live ranking exactly as resolveFocusEntry
+  // would have. A decision can drop the artist out of the pool (Show =
+  // Undecided), and when it does the frozen snapshot is what the pane keeps
+  // reading — the same "never yank the pane mid-thought" rule that already
+  // governs which artist is focused.
+  const live = pool.find((e) => e.name === name);
+  if (live) focusedSnapshot = live;
+  const entry = focusedSnapshot;
+
+  const heroBg = pane.querySelector('.dd2-pane-hero-bg');
+  if (heroBg) heroBg.style.background = auraBackground(cardPeopleFor(name, ctx)).background;
+
+  const undecided = myLevel(name, ctx) < 1 && !model.isPassed(state.crewDoc, ctx.fid, name, ctx.meName);
+  const paneBody = pane.querySelector('.dd2-pane-body');
+  const oldReason = pane.querySelector('.dd2-pane-reason');
+  if (undecided && entry && entry.reason) {
+    if (oldReason) oldReason.textContent = entry.reason.text;
+    else if (paneBody) {
+      const ribbon = document.createElement('div');
+      ribbon.className = 'dd2-pane-reason';
+      ribbon.textContent = entry.reason.text;
+      paneBody.insertBefore(ribbon, paneBody.firstChild); // above the player, as buildFocusPane places it
+    }
+  } else if (oldReason) {
+    oldReason.remove();
+  }
+
+  // REBUILT, not repainted through paintPrimaryActions: the control's handlers
+  // close over the level they were built with, so a repainted row would
+  // compute its next tick from a stale base and the second tap would go
+  // somewhere nobody asked for.
+  const oldActions = pane.querySelector('.dd2-pane-actions');
+  if (oldActions) pane.replaceChild(buildPanePickControl(name, ctx, actions), oldActions);
+}
+
 function paneWritePick(artistName, level, ctx, actions) {
   const before = myLevel(artistName, ctx);
   state.applyPickLevel(ctx.fid, artistName, ctx.meName, level);
   actions.applyLocalPick(artistName, ctx.meName, level);
   if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
   ctx.onNotesChange();
-  renderDeckBody(ctx, actions);
+  refreshDesktopAfterDecision(ctx, actions);
   if (before === 4 && level === 0 && actions.showUndoToast) {
     actions.showUndoToast(`Cleared your must for ${artistName}`, () => {
       state.applyPickLevel(ctx.fid, artistName, ctx.meName, 4);
       actions.applyLocalPick(artistName, ctx.meName, 4);
       if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
       ctx.onNotesChange();
-      renderDeckBody(ctx, actions);
+      refreshDesktopAfterDecision(ctx, actions);
     });
   }
 }
@@ -1204,13 +1282,13 @@ function paneWritePass(artistName, on, ctx, actions) {
   if (on) actions.applyLocalPick(artistName, ctx.meName, 0);
   if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
   ctx.onNotesChange();
-  renderDeckBody(ctx, actions);
+  refreshDesktopAfterDecision(ctx, actions);
   if (on && actions.showUndoToast) {
     actions.showUndoToast(`Passed on ${artistName}`, () => {
       state.applyPass(ctx.fid, artistName, ctx.meName, false);
       if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
       ctx.onNotesChange();
-      renderDeckBody(ctx, actions);
+      refreshDesktopAfterDecision(ctx, actions);
     });
   }
 }

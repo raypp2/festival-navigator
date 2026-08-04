@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v52'; // v52 = deck mobile pass: card breathing room, bottom-pinned player, one-row top bar, set times, skip button
+const CACHE_VERSION = 'festival-nav-v53'; // v53 = a desktop pane decision no longer restarts the player
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

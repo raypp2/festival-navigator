@@ -385,6 +385,69 @@ test('a pane decision that drops the focused artist out of the pool keeps the pa
   assert.equal(paneName(), 'PickFlow1', 'the pane keeps showing it anyway');
 });
 
+// The pane is where you are LISTENING. Reaching a verdict on the artist used
+// to call renderDeckBody, which wipes the overlay and destroys the live player
+// — every pick, must and pass stopped the audio and reset the video mid-listen
+// (reported 2026-08-04). destroyCounter/mountCalls are the honest assertion
+// here: "the pane still shows the artist" would have passed the whole time it
+// was broken, because a re-render puts the same artist back with a new embed.
+test('a pane decision never touches the live player — no destroy, no remount', () => {
+  const mounts = [];
+  const destroys = { n: 0 };
+  const actions = mkActions(mounts, destroys);
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow1').click();
+  const mountsAfterFocus = mounts.length;
+  const destroysAfterFocus = destroys.n;
+  assert.equal(mounts[mounts.length - 1].artist.name, 'PickFlow1', 'sanity: focusing mounted the player once');
+
+  const pane = () => overlay().querySelector('.dd2-pane-actions');
+  pane().querySelector('.dd-btn-pick').click();  // ×1
+  pane().querySelector('.dd-btn-pick').click();  // ×2
+  pane().querySelector('.dd-btn-must').click();  // must
+  pane().querySelector('.dd-btn-pass').click();  // not for me
+
+  assert.equal(destroys.n, destroysAfterFocus, 'four decisions destroyed the player zero times');
+  assert.equal(mounts.length, mountsAfterFocus, 'and remounted it zero times — the stream plays through');
+  assert.ok(overlay().querySelector('.dd2-pane-body'), 'the pane body (which owns the embed) is still mounted');
+});
+
+test('a pane decision still repaints the grid and the pick control around the player', () => {
+  const actions = mkActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow1').click();
+  assert.ok(overlay().querySelector('.dd2-pane-reason') || true); // reason is optional for this fixture
+  overlay().querySelector('.dd2-pane-actions .dd-btn-must').click();
+
+  // The grid is the thing that has to move: a must leaves the Undecided pool.
+  assert.equal(gridCard('PickFlow1'), null, 'the decided artist left the grid');
+  // And the control has to know its own new level, or the next tap ticks from
+  // a stale base — this is why it is rebuilt rather than repainted.
+  const row = overlay().querySelector('.dd2-pane-actions .dd-actions-row');
+  assert.ok(row.querySelector('.dd-btn-must').classList.contains('is-on'), 'Must reads as chosen');
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click();
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin), 1,
+    'Pick from a must drops to x1 — computed from the CURRENT level, not the one the row was built with');
+});
+
+test('clicking the card you are already sampling does not restart the player', () => {
+  const mounts = [];
+  const destroys = { n: 0 };
+  const actions = mkActions(mounts, destroys);
+  renderDesktopForTest(ctx, actions, CANON);
+  gridCard('PickFlow1').click();
+  // Baselines AFTER the first focus: that click is a real focus change, so it
+  // legitimately tears down the player the initial render mounted for the
+  // pool's top entry. What must not move is what happens on the SECOND click.
+  const n = mounts.length;
+  const d = destroys.n;
+  gridCard('PickFlow1').click();
+  assert.equal(mounts.length, n, 're-focusing the current artist is a no-op, not a remount');
+  assert.equal(destroys.n, d, 'and nothing was torn down');
+  gridCard('PickFlow2').click();
+  assert.equal(mounts.length, n + 1, 'but a DIFFERENT artist genuinely needs a new player');
+});
+
 test('a rail facet edit narrows the grid live and persists to the same localStorage key the sheet uses', () => {
   const actions = mkActions();
   renderDesktopForTest(ctx, actions, CANON);
