@@ -70,6 +70,20 @@ let layoutMq = null;     // the live matchMedia handle while the deck is open
 // pool entry to read reason/genre text from.
 let focusedName = null;
 let focusedSnapshot = null;
+// DESKTOP session state. The desktop deck is a PASS THROUGH a set of artists,
+// not a live query — the same thing `session` models on mobile, and it is here
+// for the same two reasons. `desktopOrder` is the ranked pool frozen when the
+// session starts, so deciding on one artist cannot reshuffle the cards under
+// the cursor (a pick moves the taste signal, which re-ranks everyone else).
+// Freezing it is also what lets a decided card STAY on screen, marked, instead
+// of evaporating out of the Undecided filter the instant you act: "we don't
+// remove it from consideration within the count when the user decides — there's
+// value in them seeing what they covered" (2026-08-04). A facet edit is a
+// genuinely different question, so it starts a new session.
+let desktopOrder = null;       // Array<pool entry> | null — the frozen session order
+let desktopFacetKey = null;    // the facets that order was built from
+let desktopSettleTimer = null; // cancel fn: the hold/idle before the pane moves on
+let desktopExitTimer = null;   // cancel fn: the exit animation -> next artist
 
 function isDesktopLayout() {
   if (forcedLayout) return forcedLayout === 'desktop';
@@ -160,6 +174,47 @@ function startSession(ctx, facets, canonData) {
   // celebrate belongs to a card that is about to stop existing.
   clearDeckTimers();
   session = { pool: buildPool(ctx, facets, canonData), position: 0, decided: 0 };
+}
+
+function clearDesktopTimers() {
+  for (const cancel of [desktopSettleTimer, desktopExitTimer]) {
+    if (typeof cancel === 'function') cancel();
+  }
+  desktopSettleTimer = desktopExitTimer = null;
+}
+
+function resetDesktopSession() {
+  clearDesktopTimers();
+  desktopOrder = null;
+  desktopFacetKey = null;
+}
+
+// ONE place decides whether the frozen order is still the right one, so every
+// path that renders the desktop body — facet commit, layout switch, undo, a
+// grid click — gets the same answer without each having to remember to ask.
+function ensureDesktopSession(ctx, facets) {
+  const key = JSON.stringify(facets);
+  if (desktopOrder && key === desktopFacetKey) return desktopOrder;
+  clearDesktopTimers();
+  desktopFacetKey = key;
+  desktopOrder = buildPool(ctx, facets, currentCanonData);
+  return desktopOrder;
+}
+
+// Decided = you have said something about this artist, either way. Read from
+// the DOC rather than from a "seen this session" set, so an undo un-marks the
+// card for free and an already-decided artist surfaced by Show=All reads
+// correctly on its very first render.
+function isDecided(artistName, ctx) {
+  return myLevel(artistName, ctx) >= 1
+    || model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName);
+}
+
+function decisionKind(artistName, ctx) {
+  if (model.isPassed(state.crewDoc, ctx.fid, artistName, ctx.meName)) return 'pass';
+  const lvl = myLevel(artistName, ctx);
+  if (lvl === 4) return 'must';
+  return lvl >= 1 ? 'pick' : null;
 }
 
 // ---- sub-line copy -----------------------------------------------------------------
@@ -1058,11 +1113,18 @@ function buildGridCard(entry, ctx, actions) {
   btn.className = 'card dd2-gridcard';
   btn.dataset.artist = entry.name;
   const lvl = myLevel(entry.name, ctx);
-  const undecided = lvl < 1 && !entry.passed;
+  // Live doc reads, not entry.passed: the pool entry is frozen at session
+  // start, and this card now OUTLIVES its own decision — it has to be able to
+  // show a state its own entry has never heard of.
+  const kind = decisionKind(entry.name, ctx);
+  const passed = kind === 'pass';
+  const undecided = !kind;
   const showRibbon = undecided && entry.reason && entry.reason.type !== 'crew';
   if (showRibbon) btn.classList.add('has-reason');
-  if (entry.passed) btn.classList.add('wall-passed');
-  btn.setAttribute('aria-label', `Focus ${entry.name} in the sample pane`);
+  if (passed) btn.classList.add('wall-passed');
+  btn.setAttribute('aria-label', undecided
+    ? `Focus ${entry.name} in the sample pane`
+    : `${entry.name} — ${passed ? 'not for me' : kind === 'must' ? 'a must' : `picked ×${lvl}`}. Focus in the sample pane`);
 
   const { background, animated } = auraBackground(people);
   btn.style.background = background;
@@ -1078,7 +1140,7 @@ function buildGridCard(entry, ctx, actions) {
     ribbon.textContent = entry.reason.text;
     btn.appendChild(ribbon);
   }
-  if (entry.passed) {
+  if (passed) {
     const chip = document.createElement('span');
     chip.className = 'card-passed-chip';
     // The tag says what the button said. "Passed" was internal vocabulary
@@ -1115,12 +1177,30 @@ function buildGridCard(entry, ctx, actions) {
   }
   btn.appendChild(who);
 
+  // A decided card STAYS in the grid and says so, rather than disappearing.
+  // Losing it mid-session was disorienting — the thing you just acted on was
+  // the one thing that vanished — and it hid your own progress. The card dims
+  // and takes a stamp; the who-corner tick underneath still carries the exact
+  // level, so the stamp is never the only place a state is legible.
+  if (kind) {
+    btn.classList.add('is-decided');
+    const stamp = document.createElement('span');
+    stamp.className = 'dd2-gridcard-stamp';
+    stamp.dataset.kind = kind;
+    stamp.textContent = passed ? '✕' : kind === 'must' ? '★' : '✓';
+    btn.appendChild(stamp);
+  }
+
   btn.addEventListener('click', () => {
     // Clicking the card you are ALREADY sampling is a no-op, not a re-render.
     // Focusing a different artist genuinely needs a new player; re-focusing the
     // current one would tear down a playing embed and start it over, which is
     // the same interruption refreshDesktopAfterDecision exists to prevent.
     if (focusedName === entry.name) return;
+    // Picking a card by hand overrides a succession already in flight —
+    // otherwise the pane you just asked for gets replaced a beat later by
+    // whatever the auto-advance had queued up.
+    clearDesktopTimers();
     setFocus(entry);
     renderDeckBody(ctx, actions);
   });
@@ -1153,7 +1233,14 @@ function buildMiddle(ctx, actions, pool, fest) {
   const count = document.createElement('span');
   count.className = 'dd2-middle-count';
   const total = (fest.artists || []).length;
-  count.textContent = `${pool.length} of ${total} · every card shows why`;
+  // Once you have decided anything, the line becomes progress THROUGH the
+  // session rather than the size of a shrinking pool — the denominator holds
+  // still on purpose, the same way the mobile progress bar does not shorten
+  // the track every time you answer.
+  const decided = pool.reduce((n, e) => n + (isDecided(e.name, ctx) ? 1 : 0), 0);
+  count.textContent = decided
+    ? `${decided} of ${pool.length} decided · every card shows why`
+    : `${pool.length} of ${total} · every card shows why`;
   head.append(label, count);
   middle.appendChild(head);
 
@@ -1217,7 +1304,7 @@ function refreshDesktopAfterDecision(ctx, actions) {
 
   const facets = loadFacets(ctx.fid);
   const fest = state.FESTIVALS[ctx.fid] || {};
-  const pool = buildPool(ctx, facets, currentCanonData);
+  const pool = ensureDesktopSession(ctx, facets);
 
   const oldMiddle = body.querySelector('.dd2-middle');
   if (oldMiddle) body.replaceChild(buildMiddle(ctx, actions, pool, fest), oldMiddle);
@@ -1236,10 +1323,16 @@ function refreshDesktopAfterDecision(ctx, actions) {
   const heroBg = pane.querySelector('.dd2-pane-hero-bg');
   if (heroBg) heroBg.style.background = auraBackground(cardPeopleFor(name, ctx)).background;
 
-  const undecided = myLevel(name, ctx) < 1 && !model.isPassed(state.crewDoc, ctx.fid, name, ctx.meName);
+  // The reason ribbon STAYS through a decision. It used to be undecided-only,
+  // so the instant you picked, the tag vanished, the pane got shorter and the
+  // action bar jumped up under the cursor — in the middle of a multi-tap Pick,
+  // the one interaction on this surface that cannot afford a moving target
+  // (reported 2026-08-04). It is also still TRUE: "Byron has this as a must"
+  // does not stop being why we put this artist in front of you because you
+  // agreed with it.
   const paneBody = pane.querySelector('.dd2-pane-body');
   const oldReason = pane.querySelector('.dd2-pane-reason');
-  if (undecided && entry && entry.reason) {
+  if (entry && entry.reason) {
     if (oldReason) oldReason.textContent = entry.reason.text;
     else if (paneBody) {
       const ribbon = document.createElement('div');
@@ -1247,8 +1340,6 @@ function refreshDesktopAfterDecision(ctx, actions) {
       ribbon.textContent = entry.reason.text;
       paneBody.insertBefore(ribbon, paneBody.firstChild); // above the player, as buildFocusPane places it
     }
-  } else if (oldReason) {
-    oldReason.remove();
   }
 
   // REBUILT, not repainted through paintPrimaryActions: the control's handlers
@@ -1259,6 +1350,86 @@ function refreshDesktopAfterDecision(ctx, actions) {
   if (oldActions) pane.replaceChild(buildPanePickControl(name, ctx, actions), oldActions);
 }
 
+// ---- desktop succession ---------------------------------------------------------------
+// "The idea of the discover experience is that we're going through the artists
+// in succession" (2026-08-04). The desktop pane used to just sit there after a
+// decision, which made the grid the thing you had to drive by hand; now a
+// decision holds for a beat so you SEE it land, the pane leaves in the same
+// direction the mobile card would have, and the next undecided artist arrives.
+//
+// Pick gets the full 1s idle window instead of the short hold, and that is not
+// a detail: Pick is a CYCLE here (×1 → ×2 → ×3 → clear), so advancing on the
+// first tap would put every level above ×1 out of reach. Same reasoning as the
+// mobile deck's PICK_IDLE_MS, which is the constant it reuses.
+const DESKTOP_HOLD_MS = 420;
+const DESKTOP_EXIT_MS = 300;
+
+// The next artist you have NOT decided on, wrapping once so a session that was
+// worked out of order still finds the gaps. Null when everything is decided —
+// there is nowhere to go, and yanking the pane somewhere arbitrary would be
+// worse than staying put.
+function nextDesktopEntry(list, fromName, ctx) {
+  if (!list.length) return null;
+  const at = list.findIndex((e) => e.name === fromName);
+  const start = at < 0 ? -1 : at;
+  for (let i = 1; i <= list.length; i++) {
+    const cand = list[(start + i + list.length) % list.length];
+    if (!isDecided(cand.name, ctx)) return cand;
+  }
+  return null;
+}
+
+function advanceDesktopFocus(ctx, actions, kind) {
+  const overlay = document.getElementById(OVERLAY_ID);
+  const body = overlay && overlay.querySelector('.dd2-body');
+  const pane = body && body.querySelector('.dd2-pane');
+  if (!body || !pane) return;
+  const next = nextDesktopEntry(desktopOrder || [], focusedName, ctx);
+  if (!next || next.name === focusedName) return;
+
+  // Only the PANE is replaced. The grid and the rail are already correct — the
+  // decision repainted them — and rebuilding them would throw away scroll
+  // position for no reason.
+  const swap = () => {
+    desktopExitTimer = null;
+    setFocus(next);
+    const fresh = buildFocusPane(ctx, actions, next, currentCanonData);
+    if (!REDUCED_MOTION()) {
+      fresh.classList.add('is-entering');
+      // Drop the class once it has done its job. A finished no-fill animation
+      // is inert, but leaving it on means the NEXT decision adds is-exiting to
+      // a node still carrying an animation rule, and the two would be arguing
+      // over transform on the same element.
+      fresh.addEventListener('animationend', () => fresh.classList.remove('is-entering'), { once: true });
+    }
+    if (pane.parentNode === body) body.replaceChild(fresh, pane);
+  };
+
+  if (REDUCED_MOTION()) { swap(); return; }
+  // The mobile card's directions, so the two surfaces mean the same thing by
+  // the same movement: a decline leaves LEFT, a pick or a must leaves RIGHT.
+  // Motion carries no meaning on its own here either — the grid stamp and the
+  // undo toast are what actually say what happened.
+  pane.dataset.exit = kind === 'pass' ? 'left' : 'right';
+  pane.classList.add('is-exiting');
+  desktopExitTimer = schedule(actions, swap, DESKTOP_EXIT_MS);
+}
+
+// Every decision routes through here so there is exactly one rule about when
+// the deck moves on — and exactly one place that cancels a move already queued.
+function scheduleDesktopAdvance(ctx, actions, artistName, kind, delay) {
+  clearDesktopTimers();
+  // A tap that leaves the artist UNDECIDED is a correction, not a decision:
+  // cycling Pick round to clear, or toggling a must back off. Moving on from
+  // one would strand you on the next artist with the thing you just undid
+  // sitting behind you.
+  if (!isDecided(artistName, ctx)) return;
+  desktopSettleTimer = schedule(actions, () => {
+    desktopSettleTimer = null;
+    advanceDesktopFocus(ctx, actions, kind);
+  }, delay);
+}
+
 function paneWritePick(artistName, level, ctx, actions) {
   const before = myLevel(artistName, ctx);
   state.applyPickLevel(ctx.fid, artistName, ctx.meName, level);
@@ -1266,8 +1437,12 @@ function paneWritePick(artistName, level, ctx, actions) {
   if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
   ctx.onNotesChange();
   refreshDesktopAfterDecision(ctx, actions);
+  // A must lands immediately; a pick waits out the cycle it just opened.
+  scheduleDesktopAdvance(ctx, actions, artistName, level === 4 ? 'must' : 'pick',
+    level === 4 ? DESKTOP_HOLD_MS : PICK_IDLE_MS);
   if (before === 4 && level === 0 && actions.showUndoToast) {
     actions.showUndoToast(`Cleared your must for ${artistName}`, () => {
+      clearDesktopTimers(); // an undo cancels the move it was about to trigger
       state.applyPickLevel(ctx.fid, artistName, ctx.meName, 4);
       actions.applyLocalPick(artistName, ctx.meName, 4);
       if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
@@ -1283,8 +1458,10 @@ function paneWritePass(artistName, on, ctx, actions) {
   if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
   ctx.onNotesChange();
   refreshDesktopAfterDecision(ctx, actions);
+  scheduleDesktopAdvance(ctx, actions, artistName, 'pass', DESKTOP_HOLD_MS);
   if (on && actions.showUndoToast) {
     actions.showUndoToast(`Passed on ${artistName}`, () => {
+      clearDesktopTimers(); // an undo cancels the move it was about to trigger
       state.applyPass(ctx.fid, artistName, ctx.meName, false);
       if (session) startSession(ctx, loadFacets(ctx.fid), currentCanonData);
       ctx.onNotesChange();
@@ -1347,9 +1524,6 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
 
   const fest = state.FESTIVALS[ctx.fid] || {};
   const meta = findArtistMeta(fest, focusEntry.name);
-  const lvl = myLevel(focusEntry.name, ctx);
-  const passed = model.isPassed(state.crewDoc, ctx.fid, focusEntry.name, ctx.meName);
-  const undecided = lvl < 1 && !passed;
 
   const hero = document.createElement('div');
   hero.className = 'dd2-pane-hero';
@@ -1389,7 +1563,10 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
   const body = document.createElement('div');
   body.className = 'dd2-pane-body';
 
-  if (undecided && focusEntry.reason) {
+  // Shown whether or not you have decided — see refreshDesktopAfterDecision:
+  // a ribbon that disappears on decision moves the action bar mid-multi-tap,
+  // and the reason is still the reason.
+  if (focusEntry.reason) {
     const ribbon = document.createElement('div');
     ribbon.className = 'dd2-pane-reason';
     ribbon.textContent = focusEntry.reason.text;
@@ -1511,7 +1688,7 @@ function buildDesktopHeader(ctx, actions, fest, scheduled) {
 function renderDesktopBody(overlay, ctx, actions, facets) {
   const fest = state.FESTIVALS[ctx.fid] || {};
   const scheduled = !!(fest.days && Object.keys(fest.days).length);
-  const pool = buildPool(ctx, facets, currentCanonData);
+  const pool = ensureDesktopSession(ctx, facets);
   const focusEntry = resolveFocusEntry(pool);
 
   const shell = document.createElement('div');
@@ -1615,6 +1792,7 @@ export function closeDeck() {
   // Before anything else: a pick timer that fires after the deck is gone would
   // write a level onto whatever card the next session deals at that index.
   clearDeckTimers();
+  resetDesktopSession(); // a fresh open deals a fresh session on desktop too
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
   unwatchLayout();
   const overlay = document.getElementById(OVERLAY_ID);

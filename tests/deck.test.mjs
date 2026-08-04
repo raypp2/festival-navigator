@@ -352,49 +352,85 @@ test('clicking a grid card focuses the pane and writes nothing', () => {
   assert.ok(!model.isPassed(state.crewDoc, FID, 'PickFlow1', 'Kevin'), 'focusing a card never writes a pass');
 });
 
-test('the pane Pick button writes a pick through the state layer and does not move focus', () => {
-  const actions = mkActions();
+// Desktop is a SUCCESSION as of 2026-08-04: a decision lands, holds for a
+// beat, and the pane moves to the next artist you have not decided on. These
+// use the manual scheduler so the two halves — the decision, then the move —
+// are separable; mkActions' collapsed scheduler runs them in one tick and can
+// only ever see the end state.
+test('the pane Pick button writes through the state layer, then moves on', () => {
+  const actions = mkManualActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
   assert.equal(paneName(), 'PickFlow1');
   overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // ×0 -> ×1
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin), 1);
-  assert.equal(paneName(), 'PickFlow1', 'the pane stayed on the same artist through the decision');
+  assert.equal(paneName(), 'PickFlow1', 'the pane holds while the pick cycle is still open');
+  actions.flush();
+  assert.notEqual(paneName(), 'PickFlow1', 'once the cycle settles, the deck goes on to the next artist');
 });
 
-test('the pane must (★) and pass (✕) controls write through the state layer and do not move focus', () => {
-  const actions = mkActions();
+test('the pane must (★) and pass (✕) controls write through the state layer, then move on', () => {
+  const actions = mkManualActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow2').click();
   overlay().querySelector('.dd2-pane-actions .dd-btn-must').click();
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow2?.Kevin), 4);
-  assert.equal(paneName(), 'PickFlow2');
+  assert.equal(paneName(), 'PickFlow2', 'the decision is visible before the move');
+  actions.flush();
+  assert.notEqual(paneName(), 'PickFlow2');
 
   gridCard('PickFlow3').click();
   overlay().querySelector('.dd2-pane-actions .dd-btn-pass').click();
   assert.ok(model.isPassed(state.crewDoc, FID, 'PickFlow3', 'Kevin'));
-  assert.equal(paneName(), 'PickFlow3', 'a pass — like a pick — never yanks the pane to another card');
+  actions.flush();
+  assert.notEqual(paneName(), 'PickFlow3', 'a decline moves on too');
 });
 
-test('a pane decision that drops the focused artist out of the pool keeps the pane on it (never yank mid-thought)', () => {
-  const actions = mkActions();
+// The counterpart rule, and the one that keeps the succession from trapping
+// you: a tap that leaves the artist UNDECIDED is a correction, not a decision.
+test('undoing a decision from the pane does NOT move on', () => {
+  const actions = mkManualActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
-  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // picked -> leaves the default Undecided pool
-  assert.equal(gridCard('PickFlow1'), null, 'the decided artist drops out of the (still nonempty) grid');
-  assert.equal(paneName(), 'PickFlow1', 'the pane keeps showing it anyway');
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pass').click();     // pass
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pass').click();     // un-pass, same button
+  assert.ok(!model.isPassed(state.crewDoc, FID, 'PickFlow1', 'Kevin'));
+  actions.flush();
+  assert.equal(paneName(), 'PickFlow1',
+    'toggling a decision back off leaves you where you are — moving on would strand the correction behind you');
 });
 
-// The pane is where you are LISTENING. Reaching a verdict on the artist used
-// to call renderDeckBody, which wipes the overlay and destroys the live player
-// — every pick, must and pass stopped the audio and reset the video mid-listen
-// (reported 2026-08-04). destroyCounter/mountCalls are the honest assertion
-// here: "the pane still shows the artist" would have passed the whole time it
-// was broken, because a re-render puts the same artist back with a new embed.
-test('a pane decision never touches the live player — no destroy, no remount', () => {
+// "There's value in them seeing what they covered" (2026-08-04). A decided
+// card used to evaporate out of the Undecided filter the instant you acted,
+// taking the one thing you had just touched off the screen.
+test('a decided card stays in the grid, marked, instead of disappearing', () => {
+  const actions = mkManualActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  const before = overlay().querySelectorAll('.dd2-gridcard').length;
+  gridCard('PickFlow1').click();
+  overlay().querySelector('.dd2-pane-actions .dd-btn-must').click();
+
+  const card = gridCard('PickFlow1');
+  assert.ok(card, 'the decided artist is still on screen');
+  assert.equal(overlay().querySelectorAll('.dd2-gridcard').length, before, 'and the grid did not shrink');
+  assert.ok(card.classList.contains('is-decided'), 'it reads as decided');
+  const stamp = card.querySelector('.dd2-gridcard-stamp');
+  assert.ok(stamp, 'a stamp says so without relying on the dimming alone');
+  assert.equal(stamp.dataset.kind, 'must');
+  // The count becomes progress through the session, and its denominator holds.
+  assert.match(overlay().querySelector('.dd2-middle-count').textContent, /1 of \d+ decided/);
+});
+
+// The pane is where you are LISTENING. Reaching a verdict used to call
+// renderDeckBody, which wipes the overlay and destroys the live player — every
+// pick, must and pass stopped the audio and reset the video mid-listen
+// (reported 2026-08-04). destroyCounter/mountCalls are the honest assertion:
+// "the pane still shows the artist" would have passed the whole time it was
+// broken, because a re-render puts the same artist back with a new embed.
+test('a pane decision never touches the live player before the deck moves on', () => {
   const mounts = [];
   const destroys = { n: 0 };
-  const actions = mkActions(mounts, destroys);
+  const actions = mkManualActions(mounts, destroys);
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
   const mountsAfterFocus = mounts.length;
@@ -404,30 +440,53 @@ test('a pane decision never touches the live player — no destroy, no remount',
   const pane = () => overlay().querySelector('.dd2-pane-actions');
   pane().querySelector('.dd-btn-pick').click();  // ×1
   pane().querySelector('.dd-btn-pick').click();  // ×2
-  pane().querySelector('.dd-btn-must').click();  // must
-  pane().querySelector('.dd-btn-pass').click();  // not for me
+  pane().querySelector('.dd-btn-pick').click();  // ×3
 
-  assert.equal(destroys.n, destroysAfterFocus, 'four decisions destroyed the player zero times');
+  assert.equal(destroys.n, destroysAfterFocus, 'the whole pick cycle destroyed the player zero times');
   assert.equal(mounts.length, mountsAfterFocus, 'and remounted it zero times — the stream plays through');
   assert.ok(overlay().querySelector('.dd2-pane-body'), 'the pane body (which owns the embed) is still mounted');
+
+  // Moving to a DIFFERENT artist is the one time a new embed is correct.
+  actions.flush();
+  assert.equal(mounts.length, mountsAfterFocus + 1, 'the next artist gets its own player, exactly once');
 });
 
-test('a pane decision still repaints the grid and the pick control around the player', () => {
-  const actions = mkActions();
+test('a pane decision repaints the grid and the pick control around the player', () => {
+  const actions = mkManualActions();
   renderDesktopForTest(ctx, actions, CANON);
   gridCard('PickFlow1').click();
-  assert.ok(overlay().querySelector('.dd2-pane-reason') || true); // reason is optional for this fixture
   overlay().querySelector('.dd2-pane-actions .dd-btn-must').click();
 
-  // The grid is the thing that has to move: a must leaves the Undecided pool.
-  assert.equal(gridCard('PickFlow1'), null, 'the decided artist left the grid');
-  // And the control has to know its own new level, or the next tap ticks from
-  // a stale base — this is why it is rebuilt rather than repainted.
+  // The control has to know its own new level, or the next tap ticks from a
+  // stale base — this is why it is rebuilt rather than repainted.
   const row = overlay().querySelector('.dd2-pane-actions .dd-actions-row');
   assert.ok(row.querySelector('.dd-btn-must').classList.contains('is-on'), 'Must reads as chosen');
   overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click();
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.PickFlow1?.Kevin), 1,
     'Pick from a must drops to x1 — computed from the CURRENT level, not the one the row was built with');
+});
+
+// The reason tag used to be undecided-only, so the instant you picked it
+// vanished, the pane got shorter and the action bar jumped UP under the
+// cursor — mid-way through a multi-tap Pick, which is the one interaction here
+// that cannot afford a moving target (reported 2026-08-04).
+test('the pane reason tag survives a decision, so the action bar cannot move under the cursor', () => {
+  const actions = mkManualActions();
+  renderDesktopForTest(ctx, actions, CANON);
+  // RankTarget is the fixture with a producible reason (it shares Bass House
+  // with a seeded must), which is why this test focuses it by name.
+  gridCard('RankTarget').click();
+  const before = overlay().querySelector('.dd2-pane-reason');
+  assert.ok(before, 'sanity: this artist has a reason to show');
+  const text = before.textContent;
+
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // ×1
+  const after = overlay().querySelector('.dd2-pane-reason');
+  assert.ok(after, 'the tag is still there after the pick');
+  assert.equal(after.textContent, text, 'and still says the same thing — it is still why we showed you this artist');
+  overlay().querySelector('.dd2-pane-actions .dd-btn-pick').click(); // ×2, the tap the jump used to break
+  assert.ok(overlay().querySelector('.dd2-pane-reason'), 'and through the rest of the cycle');
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.RankTarget?.Kevin), 2);
 });
 
 test('clicking the card you are already sampling does not restart the player', () => {
@@ -579,9 +638,9 @@ test('every swipe has a visible button equivalent — no gesture is ever require
 // which the collapsed scheduler in mkActions skips straight past — are visible.
 // ---------------------------------------------------------------------------
 
-function mkManualActions(mountCalls = []) {
+function mkManualActions(mountCalls = [], destroyCounter = { n: 0 }) {
   const queue = [];
-  const a = mkActions(mountCalls);
+  const a = mkActions(mountCalls, destroyCounter);
   a.schedule = (fn) => {
     const slot = { fn, cancelled: false };
     queue.push(slot);

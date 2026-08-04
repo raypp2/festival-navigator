@@ -1246,9 +1246,35 @@
  * had width to spare — three narrow cards bought nothing the eye was using
  * (reported 2026-08-02). The reclaimed width goes to .dd2-pane below. */
 .dd2-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.dd2-gridcard { flex-direction: column; min-height: 116px; gap: 3px; padding: 12px; }
+.dd2-gridcard { position: relative; flex-direction: column; min-height: 116px; gap: 3px; padding: 12px; }
 .dd2-gridcard .name { font-size: 14px; }
 .dd2-gridcard-genre { font: 600 10px var(--font-ui); color: var(--text-tertiary); }
+/* A card you have decided on STAYS in the grid — it used to vanish out of the
+ * Undecided filter the moment you acted, which took the thing you had just
+ * touched off the screen and hid how far you had got. It dims and takes a
+ * stamp instead: the session is a record of what you covered, not a queue that
+ * empties. Fading is the quiet part; the stamp is what makes it a STATE rather
+ * than a disabled-looking card, and the who-corner tick under it still carries
+ * the exact level, so nothing is legible only from the opacity. */
+.dd2-gridcard.is-decided { opacity: .5; }
+.dd2-gridcard.is-decided:hover { opacity: .78; }
+/* Top-LEFT, not top-right: .card-passed-chip ("NOT FOR ME") already owns the
+ * right corner at top:6/right:6 and the two collided outright. Decided cards
+ * never draw the reason ribbon, so this corner is always free, and the
+ * who-corner tick keeps the bottom-right. */
+.dd2-gridcard-stamp {
+  position: absolute; z-index: 1; top: 8px; left: 8px; width: 22px; height: 22px;
+  display: grid; place-items: center; border-radius: var(--r-pill);
+  font: 700 11px/1 var(--font-ui);
+  background: rgba(var(--brand), .22); color: #E9D5FF; border: 1px solid rgba(var(--brand), .5);
+}
+/* A decline is never violet — brand violet means selected/ours (repo law). */
+.dd2-gridcard-stamp[data-kind="pass"] {
+  background: var(--hairline); color: var(--text-secondary); border-color: var(--border-input);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dd2-gridcard.is-decided { transition: opacity var(--dd-base) var(--dd-ease); }
+}
 .dd2-empty {
   border: 1px dashed var(--border-card); border-radius: var(--r-row); background: var(--card);
   padding: 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -1270,6 +1296,29 @@
   max-height: 100%; display: flex; flex-direction: column;
 }
 .dd2-pane-actions { flex: none; }
+/* Succession: the decided artist leaves and the next one arrives. Same
+ * directions the mobile card uses — a decline goes LEFT, a pick or must goes
+ * RIGHT — so the two surfaces mean the same thing by the same movement. The
+ * pane is `overflow: hidden` and sits in a clipped body, so a card sliding out
+ * never paints over the rail. */
+.dd2-pane.is-exiting {
+  transition: transform var(--dd-base) var(--dd-ease), opacity var(--dd-base) ease;
+  opacity: 0;
+  /* DEAD to the pointer the moment it starts leaving. For the length of the
+   * exit the departing pane is still the only .dd2-pane in the document, and
+   * its buttons still close over the artist they were built for — so a fast
+   * second decision landed on the artist you had just finished with instead of
+   * the one arriving. Caught in the browser, 2026-08-04. */
+  pointer-events: none;
+}
+.dd2-pane.is-exiting[data-exit="left"]  { transform: translateX(-46px) rotate(-3deg); }
+.dd2-pane.is-exiting[data-exit="right"] { transform: translateX(46px) rotate(3deg); }
+.dd2-pane.is-entering { animation: dd2-pane-in var(--dd-base) var(--dd-ease); }
+@keyframes dd2-pane-in { from { opacity: 0; transform: translateY(12px) scale(.985); } }
+@media (prefers-reduced-motion: reduce) {
+  .dd2-pane.is-exiting { transition: none; }
+  .dd2-pane.is-entering { animation: none; }
+}
 .dd2-pane-hero { position: relative; padding: 16px; overflow: hidden; flex: none; }
 .dd2-pane-hero-bg { position: absolute; inset: 0; }
 .dd2-pane-hero-content { position: relative; z-index: 1; }
@@ -1302,6 +1351,46 @@
   width: 100%; margin-top: 4px; padding-top: 10px; border: none; border-top: 1px solid var(--hairline);
   background: none; cursor: pointer; text-align: center; font: 600 11px var(--font-ui); color: var(--text-tertiary);
 }
+/* Scrollbars inside Discover are drawn by us, not by the platform. A stock
+ * light-grey Chrome bar down the side of the sample pane is the one piece of
+ * chrome on this screen that has never heard of the design (reported
+ * 2026-08-04). Scoped to the deck's own scrollers rather than applied
+ * globally: the rest of the app is Kevin's v3 chrome and is not this design's
+ * to restyle. Firefox gets scrollbar-width/-color; WebKit and Blink get the
+ * pseudo-elements. The thumb is drawn with a transparent border and
+ * background-clip so it reads as an inset pill with breathing room, and the
+ * track stays invisible so nothing is painted until there is something to
+ * scroll. */
+.discover-deck .dd2-body,
+.discover-deck .dd2-pane-body,
+.discover-deck .dd2-rail,
+.discover-deck .dd-card {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--brand), .38) transparent;
+}
+.discover-deck .dd2-body::-webkit-scrollbar,
+.discover-deck .dd2-pane-body::-webkit-scrollbar,
+.discover-deck .dd2-rail::-webkit-scrollbar,
+.discover-deck .dd-card::-webkit-scrollbar { width: 11px; height: 11px; }
+.discover-deck .dd2-body::-webkit-scrollbar-track,
+.discover-deck .dd2-pane-body::-webkit-scrollbar-track,
+.discover-deck .dd2-rail::-webkit-scrollbar-track,
+.discover-deck .dd-card::-webkit-scrollbar-track { background: transparent; }
+.discover-deck .dd2-body::-webkit-scrollbar-thumb,
+.discover-deck .dd2-pane-body::-webkit-scrollbar-thumb,
+.discover-deck .dd2-rail::-webkit-scrollbar-thumb,
+.discover-deck .dd-card::-webkit-scrollbar-thumb {
+  background: rgba(var(--brand), .34);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--r-pill);
+}
+.discover-deck .dd2-body::-webkit-scrollbar-thumb:hover,
+.discover-deck .dd2-pane-body::-webkit-scrollbar-thumb:hover,
+.discover-deck .dd2-rail::-webkit-scrollbar-thumb:hover,
+.discover-deck .dd-card::-webkit-scrollbar-thumb:hover { background: rgba(var(--brand), .58); background-clip: content-box; }
+.discover-deck ::-webkit-scrollbar-corner { background: transparent; }
+
 .dd2-pane-empty { padding: 40px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .dd2-pane-empty-title { font: 800 15px var(--font-ui); color: var(--text-primary); }
 .dd2-pane-empty-sub { font: 500 12px/1.5 var(--font-ui); color: var(--text-tertiary); max-width: 34ch; }
