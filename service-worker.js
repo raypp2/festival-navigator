@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v49'; // v49 = device-feedback batch: skip, in-bar undo, real set titles, toggles
+const CACHE_VERSION = 'festival-nav-v52'; // v52 = deck mobile pass: card breathing room, bottom-pinned player, one-row top bar, set times, skip button
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
@@ -38,6 +38,7 @@ const APP_CORE = [
   '/js/discovery/artist-page.js',
   '/js/discovery/genres.js',
   '/js/discovery/score.js',
+  '/js/discovery/setinfo.js',
   '/js/discovery/player.js',
   '/js/discovery/player-core.js',
   '/js/discovery/deck.js',

@@ -28,6 +28,7 @@ import * as model from '../v3/model.js';
 import { router } from '../v3/router.js';
 import { sheetChrome, dialogize, rememberOpener, closeSheet } from '../v3/notes.js';
 import { loadGenreCanon, canonicalize } from './genres.js';
+import { findSetInfo, formatSetLinePlain } from './setinfo.js';
 import { mountPlayer as realMountPlayer } from './player.js';
 import { applyFilters, activeFacetCount, availableGenres, availableDays, DEFAULT_FACETS } from './filter.js';
 import { colorIndexOf } from '../v3/wall.js';
@@ -213,6 +214,20 @@ function buildCard(entry, ctx, actions, canonData) {
   nameBtn.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(entry.name); });
   card.appendChild(nameBtn);
 
+  // When they play, right under the name — the same DAY · TIME · STAGE line the
+  // artist page carries, from the same findSetInfo, so a card and the page it
+  // opens never disagree. Absent for a lineup with no schedule yet: no set
+  // info, no line (never a placeholder, same rule the reason ribbon follows).
+  // Plain text throughout, including the stage: the festival accent has exactly
+  // four homes (repo law) and a deck card is not one of them.
+  const setLine = formatSetLinePlain(fest, findSetInfo(fest, entry.name, meta));
+  if (setLine) {
+    const when = document.createElement('div');
+    when.className = 'dd-setline';
+    when.textContent = setLine;
+    card.appendChild(when);
+  }
+
   // Exactly one reason ribbon — no reason, no ribbon (score.js's guarantee).
   if (entry.reason) {
     const ribbon = document.createElement('div');
@@ -304,22 +319,13 @@ function buildCompletion(ctx, facets, actions) {
 }
 
 // ---- header -------------------------------------------------------------------------
-function buildHeader(ctx, facets, actions) {
-  const header = document.createElement('div');
-  header.className = 'dd-header';
-
-  const top = document.createElement('div');
-  top.className = 'dd-header-top';
-  const label = document.createElement('div');
-  label.className = 'dd-session-label';
-  const micro = document.createElement('span');
-  micro.className = 'dd-micro-label';
-  micro.textContent = 'DISCOVERY SESSION';
-  const counter = document.createElement('span');
-  counter.className = 'dd-counter';
-  counter.textContent = `${Math.min(session.position + 1, session.pool.length)} / ${session.pool.length}`;
-  label.append(micro, counter);
-
+// Filter rides the title row, next to Back and DISCOVER (2026-08-04). It used
+// to own a row of its own alongside a "DISCOVERY SESSION" micro-label, which
+// spent a whole row of a phone screen saying what the screen already says —
+// and pushed the progress bar and the card down with it. The counter kept its
+// job and moved to the end of the sub-line, where it sits next to the "N
+// unheard left" it is counting.
+function buildFilterButton(ctx, facets, actions) {
   const filterBtn = document.createElement('button');
   filterBtn.type = 'button';
   filterBtn.className = 'dd-filter-btn';
@@ -341,8 +347,12 @@ function buildHeader(ctx, facets, actions) {
     openDiscoverFilterSheet(ctx, actions);
     router.push('sheet:discover-filter');
   });
+  return filterBtn;
+}
 
-  top.append(label, filterBtn);
+function buildHeader(ctx, facets) {
+  const header = document.createElement('div');
+  header.className = 'dd-header';
 
   const bar = document.createElement('div');
   bar.className = 'dd-progress';
@@ -352,11 +362,17 @@ function buildHeader(ctx, facets, actions) {
   fill.style.width = pct + '%';
   bar.appendChild(fill);
 
+  const meta = document.createElement('div');
+  meta.className = 'dd-header-meta';
   const sub = document.createElement('div');
   sub.className = 'dd-subline';
   sub.textContent = subLineText(ctx, facets);
+  const counter = document.createElement('span');
+  counter.className = 'dd-counter';
+  counter.textContent = `${Math.min(session.position + 1, session.pool.length)} / ${session.pool.length}`;
+  meta.append(sub, counter);
 
-  header.append(top, bar, sub);
+  header.append(bar, meta);
   return header;
 }
 // ---- the decision flow ----------------------------------------------------------------
@@ -620,15 +636,23 @@ function pickTap(ctx, actions) {
 }
 
 // ---- in-bar undo ----------------------------------------------------------------------
-// "Undo EXPANDS the action bar — a row grows in above the buttons with a 5s
-// countdown hairline, then the bar collapses back." And: "Never a floating
-// snackbar over the deck or over the action bar — undo has a place of its own,
-// so it never covers content." (Style guide §07.)
+// "Undo EXPANDS the action bar — a row grows in above the buttons, then the
+// bar collapses back." And: "Never a floating snackbar over the deck or over
+// the action bar — undo has a place of its own, so it never covers content."
+// (Style guide §07.)
 //
 // The build had kept the app-wide toast, which is exactly the floating
 // snackbar the design rules out — on the deck it landed on top of the bar it
 // was describing. The toast stays for surfaces with no action bar (the wall),
 // where it remains the right component.
+//
+// The row USED to carry a 5s countdown hairline, and it was read as a deadline:
+// a draining bar under a decision looks like the decision is the thing being
+// timed, so people felt hurried into choosing rather than informed that an
+// escape hatch was expiring (reported 2026-08-04). The 5s dismissal stays —
+// the row simply leaves when it is done. Nothing was lost: the countdown was
+// never the only carrier of anything, and the row disappearing was always the
+// real signal.
 //
 // Exported so the artist page's bar gets the same treatment.
 const UNDO_MS = 5000;
@@ -644,14 +668,10 @@ export function showBarUndo(bar, message, onUndo) {
   btn.type = 'button';
   btn.className = 'dd-undo-btn';
   btn.textContent = 'Undo';
-  const bar_ = document.createElement('span');
-  bar_.className = 'dd-undo-countdown';
-  row.append(msg, btn, bar_);
+  row.append(msg, btn);
   bar.insertBefore(row, bar.firstChild); // above the buttons, per the design
   const done = () => { clearBarUndo(bar); };
   btn.addEventListener('click', () => { done(); onUndo(); });
-  // Time is carried by the hairline AND by the row disappearing — never by
-  // motion alone, so reduced-motion loses nothing but the sweep.
   row._t = setTimeout(done, UNDO_MS);
 }
 
@@ -734,43 +754,87 @@ export function paintPrimaryActions(row, level, bump = false) {
 
 // Skip: move on without recording anything.
 //
-// Not a fourth primary action — the design's three are "not for me · pick ·
-// must" and a decline already has a home. This is the escape from being made
-// to decide at all, and the distinction matters to the data: "not for me" is
-// considered-and-rejected and is visible to the crew, while a skip says
+// Still not a fourth PRIMARY action — the design's three are "not for me ·
+// pick · must" and a decline already has a home. This is the escape from being
+// made to decide at all, and the distinction matters to the data: "not for me"
+// is considered-and-rejected and is visible to the crew, while a skip says
 // nothing about the artist, so they stay in the pool and come back in a later
-// session. Rendered as a quiet full-width row UNDER the buttons, so the three
-// primary actions keep their weight (requested 2026-08-02).
+// session.
+//
+// It IS a button now, sitting left of "not for me" (requested 2026-08-04). As
+// a bare text link under the bar it read as a caption rather than a control —
+// people did not find it, and the one escape from a screen that otherwise
+// insists on a decision has to be findable. It keeps a quieter treatment than
+// the three (see .dd-btn-skip) and stays OUTSIDE buildPrimaryActions, which is
+// the component the artist page and the desktop focus pane share verbatim:
+// skip is a property of a deck session, and neither of those surfaces has one.
 function skipCurrent(ctx, actions) {
   if (!session || session.position >= session.pool.length || celebrating) return;
   clearDeckTimers();
   pendingPick = null;
   const name = session.pool[session.position].name;
   const from = session.position;
-  session.position++;
-  renderDeckBody(ctx, actions);
-  const ov = document.getElementById(OVERLAY_ID);
-  showBarUndo(ov && ov.querySelector('.dd-actions'), `Skipped ${name}`, () => {
-    session.position = from;
+
+  // Claim the decision lock for the length of the exit, exactly as a real
+  // decision does: every guard in this file already reads `celebrating`, so a
+  // second skip tap — or a Pick landing mid-flight — cannot advance twice. The
+  // kind is inert; nothing paints a confirmation overlay for a skip, because
+  // there is nothing to confirm.
+  celebrating = { kind: 'skip' };
+
+  const advance = () => {
+    celebrating = null;
+    session.position = from + 1;
     renderDeckBody(ctx, actions);
-  });
+    const ov = document.getElementById(OVERLAY_ID);
+    showBarUndo(ov && ov.querySelector('.dd-actions'), `Skipped ${name}`, () => {
+      clearDeckTimers();
+      session.position = from;
+      renderDeckBody(ctx, actions);
+    });
+  };
+
+  const overlay = document.getElementById(OVERLAY_ID);
+  const card = overlay && overlay.querySelector('.dd-card');
+  const rm = REDUCED_MOTION();
+  if (card && !rm) {
+    // A skip leaves DOWNWARD, and the direction is the message: left, right and
+    // up are spoken for by pass, pick and must, so a fourth exit borrowing any
+    // of them would read as a decision that got recorded. Straight down, no
+    // rotation — the card drops back onto the pile it came from, which is
+    // exactly what a skip does to the artist. The distance is measured rather
+    // than the ±520 the sideways exits hard-code: those only have to clear a
+    // 375px-wide phone, while this has to clear whatever height the device has.
+    // It passes BEHIND the action bar on the way out (.dd-actions carries the
+    // higher z-index), so the controls are never covered by a leaving card.
+    const drop = Math.ceil(window.innerHeight - card.getBoundingClientRect().top) + 24;
+    card.classList.add('is-exiting');
+    card.style.transform = `translate(0, ${drop}px)`;
+    card.style.opacity = '0';
+  }
+  exitTimer = schedule(actions, advance, rm ? 0 : EXIT_MS);
 }
 
 function buildActionBar(ctx, actions) {
   const bar = document.createElement('div');
   bar.className = 'dd-actions';
-  bar.appendChild(buildPrimaryActions({
+
+  const line = document.createElement('div');
+  line.className = 'dd-actions-line';
+
+  const skip = document.createElement('button');
+  skip.type = 'button';
+  skip.className = 'dd-btn dd-btn-skip';
+  skip.innerHTML = '<span class="dd-btn-glyph">»</span><span class="dd-btn-label">SKIP</span>';
+  skip.setAttribute('aria-label', 'Skip this artist without deciding');
+  skip.addEventListener('click', () => skipCurrent(ctx, actions));
+
+  line.append(skip, buildPrimaryActions({
     onPass: () => beginDecision('pass', 0, ctx, actions),
     onPick: () => pickTap(ctx, actions),
     onMust: () => beginDecision('must', 4, ctx, actions),
   }));
-  const skip = document.createElement('button');
-  skip.type = 'button';
-  skip.className = 'dd-skip';
-  skip.textContent = 'Skip for now';
-  skip.setAttribute('aria-label', 'Skip this artist without deciding');
-  skip.addEventListener('click', () => skipCurrent(ctx, actions));
-  bar.appendChild(skip);
+  bar.appendChild(line);
   return bar;
 }
 
@@ -1417,10 +1481,10 @@ function renderDeckBody(ctx, actions) {
   const title = document.createElement('div');
   title.className = 'dd-title';
   title.textContent = 'DISCOVER';
-  topBar.append(back, title);
+  topBar.append(back, title, buildFilterButton(ctx, facets, actions));
 
   shell.appendChild(topBar);
-  shell.appendChild(buildHeader(ctx, facets, actions));
+  shell.appendChild(buildHeader(ctx, facets));
 
   const stageWrap = document.createElement('div');
   stageWrap.className = 'dd-stage';

@@ -37,7 +37,7 @@ import { hslOf, strokeOf } from '../v3/palette.js';
 import { colorIndexOf } from '../v3/wall.js';
 import { auraBackground, initialFor } from '../v3/aura.js';
 import { dialogize } from '../v3/notes.js';
-import { computeDayArtists } from '../time.js';
+import { findSetInfo, dayLabel, formatSetLinePlain } from './setinfo.js';
 import { loadGenreCanon, canonicalize } from './genres.js';
 import { similarArtists } from './score.js';
 import { mountPlayer as realMountPlayer } from './player.js';
@@ -56,41 +56,9 @@ function findArtistMeta(fest, name) {
   return (fest?.artists || []).find((a) => a && a.name === name) || { name };
 }
 
-// Set info for the hero/set-line and similar-artist rows. Two shapes exist in
-// the wild: a lineup entry carries day/stage/time directly on the artists[]
-// record (build spec 3.1's example); a SCHEDULED festival's real times live
-// under fest.days[day].artists instead (electric-forest-2026.json etc.) — so
-// this checks the direct fields first, then searches every day's computed
-// sets for a match. Pure: uses time.js's computeDayArtists directly rather
-// than state.getDayArtists's cache, which is keyed to the global
-// activeFestivalId and would tie this function to app boot state.
-function findSetInfo(fest, name, meta) {
-  if (meta?.day && meta?.stage && meta?.time) {
-    return { day: meta.day, stage: meta.stage, time: meta.time };
-  }
-  for (const day of Object.keys(fest?.days || {})) {
-    const dayData = fest.days[day];
-    if (!dayData?.artists?.length) continue;
-    const hit = computeDayArtists(dayData).find((a) => a.name === name);
-    if (hit) return { day, stage: hit.stage, time: hit.startStr };
-  }
-  if (meta?.day) return { day: meta.day, stage: meta.stage || null, time: null };
-  return null;
-}
-
-function dayLabel(fest, day) {
-  const meta = (fest?.dayMeta || {})[day];
-  return (meta?.wd || day || '').toUpperCase();
-}
-
-function formatSetLinePlain(fest, setInfo) {
-  if (!setInfo) return '';
-  const bits = [];
-  if (setInfo.day) bits.push(dayLabel(fest, setInfo.day));
-  if (setInfo.time) bits.push(setInfo.time);
-  if (setInfo.stage) bits.push(setInfo.stage);
-  return bits.join(' · ');
-}
+// findSetInfo / dayLabel / formatSetLinePlain moved to ./setinfo.js on
+// 2026-08-04, when the deck card started showing set times too — see that
+// file's header for why they can't live in either page module.
 
 // ---- helpers: doc reads --------------------------------------------------------------
 // Mirrors wall.js's private cardPeople — the crew-aura hero reuses the exact

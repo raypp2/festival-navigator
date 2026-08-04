@@ -534,31 +534,40 @@
 }
 .dd-shell { display: flex; flex-direction: column; height: 100%; min-height: 0; }
 
+/* Back · DISCOVER · Filter, all on one row. A three-column grid rather than a
+ * flex row with a margin hack: the outer columns are equal 1fr, so the title
+ * stays optically centred no matter how wide the filter pill gets (a facet
+ * badge widens it), and neither side has to know the other's width. */
 .dd-topbar {
-  flex: none; display: flex; align-items: center; gap: 12px;
+  flex: none; display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 10px;
   padding: max(10px, env(safe-area-inset-top)) 18px 10px;
 }
 .dd-back {
-  width: 40px; height: 40px; flex: none; border-radius: var(--r-pill);
+  width: 40px; height: 40px; flex: none; justify-self: start; border-radius: var(--r-pill);
   border: 1px solid var(--border-card); background: transparent;
   color: var(--text-body); font-size: 16px; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .dd-title {
   font-family: var(--font-display); letter-spacing: var(--track-display);
-  font-size: 20px; color: var(--text-header); flex: 1; text-align: center;
-  margin-right: 40px; /* balances the back button so the title stays centered */
+  font-size: 20px; color: var(--text-header); text-align: center; white-space: nowrap;
 }
+.dd-topbar .dd-filter-btn { justify-self: end; }
 
-/* ---- session header: label + counter, filter button, progress, sub-line ---- */
+/* ---- session header: progress, sub-line + counter ----
+ * The filter button and a "DISCOVERY SESSION" micro-label used to own a row of
+ * their own here. The label spent a row of a phone screen restating the title
+ * directly above it, and pushed the progress bar and the card down with it; the
+ * button moved up to the title row on 2026-08-04 and the label went away. The
+ * counter stayed and joined the sub-line, next to the "N unheard left" it is
+ * counting. */
 .dd-header { flex: none; padding: 0 18px 12px; }
-.dd-header-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.dd-session-label { display: flex; align-items: baseline; gap: 8px; }
-.dd-micro-label {
-  font: 800 10px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
-  color: var(--text-tertiary);
+.dd-header-meta {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  margin-top: 7px;
 }
-.dd-counter { font: 800 10px var(--font-ui); color: var(--text-body); }
+.dd-counter { flex: none; font: 800 10px var(--font-ui); color: var(--text-body); }
 .dd-filter-btn {
   display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 11px;
   border-radius: var(--r-pill); border: 1px solid rgba(var(--brand), .45);
@@ -570,13 +579,30 @@
   color: #EDD9FF; display: inline-flex; align-items: center; justify-content: center;
   font: 800 9px var(--font-ui); padding: 0 4px;
 }
-.dd-progress { height: 6px; border-radius: var(--r-pill); background: var(--hairline); margin-top: 8px; overflow: hidden; }
+.dd-progress { height: 6px; border-radius: var(--r-pill); background: var(--hairline); margin-top: 2px; overflow: hidden; }
 .dd-progress-fill { height: 100%; background: rgb(var(--brand)); border-radius: var(--r-pill); transition: width .3s ease; }
-.dd-subline { font: 500 11px var(--font-ui); color: var(--text-tertiary); margin-top: 7px; }
+.dd-subline { min-width: 0; font: 500 11px var(--font-ui); color: var(--text-tertiary); }
 
-/* ---- card stack ---- */
-.dd-stage { flex: 1; min-height: 0; padding: 0 18px 14px; position: relative; }
-.dd-stack { position: relative; height: 100%; }
+/* ---- card stack ----
+ * EVERY CARD IS THE SAME HEIGHT, and that is a decision, not an accident.
+ * Content-sizing was built and rejected on 2026-08-04: it does remove the
+ * empty space under a sparse card, but it makes the card's bottom edge — and
+ * the sample player pinned to it — land somewhere new on every advance, in a
+ * surface whose whole job is to be tapped through at speed. A deck you flick
+ * through wants the identity block and the play button in the same place every
+ * time far more than it wants a snug outline. So the card fills the stage, the
+ * copy anchors to its top, the player anchors to its bottom, and nothing under
+ * your thumb moves between artists.
+ *
+ * The padding here is the breathing room: the top keeps the stack clear of the
+ * sub-line (the ghosts sit 7px above the card, so this has to cover them and
+ * then some), the bottom holds the card off the pick controls. Both were too
+ * tight at 0/14 and the card read as wedged between two things. */
+.dd-stage {
+  flex: 1; min-height: 0; padding: 12px 18px 22px; position: relative;
+  display: flex; flex-direction: column;
+}
+.dd-stack { position: relative; flex: 1; min-height: 0; }
 .dd-ghost {
   position: absolute; left: 8px; right: 8px; top: 0; bottom: 0;
   border-radius: var(--r-row); background: var(--card-unpicked); border: 1px solid var(--border-card);
@@ -585,6 +611,15 @@
 .dd-ghost-1 { left: 12px; right: 12px; top: -3px; bottom: 3px; z-index: 2; }
 .dd-card {
   position: relative; z-index: 3; height: 100%; border-radius: var(--r-row);
+  /* border-box, and it is load-bearing. There is no global box-sizing reset in
+   * this stylesheet, so `height: 100%` was the CONTENT height and the 16px
+   * padding plus the border added 34px on top of it — the card overflowed the
+   * stack that sizes it and rendered 20px INTO the action bar below (measured
+   * 2026-08-04 on a 375x812 viewport: stack 537.5px, card 571.5px). Every
+   * candidate fix that touched the height (a calc, a max-height, a shorter
+   * stage) would have left the same bug for the next padding change to
+   * re-open. */
+  box-sizing: border-box;
   background: var(--card-unpicked); border: 1px solid var(--border-card);
   overflow: hidden auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;
   touch-action: pan-y; cursor: grab;
@@ -708,16 +743,33 @@
   font: 800 clamp(19px, 5vw, 22px)/1.15 var(--font-ui); color: var(--text-primary);
   word-break: break-word; overflow-wrap: anywhere;
 }
+/* When they play — same line the artist page's hero carries, minus the
+ * fest-accent stage (four allowed places; a deck card is not one). */
+.dd-setline { font: 700 12px var(--font-ui); color: var(--text-header); letter-spacing: .01em; }
 /* Exactly one reason ribbon, or none — never a placeholder. */
 .dd-reason {
   align-self: flex-start; background: var(--tonal-fill); color: var(--tonal-text);
   border-radius: var(--r-pill); padding: 6px 11px; font: 700 11px var(--font-ui);
 }
+/* The player is PINNED to the bottom of the card, and the copy is anchored to
+ * the top: with every card the same height, that puts the play button in the
+ * identical spot on every artist, so tapping through a session never asks your
+ * thumb to go looking. The slack lands between the two. That is only tolerable
+ * because the card no longer ends flush against the pick controls — .dd-stage
+ * carries 22px below it now, which is what stopped the sample panel reading as
+ * if it were crowding the buttons (2026-08-04). */
 .dd-player-host { margin-top: auto; }
 
 /* ---- pool-exhausted completion state ---- */
+/* The pool-exhausted panel still FILLS the stage, unlike the card above it: a
+ * zero state is a place you've arrived at, and centring its message inside a
+ * small dashed box floated at the top would read as a card that failed to
+ * load. It is a flex item of the stage now (not `height: 100%`) for the same
+ * box-sizing reason the card carries — a percentage height here would put its
+ * 24px padding and border outside the bound and push it into the action bar. */
 .dd-done {
-  height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex: 1; min-height: 0; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 14px; border: 1px dashed var(--border-card); border-radius: var(--r-row);
   padding: 24px;
 }
@@ -744,14 +796,26 @@
   flex: none; display: flex; flex-direction: column; gap: 9px;
   padding: 14px 16px calc(22px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--hairline); background: var(--dock);
+  /* Above the card (3), the drag hint (4) and the confirmation overlay (5), all
+   * of which live in .dd-stack without a stacking context of their own. Two
+   * jobs: nothing leaving the deck can ever cover the primary controls, and a
+   * skipped card drops out of sight BEHIND the bar rather than sliding across
+   * it (deck.js's skipCurrent). */
+  position: relative; z-index: 6;
 }
+/* skip · not for me · pick · must. The three primaries stay one shared
+ * component (.dd-actions-row, verbatim on the artist page and the desktop
+ * focus pane); skip sits beside it, deck-only, because only the deck has a
+ * session to move through. */
+.dd-actions-line { display: flex; gap: 8px; align-items: stretch; }
+.dd-actions-line .dd-actions-row { flex: 1; min-width: 0; }
 /* Undo lives INSIDE the bar and the bar grows to hold it — never a floating
  * snackbar over the deck (style guide §07: "undo has a place of its own, so
  * it never covers content"). */
 .dd-actions-row { display: flex; gap: 8px; align-items: stretch; }
 .dd-undo {
-  position: relative; display: flex; align-items: center; justify-content: space-between;
-  gap: 10px; padding: 0 6px 8px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 0 6px;
   animation: dd-undo-in var(--dd-base) var(--dd-ease);
 }
 @keyframes dd-undo-in { from { opacity: 0; transform: translateY(7px); } }
@@ -763,22 +827,22 @@
   flex: none; border: none; background: none; padding: 2px 0;
   font: 800 12px var(--font-ui); color: var(--tonal-text); cursor: pointer; min-height: 0;
 }
-/* The 5s countdown hairline. Motion is the nicety; the row vanishing is the
- * real signal, so reduced-motion loses the sweep and nothing else. */
-.dd-undo-countdown {
-  position: absolute; left: 6px; right: 6px; bottom: 0; height: 1px;
-  background: rgba(var(--brand), .45); transform-origin: left center;
-  animation: dd-undo-count 5s linear forwards;
-}
-@keyframes dd-undo-count { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+/* There is deliberately no countdown hairline under the undo row. It had one
+ * for 5s and it was misread as a deadline on the DECISION rather than on the
+ * undo: a bar draining under freshly-tapped controls reads as "choose before
+ * this runs out" (reported 2026-08-04). The row still leaves after 5s — it
+ * just stops narrating it. */
 
-/* Skip — deliberately subordinate. It is an escape from deciding, not a
- * fourth decision, so it gets text weight rather than a button's. */
-.dd-skip {
-  width: 100%; border: none; background: none; cursor: pointer; padding: 2px 0;
-  font: 700 12px var(--font-ui); color: var(--text-tertiary); min-height: 0;
+/* Skip — a real button as of 2026-08-04, left of "not for me", because as a
+ * text link under the bar it read as a caption and went unfound. Still
+ * subordinate to the three: no fill and a dimmer border, so the bar does not
+ * offer four things of equal weight. It is not a decision; it is the refusal
+ * to make one. */
+.dd-btn-skip {
+  width: 56px; flex: none; border: 1px solid var(--hairline);
+  background: transparent; color: var(--text-tertiary);
 }
-.dd-skip:hover { color: var(--text-body); }
+.dd-btn-skip:hover { color: var(--text-body); }
 .dd-btn {
   border-radius: 14px; cursor: pointer; min-height: 58px;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;

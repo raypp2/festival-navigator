@@ -130,6 +130,61 @@ test('deck renders the top-ranked card with exactly one reason ribbon', () => {
   assert.equal(overlay().querySelector('.dd-counter').textContent, '1 / 6');
 });
 
+// The 2026-08-04 phone pass. Each of these is a thing a person hit on a real
+// device, so each gets an assertion rather than a comment.
+test('the top bar carries back, title and filter on ONE row', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  const topbar = overlay().querySelector('.dd-topbar');
+  assert.ok(topbar.querySelector('.dd-back'), 'back stays');
+  assert.equal(topbar.querySelector('.dd-title').textContent, 'DISCOVER');
+  assert.ok(topbar.querySelector('.dd-filter-btn'),
+    'filter moved up beside the title instead of owning a row below it');
+  // The row it used to share with a "DISCOVERY SESSION" micro-label is gone
+  // entirely — the label restated the title directly above it and cost the
+  // card a row of height on a phone.
+  assert.equal(overlay().querySelectorAll('.dd-filter-btn').length, 1, 'exactly one filter control');
+  assert.ok(!/DISCOVERY SESSION/i.test(overlay().textContent), 'the micro-label is gone');
+  // The counter kept its job and joined the sub-line.
+  assert.ok(overlay().querySelector('.dd-header-meta .dd-counter'));
+});
+
+test('the card shows when the artist plays, and nothing when there is no set', () => {
+  const fest = state.FESTIVALS[FID];
+  const target = fest.artists.find((a) => a.name === 'RankTarget');
+  const restore = { ...target };
+  try {
+    Object.assign(target, { day: 'Day 1', stage: 'Ranch Arena', time: '6:30 PM' });
+    fest.dayMeta = { 'Day 1': { wd: 'Thu', num: 1, date: 'Jun 25' } };
+    renderDeckForTest(ctx, mkActions(), CANON);
+    assert.equal(cardName(), 'RankTarget');
+    assert.equal(overlay().querySelector('.dd-setline').textContent, 'THU · 6:30 PM · Ranch Arena');
+  } finally {
+    for (const k of Object.keys(target)) if (!(k in restore)) delete target[k];
+    Object.assign(target, restore);
+    delete fest.dayMeta;
+  }
+  // Same fixture with the schedule taken back off: no line rather than an
+  // empty one. A lineup with no times yet is the common case, not an edge one.
+  closeDeck();
+  renderDeckForTest(ctx, mkActions(), CANON);
+  assert.equal(cardName(), 'RankTarget');
+  assert.equal(overlay().querySelector('.dd-setline'), null);
+});
+
+test('the undo row states what happened and offers Undo — with no countdown bar', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  overlay().querySelector('.dd-btn-must').click();
+  const undo = overlay().querySelector('.dd-actions .dd-undo');
+  assert.ok(undo, 'a decision grows the undo row');
+  assert.match(undo.querySelector('.dd-undo-msg').textContent, /RankTarget/);
+  // A draining hairline under freshly-tapped controls read as a deadline on the
+  // DECISION rather than on the undo. The 5s dismissal stays; the narration of
+  // it does not.
+  assert.equal(undo.querySelector('.dd-undo-countdown'), null);
+});
+
 test('Pick writes applyPickLevel(1) through the state layer, mirrors, and advances', () => {
   const actions = mkActions();
   renderDeckForTest(ctx, actions, CANON);
@@ -166,7 +221,7 @@ test('Skip advances without recording anything, and is undoable', () => {
   renderDeckForTest(ctx, actions, CANON);
   assert.equal(cardName(), 'RankTarget');
 
-  overlay().querySelector('.dd-skip').click();
+  overlay().querySelector('.dd-btn-skip').click();
   assert.equal(cardName(), 'PickFlow1', 'the deck moved on');
   // The distinction that matters: a skip says NOTHING about the artist, so no
   // pick and no pass is written and they stay in the pool for a later session.
