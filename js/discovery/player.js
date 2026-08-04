@@ -13,7 +13,7 @@
 // third-party iframes) — design/player-harness.html is the manual test
 // surface for it.
 
-import { createPlayerCore, PRIORITY, SOURCE_META, mapSoundcloudSounds, seekFraction } from './player-core.js';
+import { createPlayerCore, PRIORITY, SOURCE_META, mapSoundcloudSounds, isUnplayableSound, seekFraction } from './player-core.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -22,6 +22,26 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 // on a festival LTE connection; short enough that a refused seek self-heals.
 const SEEK_SETTLE_MS = 2500;
 const SEEK_SETTLE_EPS = 0.01; // "arrived" = within 1% of the track
+
+// How the SoundCloud track list is waited out. getSounds() returns a growing
+// prefix of the profile rather than one complete list, so both questions we
+// ask of it — "which track will actually play?" and "is this profile dead?" —
+// have to be answered against a list that has stopped changing. Measured on
+// the four profiles that misbehaved on-device (2026-08-04): rufusdusol went
+// 18 sounds at READY → 146 at +6s, and its first streamable track is at index
+// 54.
+//
+// SC_STABLE_POLLS is 3 and that number is load-bearing. The list does not fill
+// smoothly — it arrives in BURSTS SEPARATED BY PLATEAUS, and consecutive polls
+// of snowstrippers measured 9, 9, 20, 20, 25, 45 (700ms apart, same on an
+// 82x46 iframe and a 400x200 one — the widget's own paging, not a visibility
+// effect). So "the length didn't change since last time" is true twice while
+// the list is still loading, and a single-comparison stability test declares
+// a profile dead mid-load. Three consecutive identical readings means the
+// widget has genuinely done nothing for 2.1s.
+const SC_POLL_MS = 700;
+const SC_MAX_POLLS = 10;
+const SC_STABLE_POLLS = 3;
 
 // ---------------------------------------------------------------------------
 // Lazy SDK loaders — each third-party script is injected at most once per
@@ -301,7 +321,15 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     body.className = 'sample-player-body';
     if (curLayout === 'desktop' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) body.classList.add('is-split');
 
-    const stageWrap = curLayout === 'compact' ? buildCompactStage(snap) : buildFullStage(snap);
+    // Spotify draws its REAL embed on every surface, deck card included. The
+    // 82x46 now-playing row works for a source we drive ourselves (a video
+    // thumbnail, a waveform we scrub) but Spotify's iframe IS the control
+    // surface — squeezed into a thumbnail it became a black box behind an
+    // orange button of ours, which is strictly less than the artist page shows
+    // for the same artist. Same embed, same format, every layout
+    // (device feedback, 2026-08-04).
+    const useNowPlayingRow = curLayout === 'compact' && snap.currentSource !== 'sp';
+    const stageWrap = useNowPlayingRow ? buildCompactStage(snap) : buildFullStage(snap);
     body.appendChild(stageWrap);
     // Compact can't fit usable native chrome (YT at 82x46) and SC compact has
     // no visible widget at all — a full-width seek row is the scrubber there.
@@ -321,7 +349,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     if (!snap.online) root.appendChild(renderOfflineNote());
 
     if (preserved) {
-      const target = curLayout === 'compact' ? root.querySelector('.sample-player-np-thumb') : root.querySelector('.sample-player-stage');
+      const target = embedContainer();
       if (target) {
         target.insertBefore(preserved, target.firstChild);
         const stage = root.querySelector('.sample-player-stage');
@@ -504,15 +532,15 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   function renderCompactBadge(snap) {
     const badge = document.createElement('div');
     badge.className = 'sample-player-head';
-    // Spotify says nothing here: the green chip on the now-playing row already
-    // carries "30-sec preview", and printing it twice ~150px apart was the
-    // same wasted space as the block removed below (device feedback,
-    // 2026-08-02). The other sources' status is not duplicated anywhere, so
-    // it stays.
+    // Spotify's honesty label lives HERE now. It used to be a chip on the
+    // now-playing row, and that row is gone for Spotify — the real embed
+    // replaced it — so the badge inherits it rather than losing it. It costs
+    // no vertical space in this slot, which is why it isn't the duplicate it
+    // would have been beside the chip (device feedback, 2026-08-02/04).
     const status = !snap.online
       ? '<span class="sample-player-status"><span class="sample-player-status-dot"></span>offline</span>'
       : snap.currentSource === 'sp'
-        ? ''
+        ? '<span class="sample-player-sp-chip">30-sec preview</span>'
         : '<span class="sample-player-status">plays in full · no account</span>';
     badge.innerHTML = `<span class="sample-player-label">Sample</span>${status}`;
     return badge;
@@ -539,6 +567,14 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     return wrap;
   }
 
+  // Where the live <iframe> hangs. Compact uses the 82x46 thumbnail for the
+  // sources we drive ourselves; every other case — full, desktop, and Spotify
+  // on ANY layout — hangs it in the fixed-shape stage. Asking the DOM which
+  // one got built keeps this from having to re-derive that rule.
+  function embedContainer() {
+    return root.querySelector('.sample-player-np-thumb') || root.querySelector('.sample-player-stage');
+  }
+
   // ---- full / desktop stage: real fixed-shape embed, custom overlay for YT (empty placeholder — mountEmbed/rebuildChrome fill it) ----
   function buildFullStage(snap) {
     const stage = document.createElement('div');
@@ -548,7 +584,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     return stage;
   }
 
-  // ---- compact: 82x46 now-playing row (empty placeholder — mountEmbed/rebuildChrome fill it) ----
+  // ---- compact: 82x46 now-playing row (empty placeholder — mountEmbed/rebuildChrome fill it).
+  // YouTube and SoundCloud only: Spotify takes the full stage on every layout,
+  // so nothing here has an 'sp' branch any more. ----
   function buildCompactStage(snap) {
     const wrap = document.createElement('div');
     wrap.className = 'sample-player-np';
@@ -557,9 +595,10 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     thumb.className = 'sample-player-np-thumb';
     wrap.appendChild(thumb);
 
-    if (snap.currentSource !== 'yt') {
-      // Audio-only sources: our own round play/pause — never hides a video,
-      // and there's no picture to hide here in the first place.
+    if (snap.currentSource === 'sc') {
+      // SoundCloud in compact has no visible widget at 82x46 — our own round
+      // play/pause is the control. Never used to hide a video; there is no
+      // picture to hide here in the first place.
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'sample-player-np-btn';
@@ -575,13 +614,6 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     meta.className = 'sample-player-np-meta';
     meta.innerHTML = npMetaHtml(snap);
     wrap.appendChild(meta);
-
-    if (snap.currentSource === 'sp') {
-      const chip = document.createElement('span');
-      chip.className = 'sample-player-sp-chip';
-      chip.textContent = '30-sec preview';
-      wrap.appendChild(chip);
-    }
     return wrap;
   }
 
@@ -680,7 +712,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     embedHost = document.createElement('div');
     embedHost.className = 'sample-player-stage-embed';
 
-    const container = curLayout === 'compact' ? root.querySelector('.sample-player-np-thumb') : root.querySelector('.sample-player-stage');
+    const container = embedContainer();
     if (container) container.insertBefore(embedHost, container.firstChild);
 
     // "Player tabs — crossfade between the panes (fast)." The stage is faded
@@ -700,22 +732,26 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       if (stage) { stage.dataset.state = 'ready'; delete stage.dataset.swapping; }
     };
     const onError = () => applyState(core.markFailed(src));
-    const onSounds = ({ items, initialIndex, allUnplayable }) => {
-      if (allUnplayable) {
-        // Every posted track is monetization-gated for anonymous listeners —
-        // rows for them would all be dead. Same treatment as an embed error:
-        // strike the tab, fall through to the next source.
-        applyState(core.markFailed('sc'));
-        return;
-      }
+    // Returns the resulting snapshot: buildSoundCloud needs to know which row
+    // ended up current so it can park the widget on that exact track.
+    const onSounds = ({ items, initialIndex }) => {
       const updated = core.setAlternates('sc', items, initialIndex);
       lastSnap = updated;
       if (updated.currentSource === 'sc') {
         const oldClips = root.querySelector('.sample-player-clips');
         if (oldClips) oldClips.replaceWith(renderClips(updated));
+        const meta = root.querySelector('.sample-player-np-meta');
+        if (meta) meta.innerHTML = npMetaHtml(updated);
       }
       notify(updated);
+      return updated;
     };
+    // The profile settled and not one track on it is streamable for an
+    // anonymous listener — rows for them would all be dead controls. Same
+    // treatment as an embed error: strike the tab, fall through to the next
+    // source. Only ever called once the list has stopped growing (or the poll
+    // budget is spent), never off a first partial fetch.
+    const onNothingPlayable = () => applyState(core.markFailed('sc'));
     // The widget auto-advanced (or moved on its own): state follows reality,
     // and we must NOT drive the embed back (reconcileEmbed would loop) — so
     // this bypasses applyState on purpose.
@@ -731,7 +767,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     };
 
     if (src === 'yt') embedAdapter = buildYouTube(embedHost, sources, snap, { setReady, onError });
-    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, sources, snap, { setReady, onError, onSounds, onTrackSync });
+    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, sources, snap, { setReady, onError, onSounds, onTrackSync, onNothingPlayable });
     else if (src === 'sp') embedAdapter = buildSpotify(embedHost, sources, snap, { setReady, onError });
   }
 
@@ -817,14 +853,36 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
   }
 
   // ---- SoundCloud: Widget API. Public tracks stream in full, no session. ----
-  function buildSoundCloud(container, srcData, snap, { setReady, onError, onSounds }) {
+  //
+  // Two things this has to get right, both measured against the profiles that
+  // misbehaved on-device (live widget probe, 2026-08-04, soundcloud.com/
+  // {snowstrippers,sofitukker,clairerosinkranz,rufusdusol}):
+  //
+  //  1. getSounds() returns a GROWING PREFIX of the profile — not a complete
+  //     list with placeholder rows, as this file used to assume. Every entry it
+  //     hands back already carries a title, and more entries keep arriving for
+  //     seconds (rufusdusol: 18 sounds at READY, 56 at +1s, 146 at +6s). On a
+  //     label profile that prefix is 100% ad-supported, so reading
+  //     `allUnplayable` off the FIRST fetch struck the tab on all four of those
+  //     artists about a second after playback appeared to start — the
+  //     strikethrough-and-Retry-SoundCloud report. Nothing terminal may be
+  //     decided until the list stops growing.
+  //  2. The first streamable track is DEEP: widget index 9 / 28 / 34 / 54 on
+  //     those four. The widget opens parked at index 0, so a press of play
+  //     makes it walk forward through every ad-supported track in between
+  //     (each PLAYs then PAUSEs at 0ms) before landing on one it can stream —
+  //     the row our own list has been showing as #1 the whole time. We already
+  //     know where it will end up, so we skip() it there as soon as the list
+  //     resolves, before anyone presses anything. auto_play stays off in the
+  //     URL for the same reason: it would start that walk at load.
+  function buildSoundCloud(container, srcData, snap, { setReady, onError, onSounds, onTrackSync, onNothingPlayable }) {
     const iframe = document.createElement('iframe');
     iframe.allow = 'autoplay';
     iframe.scrolling = 'no';
     iframe.frameBorder = 'no';
     const url = 'https://soundcloud.com/' + encodeURIComponent(srcData?.soundcloudSlug || '');
     iframe.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(url) +
-      '&color=%23c084fc&auto_play=' + (snap.play ? 'true' : 'false') + '&hide_related=true&show_comments=false&show_user=true&visual=false';
+      '&color=%23c084fc&auto_play=false&hide_related=true&show_comments=false&show_user=true&visual=false';
     container.appendChild(iframe);
 
     let widget = null;
@@ -832,6 +890,12 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
 
     let scDurMs = 0;
     let lastKnownItems = [];
+    let wantPlay = !!snap.play; // play/pause INTENT, honored the moment we're parked
+    let parked = false;         // the widget sits on a track we know it can stream
+    let polls = 0;
+    let lastTotal = -1;
+    let unchangedRuns = 0; // consecutive polls that saw the same list length
+    let pollTimer = null;
 
     loadSoundCloudApi().then((SC) => {
       if (torn) return;
@@ -840,21 +904,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       widget.bind(E.READY, () => {
         setReady();
         fetchSounds();
-        // getSounds() lazy-loads track titles as the widget's own internal
-        // list scrolls — we can't script that scroll (cross-origin iframe),
-        // so best-effort re-poll a couple of times to pick up titles that
-        // arrive shortly after READY. Documented limitation, not guaranteed.
-        setTimeout(fetchSounds, 1000);
-        setTimeout(fetchSounds, 3000);
       });
       // Whatever the widget actually plays is what our rows must show as
-      // active — it auto-advances off monetization-gated tracks, and lying
-      // about the current track was exactly the reported bug.
+      // active — lying about the current track was the original reported bug.
       widget.bind(E.PLAY, () => {
         if (torn) return;
-        setPlaying(true);
         widget.getCurrentSound((s) => {
           if (torn || !s) return;
+          // It wandered onto a track we already know it cannot stream: its own
+          // auto-advance off the end of a set, or a press on the widget's
+          // native controls before our skip landed. Jump to the next row we
+          // know plays rather than let it grind the gap one dead track at a
+          // time — which is the whole point of knowing the list.
+          if (isUnplayableSound(s)) { jumpPastUnplayable(s); return; }
+          setPlaying(true);
           scDurMs = s.duration || 0;
           if (onTrackSync && lastKnownItems.length) {
             const i = lastKnownItems.findIndex((it) => it.id === s.permalink_url);
@@ -871,27 +934,86 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       widget.bind(E.ERROR, () => onError());
     });
 
+    function schedulePoll() {
+      if (torn || pollTimer) return;
+      pollTimer = setTimeout(() => { pollTimer = null; fetchSounds(); }, SC_POLL_MS);
+    }
+
     function fetchSounds() {
       if (!widget || torn) return;
       widget.getSounds((sounds) => {
         if (torn) return;
-        const mapped = mapSoundcloudSounds(sounds);
+        const arr = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
+        const mapped = mapSoundcloudSounds(arr);
         lastKnownItems = mapped.items;
-        onSounds(mapped);
+        const updated = onSounds(mapped);
+        polls += 1;
+        unchangedRuns = arr.length === lastTotal ? unchangedRuns + 1 : 0;
+        lastTotal = arr.length;
+        const settled = unchangedRuns >= SC_STABLE_POLLS; // done filling, not merely between bursts
+
+        if (!parked && mapped.items.some((i) => i.label)) parkOn(arr, updated);
+        if (parked) {
+          // Already playable; keep polling only while the panel can still gain
+          // rows, then stop — nothing after this changes what plays.
+          if (!settled && polls < SC_MAX_POLLS) schedulePoll();
+          return;
+        }
+        // Nothing streamable YET. That is only a verdict once the list has
+        // settled (or we've waited out the budget); until then, keep looking.
+        if (polls < SC_MAX_POLLS && !(settled && mapped.allUnplayable)) { schedulePoll(); return; }
+        onNothingPlayable();
+      });
+    }
+
+    // Move the widget onto the row the UI is already showing as current, so the
+    // first press of play starts THERE. skip() takes a WIDGET index and our
+    // list is filtered, so the row's permalink is resolved against the widget's
+    // own unfiltered array — the one we just fetched, no extra round trip.
+    function parkOn(sounds, snapNow) {
+      if (!widget || !snapNow || snapNow.currentSource !== 'sc') return;
+      const item = snapNow.alternates[snapNow.clipIndex] || lastKnownItems.find((i) => i.label);
+      if (!item || !item.label) return;
+      const i = sounds.findIndex((s) => s.permalink_url === item.id);
+      if (i < 0) return;
+      parked = true;
+      if (i > 0) widget.skip(i);
+      // Tap-to-play is the rule everywhere: a player that has merely been
+      // mounted must stay silent, and skip() can start the widget on its own.
+      if (wantPlay) widget.play();
+      else if (i > 0) widget.pause();
+    }
+
+    function jumpPastUnplayable(current) {
+      if (!widget) return;
+      widget.getSounds((sounds) => {
+        if (torn) return;
+        const arr = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
+        const at = arr.findIndex((s) => s.permalink_url === current.permalink_url);
+        // Forward only — that is what makes this terminate.
+        const next = arr.findIndex((s, i) => i > at && s.title && !isUnplayableSound(s));
+        if (next >= 0) { parked = true; widget.skip(next); }
+        else { widget.pause(); setPlaying(false); }
       });
     }
 
     return {
-      destroy: () => { torn = true; try { widget && widget.pause && widget.pause(); } catch { /* widget may already be torn down */ } },
-      play: () => widget && widget.play && widget.play(),
-      pause: () => widget && widget.pause && widget.pause(),
+      destroy: () => {
+        torn = true;
+        if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
+        try { widget && widget.pause && widget.pause(); } catch { /* widget may already be torn down */ }
+      },
+      // Deferred until parked: playing before we know where to start IS the
+      // grind. The intent is remembered, so parkOn honors a press that landed
+      // while the list was still resolving.
+      play: () => { wantPlay = true; if (parked && widget && widget.play) widget.play(); },
+      pause: () => { wantPlay = false; if (widget && widget.pause) widget.pause(); },
       loadClip: (item) => {
         if (!widget) return;
-        // skip() takes a WIDGET index, and our list is filtered — resolve the
-        // row's id against the widget's own unfiltered list every time.
+        wantPlay = true;
         widget.getSounds((sounds) => {
           const i = (sounds || []).findIndex((s) => s && s.permalink_url === item.id);
-          if (i >= 0) { widget.skip(i); widget.play(); }
+          if (i >= 0) { parked = true; widget.skip(i); widget.play(); }
         });
       },
       seekTo: (frac) => {
@@ -903,15 +1025,32 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
 
   // ---- Spotify: iframe-api. No alternates pane — its own embed lists top
   // tracks; we only ever mount the artist URI and show the honesty chip. ----
+  //
+  // height MUST be a NUMBER, and that is not a detail. Spotify picks which of
+  // its two layouts to draw from the height it is HANDED, not from the box it
+  // ends up in: given `'100%'` it falls back to the squat compact player and
+  // draws it at ~150px, while the iframe still stretches to the full stage —
+  // which is where the ~200px of dead space under the embed came from, on the
+  // artist page as well as the deck (measured 2026-08-04, 352px stage). Given
+  // the same 352 as a number it draws the full layout: artwork, artist, Follow,
+  // transport AND the top-tracks list with durations, filling the stage. The
+  // number is read off the stage the CSS already sized, so --disc-stage-sp-h
+  // stays the one place the shape is decided.
   function buildSpotify(container, srcData, snap, { setReady, onError }) {
     const node = document.createElement('div');
     container.appendChild(node);
     let controller = null;
     let torn = false;
+    // clientHeight of the STAGE, not of `container`: that is the content box
+    // the CSS sized to --disc-stage-sp-h, which is the number the embed needs
+    // to see. (The stage is content-box precisely so its hairlines can't shave
+    // it under Spotify's 352 threshold — see assets/discovery.css.)
+    const stage = container.closest('.sample-player-stage');
+    const height = (stage || container).clientHeight || 352;
 
     loadSpotifyApi().then((api) => {
       if (torn) return;
-      api.createController(node, { uri: 'spotify:artist:' + (srcData?.spotifyId || ''), width: '100%', height: '100%' }, (c) => {
+      api.createController(node, { uri: 'spotify:artist:' + (srcData?.spotifyId || ''), width: '100%', height }, (c) => {
         if (torn) { try { c.destroy && c.destroy(); } catch { /* noop */ } return; }
         controller = c;
         setReady();

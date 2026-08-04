@@ -55,15 +55,26 @@ export function seekFraction(x, width) {
 // Keying on policy alone struck out 17 of 30 SoundCloud tabs on the Ubbi Dubbi
 // 2026 lineup (Kx5 and San Holo were 100% dead); this rule leaves 3, all of
 // which really are unplayable.
+export function isUnplayableSound(s) {
+  if (!s) return false;
+  return s.policy === 'BLOCK' || s.streamable === false
+    || (s.policy === 'MONETIZE' && s.monetization_model === 'AD_SUPPORTED');
+}
+
 // Sounds still lazy-loading (no title yet) can't be judged and stay as
 // loading rows. initialIndex = the first full-play row (never auto-pick a
-// preview when a full set is sitting right there); allUnplayable = the list
-// had sounds but every one is known-unplayable → caller falls through to the
-// next source exactly like an embed error.
+// preview when a full set is sitting right there); allUnplayable = every sound
+// IN THIS LIST is known-unplayable.
+//
+// allUnplayable is a fact about the list it was handed, NOT a verdict on the
+// artist — getSounds() hands back a growing PREFIX of the profile, so a `true`
+// here on an early fetch means nothing until the list has stopped growing.
+// player.js owns that wait; treating a first-fetch `true` as terminal is
+// exactly the bug that struck SoundCloud dead a second after it started on
+// snowstrippers / sofitukker / clairerosinkranz / rufusdusol (2026-08-04).
 export function mapSoundcloudSounds(sounds) {
   const arr = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
-  const unplayable = (s) => s.policy === 'BLOCK' || s.streamable === false
-    || (s.policy === 'MONETIZE' && s.monetization_model === 'AD_SUPPORTED');
+  const unplayable = isUnplayableSound;
   const kept = arr.filter((s) => !s.title || !unplayable(s));
   const items = kept.slice(0, 6).map((s) => ({
     id: s.permalink_url,

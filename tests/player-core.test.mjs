@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createPlayerCore, PRIORITY, STORAGE_KEY, mapSoundcloudSounds, seekFraction } from '../js/discovery/player-core.js';
+import { createPlayerCore, PRIORITY, STORAGE_KEY, mapSoundcloudSounds, isUnplayableSound, seekFraction } from '../js/discovery/player-core.js';
 
 // Fake storage — no localStorage/browser needed. Mirrors the getItem/setItem
 // surface createPlayerCore expects.
@@ -330,6 +330,37 @@ test('mapSoundcloudSounds: all known-unplayable -> allUnplayable (falls through 
   assert.equal(items.length, 0);
   assert.equal(allUnplayable, true);
   assert.equal(mapSoundcloudSounds([]).allUnplayable, false); // empty list is just "no data yet"
+});
+
+test('isUnplayableSound: monetization_model is the discriminator, not policy', () => {
+  const un = isUnplayableSound;
+  assert.equal(un({ policy: 'MONETIZE', monetization_model: 'AD_SUPPORTED' }), true);
+  assert.equal(un({ policy: 'MONETIZE', monetization_model: 'BLACKBOX' }), false); // streams in full
+  assert.equal(un({ policy: 'BLOCK' }), true);
+  assert.equal(un({ policy: 'ALLOW', streamable: false }), true);
+  assert.equal(un({ policy: 'ALLOW' }), false);
+  assert.equal(un({ policy: 'SNIP' }), false); // a 30s preview still plays
+  assert.equal(un(null), false);
+});
+
+// The reason player.js may never act on one fetch. getSounds() hands back a
+// growing PREFIX of the profile, and on a label profile that prefix is all
+// ad-supported for the first several seconds — measured live 2026-08-04:
+// rufusdusol's first streamable track is at index 54, sofitukker's at 34,
+// clairerosinkranz's at 28, snowstrippers' at 9. A `true` here off an early
+// fetch is a fact about nine tracks, not a verdict on the artist; reading it
+// as one is what struck SoundCloud dead a second after it started.
+test('allUnplayable on a partial prefix is not a verdict — the same profile flips as it fills', () => {
+  const dead = (i) => ({ title: 'gated ' + i, permalink_url: 'd' + i, policy: 'MONETIZE', monetization_model: 'AD_SUPPORTED', streamable: true });
+  const alive = { title: 'the one live set', permalink_url: 'live', policy: 'ALLOW', streamable: true };
+  const prefix = [dead(0), dead(1), dead(2)];
+  assert.equal(mapSoundcloudSounds(prefix).allUnplayable, true);
+
+  const filled = [...prefix, dead(3), alive];
+  const later = mapSoundcloudSounds(filled);
+  assert.equal(later.allUnplayable, false);
+  assert.deepEqual(later.items.map((i) => i.id), ['live']);
+  assert.equal(later.initialIndex, 0);
 });
 
 test('setAlternates defaultIndex applies only before any play/user choice', () => {

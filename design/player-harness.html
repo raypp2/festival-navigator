@@ -129,6 +129,19 @@ const ARTISTS = [
   // from our rows), track 5 "Destiny (HILLS Remix)" is SNIP (30s preview —
   // kept + badged). Exercises mapSoundcloudSounds against reality.
   { id: 'alesso', name: 'Alesso', genres: ['Progressive House'], sources: { soundcloudSlug: 'alesso', spotifyId: '4AVFqumd2ogHFlRbKIjp1t' } },
+  // The two SoundCloud regression cases (live widget probe 2026-08-04). Both
+  // are label profiles whose getSounds() prefix is 100% ad-supported, which is
+  // what used to strike the tab a second after playback appeared to start, and
+  // whose first streamable track is far down the list, which is what used to
+  // make the widget walk audibly through the dead ones. Snow Strippers: first
+  // playable at widget index 9, and NO YouTube, so SoundCloud is the source
+  // that opens. RÜFÜS DU SOL is the deep end — index 54, list still growing
+  // past 146 sounds at +6s. (Same failure on sofitukker/index 34 and
+  // clairerosinkranz/index 28.) Expected now: no walk, no strikethrough.
+  { id: 'snowstrippers', name: 'Snow Strippers', genres: ['Electroclash', 'Electropop'],
+    sources: { soundcloudSlug: 'snowstrippers', spotifyId: '6TsAG8Ve1icEC8ydeHm3C8' } },
+  { id: 'rufusdusol', name: 'RÜFÜS DU SOL', genres: ['Alternative Dance', 'Deep House'],
+    sources: { youtubeVideoIds: ['Zy4KtD98S2c'], youtubeLabels: ['Live from Joshua Tree'], soundcloudSlug: 'rufusdusol', spotifyId: '5Pb27ujIyYb33zBqVysBkj' } },
   { id: 'unannounced', name: 'Unannounced B2B', genres: [], sources: {} }, // zero sources -> "Nothing to sample yet"
 ];
 
