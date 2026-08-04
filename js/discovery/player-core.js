@@ -37,14 +37,24 @@ export function seekFraction(x, width) {
 }
 
 // SoundCloud getSounds() → our alternates list, with the monetization truth
-// baked in. Evidence (live probe against soundcloud.com/alesso, 2026-07-31):
-//   policy 'MONETIZE'  — the widget SKIPS it for anonymous listeners (this was
-//                        the reported "plays then immediately skips" bug);
-//                        a row for it would be a dead control, so it's dropped.
+// baked in. The discriminator is monetization_model, NOT policy — policy
+// 'MONETIZE' covers both the tracks the widget skips and the ones it plays in
+// full, so keying on it alone drops the good ones too. Evidence (live widget
+// probe, 2026-08-04, soundcloud.com/{kx5official,sanholobeats,loudluxury}):
+//   MONETIZE + 'AD_SUPPORTED'  — PLAY then PAUSE at 0ms for anonymous
+//                        listeners (this is the "plays then immediately skips"
+//                        bug); a row for it is a dead control, so it's dropped.
+//   MONETIZE + 'BLACKBOX' — streams in FULL (probed past 51s on Kx5, and it is
+//                        what the widget auto-advances TO after skipping the
+//                        ad-supported ones). These are usually the long live
+//                        sets — the best rows on the page. KEPT.
 //   policy 'SNIP'      — 30-second preview (duration 30000 vs full_duration
 //                        ~162s on the probe) — kept, badged, honesty rule.
 //   policy 'ALLOW'/absent — streams in full.
 //   'BLOCK' / streamable:false — never plays; dropped.
+// Keying on policy alone struck out 17 of 30 SoundCloud tabs on the Ubbi Dubbi
+// 2026 lineup (Kx5 and San Holo were 100% dead); this rule leaves 3, all of
+// which really are unplayable.
 // Sounds still lazy-loading (no title yet) can't be judged and stay as
 // loading rows. initialIndex = the first full-play row (never auto-pick a
 // preview when a full set is sitting right there); allUnplayable = the list
@@ -52,7 +62,8 @@ export function seekFraction(x, width) {
 // next source exactly like an embed error.
 export function mapSoundcloudSounds(sounds) {
   const arr = Array.isArray(sounds) ? sounds.filter(Boolean) : [];
-  const unplayable = (s) => s.policy === 'MONETIZE' || s.policy === 'BLOCK' || s.streamable === false;
+  const unplayable = (s) => s.policy === 'BLOCK' || s.streamable === false
+    || (s.policy === 'MONETIZE' && s.monetization_model === 'AD_SUPPORTED');
   const kept = arr.filter((s) => !s.title || !unplayable(s));
   const items = kept.slice(0, 6).map((s) => ({
     id: s.permalink_url,

@@ -32,6 +32,11 @@ screenshots/
 1440/
 offline/
 
+# Backfill proposals (scripts/backfill-soundcloud.mjs). A review artifact, not
+# a source of truth — the decisions land in data/festivals/*.json, and a stale
+# report in the tree is just a second answer to the same question.
+soundcloud-backfill-report*.md
+
 # Deny every image by default; name the three that actually ship.
 *.png
 !favicon.png

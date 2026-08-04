@@ -268,6 +268,13 @@ test('setSource is a no-op for an already-failed source (must retry instead)', (
 // Evidence base: live probe of soundcloud.com/alesso — tracks 1-4 policy
 // MONETIZE (widget skips them anonymously), track 5 SNIP (30s preview,
 // duration 30000 vs full_duration 162508).
+//
+// EVERY fixture below carries monetization_model, and that is load-bearing:
+// it is the field the rule actually keys on. The original fixtures omitted it
+// and so encoded the wrong model — they passed against a filter that dropped
+// all MONETIZE, which killed 17 of 30 SoundCloud tabs on Ubbi Dubbi 2026
+// (2026-08-04). A MONETIZE fixture without monetization_model cannot tell a
+// skipped track from a full-playing one, so don't write one.
 
 test('seekFraction clamps to [0,1] and survives junk', () => {
   assert.equal(seekFraction(50, 100), 0.5);
@@ -278,11 +285,27 @@ test('seekFraction clamps to [0,1] and survives junk', () => {
 });
 
 const ALESSO_SOUNDS = [
-  { title: 'In Your Eyes', permalink_url: 'u1', policy: 'MONETIZE', streamable: true },
-  { title: 'Turn Up The Bass', permalink_url: 'u2', policy: 'MONETIZE', streamable: true },
-  { title: 'Destiny (HILLS Remix)', permalink_url: 'u5', policy: 'SNIP', streamable: true, duration: 30000, full_duration: 162508 },
-  { title: 'Words (Alesso VIP)', permalink_url: 'u6', policy: 'ALLOW', streamable: true },
+  { title: 'In Your Eyes', permalink_url: 'u1', policy: 'MONETIZE', monetization_model: 'AD_SUPPORTED', streamable: true },
+  { title: 'Turn Up The Bass', permalink_url: 'u2', policy: 'MONETIZE', monetization_model: 'AD_SUPPORTED', streamable: true },
+  { title: 'Destiny (HILLS Remix)', permalink_url: 'u5', policy: 'SNIP', monetization_model: 'SUB_HIGH_TIER', streamable: true, duration: 30000, full_duration: 162508 },
+  { title: 'Words (Alesso VIP)', permalink_url: 'u6', policy: 'ALLOW', monetization_model: 'NOT_APPLICABLE', streamable: true },
 ];
+
+// Real getSounds() payload shape from soundcloud.com/kx5official (2026-08-04):
+// the widget skipped u1 at 0ms and played u2 past 51s. Both are MONETIZE —
+// only monetization_model tells them apart.
+const KX5_SOUNDS = [
+  { title: 'Escape (Sparrow & Barbossa Remix) [feat. Hayla]', permalink_url: 'u1', policy: 'MONETIZE', monetization_model: 'AD_SUPPORTED', streamable: true, duration: 348315, full_duration: 348343 },
+  { title: 'Kx5 - Escape (ft. Hayla) [Tall Order Remix]', permalink_url: 'u2', policy: 'MONETIZE', monetization_model: 'BLACKBOX', streamable: true, duration: 217977, full_duration: 217966 },
+];
+
+test('mapSoundcloudSounds keeps MONETIZE/BLACKBOX — the widget plays those in full', () => {
+  const { items, initialIndex, allUnplayable } = mapSoundcloudSounds(KX5_SOUNDS);
+  assert.deepEqual(items.map((i) => i.id), ['u2']); // the ad-supported u1 is dropped
+  assert.equal(items[0].preview, false); // full play, not a 30s badge
+  assert.equal(initialIndex, 0);
+  assert.equal(allUnplayable, false); // regression: this whole tab used to die
+});
 
 test('mapSoundcloudSounds drops MONETIZE/BLOCK/unstreamable, badges SNIP', () => {
   const { items } = mapSoundcloudSounds(ALESSO_SOUNDS);

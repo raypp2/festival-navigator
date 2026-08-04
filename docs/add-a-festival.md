@@ -45,6 +45,20 @@ Two files, one command:
 3. **Validate:** `node scripts/validate-festivals.mjs` — errors block CI.
    `scripts/import-festival.mjs` helps convert pasted lineup text.
 
+4. **Enrich:** `node scripts/enrich-artists.mjs <festival-id>` fills genres and
+   link-outs from MusicBrainz.
+
+5. **Backfill the SoundCloud links MusicBrainz doesn't have.** MusicBrainz
+   carries no SoundCloud relation for most of this catalogue, so step 4 leaves
+   a lot of `soundcloudSlug` gaps that are not real absences —
+   `node scripts/backfill-soundcloud.mjs <festival-id>` searches SoundCloud
+   itself and writes a report of what it would link. It is **dry run by
+   default**: read the report, then re-run with `--apply` (auto rows only) or
+   `--apply --include-review`. The `review` bucket exists because a match on
+   an artist's free-text username is not proof of identity — decide those by
+   eye. Set `SOUNDCLOUD_CLIENT_ID` if you have an official key; without one it
+   borrows the public widget's id, which works but can rotate without notice.
+
 Picks are keyed by artist name, so keep names stable between the lineup and
 scheduled phases (fixing capitalization is safe — lookups are exact by name,
 so a spelling change orphans existing picks for that artist).
