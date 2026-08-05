@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v64'; // v64 = the deck advances in place — the player host never changes parents, because WebKit re-creates a reparented iframe
+const CACHE_VERSION = 'festival-nav-v65'; // v65 = stop re-appending the player onto the parent it is already in — that is a reparent too
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

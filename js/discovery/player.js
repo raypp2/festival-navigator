@@ -1357,7 +1357,14 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     let settle = (fn) => fn();
     if (nextHost) {
       curHost = nextHost;
-      if (nextHost.isConnected) curHost.appendChild(root);
+      // Already where it belongs: do NOTHING. appendChild onto the parent a
+      // node is already in still removes it from the child list and re-inserts
+      // it, and that is the exact operation the probe proved fatal — WebKit
+      // re-creates the iframe's browsing context for it (step 5B). The deck's
+      // in-place advance hands us the very host the player is sitting in, so
+      // this branch is the common case, not an edge one.
+      if (root.parentNode === nextHost) { /* nothing to move, and moving would cost the embed */ }
+      else if (nextHost.isConnected) curHost.appendChild(root);
       else {
         const wanted = nextHost;
         settle = (fn) => queueMicrotask(() => {
