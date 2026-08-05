@@ -67,6 +67,16 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
 </div>
 
 <div class="step">
+  <h2>4 · SoundCloud only — load, then ask explicitly</h2>
+  <p>Step 3 loads with <code>auto_play</code> and never calls play(). The app does
+     something different: it loads, waits for the callback, then calls play()
+     itself. If THAT works, SoundCloud is fixable; if it does not, the widget
+     drops its unlock on load and needs another approach entirely.</p>
+  <button id="run-d" disabled>Load artist 2, then call play() in the callback</button>
+  <div class="verdict wait" id="v-d">not run — SoundCloud only</div>
+</div>
+
+<div class="step">
   <h2>Source</h2>
   <button class="ghost" id="src-yt">▶ Test with YouTube</button>
   <button class="ghost" id="src-sc">▶ Test with SoundCloud</button>
@@ -217,6 +227,10 @@ document.getElementById('run-b').addEventListener('click', function () {
       moved ? 'Playing. This element is now unlocked.'
             : 'Did NOT play even from a gesture — something else is wrong.');
     document.getElementById('run-c').disabled = !moved;
+    if (source === 'sc' && moved) {
+      document.getElementById('run-d').disabled = false;
+      verdict('v-d', 'wait', 'ready — run step 3 first, then this');
+    }
   });
 });
 
@@ -240,6 +254,34 @@ document.getElementById('run-c').addEventListener('click', function () {
               : 'STOPPED. The unlock does NOT survive a load on this phone — we need a different approach.');
     });
   }, 900);
+});
+
+// Step 4 exists because step 3 tested SoundCloud the way the PROBE does it
+// (auto_play in the load options, no explicit call), and the app does it the
+// other way (load, wait for the callback, then play()). Those are different
+// questions and step 3 only answered one of them.
+document.getElementById('run-d').addEventListener('click', function () {
+  this.disabled = true;
+  log('=== STEP 4: SC load(), then explicit play() from the callback ===');
+  var sawProgress = false;
+  var onProg = function () { sawProgress = true; };
+  scWidget.bind(window.SC.Widget.Events.PLAY_PROGRESS, onProg);
+  scPos = 0; // start the clock from zero so a frozen old position cannot read as movement
+  scWidget.load('https://soundcloud.com/' + ARTISTS[1].sc, {
+    auto_play: false,
+    callback: function () {
+      log('SC load() callback — calling play() now');
+      try { scWidget.play(); } catch (e) { log('play() threw: ' + e.message); }
+      setTimeout(function () {
+        watchPosition(function () { return scPos; }, 5000, function (moved) {
+          log('   PLAY_PROGRESS fired at all? ' + sawProgress);
+          verdict('v-d', moved ? 'ok' : 'bad',
+            moved ? 'PLAYED. SoundCloud is fixable — load, then ask.'
+                  : 'Still silent. The widget drops its unlock on load; SoundCloud needs another approach.');
+        });
+      }, 600);
+    }
+  });
 });
 
 document.getElementById('src-yt').addEventListener('click', function () { source = 'yt'; verdict('v-src', 'wait', 'YouTube selected — reload the page to start clean'); });

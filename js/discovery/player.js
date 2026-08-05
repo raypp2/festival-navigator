@@ -205,13 +205,19 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // So: after every request to play, wait. If no real PLAY event arrives, the
   // platform said no, and the player says so too — back to a Play glyph, and
   // the very next tap is a genuine user gesture that will be honored.
-  const PLAY_REFUSED_MS = 1500;
+  // 2500, not 1500: measured on an iPhone (design/ios-playback-probe, trace
+  // 2026-08-04), a carried YouTube embed reports playing ~1.16s after the load
+  // and the playhead moves shortly after. A shorter fuse would call a slow
+  // start a refusal.
+  const PLAY_REFUSED_MS = 2500;
   let playWatchdog = null;
+  let lastKnownPos = -1; // seconds, as last reported by whatever is mounted
   function clearPlayWatchdog() {
     if (playWatchdog) { clearTimeout(playWatchdog); playWatchdog = null; }
   }
   function armPlayWatchdog() {
     clearPlayWatchdog();
+    lastKnownPos = -1; // forget the previous embed's clock; only movement from HERE counts
     playWatchdog = setTimeout(() => {
       playWatchdog = null;
       if (destroyed || playingNow) return;
@@ -544,13 +550,23 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // embed's own play/pause events move it now — asking a player to start is
   // not the same as it having started.
   function setPlaying(on) {
-    if (on) clearPlayWatchdog(); // it really started — nothing left to check
     if (playingNow === on) return;
     playingNow = on;
     if (root) root.classList.toggle('is-playing', on);
   }
 
   function updateSeekRow(cur, dur) {
+    // A PLAY event is a claim; a playhead that has MOVED is evidence. iOS
+    // refuses the SoundCloud widget by firing PLAY and then sitting at zero
+    // (measured, probe step 1), which is exactly how a watchdog keyed on the
+    // event got itself stood down over silence. This is keyed on the clock.
+    if (Number.isFinite(cur) && cur > 0) {
+      if (lastKnownPos >= 0 && cur > lastKnownPos + 0.05) {
+        clearPlayWatchdog();
+        setPlaying(true);
+      }
+      if (cur > lastKnownPos) lastKnownPos = cur;
+    }
     // A live drag owns the position outright; a settling seek owns it until
     // the embed catches up. Only then does the playhead drive the rail.
     if (!seekDragging && !seekSettling(cur, dur) && dur > 0) paintSeek(cur / dur);
