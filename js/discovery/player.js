@@ -1135,32 +1135,29 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
           if (i >= 0) { parked = true; widget.skip(i); widget.play(); }
         });
       },
-      // Same live widget, a different profile. The point is the iOS unlock:
-      // the tap that started the previous artist unlocked THIS iframe, and
-      // load() keeps it — where a fresh iframe would have to be tapped again.
-      // Every piece of per-profile discovery state resets with it, because
-      // none of it describes the profile we are moving to.
-      loadArtist: (srcDataNext, _snap, nextWantPlay) => {
-        if (!widget || !widget.load) return false;
-        if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
-        wantPlay = !!nextWantPlay;
-        parked = false;
-        lastKnownItems = [];
-        scDurMs = 0;
-        polls = 0;
-        lastTotal = -1;
-        unchangedRuns = 0;
-        widget.load(profileUrl(srcDataNext), {
-          auto_play: false, // parkOn owns the first press; see the note there
-          color: '#c084fc',
-          hide_related: true,
-          show_comments: false,
-          show_user: true,
-          visual: false,
-          callback: () => { if (!torn) fetchSounds(); },
-        });
-        return true;
-      },
+      // NO loadArtist, deliberately — SoundCloud cannot carry playback across
+      // artists on mobile web, and the absence of this method is what routes a
+      // new artist back to a clean teardown-and-rebuild instead.
+      //
+      // Measured on an iPhone (design/ios-playback-probe step 4, 2026-08-04),
+      // driving the raw widget with the app's exact sequence — load(), wait for
+      // the callback, then play():
+      //     SC load() callback — calling play() now
+      //     SC PLAY event
+      //     SC PAUSE event            <- at 0ms
+      //     positions: [0 x13]        PLAY_PROGRESS fired at all? false
+      // and the widget then draws SoundCloud's own "Play on SoundCloud /
+      // Listen in browser" interstitial over itself. The gesture unlock does
+      // not survive load(): it belongs to the loaded track, not to the iframe,
+      // and SoundCloud re-gates the new one behind a tap of its own. That gate
+      // is theirs, not iOS's, and nothing we can call gets past it — proven
+      // both after a prior load and from a clean start.
+      //
+      // Carrying anyway would be worse than not carrying: it leaves a live
+      // widget wearing an interstitial where a fresh one at least looks right
+      // and takes one tap. YouTube DOES carry (same probe, step 3: same
+      // iframe, playhead advancing), so that path keeps its loadArtist and
+      // this one honestly does without.
       seekTo: (frac) => {
         if (!widget) return;
         widget.getDuration((d) => { if (d > 0) widget.seekTo(d * frac); });

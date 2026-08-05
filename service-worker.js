@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v60'; // v60 = the play watchdog judges on the playhead, not on a PLAY event (SoundCloud fires PLAY while iOS refuses it)
+const CACHE_VERSION = 'festival-nav-v61'; // v61 = YouTube carries playback across artists; SoundCloud provably cannot, so it rebuilds clean instead
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

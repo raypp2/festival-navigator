@@ -979,3 +979,27 @@ test('an autoplay refusal fixes the icon without withdrawing the intent', () => 
   assert.equal(calls[calls.length - 1].autoplay, true,
     'the next artist still tries — the platform said no, the person did not');
 });
+
+// Carrying is per-source, and that asymmetry is measured, not assumed:
+// YouTube keeps playing through a loadVideoById on iOS; SoundCloud's widget
+// drops its unlock on load() and re-gates behind its own interstitial
+// (design/ios-playback-probe, 2026-08-04). A player that cannot carry says so
+// by having no loadArtist, and the deck falls back to a clean mount.
+test('a player that cannot carry falls back to a real mount, and still gets the intent', () => {
+  const calls = [];
+  const destroys = { n: 0 };
+  const actions = mkActions(calls, destroys);
+  // a handle with no remountFor is exactly what an uncarryable player looks like
+  actions.mountPlayer = (opts) => {
+    calls.push(opts);
+    return { destroy: () => { destroys.n++; }, getState: () => ({}), handoverTo: () => {} };
+  };
+  renderDeckForTest(ctx, actions, CANON);
+  calls[calls.length - 1].onStateChange({ play: true });
+
+  overlay().querySelector('.dd-btn-pick').click();
+  const last = calls[calls.length - 1];
+  assert.equal(last.viaRemount, undefined, 'no carry available — a fresh mount');
+  assert.equal(last.autoplay, true, 'but the intent still travels, so it plays wherever it can');
+  assert.ok(destroys.n >= 1, 'and the old one is torn down rather than leaked');
+});
