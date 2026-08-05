@@ -211,13 +211,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // start a refusal.
   const PLAY_REFUSED_MS = 2500;
   let playWatchdog = null;
-  let lastKnownPos = -1; // seconds, as last reported by whatever is mounted
+  let lastKnownPos = 0;     // seconds, as last reported by whatever is mounted
+  let watchdogBase = null;  // the position we were at when we started waiting
   function clearPlayWatchdog() {
     if (playWatchdog) { clearTimeout(playWatchdog); playWatchdog = null; }
+    watchdogBase = null;
   }
+  // IDEMPOTENT, and that is the point. It used to clear and re-arm on every
+  // call, resetting the baseline with it — and applyState calls this on every
+  // render, so a surface that re-renders while waiting (a clip sync, a chrome
+  // patch) kept moving the goalposts and the movement check could never
+  // complete. A watch already running is left alone.
   function armPlayWatchdog() {
-    clearPlayWatchdog();
-    lastKnownPos = -1; // forget the previous embed's clock; only movement from HERE counts
+    if (playWatchdog) return;
+    watchdogBase = lastKnownPos;
     playWatchdog = setTimeout(() => {
       playWatchdog = null;
       if (destroyed || playingNow) return;
@@ -582,12 +589,12 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // refuses the SoundCloud widget by firing PLAY and then sitting at zero
     // (measured, probe step 1), which is exactly how a watchdog keyed on the
     // event got itself stood down over silence. This is keyed on the clock.
-    if (Number.isFinite(cur) && cur > 0) {
-      if (lastKnownPos >= 0 && cur > lastKnownPos + 0.05) {
+    if (Number.isFinite(cur) && cur >= 0) {
+      if (playWatchdog && watchdogBase !== null && cur > watchdogBase + 0.15) {
         clearPlayWatchdog();
         setPlaying(true);
       }
-      if (cur > lastKnownPos) lastKnownPos = cur;
+      lastKnownPos = cur;
     }
     // A live drag owns the position outright; a settling seek owns it until
     // the embed catches up. Only then does the playhead drive the rail.
@@ -684,20 +691,24 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     thumb.className = 'sample-player-np-thumb';
     wrap.appendChild(thumb);
 
-    if (snap.currentSource === 'sc') {
-      // SoundCloud in compact has no visible widget at 82x46 — our own round
-      // play/pause is the control. Never used to hide a video; there is no
-      // picture to hide here in the first place.
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'sample-player-np-btn';
-      btn.disabled = !snap.online;
-      setPlayGlyph(btn, snap.play);
-      btn.addEventListener('click', () => applyState(core.togglePlay()));
-      thumb.appendChild(btn);
-    }
-    // yt: the tiny live iframe keeps its own native controls/progress bar —
-    // per the design sheet, a video source never hides behind our button here.
+    // BOTH driven sources get the round control now, and YouTube needed it more
+    // than SoundCloud did. The rule here used to be "a video source never hides
+    // behind our button" — which left YouTube in compact with no control of
+    // OURS at all, relying on its native chrome inside an 82x46 frame that this
+    // very file calls too small to be usable. On a phone that means: a poster
+    // play button that does nothing, no glyph we can paint (patchClipAndPlay
+    // looks for this element and found none, so the honest-icon watchdog had
+    // nowhere to show), and playback reachable only by the seek row or a track
+    // row — every symptom reported on 2026-08-04. Covering unusable controls
+    // with a usable one is not hiding the video; scrubbing still lives in the
+    // seek row directly beneath.
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sample-player-np-btn is-' + snap.currentSource;
+    btn.disabled = !snap.online;
+    setPlayGlyph(btn, snap.play);
+    btn.addEventListener('click', () => applyState(core.togglePlay()));
+    thumb.appendChild(btn);
 
     const meta = document.createElement('div');
     meta.className = 'sample-player-np-meta';
@@ -822,6 +833,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // empty stage/np-thumb placeholder for us to fill.
   // -------------------------------------------------------------------------
   function mountEmbed(src, snap) {
+    lastKnownPos = 0; // a fresh embed starts its clock over; so does what we compare against
     teardownEmbed();
     embedHost = document.createElement('div');
     embedHost.className = 'sample-player-stage-embed';
@@ -1298,14 +1310,18 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // instead: the root stays parked (connected) and the move happens in a
     // microtask, once the render that created this host has finished putting it
     // in the document. Both parents connected at both ends — never a detach.
+    // Re-home now if we can, otherwise as soon as the caller's tree lands.
+    // `settle` runs whatever must wait for the player to be back on screen.
+    let settle = (fn) => fn();
     if (nextHost) {
       curHost = nextHost;
       if (nextHost.isConnected) curHost.appendChild(root);
       else {
         const wanted = nextHost;
-        queueMicrotask(() => {
+        settle = (fn) => queueMicrotask(() => {
           if (destroyed || !root || curHost !== wanted) return;
           if (wanted.isConnected) wanted.appendChild(root);
+          fn();
         });
       }
     }
@@ -1327,12 +1343,23 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
 
     if (canCarry) {
       rebuildChrome(snap, false); // false = preserve embedHost, the whole point
-      const carried = embedAdapter.loadArtist(curSources, snap, !!nextAutoplay);
-      if (!carried) { teardownEmbed(); mountEmbed(snap.currentSource, snap); }
+      // Load AFTER the player is back on screen, never while it is parked. The
+      // holder is a 1x1 transparent box, and asking a video to start inside one
+      // is asking to be refused or instantly paused — which comes back as an
+      // embed sitting on its poster, the exact "play icon showing but nothing
+      // playing" reported on 2026-08-04. Being visible is part of being able
+      // to play.
+      settle(() => {
+        if (destroyed || !embedAdapter || !embedAdapter.loadArtist) return;
+        lastKnownPos = 0; // the incoming artist starts at zero, and so does the baseline
+        const carried = embedAdapter.loadArtist(curSources, snap, !!nextAutoplay);
+        if (!carried) { teardownEmbed(); mountEmbed(snap.currentSource, snap); }
+        if (snap.play) armPlayWatchdog();
+      });
     } else {
       rebuildChrome(snap, true);
       teardownEmbed();
-      mountEmbed(snap.currentSource, snap);
+      settle(() => { if (!destroyed) mountEmbed(snap.currentSource, snap); });
     }
     if (snap.play) armPlayWatchdog(); else clearPlayWatchdog();
     notify(snap);

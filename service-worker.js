@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v62'; // v62 = the carried player is PARKED, never detached — Safari reloads a disconnected iframe and the reload cost YouTube its unlock
+const CACHE_VERSION = 'festival-nav-v63'; // v63 = YouTube gets a real play control in compact; the watchdog stops resetting its own baseline; the carry loads only once back on screen
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

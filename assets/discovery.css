@@ -173,7 +173,12 @@
   border-radius: var(--r-pill); border: none;
   background: rgba(255, 122, 47, .92); color: #fff; font-size: 15px;
   display: flex; align-items: center; justify-content: center;
+  z-index: 2; /* over the embed it sits on — the tap has to reach US */
 }
+/* Wears the source's own colour, so the control never claims to be a different
+ * service than the one it is driving. */
+.sample-player-np-btn.is-yt { background: rgba(255, 78, 69, .92); }
+.sample-player-np-btn.is-sc { background: rgba(255, 122, 47, .92); }
 .sample-player-np-btn:disabled { opacity: .5; }
 
 /* full/desktop YouTube stage: custom overlay controls (compact intentionally
