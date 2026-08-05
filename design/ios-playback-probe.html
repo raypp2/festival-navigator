@@ -77,6 +77,19 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
 </div>
 
 <div class="step">
+  <h2>5 · YouTube only — the app's conditions, one variable at a time</h2>
+  <p>Step 3 proved the carry works on a 150px player that never moves. The deck
+     has neither: its player is an 82&times;46 thumbnail, and it gets reparented
+     three times per advance. These test each on its own, so we learn which one
+     actually breaks it rather than guessing.</p>
+  <button id="run-e1" disabled>A · shrink to 82&times;46, then load artist 2</button>
+  <div class="verdict wait" id="v-e1">not run</div>
+  <button id="run-e2" disabled>B · move the iframe in the DOM, then load artist 2</button>
+  <div class="verdict wait" id="v-e2">not run</div>
+  <div class="stage" id="stage-b" style="height:46px;width:82px;"></div>
+</div>
+
+<div class="step">
   <h2>Source</h2>
   <button class="ghost" id="src-yt">▶ Test with YouTube</button>
   <button class="ghost" id="src-sc">▶ Test with SoundCloud</button>
@@ -231,6 +244,10 @@ document.getElementById('run-b').addEventListener('click', function () {
       document.getElementById('run-d').disabled = false;
       verdict('v-d', 'wait', 'ready — run step 3 first, then this');
     }
+    if (source === 'yt' && moved) {
+      document.getElementById('run-e1').disabled = false;
+      verdict('v-e1', 'wait', 'ready — you can skip step 3 and come straight here');
+    }
   });
 });
 
@@ -282,6 +299,56 @@ document.getElementById('run-d').addEventListener('click', function () {
       }, 600);
     }
   });
+});
+
+// A: size alone. Same element, same parent, just squeezed to the deck's
+// thumbnail before the load.
+document.getElementById('run-e1').addEventListener('click', function () {
+  this.disabled = true;
+  log('=== STEP 5A: shrink to 82x46, then loadVideoById ===');
+  var frame = yt.getIframe ? yt.getIframe() : null;
+  if (frame) { frame.style.width = '82px'; frame.style.height = '46px'; }
+  var host = document.getElementById('stage-a');
+  host.style.width = '82px'; host.style.height = '46px';
+  log('   stage is now ' + host.getBoundingClientRect().width + 'x' + host.getBoundingClientRect().height);
+  yt.loadVideoById(ARTISTS[1].yt);
+  setTimeout(function () {
+    watchPosition(ytPos, 4500, function (moved) {
+      verdict('v-e1', moved ? 'ok' : 'bad',
+        moved ? 'Size is NOT the problem — it played at thumbnail size.'
+              : 'SIZE breaks it. A thumbnail-sized player will not carry.');
+      document.getElementById('run-e2').disabled = false;
+    });
+  }, 900);
+});
+
+// B: movement alone. Restore a comfortable size, then reparent the iframe
+// between two CONNECTED parents — exactly what the deck does — and load.
+document.getElementById('run-e2').addEventListener('click', function () {
+  this.disabled = true;
+  log('=== STEP 5B: reparent the iframe, then loadVideoById ===');
+  var host = document.getElementById('stage-a');
+  host.style.width = ''; host.style.height = '150px';
+  var frame = yt.getIframe ? yt.getIframe() : null;
+  if (!frame) { log('   no iframe handle'); return; }
+  frame.style.width = '100%'; frame.style.height = '100%';
+  var b = document.getElementById('stage-b');
+  b.style.width = '100%'; b.style.height = '150px';
+  var left = false;
+  var mo = new MutationObserver(function () { if (!frame.isConnected) left = true; });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+  b.appendChild(frame);            // connected -> connected, a move
+  host.appendChild(frame);         // and back again
+  mo.disconnect();
+  log('   iframe ever left the document? ' + left);
+  yt.loadVideoById(ARTISTS[1].yt);
+  setTimeout(function () {
+    watchPosition(ytPos, 4500, function (moved) {
+      verdict('v-e2', moved ? 'ok' : 'bad',
+        moved ? 'Moving it is NOT the problem either.'
+              : 'MOVING breaks it. Reparenting costs the player its unlock.');
+    });
+  }, 900);
 });
 
 document.getElementById('src-yt').addEventListener('click', function () { source = 'yt'; verdict('v-src', 'wait', 'YouTube selected — reload the page to start clean'); });
