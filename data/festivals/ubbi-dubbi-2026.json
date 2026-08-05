@@ -114,6 +114,9 @@
         "OMNOM Live @ Boxpac Project 2026",
         "OMNOM Live @ The Ruins at Knockdown Center",
         "Omnom @ KDC Ruins with Gray Area"
+      ],
+      "genres": [
+        "tech house"
       ]
     },
     {
@@ -131,6 +134,12 @@
         "electric cleaners intergalactic mix | dance & electro | EC092",
         "STARJUNK 95 AT COUNTDOWN NYE 2025 - los angeles [4K]",
         "SIX5TAR @ Starjunk 95 [08/09/25]"
+      ],
+      "genres": [
+        "house",
+        "drum and bass",
+        "speed garage",
+        "bass house"
       ]
     },
     {
@@ -148,6 +157,9 @@
         "Gravagerz Live at EDC Las Vegas 2026",
         "Gravagerz (LIVE) at DEF x SoundCloud®",
         "WAREHOUSE SET | UKG, HOUSE, SPEED GARAGE MIX"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -298,6 +310,10 @@
         "Kaivon Live @ EDC Las Vegas 2023",
         "Kaivon Live @ Hard Summer 2023",
         "The Dark Night of the Soul Album Showcase"
+      ],
+      "genres": [
+        "chillwave",
+        "future bass"
       ]
     },
     {
@@ -315,7 +331,10 @@
         "Live From Denver",
         "Live @ The Far Out Lounge"
       ],
-      "soundcloudSlug": "capochinomusic"
+      "soundcloudSlug": "capochinomusic",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "ONHELL",
@@ -332,6 +351,9 @@
         "ONHELL Live At Red Rocks (DeadRocks)",
         "ONHELL @ DEF",
         "ONHELL B2B Chef Boyarbeatz DJ Set @ Party By ONHELL x Maybe Forever Denver"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -348,7 +370,13 @@
         "OMRI. | Dots On Melrose | Est.Today | Stranger Than | Los Angeles",
         "Dot Chandler @ Apokalypsa (Brno/CZ) 25.03.2016"
       ],
-      "soundcloudSlug": "iamdot"
+      "soundcloudSlug": "iamdot",
+      "genres": [
+        "dubstep",
+        "electro house",
+        "hip hop",
+        "progressive house"
+      ]
     },
     {
       "name": "Deluluz",
@@ -379,7 +407,10 @@
         "RIORDAN B2B RANGER TRUCCO - LIVE AT ECHOSTAGE",
         "Riordan at The Concourse Project | Full Set (1 Aug 2025)"
       ],
-      "soundcloudSlug": "riordanuk"
+      "soundcloudSlug": "riordanuk",
+      "genres": [
+        "tech house"
+      ]
     },
     {
       "name": "Obskür",
@@ -396,7 +427,11 @@
         "Saint Patrick's Day | RAW CUTS",
         "Dj set at The Terrace @OfficialClubSpace"
       ],
-      "soundcloudSlug": "obskurofficial"
+      "soundcloudSlug": "obskurofficial",
+      "genres": [
+        "house",
+        "techno"
+      ]
     },
     {
       "name": "Omar+",
@@ -428,7 +463,12 @@
         "HoneyLuv House Set @ Day Trip In The Park, LA",
         "@beatport Live | NY"
       ],
-      "soundcloudSlug": "honeyluvmusic"
+      "soundcloudSlug": "honeyluvmusic",
+      "genres": [
+        "house",
+        "soul",
+        "rnb"
+      ]
     },
     {
       "name": "SLAMM",
@@ -503,6 +543,11 @@
         "Cloonee B2B Prospa - Live at Destino, Ibiza",
         "Live at Hellbent in Los Angeles",
         "Live At EDC Orlando"
+      ],
+      "genres": [
+        "house",
+        "tech house",
+        "electro house"
       ]
     },
     {
@@ -519,7 +564,12 @@
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
       ],
-      "soundcloudSlug": "buntmusic"
+      "soundcloudSlug": "buntmusic",
+      "genres": [
+        "pop",
+        "folk",
+        "house"
+      ]
     },
     {
       "name": "Loud Luxury",
@@ -578,6 +628,11 @@
         "TWINSICK Live @ Fillmore Minneapolis 2026",
         "TWINSICK Live @ Terminal 5 New York City 2025",
         "TWINSICK Live @ Varsity Theater Minneapolis 2025"
+      ],
+      "genres": [
+        "indie",
+        "pop",
+        "electro house"
       ]
     },
     {
@@ -595,6 +650,10 @@
         "2026 CFP Live Set (Miami, FL)",
         "2026 EDC MEXICO (FULL SET)",
         "LIVE SET @ LOLLAPALOOZA (Perry's Stage) 2024"
+      ],
+      "genres": [
+        "ambient",
+        "pop"
       ]
     },
     {
@@ -709,6 +768,9 @@
         "LAYZ @ THUNDERDOME 2026",
         "Layz Live @ Lost Lands 2025 - Full Set",
         "LAYZ @ ULTRA MIAMI 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -783,6 +845,9 @@
         "LIVE SET FUNKBOX - Dennis O Brabo",
         "LIVE PERFORMANCE",
         "PEDRO SAMPAIO - Live DJ SET | BAILE FUNK | CIA"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -814,6 +879,9 @@
         "MISH @ EDC LAS VEGAS (Full Set) 2026 - WASTELAND STAGE - #hardstyle #harddance #hardtechno #edc",
         "MISH @ ESCAPE (Full Set) 2025 - HARDSTYLE/HARD TECHNO/HARD DANCE #hardstyle #harddance #hardtechno",
         "Defqon.1 2025"
+      ],
+      "genres": [
+        "hardstyle"
       ]
     },
     {
@@ -831,6 +899,10 @@
         "TRYM B2B THE OUTLAW LIVE @ ULTRA MIAMI WORLDWIDE STAGE 2026",
         "@UnrealGermany x BOOTSHAUS 2024",
         "Trym WE2 | Tomorrowland 2024"
+      ],
+      "genres": [
+        "techno",
+        "trance"
       ]
     },
     {
@@ -869,6 +941,10 @@
         "MARIE VAUNT LIVE SET | S2O BANGKOK 2026",
         "Marie Vaunt Beyond Wonderland SoCal 2026 [Acid Techno DJ Set]",
         "Marie Vaunt Live | Rockstar Energy presents @creamfields 2024 | @beatport live"
+      ],
+      "genres": [
+        "techno",
+        "hard techno"
       ]
     },
     {
@@ -884,6 +960,10 @@
         "DØMINA LIVE AT EDC LAS VEGAS 2026 UNREAL TAKEOVER WASTELAND STAGE",
         "DØMINA LIVE @ ESCAPE HALLOWEEN ( HARD TECHNO )",
         "DØMINA Live @ Avalon Mutate Los Angeles, CA 01.09.2026"
+      ],
+      "genres": [
+        "hard techno",
+        "hard dance"
       ]
     },
     {

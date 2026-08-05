@@ -30,7 +30,11 @@
       "Don't Wait Up | Audiotree Live"
     ],
     "mbid": "57613605-bb93-444d-980a-6e107692b958",
-    "enrichedAt": "2026-08-03T20:23:05.630Z"
+    "enrichedAt": "2026-08-03T20:23:05.630Z",
+    "genres": [
+      "disco",
+      "funk"
+    ]
   },
   "disco lines": {
     "spotifyId": "5Kmr0b3ip8g9P2i0dLTC3Z",
@@ -47,7 +51,13 @@
     ],
     "mbid": "9b2f64a8-98ea-433b-bfe0-2675c02b08db",
     "enrichedAt": "2026-08-03T01:00:27.669Z",
-    "soundcloudSlug": "discolines"
+    "soundcloudSlug": "discolines",
+    "genres": [
+      "house",
+      "indie",
+      "electropop",
+      "electro house"
+    ]
   },
   "excision": {
     "genres": [
@@ -123,7 +133,12 @@
     ],
     "mbid": "2590b6d4-648a-4092-9850-f614d6df51ca",
     "enrichedAt": "2026-08-03T01:00:16.634Z",
-    "soundcloudSlug": "alleycvt"
+    "soundcloudSlug": "alleycvt",
+    "genres": [
+      "dubstep",
+      "drum and bass",
+      "electro house"
+    ]
   },
   "ganja white night": {
     "genres": [
@@ -202,7 +217,10 @@
     ],
     "mbid": "3800f057-098d-4875-967c-ed1874382c2f",
     "enrichedAt": "2026-08-03T20:23:07.290Z",
-    "soundcloudSlug": "danielallantunes"
+    "soundcloudSlug": "danielallantunes",
+    "genres": [
+      "house"
+    ]
   },
   "devault": {
     "soundcloudSlug": "devaultmusic",
@@ -219,7 +237,12 @@
       "Devault Live @ Pop Up Warehouse (Los Angeles) June 2025"
     ],
     "mbid": "da1fd423-e121-4d4e-a040-c9520e1bcb62",
-    "enrichedAt": "2026-08-03T00:59:57.575Z"
+    "enrichedAt": "2026-08-03T00:59:57.575Z",
+    "genres": [
+      "house",
+      "dubstep",
+      "pop"
+    ]
   },
   "westend": {
     "genres": [
@@ -285,7 +308,12 @@
     ],
     "mbid": "61bb4f68-d1a3-4a04-aa36-536c36135408",
     "enrichedAt": "2026-08-03T20:23:07.295Z",
-    "soundcloudSlug": "elibrownbeats"
+    "soundcloudSlug": "elibrownbeats",
+    "genres": [
+      "techno",
+      "house",
+      "tech house"
+    ]
   },
   "dixon's violin": {
     "genres": [
@@ -317,7 +345,12 @@
       "Shima Full Set Hulaween 2025 ft UTAW"
     ],
     "mbid": "df35274a-14c6-49c9-b004-797664572bce",
-    "enrichedAt": "2026-08-03T20:23:07.295Z"
+    "enrichedAt": "2026-08-03T20:23:07.295Z",
+    "genres": [
+      "rock",
+      "punk",
+      "pop"
+    ]
   },
   "hershe": {
     "soundcloudSlug": "djhershe",
@@ -334,7 +367,11 @@
       "DJ SET IN A CAR?! | HerShe - Backseat Bass Vol: 1"
     ],
     "mbid": "1ce13d9b-9688-4df2-a5b8-a7f3bf026ab1",
-    "enrichedAt": "2026-08-03T01:02:03.731Z"
+    "enrichedAt": "2026-08-03T01:02:03.731Z",
+    "genres": [
+      "pop",
+      "hip-hop"
+    ]
   },
   "jkyl & hyde": {
     "genres": [
@@ -367,7 +404,10 @@
       "ProbCause on Audiotree Live (Full Session)"
     ],
     "mbid": "4ba1219a-261b-4611-8d22-19416121e187",
-    "enrichedAt": "2026-08-03T20:23:07.295Z"
+    "enrichedAt": "2026-08-03T20:23:07.295Z",
+    "genres": [
+      "hip-hop"
+    ]
   },
   "lsdream (surprise set)": {
     "soundcloudSlug": "lsdream",
@@ -494,7 +534,12 @@
       "Live From Medellín"
     ],
     "mbid": "b980085f-c055-436a-9cfa-3db37a240f52",
-    "enrichedAt": "2026-08-03T20:23:13.428Z"
+    "enrichedAt": "2026-08-03T20:23:13.428Z",
+    "genres": [
+      "techno",
+      "house",
+      "hip-hop"
+    ]
   },
   "bardo": {
     "youtubeQuery": "Bardo live set",
@@ -508,7 +553,11 @@
       "Full Concert with Lake Street Dive",
       "Hard Launch Party Mix - LA"
     ],
-    "enrichedAt": "2026-08-03T20:23:14.637Z"
+    "enrichedAt": "2026-08-03T20:23:14.637Z",
+    "genres": [
+      "ambient",
+      "indie pop"
+    ]
   },
   "shauhiin davari": {
     "youtubeQuery": "Shauhiin Davari live set",
@@ -545,7 +594,11 @@
       "Kingfishr – Live at Fairview | Full Concert (June 21, 2025)"
     ],
     "mbid": "f7ac1f78-7c87-484a-ad4a-642ccc707679",
-    "enrichedAt": "2026-08-03T20:23:15.875Z"
+    "enrichedAt": "2026-08-03T20:23:15.875Z",
+    "genres": [
+      "electropop",
+      "electro"
+    ]
   },
   "supertaste": {
     "soundcloudSlug": "supertastemusic",
@@ -562,7 +615,10 @@
       "Play2Lose - Supertaste [Live From the Rooftop]"
     ],
     "mbid": "7483d378-a29d-4720-845a-048937236519",
-    "enrichedAt": "2026-08-03T20:23:15.875Z"
+    "enrichedAt": "2026-08-03T20:23:15.875Z",
+    "genres": [
+      "disco"
+    ]
   },
   "flying mojito bros": {
     "soundcloudSlug": "flying-mojito-bros",
@@ -621,7 +677,11 @@
       "An Evening with Alicia Keys - Live at Baloise Session 2017 (Full Concert)",
       "The Black Keys - Full Performance (Live from the KROQ Helpful Honda Sound Space)"
     ],
-    "enrichedAt": "2026-08-04T07:29:13.109Z"
+    "enrichedAt": "2026-08-04T07:29:13.109Z",
+    "genres": [
+      "hip-hop",
+      "techno"
+    ]
   },
   "mr. wobbles": {
     "spotifyId": "1vG1KY8zUxiuoxqol1jufs",
@@ -752,7 +812,11 @@
       "Bread & Breakfast VI"
     ],
     "mbid": "defd5f38-2374-494a-8467-094dd994e825",
-    "enrichedAt": "2026-08-04T07:29:20.740Z"
+    "enrichedAt": "2026-08-04T07:29:20.740Z",
+    "genres": [
+      "indie",
+      "rock"
+    ]
   },
   "levity": {
     "soundcloudSlug": "levity-pl",
@@ -768,7 +832,10 @@
       "Levity (LASERSHIP SET) ULTRA 2026"
     ],
     "mbid": "6d1df48e-7257-41d3-9c10-57aa139158d4",
-    "enrichedAt": "2026-08-03T01:00:34.512Z"
+    "enrichedAt": "2026-08-03T01:00:34.512Z",
+    "genres": [
+      "jazz"
+    ]
   },
   "griz": {
     "genres": [
@@ -826,7 +893,11 @@
       "Live in Portland, Maine (State Theatre)"
     ],
     "mbid": "2478be4e-dc20-4415-b171-abc18e960e3f",
-    "enrichedAt": "2026-08-04T07:29:21.690Z"
+    "enrichedAt": "2026-08-04T07:29:21.690Z",
+    "genres": [
+      "indie",
+      "soul"
+    ]
   },
   "ship wrek": {
     "soundcloudSlug": "theshipwrek",
@@ -843,7 +914,11 @@
       "Live @ Mission Ballroom in Denver, CO"
     ],
     "mbid": "c8d73c9c-573e-4b0a-80c0-58d2fff06f95",
-    "enrichedAt": "2026-08-04T07:29:22.177Z"
+    "enrichedAt": "2026-08-04T07:29:22.177Z",
+    "genres": [
+      "trap",
+      "dance-pop"
+    ]
   },
   "sidepiece": {
     "soundcloudSlug": "sidepiece",
@@ -860,7 +935,10 @@
       "SIDEPIECE Live @ EDC Las Vegas 2025 | cosmicMEADOW"
     ],
     "mbid": "9afee8b9-0cb8-4e85-9d20-329dbf7d8cc5",
-    "enrichedAt": "2026-08-04T07:29:22.545Z"
+    "enrichedAt": "2026-08-04T07:29:22.545Z",
+    "genres": [
+      "house"
+    ]
   },
   "passion pit": {
     "genres": [
@@ -1017,7 +1095,11 @@
       "Nikita, The Wicked Live @ Lost Lands 2025 - Full Set"
     ],
     "mbid": "72f2e467-d02e-4590-8d9c-c33b2041dd36",
-    "enrichedAt": "2026-08-04T07:29:25.877Z"
+    "enrichedAt": "2026-08-04T07:29:25.877Z",
+    "genres": [
+      "future bass",
+      "dubstep"
+    ]
   },
   "ivy lab": {
     "genres": [
@@ -1153,7 +1235,10 @@
       "Casey Club DJ Set 📍 Ohlala Festival 2025 | Bass Music, deep dubstep, 140,"
     ],
     "mbid": "48a354df-a02f-4006-8bb8-b178ce89d099",
-    "enrichedAt": "2026-08-04T07:29:27.044Z"
+    "enrichedAt": "2026-08-04T07:29:27.044Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "mild minds": {
     "genres": [
@@ -1229,7 +1314,11 @@
       "Ranger Trucco b2b Luke Dean Live @ EDC Orlando 2025"
     ],
     "mbid": "39de9c60-14bb-4148-a29e-08df6303476a",
-    "enrichedAt": "2026-08-04T07:29:28.310Z"
+    "enrichedAt": "2026-08-04T07:29:28.310Z",
+    "genres": [
+      "house",
+      "deep house"
+    ]
   },
   "sbtrkt": {
     "genres": [
@@ -1266,7 +1355,10 @@
       "RICHARD FINGER Electric Forest 2026",
       "Richard Finger FULL SET live at The Wintrust Arena Chicago 02/07/2026"
     ],
-    "enrichedAt": "2026-08-04T07:29:29.154Z"
+    "enrichedAt": "2026-08-04T07:29:29.154Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "humanity circles": {
     "youtubeQuery": "Humanity Circles live set",
@@ -1461,7 +1553,10 @@
       "EARMILK Presents: Livestream with Gilligan Moss"
     ],
     "mbid": "b55d0453-f43f-4b88-94a9-7658cbffb972",
-    "enrichedAt": "2026-08-04T07:29:50.642Z"
+    "enrichedAt": "2026-08-04T07:29:50.642Z",
+    "genres": [
+      "indie pop"
+    ]
   },
   "family blood feud": {
     "youtubeQuery": "Family Blood Feud live set",
@@ -1667,7 +1762,12 @@
       "7 Circles of Funk Mix"
     ],
     "mbid": "ad377f6f-cfe1-4fb5-b36c-ac5f4e5be334",
-    "enrichedAt": "2026-08-04T07:30:05.529Z"
+    "enrichedAt": "2026-08-04T07:30:05.529Z",
+    "genres": [
+      "house",
+      "funky house",
+      "g-house"
+    ]
   },
   "starjunk 95": {
     "soundcloudSlug": "starjunk95",
@@ -1684,7 +1784,13 @@
       "SIX5TAR @ Starjunk 95 [08/09/25]"
     ],
     "mbid": "18822272-d7dd-4619-bb3e-dd619b2cd179",
-    "enrichedAt": "2026-08-03T01:00:04.606Z"
+    "enrichedAt": "2026-08-03T01:00:04.606Z",
+    "genres": [
+      "house",
+      "drum and bass",
+      "speed garage",
+      "bass house"
+    ]
   },
   "sam gellaitry": {
     "genres": [
@@ -1799,7 +1905,14 @@
       "Live From Denver",
       "COSTA Live @ Electric Forest 2026"
     ],
-    "enrichedAt": "2026-08-04T07:30:07.141Z"
+    "enrichedAt": "2026-08-04T07:30:07.141Z",
+    "genres": [
+      "electro",
+      "jungle",
+      "trance",
+      "techno",
+      "rap"
+    ]
   },
   "steller": {
     "soundcloudSlug": "stellersounds",
@@ -1831,7 +1944,11 @@
       "RIOT Live at EDC Las Vegas 2026",
       "RIOT LIVE SET @ THE MACHINE TOUR"
     ],
-    "enrichedAt": "2026-08-04T07:30:09.391Z"
+    "enrichedAt": "2026-08-04T07:30:09.391Z",
+    "genres": [
+      "heavy metal",
+      "brostep"
+    ]
   },
   "capochino": {
     "spotifyId": "70qOCKE1NFO6q1a1pC0KRE",
@@ -1848,7 +1965,10 @@
     ],
     "mbid": "8b177226-30e8-4563-b586-0be3e11d98ed",
     "enrichedAt": "2026-08-03T20:08:55.707Z",
-    "soundcloudSlug": "capochinomusic"
+    "soundcloudSlug": "capochinomusic",
+    "genres": [
+      "dubstep"
+    ]
   },
   "avello": {
     "spotifyId": "1ZR5GnPw0Jkb5M4hnBwzuZ",
@@ -1865,7 +1985,11 @@
     ],
     "mbid": "90bcd6a7-1267-4275-af31-19e0e601ce73",
     "enrichedAt": "2026-08-03T01:00:16.636Z",
-    "soundcloudSlug": "avello_music"
+    "soundcloudSlug": "avello_music",
+    "genres": [
+      "future bass",
+      "dubstep"
+    ]
   },
   "sippy": {
     "soundcloudSlug": "sippyau",
@@ -1882,7 +2006,10 @@
       "Sippy (Full set) Live @ Lost Lands 2025 - Couch Lands"
     ],
     "mbid": "5cca49ac-0b1a-4e4f-8541-b23cd109c3da",
-    "enrichedAt": "2026-08-03T01:00:54.638Z"
+    "enrichedAt": "2026-08-03T01:00:54.638Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "heyz": {
     "soundcloudSlug": "heyzmsc",
@@ -1899,7 +2026,13 @@
       "Live at Red Rocks 2025 [Full Set | Deadrocks Night 2]"
     ],
     "mbid": "af9ce2fc-48ad-4818-9969-49dcd5db6651",
-    "enrichedAt": "2026-08-03T01:01:49.778Z"
+    "enrichedAt": "2026-08-03T01:01:49.778Z",
+    "genres": [
+      "tech house",
+      "progressive house",
+      "electro house",
+      "techno"
+    ]
   },
   "ravenscoon": {
     "spotifyId": "7vfvYuEyJbh1Tf3QlOTAmZ",
@@ -1916,7 +2049,12 @@
     ],
     "mbid": "4bce31bc-f96b-4545-b363-fa3c8f43b5cc",
     "enrichedAt": "2026-08-03T01:00:50.788Z",
-    "soundcloudSlug": "ravenscoon"
+    "soundcloudSlug": "ravenscoon",
+    "genres": [
+      "downtempo",
+      "drum and bass",
+      "dubstep"
+    ]
   },
   "whethan": {
     "genres": [
@@ -2006,7 +2144,13 @@
       "Yerr On The Street"
     ],
     "mbid": "c9e3089c-a7bc-4df5-80f9-9161eaa74a02",
-    "enrichedAt": "2026-08-04T07:30:10.816Z"
+    "enrichedAt": "2026-08-04T07:30:10.816Z",
+    "genres": [
+      "indie pop",
+      "pop",
+      "hyperpop",
+      "electro house"
+    ]
   },
   "rio kosta": {
     "soundcloudSlug": "riokosta",
@@ -2022,7 +2166,11 @@
       "@RIOKOSTAMUSIC @ Zebulon (7/16/25)"
     ],
     "mbid": "07f13029-a900-45af-a306-e0a657655190",
-    "enrichedAt": "2026-08-04T07:28:37.137Z"
+    "enrichedAt": "2026-08-04T07:28:37.137Z",
+    "genres": [
+      "indie",
+      "funk"
+    ]
   },
   "lyrah": {
     "soundcloudSlug": "lyrah",
@@ -2039,7 +2187,11 @@
       "LYRAH @ CORONA CAPITAL 2025 (FULL SET)"
     ],
     "mbid": "9275ccaf-edc0-47a5-b1ef-c2afa9fde7bf",
-    "enrichedAt": "2026-08-04T07:30:11.162Z"
+    "enrichedAt": "2026-08-04T07:30:11.162Z",
+    "genres": [
+      "pop",
+      "electro"
+    ]
   },
   "vandelux": {
     "soundcloudSlug": "vandelux",
@@ -2056,7 +2208,12 @@
       "Vandelux Après-Ski DJ Set in the Colorado Mountains (Disco, House)"
     ],
     "mbid": "591469ad-be95-4f23-9a90-f28c6a43aa10",
-    "enrichedAt": "2026-08-04T07:30:11.488Z"
+    "enrichedAt": "2026-08-04T07:30:11.488Z",
+    "genres": [
+      "house",
+      "chillout",
+      "electro"
+    ]
   },
   "tourist": {
     "genres": [
@@ -2100,7 +2257,14 @@
       "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
     ],
     "mbid": "58c4026e-b5b5-4368-8743-e5579d2b1a40",
-    "enrichedAt": "2026-08-03T01:01:15.706Z"
+    "enrichedAt": "2026-08-03T01:01:15.706Z",
+    "genres": [
+      "pop",
+      "hyperpop",
+      "trance",
+      "indie",
+      "house"
+    ]
   },
   "eoto": {
     "soundcloudSlug": "eoto",
@@ -2117,7 +2281,10 @@
       "Eoto Live @ Portage Theater Chicago 10/4/2008"
     ],
     "mbid": "21873b14-0212-4ac5-abc2-883f37298805",
-    "enrichedAt": "2026-08-04T07:30:12.118Z"
+    "enrichedAt": "2026-08-04T07:30:12.118Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "hannah muse community": {
     "youtubeQuery": "Hannah Muse Community live set",
@@ -2161,7 +2328,12 @@
       "KFC Santería | A COLORS SHOW"
     ],
     "mbid": "82fd7218-a6bb-4ccc-b001-86bd49c3cec7",
-    "enrichedAt": "2026-08-04T07:30:26.498Z"
+    "enrichedAt": "2026-08-04T07:30:26.498Z",
+    "genres": [
+      "afrobeat",
+      "soul",
+      "pop"
+    ]
   },
   "snow wife": {
     "soundcloudSlug": "snowwife-music",
@@ -2178,7 +2350,12 @@
       "\"Pumps\""
     ],
     "mbid": "2c4dd6e6-2d02-4881-9a25-2117b197f582",
-    "enrichedAt": "2026-08-04T07:30:26.849Z"
+    "enrichedAt": "2026-08-04T07:30:26.849Z",
+    "genres": [
+      "pop",
+      "rnb",
+      "hyperpop"
+    ]
   },
   "rochelle jordan": {
     "genres": [
@@ -2215,7 +2392,11 @@
       "Chmura Full Set Sound Haven 2024"
     ],
     "mbid": "c5b3d8ad-2bbb-42da-bb75-6fc27aaa70ff",
-    "enrichedAt": "2026-08-05T06:12:57.288Z"
+    "enrichedAt": "2026-08-05T06:12:57.288Z",
+    "genres": [
+      "rock",
+      "dubstep"
+    ]
   },
   "detroit party marching band": {
     "youtubeQuery": "Detroit Party Marching Band live set",
@@ -2259,7 +2440,10 @@
       "Love Song"
     ],
     "mbid": "e0bebecd-c6bb-49b2-a21f-538b481ffd74",
-    "enrichedAt": "2026-08-04T07:30:35.226Z"
+    "enrichedAt": "2026-08-04T07:30:35.226Z",
+    "genres": [
+      "pop"
+    ]
   },
   "emmie and ryan": {
     "youtubeQuery": "Emmie and Ryan live set",
@@ -2347,7 +2531,10 @@
       "Vincent Antone Live Elements Music & Arts Festival 2025 4k"
     ],
     "mbid": "858d212f-d33d-45eb-9cb2-42cf04d7930b",
-    "enrichedAt": "2026-08-04T07:30:44.515Z"
+    "enrichedAt": "2026-08-04T07:30:44.515Z",
+    "genres": [
+      "future bass"
+    ]
   },
   "bob moses": {
     "genres": [
@@ -2444,7 +2631,13 @@
       "Jean Dawson Camp Flog Gnaw 2024"
     ],
     "mbid": "beaa1f19-19a0-4059-93bb-8f0c097f53fe",
-    "enrichedAt": "2026-08-04T07:30:45.696Z"
+    "enrichedAt": "2026-08-04T07:30:45.696Z",
+    "genres": [
+      "indie pop",
+      "rap",
+      "pop",
+      "alternative rock"
+    ]
   },
   "kaskade": {
     "genres": [
@@ -2518,7 +2711,12 @@
       "Wooli Live @ Lost Lands 2023 - Full Set"
     ],
     "mbid": "d5d38024-4428-4ef8-9c0c-2b78efa097ad",
-    "enrichedAt": "2026-08-03T01:00:58.588Z"
+    "enrichedAt": "2026-08-03T01:00:58.588Z",
+    "genres": [
+      "dubstep",
+      "future bass",
+      "riddim"
+    ]
   },
   "lsdream": {
     "soundcloudSlug": "lsdream",
@@ -2535,7 +2733,11 @@
       "LOST LANDS 2022 (FULL SET)"
     ],
     "mbid": "3e8f5ad6-fcd4-416c-997e-5d7f6aa99043",
-    "enrichedAt": "2026-08-04T07:30:52.255Z"
+    "enrichedAt": "2026-08-04T07:30:52.255Z",
+    "genres": [
+      "dubstep",
+      "electro"
+    ]
   },
   "wes mills": {
     "spotifyId": "0EuHfcxMPDNkOjGVF4e1KT",
@@ -2609,7 +2811,10 @@
       "Omnom @ KDC Ruins with Gray Area"
     ],
     "mbid": "23f6348c-b070-449b-888b-01781624a31d",
-    "enrichedAt": "2026-08-03T20:08:55.705Z"
+    "enrichedAt": "2026-08-03T20:08:55.705Z",
+    "genres": [
+      "tech house"
+    ]
   },
   "yaeji": {
     "genres": [
@@ -2688,7 +2893,11 @@
       "Bricknasty at The Academy 2024"
     ],
     "mbid": "51f5a1d7-613d-4199-93dc-871fde0567e1",
-    "enrichedAt": "2026-08-04T07:30:53.536Z"
+    "enrichedAt": "2026-08-04T07:30:53.536Z",
+    "genres": [
+      "hip-hop",
+      "rnb"
+    ]
   },
   "bombargo": {
     "youtubeQuery": "Bombargo live set",
@@ -2703,7 +2912,12 @@
       "Bombargo's Movin' & Groovin' Live Series: Oxygen (Acoustic)"
     ],
     "mbid": "7b790e1e-12b7-4a51-b6cd-7d177f013698",
-    "enrichedAt": "2026-08-04T07:30:53.823Z"
+    "enrichedAt": "2026-08-04T07:30:53.823Z",
+    "genres": [
+      "indie pop",
+      "soul",
+      "pop"
+    ]
   },
   "oppidan": {
     "genres": [
@@ -2742,7 +2956,10 @@
       "Hail Mary Full of Bass 2025 Long Beach w/ Secret Service"
     ],
     "mbid": "b4c107fa-8c7e-4d25-be36-1fac95a660c2",
-    "enrichedAt": "2026-08-04T07:30:54.184Z"
+    "enrichedAt": "2026-08-04T07:30:54.184Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "mph": {
     "genres": [
@@ -2830,7 +3047,14 @@
       "River Tiber \"I'm A Stone\" (Live in Brooklyn 12/10/16)"
     ],
     "mbid": "f2afcf42-edf0-4670-8b31-0a4253709395",
-    "enrichedAt": "2026-08-04T07:30:55.209Z"
+    "enrichedAt": "2026-08-04T07:30:55.209Z",
+    "genres": [
+      "rnb",
+      "ambient",
+      "jungle",
+      "indie",
+      "jazz"
+    ]
   },
   "deadtronica": {
     "youtubeQuery": "Deadtronica live set",
@@ -2856,7 +3080,14 @@
     "spotifyId": "4F61H4lx1js4wtWfb2Rfnt",
     "youtubeQuery": "Party Pupils live set",
     "mbid": "32226ad4-6578-45e5-ba89-9e8cd2d92fec",
-    "enrichedAt": "2026-07-31T02:16:19.166Z"
+    "enrichedAt": "2026-07-31T02:16:19.166Z",
+    "genres": [
+      "future bass",
+      "house",
+      "uk garage",
+      "electro",
+      "pop"
+    ]
   },
   "party pupils (late)": {
     "soundcloudSlug": "partypupils",
@@ -2910,7 +3141,12 @@
       "Dj Heather PIXEL SET - July 2020"
     ],
     "mbid": "8c2d581b-4482-4653-9d02-f44506604b57",
-    "enrichedAt": "2026-08-03T20:25:16.874Z"
+    "enrichedAt": "2026-08-03T20:25:16.874Z",
+    "genres": [
+      "house",
+      "deep house",
+      "downtempo"
+    ]
   },
   "the symposium": {
     "genres": [
@@ -2945,7 +3181,10 @@
     "spotifyId": "4JnJjqxsTp8E5rZsyITf63",
     "youtubeQuery": "Jade LeMac live set",
     "mbid": "badf41dd-ead5-4201-b093-6c86e90daf35",
-    "enrichedAt": "2026-07-31T02:17:30.896Z"
+    "enrichedAt": "2026-07-31T02:17:30.896Z",
+    "genres": [
+      "pop"
+    ]
   },
   "girl tones": {
     "spotifyId": "1Tq0nryXkwLARcHDMIZbY6",
@@ -2961,7 +3200,11 @@
       "Live @ Funhouse (3/8/25) - Seattle, WA"
     ],
     "mbid": "4771a96d-bd64-4da2-9acc-da68e52dbd35",
-    "enrichedAt": "2026-08-03T20:25:17.309Z"
+    "enrichedAt": "2026-08-03T20:25:17.309Z",
+    "genres": [
+      "rock",
+      "punk"
+    ]
   },
   "nourished by time": {
     "genres": [
@@ -3017,17 +3260,30 @@
     ],
     "mbid": "f55e5016-c424-467f-b90c-8db26a017ea8",
     "enrichedAt": "2026-08-03T01:00:16.637Z",
-    "soundcloudSlug": "azzecca"
+    "soundcloudSlug": "azzecca",
+    "genres": [
+      "house",
+      "tech house"
+    ]
   },
   "julie": {
     "youtubeQuery": "Julie live set",
-    "enrichedAt": "2026-07-31T02:17:49.917Z"
+    "enrichedAt": "2026-07-31T02:17:49.917Z",
+    "genres": [
+      "shoegaze",
+      "pop"
+    ]
   },
   "alexsucks": {
     "spotifyId": "0zmxCsd8aIJHfNC95gdT2i",
     "youtubeQuery": "ALEXSUCKS live set",
     "mbid": "5a376cb7-0489-4934-ae5b-35dcff2b4ea7",
-    "enrichedAt": "2026-07-31T02:17:52.593Z"
+    "enrichedAt": "2026-07-31T02:17:52.593Z",
+    "genres": [
+      "indie rock",
+      "garage rock",
+      "pop punk"
+    ]
   },
   "chicago made": {
     "youtubeQuery": "Chicago Made live set",
@@ -3078,7 +3334,11 @@
       "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
     ],
     "mbid": "4c3cffca-37b7-4ecd-9320-e6dcc2cb837a",
-    "enrichedAt": "2026-08-03T01:01:13.803Z"
+    "enrichedAt": "2026-08-03T01:01:13.803Z",
+    "genres": [
+      "house",
+      "electro"
+    ]
   },
   "yana": {
     "youtubeQuery": "Yana live set",
@@ -3174,7 +3434,12 @@
       "Angus and Julia Stone - Big Jet Plane"
     ],
     "mbid": "c353dd11-40c4-493c-ad23-063b19d89ba0",
-    "enrichedAt": "2026-08-03T20:09:14.354Z"
+    "enrichedAt": "2026-08-03T20:09:14.354Z",
+    "genres": [
+      "folk",
+      "country",
+      "pop"
+    ]
   },
   "sierra ferrell": {
     "genres": [
@@ -3193,7 +3458,11 @@
   },
   "barry can't swim": {
     "youtubeQuery": "Barry Can't Swim live set",
-    "enrichedAt": "2026-07-31T02:18:35.061Z"
+    "enrichedAt": "2026-07-31T02:18:35.061Z",
+    "genres": [
+      "house",
+      "jazz"
+    ]
   },
   "glass beams": {
     "genres": [
@@ -3218,7 +3487,11 @@
     "spotifyId": "2L9DVKDXY3W8uRl5TwLbMC",
     "youtubeQuery": "Colby Acuff live set",
     "mbid": "fbed2353-569e-479e-955c-32711b1219af",
-    "enrichedAt": "2026-07-31T02:18:43.634Z"
+    "enrichedAt": "2026-07-31T02:18:43.634Z",
+    "genres": [
+      "country",
+      "singer-songwriter"
+    ]
   },
   "role model": {
     "genres": [
@@ -3254,7 +3527,12 @@
       "Live At EDC Orlando"
     ],
     "mbid": "b643c24d-4cd6-4531-88bc-62b39ce43ee1",
-    "enrichedAt": "2026-08-03T20:09:02.812Z"
+    "enrichedAt": "2026-08-03T20:09:02.812Z",
+    "genres": [
+      "house",
+      "tech house",
+      "electro house"
+    ]
   },
   "magdalena bay": {
     "genres": [
@@ -3357,7 +3635,12 @@
     ],
     "mbid": "429ea265-e9d0-40fc-b193-e1e4b6b7fbdf",
     "enrichedAt": "2026-08-03T01:00:42.688Z",
-    "soundcloudSlug": "realmaup"
+    "soundcloudSlug": "realmaup",
+    "genres": [
+      "house",
+      "tech house",
+      "techno"
+    ]
   },
   "gracie abrams": {
     "genres": [
@@ -3422,7 +3705,13 @@
     "spotifyId": "205i7E8fNVfojowcQSfK9m",
     "youtubeQuery": "Dom Dolla live set",
     "mbid": "9b8548a9-5991-42a9-ba96-fe83bd238b7a",
-    "enrichedAt": "2026-07-31T02:19:20.466Z"
+    "enrichedAt": "2026-07-31T02:19:20.466Z",
+    "genres": [
+      "house",
+      "deep house",
+      "future house",
+      "tech house"
+    ]
   },
   "luke combs": {
     "genres": [
@@ -3482,7 +3771,12 @@
     "spotifyId": "5xKVALj2MSqOHmQhburCM8",
     "youtubeQuery": "Tanner Adell live set",
     "mbid": "dc5aa749-10d1-4e58-a18d-9e2c8cadaa7c",
-    "enrichedAt": "2026-07-31T02:19:35.169Z"
+    "enrichedAt": "2026-07-31T02:19:35.169Z",
+    "genres": [
+      "country",
+      "pop",
+      "hip hop"
+    ]
   },
   "gigi perez": {
     "genres": [
@@ -3563,7 +3857,10 @@
     "spotifyId": "7HeSEuZA4D7EtdygBjCbi9",
     "youtubeQuery": "Viperactive live set",
     "mbid": "54eb87ac-5fcf-41de-b86e-9fafd1e771de",
-    "enrichedAt": "2026-07-31T02:20:00.651Z"
+    "enrichedAt": "2026-07-31T02:20:00.651Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "murda beatz": {
     "genres": [
@@ -3593,7 +3890,12 @@
       "BUNT “in the round” @ Electric Love"
     ],
     "enrichedAt": "2026-08-03T20:09:04.078Z",
-    "soundcloudSlug": "buntmusic"
+    "soundcloudSlug": "buntmusic",
+    "genres": [
+      "pop",
+      "folk",
+      "house"
+    ]
   },
   "tape b": {
     "genres": [
@@ -3627,7 +3929,10 @@
     "spotifyId": "2VlmDb05CPERyCZfmZI3x7",
     "youtubeQuery": "Dogpark live set",
     "mbid": "8c8b7177-4c03-4cb4-858c-b071f5de013e",
-    "enrichedAt": "2026-07-31T02:20:18.140Z"
+    "enrichedAt": "2026-07-31T02:20:18.140Z",
+    "genres": [
+      "rock"
+    ]
   },
   "isabel larosa": {
     "genres": [
@@ -3704,7 +4009,11 @@
     "spotifyId": "4iyP4VOGOLzbt2Vxcyu6zG",
     "youtubeQuery": "Winyah live set",
     "mbid": "bff06586-9050-420e-93a1-bff166090e7f",
-    "enrichedAt": "2026-07-31T02:20:43.558Z"
+    "enrichedAt": "2026-07-31T02:20:43.558Z",
+    "genres": [
+      "indie",
+      "rock"
+    ]
   },
   "cassandra coleman": {
     "spotifyId": "1O6GvgnaHzgcFlCX6RlhYV",
@@ -3720,7 +4029,10 @@
       "Coming of Age"
     ],
     "mbid": "b49a2757-d21d-40bf-911e-bdda5eb7f66b",
-    "enrichedAt": "2026-08-03T20:09:14.354Z"
+    "enrichedAt": "2026-08-03T20:09:14.354Z",
+    "genres": [
+      "folk"
+    ]
   },
   "caroline kingsbury": {
     "spotifyId": "0uE0bzpIfuZ9XVduu0byzg",
@@ -3736,7 +4048,11 @@
       "Shock Treatment | Audiotree Live"
     ],
     "mbid": "a7515be2-3bd8-402f-87bc-a77e01c9de73",
-    "enrichedAt": "2026-08-03T20:25:23.667Z"
+    "enrichedAt": "2026-08-03T20:25:23.667Z",
+    "genres": [
+      "indie pop",
+      "pop"
+    ]
   },
   "carol ades": {
     "genres": [
@@ -3752,26 +4068,40 @@
     "spotifyId": "5qhDQveADDnjIZQ85AtgDM",
     "youtubeQuery": "Star Bandz live set",
     "mbid": "aa7be156-ddb4-4e85-b911-d27eb87c42d5",
-    "enrichedAt": "2026-07-31T02:21:03.610Z"
+    "enrichedAt": "2026-07-31T02:21:03.610Z",
+    "genres": [
+      "rap"
+    ]
   },
   "jesse detor": {
     "spotifyId": "3HljFuKgpaXNKfIlFZWCEk",
     "youtubeQuery": "Jesse Detor live set",
     "mbid": "90751b46-1bfa-40d5-ae86-9c7fa9836d43",
-    "enrichedAt": "2026-07-31T02:21:06.335Z"
+    "enrichedAt": "2026-07-31T02:21:06.335Z",
+    "genres": [
+      "indie",
+      "rock"
+    ]
   },
   "old mervs": {
     "spotifyId": "3N8YzKqrEQonvd5RLQ4iYg",
     "youtubeQuery": "Old Mervs live set",
     "mbid": "0891a6be-10b8-4bc2-aa66-584ba1c6a33b",
-    "enrichedAt": "2026-07-31T02:21:10.816Z"
+    "enrichedAt": "2026-07-31T02:21:10.816Z",
+    "genres": [
+      "indie rock"
+    ]
   },
   "hey, nothing": {
     "soundcloudSlug": "heynothing-music",
     "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
     "youtubeQuery": "Hey, Nothing live set",
     "mbid": "63094905-b963-46ca-8429-090e1afd6752",
-    "enrichedAt": "2026-07-31T02:21:16.307Z"
+    "enrichedAt": "2026-07-31T02:21:16.307Z",
+    "genres": [
+      "folk",
+      "indie rock"
+    ]
   },
   "zinadelphia": {
     "genres": [
@@ -3824,7 +4154,12 @@
       "YELLOW MELLOW EP - LIVE (10 Year Anniversary)"
     ],
     "mbid": "8cf32b06-c5a3-4804-a967-376f88d12aad",
-    "enrichedAt": "2026-08-05T07:00:09.981Z"
+    "enrichedAt": "2026-08-05T07:00:09.981Z",
+    "genres": [
+      "rock",
+      "reggae",
+      "indie rock"
+    ]
   },
   "wyatt flores": {
     "genres": [
@@ -3886,7 +4221,11 @@
       "I'm Over It Unplugged (Tour Rehearsal Live Session)"
     ],
     "mbid": "787a4eb5-e9b7-4944-b503-57020255104d",
-    "enrichedAt": "2026-08-05T07:00:12.590Z"
+    "enrichedAt": "2026-08-05T07:00:12.590Z",
+    "genres": [
+      "rnb",
+      "pop"
+    ]
   },
   "kenny mason": {
     "genres": [
@@ -3976,7 +4315,11 @@
   "otoboke beaver": {
     "youtubeQuery": "Otoboke Beaver live set",
     "youtubeSearchedAt": "2026-08-05T07:00:31.123Z",
-    "enrichedAt": "2026-08-05T07:00:31.126Z"
+    "enrichedAt": "2026-08-05T07:00:31.126Z",
+    "genres": [
+      "punk",
+      "garage rock"
+    ]
   },
   "t-pain": {
     "youtubeQuery": "T-Pain live set",
@@ -3990,7 +4333,13 @@
       "On Top Of The Covers (Live From The Sun Rose)",
       "Mashup (To The Beat with Kurt Hugo Schneider)"
     ],
-    "enrichedAt": "2026-08-05T06:14:03.495Z"
+    "enrichedAt": "2026-08-05T06:14:03.495Z",
+    "genres": [
+      "rnb",
+      "hip-hop",
+      "pop",
+      "soul"
+    ]
   },
   "bleachers": {
     "genres": [
@@ -4069,7 +4418,12 @@
       "Billie Eilish - BIRDS OF A FEATHER (Live From The GRAMMYs 2025)"
     ],
     "mbid": "c899d283-63ce-426a-b639-8e2703e02d57",
-    "enrichedAt": "2026-08-05T07:00:32.660Z"
+    "enrichedAt": "2026-08-05T07:00:32.660Z",
+    "genres": [
+      "hardcore punk",
+      "garage rock",
+      "metalcore"
+    ]
   },
   "landon conrath": {
     "spotifyId": "2PJ06l59DomDd440az768u",
@@ -4085,7 +4439,11 @@
       "Acetone/Papercuts (Live at Fine Line)"
     ],
     "mbid": "ae412320-5be9-43ae-963e-c31fae54b110",
-    "enrichedAt": "2026-08-05T07:00:32.951Z"
+    "enrichedAt": "2026-08-05T07:00:32.951Z",
+    "genres": [
+      "singer-songwriter",
+      "indie pop"
+    ]
   },
   "winnetka bowling league": {
     "spotifyId": "4ug3P1K8BaCdJXROrqHqhu",
@@ -4101,7 +4459,10 @@
       "Winnetka Bowling League Live Performance | The Ringer Room | The Ringer"
     ],
     "mbid": "cae1f90c-53f9-442c-a284-3b638ecdb653",
-    "enrichedAt": "2026-08-05T07:00:33.291Z"
+    "enrichedAt": "2026-08-05T07:00:33.291Z",
+    "genres": [
+      "indie"
+    ]
   },
   "jev": {
     "youtubeQuery": "Jev live set",
@@ -4115,7 +4476,10 @@
       "jev.: Tiny Desk Concert",
       "JEV at Crosscurrents Denver 2026 | Full set"
     ],
-    "enrichedAt": "2026-08-05T07:00:35.607Z"
+    "enrichedAt": "2026-08-05T07:00:35.607Z",
+    "genres": [
+      "garage"
+    ]
   },
   "dua saleh": {
     "soundcloudSlug": "doitlikedua",
@@ -4132,7 +4496,12 @@
       "\"Survival\" ft. Velvet Negroni (Live on Radio K)"
     ],
     "mbid": "0181a90e-6b1d-4d09-bd6f-b0b1145e7ad8",
-    "enrichedAt": "2026-08-05T07:00:35.948Z"
+    "enrichedAt": "2026-08-05T07:00:35.948Z",
+    "genres": [
+      "rnb",
+      "soul",
+      "hip-hop"
+    ]
   },
   "eddie and the getaway": {
     "youtubeQuery": "Eddie and the Getaway live set",
@@ -4147,7 +4516,10 @@
       "“USE SOMEBODY” - Kings of Leon"
     ],
     "mbid": "2d4eb032-b114-41e5-b4ab-d703fe8779c7",
-    "enrichedAt": "2026-08-05T07:00:36.277Z"
+    "enrichedAt": "2026-08-05T07:00:36.277Z",
+    "genres": [
+      "rock"
+    ]
   },
   "kickflip": {
     "genres": [
@@ -4182,7 +4554,12 @@
       "FULL SHOW | Hinterland | St. Charles, IA | August 3, 2025 | LIVE"
     ],
     "mbid": "0ffe666f-5f7c-4cd1-b07e-dbb6eac41a50",
-    "enrichedAt": "2026-08-05T07:00:38.904Z"
+    "enrichedAt": "2026-08-05T07:00:38.904Z",
+    "genres": [
+      "rap",
+      "trap",
+      "indie"
+    ]
   },
   "fyutch & aura v": {
     "youtubeQuery": "Fyütch & Aura V live set",
@@ -4278,7 +4655,10 @@
       "ASTRONAUTS - live in my bedroom"
     ],
     "mbid": "063ef568-674e-4181-a9a9-6bc17c753806",
-    "enrichedAt": "2026-08-05T07:00:40.876Z"
+    "enrichedAt": "2026-08-05T07:00:40.876Z",
+    "genres": [
+      "indie"
+    ]
   },
   "layz": {
     "soundcloudSlug": "layzdubz",
@@ -4295,7 +4675,10 @@
       "LAYZ @ ULTRA MIAMI 2026"
     ],
     "mbid": "60c0c427-ef03-4d63-b47e-9ab08bf48d04",
-    "enrichedAt": "2026-08-03T01:00:34.510Z"
+    "enrichedAt": "2026-08-03T01:00:34.510Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "boa": {
     "genres": [
@@ -4333,7 +4716,11 @@
       "\"Dust 2 Dust\" (Live at the Print Shop)"
     ],
     "mbid": "d0da565b-64c4-4e4f-bebf-f4bb7c56ef30",
-    "enrichedAt": "2026-08-05T07:00:41.622Z"
+    "enrichedAt": "2026-08-05T07:00:41.622Z",
+    "genres": [
+      "country",
+      "folk"
+    ]
   },
   "max mcnown": {
     "spotifyId": "340PS4ZcZ4UCBgyrXzEjcp",
@@ -4349,7 +4736,12 @@
       "Better Me For You (Brown Eyes)(Live) | Spotify homegrown"
     ],
     "mbid": "cc45b39c-c7c2-4db3-98f2-9c0220c76d7c",
-    "enrichedAt": "2026-08-03T20:10:10.511Z"
+    "enrichedAt": "2026-08-03T20:10:10.511Z",
+    "genres": [
+      "country",
+      "bluegrass",
+      "folk"
+    ]
   },
   "divinity roxx & divi roxx kids": {
     "youtubeQuery": "Divinity Roxx & Divi Roxx Kids live set",
@@ -4393,7 +4785,10 @@
       "Rachel Rae - Library Sessions - Full Video"
     ],
     "mbid": "dcde6074-fda8-48df-a581-c3678a5e0b5a",
-    "enrichedAt": "2026-08-05T07:00:43.723Z"
+    "enrichedAt": "2026-08-05T07:00:43.723Z",
+    "genres": [
+      "pop"
+    ]
   },
   "flux pavilion": {
     "genres": [
@@ -4476,7 +4871,13 @@
     "spotifyId": "2Zi3RrdQqk63Xj0914STkS",
     "youtubeQuery": "Naomi Scott live set",
     "mbid": "65fc5739-3562-46a0-8b69-1d1f64941a8b",
-    "enrichedAt": "2026-07-31T02:24:17.405Z"
+    "enrichedAt": "2026-07-31T02:24:17.405Z",
+    "genres": [
+      "pop",
+      "rnb",
+      "dream pop",
+      "rock"
+    ]
   },
   "young miko": {
     "genres": [
@@ -4534,7 +4935,11 @@
       "Red Rocks 2026 (Full Set)"
     ],
     "mbid": "6bc0fa87-4d85-4387-94f0-f99094c32ea6",
-    "enrichedAt": "2026-08-03T01:01:44.017Z"
+    "enrichedAt": "2026-08-03T01:01:44.017Z",
+    "genres": [
+      "house",
+      "electro house"
+    ]
   },
   "orion sun": {
     "genres": [
@@ -4552,11 +4957,21 @@
     "spotifyId": "493xhO4GiL1eOhWUBt8CzZ",
     "youtubeQuery": "Zoe Ko live set",
     "mbid": "79088467-dfaf-4862-bbb2-cb22edf8a826",
-    "enrichedAt": "2026-07-31T02:24:37.377Z"
+    "enrichedAt": "2026-07-31T02:24:37.377Z",
+    "genres": [
+      "pop",
+      "indie"
+    ]
   },
   "fujii kaze": {
     "youtubeQuery": "Fujii Kaze live set",
-    "enrichedAt": "2026-07-31T02:24:38.659Z"
+    "enrichedAt": "2026-07-31T02:24:38.659Z",
+    "genres": [
+      "jazz",
+      "pop",
+      "indie pop",
+      "disco"
+    ]
   },
   "bilmuri": {
     "genres": [
@@ -4614,7 +5029,11 @@
     "spotifyId": "1kXY7pco0sC6GEgJW9xxyI",
     "youtubeQuery": "People R Ugly live set",
     "mbid": "f6079afa-d125-4c92-9d35-887728fe8329",
-    "enrichedAt": "2026-07-31T02:24:59.111Z"
+    "enrichedAt": "2026-07-31T02:24:59.111Z",
+    "genres": [
+      "punk",
+      "rock"
+    ]
   },
   "chase & status": {
     "genres": [
@@ -4637,7 +5056,13 @@
     "spotifyId": "7AaGbSgUxJFuZ49VvclNH6",
     "youtubeQuery": "Damiano David live set",
     "mbid": "852c198a-75ee-4e2b-9aba-4453c52260b2",
-    "enrichedAt": "2026-07-31T02:25:05.780Z"
+    "enrichedAt": "2026-07-31T02:25:05.780Z",
+    "genres": [
+      "pop",
+      "singer-songwriter",
+      "rock",
+      "soul"
+    ]
   },
   "jpegmafia": {
     "genres": [
@@ -4734,7 +5159,10 @@
     "spotifyId": "4WgDm2J3jztBZSc1S0lMsx",
     "youtubeQuery": "Kaicrewsade live set",
     "mbid": "226715ae-6ad9-424f-9ba8-4c94224e5334",
-    "enrichedAt": "2026-07-31T02:25:33.423Z"
+    "enrichedAt": "2026-07-31T02:25:33.423Z",
+    "genres": [
+      "hip-hop"
+    ]
   },
   "landon barker": {
     "spotifyId": "7tWnepocfeqynsYC75hWoF",
@@ -4760,7 +5188,11 @@
   "benches": {
     "youtubeQuery": "Benches live set",
     "mbid": "904f6d75-b3cb-48df-bad8-f91afddf9295",
-    "enrichedAt": "2026-07-31T02:25:50.175Z"
+    "enrichedAt": "2026-07-31T02:25:50.175Z",
+    "genres": [
+      "indie rock",
+      "garage rock"
+    ]
   },
   "flowerovlove": {
     "genres": [
@@ -4775,7 +5207,11 @@
   },
   "laila!": {
     "youtubeQuery": "Laila! live set",
-    "enrichedAt": "2026-07-31T02:25:56.081Z"
+    "enrichedAt": "2026-07-31T02:25:56.081Z",
+    "genres": [
+      "rnb",
+      "soul"
+    ]
   },
   "nimino": {
     "genres": [
@@ -4805,7 +5241,11 @@
       "Vincent Lima (Live) | Wesleyan University | Quadio After Hours"
     ],
     "mbid": "55989e47-4c3f-49ad-9b1c-10cf4f9c2107",
-    "enrichedAt": "2026-08-05T07:01:05.262Z"
+    "enrichedAt": "2026-08-05T07:01:05.262Z",
+    "genres": [
+      "folk",
+      "pop"
+    ]
   },
   "post animal": {
     "genres": [
@@ -4825,7 +5265,11 @@
     "spotifyId": "3Z7dkUrTApDgi6npZfoHVv",
     "youtubeQuery": "Lekan live set",
     "mbid": "62ce428d-c504-4ae0-b7ee-defc2ebfc3e0",
-    "enrichedAt": "2026-07-31T02:26:14.219Z"
+    "enrichedAt": "2026-07-31T02:26:14.219Z",
+    "genres": [
+      "rnb",
+      "soul"
+    ]
   },
   "boynextdoor": {
     "genres": [
@@ -4850,7 +5294,11 @@
       "FULL SHOW | Hinterland | St. Charles, IA | August 2, 2025 | LIVE"
     ],
     "mbid": "a7c5cd9d-861f-4500-9958-ec4a50b7d80f",
-    "enrichedAt": "2026-08-05T07:01:01.850Z"
+    "enrichedAt": "2026-08-05T07:01:01.850Z",
+    "genres": [
+      "country",
+      "folk"
+    ]
   },
   "rebecca black": {
     "genres": [
@@ -4968,11 +5416,21 @@
       "Marlon Hoffstadt Live @ Ultra Miami Main Stage 2026"
     ],
     "mbid": "7377ee25-9240-4b50-a824-20c202e96da9",
-    "enrichedAt": "2026-08-03T01:00:39.776Z"
+    "enrichedAt": "2026-08-03T01:00:39.776Z",
+    "genres": [
+      "house",
+      "pop",
+      "deep house",
+      "trance"
+    ]
   },
   "aliyah's interlude": {
     "youtubeQuery": "Aliyah's Interlude live set",
-    "enrichedAt": "2026-07-31T02:27:08.449Z"
+    "enrichedAt": "2026-07-31T02:27:08.449Z",
+    "genres": [
+      "pop",
+      "hip-hop"
+    ]
   },
   "isaiah rashad": {
     "genres": [
@@ -5031,7 +5489,13 @@
   },
   "ian": {
     "youtubeQuery": "Ian live set",
-    "enrichedAt": "2026-07-31T02:27:25.583Z"
+    "enrichedAt": "2026-07-31T02:27:25.583Z",
+    "genres": [
+      "trap",
+      "rap",
+      "heavy metal",
+      "ambient"
+    ]
   },
   "bob's dance shop": {
     "youtubeQuery": "Bob's Dance Shop live set",
@@ -5059,7 +5523,10 @@
     "spotifyId": "3WHWgx8Dh0IqQT1BMDTeE3",
     "youtubeQuery": "Graham Barham live set",
     "mbid": "0ddd210b-12f5-43f5-ba4b-17c9da267d4c",
-    "enrichedAt": "2026-07-31T02:27:36.643Z"
+    "enrichedAt": "2026-07-31T02:27:36.643Z",
+    "genres": [
+      "country"
+    ]
   },
   "dominic fike": {
     "genres": [
@@ -5243,7 +5710,10 @@
       "WAREHOUSE SET | UKG, HOUSE, SPEED GARAGE MIX"
     ],
     "mbid": "092b4d23-acf7-4d98-aabd-6162264ead2a",
-    "enrichedAt": "2026-08-03T20:08:55.707Z"
+    "enrichedAt": "2026-08-03T20:08:55.707Z",
+    "genres": [
+      "house"
+    ]
   },
   "rayray": {
     "genres": [
@@ -5349,7 +5819,11 @@
       "The Dark Night of the Soul Album Showcase"
     ],
     "mbid": "e0ff315a-158a-470f-9557-1617390a21b9",
-    "enrichedAt": "2026-08-03T01:00:33.244Z"
+    "enrichedAt": "2026-08-03T01:00:33.244Z",
+    "genres": [
+      "chillwave",
+      "future bass"
+    ]
   },
   "onhell": {
     "soundcloudSlug": "onhellmusic",
@@ -5366,7 +5840,10 @@
       "ONHELL B2B Chef Boyarbeatz DJ Set @ Party By ONHELL x Maybe Forever Denver"
     ],
     "mbid": "c1c2c537-9cfe-46a8-9ab6-5d84e16f1bec",
-    "enrichedAt": "2026-08-03T20:08:55.707Z"
+    "enrichedAt": "2026-08-03T20:08:55.707Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "dot": {
     "youtubeQuery": "DOT live set",
@@ -5381,7 +5858,13 @@
       "Dot Chandler @ Apokalypsa (Brno/CZ) 25.03.2016"
     ],
     "enrichedAt": "2026-08-03T20:08:57.024Z",
-    "soundcloudSlug": "iamdot"
+    "soundcloudSlug": "iamdot",
+    "genres": [
+      "dubstep",
+      "electro house",
+      "hip hop",
+      "progressive house"
+    ]
   },
   "deluluz": {
     "youtubeQuery": "Deluluz live set",
@@ -5410,7 +5893,10 @@
       "Riordan at The Concourse Project | Full Set (1 Aug 2025)"
     ],
     "enrichedAt": "2026-08-03T20:08:59.550Z",
-    "soundcloudSlug": "riordanuk"
+    "soundcloudSlug": "riordanuk",
+    "genres": [
+      "tech house"
+    ]
   },
   "obskur": {
     "spotifyId": "29MTNlaVntQaQiDyj8KGwx",
@@ -5427,7 +5913,11 @@
     ],
     "mbid": "2c3d7081-7c6d-448a-a024-ba441252f62d",
     "enrichedAt": "2026-08-03T20:08:59.554Z",
-    "soundcloudSlug": "obskurofficial"
+    "soundcloudSlug": "obskurofficial",
+    "genres": [
+      "house",
+      "techno"
+    ]
   },
   "omar+": {
     "youtubeQuery": "Omar+ live set",
@@ -5458,7 +5948,12 @@
     ],
     "mbid": "8d839449-aa45-402a-af82-12b874b2ba02",
     "enrichedAt": "2026-08-03T20:09:02.812Z",
-    "soundcloudSlug": "honeyluvmusic"
+    "soundcloudSlug": "honeyluvmusic",
+    "genres": [
+      "house",
+      "soul",
+      "rnb"
+    ]
   },
   "slamm": {
     "youtubeQuery": "SLAMM live set",
@@ -5548,7 +6043,12 @@
       "TWINSICK Live @ Varsity Theater Minneapolis 2025"
     ],
     "mbid": "28786a5a-cc06-4673-8d3d-a9db6e20446d",
-    "enrichedAt": "2026-08-03T01:00:57.898Z"
+    "enrichedAt": "2026-08-03T01:00:57.898Z",
+    "genres": [
+      "indie",
+      "pop",
+      "electro house"
+    ]
   },
   "xandra": {
     "soundcloudSlug": "xanddara",
@@ -5565,7 +6065,11 @@
       "LIVE SET @ LOLLAPALOOZA (Perry's Stage) 2024"
     ],
     "mbid": "8a439594-9cc2-430d-96d3-9719065fa01b",
-    "enrichedAt": "2026-08-03T20:09:04.078Z"
+    "enrichedAt": "2026-08-03T20:09:04.078Z",
+    "genres": [
+      "ambient",
+      "pop"
+    ]
   },
   "skilah": {
     "spotifyId": "0ILzznvRwQsrGX7BsaDer0",
@@ -5678,7 +6182,10 @@
       "PEDRO SAMPAIO - Live DJ SET | BAILE FUNK | CIA"
     ],
     "mbid": "e4161ada-020b-408d-8b51-2db9d39dfd87",
-    "enrichedAt": "2026-08-03T20:09:07.940Z"
+    "enrichedAt": "2026-08-03T20:09:07.940Z",
+    "genres": [
+      "house"
+    ]
   },
   "packet loss": {
     "youtubeQuery": "Packet Loss live set",
@@ -5709,7 +6216,10 @@
       "Defqon.1 2025"
     ],
     "mbid": "6b896cef-921f-4f44-9536-6b11ad2ca4eb",
-    "enrichedAt": "2026-08-03T20:09:07.940Z"
+    "enrichedAt": "2026-08-03T20:09:07.940Z",
+    "genres": [
+      "hardstyle"
+    ]
   },
   "trym": {
     "soundcloudSlug": "trymofficial",
@@ -5726,7 +6236,11 @@
       "Trym WE2 | Tomorrowland 2024"
     ],
     "mbid": "101c6e44-1f68-41d7-bc70-b9ddba411e90",
-    "enrichedAt": "2026-08-03T20:09:07.940Z"
+    "enrichedAt": "2026-08-03T20:09:07.940Z",
+    "genres": [
+      "techno",
+      "trance"
+    ]
   },
   "joyhauser": {
     "genres": [
@@ -5759,7 +6273,11 @@
       "Marie Vaunt Live | Rockstar Energy presents @creamfields 2024 | @beatport live"
     ],
     "mbid": "b60392c4-6c78-45d0-8f9d-7ef9b81fac47",
-    "enrichedAt": "2026-08-03T20:09:07.940Z"
+    "enrichedAt": "2026-08-03T20:09:07.940Z",
+    "genres": [
+      "techno",
+      "hard techno"
+    ]
   },
   "dømina": {
     "youtubeQuery": "DØMINA live set",
@@ -5773,7 +6291,11 @@
       "DØMINA LIVE @ ESCAPE HALLOWEEN ( HARD TECHNO )",
       "DØMINA Live @ Avalon Mutate Los Angeles, CA 01.09.2026"
     ],
-    "enrichedAt": "2026-08-03T20:09:09.173Z"
+    "enrichedAt": "2026-08-03T20:09:09.173Z",
+    "genres": [
+      "hard techno",
+      "hard dance"
+    ]
   },
   "alyssa jolee": {
     "spotifyId": "4339Su9vxGrlufPNpkRRAO",
@@ -5838,7 +6360,10 @@
       "Live at Exchange, Los Angeles | UKF On Air"
     ],
     "mbid": "57960218-e4ad-46d9-af7f-f86b6a405aed",
-    "enrichedAt": "2026-08-03T01:01:42.025Z"
+    "enrichedAt": "2026-08-03T01:01:42.025Z",
+    "genres": [
+      "drum and bass"
+    ]
   },
   "armnhmr": {
     "soundcloudSlug": "ARMNHMR",
@@ -5855,7 +6380,10 @@
       "ARMNHMR LIVE - EDC LAS VEGAS 2025 FULL SET (cosmicMEADOW) - FIXED AUDIO HQ"
     ],
     "mbid": "f5aa8374-e16b-4645-bb1d-f88a855fb924",
-    "enrichedAt": "2026-08-03T01:01:42.027Z"
+    "enrichedAt": "2026-08-03T01:01:42.027Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "atliens": {
     "genres": [
@@ -5889,7 +6417,10 @@
     ],
     "mbid": "d4dee63b-645d-41cc-b9a5-ee8814d22ec4",
     "enrichedAt": "2026-08-03T01:01:42.027Z",
-    "soundcloudSlug": "audiofreqdj"
+    "soundcloudSlug": "audiofreqdj",
+    "genres": [
+      "hardstyle"
+    ]
   },
   "barely alive": {
     "genres": [
@@ -5944,7 +6475,10 @@
       "Benda B2B OG Nixin Live Set At Apocalypse Zombie Land 2025 In Long Beach, California"
     ],
     "mbid": "40682644-d458-4325-831b-98d9cba5957f",
-    "enrichedAt": "2026-08-03T01:01:42.027Z"
+    "enrichedAt": "2026-08-03T01:01:42.027Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "blossom": {
     "youtubeQuery": "Blossom live set",
@@ -5959,7 +6493,12 @@
       "Blossoms | Live From Kendal Calling (Full Set)"
     ],
     "enrichedAt": "2026-08-03T01:01:42.736Z",
-    "soundcloudSlug": "blossomdj"
+    "soundcloudSlug": "blossomdj",
+    "genres": [
+      "downtempo",
+      "pop punk",
+      "shoegaze"
+    ]
   },
   "boogie t": {
     "soundcloudSlug": "boogie-t",
@@ -5976,7 +6515,11 @@
       "Boogie T Live @ Lost Lands 2025 - Couch Lands"
     ],
     "mbid": "906b8f09-9e3b-4063-ba9e-5ce1f1a45227",
-    "enrichedAt": "2026-08-03T01:00:17.885Z"
+    "enrichedAt": "2026-08-03T01:00:17.885Z",
+    "genres": [
+      "dubstep",
+      "riddim"
+    ]
   },
   "borgore": {
     "genres": [
@@ -6039,7 +6582,11 @@
     ],
     "mbid": "96b74b9c-6adb-4448-8bdf-1a55666de0d3",
     "enrichedAt": "2026-08-03T01:01:42.737Z",
-    "soundcloudSlug": "canabliss"
+    "soundcloudSlug": "canabliss",
+    "genres": [
+      "dubstep",
+      "future bass"
+    ]
   },
   "caspa": {
     "genres": [
@@ -6078,7 +6625,12 @@
       "CRANKDAT LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2025"
     ],
     "mbid": "00b21266-918d-434c-b31e-3f1a3e96cad5",
-    "enrichedAt": "2026-08-03T01:01:42.737Z"
+    "enrichedAt": "2026-08-03T01:01:42.737Z",
+    "genres": [
+      "melodic dubstep",
+      "future bass",
+      "house"
+    ]
   },
   "craze": {
     "youtubeQuery": "Craze live set",
@@ -6093,7 +6645,11 @@
       "DJ CRAZE LIVE @ GLOBAL BASED"
     ],
     "enrichedAt": "2026-08-03T01:01:44.014Z",
-    "soundcloudSlug": "crazearoni"
+    "soundcloudSlug": "crazearoni",
+    "genres": [
+      "rock",
+      "hiphop"
+    ]
   },
   "culture shock": {
     "genres": [
@@ -6130,7 +6686,12 @@
       "Cyclops Live @ Lost Lands 2024 - Full Set"
     ],
     "mbid": "f6c1e262-ceb9-4115-a95e-3b06e8df28e2",
-    "enrichedAt": "2026-08-03T01:01:44.017Z"
+    "enrichedAt": "2026-08-03T01:01:44.017Z",
+    "genres": [
+      "dubstep",
+      "punk",
+      "riddim"
+    ]
   },
   "delta heavy": {
     "genres": [
@@ -6233,7 +6794,10 @@
       "Boogie T B2B Distinct Motive Live at EDC Las Vegas 2026"
     ],
     "mbid": "826a3642-7a88-49c1-99de-c265ba8c043e",
-    "enrichedAt": "2026-08-03T01:01:44.017Z"
+    "enrichedAt": "2026-08-03T01:01:44.017Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "doctor p": {
     "genres": [
@@ -6266,7 +6830,10 @@
     ],
     "mbid": "95562d40-dd73-4d19-9517-eab0a3c42351",
     "enrichedAt": "2026-08-03T01:01:44.017Z",
-    "soundcloudSlug": "itsdrinkurwater"
+    "soundcloudSlug": "itsdrinkurwater",
+    "genres": [
+      "dubstep"
+    ]
   },
   "emorfik": {
     "spotifyId": "34bGTqa9HJUnf14IOHt6pc",
@@ -6283,7 +6850,10 @@
     ],
     "mbid": "5c8de07d-c55b-4d3d-9b94-68fa38c666a0",
     "enrichedAt": "2026-08-03T01:01:44.017Z",
-    "soundcloudSlug": "emorfik"
+    "soundcloudSlug": "emorfik",
+    "genres": [
+      "dubstep"
+    ]
   },
   "eptic": {
     "genres": [
@@ -6435,7 +7005,11 @@
       "Ghastly Presents Ghengar - EDC Las Vegas 2024"
     ],
     "mbid": "f55ea76f-5d86-4420-9a5a-7cbda1e597d0",
-    "enrichedAt": "2026-08-03T01:01:48.135Z"
+    "enrichedAt": "2026-08-03T01:01:48.135Z",
+    "genres": [
+      "dubstep",
+      "riddim"
+    ]
   },
   "gladde paling": {
     "soundcloudSlug": "gladdepaling",
@@ -6452,7 +7026,10 @@
       "gladde paling @ Rampage Open Air 2025"
     ],
     "mbid": "9f7750f1-ecf7-438c-a93e-1e3befa4a0ba",
-    "enrichedAt": "2026-08-03T01:01:48.135Z"
+    "enrichedAt": "2026-08-03T01:01:48.135Z",
+    "genres": [
+      "drum and bass"
+    ]
   },
   "grabbitz": {
     "genres": [
@@ -6488,7 +7065,10 @@
       "Hairitage Live Full Set The Cannery Hall Nashville TN 2026"
     ],
     "mbid": "612ee509-f2fa-4232-aecf-80791fa525df",
-    "enrichedAt": "2026-08-03T01:01:48.810Z"
+    "enrichedAt": "2026-08-03T01:01:48.810Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "hedex": {
     "spotifyId": "22I9QWygJ2IfxR855VsA3t",
@@ -6505,7 +7085,11 @@
     ],
     "mbid": "bd83eb7b-a301-4696-b886-8d6f616e165f",
     "enrichedAt": "2026-08-03T01:01:49.344Z",
-    "soundcloudSlug": "hedexuk"
+    "soundcloudSlug": "hedexuk",
+    "genres": [
+      "drum and bass",
+      "riddim"
+    ]
   },
   "hol!": {
     "genres": [
@@ -6564,7 +7148,11 @@
     ],
     "mbid": "5af2d229-4730-4508-bd9c-f9b12be77d1e",
     "enrichedAt": "2026-08-03T01:01:53.302Z",
-    "soundcloudSlug": "jantsenmusic"
+    "soundcloudSlug": "jantsenmusic",
+    "genres": [
+      "dubstep",
+      "hybrid trap"
+    ]
   },
   "jessica audiffred": {
     "soundcloudSlug": "jessicaaudiffred",
@@ -6581,7 +7169,14 @@
       "JESSICA AUDIFFRED @ EDC VEGAS 2024"
     ],
     "mbid": "96147e6f-5f7e-4753-9369-371013daaf4f",
-    "enrichedAt": "2026-08-03T01:00:33.244Z"
+    "enrichedAt": "2026-08-03T01:00:33.244Z",
+    "genres": [
+      "techno",
+      "house",
+      "dubstep",
+      "electro",
+      "trap"
+    ]
   },
   "know good": {
     "genres": [
@@ -6658,7 +7253,10 @@
       "LEVEL UP Live @ EDC Las Vegas 2025"
     ],
     "mbid": "d85dea8c-6939-4ed1-917e-d147cd2d2981",
-    "enrichedAt": "2026-08-03T01:00:34.510Z"
+    "enrichedAt": "2026-08-03T01:00:34.510Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "lil texas": {
     "genres": [
@@ -6879,7 +7477,10 @@
       "Beats for Love 2025 I Drum & Bass"
     ],
     "enrichedAt": "2026-08-03T01:01:57.465Z",
-    "soundcloudSlug": "reapernoises"
+    "soundcloudSlug": "reapernoises",
+    "genres": [
+      "heavy metal"
+    ]
   },
   "the resistance": {
     "youtubeQuery": "THE RESISTANCE live set",
@@ -6895,7 +7496,10 @@
     ],
     "mbid": "785cc25b-de4e-47a1-a9de-8b9b9cc999ff",
     "enrichedAt": "2026-08-03T01:01:57.870Z",
-    "soundcloudSlug": "theresistancedubs"
+    "soundcloudSlug": "theresistancedubs",
+    "genres": [
+      "metal"
+    ]
   },
   "riot ten": {
     "soundcloudSlug": "riotten",
@@ -6912,7 +7516,11 @@
       "RIOT Live at EDC Las Vegas 2026"
     ],
     "mbid": "1bc3af5d-aba3-4005-8061-62e20415dd87",
-    "enrichedAt": "2026-08-03T01:01:58.337Z"
+    "enrichedAt": "2026-08-03T01:01:58.337Z",
+    "genres": [
+      "dubstep",
+      "trap"
+    ]
   },
   "samplifire": {
     "genres": [
@@ -7019,7 +7627,11 @@
       "SMOAKLAND b2b SIPPY Live @ Lost Lands 2024 - Full Set"
     ],
     "mbid": "3cb22cbd-65d1-463c-9dd2-352a369f2a5c",
-    "enrichedAt": "2026-08-03T20:08:50.161Z"
+    "enrichedAt": "2026-08-03T20:08:50.161Z",
+    "genres": [
+      "dubstep",
+      "liquid dnb"
+    ]
   },
   "sodown": {
     "soundcloudSlug": "sodownbassmusic",
@@ -7036,7 +7648,12 @@
       "SoDown Live @ Lost Lands 2023 - Full Set"
     ],
     "mbid": "eccb1d78-2fe4-4d30-b333-6e488334e158",
-    "enrichedAt": "2026-08-03T20:08:50.486Z"
+    "enrichedAt": "2026-08-03T20:08:50.486Z",
+    "genres": [
+      "dubstep",
+      "funk",
+      "downtempo"
+    ]
   },
   "stumpi": {
     "spotifyId": "5ADBt5Q860eEVH9GoQApm6",
@@ -7090,7 +7707,13 @@
       "UKF Invites at Colour Factory, London"
     ],
     "mbid": "a6491315-9268-4d3b-8b63-28f40f4091fc",
-    "enrichedAt": "2026-08-03T01:00:57.898Z"
+    "enrichedAt": "2026-08-03T01:00:57.898Z",
+    "genres": [
+      "house",
+      "bass house",
+      "tech house",
+      "techno"
+    ]
   },
   "trivecta": {
     "soundcloudSlug": "trivectamusic",
@@ -7107,7 +7730,10 @@
       "Live from Echo Mountain, CO (DJ Set)"
     ],
     "mbid": "37c77797-5df2-4d47-a497-7af1a329ae26",
-    "enrichedAt": "2026-08-03T01:02:00.437Z"
+    "enrichedAt": "2026-08-03T01:02:00.437Z",
+    "genres": [
+      "brostep"
+    ]
   },
   "truth": {
     "genres": [
@@ -7191,7 +7817,11 @@
       "The Widdler Full Set Sound Haven 2024"
     ],
     "mbid": "a66145e9-2391-4e0f-93f8-357ddac7f3b6",
-    "enrichedAt": "2026-08-03T20:08:51.476Z"
+    "enrichedAt": "2026-08-03T20:08:51.476Z",
+    "genres": [
+      "dubstep",
+      "dub"
+    ]
   },
   "william black": {
     "genres": [
@@ -7228,7 +7858,11 @@
     ],
     "mbid": "54ea308a-0a2b-45fc-8677-41dd05ac2eaa",
     "enrichedAt": "2026-08-03T01:02:02.147Z",
-    "soundcloudSlug": "wonkywilla"
+    "soundcloudSlug": "wonkywilla",
+    "genres": [
+      "dubstep",
+      "rap"
+    ]
   },
   "yookie": {
     "soundcloudSlug": "yookiemusic",
@@ -7245,7 +7879,11 @@
       "Dark Side of the Trash Tour @ Mississippi Underground, St Louis, MO 3.7.26"
     ],
     "mbid": "766bca80-911a-42e3-8919-65157da0147e",
-    "enrichedAt": "2026-08-03T01:02:02.528Z"
+    "enrichedAt": "2026-08-03T01:02:02.528Z",
+    "genres": [
+      "dubstep",
+      "trap"
+    ]
   },
   "zingara": {
     "genres": [
@@ -7309,7 +7947,10 @@
       "[Live Set] Chassi @ Sounds of Mayhem x Space Yacht 2023"
     ],
     "mbid": "44fa4d48-a493-4f23-bc89-b846024e7150",
-    "enrichedAt": "2026-08-03T20:08:51.852Z"
+    "enrichedAt": "2026-08-03T20:08:51.852Z",
+    "genres": [
+      "psytrance"
+    ]
   },
   "gardella": {
     "soundcloudSlug": "gardella",
@@ -7343,7 +7984,13 @@
       "Hydraulix FILTHY Dubstep LIVE Set | Part 1"
     ],
     "mbid": "50b3eb33-9416-47cd-957a-952aaf09df46",
-    "enrichedAt": "2026-08-03T01:02:04.312Z"
+    "enrichedAt": "2026-08-03T01:02:04.312Z",
+    "genres": [
+      "electro",
+      "dubstep",
+      "techno",
+      "drum and bass"
+    ]
   },
   "izzy vadim": {
     "spotifyId": "3mEgLhTVxuUG4n1ezLNY5l",
@@ -7360,7 +8007,10 @@
     ],
     "mbid": "2c824365-97e7-4431-a8d2-4fb08cbe64df",
     "enrichedAt": "2026-08-03T20:08:52.212Z",
-    "soundcloudSlug": "izzyvadim"
+    "soundcloudSlug": "izzyvadim",
+    "genres": [
+      "dubstep"
+    ]
   },
   "jaenga": {
     "soundcloudSlug": "jaenga",
@@ -7377,7 +8027,13 @@
       "Jaenga's TUNNEL RAVE (2024)"
     ],
     "mbid": "5b7ba8c6-92f0-4632-8909-905ef4f74d34",
-    "enrichedAt": "2026-08-03T01:02:05.043Z"
+    "enrichedAt": "2026-08-03T01:02:05.043Z",
+    "genres": [
+      "house",
+      "hip-hop",
+      "brostep",
+      "dnb"
+    ]
   },
   "mad dubz": {
     "genres": [
@@ -7446,7 +8102,12 @@
       "Stoned To Death | Live From Denver"
     ],
     "mbid": "6786d9b6-6aa5-443f-a763-9c301515f382",
-    "enrichedAt": "2026-08-03T01:02:06.537Z"
+    "enrichedAt": "2026-08-03T01:02:06.537Z",
+    "genres": [
+      "hardcore punk",
+      "rock",
+      "riddim"
+    ]
   },
   "nikita the wicked": {
     "youtubeQuery": "Nikita The Wicked live set",
@@ -7495,7 +8156,10 @@
     ],
     "mbid": "92afca38-7ce2-4033-86e0-fb3a1d6c521a",
     "enrichedAt": "2026-08-03T01:02:07.665Z",
-    "soundcloudSlug": "alienparkdub"
+    "soundcloudSlug": "alienparkdub",
+    "genres": [
+      "dubstep"
+    ]
   },
   "deadcrow": {
     "genres": [
@@ -7539,7 +8203,10 @@
     ],
     "mbid": "ca585a45-7029-47e4-b77d-da199c14a52b",
     "enrichedAt": "2026-08-03T01:02:08.062Z",
-    "soundcloudSlug": "machakimusic"
+    "soundcloudSlug": "machakimusic",
+    "genres": [
+      "dubstep"
+    ]
   },
   "mindset": {
     "youtubeQuery": "Mindset live set",
@@ -7555,7 +8222,11 @@
     ],
     "mbid": "b440eccd-3200-47c6-919e-7b0a1ccb8de7",
     "enrichedAt": "2026-08-03T20:08:54.311Z",
-    "soundcloudSlug": "mindsetbass"
+    "soundcloudSlug": "mindsetbass",
+    "genres": [
+      "hardcore punk",
+      "progressive house"
+    ]
   },
   "phrva": {
     "soundcloudSlug": "phrva",
@@ -7572,7 +8243,10 @@
       "PHRVA GENESIS DENVER DJ SET @ MAYBE FOREVER"
     ],
     "mbid": "049245e1-ad11-492e-86ff-003cbd548e8a",
-    "enrichedAt": "2026-08-03T01:00:48.890Z"
+    "enrichedAt": "2026-08-03T01:00:48.890Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "rsun": {
     "genres": [
@@ -7610,7 +8284,10 @@
     ],
     "mbid": "808e7c6a-94da-42f2-9f78-be2edc65ec53",
     "enrichedAt": "2026-08-03T20:08:54.911Z",
-    "soundcloudSlug": "rzrktmusic"
+    "soundcloudSlug": "rzrktmusic",
+    "genres": [
+      "dubstep"
+    ]
   },
   "super future": {
     "genres": [
@@ -7733,7 +8410,12 @@
       "KETTAMA @ SILO Dublin | Full Set | May 2025"
     ],
     "mbid": "e457531c-4add-45f0-9998-f65ec53a305c",
-    "enrichedAt": "2026-08-03T01:01:13.804Z"
+    "enrichedAt": "2026-08-03T01:01:13.804Z",
+    "genres": [
+      "house",
+      "techno",
+      "deep house"
+    ]
   },
   "fatboy slim": {
     "genres": [
@@ -8021,7 +8703,12 @@
       "Nate Sib Live in Melbourne (02/14/25) *FULL SET*"
     ],
     "mbid": "1ff7da2a-885f-4f66-b1a2-14d93bf590d0",
-    "enrichedAt": "2026-08-03T01:01:17.122Z"
+    "enrichedAt": "2026-08-03T01:01:17.122Z",
+    "genres": [
+      "rap",
+      "pop",
+      "hyperpop"
+    ]
   },
   "mgna crrrta": {
     "soundcloudSlug": "mgna-crrrta",
@@ -8038,7 +8725,12 @@
       "MGNA CRRRTA & DEV + CATARACS | SUBCULTURE PARTY"
     ],
     "mbid": "dbf58ceb-2acc-439d-b431-867e9a94c46a",
-    "enrichedAt": "2026-08-03T01:01:17.565Z"
+    "enrichedAt": "2026-08-03T01:01:17.565Z",
+    "genres": [
+      "electropop",
+      "hyperpop",
+      "electro house"
+    ]
   },
   "sam alfred": {
     "genres": [
@@ -8277,7 +8969,10 @@
       "Mixmag Lab Moçambique | Mixmag Cover Mix"
     ],
     "mbid": "35321b91-98ca-4a78-b34f-cb113722eab9",
-    "enrichedAt": "2026-08-03T01:01:23.221Z"
+    "enrichedAt": "2026-08-03T01:01:23.221Z",
+    "genres": [
+      "house"
+    ]
   },
   "horsegiirl": {
     "genres": [
@@ -8433,7 +9128,12 @@
       "Justin Timberlake - Futuresex/Loveshow: Live from Madison Square Garden",
       "Justin Timberlake - Medley (Late Night with Jimmy Fallon 2013) HD [REUPLOAD]"
     ],
-    "enrichedAt": "2026-08-03T01:01:26.980Z"
+    "enrichedAt": "2026-08-03T01:01:26.980Z",
+    "genres": [
+      "rap",
+      "techno",
+      "idm"
+    ]
   },
   "baby j": {
     "genres": [
@@ -8485,7 +9185,11 @@
       "Live at Washington D.C [FULL SET | 3/17/26]"
     ],
     "mbid": "32e0cc34-dee7-492d-84b2-cad12c75c13e",
-    "enrichedAt": "2026-08-03T01:01:28.700Z"
+    "enrichedAt": "2026-08-03T01:01:28.700Z",
+    "genres": [
+      "ambient",
+      "pop"
+    ]
   },
   "ben ufo": {
     "genres": [
@@ -8523,7 +9227,10 @@
     ],
     "mbid": "980604d4-fc2b-4778-8fc5-a7d28e52ab85",
     "enrichedAt": "2026-08-03T01:01:29.876Z",
-    "soundcloudSlug": "silvabumpa"
+    "soundcloudSlug": "silvabumpa",
+    "genres": [
+      "speed garage"
+    ]
   },
   "mind enterprises": {
     "genres": [
@@ -8561,7 +9268,10 @@
     ],
     "mbid": "0e7192c8-7650-49d3-a739-385783f06a2b",
     "enrichedAt": "2026-08-03T01:01:30.909Z",
-    "soundcloudSlug": "dean_turnley"
+    "soundcloudSlug": "dean_turnley",
+    "genres": [
+      "house"
+    ]
   },
   "riria": {
     "youtubeQuery": "riria live set",
@@ -8942,7 +9652,14 @@
       "RUSOWSKY SANTIAGO DE CHILE 2025/ registro completo"
     ],
     "mbid": "d836bdef-52ef-4142-baba-573e5b529478",
-    "enrichedAt": "2026-08-03T20:09:13.706Z"
+    "enrichedAt": "2026-08-03T20:09:13.706Z",
+    "genres": [
+      "rnb",
+      "pop",
+      "house",
+      "latin",
+      "dancehall"
+    ]
   },
   "marlon funaki": {
     "soundcloudSlug": "marlonfunaki",
@@ -8959,7 +9676,12 @@
       "Live from 22nd Dimension Studio"
     ],
     "mbid": "4bc024a4-9b84-4abf-91de-b467733ae1cb",
-    "enrichedAt": "2026-08-03T20:09:14.058Z"
+    "enrichedAt": "2026-08-03T20:09:14.058Z",
+    "genres": [
+      "psychedelic rock",
+      "indie",
+      "singer-songwriter"
+    ]
   },
   "cmat": {
     "genres": [
@@ -9034,7 +9756,10 @@
       "Molly Santana LIVE @ Rolling Loud Miami '24 [FULL SET]"
     ],
     "mbid": "7c2fd839-62ca-4787-b687-8a4067c48e24",
-    "enrichedAt": "2026-08-03T20:09:14.354Z"
+    "enrichedAt": "2026-08-03T20:09:14.354Z",
+    "genres": [
+      "trap"
+    ]
   },
   "faouzia": {
     "genres": [
@@ -9073,7 +9798,13 @@
       "“Waymore’s Blues” - Live at Red Rocks"
     ],
     "mbid": "a03c3296-fc11-4fcf-b378-fa602e30a7e9",
-    "enrichedAt": "2026-08-03T20:09:14.354Z"
+    "enrichedAt": "2026-08-03T20:09:14.354Z",
+    "genres": [
+      "folk",
+      "country",
+      "indie",
+      "rock"
+    ]
   },
   "hunx and his punx": {
     "genres": [
@@ -9126,7 +9857,11 @@
       "New Constellations Live at The Crystal Ballroom | Portland"
     ],
     "mbid": "708c8fe9-af4f-4f3f-9c34-986c0b97caa3",
-    "enrichedAt": "2026-08-03T20:09:14.757Z"
+    "enrichedAt": "2026-08-03T20:09:14.757Z",
+    "genres": [
+      "synthpop",
+      "indie pop"
+    ]
   },
   "asleep at the wheel": {
     "genres": [
@@ -9163,7 +9898,10 @@
       "NIGHT TRAVELER Live in Texas! \"Missing You\""
     ],
     "mbid": "0a5227e3-ec87-49d6-bfb2-2dcfa374836c",
-    "enrichedAt": "2026-08-03T20:09:15.539Z"
+    "enrichedAt": "2026-08-03T20:09:15.539Z",
+    "genres": [
+      "synthpop"
+    ]
   },
   "dallas wax": {
     "youtubeQuery": "Dallas Wax live set",
@@ -9215,7 +9953,10 @@
       "Mountain Mama (Live from Lollapalooza)"
     ],
     "mbid": "9aab4425-2329-4049-acab-39280c7b706a",
-    "enrichedAt": "2026-08-03T20:09:18.202Z"
+    "enrichedAt": "2026-08-03T20:09:18.202Z",
+    "genres": [
+      "folk"
+    ]
   },
   "girlfriend": {
     "youtubeQuery": "Girlfriend live set",
@@ -9229,7 +9970,10 @@
       "Avril Lavigne - Girlfriend (The Best Damn Tour - Live In Toronto)",
       "girlfriends - VANS WARPED TOUR FULL SHOW (Long Beach 2025)"
     ],
-    "enrichedAt": "2026-08-03T20:09:23.204Z"
+    "enrichedAt": "2026-08-03T20:09:23.204Z",
+    "genres": [
+      "pop"
+    ]
   },
   "almost heaven": {
     "genres": [
@@ -9262,7 +10006,12 @@
       "GROCERY BAG live @Stubbs Austin, TX"
     ],
     "mbid": "4f089243-c6d7-4f22-a952-7ab704342bc8",
-    "enrichedAt": "2026-08-03T20:09:26.289Z"
+    "enrichedAt": "2026-08-03T20:09:26.289Z",
+    "genres": [
+      "garage rock",
+      "punk",
+      "garage"
+    ]
   },
   "elle coves": {
     "spotifyId": "3Hey7RF0bxnjPP8IEXmPRa",
@@ -9278,7 +10027,10 @@
       "Tahanan (Live at The Cozy Cove) - El Manu, Jessy Kang, Jason Marvin"
     ],
     "mbid": "f634957e-b480-46c1-a8b0-083b3b1dfe0e",
-    "enrichedAt": "2026-08-03T20:09:26.622Z"
+    "enrichedAt": "2026-08-03T20:09:26.622Z",
+    "genres": [
+      "pop"
+    ]
   },
   "izzy escobar": {
     "soundcloudSlug": "izzyescobar",
@@ -9295,7 +10047,10 @@
       "Live | Baby's All Right Brooklyn NYC | December 8, 2025"
     ],
     "mbid": "f9bbb7b7-7a20-430e-ad96-4fa385902539",
-    "enrichedAt": "2026-08-03T20:09:26.932Z"
+    "enrichedAt": "2026-08-03T20:09:26.932Z",
+    "genres": [
+      "pop"
+    ]
   },
   "soloman hicks": {
     "youtubeQuery": "Soloman Hicks live set",
@@ -9326,7 +10081,11 @@
       "Singer 4411 Heavy Duty 10 Selecting Stitches, Stitch Length & Stitch Width"
     ],
     "mbid": "f68b8a3f-d413-4c3a-84b4-4d4bbb10f843",
-    "enrichedAt": "2026-08-03T20:09:34.894Z"
+    "enrichedAt": "2026-08-03T20:09:34.894Z",
+    "genres": [
+      "folk",
+      "indie"
+    ]
   },
   "łaszewo": {
     "spotifyId": "6jxGLrn1I14RIeRYodOpLN",
@@ -9342,7 +10101,10 @@
       "Łaszewo @ GMOSONIC 2026"
     ],
     "mbid": "8eea42ed-bece-4802-b6f2-1873d16795e6",
-    "enrichedAt": "2026-08-03T20:09:35.259Z"
+    "enrichedAt": "2026-08-03T20:09:35.259Z",
+    "genres": [
+      "pop"
+    ]
   },
   "leon knight": {
     "soundcloudSlug": "theleonknight",
@@ -9359,7 +10121,13 @@
       "Don't be this guy! Entitlement of the Seas! 🚢"
     ],
     "mbid": "08cf3253-8b70-4cb0-aa6f-079dcd00e200",
-    "enrichedAt": "2026-08-03T20:09:35.798Z"
+    "enrichedAt": "2026-08-03T20:09:35.798Z",
+    "genres": [
+      "rock",
+      "hiphop",
+      "funk",
+      "pop"
+    ]
   },
   "lorde": {
     "genres": [
@@ -9514,7 +10282,10 @@
       "it's murph LIVE @ Red Rocks 2026",
       "it's murph LIVE @ EDC Las Vegas (Cosmic Meadow) 2025"
     ],
-    "enrichedAt": "2026-08-03T20:09:39.394Z"
+    "enrichedAt": "2026-08-03T20:09:39.394Z",
+    "genres": [
+      "house"
+    ]
   },
   "fakemink": {
     "soundcloudSlug": "fakemink",
@@ -9531,7 +10302,12 @@
       "FAKEMINK LIVE CAMP FLOG GNAW 2025 (BEST VIEW 4K)"
     ],
     "mbid": "968847c6-2150-419d-b14b-68c672dcde99",
-    "enrichedAt": "2026-08-03T20:09:39.728Z"
+    "enrichedAt": "2026-08-03T20:09:39.728Z",
+    "genres": [
+      "hip-hop",
+      "downtempo",
+      "trap"
+    ]
   },
   "palace": {
     "genres": [
@@ -9583,7 +10359,13 @@
       "FU & UF (Live) | Presented by Spotify"
     ],
     "mbid": "41641281-e1aa-4bbe-ba19-5fb436996e86",
-    "enrichedAt": "2026-08-03T20:09:41.021Z"
+    "enrichedAt": "2026-08-03T20:09:41.021Z",
+    "genres": [
+      "indie",
+      "hip-hop",
+      "rnb",
+      "neo soul"
+    ]
   },
   "rodrigo y gabriela": {
     "genres": [
@@ -9625,7 +10407,11 @@
       "'Sideways' (live for Like A Version)"
     ],
     "mbid": "f9ad56b5-6f41-4cdc-b859-3370c8bff3e2",
-    "enrichedAt": "2026-08-03T20:09:41.653Z"
+    "enrichedAt": "2026-08-03T20:09:41.653Z",
+    "genres": [
+      "indie",
+      "pop"
+    ]
   },
   "arcy drive": {
     "spotifyId": "7o1TBmx7Ube5h2Czlam84O",
@@ -9641,7 +10427,11 @@
       "FULL SHOW | Omaha, NE | October 21, 2025 | LIVE | The Pit Tour"
     ],
     "mbid": "8c783f89-6d9f-42be-b244-5edba0d57adb",
-    "enrichedAt": "2026-08-03T20:09:42.359Z"
+    "enrichedAt": "2026-08-03T20:09:42.359Z",
+    "genres": [
+      "indie rock",
+      "folk"
+    ]
   },
   "finn wolfhard": {
     "genres": [
@@ -9697,7 +10487,10 @@
       "Don West performs Send It Back | Sydney New Year's Eve 2025 | ABC iview"
     ],
     "mbid": "5f026fdc-72d1-4739-a035-71a7defad279",
-    "enrichedAt": "2026-08-03T20:09:43.427Z"
+    "enrichedAt": "2026-08-03T20:09:43.427Z",
+    "genres": [
+      "soul"
+    ]
   },
   "temper city": {
     "spotifyId": "5mHUmlJWkcoOk1NbjfrXWz",
@@ -9713,7 +10506,11 @@
       "Fly Away (Aztec Techno Remix) | Rooftop Sessions [4K]"
     ],
     "mbid": "c74a9a82-29bf-486d-bf93-b4516ac3e338",
-    "enrichedAt": "2026-08-03T20:09:43.890Z"
+    "enrichedAt": "2026-08-03T20:09:43.890Z",
+    "genres": [
+      "rock",
+      "pop"
+    ]
   },
   "gabriel jacoby": {
     "spotifyId": "05pLxSVIyZiQTqQnR4QQ9H",
@@ -9729,7 +10526,13 @@
       "be careful | A COLORS SHOW"
     ],
     "mbid": "a0fda0ea-7466-4fac-b96c-0fbab88bc8c0",
-    "enrichedAt": "2026-08-03T20:09:44.215Z"
+    "enrichedAt": "2026-08-03T20:09:44.215Z",
+    "genres": [
+      "soul",
+      "funk",
+      "rnb",
+      "rap"
+    ]
   },
   "dj cassandra": {
     "youtubeQuery": "DJ Cassandra live set",
@@ -9778,7 +10581,11 @@
       "thats crazy🫠🙏"
     ],
     "mbid": "8e4f426e-9afc-49ee-b559-3209beb75535",
-    "enrichedAt": "2026-08-03T20:09:53.081Z"
+    "enrichedAt": "2026-08-03T20:09:53.081Z",
+    "genres": [
+      "punk",
+      "indie rock"
+    ]
   },
   "emma ogier": {
     "spotifyId": "7lVBH2nQlHcpcU4RiY7izm",
@@ -9794,7 +10601,11 @@
       "Was it the Actress? | BELMONT TRACKS"
     ],
     "mbid": "2cd302f3-d66a-421e-b6b8-2a8c2ca511c4",
-    "enrichedAt": "2026-08-03T20:09:53.555Z"
+    "enrichedAt": "2026-08-03T20:09:53.555Z",
+    "genres": [
+      "folk",
+      "americana"
+    ]
   },
   "coleman jennings": {
     "spotifyId": "41wdI5RbAcOMsc6Wyb13kj",
@@ -9826,7 +10637,11 @@
       "The shoot of the fight goes like this, # fightmaster live"
     ],
     "mbid": "6e6e7d6a-1ce2-4cec-858f-b82ad27592ab",
-    "enrichedAt": "2026-08-03T20:09:54.447Z"
+    "enrichedAt": "2026-08-03T20:09:54.447Z",
+    "genres": [
+      "alt-country",
+      "folk"
+    ]
   },
   "left lucid": {
     "youtubeQuery": "Left Lucid live set",
@@ -9872,7 +10687,12 @@
       "So Sad So Hot"
     ],
     "mbid": "fffa2bd2-2382-44b8-8f94-27b1fbe9eb58",
-    "enrichedAt": "2026-08-03T20:10:03.755Z"
+    "enrichedAt": "2026-08-03T20:10:03.755Z",
+    "genres": [
+      "pop",
+      "indie pop",
+      "singer-songwriter"
+    ]
   },
   "common people": {
     "youtubeQuery": "Common People live set",
@@ -9887,7 +10707,10 @@
       "Pulp - Common People (Glastonbury 1995)"
     ],
     "mbid": "e88e3823-9ebd-4afb-8f6a-dbb0b97c7f00",
-    "enrichedAt": "2026-08-03T20:10:04.207Z"
+    "enrichedAt": "2026-08-03T20:10:04.207Z",
+    "genres": [
+      "indie rock"
+    ]
   },
   "damaris bojor": {
     "youtubeQuery": "Damaris Bojor live set",
@@ -9929,7 +10752,10 @@
       "Live - September 27th 2025 - Full Set -"
     ],
     "mbid": "31231af9-f91a-4d8b-992b-ba93d684a5c5",
-    "enrichedAt": "2026-08-03T20:10:07.444Z"
+    "enrichedAt": "2026-08-03T20:10:07.444Z",
+    "genres": [
+      "metalcore"
+    ]
   },
   "presley regier": {
     "soundcloudSlug": "presleyregier",
@@ -9946,7 +10772,11 @@
       "Nevermind"
     ],
     "mbid": "00434be4-b3b2-4159-bbd9-15c81297f493",
-    "enrichedAt": "2026-08-03T20:10:07.777Z"
+    "enrichedAt": "2026-08-03T20:10:07.777Z",
+    "genres": [
+      "indie",
+      "pop"
+    ]
   },
   "twenty one pilots": {
     "genres": [
@@ -10281,7 +11111,11 @@
       "Live | Baby's All Right Brooklyn NYC | November 11, 2024"
     ],
     "mbid": "04b685be-a7a7-4d54-8ea5-2b30a95fc0e1",
-    "enrichedAt": "2026-08-03T20:10:14.096Z"
+    "enrichedAt": "2026-08-03T20:10:14.096Z",
+    "genres": [
+      "folk",
+      "indie"
+    ]
   },
   "bad nerves": {
     "genres": [
@@ -10319,7 +11153,11 @@
       "Everything Is Easy (live) BIGSOUND 2023"
     ],
     "mbid": "a419f5d1-ed85-4910-98a0-468789bbd3c0",
-    "enrichedAt": "2026-08-03T20:10:36.824Z"
+    "enrichedAt": "2026-08-03T20:10:36.824Z",
+    "genres": [
+      "garage rock",
+      "indie rock"
+    ]
   },
   "paloma morphy": {
     "youtubeQuery": "Paloma Morphy live set",
@@ -10334,7 +11172,11 @@
       "SEB (Video Oficial)"
     ],
     "mbid": "15e504ab-28eb-4784-b0e8-627fa4c0adfd",
-    "enrichedAt": "2026-08-03T20:10:37.112Z"
+    "enrichedAt": "2026-08-03T20:10:37.112Z",
+    "genres": [
+      "latin",
+      "indie"
+    ]
   },
   "sunday (1994)": {
     "genres": [
@@ -10404,7 +11246,11 @@
       "“BURNED”",
       "Britton Powell - Live at Zebulon, LA 3/7/2020"
     ],
-    "enrichedAt": "2026-08-03T20:10:38.200Z"
+    "enrichedAt": "2026-08-03T20:10:38.200Z",
+    "genres": [
+      "indie pop",
+      "heavy metal"
+    ]
   },
   "solya": {
     "genres": [
@@ -10441,7 +11287,10 @@
       "Marie Davidson & L’Œil Nu || Worst come to worst"
     ],
     "mbid": "6f92467f-2b88-4837-a59b-29cbe55cc0f2",
-    "enrichedAt": "2026-08-04T07:28:38.787Z"
+    "enrichedAt": "2026-08-04T07:28:38.787Z",
+    "genres": [
+      "rock"
+    ]
   },
   "aaron rowe": {
     "genres": [
@@ -10495,7 +11344,13 @@
       "Full Performance (Live on KEXP)",
       "Full Performance (Live on KEXP)"
     ],
-    "enrichedAt": "2026-08-03T20:10:39.580Z"
+    "enrichedAt": "2026-08-03T20:10:39.580Z",
+    "genres": [
+      "indie",
+      "latin",
+      "hip hop",
+      "synthpop"
+    ]
   },
   "the moriah sisters": {
     "youtubeQuery": "The Moriah Sisters live set",
@@ -10526,7 +11381,11 @@
       "pov: you go to a Kevin Atwater concert"
     ],
     "mbid": "448665cd-e62d-4e48-abf6-096e9d1a71fb",
-    "enrichedAt": "2026-08-03T20:10:40.217Z"
+    "enrichedAt": "2026-08-03T20:10:40.217Z",
+    "genres": [
+      "pop",
+      "indie"
+    ]
   },
   "thomas day": {
     "spotifyId": "5TwUXL3I6RaLckHy8le2Hq",
@@ -10542,7 +11401,10 @@
       "@thomasdaymusic3214 Live|Garden City, ID|March28th, 2025"
     ],
     "mbid": "fc876445-efed-4522-8397-e9a2ee6e3856",
-    "enrichedAt": "2026-08-04T07:28:39.858Z"
+    "enrichedAt": "2026-08-04T07:28:39.858Z",
+    "genres": [
+      "pop"
+    ]
   },
   "vwillz": {
     "spotifyId": "0S7eN9KAsbAaIZtFyCn1q1",
@@ -10558,7 +11420,11 @@
       "Today’s First: Hadji Gaviota, Teezo Touchdown, Sevdaliza, VITA & Vwillz"
     ],
     "mbid": "0b0fd362-5bc7-42c9-ae15-1c6e3f66db9e",
-    "enrichedAt": "2026-08-04T07:28:40.132Z"
+    "enrichedAt": "2026-08-04T07:28:40.132Z",
+    "genres": [
+      "rap",
+      "pop"
+    ]
   },
   "sasha keable": {
     "soundcloudSlug": "sasha-keable",
@@ -10575,7 +11441,12 @@
       "SASHA KEABLE LIVE IN MANCHESTER | DJ AG"
     ],
     "mbid": "c2b7f5ad-0db8-4e6d-b228-5598d6b17717",
-    "enrichedAt": "2026-08-04T07:28:40.408Z"
+    "enrichedAt": "2026-08-04T07:28:40.408Z",
+    "genres": [
+      "soul",
+      "pop",
+      "rnb"
+    ]
   },
   "marzz": {
     "youtubeQuery": "Marzz live set",
@@ -10590,7 +11461,12 @@
       "The Mars Volta - Roulette Dares (The Haunt Of)"
     ],
     "mbid": "dbb984bf-ab45-4caf-be04-67e88b5acd57",
-    "enrichedAt": "2026-08-04T07:28:40.793Z"
+    "enrichedAt": "2026-08-04T07:28:40.793Z",
+    "genres": [
+      "techno",
+      "hip hop",
+      "rnb"
+    ]
   },
   "chelsea jordan": {
     "youtubeQuery": "Chelsea Jordan live set",
@@ -10636,7 +11512,10 @@
       "Let it Roll OA 2025 I Drum & Bass"
     ],
     "mbid": "c1df97ad-3114-448b-aceb-52f21f22de01",
-    "enrichedAt": "2026-08-03T01:00:12.104Z"
+    "enrichedAt": "2026-08-03T01:00:12.104Z",
+    "genres": [
+      "drum and bass"
+    ]
   },
   "aaron hibell": {
     "soundcloudSlug": "aaronhibell",
@@ -10653,7 +11532,12 @@
       "Tomorrowland 2025 Atmosphere Stage [full DJ set]"
     ],
     "mbid": "9d2328f6-b608-4103-895a-e04375580d83",
-    "enrichedAt": "2026-08-03T01:00:12.105Z"
+    "enrichedAt": "2026-08-03T01:00:12.105Z",
+    "genres": [
+      "trance",
+      "ambient",
+      "dance-pop"
+    ]
   },
   "aat": {
     "spotifyId": "02B08CAGsMQ0y87xmg07M9",
@@ -10669,7 +11553,12 @@
       "DJ Mix: Undrscovered.005 - AAT [Haven Trax]"
     ],
     "mbid": "68a74e87-290c-43b9-ac29-8fb1af325022",
-    "enrichedAt": "2026-08-03T01:00:12.105Z"
+    "enrichedAt": "2026-08-03T01:00:12.105Z",
+    "genres": [
+      "house",
+      "deep house",
+      "tech house"
+    ]
   },
   "acraze b2b cid": {
     "genres": [
@@ -11122,7 +12011,10 @@
       "No Art Festival 2024 | Dennis Cruz | Flevopark Amsterdam"
     ],
     "mbid": "f3d44367-7d70-4d76-8099-2f47d99e4348",
-    "enrichedAt": "2026-08-03T01:00:24.840Z"
+    "enrichedAt": "2026-08-03T01:00:24.840Z",
+    "genres": [
+      "tech-house"
+    ]
   },
   "deorro b2b dj diesel": {
     "genres": [
@@ -11182,7 +12074,10 @@
       "🔴 Discip | EDC MEXICO 2026 Live Broadcast DAY 2"
     ],
     "mbid": "f52019cd-cc88-42f4-87f8-2ad1785cfe7e",
-    "enrichedAt": "2026-08-03T01:00:27.669Z"
+    "enrichedAt": "2026-08-03T01:00:27.669Z",
+    "genres": [
+      "tech house"
+    ]
   },
   "esse": {
     "youtubeQuery": "ESSE live set",
@@ -11197,7 +12092,11 @@
       "FESTA BLACK PRIDE EDITION 2026 . NEO QUÍMICA ARENA - SÃO PAULO . Live Set DJ Allison Nunes"
     ],
     "mbid": "bd1f63ff-e4db-4e02-a01e-9973e473c7c9",
-    "enrichedAt": "2026-08-03T01:00:29.139Z"
+    "enrichedAt": "2026-08-03T01:00:29.139Z",
+    "genres": [
+      "minimal techno",
+      "progressive house"
+    ]
   },
   "fallon": {
     "youtubeQuery": "Fallon live set",
@@ -11212,7 +12111,12 @@
       "Live from NO GUESTLIST | 11.23.24"
     ],
     "enrichedAt": "2026-08-03T01:00:03.074Z",
-    "soundcloudSlug": "fallonsounds"
+    "soundcloudSlug": "fallonsounds",
+    "genres": [
+      "house",
+      "rnb",
+      "heavy metal"
+    ]
   },
   "franky rizardo": {
     "spotifyId": "2UgphhGSlC9QWgaZWUOCkl",
@@ -11229,7 +12133,12 @@
     ],
     "mbid": "a9b88c14-4191-43bf-9895-bd5c7c6a38a8",
     "enrichedAt": "2026-08-03T01:00:30.658Z",
-    "soundcloudSlug": "frankyrizardo"
+    "soundcloudSlug": "frankyrizardo",
+    "genres": [
+      "house",
+      "tech house",
+      "deep house"
+    ]
   },
   "fury with mc dino": {
     "youtubeQuery": "Fury with MC Dino live set",
@@ -11316,7 +12225,11 @@
       "Where You Are, Escape, Fall Again | Defected Live Sessions [S1E6]"
     ],
     "mbid": "f8435d8e-e0c3-402f-911a-59722711fd44",
-    "enrichedAt": "2026-08-03T01:00:31.992Z"
+    "enrichedAt": "2026-08-03T01:00:31.992Z",
+    "genres": [
+      "house",
+      "pop"
+    ]
   },
   "holy priest": {
     "spotifyId": "5UG2ipdnA4vk8Eevkf1s06",
@@ -11333,7 +12246,10 @@
     ],
     "mbid": "64cb417c-d902-41c4-a9c0-6bac865738bf",
     "enrichedAt": "2026-08-03T01:00:31.992Z",
-    "soundcloudSlug": "holypriest_music"
+    "soundcloudSlug": "holypriest_music",
+    "genres": [
+      "hard techno"
+    ]
   },
   "i hate models": {
     "genres": [
@@ -11365,7 +12281,10 @@
     ],
     "mbid": "c055a36c-f41c-487e-ad6d-fec8318af336",
     "enrichedAt": "2026-08-03T01:00:31.992Z",
-    "soundcloudSlug": "ianasher"
+    "soundcloudSlug": "ianasher",
+    "genres": [
+      "house"
+    ]
   },
   "idemi": {
     "genres": [
@@ -11421,7 +12340,12 @@
       "Dekmantel - Interplanetary Criminal | HÖR - Aug 5 / 2023"
     ],
     "mbid": "02ebebd7-120e-4341-ac89-90e666d49c9e",
-    "enrichedAt": "2026-08-03T01:00:33.244Z"
+    "enrichedAt": "2026-08-03T01:00:33.244Z",
+    "genres": [
+      "uk garage",
+      "house",
+      "jungle"
+    ]
   },
   "joa": {
     "genres": [
@@ -11458,7 +12382,11 @@
       "Riordan b2b Joshwa - Live @ Escape 2024"
     ],
     "mbid": "6b31ce91-1b2e-445a-970c-ea7c67424b07",
-    "enrichedAt": "2026-08-03T01:00:33.244Z"
+    "enrichedAt": "2026-08-03T01:00:33.244Z",
+    "genres": [
+      "house",
+      "tech house"
+    ]
   },
   "ki/ki": {
     "youtubeQuery": "KI/KI live set",
@@ -11472,7 +12400,11 @@
       "5 HOURS - The Wool Store, Melbourne",
       "Warsaw | Mixmag x Burn Energy Tour"
     ],
-    "enrichedAt": "2026-08-03T00:59:56.343Z"
+    "enrichedAt": "2026-08-03T00:59:56.343Z",
+    "genres": [
+      "trance",
+      "techno"
+    ]
   },
   "kinahau": {
     "soundcloudSlug": "kinahau",
@@ -11489,7 +12421,10 @@
       "DJ Kinahau live @ EDC México 2026"
     ],
     "mbid": "1734f7bf-04a4-4881-aa0e-4360579ede53",
-    "enrichedAt": "2026-08-03T01:00:34.510Z"
+    "enrichedAt": "2026-08-03T01:00:34.510Z",
+    "genres": [
+      "house"
+    ]
   },
   "klangkuenstler": {
     "genres": [
@@ -11623,7 +12558,12 @@
       "Matthias Meyer Live at Levels 11Y - Porto Alegre | House & Techno Mix",
       "themuddshow x tylko"
     ],
-    "enrichedAt": "2026-08-03T01:00:42.073Z"
+    "enrichedAt": "2026-08-03T01:00:42.073Z",
+    "genres": [
+      "techno",
+      "house",
+      "electro"
+    ]
   },
   "me n u": {
     "youtubeQuery": "Me n ü live set",
@@ -11654,7 +12594,10 @@
       "MEDUZA live @ EDC Las Vegas Kinetic Field, 2025"
     ],
     "enrichedAt": "2026-08-03T01:00:43.878Z",
-    "soundcloudSlug": "meduzamusic"
+    "soundcloudSlug": "meduzamusic",
+    "genres": [
+      "house"
+    ]
   },
   "miguelle & tons": {
     "youtubeQuery": "Miguelle & Tons live set",
@@ -11751,7 +12694,11 @@
       "Pegassi at Intercell x Glitch Festival 2025"
     ],
     "mbid": "c77c111e-38dd-4e31-bc14-2baa276862e4",
-    "enrichedAt": "2026-08-03T01:00:48.391Z"
+    "enrichedAt": "2026-08-03T01:00:48.391Z",
+    "genres": [
+      "trance",
+      "techno"
+    ]
   },
   "prospa b2b josh baker": {
     "soundcloudSlug": "prospauk",
@@ -11855,7 +12802,10 @@
       "SHDW at EXPO XXI Warsaw | Poland 2025"
     ],
     "mbid": "a2b65bec-a585-4bb2-a5c9-6814ba3fa8ce",
-    "enrichedAt": "2026-08-03T01:00:54.279Z"
+    "enrichedAt": "2026-08-03T01:00:54.279Z",
+    "genres": [
+      "techno"
+    ]
   },
   "skull machine (black tiger sex machine x kai wachi)": {
     "youtubeQuery": "Skull Machine (Black Tiger Sex Machine x Kai Wachi) live set",
@@ -11926,7 +12876,13 @@
       "DnB Allstars: Festival 2023 Live From London (DJ Set)"
     ],
     "mbid": "3208557c-c04d-4e69-b652-c7266e139876",
-    "enrichedAt": "2026-08-03T01:00:57.579Z"
+    "enrichedAt": "2026-08-03T01:00:57.579Z",
+    "genres": [
+      "techno",
+      "drum and bass",
+      "rock",
+      "hard techno"
+    ]
   },
   "ultrathem": {
     "youtubeQuery": "Ultrathem live set",
@@ -12036,7 +12992,12 @@
       "Layton Giordani Live @ EDC Las Vegas 2025 | Circuit Grounds Closing Set"
     ],
     "mbid": "81f494b2-bd4b-486c-aae5-8c789165d14c",
-    "enrichedAt": "2026-08-03T00:59:56.344Z"
+    "enrichedAt": "2026-08-03T00:59:56.344Z",
+    "genres": [
+      "techno",
+      "house",
+      "tech house"
+    ]
   },
   "notion": {
     "soundcloudSlug": "notiondj",
@@ -12053,7 +13014,11 @@
       "NOTION LIVE AT AIRSPACE BRISTOL 09/02/24"
     ],
     "mbid": "74e2dba9-b687-4554-bbf7-9c6376f7ebb1",
-    "enrichedAt": "2026-08-03T00:59:56.344Z"
+    "enrichedAt": "2026-08-03T00:59:56.344Z",
+    "genres": [
+      "drum and bass",
+      "hip hop"
+    ]
   },
   "diffrent": {
     "soundcloudSlug": "diffrentdj",
@@ -12070,7 +13035,10 @@
       "Full set | Soenda Festival 2026"
     ],
     "mbid": "b8f734da-71ce-4338-aa7d-049380eb2be3",
-    "enrichedAt": "2026-08-03T00:59:56.345Z"
+    "enrichedAt": "2026-08-03T00:59:56.345Z",
+    "genres": [
+      "house"
+    ]
   },
   "smokey bubblin' b": {
     "youtubeQuery": "Smokey Bubblin' B live set",
@@ -12085,7 +13053,10 @@
       "SMOKEY BUBBLIN'B | HOUSE | GARAGE | 12/01/2026"
     ],
     "enrichedAt": "2026-08-03T00:59:57.575Z",
-    "soundcloudSlug": "smokey-bubblin-b123"
+    "soundcloudSlug": "smokey-bubblin-b123",
+    "genres": [
+      "house"
+    ]
   },
   "brutalismus 3000": {
     "soundcloudSlug": "brutalismus-3000",
@@ -12102,7 +13073,12 @@
       "Boiler Room Festival London 2021 | Possession"
     ],
     "mbid": "b4cd749e-adce-4cb5-8a73-cdd0c7e4b9cc",
-    "enrichedAt": "2026-08-03T00:59:57.575Z"
+    "enrichedAt": "2026-08-03T00:59:57.575Z",
+    "genres": [
+      "techno",
+      "hardcore techno",
+      "hardstyle"
+    ]
   },
   "luke alessi": {
     "genres": [
@@ -12135,7 +13111,13 @@
       "Sold Out at 99 Scott, Brooklyn NY, 2026"
     ],
     "mbid": "cd955539-c357-49ee-ac45-2a414440613e",
-    "enrichedAt": "2026-08-03T00:59:57.575Z"
+    "enrichedAt": "2026-08-03T00:59:57.575Z",
+    "genres": [
+      "progressive house",
+      "melodic techno",
+      "acid house",
+      "tech house"
+    ]
   },
   "kyle starkey": {
     "soundcloudSlug": "kyle_starkey43",
@@ -12188,7 +13170,12 @@
       "Rinse HQ139 | 1tbsp"
     ],
     "mbid": "a0d6bf65-d17d-45d6-952a-0c18b103b1fb",
-    "enrichedAt": "2026-08-03T00:59:57.578Z"
+    "enrichedAt": "2026-08-03T00:59:57.578Z",
+    "genres": [
+      "house",
+      "techno",
+      "uk garage"
+    ]
   },
   "bolo": {
     "youtubeQuery": "BOLO live set",
@@ -12245,7 +13232,11 @@
       "WELKER LIVE AT VIRTUAL FESTIVAL 2025 (FULL SET)"
     ],
     "mbid": "51f51fec-e720-4787-977d-0073b3714e72",
-    "enrichedAt": "2026-08-03T01:00:01.554Z"
+    "enrichedAt": "2026-08-03T01:00:01.554Z",
+    "genres": [
+      "house",
+      "techno"
+    ]
   },
   "benwal": {
     "soundcloudSlug": "benwalmusic",
@@ -12262,7 +13253,10 @@
       "FULL SET | DGTL ADE 2025"
     ],
     "mbid": "bfc6febc-a0fc-490c-85cc-a7efdac27270",
-    "enrichedAt": "2026-08-03T01:00:01.554Z"
+    "enrichedAt": "2026-08-03T01:00:01.554Z",
+    "genres": [
+      "techno"
+    ]
   },
   "joss dean": {
     "youtubeQuery": "Joss Dean live set",
@@ -12294,7 +13288,11 @@
     ],
     "mbid": "e5292d75-c57b-4e11-8045-5241c4f832e1",
     "enrichedAt": "2026-08-03T01:00:01.554Z",
-    "soundcloudSlug": "conradsamtaylor"
+    "soundcloudSlug": "conradsamtaylor",
+    "genres": [
+      "house",
+      "techno"
+    ]
   },
   "mestiza": {
     "genres": [
@@ -12335,7 +13333,11 @@
       "HILLS at Brooklyn Storehouse - FULL SET",
       "HILLS at Sound Night Club - FULL SET"
     ],
-    "enrichedAt": "2026-08-03T01:00:04.606Z"
+    "enrichedAt": "2026-08-03T01:00:04.606Z",
+    "genres": [
+      "psychedelic rock",
+      "indie"
+    ]
   },
   "hozier": {
     "genres": [
@@ -12513,7 +13515,11 @@
       "Live From The Westward Tour (Hangin On' / Folsom Prison / Boston / Sept 26, 2025)"
     ],
     "mbid": "c3012f96-f4eb-418a-8a02-3febccf95091",
-    "enrichedAt": "2026-08-05T07:01:00.506Z"
+    "enrichedAt": "2026-08-05T07:01:00.506Z",
+    "genres": [
+      "folk",
+      "country"
+    ]
   },
   "mj lenderman": {
     "genres": [
@@ -12549,7 +13555,11 @@
       "FINNEAS & Ashe Present The Favors - Austin City Limits Festival * Zilker Park, TX, US (Oct 03, 2025)"
     ],
     "mbid": "d12b8871-bf2d-42c7-987c-f88f9248c17f",
-    "enrichedAt": "2026-08-05T07:01:01.217Z"
+    "enrichedAt": "2026-08-05T07:01:01.217Z",
+    "genres": [
+      "indie",
+      "pop"
+    ]
   },
   "briscoe": {
     "spotifyId": "28NTlcAifzUgF4SIZgxncj",
@@ -12565,7 +13575,11 @@
       "LIVE At The Theatre Of Living Arts"
     ],
     "mbid": "cadb392d-e6a4-4268-9176-6497fa41f565",
-    "enrichedAt": "2026-08-05T07:01:02.265Z"
+    "enrichedAt": "2026-08-05T07:01:02.265Z",
+    "genres": [
+      "folk",
+      "indie"
+    ]
   },
   "confidence man": {
     "genres": [
@@ -12626,7 +13640,10 @@
       "Tanner Usrey full set @Jackalope Jamboree 6/22/2023 live in Pendleton Oregon"
     ],
     "mbid": "3fbe788d-d4df-4ab1-b6cc-efc5781bb1f2",
-    "enrichedAt": "2026-08-05T07:01:03.664Z"
+    "enrichedAt": "2026-08-05T07:01:03.664Z",
+    "genres": [
+      "alt-country"
+    ]
   },
   "good neighbours": {
     "soundcloudSlug": "good-neighbours",
@@ -12643,7 +13660,11 @@
       "Full Performance (Live in the KROQ Helpful Honda Sound Space)"
     ],
     "mbid": "a84a3df1-a873-4be9-b6ff-4238393d46d7",
-    "enrichedAt": "2026-08-05T07:01:03.969Z"
+    "enrichedAt": "2026-08-05T07:01:03.969Z",
+    "genres": [
+      "indie",
+      "ambient"
+    ]
   },
   "spill tab": {
     "genres": [
@@ -12772,7 +13793,13 @@
     "spotifyId": "00OF0nwYaoBSO3AnPVq3vE",
     "youtubeQuery": "Johnny Stimson live set",
     "mbid": "e527e6a8-4b5a-491c-8709-123f92fdc0e5",
-    "enrichedAt": "2026-08-05T06:28:45.493Z"
+    "enrichedAt": "2026-08-05T06:28:45.493Z",
+    "genres": [
+      "pop",
+      "soul",
+      "indie",
+      "house"
+    ]
   },
   "nicky youre": {
     "genres": [
@@ -12788,7 +13815,12 @@
     "spotifyId": "2Kqa4BYcpEq4KXX9fYmRpH",
     "youtubeQuery": "Judy Blank live set",
     "mbid": "d5693dce-e41a-4094-97e6-8c620368295c",
-    "enrichedAt": "2026-08-05T06:05:26.803Z"
+    "enrichedAt": "2026-08-05T06:05:26.803Z",
+    "genres": [
+      "pop",
+      "singer-songwriter",
+      "americana"
+    ]
   },
   "skrilla": {
     "genres": [
@@ -12804,7 +13836,10 @@
     "spotifyId": "0ndpuECxVStTsHhzq4Euxz",
     "youtubeQuery": "Moody Joody live set",
     "mbid": "57d2d8f3-aa79-4d2b-9286-3be1e9a58cd7",
-    "enrichedAt": "2026-08-03T20:12:58.742Z"
+    "enrichedAt": "2026-08-03T20:12:58.742Z",
+    "genres": [
+      "indie pop"
+    ]
   },
   "chance emerson": {
     "spotifyId": "2qabc8edZgoWe8DY4HIGED",
@@ -12816,7 +13851,10 @@
     "spotifyId": "6mEP6006jfAcrzLbxyEZxp",
     "youtubeQuery": "Maggie Antone live set",
     "mbid": "94557b3a-fd4f-4ea7-b1f0-f2575ab51755",
-    "enrichedAt": "2026-08-03T20:13:04.076Z"
+    "enrichedAt": "2026-08-03T20:13:04.076Z",
+    "genres": [
+      "country"
+    ]
   },
   "lvvrs": {
     "soundcloudSlug": "user-502986064",
@@ -12833,7 +13871,13 @@
   },
   "farmer's wife": {
     "youtubeQuery": "Farmer's Wife live set",
-    "enrichedAt": "2026-08-03T20:13:10.674Z"
+    "enrichedAt": "2026-08-03T20:13:10.674Z",
+    "genres": [
+      "indie rock",
+      "rock",
+      "punk",
+      "garage"
+    ]
   },
   "the strokes": {
     "genres": [
@@ -12972,7 +14016,12 @@
     "spotifyId": "6XTGKOV9jceQ6f67lnhpbF",
     "youtubeQuery": "LATIN MAFIA live set",
     "mbid": "33118d4b-cec1-4030-b37c-0e81fdf97dc8",
-    "enrichedAt": "2026-08-05T06:06:00.871Z"
+    "enrichedAt": "2026-08-05T06:06:00.871Z",
+    "genres": [
+      "indie pop",
+      "latin",
+      "rnb"
+    ]
   },
   "lp giobbi": {
     "genres": [
@@ -13015,7 +14064,11 @@
     "spotifyId": "7FU0xCgmSYQEiBeevUqQ4S",
     "youtubeQuery": "Yoke Lore live set",
     "mbid": "80a37f31-402b-4dfe-9181-2e7dd8f40143",
-    "enrichedAt": "2026-08-05T06:06:07.607Z"
+    "enrichedAt": "2026-08-05T06:06:07.607Z",
+    "genres": [
+      "indie pop",
+      "pop"
+    ]
   },
   "mallrat": {
     "genres": [
@@ -13036,24 +14089,45 @@
     "spotifyId": "01sY3iLJZtSBa0BIbcpddJ",
     "youtubeQuery": "LA LOM live set",
     "mbid": "bf1bfb17-109c-4b28-bf36-aef587976343",
-    "enrichedAt": "2026-08-03T20:13:49.469Z"
+    "enrichedAt": "2026-08-03T20:13:49.469Z",
+    "genres": [
+      "jazz",
+      "latin",
+      "soul",
+      "americana"
+    ]
   },
   "tops": {
     "youtubeQuery": "TOPS live set",
-    "enrichedAt": "2026-08-03T20:13:50.555Z"
+    "enrichedAt": "2026-08-03T20:13:50.555Z",
+    "genres": [
+      "indie pop",
+      "pop"
+    ]
   },
   "odeal": {
     "soundcloudSlug": "iamodeal",
     "spotifyId": "2BPwxhCvvcb8xDl8GWIjbh",
     "youtubeQuery": "Odeal live set",
     "mbid": "47e10b14-4b74-4650-bc2b-34424c1c6bcb",
-    "enrichedAt": "2026-08-05T06:06:11.487Z"
+    "enrichedAt": "2026-08-05T06:06:11.487Z",
+    "genres": [
+      "rnb",
+      "rap",
+      "soul",
+      "afrobeats"
+    ]
   },
   "the heavy heavy": {
     "spotifyId": "5WSRRbhBJlhqvzgbOm3U2Q",
     "youtubeQuery": "The Heavy Heavy live set",
     "mbid": "5c465508-e810-4a2b-9c69-ce9e8e07a787",
-    "enrichedAt": "2026-08-03T20:13:54.391Z"
+    "enrichedAt": "2026-08-03T20:13:54.391Z",
+    "genres": [
+      "psychedelic rock",
+      "indie rock",
+      "soul"
+    ]
   },
   "hotline tnt": {
     "genres": [
@@ -13067,25 +14141,43 @@
     "spotifyId": "0uoN6ea8SXzhV7WxyrvT1h",
     "youtubeQuery": "INOHA live set",
     "mbid": "36b26d21-ed37-4462-b697-181113237de1",
-    "enrichedAt": "2026-08-03T20:13:59.582Z"
+    "enrichedAt": "2026-08-03T20:13:59.582Z",
+    "genres": [
+      "indie rock",
+      "pop punk"
+    ]
   },
   "sydney rose": {
     "soundcloudSlug": "user-380287823",
     "spotifyId": "5vx4pDmiFDyKMhuOIgpiRv",
     "youtubeQuery": "Sydney Rose live set",
     "mbid": "f5db63f8-94e0-4cf9-bdc8-69744e4fd4b4",
-    "enrichedAt": "2026-08-03T20:14:02.320Z"
+    "enrichedAt": "2026-08-03T20:14:02.320Z",
+    "genres": [
+      "singer-songwriter",
+      "indie pop",
+      "pop"
+    ]
   },
   "next of kin": {
     "youtubeQuery": "Next of Kin live set",
     "mbid": "2862b834-b5ee-4148-ae26-a07d8929602d",
-    "enrichedAt": "2026-08-03T20:14:18.117Z"
+    "enrichedAt": "2026-08-03T20:14:18.117Z",
+    "genres": [
+      "country",
+      "rock"
+    ]
   },
   "clover county": {
     "spotifyId": "1vOabSI7N1elDhNGoirgU2",
     "youtubeQuery": "Clover County live set",
     "mbid": "15a3b1e0-0790-4f24-a158-f549498857e4",
-    "enrichedAt": "2026-08-03T20:14:20.605Z"
+    "enrichedAt": "2026-08-03T20:14:20.605Z",
+    "genres": [
+      "folk",
+      "country",
+      "indie"
+    ]
   },
   "s.l. houser": {
     "youtubeQuery": "S.L. Houser live set",
@@ -13095,13 +14187,23 @@
     "spotifyId": "5odtYnxUvkfTC6wmwR53aI",
     "youtubeQuery": "Eric Slick live set",
     "mbid": "88e7a7fe-c226-4f93-8185-2ce42077a0f0",
-    "enrichedAt": "2026-08-03T20:14:24.495Z"
+    "enrichedAt": "2026-08-03T20:14:24.495Z",
+    "genres": [
+      "rock",
+      "jazz",
+      "indie rock"
+    ]
   },
   "goldford": {
     "spotifyId": "4I2QW85rkIhCRRZt1kuBqS",
     "youtubeQuery": "GoldFord live set",
     "mbid": "6e555064-a16c-4a3d-ac56-e496f3633b7b",
-    "enrichedAt": "2026-08-03T20:14:27.027Z"
+    "enrichedAt": "2026-08-03T20:14:27.027Z",
+    "genres": [
+      "folk",
+      "soul",
+      "indie"
+    ]
   },
   "southall": {
     "genres": [
@@ -13137,7 +14239,12 @@
       "Complexion (Live) #MNMUSICSCENE"
     ],
     "mbid": "97c170b8-a779-49ed-9da0-75b90e1a4bdc",
-    "enrichedAt": "2026-08-05T06:13:59.996Z"
+    "enrichedAt": "2026-08-05T06:13:59.996Z",
+    "genres": [
+      "rnb",
+      "hip hop",
+      "synthpop"
+    ]
   },
   "animal arcade": {
     "youtubeQuery": "Animal Arcade live set",
@@ -13148,7 +14255,11 @@
     "spotifyId": "3BV5N0bOmtkavYFUSHsfMQ",
     "youtubeQuery": "Shallowater live set",
     "mbid": "8feeecfe-996d-4c06-a8b1-c9bb9586e14d",
-    "enrichedAt": "2026-08-03T20:14:56.901Z"
+    "enrichedAt": "2026-08-03T20:14:56.901Z",
+    "genres": [
+      "alt-country",
+      "shoegaze"
+    ]
   },
   "ted hammig & the campaign": {
     "youtubeQuery": "Ted Hammig & the Campaign live set",
@@ -13274,7 +14385,13 @@
   },
   "ca7riel & paco amoroso": {
     "youtubeQuery": "CA7RIEL & Paco Amoroso live set",
-    "enrichedAt": "2026-08-03T20:15:51.749Z"
+    "enrichedAt": "2026-08-03T20:15:51.749Z",
+    "genres": [
+      "trap",
+      "acid house",
+      "hip-hop",
+      "g-house"
+    ]
   },
   "anderson east": {
     "genres": [
@@ -13325,20 +14442,33 @@
     "spotifyId": "3SEkDN2vusR7CIyehzfJaj",
     "youtubeQuery": "Hans Williams live set",
     "mbid": "e6ca8ec3-1372-4534-a1c1-b327adc27e9f",
-    "enrichedAt": "2026-08-03T20:16:20.410Z"
+    "enrichedAt": "2026-08-03T20:16:20.410Z",
+    "genres": [
+      "folk",
+      "indie"
+    ]
   },
   "haute & freddy": {
     "soundcloudSlug": "hauteandfreddy",
     "spotifyId": "66T34XqGkEWbzKWALSBDuR",
     "youtubeQuery": "Haute & Freddy live set",
     "mbid": "44130072-d72e-4926-8cb7-6163189bc9b0",
-    "enrichedAt": "2026-08-03T20:16:25.183Z"
+    "enrichedAt": "2026-08-03T20:16:25.183Z",
+    "genres": [
+      "synthpop",
+      "indie"
+    ]
   },
   "chezile": {
     "spotifyId": "1EmdfupUQDpXOcb4Nj2mBH",
     "youtubeQuery": "Chezile live set",
     "mbid": "6cdf7825-577b-4689-92f9-4df5c8bafe4b",
-    "enrichedAt": "2026-08-03T20:16:27.996Z"
+    "enrichedAt": "2026-08-03T20:16:27.996Z",
+    "genres": [
+      "dream pop",
+      "chillout",
+      "pop"
+    ]
   },
   "bebe stockwell": {
     "spotifyId": "2KPSR6XA83w8XYrwWekhA9",
@@ -13350,34 +14480,58 @@
     "spotifyId": "5Ml0QbIoj7bneIUJDCoMx8",
     "youtubeQuery": "Case Oats live set",
     "mbid": "c4d95236-1d63-43b6-bedc-ea4d9b536c5b",
-    "enrichedAt": "2026-08-03T20:17:02.740Z"
+    "enrichedAt": "2026-08-03T20:17:02.740Z",
+    "genres": [
+      "country",
+      "rock",
+      "folk",
+      "indie"
+    ]
   },
   "lamont landers": {
     "spotifyId": "3avnA23xLmCYfnsivruOgq",
     "youtubeQuery": "Lamont Landers live set",
     "mbid": "7100e052-9adf-45bc-a277-1d7a6c0964a7",
-    "enrichedAt": "2026-08-03T20:17:06.256Z"
+    "enrichedAt": "2026-08-03T20:17:06.256Z",
+    "genres": [
+      "rnb",
+      "soul"
+    ]
   },
   "the bends": {
     "youtubeQuery": "The Bends live set",
     "mbid": "43d364a0-6306-42a9-80d7-1732a6ba95bc",
-    "enrichedAt": "2026-08-03T20:17:29.530Z"
+    "enrichedAt": "2026-08-03T20:17:29.530Z",
+    "genres": [
+      "rock"
+    ]
   },
   "the point.": {
     "youtubeQuery": "The Point. live set",
-    "enrichedAt": "2026-08-03T20:17:31.079Z"
+    "enrichedAt": "2026-08-03T20:17:31.079Z",
+    "genres": [
+      "funk",
+      "cumbia"
+    ]
   },
   "chuwi": {
     "spotifyId": "6wF1Cz760dpdbX9RJIDpQW",
     "youtubeQuery": "Chuwi live set",
     "mbid": "ec924d55-2e15-4dc1-8b34-d78a7a015d3d",
-    "enrichedAt": "2026-08-03T20:17:55.022Z"
+    "enrichedAt": "2026-08-03T20:17:55.022Z",
+    "genres": [
+      "latin"
+    ]
   },
   "tyler ballgame": {
     "spotifyId": "1pQ0Axx7UF8LDDOqSgdVmK",
     "youtubeQuery": "Tyler Ballgame live set",
     "mbid": "b354fdfa-5d8e-46ef-b76e-5bd1ed05a59c",
-    "enrichedAt": "2026-08-03T20:17:58.493Z"
+    "enrichedAt": "2026-08-03T20:17:58.493Z",
+    "genres": [
+      "indie pop",
+      "singer-songwriter"
+    ]
   },
   "ally salort": {
     "genres": [
@@ -13417,7 +14571,10 @@
   "disciples of christ": {
     "youtubeQuery": "Disciples of Christ live set",
     "mbid": "c51f0b8b-2e92-47b2-b72d-07e4cd0cd115",
-    "enrichedAt": "2026-08-03T20:18:39.537Z"
+    "enrichedAt": "2026-08-03T20:18:39.537Z",
+    "genres": [
+      "hardcore punk"
+    ]
   },
   "eric prydz": {
     "genres": [
@@ -13499,7 +14656,12 @@
       "VOYD @ ULTRA MIAMI 2026"
     ],
     "mbid": "0a43984a-dfbb-4584-bdeb-fe8c93c0e9ea",
-    "enrichedAt": "2026-08-05T07:01:20.391Z"
+    "enrichedAt": "2026-08-05T07:01:20.391Z",
+    "genres": [
+      "house",
+      "dub",
+      "garage"
+    ]
   },
   "automhate": {
     "genres": [
@@ -13537,7 +14699,10 @@
       "Prosecute in 8k @ 60 fps | LOST LANDS 2025 - COUCH LANDS - DAY 2"
     ],
     "mbid": "5a513490-bdf4-47c7-9c86-d004ebd2162a",
-    "enrichedAt": "2026-08-05T07:01:20.668Z"
+    "enrichedAt": "2026-08-05T07:01:20.668Z",
+    "genres": [
+      "dubstep"
+    ]
   },
   "simula": {
     "genres": [
@@ -13574,7 +14739,11 @@
       "JEANIE & VAMPA PRESENT: WITCHING HOUR LIVE @ RED ROCKS 2025 [FULL SET]"
     ],
     "mbid": "8f43e71e-a372-48de-812e-904edc4b83cc",
-    "enrichedAt": "2026-08-05T06:13:29.688Z"
+    "enrichedAt": "2026-08-05T06:13:29.688Z",
+    "genres": [
+      "heavy metal",
+      "dubstep"
+    ]
   },
   "jeanie": {
     "soundcloudSlug": "jeaniesounds",
@@ -13652,7 +14821,11 @@
       "BEJALVIN LIVE - Full Set @ Vibes Underground in San Antonio TX, 01/11/2025"
     ],
     "mbid": "55e19c6d-e072-4c6b-8946-21ee99f6f8f0",
-    "enrichedAt": "2026-08-05T07:01:22.448Z"
+    "enrichedAt": "2026-08-05T07:01:22.448Z",
+    "genres": [
+      "dubstep",
+      "hyperpop"
+    ]
   },
   "vanfleet": {
     "genres": [
@@ -13724,7 +14897,11 @@
       "Live in Calgary | Beehive Presents Afrodisiac | August 2025"
     ],
     "mbid": "7586b937-9af6-49af-ae1d-c85ce51ec832",
-    "enrichedAt": "2026-08-05T06:13:30.975Z"
+    "enrichedAt": "2026-08-05T06:13:30.975Z",
+    "genres": [
+      "house",
+      "latin"
+    ]
   },
   "autograf": {
     "genres": [
@@ -13751,13 +14928,19 @@
       "Wednesday - live at Tumbleroot in Santa Fe [FULL SET] 10/9/25"
     ],
     "mbid": "d3512d79-b24a-45bc-b4ce-90717ce9f347",
-    "enrichedAt": "2026-08-05T06:13:31.310Z"
+    "enrichedAt": "2026-08-05T06:13:31.310Z",
+    "genres": [
+      "tech house"
+    ]
   },
   "dark heart": {
     "soundcloudSlug": "dddarkheart",
     "youtubeQuery": "Dark Heart live set",
     "mbid": "e467df2c-7db0-403f-8903-294a659064fa",
-    "enrichedAt": "2026-08-05T06:06:46.378Z"
+    "enrichedAt": "2026-08-05T06:06:46.378Z",
+    "genres": [
+      "heavy metal"
+    ]
   },
   "trn me up": {
     "youtubeQuery": "TRN ME UP live set",
@@ -13802,7 +14985,10 @@
       "ANGRYBABY LIVE @ OUTSIDE LANDS FESTIVAL 2024"
     ],
     "mbid": "2eb913e8-2e2b-4344-8782-3f71d7586a58",
-    "enrichedAt": "2026-08-05T06:13:35.237Z"
+    "enrichedAt": "2026-08-05T06:13:35.237Z",
+    "genres": [
+      "house"
+    ]
   },
   "carola": {
     "genres": [
@@ -13908,25 +15094,43 @@
     "spotifyId": "3koHmmPvpgZWHcVmK8AKDq",
     "youtubeQuery": "HVDES live set",
     "mbid": "500bad15-681e-4399-ab14-453a60608ff7",
-    "enrichedAt": "2026-08-05T06:07:15.944Z"
+    "enrichedAt": "2026-08-05T06:07:15.944Z",
+    "genres": [
+      "electro house",
+      "psytrance",
+      "dnb"
+    ]
   },
   "codd dubz": {
     "soundcloudSlug": "coddmusic",
     "spotifyId": "3SsxYsQwnhws0qW0fsO1s5",
     "youtubeQuery": "Codd Dubz live set",
     "mbid": "c736838f-aeac-4ee7-b97f-90948f2a5663",
-    "enrichedAt": "2026-08-03T20:21:19.346Z"
+    "enrichedAt": "2026-08-03T20:21:19.346Z",
+    "genres": [
+      "dubstep",
+      "riddim dubstep"
+    ]
   },
   "pyke": {
     "youtubeQuery": "PYKE live set",
-    "enrichedAt": "2026-08-03T20:21:20.446Z"
+    "enrichedAt": "2026-08-03T20:21:20.446Z",
+    "genres": [
+      "pop",
+      "dubstep",
+      "riddim"
+    ]
   },
   "blvnkspvce": {
     "soundcloudSlug": "blvnkspvce",
     "spotifyId": "72qYTgSCSu7QFhBhyk00fe",
     "youtubeQuery": "BLVNKSPVCE live set",
     "mbid": "0aac7368-6a75-4938-873d-2e837d0cfda6",
-    "enrichedAt": "2026-08-03T20:21:23.387Z"
+    "enrichedAt": "2026-08-03T20:21:23.387Z",
+    "genres": [
+      "dubstep",
+      "riddim"
+    ]
   },
   "hamro": {
     "soundcloudSlug": "djhamro",
@@ -13943,7 +15147,11 @@
       "HAMRO @ Club Soda (Northern Invasion 2025 Day 1 - Montreal, QC, Canada) (Recap)"
     ],
     "mbid": "953ec1b6-4a29-4249-a05e-c0462d7165b3",
-    "enrichedAt": "2026-08-05T06:35:31.783Z"
+    "enrichedAt": "2026-08-05T06:35:31.783Z",
+    "genres": [
+      "riddim",
+      "dubstep"
+    ]
   },
   "sqishi": {
     "genres": [
@@ -14000,14 +15208,22 @@
   "sosa": {
     "youtubeQuery": "SOSA live set",
     "enrichedAt": "2026-08-03T20:21:38.209Z",
-    "soundcloudSlug": "sosamusicuk"
+    "soundcloudSlug": "sosamusicuk",
+    "genres": [
+      "trance"
+    ]
   },
   "luuk van dijk": {
     "soundcloudSlug": "luukvandijkdj",
     "spotifyId": "1KFfk3NtblIJtGEqyiR31t",
     "youtubeQuery": "Luuk Van Dijk live set",
     "mbid": "ad509d02-14ec-4a8e-8350-ff1dc4f163b6",
-    "enrichedAt": "2026-08-03T20:21:40.963Z"
+    "enrichedAt": "2026-08-03T20:21:40.963Z",
+    "genres": [
+      "house",
+      "tech house",
+      "deep house"
+    ]
   },
   "classmatic": {
     "soundcloudSlug": "classmatic",
@@ -14024,20 +15240,33 @@
       "Classmatic b2b Beltran @ Organic Pieces Pop Up, Florianópolis - BR"
     ],
     "mbid": "21f94529-50ae-490a-bc25-42a457bf70c9",
-    "enrichedAt": "2026-08-05T06:13:38.194Z"
+    "enrichedAt": "2026-08-05T06:13:38.194Z",
+    "genres": [
+      "house",
+      "techno",
+      "tech house"
+    ]
   },
   "mahony": {
     "soundcloudSlug": "mahonydj",
     "youtubeQuery": "Mahony live set",
     "mbid": "681586fc-2c25-428a-a876-18864b41ad5e",
-    "enrichedAt": "2026-08-05T06:07:33.968Z"
+    "enrichedAt": "2026-08-05T06:07:33.968Z",
+    "genres": [
+      "jazz"
+    ]
   },
   "maxinne": {
     "soundcloudSlug": "djmaxinne",
     "spotifyId": "3sv9dCyzqOsGcJHPl5seiq",
     "youtubeQuery": "Maxinne live set",
     "mbid": "41a7b66f-72b6-4a10-a41e-77102732558a",
-    "enrichedAt": "2026-08-05T06:07:36.909Z"
+    "enrichedAt": "2026-08-05T06:07:36.909Z",
+    "genres": [
+      "house",
+      "deep house",
+      "tech-house"
+    ]
   },
   "boycott": {
     "genres": [

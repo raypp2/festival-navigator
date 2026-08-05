@@ -1063,6 +1063,11 @@
         "DJ Heather Boiler Room Chicago DJ Set",
         "Live at You and I (2002) | Classic House & Funk Mix",
         "Dj Heather PIXEL SET - July 2020"
+      ],
+      "genres": [
+        "house",
+        "deep house",
+        "downtempo"
       ]
     },
     {
@@ -1106,7 +1111,10 @@
       "day": "Thursday",
       "stage": "Tito's",
       "spotifyId": "4JnJjqxsTp8E5rZsyITf63",
-      "youtubeQuery": "Jade LeMac live set"
+      "youtubeQuery": "Jade LeMac live set",
+      "genres": [
+        "pop"
+      ]
     },
     {
       "name": "Girl Tones",
@@ -1123,6 +1131,10 @@
         "Got It (Live Office Takeover)",
         "The Girl Tones - Full Set - LIVE",
         "Live @ Funhouse (3/8/25) - Seattle, WA"
+      ],
+      "genres": [
+        "rock",
+        "punk"
       ]
     },
     {
@@ -1183,20 +1195,33 @@
         "Azzecca Chicago Sunset Set - July 2025",
         "Azzecca at Seismic Dance Event 6.0 | Full Set"
       ],
-      "soundcloudSlug": "azzecca"
+      "soundcloudSlug": "azzecca",
+      "genres": [
+        "house",
+        "tech house"
+      ]
     },
     {
       "name": "Julie",
       "day": "Thursday",
       "stage": "Lakeshore",
-      "youtubeQuery": "Julie live set"
+      "youtubeQuery": "Julie live set",
+      "genres": [
+        "shoegaze",
+        "pop"
+      ]
     },
     {
       "name": "ALEXSUCKS",
       "day": "Thursday",
       "stage": "BMI",
       "spotifyId": "0zmxCsd8aIJHfNC95gdT2i",
-      "youtubeQuery": "ALEXSUCKS live set"
+      "youtubeQuery": "ALEXSUCKS live set",
+      "genres": [
+        "indie rock",
+        "garage rock",
+        "pop punk"
+      ]
     },
     {
       "name": "Chicago Made",
@@ -1252,6 +1277,10 @@
         "Cloonee B2B Prospa - Live at Destino, Ibiza",
         "Prospa b2b Josh Baker | Miami Music Week | RAW CUTS",
         "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
+      ],
+      "genres": [
+        "house",
+        "electro"
       ]
     },
     {
@@ -1365,6 +1394,11 @@
         "Noah Kahan Closes Rolling Stone Fest 🌧️ #musicnews",
         "Glen Hansard, Marketa Irglova - Falling Slowly",
         "Angus and Julia Stone - Big Jet Plane"
+      ],
+      "genres": [
+        "folk",
+        "country",
+        "pop"
       ]
     },
     {
@@ -1387,7 +1421,11 @@
       "name": "Barry Can't Swim",
       "day": "Thursday",
       "stage": "T-Mobile",
-      "youtubeQuery": "Barry Can't Swim live set"
+      "youtubeQuery": "Barry Can't Swim live set",
+      "genres": [
+        "house",
+        "jazz"
+      ]
     },
     {
       "name": "Glass Beams",
@@ -1419,7 +1457,11 @@
       "day": "Thursday",
       "stage": "BMI",
       "spotifyId": "2L9DVKDXY3W8uRl5TwLbMC",
-      "youtubeQuery": "Colby Acuff live set"
+      "youtubeQuery": "Colby Acuff live set",
+      "genres": [
+        "country",
+        "singer-songwriter"
+      ]
     },
     {
       "name": "Role Model",
@@ -1457,6 +1499,11 @@
         "Cloonee B2B Prospa - Live at Destino, Ibiza",
         "Live at Hellbent in Los Angeles",
         "Live At EDC Orlando"
+      ],
+      "genres": [
+        "house",
+        "tech house",
+        "electro house"
       ]
     },
     {
@@ -1570,7 +1617,12 @@
         "Live From Coachella 2025",
         "MAU P @OfficialClubSpace | Miami - Dj Set presented by Link Miami Rebels."
       ],
-      "soundcloudSlug": "realmaup"
+      "soundcloudSlug": "realmaup",
+      "genres": [
+        "house",
+        "tech house",
+        "techno"
+      ]
     },
     {
       "name": "Gracie Abrams",
@@ -1640,7 +1692,13 @@
       "stage": "DOLLAPALOOZA",
       "soundcloudSlug": "domdolla",
       "spotifyId": "205i7E8fNVfojowcQSfK9m",
-      "youtubeQuery": "Dom Dolla live set"
+      "youtubeQuery": "Dom Dolla live set",
+      "genres": [
+        "house",
+        "deep house",
+        "future house",
+        "tech house"
+      ]
     },
     {
       "name": "Luke Combs",
@@ -1694,7 +1752,12 @@
       "day": "Friday",
       "stage": "T-Mobile",
       "spotifyId": "5xKVALj2MSqOHmQhburCM8",
-      "youtubeQuery": "Tanner Adell live set"
+      "youtubeQuery": "Tanner Adell live set",
+      "genres": [
+        "country",
+        "pop",
+        "hip hop"
+      ]
     },
     {
       "name": "Gigi Perez",
@@ -1789,6 +1852,9 @@
         "Live at Boxpac Project",
         "Mary Droppinz Live at EDC Las Vegas 2026",
         "Hail Mary Full of Bass 2025 Long Beach w/ Secret Service"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1809,7 +1875,10 @@
       "stage": "Perry's",
       "soundcloudSlug": "viperactive",
       "spotifyId": "7HeSEuZA4D7EtdygBjCbi9",
-      "youtubeQuery": "Viperactive live set"
+      "youtubeQuery": "Viperactive live set",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Murda Beatz",
@@ -1848,7 +1917,12 @@
         "SUPERSONIC BALLROOM [FULL SET]",
         "ALLEYCVT @ EDC LAS VEGAS 2025 (FULL SET)"
       ],
-      "soundcloudSlug": "alleycvt"
+      "soundcloudSlug": "alleycvt",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electro house"
+      ]
     },
     {
       "name": "BUNT.",
@@ -1865,7 +1939,12 @@
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
       ],
-      "soundcloudSlug": "buntmusic"
+      "soundcloudSlug": "buntmusic",
+      "genres": [
+        "pop",
+        "folk",
+        "house"
+      ]
     },
     {
       "name": "Tape B",
@@ -1932,7 +2011,10 @@
       "day": "Friday",
       "stage": "Lakeshore",
       "spotifyId": "2VlmDb05CPERyCZfmZI3x7",
-      "youtubeQuery": "Dogpark live set"
+      "youtubeQuery": "Dogpark live set",
+      "genres": [
+        "rock"
+      ]
     },
     {
       "name": "Isabel LaRosa",
@@ -2014,7 +2096,11 @@
       "day": "Friday",
       "stage": "BMI",
       "spotifyId": "4iyP4VOGOLzbt2Vxcyu6zG",
-      "youtubeQuery": "Winyah live set"
+      "youtubeQuery": "Winyah live set",
+      "genres": [
+        "indie",
+        "rock"
+      ]
     },
     {
       "name": "Cassandra Coleman",
@@ -2031,6 +2117,9 @@
         "Cassandra Coleman Top 12 Performance is Bone Chilling",
         "Nashville Debut EP Show at Exit/In!!!",
         "Coming of Age"
+      ],
+      "genres": [
+        "folk"
       ]
     },
     {
@@ -2048,6 +2137,10 @@
         "Caroline Kingsbury on Audiotree Live (Full Session)",
         "Kissing Someone Else | Audiotree Live",
         "Shock Treatment | Audiotree Live"
+      ],
+      "genres": [
+        "indie pop",
+        "pop"
       ]
     },
     {
@@ -2065,6 +2158,10 @@
         "Midnight Generation on Audiotree Live (Full Session)",
         "Don't Wait Up (Live in Mexico City)",
         "Don't Wait Up | Audiotree Live"
+      ],
+      "genres": [
+        "disco",
+        "funk"
       ]
     },
     {
@@ -2083,21 +2180,31 @@
       "day": "Friday",
       "stage": "BMI",
       "spotifyId": "5qhDQveADDnjIZQ85AtgDM",
-      "youtubeQuery": "Star Bandz live set"
+      "youtubeQuery": "Star Bandz live set",
+      "genres": [
+        "rap"
+      ]
     },
     {
       "name": "Jesse Detor",
       "day": "Friday",
       "stage": "The Grove",
       "spotifyId": "3HljFuKgpaXNKfIlFZWCEk",
-      "youtubeQuery": "Jesse Detor live set"
+      "youtubeQuery": "Jesse Detor live set",
+      "genres": [
+        "indie",
+        "rock"
+      ]
     },
     {
       "name": "Old Mervs",
       "day": "Friday",
       "stage": "The Grove",
       "spotifyId": "3N8YzKqrEQonvd5RLQ4iYg",
-      "youtubeQuery": "Old Mervs live set"
+      "youtubeQuery": "Old Mervs live set",
+      "genres": [
+        "indie rock"
+      ]
     },
     {
       "name": "Hey, Nothing",
@@ -2105,7 +2212,11 @@
       "stage": "The Grove",
       "soundcloudSlug": "heynothing-music",
       "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
-      "youtubeQuery": "Hey, Nothing live set"
+      "youtubeQuery": "Hey, Nothing live set",
+      "genres": [
+        "folk",
+        "indie rock"
+      ]
     },
     {
       "name": "Zinadelphia",
@@ -2167,6 +2278,11 @@
         "Ocean Alley Live at Austin City Limits 2025 (Full Set)",
         "LIVE IN MELBOURNE ‘23 (Full Concert)",
         "YELLOW MELLOW EP - LIVE (10 Year Anniversary)"
+      ],
+      "genres": [
+        "rock",
+        "reggae",
+        "indie rock"
       ]
     },
     {
@@ -2232,6 +2348,10 @@
         "Live | Baby's All Right Brooklyn NYC | February 26, 2025",
         "Beat A B!tch Up Unplugged (Tour Rehearsal Live Session)",
         "I'm Over It Unplugged (Tour Rehearsal Live Session)"
+      ],
+      "genres": [
+        "rnb",
+        "pop"
       ]
     },
     {
@@ -2332,7 +2452,11 @@
       "name": "Otoboke Beaver",
       "day": "Friday",
       "stage": "Bud Light",
-      "youtubeQuery": "Otoboke Beaver live set"
+      "youtubeQuery": "Otoboke Beaver live set",
+      "genres": [
+        "punk",
+        "garage rock"
+      ]
     },
     {
       "name": "T-Pain",
@@ -2348,6 +2472,12 @@
         "T-Pain Live @ Lost Lands 2025 - Full Set",
         "On Top Of The Covers (Live From The Sun Rose)",
         "Mashup (To The Beat with Kurt Hugo Schneider)"
+      ],
+      "genres": [
+        "rnb",
+        "hip-hop",
+        "pop",
+        "soul"
       ]
     },
     {
@@ -2431,6 +2561,11 @@
         "Billie Eilish – BIRDS OF A FEATHER (Live Performance from Amazon Music’s Songline)",
         "Billie Eilish - BIRDS OF A FEATHER (Live from The LA28 Olympic Handover)",
         "Billie Eilish - BIRDS OF A FEATHER (Live From The GRAMMYs 2025)"
+      ],
+      "genres": [
+        "hardcore punk",
+        "garage rock",
+        "metalcore"
       ]
     },
     {
@@ -2448,6 +2583,10 @@
         "Landon Conrath on Audiotree Live (Full Session)",
         "Live @ The Atlantis, Washington D.C. (FULL SET) [03/07/2026]",
         "Acetone/Papercuts (Live at Fine Line)"
+      ],
+      "genres": [
+        "singer-songwriter",
+        "indie pop"
       ]
     },
     {
@@ -2465,6 +2604,9 @@
         "Full Session | Paste",
         "“Alice”- Winnetka Bowling League live @ Mercury Lounge, NYC 9/24/18",
         "Winnetka Bowling League Live Performance | The Ringer Room | The Ringer"
+      ],
+      "genres": [
+        "indie"
       ]
     },
     {
@@ -2481,6 +2623,9 @@
         "JEV @ LOLLAPALOOZA 2025",
         "jev.: Tiny Desk Concert",
         "JEV at Crosscurrents Denver 2026 | Full set"
+      ],
+      "genres": [
+        "garage"
       ]
     },
     {
@@ -2499,6 +2644,11 @@
         "Full Set | KUTX",
         "PVRIS & Dua Saleh - Live in Chicago - 12.6.26 [FLASH WARNING]",
         "\"Survival\" ft. Velvet Negroni (Live on Radio K)"
+      ],
+      "genres": [
+        "rnb",
+        "soul",
+        "hip-hop"
       ]
     },
     {
@@ -2515,6 +2665,9 @@
         "Eddie and The Getaway Interview",
         "The Making Of The \"Silver Lining\" Music Video (Vlog)",
         "“USE SOMEBODY” - Kings of Leon"
+      ],
+      "genres": [
+        "rock"
       ]
     },
     {
@@ -2552,6 +2705,11 @@
         "Sam Austins Performs in the Medium Sized Backyard",
         "Sam Austins (DJ Set) - Elevator Music",
         "FULL SHOW | Hinterland | St. Charles, IA | August 3, 2025 | LIVE"
+      ],
+      "genres": [
+        "rap",
+        "trap",
+        "indie"
       ]
     },
     {
@@ -2570,7 +2728,10 @@
         "High Energy Electronic / UKG / Insane Bass Flips | San Diego DJ Set | BLOCK PARTY 006",
         "Speed House Coffee Shop Set | AM.RADIO 007"
       ],
-      "soundcloudSlug": "danielallantunes"
+      "soundcloudSlug": "danielallantunes",
+      "genres": [
+        "house"
+      ]
     },
     {
       "name": "Fyütch & Aura V",
@@ -2672,6 +2833,9 @@
         "Jam in the Van (Full Set 2025)",
         "“I Want You” live by Carter Vail",
         "ASTRONAUTS - live in my bedroom"
+      ],
+      "genres": [
+        "indie"
       ]
     },
     {
@@ -2690,6 +2854,9 @@
         "LAYZ @ THUNDERDOME 2026",
         "Layz Live @ Lost Lands 2025 - Full Set",
         "LAYZ @ ULTRA MIAMI 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -2730,6 +2897,10 @@
         "Next to You (Live in Beaver Dam)",
         "Live at the Print Shop (Full Episode)",
         "\"Dust 2 Dust\" (Live at the Print Shop)"
+      ],
+      "genres": [
+        "country",
+        "folk"
       ]
     },
     {
@@ -2747,6 +2918,11 @@
         "live at Pinkpop 2026",
         "A Lot More Free (Live in Chattanooga)",
         "Better Me For You (Brown Eyes)(Live) | Spotify homegrown"
+      ],
+      "genres": [
+        "country",
+        "bluegrass",
+        "folk"
       ]
     },
     {
@@ -2796,6 +2972,9 @@
         "Rachel Grae concert | Turned Into Me tour @ The Lower Third {3.10.25}",
         "GOOD SIDE - Rachel Grae - Rockwood Music Hall, NYC 06/16/2022",
         "Rachel Rae - Library Sessions - Full Video"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -2890,7 +3069,13 @@
       "stage": "The Grove",
       "soundcloudSlug": "naomiscottmusic",
       "spotifyId": "2Zi3RrdQqk63Xj0914STkS",
-      "youtubeQuery": "Naomi Scott live set"
+      "youtubeQuery": "Naomi Scott live set",
+      "genres": [
+        "pop",
+        "rnb",
+        "dream pop",
+        "rock"
+      ]
     },
     {
       "name": "Young Miko",
@@ -2951,6 +3136,10 @@
         "BEYOND WONDERLAND 2025 (Full Set)",
         "Decadence NYE 2025 (Full Set)",
         "Red Rocks 2026 (Full Set)"
+      ],
+      "genres": [
+        "house",
+        "electro house"
       ]
     },
     {
@@ -2971,7 +3160,11 @@
       "day": "Saturday",
       "stage": "BMI",
       "spotifyId": "493xhO4GiL1eOhWUBt8CzZ",
-      "youtubeQuery": "Zoe Ko live set"
+      "youtubeQuery": "Zoe Ko live set",
+      "genres": [
+        "pop",
+        "indie"
+      ]
     },
     {
       "name": "Levity",
@@ -2988,13 +3181,22 @@
         "LEVITY at COACHELLA 2026",
         "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
         "Levity (LASERSHIP SET) ULTRA 2026"
+      ],
+      "genres": [
+        "jazz"
       ]
     },
     {
       "name": "Fujii Kaze",
       "day": "Saturday",
       "stage": "Tito's",
-      "youtubeQuery": "Fujii Kaze live set"
+      "youtubeQuery": "Fujii Kaze live set",
+      "genres": [
+        "jazz",
+        "pop",
+        "indie pop",
+        "disco"
+      ]
     },
     {
       "name": "Bilmuri",
@@ -3046,7 +3248,11 @@
       "day": "Saturday",
       "stage": "BMI",
       "spotifyId": "1kXY7pco0sC6GEgJW9xxyI",
-      "youtubeQuery": "People R Ugly live set"
+      "youtubeQuery": "People R Ugly live set",
+      "genres": [
+        "punk",
+        "rock"
+      ]
     },
     {
       "name": "Chase & Status",
@@ -3071,7 +3277,13 @@
       "day": "Saturday",
       "stage": "The Grove",
       "spotifyId": "7AaGbSgUxJFuZ49VvclNH6",
-      "youtubeQuery": "Damiano David live set"
+      "youtubeQuery": "Damiano David live set",
+      "genres": [
+        "pop",
+        "singer-songwriter",
+        "rock",
+        "soul"
+      ]
     },
     {
       "name": "JPEGMAFIA",
@@ -3175,7 +3387,10 @@
       "day": "Sunday",
       "stage": "The Grove",
       "spotifyId": "4WgDm2J3jztBZSc1S0lMsx",
-      "youtubeQuery": "Kaicrewsade live set"
+      "youtubeQuery": "Kaicrewsade live set",
+      "genres": [
+        "hip-hop"
+      ]
     },
     {
       "name": "Landon Barker",
@@ -3200,6 +3415,13 @@
         "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
         "PARDEAUX Live Set | Secret B2B",
         "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ],
+      "genres": [
+        "pop",
+        "hyperpop",
+        "trance",
+        "indie",
+        "house"
       ]
     },
     {
@@ -3223,7 +3445,11 @@
       "name": "Benches",
       "day": "Sunday",
       "stage": "BMI",
-      "youtubeQuery": "Benches live set"
+      "youtubeQuery": "Benches live set",
+      "genres": [
+        "indie rock",
+        "garage rock"
+      ]
     },
     {
       "name": "Flowerovlove",
@@ -3241,7 +3467,11 @@
       "name": "Laila!",
       "day": "Sunday",
       "stage": "T-Mobile",
-      "youtubeQuery": "Laila! live set"
+      "youtubeQuery": "Laila! live set",
+      "genres": [
+        "rnb",
+        "soul"
+      ]
     },
     {
       "name": "Nimino",
@@ -3268,7 +3498,11 @@
       "name": "Vincent Lima",
       "day": "Sunday",
       "stage": "The Grove",
-      "youtubeQuery": "Vincent Lima live set"
+      "youtubeQuery": "Vincent Lima live set",
+      "genres": [
+        "folk",
+        "pop"
+      ]
     },
     {
       "name": "Post Animal",
@@ -3292,7 +3526,11 @@
       "day": "Sunday",
       "stage": "BMI",
       "spotifyId": "3Z7dkUrTApDgi6npZfoHVv",
-      "youtubeQuery": "Lekan live set"
+      "youtubeQuery": "Lekan live set",
+      "genres": [
+        "rnb",
+        "soul"
+      ]
     },
     {
       "name": "Boynextdoor",
@@ -3309,7 +3547,11 @@
       "day": "Sunday",
       "stage": "The Grove",
       "spotifyId": "6EEkobfnenJF603WO8nUrR",
-      "youtubeQuery": "Willow Avalon live set"
+      "youtubeQuery": "Willow Avalon live set",
+      "genres": [
+        "country",
+        "folk"
+      ]
     },
     {
       "name": "Rebecca Black",
@@ -3444,13 +3686,23 @@
         "Marlon Hoffstadt Live @ Coachella 2026",
         "Marlon Hoffstadt WE1 | Tomorrowland 2026",
         "Marlon Hoffstadt Live @ Ultra Miami Main Stage 2026"
+      ],
+      "genres": [
+        "house",
+        "pop",
+        "deep house",
+        "trance"
       ]
     },
     {
       "name": "Aliyah's Interlude",
       "day": "Sunday",
       "stage": "BMI",
-      "youtubeQuery": "Aliyah's Interlude live set"
+      "youtubeQuery": "Aliyah's Interlude live set",
+      "genres": [
+        "pop",
+        "hip-hop"
+      ]
     },
     {
       "name": "Isaiah Rashad",
@@ -3542,7 +3794,13 @@
       "name": "Ian",
       "day": "Sunday",
       "stage": "Tito's",
-      "youtubeQuery": "Ian live set"
+      "youtubeQuery": "Ian live set",
+      "genres": [
+        "trap",
+        "rap",
+        "heavy metal",
+        "ambient"
+      ]
     },
     {
       "name": "Bob's Dance Shop",
@@ -3575,7 +3833,10 @@
       "day": "Sunday",
       "stage": "BMI",
       "spotifyId": "3WHWgx8Dh0IqQT1BMDTeE3",
-      "youtubeQuery": "Graham Barham live set"
+      "youtubeQuery": "Graham Barham live set",
+      "genres": [
+        "country"
+      ]
     },
     {
       "name": "Dominic Fike",

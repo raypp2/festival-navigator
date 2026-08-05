@@ -294,7 +294,12 @@
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
       ],
-      "soundcloudSlug": "buntmusic"
+      "soundcloudSlug": "buntmusic",
+      "genres": [
+        "pop",
+        "folk",
+        "house"
+      ]
     },
     {
       "name": "Natasha Bedingfield",
@@ -400,6 +405,13 @@
         "rusowsky LIVE @ Riverland Fest 2025 (Arriondas, Asturias)",
         "Tiny Desk Concert",
         "RUSOWSKY SANTIAGO DE CHILE 2025/ registro completo"
+      ],
+      "genres": [
+        "rnb",
+        "pop",
+        "house",
+        "latin",
+        "dancehall"
       ]
     },
     {
@@ -418,6 +430,11 @@
         "Live from Joshua Tree",
         "Marlon Funaki (Live Music) | Beachbreak Sessions",
         "Live from 22nd Dimension Studio"
+      ],
+      "genres": [
+        "psychedelic rock",
+        "indie",
+        "singer-songwriter"
       ]
     },
     {
@@ -518,6 +535,11 @@
         "Noah Kahan Closes Rolling Stone Fest 🌧️ #musicnews",
         "Glen Hansard, Marketa Irglova - Falling Slowly",
         "Angus and Julia Stone - Big Jet Plane"
+      ],
+      "genres": [
+        "folk",
+        "country",
+        "pop"
       ]
     },
     {
@@ -535,6 +557,9 @@
         "Molly Santana LIVE @ Rolling Loud Orlando 2026 [Full Set]",
         "Molly Santana @ Summer Smash 2026 | Full Set |",
         "Molly Santana LIVE @ Rolling Loud Miami '24 [FULL SET]"
+      ],
+      "genres": [
+        "trap"
       ]
     },
     {
@@ -581,6 +606,12 @@
         "Tiny Desk Concert",
         "“I Can See the Devil” | “I’m In Love” | “Snapping Turtle” | Full KUTX Session",
         "“Waymore’s Blues” - Live at Red Rocks"
+      ],
+      "genres": [
+        "folk",
+        "country",
+        "indie",
+        "rock"
       ]
     },
     {
@@ -619,6 +650,9 @@
         "Cassandra Coleman Top 12 Performance is Bone Chilling",
         "Nashville Debut EP Show at Exit/In!!!",
         "Coming of Age"
+      ],
+      "genres": [
+        "folk"
       ]
     },
     {
@@ -659,6 +693,10 @@
         "Hot Blooded (NPR Tiny Desk Submission 2025)",
         "New Constellations on Audiotree Live (Full Session)",
         "New Constellations Live at The Crystal Ballroom | Portland"
+      ],
+      "genres": [
+        "synthpop",
+        "indie pop"
       ]
     },
     {
@@ -698,6 +736,9 @@
         "NIGHT TRAVELER Live in Texas! \"Love Nobody Else\"",
         "I Still Love You (live from Austin, TX)",
         "NIGHT TRAVELER Live in Texas! \"Missing You\""
+      ],
+      "genres": [
+        "synthpop"
       ]
     },
     {
@@ -753,6 +794,9 @@
         "Full Set (Live Music) | Sugarshack Sessions",
         "Lose The Gun (Live from Lollapalooza)",
         "Mountain Mama (Live from Lollapalooza)"
+      ],
+      "genres": [
+        "folk"
       ]
     },
     {
@@ -769,6 +813,9 @@
         "Girlfriends live at Mootsy's (thesomshow.com)",
         "Avril Lavigne - Girlfriend (The Best Damn Tour - Live In Toronto)",
         "girlfriends - VANS WARPED TOUR FULL SHOW (Long Beach 2025)"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -804,6 +851,11 @@
         "Live @ WREK",
         "Last Draw (Live at Pearl Street Co-op)",
         "GROCERY BAG live @Stubbs Austin, TX"
+      ],
+      "genres": [
+        "garage rock",
+        "punk",
+        "garage"
       ]
     },
     {
@@ -821,6 +873,9 @@
         "Hollow Coves - Coastline (Lyrics)",
         "Olivia Dean - Live At The Jazz Cafe",
         "Tahanan (Live at The Cozy Cove) - El Manu, Jessy Kang, Jason Marvin"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -839,6 +894,9 @@
         "Sunny in London Acoustic (Full EP Live Performance)",
         "Izzy Escobar Performs LIVE In Nashville | MTV Underground",
         "Live | Baby's All Right Brooklyn NYC | December 8, 2025"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -873,6 +931,10 @@
         "4411 TIKI-TAKA PASSES ARE INSANE | EA FC 26",
         "Singer 4411 Heavy Duty 4 Threading & Winding a Bobbin",
         "Singer 4411 Heavy Duty 10 Selecting Stitches, Stitch Length & Stitch Width"
+      ],
+      "genres": [
+        "folk",
+        "indie"
       ]
     },
     {
@@ -890,6 +952,9 @@
         "LIVE from NYC Pier 17 2026 | Full Set",
         "Live from Denver 2025 | Full Set",
         "Łaszewo @ GMOSONIC 2026"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -908,6 +973,12 @@
         "Leon Knight on the Mic",
         "Smash Studio",
         "Don't be this guy! Entitlement of the Seas! 🚢"
+      ],
+      "genres": [
+        "rock",
+        "hiphop",
+        "funk",
+        "pop"
       ]
     },
     {
@@ -1081,6 +1152,9 @@
         "LEVITY at COACHELLA 2026",
         "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
         "Levity (LASERSHIP SET) ULTRA 2026"
+      ],
+      "genres": [
+        "jazz"
       ]
     },
     {
@@ -1163,6 +1237,9 @@
         "LIVE @ Electric Forest 2026",
         "it's murph LIVE @ Red Rocks 2026",
         "it's murph LIVE @ EDC Las Vegas (Cosmic Meadow) 2025"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -1181,6 +1258,11 @@
         "Live at Washington D.C [FULL SET | 5/3/26]",
         "FAKEMINK LIVE @ CLOUT FESTIVAL (FULL SET)",
         "FAKEMINK LIVE CAMP FLOG GNAW 2025 (BEST VIEW 4K)"
+      ],
+      "genres": [
+        "hip-hop",
+        "downtempo",
+        "trap"
       ]
     },
     {
@@ -1236,6 +1318,12 @@
         "Family Matters (Radio 1's Big Weekend 2025) @Skye_Newman Newman",
         "Family Matters | Radio 1’s Big Weekend 2026",
         "FU & UF (Live) | Presented by Spotify"
+      ],
+      "genres": [
+        "indie",
+        "hip-hop",
+        "rnb",
+        "neo soul"
       ]
     },
     {
@@ -1280,6 +1368,10 @@
         "live at Pinkpop 2026",
         "Lollapalooza Chile 2026",
         "'Sideways' (live for Like A Version)"
+      ],
+      "genres": [
+        "indie",
+        "pop"
       ]
     },
     {
@@ -1318,6 +1410,10 @@
         "Box Session | Turtlebox Audio",
         "Arcy Drive ¦ Bonnaroo Music Festival 2026 ¦ Full Set",
         "FULL SHOW | Omaha, NE | October 21, 2025 | LIVE | The Pit Tour"
+      ],
+      "genres": [
+        "indie rock",
+        "folk"
       ]
     },
     {
@@ -1377,6 +1473,9 @@
         "Live at Park Orchards Recording Studios",
         "live at Best Kept Secret 2026",
         "Don West performs Send It Back | Sydney New Year's Eve 2025 | ABC iview"
+      ],
+      "genres": [
+        "soul"
       ]
     },
     {
@@ -1394,6 +1493,10 @@
         "Self Aware",
         "Self aware live for the first time🥹 #band #live #music #selfaware #tempercity",
         "Fly Away (Aztec Techno Remix) | Rooftop Sessions [4K]"
+      ],
+      "genres": [
+        "rock",
+        "pop"
       ]
     },
     {
@@ -1432,6 +1535,12 @@
         "\"baby\" (Live at Apple Music Radio) | Zane Lowe Show",
         "Gabriel Jacoby \"baby\" | On The Radar Live Performance",
         "be careful | A COLORS SHOW"
+      ],
+      "genres": [
+        "soul",
+        "funk",
+        "rnb",
+        "rap"
       ]
     },
     {
@@ -1485,6 +1594,10 @@
         "🎹 Studio Desk Keyboard installation",
         "Ancient Structures Ahead of Their Time",
         "thats crazy🫠🙏"
+      ],
+      "genres": [
+        "punk",
+        "indie rock"
       ]
     },
     {
@@ -1502,6 +1615,10 @@
         "First Base | BELMONT TRACKS",
         "Indie Rock / Texas music mix from the gaming lounge | Emma Ogier | Taste",
         "Was it the Actress? | BELMONT TRACKS"
+      ],
+      "genres": [
+        "folk",
+        "americana"
       ]
     },
     {
@@ -1536,6 +1653,10 @@
         "E.R. Fightmaster with fans 10/23/22",
         "E. R. Fightmaster (Kai Bartley) via them TikTok page",
         "The shoot of the fight goes like this, # fightmaster live"
+      ],
+      "genres": [
+        "alt-country",
+        "folk"
       ]
     },
     {
@@ -1586,6 +1707,11 @@
         "21st Century Cool Girl",
         "Sexy Goodbye",
         "So Sad So Hot"
+      ],
+      "genres": [
+        "pop",
+        "indie pop",
+        "singer-songwriter"
       ]
     },
     {
@@ -1602,6 +1728,9 @@
         "Pulp - Common People | Glastonbury 2025",
         "Pulp - Common People (Reading 2011)",
         "Pulp - Common People (Glastonbury 1995)"
+      ],
+      "genres": [
+        "indie rock"
       ]
     },
     {
@@ -1648,6 +1777,9 @@
         "Pinegrove - Montclair - Live at the Wellmont Theater",
         "Montclair @ Alchemy in Providence, RI - June 15, 2025 (Full Set)",
         "Live - September 27th 2025 - Full Set -"
+      ],
+      "genres": [
+        "metalcore"
       ]
     },
     {
@@ -1666,6 +1798,10 @@
         "They Know I’m Bored (New Song)(Toronto 2024)",
         "Even Presley Regier’s calmer songs had great energy live #Shorts",
         "Nevermind"
+      ],
+      "genres": [
+        "indie",
+        "pop"
       ]
     },
     {
@@ -1866,6 +2002,11 @@
         "live at Pinkpop 2026",
         "A Lot More Free (Live in Chattanooga)",
         "Better Me For You (Brown Eyes)(Live) | Spotify homegrown"
+      ],
+      "genres": [
+        "country",
+        "bluegrass",
+        "folk"
       ]
     },
     {
@@ -2091,6 +2232,10 @@
         "Live From KCRW HQ",
         "Live from Studio A - Rio Kosta",
         "@RIOKOSTAMUSIC @ Zebulon (7/16/25)"
+      ],
+      "genres": [
+        "indie",
+        "funk"
       ]
     },
     {
@@ -2124,6 +2269,10 @@
         "secrecy (live from chicago)",
         "spaceman (live from chicago)",
         "Live | Baby's All Right Brooklyn NYC | November 11, 2024"
+      ],
+      "genres": [
+        "folk",
+        "indie"
       ]
     },
     {
@@ -2185,6 +2334,10 @@
         "Rum Jungle @ Liberty Hall, Moore Park 21/2/25",
         "Rum Jungle @rumjungleband at UNSW Roundhouse 26/6/26",
         "Everything Is Easy (live) BIGSOUND 2023"
+      ],
+      "genres": [
+        "garage rock",
+        "indie rock"
       ]
     },
     {
@@ -2201,6 +2354,10 @@
         "Trebel Sessions - Paloma Morphy",
         "PALOMA MORPHY SOLA TECATE PAL NORTE 2026",
         "SEB (Video Oficial)"
+      ],
+      "genres": [
+        "latin",
+        "indie"
       ]
     },
     {
@@ -2276,6 +2433,10 @@
         "Britton at Nomadic in Jacumba, CA for Umbrella Weekend 2023",
         "“BURNED”",
         "Britton Powell - Live at Zebulon, LA 3/7/2020"
+      ],
+      "genres": [
+        "indie pop",
+        "heavy metal"
       ]
     },
     {
@@ -2315,6 +2476,9 @@
         "Pretty One - The Castle, Manchester - 10 December 2025",
         "Hinge (Live @ O2 Kentish Town Forum) - Supporting Jet 12.10.24",
         "Marie Davidson & L’Œil Nu || Worst come to worst"
+      ],
+      "genres": [
+        "rock"
       ]
     },
     {
@@ -2373,6 +2537,12 @@
         "Señal en Vivo - RUBIO",
         "Full Performance (Live on KEXP)",
         "Full Performance (Live on KEXP)"
+      ],
+      "genres": [
+        "indie",
+        "latin",
+        "hip hop",
+        "synthpop"
       ]
     },
     {
@@ -2406,6 +2576,10 @@
         "Live at The Mercury Lounge | 06/11/2024",
         "kevin atwater playing threat and jamie’s daydreams in chicago - april 11 2025",
         "pov: you go to a Kevin Atwater concert"
+      ],
+      "genres": [
+        "pop",
+        "indie"
       ]
     },
     {
@@ -2423,6 +2597,9 @@
         "Thomas Day full set opening for The Driver Era in Chicago @thomasdaymusic3214 @TheDriverEra",
         "Thomas Mapfumo - Full Set | Field Day 2013 | Festivo",
         "@thomasdaymusic3214 Live|Garden City, ID|March28th, 2025"
+      ],
+      "genres": [
+        "pop"
       ]
     },
     {
@@ -2440,6 +2617,10 @@
         "Glad this found it’s audience 🥂 Sundown by Nic D & Vwillz",
         "Sundown by Nic D & Vwillz",
         "Today’s First: Hadji Gaviota, Teezo Touchdown, Sevdaliza, VITA & Vwillz"
+      ],
+      "genres": [
+        "rap",
+        "pop"
       ]
     },
     {
@@ -2458,6 +2639,11 @@
         "Tiny Desk Concert",
         "Honda Stage | Live Performance by Sasha Keable – \"TAI CHI\"",
         "SASHA KEABLE LIVE IN MANCHESTER | DJ AG"
+      ],
+      "genres": [
+        "soul",
+        "pop",
+        "rnb"
       ]
     },
     {
@@ -2474,6 +2660,11 @@
         "Inside Marzz Live Set Recording Session (Real BTS Footage)",
         "The Mars Volta - Live at the Electric Ballroom (London, 2003) full set",
         "The Mars Volta - Roulette Dares (The Haunt Of)"
+      ],
+      "genres": [
+        "techno",
+        "hip hop",
+        "rnb"
       ]
     },
     {

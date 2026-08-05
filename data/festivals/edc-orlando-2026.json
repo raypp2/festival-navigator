@@ -22,6 +22,9 @@
         "A Little Sound @ Boomtown 2025 - Lion's Gate Stage",
         "Live From DnB Allstars 360°",
         "Let it Roll OA 2025 I Drum & Bass"
+      ],
+      "genres": [
+        "drum and bass"
       ]
     },
     {
@@ -38,6 +41,11 @@
         "Aaron Hibell WE2 | Tomorrowland 2026",
         "SYNCHRONICITY - Official Album Set (Live from Oxnard, Ca)",
         "Tomorrowland 2025 Atmosphere Stage [full DJ set]"
+      ],
+      "genres": [
+        "trance",
+        "ambient",
+        "dance-pop"
       ]
     },
     {
@@ -53,6 +61,11 @@
         "Groovy House DJ Set @ club TURN w/ friends",
         "AAT 🇳🇱 | MIXMIX SEOUL / XIMXIM BAR",
         "DJ Mix: Undrscovered.005 - AAT [Haven Trax]"
+      ],
+      "genres": [
+        "house",
+        "deep house",
+        "tech house"
       ]
     },
     {
@@ -231,7 +244,12 @@
         "SUPERSONIC BALLROOM [FULL SET]",
         "ALLEYCVT @ EDC LAS VEGAS 2025 (FULL SET)"
       ],
-      "soundcloudSlug": "alleycvt"
+      "soundcloudSlug": "alleycvt",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electro house"
+      ]
     },
     {
       "name": "Alok",
@@ -324,7 +342,11 @@
         "Avello B2B Dennett Live at EDC Las Vegas 2026",
         "AVELLO Live @ Red Rocks 2024 (Supporting Alison Wonderland)"
       ],
-      "soundcloudSlug": "avello_music"
+      "soundcloudSlug": "avello_music",
+      "genres": [
+        "future bass",
+        "dubstep"
+      ]
     },
     {
       "name": "AYYBO",
@@ -359,7 +381,11 @@
         "Azzecca Chicago Sunset Set - July 2025",
         "Azzecca at Seismic Dance Event 6.0 | Full Set"
       ],
-      "soundcloudSlug": "azzecca"
+      "soundcloudSlug": "azzecca",
+      "genres": [
+        "house",
+        "tech house"
+      ]
     },
     {
       "name": "Benda B2B Vastive",
@@ -407,6 +433,10 @@
         "Boogie T Live @ Lost Lands 2025 - Full Set",
         "Boogie T B2B Distinct Motive Live at EDC Las Vegas 2026",
         "Boogie T Live @ Lost Lands 2025 - Couch Lands"
+      ],
+      "genres": [
+        "dubstep",
+        "riddim"
       ]
     },
     {
@@ -595,6 +625,9 @@
         "DENNIS CRUZ at MUSIC ON FESTIVAL 2024 • AMSTERDAM",
         "Live @ Input, Barcelona, Spain 3.1.2020",
         "No Art Festival 2024 | Dennis Cruz | Flevopark Amsterdam"
+      ],
+      "genres": [
+        "tech-house"
       ]
     },
     {
@@ -652,6 +685,9 @@
         "Dj set at The Terrace @OfficialClubSpace",
         "Discip at The Concourse Project | Full Set (10 Apr 2026)",
         "🔴 Discip | EDC MEXICO 2026 Live Broadcast DAY 2"
+      ],
+      "genres": [
+        "tech house"
       ]
     },
     {
@@ -668,7 +704,13 @@
         "Disco Lines Live @ Factory Town Miami 2026",
         "Live @ Red Rocks Colorado 2025"
       ],
-      "soundcloudSlug": "discolines"
+      "soundcloudSlug": "discolines",
+      "genres": [
+        "house",
+        "indie",
+        "electropop",
+        "electro house"
+      ]
     },
     {
       "name": "Discovery Project",
@@ -697,6 +739,10 @@
         "Live at Hood Politics Miami 3-26-26",
         "Weekly House Curation #004 // Live @ Project Media",
         "FESTA BLACK PRIDE EDITION 2026 . NEO QUÍMICA ARENA - SÃO PAULO . Live Set DJ Allison Nunes"
+      ],
+      "genres": [
+        "minimal techno",
+        "progressive house"
       ]
     },
     {
@@ -712,7 +758,12 @@
         "Live from MIDNIGHT HOUR with FALLON | 10.25.25",
         "Live from NO GUESTLIST | 11.23.24"
       ],
-      "soundcloudSlug": "fallonsounds"
+      "soundcloudSlug": "fallonsounds",
+      "genres": [
+        "house",
+        "rnb",
+        "heavy metal"
+      ]
     },
     {
       "name": "Franky Rizardo",
@@ -728,7 +779,12 @@
         "Live at Coachella | 2026 ‘More To Life’",
         "FRANKY RIZARDO at MUSIC ON FESTIVAL 2025 | DAY 2 • AMSTERDAM"
       ],
-      "soundcloudSlug": "frankyrizardo"
+      "soundcloudSlug": "frankyrizardo",
+      "genres": [
+        "house",
+        "tech house",
+        "deep house"
+      ]
     },
     {
       "name": "Fury with MC Dino",
@@ -816,6 +872,10 @@
         "HAYLA Live at EDC Las Vegas 2026",
         "HAYLA Live at The Roxy Theatre, Los Angeles",
         "Where You Are, Escape, Fall Again | Defected Live Sessions [S1E6]"
+      ],
+      "genres": [
+        "house",
+        "pop"
       ]
     },
     {
@@ -832,7 +892,10 @@
         "CREAMFIELDS | TELETECH ARENA | 2025",
         "LIVE | EDC LAS VEGAS | CIRCUIT GROUNDS | 2026"
       ],
-      "soundcloudSlug": "holypriest_music"
+      "soundcloudSlug": "holypriest_music",
+      "genres": [
+        "hard techno"
+      ]
     },
     {
       "name": "I Hate Models",
@@ -867,7 +930,10 @@
         "IAN ASHER Live @ ESCAPE, San Bernadino",
         "Just a Feeling Radio #022 ft. Giulia Be, John Summit & Glass Animals!"
       ],
-      "soundcloudSlug": "ianasher"
+      "soundcloudSlug": "ianasher",
+      "genres": [
+        "house"
+      ]
     },
     {
       "name": "IDEMI",
@@ -921,6 +987,11 @@
         "Interplanetary Criminal at Paradise City 2026: Forest Stage Closing Set",
         "Boiler Room: Montréal",
         "Dekmantel - Interplanetary Criminal | HÖR - Aug 5 / 2023"
+      ],
+      "genres": [
+        "uk garage",
+        "house",
+        "jungle"
       ]
     },
     {
@@ -937,6 +1008,13 @@
         "Jessica Audiffred Live @ Lost Lands 2025 - Full Set",
         "Live From Denver",
         "JESSICA AUDIFFRED @ EDC VEGAS 2024"
+      ],
+      "genres": [
+        "techno",
+        "house",
+        "dubstep",
+        "electro",
+        "trap"
       ]
     },
     {
@@ -992,6 +1070,10 @@
         "JOSHWA Live @ Academy LA - 4th October 2025",
         "JOSHWA LIVE AT BEYOND WONDERLAND 29 March 2025",
         "Riordan b2b Joshwa - Live @ Escape 2024"
+      ],
+      "genres": [
+        "house",
+        "tech house"
       ]
     },
     {
@@ -1008,6 +1090,10 @@
         "Kaivon Live @ EDC Las Vegas 2023",
         "Kaivon Live @ Hard Summer 2023",
         "The Dark Night of the Soul Album Showcase"
+      ],
+      "genres": [
+        "chillwave",
+        "future bass"
       ]
     },
     {
@@ -1042,6 +1128,10 @@
         "KI/KI live at AMF 2025",
         "5 HOURS - The Wool Store, Melbourne",
         "Warsaw | Mixmag x Burn Energy Tour"
+      ],
+      "genres": [
+        "trance",
+        "techno"
       ]
     },
     {
@@ -1058,6 +1148,9 @@
         "KinAhau Live at EDC Las Vegas 2026",
         "KINAHAU Dj Set at FLOYD @OfficialClubSpace | Miami presented by Link Miami Rebels",
         "DJ Kinahau live @ EDC México 2026"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -1157,6 +1250,9 @@
         "LAYZ @ THUNDERDOME 2026",
         "Layz Live @ Lost Lands 2025 - Full Set",
         "LAYZ @ ULTRA MIAMI 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1173,6 +1269,9 @@
         "Level Up Live @ Lost Lands 2025 - Full Set",
         "Level Up Live @ Lost Lands 2024 - Full Set",
         "LEVEL UP Live @ EDC Las Vegas 2025"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1188,6 +1287,9 @@
         "LEVITY at COACHELLA 2026",
         "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
         "Levity (LASERSHIP SET) ULTRA 2026"
+      ],
+      "genres": [
+        "jazz"
       ]
     },
     {
@@ -1293,6 +1395,12 @@
         "Marlon Hoffstadt Live @ Coachella 2026",
         "Marlon Hoffstadt WE1 | Tomorrowland 2026",
         "Marlon Hoffstadt Live @ Ultra Miami Main Stage 2026"
+      ],
+      "genres": [
+        "house",
+        "pop",
+        "deep house",
+        "trance"
       ]
     },
     {
@@ -1331,6 +1439,11 @@
         "Episode 8: Strichka 2025 IN REC",
         "Matthias Meyer Live at Levels 11Y - Porto Alegre | House & Techno Mix",
         "themuddshow x tylko"
+      ],
+      "genres": [
+        "techno",
+        "house",
+        "electro"
       ]
     },
     {
@@ -1347,7 +1460,12 @@
         "Live From Coachella 2025",
         "MAU P @OfficialClubSpace | Miami - Dj Set presented by Link Miami Rebels."
       ],
-      "soundcloudSlug": "realmaup"
+      "soundcloudSlug": "realmaup",
+      "genres": [
+        "house",
+        "tech house",
+        "techno"
+      ]
     },
     {
       "name": "Me n ü",
@@ -1377,7 +1495,10 @@
         "Meduza³ WE1 | Tomorrowland 2026",
         "MEDUZA live @ EDC Las Vegas Kinetic Field, 2025"
       ],
-      "soundcloudSlug": "meduzamusic"
+      "soundcloudSlug": "meduzamusic",
+      "genres": [
+        "house"
+      ]
     },
     {
       "name": "Miguelle & Tons",
@@ -1504,6 +1625,10 @@
         "Pegassi Live at EDC Las Vegas 2026",
         "Pegassi WE1 | Tomorrowland 2026",
         "Pegassi at Intercell x Glitch Festival 2025"
+      ],
+      "genres": [
+        "trance",
+        "techno"
       ]
     },
     {
@@ -1520,6 +1645,9 @@
         "PHRVA LIVE AT THE STACKS | LiB 2026",
         "THE AMP PULLED UP FOR 140 | PHRVA @ SHAMBHALA 2025 [FULL LIVE SET]",
         "PHRVA GENESIS DENVER DJ SET @ MAYBE FOREVER"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1568,7 +1696,12 @@
         "RAVENSCOON Live @ Mission Ballroom 2025",
         "RAVENSCOON Live @ The Ogden Theatre 2024 RAGE NIGHT, FULL SET"
       ],
-      "soundcloudSlug": "ravenscoon"
+      "soundcloudSlug": "ravenscoon",
+      "genres": [
+        "downtempo",
+        "drum and bass",
+        "dubstep"
+      ]
     },
     {
       "name": "Ray Volpe",
@@ -1655,6 +1788,9 @@
         "SHDW B2B ÜBERKIKZ WE1 | Tomorrowland 2026",
         "Techno DJ Set | SECTION. | January 2026",
         "SHDW at EXPO XXI Warsaw | Poland 2025"
+      ],
+      "genres": [
+        "techno"
       ]
     },
     {
@@ -1671,6 +1807,9 @@
         "Sippy Live @ Lost Lands 2025 - Full Set",
         "Sippy Live at EDC Las Vegas 2026",
         "Sippy (Full set) Live @ Lost Lands 2025 - Couch Lands"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1759,6 +1898,12 @@
         "Live at Tribes Unite, 2025 | UKF On Air",
         "Elevate: Live 003 - Subsonic",
         "DnB Allstars: Festival 2023 Live From London (DJ Set)"
+      ],
+      "genres": [
+        "techno",
+        "drum and bass",
+        "rock",
+        "hard techno"
       ]
     },
     {
@@ -1775,6 +1920,12 @@
         "Taiki Nulight & D38 - Live in London | UKF On Air",
         "Taiki Nulight DJ set | @beatport Live | Los Angeles",
         "UKF Invites at Colour Factory, London"
+      ],
+      "genres": [
+        "house",
+        "bass house",
+        "tech house",
+        "techno"
       ]
     },
     {
@@ -1813,6 +1964,11 @@
         "TWINSICK Live @ Fillmore Minneapolis 2026",
         "TWINSICK Live @ Terminal 5 New York City 2025",
         "TWINSICK Live @ Varsity Theater Minneapolis 2025"
+      ],
+      "genres": [
+        "indie",
+        "pop",
+        "electro house"
       ]
     },
     {
@@ -1866,6 +2022,11 @@
         "WOOLI Live @ Lost Lands 2025 - Full Set",
         "Wooli Live at EDC Las Vegas 2026",
         "Wooli Live @ Lost Lands 2023 - Full Set"
+      ],
+      "genres": [
+        "dubstep",
+        "future bass",
+        "riddim"
       ]
     },
     {

@@ -113,6 +113,10 @@
         "KI/KI live at AMF 2025",
         "5 HOURS - The Wool Store, Melbourne",
         "Warsaw | Mixmag x Burn Energy Tour"
+      ],
+      "genres": [
+        "trance",
+        "techno"
       ]
     },
     {
@@ -194,6 +198,11 @@
         "Layton Giordani Live at EDC Las Vegas 2026",
         "Layton Giordani Live @ The Edge | New York City Nighttime Set",
         "Layton Giordani Live @ EDC Las Vegas 2025 | Circuit Grounds Closing Set"
+      ],
+      "genres": [
+        "techno",
+        "house",
+        "tech house"
       ]
     },
     {
@@ -230,6 +239,10 @@
         "Mixmag Lab London",
         "Notion UKG And Bassline Set Live From DJ Mag HQ",
         "NOTION LIVE AT AIRSPACE BRISTOL 09/02/24"
+      ],
+      "genres": [
+        "drum and bass",
+        "hip hop"
       ]
     },
     {
@@ -246,6 +259,9 @@
         "FULL SET | DGTL ADE 2025",
         "Boiler Room: Sheffield",
         "Full set | Soenda Festival 2026"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -261,7 +277,10 @@
         "Live Mix: Smokey Bubblin' B @ Armada London",
         "SMOKEY BUBBLIN'B | HOUSE | GARAGE | 12/01/2026"
       ],
-      "soundcloudSlug": "smokey-bubblin-b123"
+      "soundcloudSlug": "smokey-bubblin-b123",
+      "genres": [
+        "house"
+      ]
     },
     {
       "name": "Brutalismus 3000",
@@ -277,6 +296,11 @@
         "EDC Las Vegas 2025 (Live Set)",
         "Boiler Room: Berlin",
         "Boiler Room Festival London 2021 | Possession"
+      ],
+      "genres": [
+        "techno",
+        "hardcore techno",
+        "hardstyle"
       ]
     },
     {
@@ -333,6 +357,11 @@
         "Devault Live at Coachella 2026 (Quasar)",
         "Devault at The Concourse Project | Full Set (20 Feb 2026)",
         "Devault Live @ Pop Up Warehouse (Los Angeles) June 2025"
+      ],
+      "genres": [
+        "house",
+        "dubstep",
+        "pop"
       ]
     },
     {
@@ -349,6 +378,12 @@
         "Live at stereoBLOOM - EDC Las Vegas 2026",
         "HNTR at The Concourse Project | Full Set (27 Jun 2025)",
         "Sold Out at 99 Scott, Brooklyn NY, 2026"
+      ],
+      "genres": [
+        "progressive house",
+        "melodic techno",
+        "acid house",
+        "tech house"
       ]
     },
     {
@@ -404,6 +439,11 @@
         "1tbsp (DJ Set) - Elevator Music",
         "1tbsp live in sydney @ machine hall | castle dj mix",
         "Rinse HQ139 | 1tbsp"
+      ],
+      "genres": [
+        "house",
+        "techno",
+        "uk garage"
       ]
     },
     {
@@ -474,6 +514,10 @@
         "WELKER at The Concourse Project | Full Set (16 May 2025)",
         "WELKER @ Sound Nightclub | Los Angeles 4K",
         "WELKER LIVE AT VIRTUAL FESTIVAL 2025 (FULL SET)"
+      ],
+      "genres": [
+        "house",
+        "techno"
       ]
     },
     {
@@ -490,6 +534,9 @@
         "Boiler Room x Glitch Festival 2025",
         "FULL CLOSING SET | DGTL AMSTERDAM 2026",
         "FULL SET | DGTL ADE 2025"
+      ],
+      "genres": [
+        "techno"
       ]
     },
     {
@@ -520,7 +567,11 @@
         "I Made 300 People Dance for 90 Minutes Straight | NYC Techno Rave (A Better Place Tour)",
         "Raving in the Daytime (Techno, House, & DnB) - Conrad Taylor Rooftop DJ Set"
       ],
-      "soundcloudSlug": "conradsamtaylor"
+      "soundcloudSlug": "conradsamtaylor",
+      "genres": [
+        "house",
+        "techno"
+      ]
     },
     {
       "name": "Mestiza",
@@ -561,7 +612,12 @@
         "Live from MIDNIGHT HOUR with FALLON | 10.25.25",
         "Live from NO GUESTLIST | 11.23.24"
       ],
-      "soundcloudSlug": "fallonsounds"
+      "soundcloudSlug": "fallonsounds",
+      "genres": [
+        "house",
+        "rnb",
+        "heavy metal"
+      ]
     },
     {
       "name": "Hills",
@@ -575,6 +631,10 @@
         "HILLS at DAY TRIP FESTIVAL - FULL SET",
         "HILLS at Brooklyn Storehouse - FULL SET",
         "HILLS at Sound Night Club - FULL SET"
+      ],
+      "genres": [
+        "psychedelic rock",
+        "indie"
       ]
     },
     {
@@ -591,6 +651,12 @@
         "electric cleaners intergalactic mix | dance & electro | EC092",
         "STARJUNK 95 AT COUNTDOWN NYE 2025 - los angeles [4K]",
         "SIX5TAR @ Starjunk 95 [08/09/25]"
+      ],
+      "genres": [
+        "house",
+        "drum and bass",
+        "speed garage",
+        "bass house"
       ]
     }
   ],

@@ -101,6 +101,10 @@
         "Cloonee B2B Prospa - Live at Destino, Ibiza",
         "Prospa b2b Josh Baker | Miami Music Week | RAW CUTS",
         "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
+      ],
+      "genres": [
+        "house",
+        "electro"
       ]
     },
     {
@@ -118,6 +122,11 @@
         "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026",
         "Boiler Room: London",
         "KETTAMA @ SILO Dublin | Full Set | May 2025"
+      ],
+      "genres": [
+        "house",
+        "techno",
+        "deep house"
       ]
     },
     {
@@ -412,6 +421,13 @@
         "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
         "PARDEAUX Live Set | Secret B2B",
         "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ],
+      "genres": [
+        "pop",
+        "hyperpop",
+        "trance",
+        "indie",
+        "house"
       ]
     },
     {
@@ -515,6 +531,11 @@
         "Live at Newark, NJ [FULL SET | 6/16/26]",
         "Nate Sib (Live) - The Star Tour Houston Tx FULL SET",
         "Nate Sib Live in Melbourne (02/14/25) *FULL SET*"
+      ],
+      "genres": [
+        "rap",
+        "pop",
+        "hyperpop"
       ]
     },
     {
@@ -532,6 +553,11 @@
         "electric cleaners mix | electro pop | EC116",
         "MGNA CRRRTA Full Live @ EQ San Diego",
         "MGNA CRRRTA & DEV + CATARACS | SUBCULTURE PARTY"
+      ],
+      "genres": [
+        "electropop",
+        "hyperpop",
+        "electro house"
       ]
     },
     {
@@ -771,6 +797,9 @@
         "Mochakk at Plaza de España, in Sevilla, Spain for Cercle & Volcan X.A.",
         "Mochakk @ Coachella 2026 - Sahara Stage",
         "Mixmag Lab Moçambique | Mixmag Cover Mix"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -788,6 +817,12 @@
         "Marlon Hoffstadt Live @ Coachella 2026",
         "Marlon Hoffstadt WE1 | Tomorrowland 2026",
         "Marlon Hoffstadt Live @ Ultra Miami Main Stage 2026"
+      ],
+      "genres": [
+        "house",
+        "pop",
+        "deep house",
+        "trance"
       ]
     },
     {
@@ -1005,6 +1040,11 @@
         "Justin Timberlake: Tiny Desk Concert",
         "Justin Timberlake - Futuresex/Loveshow: Live from Madison Square Garden",
         "Justin Timberlake - Medley (Late Night with Jimmy Fallon 2013) HD [REUPLOAD]"
+      ],
+      "genres": [
+        "rap",
+        "techno",
+        "idm"
       ]
     },
     {
@@ -1089,6 +1129,10 @@
         "ear live @ ucla (full set)",
         "ear live in NYC 03/19/26 *FULL SET*",
         "Live at Washington D.C [FULL SET | 3/17/26]"
+      ],
+      "genres": [
+        "ambient",
+        "pop"
       ]
     },
     {
@@ -1143,7 +1187,10 @@
         "Riordan B2B Silva Bumpa in a Skate Park | RAW CUTS",
         "Live at Lost Paradise 2025"
       ],
-      "soundcloudSlug": "silvabumpa"
+      "soundcloudSlug": "silvabumpa",
+      "genres": [
+        "speed garage"
+      ]
     },
     {
       "name": "Mind Enterprises",
@@ -1181,7 +1228,11 @@
         "Azzecca Chicago Sunset Set - July 2025",
         "Azzecca at Seismic Dance Event 6.0 | Full Set"
       ],
-      "soundcloudSlug": "azzecca"
+      "soundcloudSlug": "azzecca",
+      "genres": [
+        "house",
+        "tech house"
+      ]
     },
     {
       "name": "Dean Turnley",
@@ -1198,7 +1249,10 @@
         "Dean Turnley (Live Set) | Beyond The Valley 2022 — Coastal Jam Take-over",
         "DEAN TURNLEY / Who Started House 2nd Bday / 28.7.24"
       ],
-      "soundcloudSlug": "dean_turnley"
+      "soundcloudSlug": "dean_turnley",
+      "genres": [
+        "house"
+      ]
     },
     {
       "name": "riria",

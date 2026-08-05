@@ -45,6 +45,9 @@
         "ÆON:MODE Live at EDC Las Vegas 2026",
         "ÆON:MODE 🚨 Live At Liquicity Festival",
         "Live at Exchange, Los Angeles | UKF On Air"
+      ],
+      "genres": [
+        "drum and bass"
       ]
     },
     {
@@ -61,7 +64,12 @@
         "SUPERSONIC BALLROOM [FULL SET]",
         "ALLEYCVT @ EDC LAS VEGAS 2025 (FULL SET)"
       ],
-      "soundcloudSlug": "alleycvt"
+      "soundcloudSlug": "alleycvt",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electro house"
+      ]
     },
     {
       "name": "ARMNHMR",
@@ -77,6 +85,9 @@
         "ARMNHMR Live @ Lost Lands 2025 - Full Set",
         "ARMNHMR ULTRA MIAMI 2026 FULL SET (WORLDWIDE STAGE)",
         "ARMNHMR LIVE - EDC LAS VEGAS 2025 FULL SET (cosmicMEADOW) - FIXED AUDIO HQ"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -114,7 +125,10 @@
         "Audiofreq @ EPIK 2022 | HSU EVENTS",
         "Audiofreq, Code Black & Toneshifterz Presents: 3 blokes at The Basscon stage at EDC Las Vegas 2022"
       ],
-      "soundcloudSlug": "audiofreqdj"
+      "soundcloudSlug": "audiofreqdj",
+      "genres": [
+        "hardstyle"
+      ]
     },
     {
       "name": "Barely Alive",
@@ -176,6 +190,9 @@
         "Benda Live @ Lost Lands 2023 - Full Set",
         "Benda @ Lost Lands 2024 (Couch Lands)",
         "Benda B2B OG Nixin Live Set At Apocalypse Zombie Land 2025 In Long Beach, California"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -191,7 +208,12 @@
         "Shogun X Elevate Sessions - Blossom",
         "Blossoms | Live From Kendal Calling (Full Set)"
       ],
-      "soundcloudSlug": "blossomdj"
+      "soundcloudSlug": "blossomdj",
+      "genres": [
+        "downtempo",
+        "pop punk",
+        "shoegaze"
+      ]
     },
     {
       "name": "Boogie T",
@@ -207,6 +229,10 @@
         "Boogie T Live @ Lost Lands 2025 - Full Set",
         "Boogie T B2B Distinct Motive Live at EDC Las Vegas 2026",
         "Boogie T Live @ Lost Lands 2025 - Couch Lands"
+      ],
+      "genres": [
+        "dubstep",
+        "riddim"
       ]
     },
     {
@@ -281,7 +307,11 @@
         "canabliss (Live) @ Wakaan Fest 2025",
         "canabliss (Live) @ EDC Orlando 2025"
       ],
-      "soundcloudSlug": "canabliss"
+      "soundcloudSlug": "canabliss",
+      "genres": [
+        "dubstep",
+        "future bass"
+      ]
     },
     {
       "name": "Caspa",
@@ -323,6 +353,11 @@
         "CRANKDAT Live @ Lost Lands 2025 - Full Set",
         "CRANKDAT LIVE @ RED ROCKS 2026 (FULL SET)",
         "CRANKDAT LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2025"
+      ],
+      "genres": [
+        "melodic dubstep",
+        "future bass",
+        "house"
       ]
     },
     {
@@ -338,7 +373,11 @@
         "Craze DJ Set | Keep Hush Live Miami",
         "DJ CRAZE LIVE @ GLOBAL BASED"
       ],
-      "soundcloudSlug": "crazearoni"
+      "soundcloudSlug": "crazearoni",
+      "genres": [
+        "rock",
+        "hiphop"
+      ]
     },
     {
       "name": "Culture Shock",
@@ -373,6 +412,11 @@
         "Cyclops Live @ Lost Lands 2025 - Full Set",
         "CYCLOPS @ RED ROCKS 2026",
         "Cyclops Live @ Lost Lands 2024 - Full Set"
+      ],
+      "genres": [
+        "dubstep",
+        "punk",
+        "riddim"
       ]
     },
     {
@@ -490,6 +534,9 @@
         "INFRASOUND EQUINOX 2025 FULL SET",
         "Distinct Motive Live @ Lost Lands 2025 - Full Set",
         "Boogie T B2B Distinct Motive Live at EDC Las Vegas 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -526,6 +573,10 @@
         "BEYOND WONDERLAND 2025 (Full Set)",
         "Decadence NYE 2025 (Full Set)",
         "Red Rocks 2026 (Full Set)"
+      ],
+      "genres": [
+        "house",
+        "electro house"
       ]
     },
     {
@@ -542,7 +593,10 @@
         "Live From Denver - Presented By MP3 MAG & Club Studio Time",
         "Live from DRINKURWATER at 808 | 10.11.25"
       ],
-      "soundcloudSlug": "itsdrinkurwater"
+      "soundcloudSlug": "itsdrinkurwater",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Effin",
@@ -578,7 +632,10 @@
         "EMORFIK LIVE AT BASSPOD - EDC LAS VEGAS 2024",
         "SOSYAL STUDIOS Vol. 3 | Emorfik | Dubstep DJ Live Performance"
       ],
-      "soundcloudSlug": "emorfik"
+      "soundcloudSlug": "emorfik",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Eptic",
@@ -787,6 +844,10 @@
         "GHENGAR Live at EDC Las Vegas 2026",
         "GHENGAR Live @ Lost Lands 2023 - Full Set",
         "Ghastly Presents Ghengar - EDC Las Vegas 2024"
+      ],
+      "genres": [
+        "dubstep",
+        "riddim"
       ]
     },
     {
@@ -803,6 +864,9 @@
         "Full Set @ Liquicity Festival 2023 💥",
         "BOAT SET | gladde paling B2B Explorers of the Internet",
         "gladde paling @ Rampage Open Air 2025"
+      ],
+      "genres": [
+        "drum and bass"
       ]
     },
     {
@@ -842,6 +906,9 @@
         "Hairitage Live @ Lost Lands 2023 - Full Set",
         "HAIRITAGE B2B DRINKURWATER Live @ Lost Lands 2024 - Full Set",
         "Hairitage Live Full Set The Cannery Hall Nashville TN 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -858,7 +925,11 @@
         "Live From DnB Allstars 360°",
         "HEDEX MHITR LIVE @ ULTRA MIAMI 2025 (Full 4 Camera DJ Set)"
       ],
-      "soundcloudSlug": "hedexuk"
+      "soundcloudSlug": "hedexuk",
+      "genres": [
+        "drum and bass",
+        "riddim"
+      ]
     },
     {
       "name": "HEYZ",
@@ -874,6 +945,12 @@
         "HEYZ LIVE @ EDC LAS VEGAS 2026 (FULL SET)",
         "HEYZ'D And Confused Vol. 2 (LIVE from Electric Forest)",
         "Live at Red Rocks 2025 [Full Set | Deadrocks Night 2]"
+      ],
+      "genres": [
+        "tech house",
+        "progressive house",
+        "electro house",
+        "techno"
       ]
     },
     {
@@ -982,7 +1059,11 @@
         "Jantsen Live @ Lost Lands 2019 - Full Set",
         "Jantsen Live at Seven Stars 2025 full set 4k HDR Big Dipper Stage"
       ],
-      "soundcloudSlug": "jantsenmusic"
+      "soundcloudSlug": "jantsenmusic",
+      "genres": [
+        "dubstep",
+        "hybrid trap"
+      ]
     },
     {
       "name": "Jessica Audiffred",
@@ -998,6 +1079,13 @@
         "Jessica Audiffred Live @ Lost Lands 2025 - Full Set",
         "Live From Denver",
         "JESSICA AUDIFFRED @ EDC VEGAS 2024"
+      ],
+      "genres": [
+        "techno",
+        "house",
+        "dubstep",
+        "electro",
+        "trap"
       ]
     },
     {
@@ -1121,6 +1209,9 @@
         "LAYZ @ THUNDERDOME 2026",
         "Layz Live @ Lost Lands 2025 - Full Set",
         "LAYZ @ ULTRA MIAMI 2026"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1137,6 +1228,9 @@
         "Level Up Live @ Lost Lands 2025 - Full Set",
         "Level Up Live @ Lost Lands 2024 - Full Set",
         "LEVEL UP Live @ EDC Las Vegas 2025"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1152,6 +1246,9 @@
         "LEVITY at COACHELLA 2026",
         "Levity B2B Crankdat B2B Tape B LIVE AT ELECTRIC FOREST 2025 (Full set)",
         "Levity (LASERSHIP SET) ULTRA 2026"
+      ],
+      "genres": [
+        "jazz"
       ]
     },
     {
@@ -1345,7 +1442,12 @@
         "RAVENSCOON Live @ Mission Ballroom 2025",
         "RAVENSCOON Live @ The Ogden Theatre 2024 RAGE NIGHT, FULL SET"
       ],
-      "soundcloudSlug": "ravenscoon"
+      "soundcloudSlug": "ravenscoon",
+      "genres": [
+        "downtempo",
+        "drum and bass",
+        "dubstep"
+      ]
     },
     {
       "name": "Ray Volpe",
@@ -1380,7 +1482,10 @@
         "I RIPPED A GNARLY DRUM AND BASS SET AT COUNTDOWN NYE 2024",
         "Beats for Love 2025 I Drum & Bass"
       ],
-      "soundcloudSlug": "reapernoises"
+      "soundcloudSlug": "reapernoises",
+      "genres": [
+        "heavy metal"
+      ]
     },
     {
       "name": "THE RESISTANCE",
@@ -1395,7 +1500,10 @@
         "The Resistance @ Lost Lands 2025 (Day -1: Wednesday - The Crater - Legend Valley, OH) (Full Set)",
         "THE RESISTANCE (Riddim) @ RAMPAGE WEEKEND 2026"
       ],
-      "soundcloudSlug": "theresistancedubs"
+      "soundcloudSlug": "theresistancedubs",
+      "genres": [
+        "metal"
+      ]
     },
     {
       "name": "Riot Ten",
@@ -1411,6 +1519,10 @@
         "Riot Ten @ Lost Lands 2022 - Full Set",
         "RIOT TEN x BASSPOD LIVE @ EDC LAS VEGAS 2025",
         "RIOT Live at EDC Las Vegas 2026"
+      ],
+      "genres": [
+        "dubstep",
+        "trap"
       ]
     },
     {
@@ -1493,6 +1605,9 @@
         "Sippy Live @ Lost Lands 2025 - Full Set",
         "Sippy Live at EDC Las Vegas 2026",
         "Sippy (Full set) Live @ Lost Lands 2025 - Couch Lands"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -1529,6 +1644,10 @@
         "Mersiv b2b Smoakland Live @ Lost Lands 2025 - Full Set",
         "Live From Denver - Presented By MorFlo Records & Club Studio Time",
         "SMOAKLAND b2b SIPPY Live @ Lost Lands 2024 - Full Set"
+      ],
+      "genres": [
+        "dubstep",
+        "liquid dnb"
       ]
     },
     {
@@ -1545,6 +1664,11 @@
         "SoDown Live @ Lost Lands 2024 - Full Set",
         "SoDown Presents: Colors of the Mind at Mission Ballroom '25",
         "SoDown Live @ Lost Lands 2023 - Full Set"
+      ],
+      "genres": [
+        "dubstep",
+        "funk",
+        "downtempo"
       ]
     },
     {
@@ -1616,6 +1740,12 @@
         "Taiki Nulight & D38 - Live in London | UKF On Air",
         "Taiki Nulight DJ set | @beatport Live | Los Angeles",
         "UKF Invites at Colour Factory, London"
+      ],
+      "genres": [
+        "house",
+        "bass house",
+        "tech house",
+        "techno"
       ]
     },
     {
@@ -1632,6 +1762,9 @@
         "Live at EDC Las Vegas 2025 (Cosmic Meadow Full DJ Set)",
         "Earth Meets Endless | Live at House of Blues Anaheim",
         "Live from Echo Mountain, CO (DJ Set)"
+      ],
+      "genres": [
+        "brostep"
       ]
     },
     {
@@ -1735,6 +1868,10 @@
         "Inside The Box with The Widdler",
         "DDD Quarantine Sessions 1: The Widdler",
         "The Widdler Full Set Sound Haven 2024"
+      ],
+      "genres": [
+        "dubstep",
+        "dub"
       ]
     },
     {
@@ -1770,7 +1907,11 @@
         "WonkyWilla @ Red Rocks 2026",
         "Live From Denver"
       ],
-      "soundcloudSlug": "wonkywilla"
+      "soundcloudSlug": "wonkywilla",
+      "genres": [
+        "dubstep",
+        "rap"
+      ]
     },
     {
       "name": "Wooli",
@@ -1786,6 +1927,11 @@
         "WOOLI Live @ Lost Lands 2025 - Full Set",
         "Wooli Live at EDC Las Vegas 2026",
         "Wooli Live @ Lost Lands 2023 - Full Set"
+      ],
+      "genres": [
+        "dubstep",
+        "future bass",
+        "riddim"
       ]
     },
     {
@@ -1802,6 +1948,10 @@
         "YOOKiE Live @ Lost Lands 2024 - Full Set",
         "YOOKIE LIVE @ LA BANDIDA - (Mcallen, TX 2025)",
         "Dark Side of the Trash Tour @ Mississippi Underground, St Louis, MO 3.7.26"
+      ],
+      "genres": [
+        "dubstep",
+        "trap"
       ]
     },
     {
@@ -1864,6 +2014,9 @@
         "LIVE @ LOST LANDS 2025 SET",
         "CHASSI @ LOST LANDS 2025 [PITS POV]",
         "[Live Set] Chassi @ Sounds of Mayhem x Space Yacht 2023"
+      ],
+      "genres": [
+        "psytrance"
       ]
     },
     {
@@ -1898,6 +2051,10 @@
         "HerShe LIVE @ Red Rocks (DEADROCKS XI)",
         "OUT-OF-STUDIO Live From KT8 Denver - Presented By Deadbeats & Club Studio Time",
         "DJ SET IN A CAR?! | HerShe - Backseat Bass Vol: 1"
+      ],
+      "genres": [
+        "pop",
+        "hip-hop"
       ]
     },
     {
@@ -1915,6 +2072,12 @@
         "Eighty-Six 019: Hydraulix Live Set (2022)",
         "Sessions Vol. 1",
         "Hydraulix FILTHY Dubstep LIVE Set | Part 1"
+      ],
+      "genres": [
+        "electro",
+        "dubstep",
+        "techno",
+        "drum and bass"
       ]
     },
     {
@@ -1932,7 +2095,10 @@
         "Izzy Vadim @ Photo City Music Hall (Radioactive EP Tour Rochester, NY 2025) (Recap 60fps)",
         "Izzy Vadim live in Hawaii(4k)"
       ],
-      "soundcloudSlug": "izzyvadim"
+      "soundcloudSlug": "izzyvadim",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Jaenga",
@@ -1949,6 +2115,12 @@
         "LIVE DJ SET AT MEOW WOLF 2025 [Bass Music Mix]",
         "DREAM MACHINE Abandoned Warehouse Set",
         "Jaenga's TUNNEL RAVE (2024)"
+      ],
+      "genres": [
+        "house",
+        "hip-hop",
+        "brostep",
+        "dnb"
       ]
     },
     {
@@ -2018,6 +2190,11 @@
         "MUERTE @ LOST LANDS 2023",
         "MUERTE LIVE @ LOST LANDS 2024",
         "Stoned To Death | Live From Denver"
+      ],
+      "genres": [
+        "hardcore punk",
+        "rock",
+        "riddim"
       ]
     },
     {
@@ -2068,7 +2245,10 @@
         "Alienpark live in Hawaii(4k)",
         "AlienPark @ Thunderdome 2024 (Excision @ Tacoma Dome - Day 2)"
       ],
-      "soundcloudSlug": "alienparkdub"
+      "soundcloudSlug": "alienparkdub",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Deadcrow",
@@ -2112,7 +2292,10 @@
         "Avello, Dennett, Machaki & Friends Live @ Lost Lands 2025 - Full Set",
         "MACHAKI LIVE AT EDC ORLANDO 2023"
       ],
-      "soundcloudSlug": "machakimusic"
+      "soundcloudSlug": "machakimusic",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Mindset",
@@ -2128,7 +2311,11 @@
         "[hate5six] Mindset - July 26, 2015",
         "MindSet (Live at EX THEATER ROPPONGI on June 20th, 2021)"
       ],
-      "soundcloudSlug": "mindsetbass"
+      "soundcloudSlug": "mindsetbass",
+      "genres": [
+        "hardcore punk",
+        "progressive house"
+      ]
     },
     {
       "name": "Phrva",
@@ -2145,6 +2332,9 @@
         "PHRVA LIVE AT THE STACKS | LiB 2026",
         "THE AMP PULLED UP FOR 140 | PHRVA @ SHAMBHALA 2025 [FULL LIVE SET]",
         "PHRVA GENESIS DENVER DJ SET @ MAYBE FOREVER"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -2183,7 +2373,10 @@
         "RZRKT LOST LANDS '24 LIVE SET",
         "Live From Denver - Presented By Beat Intelligence Network & Club Studio Time"
       ],
-      "soundcloudSlug": "rzrktmusic"
+      "soundcloudSlug": "rzrktmusic",
+      "genres": [
+        "dubstep"
+      ]
     },
     {
       "name": "Super Future",

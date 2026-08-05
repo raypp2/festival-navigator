@@ -261,6 +261,10 @@
         "Live from Stagecoach 2025",
         "Live From The Westward Tour (Coal / Denver / Nov 9, 2025)",
         "Live From The Westward Tour (Hangin On' / Folsom Prison / Boston / Sept 26, 2025)"
+      ],
+      "genres": [
+        "folk",
+        "country"
       ]
     },
     {
@@ -299,6 +303,10 @@
         "The Hudson (Live from Hyde Park)",
         "The Little Mess You Made (Live from Lollapalooza Chicago 2025)",
         "FINNEAS & Ashe Present The Favors - Austin City Limits Festival * Zilker Park, TX, US (Oct 03, 2025)"
+      ],
+      "genres": [
+        "indie",
+        "pop"
       ]
     },
     {
@@ -342,6 +350,10 @@
         "LIVE (FULL SET) @ Category 10 - Nashville, TN - 060326",
         "WILLOW AVALON (NUÇI’S SPACE’S 25TH ANNIVERSARY BENEFIT CONCERT) @ Georgia Theatre - 12/12/25",
         "FULL SHOW | Hinterland | St. Charles, IA | August 2, 2025 | LIVE"
+      ],
+      "genres": [
+        "country",
+        "folk"
       ]
     },
     {
@@ -359,6 +371,10 @@
         "Briscoe Live in Toronto @ The Danforth Music Hall | Full Set | Nov 4th, 2024",
         "Jam in the Van | Indie Rock (Full Set 2025)",
         "LIVE At The Theatre Of Living Arts"
+      ],
+      "genres": [
+        "folk",
+        "indie"
       ]
     },
     {
@@ -423,6 +439,9 @@
         "Live at Austin City Limits 2025",
         "Tanner Usrey & Ella Langley - Beautiful Lies (Live Performance)",
         "Tanner Usrey full set @Jackalope Jamboree 6/22/2023 live in Pendleton Oregon"
+      ],
+      "genres": [
+        "alt-country"
       ]
     },
     {
@@ -441,6 +460,10 @@
         "live at Pinkpop 2026",
         "Live at TRNSMT Festival * Glasgow Green, Glasgow, Scotland (Jul 11, 2025) HDTV",
         "Full Performance (Live in the KROQ Helpful Honda Sound Space)"
+      ],
+      "genres": [
+        "indie",
+        "ambient"
       ]
     },
     {
@@ -522,6 +545,10 @@
         "Vincent Lima Full ish Set Live At The Grove Lollapalooza Chicago Sunday 8/03/25 V2",
         "FIREHOUSE MUSIC SESSION #15: Vincent Lima",
         "Vincent Lima (Live) | Wesleyan University | Quadio After Hours"
+      ],
+      "genres": [
+        "folk",
+        "pop"
       ]
     },
     {
@@ -616,7 +643,13 @@
       "weekends": "W2",
       "youtubeQuery": "Johnny Stimson live set",
       "soundcloudSlug": "johnny-stimson",
-      "spotifyId": "00OF0nwYaoBSO3AnPVq3vE"
+      "spotifyId": "00OF0nwYaoBSO3AnPVq3vE",
+      "genres": [
+        "pop",
+        "soul",
+        "indie",
+        "house"
+      ]
     },
     {
       "name": "Nicky Youre",
@@ -634,7 +667,12 @@
       "day": "Friday",
       "weekends": "W2",
       "youtubeQuery": "Judy Blank live set",
-      "spotifyId": "2Kqa4BYcpEq4KXX9fYmRpH"
+      "spotifyId": "2Kqa4BYcpEq4KXX9fYmRpH",
+      "genres": [
+        "pop",
+        "singer-songwriter",
+        "americana"
+      ]
     },
     {
       "name": "Skrilla",
@@ -652,7 +690,10 @@
       "day": "Friday",
       "weekends": "W1",
       "spotifyId": "0ndpuECxVStTsHhzq4Euxz",
-      "youtubeQuery": "Moody Joody live set"
+      "youtubeQuery": "Moody Joody live set",
+      "genres": [
+        "indie pop"
+      ]
     },
     {
       "name": "Chance Emerson",
@@ -666,7 +707,10 @@
       "day": "Friday",
       "weekends": "W2",
       "spotifyId": "6mEP6006jfAcrzLbxyEZxp",
-      "youtubeQuery": "Maggie Antone live set"
+      "youtubeQuery": "Maggie Antone live set",
+      "genres": [
+        "country"
+      ]
     },
     {
       "name": "Girl Tones",
@@ -683,6 +727,10 @@
         "Got It (Live Office Takeover)",
         "The Girl Tones - Full Set - LIVE",
         "Live @ Funhouse (3/8/25) - Seattle, WA"
+      ],
+      "genres": [
+        "rock",
+        "punk"
       ]
     },
     {
@@ -704,7 +752,13 @@
       "name": "Farmer's Wife",
       "day": "Friday",
       "weekends": "W2",
-      "youtubeQuery": "Farmer's Wife live set"
+      "youtubeQuery": "Farmer's Wife live set",
+      "genres": [
+        "indie rock",
+        "rock",
+        "punk",
+        "garage"
+      ]
     },
     {
       "name": "Sabrina Carpenter",
@@ -963,14 +1017,25 @@
       "name": "Fujii Kaze",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "Fujii Kaze live set"
+      "youtubeQuery": "Fujii Kaze live set",
+      "genres": [
+        "jazz",
+        "pop",
+        "indie pop",
+        "disco"
+      ]
     },
     {
       "name": "LATIN MAFIA",
       "day": "Saturday",
       "weekends": "both",
       "youtubeQuery": "LATIN MAFIA live set",
-      "spotifyId": "6XTGKOV9jceQ6f67lnhpbF"
+      "spotifyId": "6XTGKOV9jceQ6f67lnhpbF",
+      "genres": [
+        "indie pop",
+        "latin",
+        "rnb"
+      ]
     },
     {
       "name": "Ocean Alley",
@@ -987,6 +1052,11 @@
         "Ocean Alley Live at Austin City Limits 2025 (Full Set)",
         "LIVE IN MELBOURNE ‘23 (Full Concert)",
         "YELLOW MELLOW EP - LIVE (10 Year Anniversary)"
+      ],
+      "genres": [
+        "rock",
+        "reggae",
+        "indie rock"
       ]
     },
     {
@@ -1047,7 +1117,11 @@
       "weekends": "both",
       "youtubeQuery": "Yoke Lore live set",
       "soundcloudSlug": "yokelore",
-      "spotifyId": "7FU0xCgmSYQEiBeevUqQ4S"
+      "spotifyId": "7FU0xCgmSYQEiBeevUqQ4S",
+      "genres": [
+        "indie pop",
+        "pop"
+      ]
     },
     {
       "name": "Mallrat",
@@ -1070,13 +1144,23 @@
       "weekends": "both",
       "soundcloudSlug": "lalom-music",
       "spotifyId": "01sY3iLJZtSBa0BIbcpddJ",
-      "youtubeQuery": "LA LOM live set"
+      "youtubeQuery": "LA LOM live set",
+      "genres": [
+        "jazz",
+        "latin",
+        "soul",
+        "americana"
+      ]
     },
     {
       "name": "TOPS",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "TOPS live set"
+      "youtubeQuery": "TOPS live set",
+      "genres": [
+        "indie pop",
+        "pop"
+      ]
     },
     {
       "name": "Alemeda",
@@ -1093,6 +1177,10 @@
         "Live | Baby's All Right Brooklyn NYC | February 26, 2025",
         "Beat A B!tch Up Unplugged (Tour Rehearsal Live Session)",
         "I'm Over It Unplugged (Tour Rehearsal Live Session)"
+      ],
+      "genres": [
+        "rnb",
+        "pop"
       ]
     },
     {
@@ -1101,14 +1189,25 @@
       "weekends": "W2",
       "youtubeQuery": "Odeal live set",
       "soundcloudSlug": "iamodeal",
-      "spotifyId": "2BPwxhCvvcb8xDl8GWIjbh"
+      "spotifyId": "2BPwxhCvvcb8xDl8GWIjbh",
+      "genres": [
+        "rnb",
+        "rap",
+        "soul",
+        "afrobeats"
+      ]
     },
     {
       "name": "The Heavy Heavy",
       "day": "Saturday",
       "weekends": "W1",
       "spotifyId": "5WSRRbhBJlhqvzgbOm3U2Q",
-      "youtubeQuery": "The Heavy Heavy live set"
+      "youtubeQuery": "The Heavy Heavy live set",
+      "genres": [
+        "psychedelic rock",
+        "indie rock",
+        "soul"
+      ]
     },
     {
       "name": "Hotline TNT",
@@ -1124,7 +1223,11 @@
       "day": "Saturday",
       "weekends": "W1",
       "spotifyId": "0uoN6ea8SXzhV7WxyrvT1h",
-      "youtubeQuery": "INOHA live set"
+      "youtubeQuery": "INOHA live set",
+      "genres": [
+        "indie rock",
+        "pop punk"
+      ]
     },
     {
       "name": "Sydney Rose",
@@ -1132,20 +1235,34 @@
       "weekends": "both",
       "soundcloudSlug": "user-380287823",
       "spotifyId": "5vx4pDmiFDyKMhuOIgpiRv",
-      "youtubeQuery": "Sydney Rose live set"
+      "youtubeQuery": "Sydney Rose live set",
+      "genres": [
+        "singer-songwriter",
+        "indie pop",
+        "pop"
+      ]
     },
     {
       "name": "Next of Kin",
       "day": "Saturday",
       "weekends": "W1",
-      "youtubeQuery": "Next of Kin live set"
+      "youtubeQuery": "Next of Kin live set",
+      "genres": [
+        "country",
+        "rock"
+      ]
     },
     {
       "name": "Clover County",
       "day": "Saturday",
       "weekends": "W1",
       "spotifyId": "1vOabSI7N1elDhNGoirgU2",
-      "youtubeQuery": "Clover County live set"
+      "youtubeQuery": "Clover County live set",
+      "genres": [
+        "folk",
+        "country",
+        "indie"
+      ]
     },
     {
       "name": "S.L. Houser",
@@ -1158,14 +1275,24 @@
       "day": "Saturday",
       "weekends": "W2",
       "spotifyId": "5odtYnxUvkfTC6wmwR53aI",
-      "youtubeQuery": "Eric Slick live set"
+      "youtubeQuery": "Eric Slick live set",
+      "genres": [
+        "rock",
+        "jazz",
+        "indie rock"
+      ]
     },
     {
       "name": "GoldFord",
       "day": "Saturday",
       "weekends": "W1",
       "spotifyId": "4I2QW85rkIhCRRZt1kuBqS",
-      "youtubeQuery": "GoldFord live set"
+      "youtubeQuery": "GoldFord live set",
+      "genres": [
+        "folk",
+        "soul",
+        "indie"
+      ]
     },
     {
       "name": "Southall",
@@ -1204,6 +1331,11 @@
         "Dizzy Fae live in-store performance at Waterloo Records in Austin, TX",
         "Opening Concert",
         "Complexion (Live) #MNMUSICSCENE"
+      ],
+      "genres": [
+        "rnb",
+        "hip hop",
+        "synthpop"
       ]
     },
     {
@@ -1217,7 +1349,11 @@
       "day": "Saturday",
       "weekends": "W2",
       "spotifyId": "3BV5N0bOmtkavYFUSHsfMQ",
-      "youtubeQuery": "Shallowater live set"
+      "youtubeQuery": "Shallowater live set",
+      "genres": [
+        "alt-country",
+        "shoegaze"
+      ]
     },
     {
       "name": "Ted Hammig & the Campaign",
@@ -1284,6 +1420,12 @@
         "T-Pain Live @ Lost Lands 2025 - Full Set",
         "On Top Of The Covers (Live From The Sun Rose)",
         "Mashup (To The Beat with Kurt Hugo Schneider)"
+      ],
+      "genres": [
+        "rnb",
+        "hip-hop",
+        "pop",
+        "soul"
       ]
     },
     {
@@ -1380,7 +1522,13 @@
         "Disco Lines Live @ Factory Town Miami 2026",
         "Live @ Red Rocks Colorado 2025"
       ],
-      "soundcloudSlug": "discolines"
+      "soundcloudSlug": "discolines",
+      "genres": [
+        "house",
+        "indie",
+        "electropop",
+        "electro house"
+      ]
     },
     {
       "name": "Gregory Alan Isakov",
@@ -1458,7 +1606,13 @@
       "name": "CA7RIEL & Paco Amoroso",
       "day": "Sunday",
       "weekends": "W2",
-      "youtubeQuery": "CA7RIEL & Paco Amoroso live set"
+      "youtubeQuery": "CA7RIEL & Paco Amoroso live set",
+      "genres": [
+        "trap",
+        "acid house",
+        "hip-hop",
+        "g-house"
+      ]
     },
     {
       "name": "Wild Rivers",
@@ -1535,14 +1689,22 @@
       "name": "julie",
       "day": "Sunday",
       "weekends": "W2",
-      "youtubeQuery": "Julie live set"
+      "youtubeQuery": "Julie live set",
+      "genres": [
+        "shoegaze",
+        "pop"
+      ]
     },
     {
       "name": "Hans Williams",
       "day": "Sunday",
       "weekends": "W2",
       "spotifyId": "3SEkDN2vusR7CIyehzfJaj",
-      "youtubeQuery": "Hans Williams live set"
+      "youtubeQuery": "Hans Williams live set",
+      "genres": [
+        "folk",
+        "indie"
+      ]
     },
     {
       "name": "Haute & Freddy",
@@ -1550,7 +1712,11 @@
       "weekends": "W1",
       "soundcloudSlug": "hauteandfreddy",
       "spotifyId": "66T34XqGkEWbzKWALSBDuR",
-      "youtubeQuery": "Haute & Freddy live set"
+      "youtubeQuery": "Haute & Freddy live set",
+      "genres": [
+        "synthpop",
+        "indie"
+      ]
     },
     {
       "name": "Midnight Generation",
@@ -1567,6 +1733,10 @@
         "Midnight Generation on Audiotree Live (Full Session)",
         "Don't Wait Up (Live in Mexico City)",
         "Don't Wait Up | Audiotree Live"
+      ],
+      "genres": [
+        "disco",
+        "funk"
       ]
     },
     {
@@ -1574,7 +1744,12 @@
       "day": "Sunday",
       "weekends": "both",
       "spotifyId": "1EmdfupUQDpXOcb4Nj2mBH",
-      "youtubeQuery": "Chezile live set"
+      "youtubeQuery": "Chezile live set",
+      "genres": [
+        "dream pop",
+        "chillout",
+        "pop"
+      ]
     },
     {
       "name": "Bebe Stockwell",
@@ -1589,27 +1764,44 @@
       "weekends": "both",
       "soundcloudSlug": "heynothing-music",
       "spotifyId": "6YWqJQS9TETSb8LgZONUzI",
-      "youtubeQuery": "Hey, Nothing live set"
+      "youtubeQuery": "Hey, Nothing live set",
+      "genres": [
+        "folk",
+        "indie rock"
+      ]
     },
     {
       "name": "Case Oats",
       "day": "Sunday",
       "weekends": "W2",
       "spotifyId": "5Ml0QbIoj7bneIUJDCoMx8",
-      "youtubeQuery": "Case Oats live set"
+      "youtubeQuery": "Case Oats live set",
+      "genres": [
+        "country",
+        "rock",
+        "folk",
+        "indie"
+      ]
     },
     {
       "name": "Lamont Landers",
       "day": "Sunday",
       "weekends": "W1",
       "spotifyId": "3avnA23xLmCYfnsivruOgq",
-      "youtubeQuery": "Lamont Landers live set"
+      "youtubeQuery": "Lamont Landers live set",
+      "genres": [
+        "rnb",
+        "soul"
+      ]
     },
     {
       "name": "The Bends",
       "day": "Sunday",
       "weekends": "W2",
-      "youtubeQuery": "The Bends live set"
+      "youtubeQuery": "The Bends live set",
+      "genres": [
+        "rock"
+      ]
     },
     {
       "name": "Supertaste",
@@ -1627,20 +1819,30 @@
         "Live From The Mustache Bash (San Diego, CA)",
         "Live From South Holston",
         "Play2Lose - Supertaste [Live From the Rooftop]"
+      ],
+      "genres": [
+        "disco"
       ]
     },
     {
       "name": "The Point.",
       "day": "Sunday",
       "weekends": "W2",
-      "youtubeQuery": "The Point. live set"
+      "youtubeQuery": "The Point. live set",
+      "genres": [
+        "funk",
+        "cumbia"
+      ]
     },
     {
       "name": "Chuwi",
       "day": "Sunday",
       "weekends": "W1",
       "spotifyId": "6wF1Cz760dpdbX9RJIDpQW",
-      "youtubeQuery": "Chuwi live set"
+      "youtubeQuery": "Chuwi live set",
+      "genres": [
+        "latin"
+      ]
     },
     {
       "name": "Zinadelphia",
@@ -1658,7 +1860,11 @@
       "day": "Sunday",
       "weekends": "W1",
       "spotifyId": "1pQ0Axx7UF8LDDOqSgdVmK",
-      "youtubeQuery": "Tyler Ballgame live set"
+      "youtubeQuery": "Tyler Ballgame live set",
+      "genres": [
+        "indie pop",
+        "singer-songwriter"
+      ]
     },
     {
       "name": "Ally Salort",
@@ -1704,7 +1910,10 @@
       "name": "Disciples of Christ",
       "day": "Sunday",
       "weekends": "W1",
-      "youtubeQuery": "Disciples of Christ live set"
+      "youtubeQuery": "Disciples of Christ live set",
+      "genres": [
+        "hardcore punk"
+      ]
     }
   ]
 }

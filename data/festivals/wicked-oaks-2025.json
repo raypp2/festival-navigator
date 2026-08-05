@@ -154,6 +154,9 @@
         "JEV @ LOLLAPALOOZA 2025",
         "jev.: Tiny Desk Concert",
         "JEV at Crosscurrents Denver 2026 | Full set"
+      ],
+      "genres": [
+        "garage"
       ]
     },
     {
@@ -169,6 +172,11 @@
         "ELECTRIC FOREST 2025",
         "Daytime Café Dance Music Set | AM.RADIO 002",
         "Shima Full Set Hulaween 2025 ft UTAW"
+      ],
+      "genres": [
+        "rock",
+        "punk",
+        "pop"
       ]
     },
     {
@@ -200,6 +208,11 @@
         "SVDDEN DEATH Presents: VOYD Live @ Lost Lands 2025 - Full Set",
         "SVDDEN DEATH (VOYD) - VOYDOME 2025 (FULL SET)",
         "VOYD @ ULTRA MIAMI 2026"
+      ],
+      "genres": [
+        "house",
+        "dub",
+        "garage"
       ]
     },
     {
@@ -373,6 +386,9 @@
         "Prosecute Live @ Lost Lands 2025 - Full Set",
         "Svdden Death B2b Prosecute | Live From Denver",
         "Prosecute in 8k @ 60 fps | LOST LANDS 2025 - COUCH LANDS - DAY 2"
+      ],
+      "genres": [
+        "dubstep"
       ]
     },
     {
@@ -410,6 +426,10 @@
         "Rampage Renegade 2022 - Vampa & Zia",
         "Witching Hour (Vampa + Jeanie) Live @ Lost Lands 2025 - Couch Lands",
         "JEANIE & VAMPA PRESENT: WITCHING HOUR LIVE @ RED ROCKS 2025 [FULL SET]"
+      ],
+      "genres": [
+        "heavy metal",
+        "dubstep"
       ]
     },
     {
@@ -488,6 +508,10 @@
         "BEJALVIN LIVE AT VOYDOME",
         "Bejalvin (FULL SET) Live at Zebulon | Shot on MiniDV | Los Angeles 2026",
         "BEJALVIN LIVE - Full Set @ Vibes Underground in San Antonio TX, 01/11/2025"
+      ],
+      "genres": [
+        "dubstep",
+        "hyperpop"
       ]
     },
     {
@@ -561,6 +585,10 @@
         "SXM FESTIVAL 2026 (FULL SET)",
         "Sistek Live @ Hags Fest San Diego 2025",
         "Live in Calgary | Beehive Presents Afrodisiac | August 2025"
+      ],
+      "genres": [
+        "house",
+        "latin"
       ]
     },
     {
@@ -588,13 +616,19 @@
         "Wenzday @ ManiFest in Brooklyn, NY (July 4th 2025)",
         "Wednesday on Audiotree Live (Full Session)",
         "Wednesday - live at Tumbleroot in Santa Fe [FULL SET] 10/9/25"
+      ],
+      "genres": [
+        "tech house"
       ]
     },
     {
       "name": "Dark Heart",
       "day": "Saturday",
       "youtubeQuery": "Dark Heart live set",
-      "soundcloudSlug": "dddarkheart"
+      "soundcloudSlug": "dddarkheart",
+      "genres": [
+        "heavy metal"
+      ]
     },
     {
       "name": "TRN ME UP",
@@ -678,7 +712,12 @@
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
       ],
-      "soundcloudSlug": "buntmusic"
+      "soundcloudSlug": "buntmusic",
+      "genres": [
+        "pop",
+        "folk",
+        "house"
+      ]
     },
     {
       "name": "Cloonee",
@@ -695,6 +734,11 @@
         "Cloonee B2B Prospa - Live at Destino, Ibiza",
         "Live at Hellbent in Los Angeles",
         "Live At EDC Orlando"
+      ],
+      "genres": [
+        "house",
+        "tech house",
+        "electro house"
       ]
     },
     {
@@ -723,6 +767,9 @@
         "Dancey Coffee Shop Set | AM.RADIO 008",
         "Dancey Daytime Set | AM.RADIO 017 San Francisco",
         "ANGRYBABY LIVE @ OUTSIDE LANDS FESTIVAL 2024"
+      ],
+      "genres": [
+        "house"
       ]
     },
     {
@@ -740,6 +787,13 @@
         "car crash [LIVE] M3F Phoenix, AZ 3/6/26",
         "PARDEAUX Live Set | Secret B2B",
         "DJ JESKA ~ Jigitz (USA) Main Support Set Australia"
+      ],
+      "genres": [
+        "pop",
+        "hyperpop",
+        "trance",
+        "indie",
+        "house"
       ]
     },
     {
@@ -874,7 +928,11 @@
         "Live From DnB Allstars 360°",
         "HEDEX MHITR LIVE @ ULTRA MIAMI 2025 (Full 4 Camera DJ Set)"
       ],
-      "soundcloudSlug": "hedexuk"
+      "soundcloudSlug": "hedexuk",
+      "genres": [
+        "drum and bass",
+        "riddim"
+      ]
     },
     {
       "name": "MUST DIE!",
@@ -928,26 +986,44 @@
       "day": "Sunday",
       "youtubeQuery": "HVDES live set",
       "soundcloudSlug": "hvdesmusic",
-      "spotifyId": "3koHmmPvpgZWHcVmK8AKDq"
+      "spotifyId": "3koHmmPvpgZWHcVmK8AKDq",
+      "genres": [
+        "electro house",
+        "psytrance",
+        "dnb"
+      ]
     },
     {
       "name": "Codd Dubz",
       "day": "Sunday",
       "soundcloudSlug": "coddmusic",
       "spotifyId": "3SsxYsQwnhws0qW0fsO1s5",
-      "youtubeQuery": "Codd Dubz live set"
+      "youtubeQuery": "Codd Dubz live set",
+      "genres": [
+        "dubstep",
+        "riddim dubstep"
+      ]
     },
     {
       "name": "PYKE",
       "day": "Sunday",
-      "youtubeQuery": "PYKE live set"
+      "youtubeQuery": "PYKE live set",
+      "genres": [
+        "pop",
+        "dubstep",
+        "riddim"
+      ]
     },
     {
       "name": "BLVNKSPVCE",
       "day": "Sunday",
       "soundcloudSlug": "blvnkspvce",
       "spotifyId": "72qYTgSCSu7QFhBhyk00fe",
-      "youtubeQuery": "BLVNKSPVCE live set"
+      "youtubeQuery": "BLVNKSPVCE live set",
+      "genres": [
+        "dubstep",
+        "riddim"
+      ]
     },
     {
       "name": "HAMRO",
@@ -964,6 +1040,10 @@
         "HAMRO Live @ Lost Lands 2025 - Full Set",
         "Live From Denver",
         "HAMRO @ Club Soda (Northern Invasion 2025 Day 1 - Montreal, QC, Canada) (Recap)"
+      ],
+      "genres": [
+        "riddim",
+        "dubstep"
       ]
     },
     {
@@ -1022,14 +1102,22 @@
       "name": "SOSA",
       "day": "Sunday",
       "youtubeQuery": "SOSA live set",
-      "soundcloudSlug": "sosamusicuk"
+      "soundcloudSlug": "sosamusicuk",
+      "genres": [
+        "trance"
+      ]
     },
     {
       "name": "Luuk Van Dijk",
       "day": "Sunday",
       "soundcloudSlug": "luukvandijkdj",
       "spotifyId": "1KFfk3NtblIJtGEqyiR31t",
-      "youtubeQuery": "Luuk Van Dijk live set"
+      "youtubeQuery": "Luuk Van Dijk live set",
+      "genres": [
+        "house",
+        "tech house",
+        "deep house"
+      ]
     },
     {
       "name": "Classmatic",
@@ -1046,20 +1134,33 @@
         "dj set at The Terrace Miami @OfficialClubSpace",
         "Classmatic Live At The Cut January 24th 2025",
         "Classmatic b2b Beltran @ Organic Pieces Pop Up, Florianópolis - BR"
+      ],
+      "genres": [
+        "house",
+        "techno",
+        "tech house"
       ]
     },
     {
       "name": "Mahony",
       "day": "Sunday",
       "youtubeQuery": "Mahony live set",
-      "soundcloudSlug": "mahonydj"
+      "soundcloudSlug": "mahonydj",
+      "genres": [
+        "jazz"
+      ]
     },
     {
       "name": "Maxinne",
       "day": "Sunday",
       "youtubeQuery": "Maxinne live set",
       "soundcloudSlug": "djmaxinne",
-      "spotifyId": "3sv9dCyzqOsGcJHPl5seiq"
+      "spotifyId": "3sv9dCyzqOsGcJHPl5seiq",
+      "genres": [
+        "house",
+        "deep house",
+        "tech-house"
+      ]
     },
     {
       "name": "BOYCOTT",
