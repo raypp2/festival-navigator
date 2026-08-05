@@ -1242,7 +1242,7 @@
   },
   "mild minds": {
     "genres": [
-      "electronic"
+      "chillout"
     ],
     "soundcloudSlug": "mildminds",
     "spotifyId": "3Ka3k9K2WStR52UJVtbJZW",
@@ -3843,8 +3843,9 @@
   },
   "hex cougar": {
     "genres": [
-      "electronic",
-      "trap edm"
+      "dubstep",
+      "trap",
+      "future bass"
     ],
     "soundcloudSlug": "hexcougar",
     "spotifyId": "0AlNB0yIoyxdKloLmK9AOR",
@@ -3936,7 +3937,8 @@
   },
   "isabel larosa": {
     "genres": [
-      "alternative pop"
+      "pop",
+      "hyperpop"
     ],
     "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
     "youtubeQuery": "Isabel LaRosa live set",
@@ -4105,8 +4107,10 @@
   },
   "zinadelphia": {
     "genres": [
-      "jazz pop",
-      "pop soul"
+      "jazz",
+      "folk",
+      "soul",
+      "funk"
     ],
     "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
     "youtubeQuery": "Zinadelphia live set",
@@ -4126,8 +4130,7 @@
   },
   "the dare": {
     "genres": [
-      "electroclash",
-      "new rave"
+      "electropop"
     ],
     "soundcloudSlug": "itsthedare",
     "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
@@ -4523,7 +4526,8 @@
   },
   "kickflip": {
     "genres": [
-      "likedis auto"
+      "k-pop",
+      "psytrance"
     ],
     "youtubeQuery": "Kickflip live set",
     "youtubeVideoIds": [
@@ -5215,7 +5219,8 @@
   },
   "nimino": {
     "genres": [
-      "electronic"
+      "house",
+      "deep house"
     ],
     "soundcloudSlug": "milo-good-evans",
     "spotifyId": "5x0R3zoC09GMiRJomoexLV",
@@ -5322,7 +5327,8 @@
   },
   "wild rivers": {
     "genres": [
-      "indie folk"
+      "folk",
+      "indie"
     ],
     "soundcloudSlug": "wildriversband",
     "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
@@ -5444,8 +5450,10 @@
   },
   "remi wolf": {
     "genres": [
-      "alternative pop",
-      "pop soul"
+      "indie pop",
+      "pop",
+      "soul",
+      "funk"
     ],
     "soundcloudSlug": "remi-wolf",
     "spotifyId": "0NB5HROxc8dDBXpkIi1v3d",
@@ -5530,7 +5538,9 @@
   },
   "dominic fike": {
     "genres": [
-      "alternative pop"
+      "indie",
+      "pop",
+      "hip-hop"
     ],
     "soundcloudSlug": "dominicfike",
     "spotifyId": "6USv9qhCn6zfxlBQIYJ9qs",
@@ -5717,7 +5727,8 @@
   },
   "rayray": {
     "genres": [
-      "missing releases"
+      "trap",
+      "rap"
     ],
     "soundcloudSlug": "djrayray",
     "spotifyId": "4FS6bomikvJR2E9JHNwiAM",
@@ -6138,7 +6149,7 @@
   },
   "canvas": {
     "genres": [
-      "brony"
+      "ambient"
     ],
     "soundcloudSlug": "yaboicanvas",
     "spotifyId": "15JiKg1xYOhBFsYJv2w4Rf",
@@ -8419,8 +8430,8 @@
   },
   "fatboy slim": {
     "genres": [
-      "big beat",
-      "electronic"
+      "house",
+      "techno"
     ],
     "soundcloudSlug": "fatboyslim",
     "spotifyId": "4Y7tXHSEejGu1vQ9bwDdXW",
@@ -8775,7 +8786,7 @@
   },
   "airwolf paradise": {
     "genres": [
-      "electronic"
+      "house"
     ],
     "spotifyId": "0c3I7EPZUCCG7khbUwQDjl",
     "youtubeQuery": "Airwolf Paradise live set",
@@ -9234,8 +9245,7 @@
   },
   "mind enterprises": {
     "genres": [
-      "electronic",
-      "italo-disco"
+      "pop"
     ],
     "soundcloudSlug": "mndntrprss",
     "spotifyId": "5pN1DJhPFDKso4OtC0QhnB",
@@ -9828,9 +9838,9 @@
   },
   "brigitte calls me baby": {
     "genres": [
-      "jangle pop",
-      "new wave",
-      "post-punk"
+      "indie rock",
+      "pop",
+      "rock"
     ],
     "soundcloudSlug": "brigittecallsmebaby",
     "spotifyId": "3sB1RV3IE5yCyMbl01FzBN",
@@ -11216,8 +11226,7 @@
   },
   "fancy hagood": {
     "genres": [
-      "lgbtqi",
-      "queer"
+      "pop"
     ],
     "spotifyId": "1klmpKnfBdJkVqr94BnuOF",
     "youtubeQuery": "Fancy Hagood live set",
@@ -11314,8 +11323,10 @@
   },
   "lauren sanderson": {
     "genres": [
-      "female vocals",
-      "lgbtq"
+      "rap",
+      "indie pop",
+      "pop",
+      "singer-songwriter"
     ],
     "spotifyId": "06vRrrjT3DBRkhBlXoBdYj",
     "youtubeQuery": "Lauren Sanderson live set",
@@ -12844,7 +12855,8 @@
   },
   "sloth": {
     "genres": [
-      "harsh noise"
+      "alternative rock",
+      "punk"
     ],
     "soundcloudSlug": "sloth-of-northeast-ohio",
     "youtubeQuery": "Sloth live set",
@@ -13608,7 +13620,9 @@
   },
   "panda bear": {
     "genres": [
-      "rock and indie"
+      "indie",
+      "folk",
+      "ambient"
     ],
     "soundcloudSlug": "panda-bear-official",
     "spotifyId": "1R84VlXnFFULOsWWV8IrCQ",
@@ -13711,7 +13725,8 @@
   },
   "honestav": {
     "genres": [
-      "indie folk"
+      "alt-country",
+      "rap"
     ],
     "spotifyId": "5LvRazQ7EDZLfQU4HYc6XF",
     "youtubeQuery": "honestav live set",
@@ -14025,8 +14040,8 @@
   },
   "lp giobbi": {
     "genres": [
-      "#animaltalk",
-      "#femmehouse"
+      "house",
+      "synthpop"
     ],
     "soundcloudSlug": "lpgiobbi",
     "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
@@ -14207,7 +14222,8 @@
   },
   "southall": {
     "genres": [
-      "red dirt"
+      "country",
+      "bluegrass"
     ],
     "spotifyId": "5fGjyURfvKXXCTcnCfU9Dl",
     "youtubeQuery": "Southall live set",
@@ -14358,10 +14374,9 @@
   },
   "gregory alan isakov": {
     "genres": [
-      "indie folk",
-      "contemporary folk",
-      "country folk",
-      "liedermacher"
+      "folk",
+      "americana",
+      "indie"
     ],
     "spotifyId": "5sXaGoRLSpd7VeyZrLkKwt",
     "youtubeQuery": "Gregory Alan Isakov live set",
@@ -14787,9 +14802,7 @@
   },
   "hexx": {
     "genres": [
-      "death metal",
-      "power metal",
-      "thrash metal"
+      "heavy metal"
     ],
     "spotifyId": "5bpqGJZtHYHyczRRL6umyQ",
     "youtubeQuery": "HEXX live set",
@@ -14905,7 +14918,8 @@
   },
   "autograf": {
     "genres": [
-      "dance"
+      "future house",
+      "house"
     ],
     "soundcloudSlug": "autografmusic",
     "spotifyId": "0FVj4JuzTyudaXAwfqDQ20",

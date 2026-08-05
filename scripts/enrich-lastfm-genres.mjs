@@ -3,6 +3,7 @@
 //
 //   set -a && . ../.env && set +a
 //   node scripts/enrich-lastfm-genres.mjs [<festival-id> ...] [--dry-run] [--limit N]
+//                                          [--refresh-unrenderable]
 //
 // Why this exists, and why it is not one of the other three. MusicBrainz is
 // thin on electronic and DJ acts — of the artists still missing genres on
@@ -41,6 +42,22 @@ const FEST_DIR = join(ROOT, 'data', 'festivals');
 const CACHE_PATH = join(ROOT, 'data', 'artists', 'artists.json');
 const CANON_PATH = join(ROOT, 'data', 'genres.json');
 
+// An artist can HAVE genres and still show none. Older MusicBrainz rows fell
+// back to the `tags` list when the artist had no genre entries, and picked up
+// things that are not genres at all — "producer", "singer", "uk", "missing
+// releases", "#femmehouse", "brony" — plus real genres the canon does not carry
+// ("red dirt", "electroclash") and ones it deliberately suppresses as too
+// generic ("electronic", "dance"). All of them filter to nothing at render, so
+// the row reads as filled and the card shows no chips. 33 rows were in that
+// state on 2026-08-05, invisible to any count that only asks whether `genres`
+// is empty.
+//
+// --refresh-unrenderable treats those as missing and re-asks. It is not the
+// default, because it overwrites data that a curator may have put there on
+// purpose. Nothing is lost when it runs: a replacement is only written if
+// last.fm returns something that actually survives the canon, so an artist
+// whose existing tags are real-but-unknown (Dixon's Violin, "avant-garde /
+// experimental / instrumental") keeps them.
 const GENRE_CAP = 8;    // matches CAPS.genres in enrich-artists.mjs
 const PACE_MS = 260;    // Last.fm publishes no hard limit but does throttle
 const RETRIES = 3;
@@ -95,6 +112,7 @@ async function main() {
   const key = process.env.LASTFM_API_KEY;
   if (!key) { console.error('LASTFM_API_KEY is not set — see the header of this file'); process.exit(1); }
 
+  const refreshUnrenderable = args.includes('--refresh-unrenderable');
   const canon = loadJson(CANON_PATH, null);
   if (!canon) { console.error(`no genre canon at ${CANON_PATH}`); process.exit(1); }
   const cache = loadJson(CACHE_PATH, {});
@@ -109,7 +127,13 @@ async function main() {
     fests.push({ path, fest });
     for (const entry of fest.artists) {
       if (!entry?.name) continue;
-      if (Array.isArray(entry.genres) && entry.genres.length) continue; // never clobber
+      const has = Array.isArray(entry.genres) && entry.genres.length;
+      if (has && !refreshUnrenderable) continue; // never clobber
+      if (has) {
+        // Renders something? Then it is real data and stays.
+        const c = canonicalize(entry.genres, canon);
+        if ([c.primary, ...(c.secondary || [])].filter(Boolean).length) continue;
+      }
       if (!todo.has(entry.name)) todo.set(entry.name, []);
       todo.get(entry.name).push(entry);
     }

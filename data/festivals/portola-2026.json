@@ -133,8 +133,8 @@
       "name": "Fatboy Slim",
       "day": "Saturday",
       "genres": [
-        "big beat",
-        "electronic"
+        "house",
+        "techno"
       ],
       "soundcloudSlug": "fatboyslim",
       "spotifyId": "4Y7tXHSEejGu1vQ9bwDdXW",
@@ -348,7 +348,8 @@
       "name": "Nimino",
       "day": "Saturday",
       "genres": [
-        "electronic"
+        "house",
+        "deep house"
       ],
       "soundcloudSlug": "milo-good-evans",
       "spotifyId": "5x0R3zoC09GMiRJomoexLV",
@@ -605,7 +606,7 @@
       "name": "Airwolf Paradise",
       "day": "Saturday",
       "genres": [
-        "electronic"
+        "house"
       ],
       "spotifyId": "0c3I7EPZUCCG7khbUwQDjl",
       "youtubeQuery": "Airwolf Paradise live set",
@@ -1196,8 +1197,7 @@
       "name": "Mind Enterprises",
       "day": "Sunday",
       "genres": [
-        "electronic",
-        "italo-disco"
+        "pop"
       ],
       "soundcloudSlug": "mndntrprss",
       "spotifyId": "5pN1DJhPFDKso4OtC0QhnB",

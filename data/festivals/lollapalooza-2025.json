@@ -1862,8 +1862,9 @@
       "day": "Friday",
       "stage": "Perry's",
       "genres": [
-        "electronic",
-        "trap edm"
+        "dubstep",
+        "trap",
+        "future bass"
       ],
       "soundcloudSlug": "hexcougar",
       "spotifyId": "0AlNB0yIoyxdKloLmK9AOR",
@@ -2021,7 +2022,8 @@
       "day": "Friday",
       "stage": "Lakeshore",
       "genres": [
-        "alternative pop"
+        "pop",
+        "hyperpop"
       ],
       "spotifyId": "5arKwJZEvT5uKq4o0JfqR4",
       "youtubeQuery": "Isabel LaRosa live set",
@@ -2223,8 +2225,10 @@
       "day": "Friday",
       "stage": "The Grove",
       "genres": [
-        "jazz pop",
-        "pop soul"
+        "jazz",
+        "folk",
+        "soul",
+        "funk"
       ],
       "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
       "youtubeQuery": "Zinadelphia live set"
@@ -2246,8 +2250,7 @@
       "day": "Friday",
       "stage": "The Grove",
       "genres": [
-        "electroclash",
-        "new rave"
+        "electropop"
       ],
       "soundcloudSlug": "itsthedare",
       "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
@@ -2675,7 +2678,8 @@
       "day": "Saturday",
       "stage": "Bud Light",
       "genres": [
-        "likedis auto"
+        "k-pop",
+        "psytrance"
       ],
       "youtubeQuery": "Kickflip live set",
       "youtubeVideoIds": [
@@ -3478,7 +3482,8 @@
       "day": "Sunday",
       "stage": "Perry's",
       "genres": [
-        "electronic"
+        "house",
+        "deep house"
       ],
       "soundcloudSlug": "milo-good-evans",
       "spotifyId": "5x0R3zoC09GMiRJomoexLV",
@@ -3585,7 +3590,8 @@
       "day": "Sunday",
       "stage": "Bud Light",
       "genres": [
-        "indie folk"
+        "folk",
+        "indie"
       ],
       "soundcloudSlug": "wildriversband",
       "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
@@ -3720,8 +3726,10 @@
       "day": "Sunday",
       "stage": "Bud Light",
       "genres": [
-        "alternative pop",
-        "pop soul"
+        "indie pop",
+        "pop",
+        "soul",
+        "funk"
       ],
       "soundcloudSlug": "remi-wolf",
       "spotifyId": "0NB5HROxc8dDBXpkIi1v3d",
@@ -3843,7 +3851,9 @@
       "day": "Sunday",
       "stage": "T-Mobile",
       "genres": [
-        "alternative pop"
+        "indie",
+        "pop",
+        "hip-hop"
       ],
       "soundcloudSlug": "dominicfike",
       "spotifyId": "6USv9qhCn6zfxlBQIYJ9qs",

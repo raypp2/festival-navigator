@@ -408,7 +408,9 @@
       "day": "Friday",
       "weekends": "both",
       "genres": [
-        "rock and indie"
+        "indie",
+        "folk",
+        "ambient"
       ],
       "soundcloudSlug": "panda-bear-official",
       "spotifyId": "1R84VlXnFFULOsWWV8IrCQ",
@@ -516,7 +518,8 @@
       "day": "Friday",
       "weekends": "W1",
       "genres": [
-        "indie folk"
+        "alt-country",
+        "rap"
       ],
       "spotifyId": "5LvRazQ7EDZLfQU4HYc6XF",
       "youtubeQuery": "honestav live set",
@@ -1077,8 +1080,8 @@
       "day": "Saturday",
       "weekends": "both",
       "genres": [
-        "#animaltalk",
-        "#femmehouse"
+        "house",
+        "synthpop"
       ],
       "soundcloudSlug": "lpgiobbi",
       "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
@@ -1299,7 +1302,8 @@
       "day": "Saturday",
       "weekends": "W2",
       "genres": [
-        "red dirt"
+        "country",
+        "bluegrass"
       ],
       "spotifyId": "5fGjyURfvKXXCTcnCfU9Dl",
       "youtubeQuery": "Southall live set"
@@ -1535,10 +1539,9 @@
       "day": "Sunday",
       "weekends": "W2",
       "genres": [
-        "indie folk",
-        "contemporary folk",
-        "country folk",
-        "liedermacher"
+        "folk",
+        "americana",
+        "indie"
       ],
       "spotifyId": "5sXaGoRLSpd7VeyZrLkKwt",
       "youtubeQuery": "Gregory Alan Isakov live set"
@@ -1585,8 +1588,7 @@
       "day": "Sunday",
       "weekends": "both",
       "genres": [
-        "electroclash",
-        "new rave"
+        "electropop"
       ],
       "soundcloudSlug": "itsthedare",
       "spotifyId": "2mqiqsaX4LzFnUP7PmHGAb",
@@ -1619,7 +1621,8 @@
       "day": "Sunday",
       "weekends": "W1",
       "genres": [
-        "indie folk"
+        "folk",
+        "indie"
       ],
       "soundcloudSlug": "wildriversband",
       "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
@@ -1849,8 +1852,10 @@
       "day": "Sunday",
       "weekends": "W1",
       "genres": [
-        "jazz pop",
-        "pop soul"
+        "jazz",
+        "folk",
+        "soul",
+        "funk"
       ],
       "spotifyId": "2bTnGGWvuVQsMVyg31rmum",
       "youtubeQuery": "Zinadelphia live set"

@@ -660,9 +660,9 @@
       "day": "Friday",
       "weekends": "W2",
       "genres": [
-        "jangle pop",
-        "new wave",
-        "post-punk"
+        "indie rock",
+        "pop",
+        "rock"
       ],
       "soundcloudSlug": "brigittecallsmebaby",
       "spotifyId": "3sB1RV3IE5yCyMbl01FzBN",
@@ -2403,8 +2403,7 @@
       "day": "Sunday",
       "weekends": "W1",
       "genres": [
-        "lgbtqi",
-        "queer"
+        "pop"
       ],
       "spotifyId": "1klmpKnfBdJkVqr94BnuOF",
       "youtubeQuery": "Fancy Hagood live set",
@@ -2507,8 +2506,10 @@
       "day": "Sunday",
       "weekends": "W1",
       "genres": [
-        "female vocals",
-        "lgbtq"
+        "rap",
+        "indie pop",
+        "pop",
+        "singer-songwriter"
       ],
       "spotifyId": "06vRrrjT3DBRkhBlXoBdYj",
       "youtubeQuery": "Lauren Sanderson live set",

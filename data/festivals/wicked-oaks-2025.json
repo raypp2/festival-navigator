@@ -476,9 +476,7 @@
       "name": "HEXX",
       "day": "Saturday",
       "genres": [
-        "death metal",
-        "power metal",
-        "thrash metal"
+        "heavy metal"
       ],
       "spotifyId": "5bpqGJZtHYHyczRRL6umyQ",
       "youtubeQuery": "HEXX live set",
@@ -595,7 +593,8 @@
       "name": "Autograf",
       "day": "Saturday",
       "genres": [
-        "dance"
+        "future house",
+        "house"
       ],
       "soundcloudSlug": "autografmusic",
       "spotifyId": "0FVj4JuzTyudaXAwfqDQ20",
@@ -745,8 +744,8 @@
       "name": "LP Giobbi",
       "day": "Sunday",
       "genres": [
-        "#animaltalk",
-        "#femmehouse"
+        "house",
+        "synthpop"
       ],
       "soundcloudSlug": "lpgiobbi",
       "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
