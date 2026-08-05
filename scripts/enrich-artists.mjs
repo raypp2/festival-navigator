@@ -199,7 +199,29 @@ async function verifySoundcloudSlug(slug) {
 // youtubeSearchedAt would be stamped on every artist after the quota wall,
 // permanently marking as "searched, no results" artists nobody ever searched.
 // `fatal` means do not keep asking today — the quota is gone.
+// YouTube answers 429 rateLimitExceeded when requests arrive too fast. That is
+// a "slow down", not a "you are done" — but with no backoff the next request
+// arrives just as fast and gets the same answer, so a whole run's budget
+// evaporates into refusals. Measured 2026-08-05: 69 searches of budget bought
+// 4, and every tranche day before it will have lost the same way.
+//
+// Quota (403 / quotaExceeded) is still fatal and still stops instantly: that
+// one really is done for the day, and retrying it burns nothing but time.
+const YT_RETRIES = 4;
+const YT_BACKOFF_MS = [1500, 4000, 9000, 20000];
+
 async function youtubeSearchTop3(query, apiKey, fetchImpl = fetch) {
+  for (let attempt = 0; ; attempt += 1) {
+    // eslint-disable-next-line no-await-in-loop
+    const r = await youtubeSearchOnce(query, apiKey, fetchImpl);
+    if (r.ok || r.fatal || r.status !== 429 || attempt >= YT_RETRIES) return r;
+    const wait = r.retryAfterMs || YT_BACKOFF_MS[attempt] || 20000;
+    // eslint-disable-next-line no-await-in-loop
+    await new Promise((res) => { setTimeout(res, wait); });
+  }
+}
+
+async function youtubeSearchOnce(query, apiKey, fetchImpl = fetch) {
   // `snippet` costs nothing extra — search.list is 100 units whatever the
   // parts — and without it every set row fell back to "Set 1/2/3", which tells
   // you nothing about which of three hour-long sets you are about to hear
@@ -224,7 +246,14 @@ async function youtubeSearchTop3(query, apiKey, fetchImpl = fetch) {
     } catch { /* non-JSON error body — the status alone is the reason */ }
     // 403 without a parseable reason is quota far more often than not; treat
     // it as fatal rather than burning the rest of the run on certain failures.
-    return { ok: false, fatal: quota || res.status === 403, reason };
+    const retryAfter = Number(res.headers?.get?.('retry-after') || 0);
+    return {
+      ok: false,
+      fatal: quota || res.status === 403,
+      status: res.status,
+      retryAfterMs: retryAfter > 0 ? (retryAfter + 1) * 1000 : 0,
+      reason,
+    };
   }
   const body = await res.json();
   const hits = (body.items || []).filter((it) => it?.id?.videoId).slice(0, 3);

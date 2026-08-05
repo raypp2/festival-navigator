@@ -323,3 +323,56 @@ test('youtubeSearchTop3 reports a thrown network error as a non-run', async () =
   assert.equal(r.fatal, false);
   assert.match(r.reason, /ECONNRESET/);
 });
+
+// ---------------------------------------------------------------------------
+// 429 is "slow down", not "you are done" (measured 2026-08-05)
+//
+// Without a retry, one rate-limit answer poisoned everything after it: the next
+// request went out just as fast, got the same 429, and a 69-search budget
+// bought 4 real searches. Quota (403) must still stop instantly — that one is
+// genuinely over for the day and retrying only burns time.
+// ---------------------------------------------------------------------------
+
+// Fails with `status` for the first n calls, then succeeds. Counts attempts so
+// a test can prove a retry actually happened rather than inferring it.
+function flakyFetch(status, failTimes, okBody) {
+  const state = { calls: 0 };
+  const fn = async () => {
+    state.calls += 1;
+    if (state.calls <= failTimes) {
+      return {
+        ok: false,
+        status,
+        headers: { get: () => '0' }, // no Retry-After -> the built-in backoff applies
+        json: async () => ({ error: { errors: [{ reason: 'rateLimitExceeded' }] } }),
+      };
+    }
+    return { ok: true, status: 200, headers: { get: () => null }, json: async () => okBody };
+  };
+  fn.state = state;
+  return fn;
+}
+
+test('youtubeSearchTop3 retries a 429 and succeeds once the limit clears', async () => {
+  const f = flakyFetch(429, 2, { items: [{ id: { videoId: 'a' } }] });
+  const r = await youtubeSearchTop3('griz live set', 'k', f);
+  assert.equal(r.ok, true, 'the search eventually ran');
+  assert.deepEqual(r.ids, ['a']);
+  assert.equal(f.state.calls, 3, 'two refusals then the real answer');
+});
+
+test('youtubeSearchTop3 gives up on a 429 that never clears, without claiming a no-result', async () => {
+  const f = flakyFetch(429, 99, {});
+  const r = await youtubeSearchTop3('griz live set', 'k', f);
+  assert.equal(r.ok, false, 'a refusal is never an empty result — that would mark the artist searched');
+  assert.equal(r.fatal, false, 'and it is not fatal: the day is not over, this one artist just missed out');
+  assert.ok(f.state.calls > 1, 'it did retry before giving up');
+});
+
+test('a 403 quota answer is not retried — the day really is over', async () => {
+  const f = flakyFetch(403, 99, {});
+  const r = await youtubeSearchTop3('griz live set', 'k', f);
+  assert.equal(r.ok, false);
+  assert.equal(r.fatal, true);
+  assert.equal(f.state.calls, 1, 'asked once, believed the answer');
+});

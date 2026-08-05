@@ -112,7 +112,17 @@
       ],
       "soundcloudSlug": "wearekasablanca",
       "spotifyId": "297Z0teiCkp5s9eneWROpI",
-      "youtubeQuery": "Kasablanca live set"
+      "youtubeQuery": "Kasablanca live set",
+      "youtubeVideoIds": [
+        "yROcDtO5T1w",
+        "l8ol6alqDFI",
+        "Mng7geb9-Gc"
+      ],
+      "youtubeLabels": [
+        "Live @ Ultra Music Festival Miami 2024",
+        "LIVE: In Higher Resolution [Full Live Performance Experience]",
+        "Full 360° Live Performance | Toronto Pop-Up 2025"
+      ]
     },
     {
       "name": "Jackie Hollander",
@@ -134,7 +144,17 @@
     {
       "name": "JEV",
       "day": "Saturday",
-      "youtubeQuery": "Jev live set"
+      "youtubeQuery": "Jev live set",
+      "youtubeVideoIds": [
+        "m6ArThudims",
+        "WcnymNhOmnQ",
+        "-8TUpMf_SaQ"
+      ],
+      "youtubeLabels": [
+        "JEV @ LOLLAPALOOZA 2025",
+        "jev.: Tiny Desk Concert",
+        "JEV at Crosscurrents Denver 2026 | Full set"
+      ]
     },
     {
       "name": "SHIMA",
@@ -170,7 +190,17 @@
       "name": "VOYD",
       "day": "Saturday",
       "youtubeQuery": "VOYD live set",
-      "soundcloudSlug": "enterthevoyd"
+      "soundcloudSlug": "enterthevoyd",
+      "youtubeVideoIds": [
+        "DYlcCkyYDnA",
+        "xAcJRlUYPFg",
+        "ug4gW8jbfKA"
+      ],
+      "youtubeLabels": [
+        "SVDDEN DEATH Presents: VOYD Live @ Lost Lands 2025 - Full Set",
+        "SVDDEN DEATH (VOYD) - VOYDOME 2025 (FULL SET)",
+        "VOYD @ ULTRA MIAMI 2026"
+      ]
     },
     {
       "name": "NGHTMRE",
@@ -333,7 +363,17 @@
       "day": "Saturday",
       "spotifyId": "29WUwugsDf2hQ5tAZMyR7T",
       "youtubeQuery": "Prosecute live set",
-      "soundcloudSlug": "prosecutemusic"
+      "soundcloudSlug": "prosecutemusic",
+      "youtubeVideoIds": [
+        "IONCwsThc5E",
+        "5xAsYMKg0dk",
+        "CJ_KyZAv2uc"
+      ],
+      "youtubeLabels": [
+        "Prosecute Live @ Lost Lands 2025 - Full Set",
+        "Svdden Death B2b Prosecute | Live From Denver",
+        "Prosecute in 8k @ 60 fps | LOST LANDS 2025 - COUCH LANDS - DAY 2"
+      ]
     },
     {
       "name": "Simula",
@@ -343,7 +383,17 @@
       ],
       "soundcloudSlug": "simula",
       "spotifyId": "2KCmoJZgpL6hNFdT4l9PTl",
-      "youtubeQuery": "Simula live set"
+      "youtubeQuery": "Simula live set",
+      "youtubeVideoIds": [
+        "Cy3gEgu7GPc",
+        "5uFzz9zoSLQ",
+        "Z1ViJOdux8E"
+      ],
+      "youtubeLabels": [
+        "Live From DnB Allstars 360°",
+        "live at Pukkelpop 2025",
+        "RAMPAGE WEEKEND 2026 – MEFJUS B2B SIMULA"
+      ]
     },
     {
       "name": "VAMPA",
@@ -367,7 +417,17 @@
       "day": "Saturday",
       "youtubeQuery": "JEANIE live set",
       "soundcloudSlug": "jeaniesounds",
-      "spotifyId": "5y4xjNwy9GEFC4hic2epwe"
+      "spotifyId": "5y4xjNwy9GEFC4hic2epwe",
+      "youtubeVideoIds": [
+        "vDMTAmPLt1o",
+        "QcxxIE6mIEU",
+        "a5cjbUIr01s"
+      ],
+      "youtubeLabels": [
+        "JEANIE Live @ Lost Lands 2024 - Full Set",
+        "JEANIE LIVE @ EDC LAS VEGAS 2024 [BASSPOD]",
+        "JEANIE & VAMPA PRESENT: WITCHING HOUR LIVE @ RED ROCKS 2025 [FULL SET]"
+      ]
     },
     {
       "name": "Akeos",
@@ -380,7 +440,17 @@
       ],
       "soundcloudSlug": "akeos",
       "spotifyId": "01GwQuZRU4oG83fF2ZOyQs",
-      "youtubeQuery": "Akeos live set"
+      "youtubeQuery": "Akeos live set",
+      "youtubeVideoIds": [
+        "ZpwvluaALSw",
+        "tyBbT280MSI",
+        "GHH1rvDESyQ"
+      ],
+      "youtubeLabels": [
+        "INFEKT & AKEOS LIVE @THE AVE [PHILADELPHIA, PA]",
+        "Akeos (Full Set) @ Lost Lands 2023 (Day 2 - Saturday // Subsidia Stage)",
+        "Akeos @ Club Soda (Northern Invasion 2025 Day 1 - Montreal, QC, Canada) (Recap)"
+      ]
     },
     {
       "name": "HEXX",
@@ -391,14 +461,34 @@
         "thrash metal"
       ],
       "spotifyId": "5bpqGJZtHYHyczRRL6umyQ",
-      "youtubeQuery": "HEXX live set"
+      "youtubeQuery": "HEXX live set",
+      "youtubeVideoIds": [
+        "Y2YQ9u9eEXY",
+        "dUGoJaplDS8",
+        "HRGtP191LEc"
+      ],
+      "youtubeLabels": [
+        "LIVE FROM NORTHERN INVASION 2026 (ft. OTSUKARE) (SHOT BY @ISO.ASH)",
+        "Hexx B2B Midroll Live @ Sunbar, Tempe, AZ [FULL SET]",
+        "Hedex Live @ Lost Lands 2025 - Full Set"
+      ]
     },
     {
       "name": "Bejalvin",
       "day": "Saturday",
       "soundcloudSlug": "bejalvin",
       "spotifyId": "2tIX1YEoPn5Mzxh2LPzeIb",
-      "youtubeQuery": "Bejalvin live set"
+      "youtubeQuery": "Bejalvin live set",
+      "youtubeVideoIds": [
+        "U3gmlXbgpzo",
+        "gKgLkKrQBjs",
+        "fNnMMmR6qa0"
+      ],
+      "youtubeLabels": [
+        "BEJALVIN LIVE AT VOYDOME",
+        "Bejalvin (FULL SET) Live at Zebulon | Shot on MiniDV | Los Angeles 2026",
+        "BEJALVIN LIVE - Full Set @ Vibes Underground in San Antonio TX, 01/11/2025"
+      ]
     },
     {
       "name": "Vanfleet",
@@ -410,7 +500,17 @@
       ],
       "soundcloudSlug": "vanfleet",
       "spotifyId": "64CiuxRx160amGnl4YdAr2",
-      "youtubeQuery": "Vanfleet live set"
+      "youtubeQuery": "Vanfleet live set",
+      "youtubeVideoIds": [
+        "8uYtP_bJcLA",
+        "5m-lJb69wrs",
+        "h5PiROGaPXg"
+      ],
+      "youtubeLabels": [
+        "Vanfleet @ Red Rocks (SVDDEN DEATH Valley of Darkness II Red Rocks, CO 2023)",
+        "Greta Van Fleet - Highway Tune (Live in Toronto / 2018)",
+        "Greta Van Fleet - Heat Above (Live)"
+      ]
     },
     {
       "name": "Otsukare",
@@ -854,7 +954,17 @@
       "day": "Sunday",
       "youtubeQuery": "HAMRO live set",
       "soundcloudSlug": "djhamro",
-      "spotifyId": "45tIGuLKx3RA70cm4rnSLH"
+      "spotifyId": "45tIGuLKx3RA70cm4rnSLH",
+      "youtubeVideoIds": [
+        "47o0lJpSwLk",
+        "td-XWwA7Ev0",
+        "YWUJQIkmMuU"
+      ],
+      "youtubeLabels": [
+        "HAMRO Live @ Lost Lands 2025 - Full Set",
+        "Live From Denver",
+        "HAMRO @ Club Soda (Northern Invasion 2025 Day 1 - Montreal, QC, Canada) (Recap)"
+      ]
     },
     {
       "name": "SQISHI",

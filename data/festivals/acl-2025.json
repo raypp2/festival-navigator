@@ -24,7 +24,17 @@
       ],
       "soundcloudSlug": "hozier",
       "spotifyId": "2FXC3k01G6Gw61bmprjgqS",
-      "youtubeQuery": "Hozier live set"
+      "youtubeQuery": "Hozier live set",
+      "youtubeVideoIds": [
+        "Yysc6zA1lUY",
+        "oQbzKj1S4cI",
+        "3kMD1eybIsA"
+      ],
+      "youtubeLabels": [
+        "Outside Lands 2025 (Full Show)",
+        "ACL Music Festival 2025 Weekend 1 (Full Set)",
+        "Full Show (4k, HQ Audio) - Syracuse, NY 5/21/2024"
+      ]
     },
     {
       "name": "Luke Combs",
@@ -35,7 +45,17 @@
       ],
       "soundcloudSlug": "lukecombs",
       "spotifyId": "718COspgdWOnwOFpJHRZHS",
-      "youtubeQuery": "Luke Combs live set"
+      "youtubeQuery": "Luke Combs live set",
+      "youtubeVideoIds": [
+        "CBwzFErjF2s",
+        "SR5-e9BlZQ4",
+        "0jufTpOU2rI"
+      ],
+      "youtubeLabels": [
+        "Live from Georgia Theatre",
+        "Luke Combs Lollapalooza Chicago 2025",
+        "Full Concert (Lexington, KY | Feb. 14, 2020)"
+      ]
     },
     {
       "name": "Cage the Elephant",
@@ -53,7 +73,17 @@
       ],
       "soundcloudSlug": "cagetheelephant",
       "spotifyId": "26T3LtbuGT1Fu9m0eRq5X3",
-      "youtubeQuery": "Cage the Elephant live set"
+      "youtubeQuery": "Cage the Elephant live set",
+      "youtubeVideoIds": [
+        "LMXdFfKE80U",
+        "Qgoy3g_2m6k",
+        "0l0hFLh8b48"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live from the KROQ Helpful Honda Sound Space)",
+        "Live Corona Capital 2024",
+        "Live in San Antonio, TX (10/04/2025) [FULL 4K SHOW] [FRONT ROW] [BEST AUDIO]"
+      ]
     },
     {
       "name": "Empire of the Sun",
@@ -67,7 +97,17 @@
       ],
       "soundcloudSlug": "empireofthesunsound",
       "spotifyId": "67hb7towEyKvt5Z8Bx306c",
-      "youtubeQuery": "Empire of the Sun live set"
+      "youtubeQuery": "Empire of the Sun live set",
+      "youtubeVideoIds": [
+        "nmhafWX9QNM",
+        "n7qadnYO1cM",
+        "plTlkZTGcTo"
+      ],
+      "youtubeLabels": [
+        "Empire Of The Sun live at Cercle Odyssey, Los Angeles, USA",
+        "We Are the People",
+        "▷▶Empire of the Sun - Live highly anticipated world exclusive"
+      ]
     },
     {
       "name": "Rilo Kiley",
@@ -79,7 +119,17 @@
         "rock"
       ],
       "spotifyId": "2cevwbv7ISD92VMNLYLHZA",
-      "youtubeQuery": "Rilo Kiley live set"
+      "youtubeQuery": "Rilo Kiley live set",
+      "youtubeVideoIds": [
+        "XXRC93ctI9Q",
+        "oKNu1-MGW-I",
+        "7b5Xj8KAjN8"
+      ],
+      "youtubeLabels": [
+        "Rilo Kiley Full Set LIVE",
+        "Rilo Kiley Full Set LIVE",
+        "Rilo Kiley Live (2003) HD"
+      ]
     },
     {
       "name": "Maren Morris",
@@ -93,7 +143,17 @@
       ],
       "soundcloudSlug": "marenmorrisofficial",
       "spotifyId": "6WY7D3jk8zTrHtmkqqo5GI",
-      "youtubeQuery": "Maren Morris live set"
+      "youtubeQuery": "Maren Morris live set",
+      "youtubeVideoIds": [
+        "NJz30SiK_OM",
+        "pvlVOcKTxi4",
+        "pR9d7ap8zM8"
+      ],
+      "youtubeLabels": [
+        "Maren Morris performs detour at UC Greek theatre in Berkeley California 9/17/22",
+        "Maren Morris & Hozier Perform “My Church” | CMT Crossroads",
+        "Maren Morris Covers Fleetwood Mac's “Songbird” Live on the Stern Show"
+      ]
     },
     {
       "name": "ROLE MODEL",
@@ -129,7 +189,17 @@
         "rock"
       ],
       "spotifyId": "4mLJ3XfOM5FPjSAWdQ2Jk7",
-      "youtubeQuery": "Dr. Dog live set"
+      "youtubeQuery": "Dr. Dog live set",
+      "youtubeVideoIds": [
+        "S3mivsCGQz8",
+        "rklOPchnf6o",
+        "79LAQBIhjxk"
+      ],
+      "youtubeLabels": [
+        "Live at House of Blues (Full Set)",
+        "full concert at The Palace Theatre, May 6, 2018",
+        "12.27.21 The Fillmore, Philadelphia, PA - Full Show - The Last Tour"
+      ]
     },
     {
       "name": "King Princess",
@@ -144,7 +214,17 @@
       ],
       "soundcloudSlug": "kingprincessmusic",
       "spotifyId": "6beUvFUlKliUYJdLOXNj9C",
-      "youtubeQuery": "King Princess live set"
+      "youtubeQuery": "King Princess live set",
+      "youtubeVideoIds": [
+        "2PQnfVlRzqE",
+        "aT67lcI3xV8",
+        "uKPo110Qpvo"
+      ],
+      "youtubeLabels": [
+        "Tiny Desk Concert",
+        "King Princess' full performance at New Orleans.",
+        "Tiny Desk (Home) Concert"
+      ]
     },
     {
       "name": "Sam Barber",
@@ -154,14 +234,34 @@
         "country"
       ],
       "spotifyId": "08GfvCW09pv2QP4y9sle2a",
-      "youtubeQuery": "Sam Barber live set"
+      "youtubeQuery": "Sam Barber live set",
+      "youtubeVideoIds": [
+        "1QjuC8R1Xh8",
+        "51A9zfyzXcU",
+        "_KJGMZstkDQ"
+      ],
+      "youtubeLabels": [
+        "Live from Stagecoach 2026",
+        "Indigo (feat. Avery Anna) (Live Performance)",
+        "Indigo (Live from Outernet London)"
+      ]
     },
     {
       "name": "Dylan Gossett",
       "day": "Friday",
       "weekends": "both",
       "spotifyId": "4H4M0Y4cN39zIVDHvdW53x",
-      "youtubeQuery": "Dylan Gossett live set"
+      "youtubeQuery": "Dylan Gossett live set",
+      "youtubeVideoIds": [
+        "LmK5NZ8fbLs",
+        "zlmCg5Z2cEY",
+        "0LctCj_GRfE"
+      ],
+      "youtubeLabels": [
+        "Live from Stagecoach 2025",
+        "Live From The Westward Tour (Coal / Denver / Nov 9, 2025)",
+        "Live From The Westward Tour (Hangin On' / Folsom Prison / Boston / Sept 26, 2025)"
+      ]
     },
     {
       "name": "MJ Lenderman",
@@ -172,14 +272,34 @@
         "singer-songwriter"
       ],
       "spotifyId": "4tK6Z8fK7Sc9133byjPGIT",
-      "youtubeQuery": "MJ Lenderman live set"
+      "youtubeQuery": "MJ Lenderman live set",
+      "youtubeVideoIds": [
+        "yCgZmGwx9VU",
+        "Vihtf7Io14c",
+        "gAY74NyLMGs"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "MJ Lenderman & The Wind - Live at Brooklyn Steel",
+        "Tiny Desk Concert"
+      ]
     },
     {
       "name": "The Favors",
       "day": "Friday",
       "weekends": "both",
       "youtubeQuery": "The Favors live set",
-      "spotifyId": "78R275jHTtGF0ue4QfBKpI"
+      "spotifyId": "78R275jHTtGF0ue4QfBKpI",
+      "youtubeVideoIds": [
+        "WsBGfW2E4_A",
+        "uhuNvxralLI",
+        "uewQgLunS-I"
+      ],
+      "youtubeLabels": [
+        "The Hudson (Live from Hyde Park)",
+        "The Little Mess You Made (Live from Lollapalooza Chicago 2025)",
+        "FINNEAS & Ashe Present The Favors - Austin City Limits Festival * Zilker Park, TX, US (Oct 03, 2025)"
+      ]
     },
     {
       "name": "Bilmuri",
@@ -195,21 +315,51 @@
         "rock"
       ],
       "spotifyId": "5Rc75vGFBWZPgL7EXb4k89",
-      "youtubeQuery": "Bilmuri live set"
+      "youtubeQuery": "Bilmuri live set",
+      "youtubeVideoIds": [
+        "RW5nHYDSVDw",
+        "y2VIKmZlkQQ",
+        "GmjZYP8SFqI"
+      ],
+      "youtubeLabels": [
+        "LIVE FROM ATLANTA",
+        "full set (Live in Madison) - May 2026 concert (KINDA HARD Tour) - Johnny Franck",
+        "THE END (LIVE)"
+      ]
     },
     {
       "name": "Willow Avalon",
       "day": "Friday",
       "weekends": "W1",
       "spotifyId": "6EEkobfnenJF603WO8nUrR",
-      "youtubeQuery": "Willow Avalon live set"
+      "youtubeQuery": "Willow Avalon live set",
+      "youtubeVideoIds": [
+        "beXPFqG-x9U",
+        "MJsKNAH7t3Q",
+        "e9W5Rpm4Drk"
+      ],
+      "youtubeLabels": [
+        "LIVE (FULL SET) @ Category 10 - Nashville, TN - 060326",
+        "WILLOW AVALON (NUÇI’S SPACE’S 25TH ANNIVERSARY BENEFIT CONCERT) @ Georgia Theatre - 12/12/25",
+        "FULL SHOW | Hinterland | St. Charles, IA | August 2, 2025 | LIVE"
+      ]
     },
     {
       "name": "Briscoe",
       "day": "Friday",
       "weekends": "W1",
       "spotifyId": "28NTlcAifzUgF4SIZgxncj",
-      "youtubeQuery": "Briscoe live set"
+      "youtubeQuery": "Briscoe live set",
+      "youtubeVideoIds": [
+        "ikscUrrImJI",
+        "LpaaQY5A2Uk",
+        "boQ6kZKZt4g"
+      ],
+      "youtubeLabels": [
+        "Briscoe Live in Toronto @ The Danforth Music Hall | Full Set | Nov 4th, 2024",
+        "Jam in the Van | Indie Rock (Full Set 2025)",
+        "LIVE At The Theatre Of Living Arts"
+      ]
     },
     {
       "name": "Confidence Man",
@@ -225,7 +375,17 @@
       ],
       "soundcloudSlug": "confidenceman",
       "spotifyId": "0RwXnFrEoI8tltFvYpJgP6",
-      "youtubeQuery": "Confidence Man live set"
+      "youtubeQuery": "Confidence Man live set",
+      "youtubeVideoIds": [
+        "XQf6088uwJM",
+        "-5G9sk8lk0o",
+        "BftwdDXnQ4I"
+      ],
+      "youtubeLabels": [
+        "Live At Primavera (DJ Set)",
+        "Confidence Man DJ set | Mixmag Lab London",
+        "Live from the Village 2025 - Confidence Man DJs"
+      ]
     },
     {
       "name": "Panda Bear",
@@ -236,14 +396,34 @@
       ],
       "soundcloudSlug": "panda-bear-official",
       "spotifyId": "1R84VlXnFFULOsWWV8IrCQ",
-      "youtubeQuery": "Panda Bear live set"
+      "youtubeQuery": "Panda Bear live set",
+      "youtubeVideoIds": [
+        "nRQH04NIzhQ",
+        "C3b1NBpBkx8",
+        "NkSTfn5hpW0"
+      ],
+      "youtubeLabels": [
+        "Tiny Desk Concert",
+        "Live at Primavera Sound Porto 2026",
+        "Live in Oklahoma City 10/4/25"
+      ]
     },
     {
       "name": "Tanner Usrey",
       "day": "Friday",
       "weekends": "both",
       "spotifyId": "1ZGVS1OWpdvELiQyx3vkO7",
-      "youtubeQuery": "Tanner Usrey live set"
+      "youtubeQuery": "Tanner Usrey live set",
+      "youtubeVideoIds": [
+        "K9ZvXE2LA5E",
+        "GhzZL5U-49Q",
+        "RTU1hnt3XGI"
+      ],
+      "youtubeLabels": [
+        "Live at Austin City Limits 2025",
+        "Tanner Usrey & Ella Langley - Beautiful Lies (Live Performance)",
+        "Tanner Usrey full set @Jackalope Jamboree 6/22/2023 live in Pendleton Oregon"
+      ]
     },
     {
       "name": "Good Neighbours",
@@ -251,7 +431,17 @@
       "weekends": "both",
       "youtubeQuery": "Good Neighbours live set",
       "soundcloudSlug": "good-neighbours",
-      "spotifyId": "52N3KGrTWDRhdQJrgBTofE"
+      "spotifyId": "52N3KGrTWDRhdQJrgBTofE",
+      "youtubeVideoIds": [
+        "ymFvYo43QHU",
+        "XGmXAYHSrCs",
+        "PQeO7yXmaqo"
+      ],
+      "youtubeLabels": [
+        "live at Pinkpop 2026",
+        "Live at TRNSMT Festival * Glasgow Green, Glasgow, Scotland (Jul 11, 2025) HDTV",
+        "Full Performance (Live in the KROQ Helpful Honda Sound Space)"
+      ]
     },
     {
       "name": "spill tab",
@@ -264,7 +454,17 @@
       ],
       "soundcloudSlug": "spilltab",
       "spotifyId": "3qqkHeEhezlIaNj1vFYH2r",
-      "youtubeQuery": "spill tab live set"
+      "youtubeQuery": "spill tab live set",
+      "youtubeVideoIds": [
+        "KXQTFK-i628",
+        "XSd2t6bWcgw",
+        "4Xh2ASJwj70"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Angie, Assis, Adore Me (Live Session from France)",
+        "Live | Baby's All Right Brooklyn NYC | June 11, 2025"
+      ]
     },
     {
       "name": "Jensen McRae",
@@ -276,7 +476,17 @@
         "singer-songwriter"
       ],
       "soundcloudSlug": "jensenmcrae",
-      "spotifyId": "11dABkjSoOjcP9p3TFSNRj"
+      "spotifyId": "11dABkjSoOjcP9p3TFSNRj",
+      "youtubeVideoIds": [
+        "WfvNFEenS68",
+        "8oED9YnkBIM",
+        "fjInMu9jfiM"
+      ],
+      "youtubeLabels": [
+        "KCRW Live From HQ (Full Performance)",
+        "Live | Bowery Ballroom NYC | May 8, 2025",
+        "Mini Concert"
+      ]
     },
     {
       "name": "honestav",
@@ -286,13 +496,33 @@
         "indie folk"
       ],
       "spotifyId": "5LvRazQ7EDZLfQU4HYc6XF",
-      "youtubeQuery": "honestav live set"
+      "youtubeQuery": "honestav live set",
+      "youtubeVideoIds": [
+        "KWlTu6I1Qzs",
+        "LWLB5xg5Eo8",
+        "ldg1AH9laMk"
+      ],
+      "youtubeLabels": [
+        "Austin City Limits Music Fest Full LIVE Set",
+        "hara-kiri UNPLUGGED (LIVE FROM LOS ANGELES)",
+        "Live Acoustic Session"
+      ]
     },
     {
       "name": "Vincent Lima",
       "day": "Friday",
       "weekends": "both",
-      "youtubeQuery": "Vincent Lima live set"
+      "youtubeQuery": "Vincent Lima live set",
+      "youtubeVideoIds": [
+        "iSVEuR9ngA8",
+        "YoUZ8oo4lx4",
+        "QfsU6RixwEo"
+      ],
+      "youtubeLabels": [
+        "Vincent Lima Full ish Set Live At The Grove Lollapalooza Chicago Sunday 8/03/25 V2",
+        "FIREHOUSE MUSIC SESSION #15: Vincent Lima",
+        "Vincent Lima (Live) | Wesleyan University | Quadio After Hours"
+      ]
     },
     {
       "name": "Amble",
@@ -302,7 +532,17 @@
       "genres": [
         "folk"
       ],
-      "spotifyId": "5ZC7GPz5h9zkEfjZBUDNzI"
+      "spotifyId": "5ZC7GPz5h9zkEfjZBUDNzI",
+      "youtubeVideoIds": [
+        "aYQ4E4gDhRc",
+        "nTagsnMb5zY",
+        "hJ50XM_qxRc"
+      ],
+      "youtubeLabels": [
+        "Live at TRNSMT Festival * Glasgow Green, Glasgow, Scotland (Jul 12, 2025) HDTV",
+        "Amble on Audiotree Live (Full Session)",
+        "Jersey Giant (Live from Dublin)"
+      ]
     },
     {
       "name": "Crowe Boys",
@@ -314,7 +554,17 @@
         "folk"
       ],
       "spotifyId": "5k7X7qq43uKpB09FSYS5id",
-      "youtubeQuery": "Crowe Boys live set"
+      "youtubeQuery": "Crowe Boys live set",
+      "youtubeVideoIds": [
+        "rKyABzd45iw",
+        "Is6I1Q203d8",
+        "sDyGHjG77ck"
+      ],
+      "youtubeLabels": [
+        "Where Did I Go Wrong (Live) | Coal Drops Sessions",
+        "Let Me Feel Alone (Live) | Coal Drops Sessions",
+        "Bootstraps (Acoustic / Live At The Ryman)"
+      ]
     },
     {
       "name": "Tiera Kennedy",
@@ -727,7 +977,17 @@
       "day": "Saturday",
       "weekends": "both",
       "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
-      "youtubeQuery": "Ocean Alley live set"
+      "youtubeQuery": "Ocean Alley live set",
+      "youtubeVideoIds": [
+        "TKFkt-MgELQ",
+        "TM9TgzcBS20",
+        "B8xtefzuoQA"
+      ],
+      "youtubeLabels": [
+        "Ocean Alley Live at Austin City Limits 2025 (Full Set)",
+        "LIVE IN MELBOURNE ‘23 (Full Concert)",
+        "YELLOW MELLOW EP - LIVE (10 Year Anniversary)"
+      ]
     },
     {
       "name": "Joey Valence & Brae",
@@ -823,7 +1083,17 @@
       "day": "Saturday",
       "weekends": "both",
       "spotifyId": "33Se8kMYeTPkeeM2LnsPF8",
-      "youtubeQuery": "Alemeda live set"
+      "youtubeQuery": "Alemeda live set",
+      "youtubeVideoIds": [
+        "oJu8g2F4W-8",
+        "wCSk9i392wg",
+        "2iF8NgbjQEs"
+      ],
+      "youtubeLabels": [
+        "Live | Baby's All Right Brooklyn NYC | February 26, 2025",
+        "Beat A B!tch Up Unplugged (Tour Rehearsal Live Session)",
+        "I'm Over It Unplugged (Tour Rehearsal Live Session)"
+      ]
     },
     {
       "name": "Odeal",
@@ -1237,7 +1507,17 @@
         "pop punk"
       ],
       "spotifyId": "64EHXDoln95lnccszdPum0",
-      "youtubeQuery": "Royal & the Serpent live set"
+      "youtubeQuery": "Royal & the Serpent live set",
+      "youtubeVideoIds": [
+        "0VTpn-xZ9ek",
+        "RzlG_20tmWI",
+        "GDv3A2iooDA"
+      ],
+      "youtubeLabels": [
+        "Royal & The Serpent [FULL SET] Live @ The Bluebird Theater, Denver 11/10/23",
+        "Royal & the Serpent (Live) Complete Set: Talking Stick Resort Amphitheatre Phx Az 6/2/2024",
+        "Royal and the Serpent Live at Aftershock 2022 Almost Full Set"
+      ]
     },
     {
       "name": "flowerovlove",

@@ -1037,7 +1037,17 @@
         "rapcore"
       ],
       "spotifyId": "0GicbfMtwhn3Ch0PdwkADQ",
-      "youtubeQuery": "Silly Goose live set"
+      "youtubeQuery": "Silly Goose live set",
+      "youtubeVideoIds": [
+        "YHME8U4cnSg",
+        "ngFjLuN6bEA",
+        "YmV1TF4y2BE"
+      ],
+      "youtubeLabels": [
+        "Live at Washington D.C [FULL SET | NO BARRIER | 12/18/25]",
+        "Silly Goose @ The Masquerade - GOOSEFEST 2026 - Atlanta, GA - 1/10/26 [FULL SET]",
+        "Goose Live at Madison Square Garden"
+      ]
     },
     {
       "name": "DJ Heather",
@@ -1214,7 +1224,17 @@
         "r&b"
       ],
       "spotifyId": "2d6ggH1oVt4z2zCuY2u5DW",
-      "youtubeQuery": "Durand Bernarr live set"
+      "youtubeQuery": "Durand Bernarr live set",
+      "youtubeVideoIds": [
+        "XgYddET0DQY",
+        "C0y9HlLc2qA",
+        "WepyDNgtf6g"
+      ],
+      "youtubeLabels": [
+        "House, Pop, Hip Hop and More | Durand Bernarr @ Club 1BD",
+        "Podium ZWART Concert",
+        "Durand Bernarr @ Club 1BD | RnB, Hip Hop, Soul, Funk, Pop, Top 40 & More"
+      ]
     },
     {
       "name": "Prospa",
@@ -1318,7 +1338,17 @@
       ],
       "soundcloudSlug": "theblessedmadonna",
       "spotifyId": "2nNEvsyPzLwKVZrfkwLpNK",
-      "youtubeQuery": "The Blessed Madonna live set"
+      "youtubeQuery": "The Blessed Madonna live set",
+      "youtubeVideoIds": [
+        "WHgbZmVvqKI",
+        "OAAEWGIfzns",
+        "tGJEe-yGLos"
+      ],
+      "youtubeLabels": [
+        "Boiler Room: Bali",
+        "Lollapalooza Chicago 2025 | Full Set",
+        "The Black Madonna b2b Mike Servito | Boiler Room x Dekmantel Festival DJ Set"
+      ]
     },
     {
       "name": "Bo Staloch",
@@ -2127,7 +2157,17 @@
       "day": "Friday",
       "stage": "The Grove",
       "spotifyId": "18lpwfiys4GtdHWNUu9qQr",
-      "youtubeQuery": "Ocean Alley live set"
+      "youtubeQuery": "Ocean Alley live set",
+      "youtubeVideoIds": [
+        "TKFkt-MgELQ",
+        "TM9TgzcBS20",
+        "B8xtefzuoQA"
+      ],
+      "youtubeLabels": [
+        "Ocean Alley Live at Austin City Limits 2025 (Full Set)",
+        "LIVE IN MELBOURNE ‘23 (Full Concert)",
+        "YELLOW MELLOW EP - LIVE (10 Year Anniversary)"
+      ]
     },
     {
       "name": "Wyatt Flores",
@@ -2138,7 +2178,17 @@
         "red dirt"
       ],
       "spotifyId": "46lEQmDJLJeyltECJYJv1Y",
-      "youtubeQuery": "Wyatt Flores live set"
+      "youtubeQuery": "Wyatt Flores live set",
+      "youtubeVideoIds": [
+        "N7oe-tzmuRY",
+        "IDlWvaYOS5g",
+        "88mdzNcOHj4"
+      ],
+      "youtubeLabels": [
+        "Live at Stagecoach 2026 (Full Set)",
+        "West of Tulsa / Welcome To The Plains / Losing Sleep - Live at Under The Big Sky 2025",
+        "Tiny Desk Concert"
+      ]
     },
     {
       "name": "Bladee",
@@ -2155,14 +2205,34 @@
       ],
       "soundcloudSlug": "bladee1000",
       "spotifyId": "2xvtxDNInKDV4AvGmjw6d1",
-      "youtubeQuery": "Bladee live set"
+      "youtubeQuery": "Bladee live set",
+      "youtubeVideoIds": [
+        "YJRzRzt9iNI",
+        "AjgqlfP-zP0",
+        "hr_U5ppv7AI"
+      ],
+      "youtubeLabels": [
+        "Bladee & Ecco2K | NTS Session",
+        "Yung Lean & bladee Live @ Way Out West, Göteborg 2025 🇸🇪",
+        "Live at Crystal Ballroom | Martyr World Tour 2025"
+      ]
     },
     {
       "name": "Alemeda",
       "day": "Friday",
       "stage": "Tito's",
       "spotifyId": "33Se8kMYeTPkeeM2LnsPF8",
-      "youtubeQuery": "Alemeda live set"
+      "youtubeQuery": "Alemeda live set",
+      "youtubeVideoIds": [
+        "oJu8g2F4W-8",
+        "wCSk9i392wg",
+        "2iF8NgbjQEs"
+      ],
+      "youtubeLabels": [
+        "Live | Baby's All Right Brooklyn NYC | February 26, 2025",
+        "Beat A B!tch Up Unplugged (Tour Rehearsal Live Session)",
+        "I'm Over It Unplugged (Tour Rehearsal Live Session)"
+      ]
     },
     {
       "name": "Kenny Mason",
@@ -2175,7 +2245,17 @@
       ],
       "soundcloudSlug": "kennymason",
       "spotifyId": "4mwdnO2jZrMmMVrjcHsZBv",
-      "youtubeQuery": "Kenny Mason live set"
+      "youtubeQuery": "Kenny Mason live set",
+      "youtubeVideoIds": [
+        "GZ0kLx24-84",
+        "FrmGKIftVeo",
+        "rHwZ0-tgnhE"
+      ],
+      "youtubeLabels": [
+        "Kenny Mason LIVE AMERICAN BULLDAWG TOUR 2026 FULL SET (Los Angeles, CA)",
+        "Live at Washington D.C [FULL SET | 6/20/26]",
+        "Live at Silver Spring, MD [FULL SET | 4/14/25]"
+      ]
     },
     {
       "name": "Del Water Gap",
@@ -2187,7 +2267,17 @@
       ],
       "soundcloudSlug": "delwatergap",
       "spotifyId": "0xPoVNPnxIIUS1vrxAYV00",
-      "youtubeQuery": "Del Water Gap live set"
+      "youtubeQuery": "Del Water Gap live set",
+      "youtubeVideoIds": [
+        "a_KGb7-7YWM",
+        "kJa-3LGmYH4",
+        "PHlq1NPPGLM"
+      ],
+      "youtubeLabels": [
+        "Live from Bonnaroo 2026 (Full Set)",
+        "Del Water Gap ¦ Bonnaroo Music Festival 2026 ¦ Full Set",
+        "Lollapalooza Chicago 2022 - Full Show HD"
+      ]
     },
     {
       "name": "Flipturn",
@@ -2198,7 +2288,17 @@
       ],
       "soundcloudSlug": "flipturnband",
       "spotifyId": "7FKTg75ADVMZgY3P9ZMRtH",
-      "youtubeQuery": "Flipturn live set"
+      "youtubeQuery": "Flipturn live set",
+      "youtubeVideoIds": [
+        "YX23X6zb1gc",
+        "Ca2XXPfWdqU",
+        "ZNS948a2nZY"
+      ],
+      "youtubeLabels": [
+        "Live From Orlando",
+        "Outside Lands Music Festival 2025 [FULL SET]",
+        "flipturn on Audiotree Live (Full Session)"
+      ]
     },
     {
       "name": "Jane Remover",
@@ -2287,7 +2387,17 @@
       ],
       "soundcloudSlug": "kornofficial",
       "spotifyId": "3RNrq3jvMZxD9ZyoOZbQOD",
-      "youtubeQuery": "Korn live set"
+      "youtubeQuery": "Korn live set",
+      "youtubeVideoIds": [
+        "ZhS4CK7E0kI",
+        "UQzAKxgBAL8",
+        "IRiOUdF_Cqg"
+      ],
+      "youtubeLabels": [
+        "Live @RockamRingofficial 2025 [FULL SHOW]",
+        "Korn Blind Live In Woodstock '99 (Dvd Rip)",
+        "Full Concert [HD] | Live at Pinkpop 2000"
+      ]
     },
     {
       "name": "Tessla",
@@ -2311,27 +2421,67 @@
       "name": "Birds of a Feather",
       "day": "Saturday",
       "stage": "Kidzapalooza",
-      "youtubeQuery": "Birds of a Feather live set"
+      "youtubeQuery": "Birds of a Feather live set",
+      "youtubeVideoIds": [
+        "YH6HJb_F-LE",
+        "m_uBbDkiAIA",
+        "ceOjTNrMHj4"
+      ],
+      "youtubeLabels": [
+        "Billie Eilish – BIRDS OF A FEATHER (Live Performance from Amazon Music’s Songline)",
+        "Billie Eilish - BIRDS OF A FEATHER (Live from The LA28 Olympic Handover)",
+        "Billie Eilish - BIRDS OF A FEATHER (Live From The GRAMMYs 2025)"
+      ]
     },
     {
       "name": "Landon Conrath",
       "day": "Saturday",
       "stage": "The Grove",
       "spotifyId": "2PJ06l59DomDd440az768u",
-      "youtubeQuery": "Landon Conrath live set"
+      "youtubeQuery": "Landon Conrath live set",
+      "youtubeVideoIds": [
+        "itPpeOmt52A",
+        "g4LLtI3qpMM",
+        "vet_pIzmqLI"
+      ],
+      "youtubeLabels": [
+        "Landon Conrath on Audiotree Live (Full Session)",
+        "Live @ The Atlantis, Washington D.C. (FULL SET) [03/07/2026]",
+        "Acetone/Papercuts (Live at Fine Line)"
+      ]
     },
     {
       "name": "Winnetka Bowling League",
       "day": "Saturday",
       "stage": "Lakeshore",
       "spotifyId": "4ug3P1K8BaCdJXROrqHqhu",
-      "youtubeQuery": "Winnetka Bowling League live set"
+      "youtubeQuery": "Winnetka Bowling League live set",
+      "youtubeVideoIds": [
+        "p5AupGRMQLY",
+        "9ANpXagXLPQ",
+        "68C3K6fqkI4"
+      ],
+      "youtubeLabels": [
+        "Full Session | Paste",
+        "“Alice”- Winnetka Bowling League live @ Mercury Lounge, NYC 9/24/18",
+        "Winnetka Bowling League Live Performance | The Ringer Room | The Ringer"
+      ]
     },
     {
       "name": "Jev",
       "day": "Saturday",
       "stage": "Perry's",
-      "youtubeQuery": "Jev live set"
+      "youtubeQuery": "Jev live set",
+      "youtubeVideoIds": [
+        "m6ArThudims",
+        "WcnymNhOmnQ",
+        "-8TUpMf_SaQ"
+      ],
+      "youtubeLabels": [
+        "JEV @ LOLLAPALOOZA 2025",
+        "jev.: Tiny Desk Concert",
+        "JEV at Crosscurrents Denver 2026 | Full set"
+      ]
     },
     {
       "name": "Dua Saleh",
@@ -2339,13 +2489,33 @@
       "stage": "The Grove",
       "soundcloudSlug": "doitlikedua",
       "spotifyId": "2DGBzoOLcKLK3eWxFyugdB",
-      "youtubeQuery": "Dua Saleh live set"
+      "youtubeQuery": "Dua Saleh live set",
+      "youtubeVideoIds": [
+        "rfF0xrImG44",
+        "0cqLDTYytQ4",
+        "nrv0d9wChs4"
+      ],
+      "youtubeLabels": [
+        "Full Set | KUTX",
+        "PVRIS & Dua Saleh - Live in Chicago - 12.6.26 [FLASH WARNING]",
+        "\"Survival\" ft. Velvet Negroni (Live on Radio K)"
+      ]
     },
     {
       "name": "Eddie and the Getaway",
       "day": "Saturday",
       "stage": "BMI",
-      "youtubeQuery": "Eddie and the Getaway live set"
+      "youtubeQuery": "Eddie and the Getaway live set",
+      "youtubeVideoIds": [
+        "1lJQho7kaWM",
+        "8DYlW8SEQA8",
+        "BcbJxYFN-gc"
+      ],
+      "youtubeLabels": [
+        "Eddie and The Getaway Interview",
+        "The Making Of The \"Silver Lining\" Music Video (Vlog)",
+        "“USE SOMEBODY” - Kings of Leon"
+      ]
     },
     {
       "name": "Kickflip",
@@ -2354,7 +2524,17 @@
       "genres": [
         "likedis auto"
       ],
-      "youtubeQuery": "Kickflip live set"
+      "youtubeQuery": "Kickflip live set",
+      "youtubeVideoIds": [
+        "epbLJG5Eq1Q",
+        "D1FuT7aRpKw",
+        "ghdv29fMdjk"
+      ],
+      "youtubeLabels": [
+        "Umm Great - KickFlip キックフリップ 킥플립 [Music Bank] | KBS WORLD TV 250124",
+        "KickFlip COMEBACK SHOWCASE [My First Kick] - ’Twenty’",
+        "KickFlip COMEBACK SHOWCASE [My First Kick] - ‘My Direction’"
+      ]
     },
     {
       "name": "Sam Austins",
@@ -2362,7 +2542,17 @@
       "stage": "T-Mobile",
       "soundcloudSlug": "samaustins",
       "spotifyId": "0zmnfFQX8LWVVZyRPHRx1V",
-      "youtubeQuery": "Sam Austins live set"
+      "youtubeQuery": "Sam Austins live set",
+      "youtubeVideoIds": [
+        "Wbcc9VxY2s0",
+        "zjpVHzanyrc",
+        "CgAzScmGS2M"
+      ],
+      "youtubeLabels": [
+        "Sam Austins Performs in the Medium Sized Backyard",
+        "Sam Austins (DJ Set) - Elevator Music",
+        "FULL SHOW | Hinterland | St. Charles, IA | August 3, 2025 | LIVE"
+      ]
     },
     {
       "name": "Daniel Allan",
@@ -2386,7 +2576,17 @@
       "name": "Fyütch & Aura V",
       "day": "Saturday",
       "stage": "Kidzapalooza",
-      "youtubeQuery": "Fyütch & Aura V live set"
+      "youtubeQuery": "Fyütch & Aura V live set",
+      "youtubeVideoIds": [
+        "7xuDk0qLEGQ",
+        "BriVJolnJmg",
+        "CAOb8FGbPfA"
+      ],
+      "youtubeLabels": [
+        "1 year ago I released ‘Family Tree’ #music #family",
+        "Family Tree Album Release Concert w/ Divinity Roxx, Rissi Palmer, Lucy Kalantari and more",
+        "This Kwanzaa (feat. Pierce Freelon) | Happy Kwanzaa Song for Kids and Families"
+      ]
     },
     {
       "name": "Wasia Project",
@@ -2398,7 +2598,17 @@
         "pop"
       ],
       "spotifyId": "7poQNrOwZoUcoqihg4Xex0",
-      "youtubeQuery": "Wasia Project live set"
+      "youtubeQuery": "Wasia Project live set",
+      "youtubeVideoIds": [
+        "Mtzy7eMb9KE",
+        "Jwgaqnk176c",
+        "BhrOk3Z1_xs"
+      ],
+      "youtubeLabels": [
+        "Petals On The Moon (Live Session)",
+        "Wasia Project at TRNSMT Festival 2024 (FULL SET)",
+        "Somebody Come Through (Live) | CURVED | Amazon Music"
+      ]
     },
     {
       "name": "Salute",
@@ -2414,7 +2624,17 @@
       ],
       "soundcloudSlug": "saluteaut",
       "spotifyId": "1np8xozf7ATJZDi9JX8Dx5",
-      "youtubeQuery": "Salute live set"
+      "youtubeQuery": "Salute live set",
+      "youtubeVideoIds": [
+        "ulhdSOiTzx8",
+        "rvGABUgyCOA",
+        "-09ljcGECLs"
+      ],
+      "youtubeLabels": [
+        "Vail Après Ski | RAW CUTS",
+        "Boiler Room: Melbourne",
+        "RA Live: salute @ Brunch Elektronik 2024"
+      ]
     },
     {
       "name": "Charlotte Lawrence",
@@ -2442,7 +2662,17 @@
       "day": "Saturday",
       "stage": "BMI",
       "spotifyId": "4Bu9DnBZ12oX7MiiaJy9hK",
-      "youtubeQuery": "Carter Vail live set"
+      "youtubeQuery": "Carter Vail live set",
+      "youtubeVideoIds": [
+        "HGyPSqYQ_80",
+        "fcuuyTgV7JI",
+        "ZADEe8fJ7EE"
+      ],
+      "youtubeLabels": [
+        "Jam in the Van (Full Set 2025)",
+        "“I Want You” live by Carter Vail",
+        "ASTRONAUTS - live in my bedroom"
+      ]
     },
     {
       "name": "Layz",
@@ -2473,14 +2703,34 @@
         "singer-songwriter"
       ],
       "spotifyId": "35M2kdEtBZT6K4tcVm78A0",
-      "youtubeQuery": "Bôa live set"
+      "youtubeQuery": "Bôa live set",
+      "youtubeVideoIds": [
+        "Qsm5sgbk9oU",
+        "kWLswqAoMQA",
+        "Y2NZU4Fw5vg"
+      ],
+      "youtubeLabels": [
+        "Live at O2 Forum Kentish Town | Full Concert",
+        "Duvet - Live at O2 Forum Kentish Town",
+        "Twilight (Performance Video)"
+      ]
     },
     {
       "name": "Ole 60",
       "day": "Saturday",
       "stage": "The Grove",
       "spotifyId": "3iXeAZ8862AyoZ5ZGg800O",
-      "youtubeQuery": "Ole 60 live set"
+      "youtubeQuery": "Ole 60 live set",
+      "youtubeVideoIds": [
+        "lRn8zbWm9C4",
+        "kZW40MWrBgo",
+        "6aX1jmaM73w"
+      ],
+      "youtubeLabels": [
+        "Next to You (Live in Beaver Dam)",
+        "Live at the Print Shop (Full Episode)",
+        "\"Dust 2 Dust\" (Live at the Print Shop)"
+      ]
     },
     {
       "name": "Max McNown",
@@ -2503,20 +2753,50 @@
       "name": "Divinity Roxx & Divi Roxx Kids",
       "day": "Saturday",
       "stage": "Kidzapalooza",
-      "youtubeQuery": "Divinity Roxx & Divi Roxx Kids live set"
+      "youtubeQuery": "Divinity Roxx & Divi Roxx Kids live set",
+      "youtubeVideoIds": [
+        "vaFxOPC_VKY",
+        "8Ihp8GHk2SE",
+        "IflsyQjKZkQ"
+      ],
+      "youtubeLabels": [
+        "Experience the Unforgettable Energy of Divi Roxx Kids Live in NYC",
+        "Divi Roxx Kids Spectacular Performance at Hudson River Park in NYC. Ready Set Go!",
+        "Divi Roxx Kids and Divinity Roxx LOL-Laugh Out Loud Official Video"
+      ]
     },
     {
       "name": "The Bingo-Go-Go",
       "day": "Saturday",
       "stage": "Bonus Tracks",
-      "youtubeQuery": "The Bingo-Go-Go live set"
+      "youtubeQuery": "The Bingo-Go-Go live set",
+      "youtubeVideoIds": [
+        "wpwkw1mfMFQ",
+        "NwnczEmq4VE",
+        "-t1ASCG8FUw"
+      ],
+      "youtubeLabels": [
+        "Bluey in the backrooms part 3 #bluey #blueyheeler #bingo #bingoheeler #backrooms #backroomsmonster",
+        "Let's go Bingo 😵",
+        "The Grannies at the Macy's Thanksgiving Day Parade 💙 | Bluey"
+      ]
     },
     {
       "name": "Rachel Grae",
       "day": "Saturday",
       "stage": "BMI",
       "spotifyId": "0ekCwZGQUkAISV1h48jlHn",
-      "youtubeQuery": "Rachel Grae live set"
+      "youtubeQuery": "Rachel Grae live set",
+      "youtubeVideoIds": [
+        "yggXCVDvNd4",
+        "YJAQpFg2TB8",
+        "F6RZqNgTveg"
+      ],
+      "youtubeLabels": [
+        "Rachel Grae concert | Turned Into Me tour @ The Lower Third {3.10.25}",
+        "GOOD SIDE - Rachel Grae - Rockwood Music Hall, NYC 06/16/2022",
+        "Rachel Rae - Library Sessions - Full Video"
+      ]
     },
     {
       "name": "Flux Pavilion",
@@ -2554,7 +2834,17 @@
       ],
       "soundcloudSlug": "montellfish",
       "spotifyId": "5nvWOyAkfNgVLKESq4fOj2",
-      "youtubeQuery": "Montell Fish live set"
+      "youtubeQuery": "Montell Fish live set",
+      "youtubeVideoIds": [
+        "ENmTpoH-mkE",
+        "RhhPawKfZ6c",
+        "kS3ypDP_8ao"
+      ],
+      "youtubeLabels": [
+        "Hotel (Live in Los Angeles, Fonda Theatre)",
+        "live at Lowlands 2025",
+        "live at Pukkelpop 2025"
+      ]
     },
     {
       "name": "Bossman Dlow",
@@ -2566,13 +2856,33 @@
       ],
       "soundcloudSlug": "bossman-dlow",
       "spotifyId": "23xFbA9rYgRX8mreqysWPc",
-      "youtubeQuery": "Bossman Dlow live set"
+      "youtubeQuery": "Bossman Dlow live set",
+      "youtubeVideoIds": [
+        "meQ25AzXbOk",
+        "7J2xDPfOmhQ",
+        "M2HJHMJ02BI"
+      ],
+      "youtubeLabels": [
+        "BossMan Dlow LIVE @ Rolling Loud Miami 2024 [FULL SET]",
+        "BossMan Dlow LIVE @ Rolling Loud Orlando 2026 [FULL SET]",
+        "BossMan Dlow FULL PERFORMANCE w/ a Live Orchestra | Audiomack Trap Symphony"
+      ]
     },
     {
       "name": "The Happiness Club",
       "day": "Saturday",
       "stage": "Kidzapalooza",
-      "youtubeQuery": "The Happiness Club live set"
+      "youtubeQuery": "The Happiness Club live set",
+      "youtubeVideoIds": [
+        "CUuiwa86j_A",
+        "65gsYnDJaag",
+        "EHat6WWXmpE"
+      ],
+      "youtubeLabels": [
+        "Live at Pocket Con 2025!",
+        "The Happiness Club @ The White House 2016",
+        "The Happiness Club performs at a Chicago Bulls Game"
+      ]
     },
     {
       "name": "Naomi Scott",
@@ -3115,7 +3425,8 @@
       "name": "Chachi (DJ Set)",
       "day": "Sunday",
       "stage": "Bud Light Backyard",
-      "youtubeQuery": "Chachi (DJ Set) live set"
+      "youtubeQuery": "Chachi (DJ Set) live set",
+      "spotifyId": "73zFGpRwTa68AKgerJ2ixy"
     },
     {
       "name": "Marlon Hoffstadt",
