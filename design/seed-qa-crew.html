@@ -97,24 +97,85 @@
     affinity: {},
   };
 
-  function seed(fid) {
+  // Where the seeded crew ends up living, once we know. On a static server with
+  // no /api this stays the fake local token; against a real deployment it is
+  // the token the server minted.
+  const LAST_KEY = 'fn_qa_seeded_token';
+
+  function land(token, fid, me, doc) {
+    localStorage.setItem('fn_crew_doc_v3_' + token, JSON.stringify(doc));
+    localStorage.setItem('fn_crews_v3', JSON.stringify([{ token, name: 'QA Crew' }]));
+    localStorage.setItem('fn_active_crew_v3', token);
+    localStorage.setItem('fn_me_v3_' + token, me);
+    localStorage.setItem('fn_crew_fest_v3_' + token, fid);
+    localStorage.removeItem('fn_crew_pending_v3_' + token);
+    try { localStorage.setItem(LAST_KEY, token); } catch (e) { /* private mode */ }
+    location.href = '/index.html#g=' + token;
+  }
+
+  // A locally-invented token only works where nothing can contradict it.
+  //
+  // The app asks the server about a token at boot, and a server that ANSWERS
+  // "no such crew" sends you to the bad-link screen — deliberately, so a
+  // deleted crew cannot re-enter on a stale cache. Only a request that FAILS
+  // falls back to the cached doc. So this page worked on a static server, where
+  // there is no /api to answer at all, and broke the moment it was opened on a
+  // real deployment (reported 2026-08-05, on a branch preview).
+  //
+  // So: ask the server to mint a real crew, seeded with the same people and
+  // picks in one create, and use the token it gives back. Where there is no API
+  // — the local static server this page was written for — fall through to the
+  // old local-only behaviour, which is still correct there.
+  async function seed(fid) {
     const me = document.getElementById('me').value;
-    localStorage.setItem('fn_crew_doc_v3_' + TOK, JSON.stringify(DOC));
-    localStorage.setItem('fn_crews_v3', JSON.stringify([{ token: TOK, name: 'QA Crew' }]));
-    localStorage.setItem('fn_active_crew_v3', TOK);
-    localStorage.setItem('fn_me_v3_' + TOK, me);
-    localStorage.setItem('fn_crew_fest_v3_' + TOK, fid);
-    localStorage.removeItem('fn_crew_pending_v3_' + TOK);
-    location.href = '/index.html#g=' + TOK;
+    const btns = [...document.querySelectorAll('button')];
+    btns.forEach((b) => { b.disabled = true; });
+    const note = document.querySelector('.note');
+    const say = (t) => { if (note) note.textContent = t; };
+
+    say('Creating a throwaway crew on the server…');
+    try {
+      const res = await fetch('/api/crew', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'QA Crew',
+          people: DOC.people,
+          // Both boards, exactly as seeded — the picker only decides which one
+          // opens, and a crew that knows about both matches what the local
+          // path has always produced.
+          festivals: DOC.festivals,
+        }),
+      });
+      if (!res.ok) throw new Error('create failed: ' + res.status);
+      const { token, doc } = await res.json();
+      say('Created ' + token.slice(0, 8) + '… — opening.');
+      land(token, fid, me, doc);
+      return;
+    } catch (e) {
+      // No API here (static server), or it refused. The local-only path is the
+      // right answer in exactly the first case, and harmless in the second
+      // because the app will tell you plainly that the link did not work.
+      say('No API on this host — seeding locally instead (' + e.message + ').');
+      btns.forEach((b) => { b.disabled = false; });
+      land(TOK, fid, me, DOC);
+    }
   }
 
   document.getElementById('ubbi').addEventListener('click', () => seed('ubbi-dubbi-2026'));
   document.getElementById('ef').addEventListener('click', () => seed('electric-forest-2026'));
   document.getElementById('clear').addEventListener('click', () => {
+    let seeded = null;
+    try { seeded = localStorage.getItem(LAST_KEY); } catch (e) { /* private mode */ }
     for (const k of Object.keys(localStorage)) {
-      if (k.includes(TOK) || k === 'fn_crews_v3' || k === 'fn_active_crew_v3') localStorage.removeItem(k);
+      if (k.includes(TOK) || (seeded && k.includes(seeded))
+        || k === 'fn_crews_v3' || k === 'fn_active_crew_v3' || k === LAST_KEY) localStorage.removeItem(k);
     }
-    document.getElementById('clear').textContent = 'Cleared ✓';
+    // Only this browser is cleared. A crew minted on the server stays there —
+    // there is no delete endpoint — so it is a dead row nobody holds a link to.
+    document.getElementById('clear').textContent = seeded
+      ? 'Cleared from this browser ✓ (the server row stays)'
+      : 'Cleared ✓';
   });
 </script>
 </body>
