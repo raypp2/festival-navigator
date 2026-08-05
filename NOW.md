@@ -1,4 +1,36 @@
-# NOW — festival-navigator: Discovery epic COMPLETE on branch `discovery` (v44) · not yet deployed
+# NOW — festival-navigator: LIVE on ray-festival.vercel.app (SW v65)
+
+## 2026-08-05 (session close) — the player carries, the genre gap closes
+
+Everything below is on `main` and deployed. `main` is git-connected, so a push
+IS a release.
+
+**Discovery's sample player now keeps playing across an artist change** —
+device-confirmed on an iPhone. Getting there took four wrong answers, and the
+two rules that governed it are the kind no laptop can check: iOS will not start
+audio on an element no finger has touched, and WebKit re-creates an iframe's
+browsing context on ANY reparent, including `appendChild` onto the parent it is
+already in. `refreshDeckInPlace` (deck.js) and `rebuildChromeAroundEmbed` /
+`remountFor` (player.js) exist for exactly that and look like over-engineering
+locally. Do not simplify them without reading
+`claude-plans/2026-08-05-player-verification-handoff.md`.
+
+Also shipped: the nav strip from design frames 6a/6b/6e (Wall · Discover · My
+Day, search demoted to an icon, strip + stage rail pin); a carried playback
+INTENT that survives a swipe but not a pause; a play/pause glyph keyed on the
+PLAYHEAD rather than on a PLAY event, because both embeds fire PLAY while being
+refused; YouTube finally getting a play control of its own in compact; and iOS
+focus-zoom suppression.
+
+**Enrichment**: the genre gap went 570 → 176 rows via Last.fm, after Spotify
+(no longer returns `genres`) and Deezer (never had them) both turned out to be
+closed. A 429-backoff fix means a YouTube tranche can now actually spend its
+daily budget — before it, a 69-search budget bought 4.
+
+**What still needs a phone**, and it is the reason the handoff doc exists:
+Spotify has NEVER been device-tested against the new advance, and SoundCloud's
+pass predates it. Details, test steps and the probe to use are in that doc.
+
 
 ## 2026-08-01 (session close) — Discovery M0-M7, built and verified
 
