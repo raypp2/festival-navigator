@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v63'; // v63 = YouTube gets a real play control in compact; the watchdog stops resetting its own baseline; the carry loads only once back on screen
+const CACHE_VERSION = 'festival-nav-v64'; // v64 = the deck advances in place — the player host never changes parents, because WebKit re-creates a reparented iframe
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

@@ -888,6 +888,16 @@ test('the rail query is per-visit: never persisted, gone on close', () => {
 // Opening Discover is silent. Pressing play is a decision that should survive
 // the swipe to the next artist — and pausing is the same decision in reverse.
 function lastMount(calls) { return calls[calls.length - 1]; }
+// onStateChange is registered ONCE, when the player is created, and survives
+// every later re-point — mountPlayer captures it in the instance, remountFor
+// does not re-take it. So the way to play the player reporting a state change
+// is through the mount that installed the callback, not the latest re-point.
+function reportState(calls, snap, meta) {
+  for (let i = calls.length - 1; i >= 0; i--) {
+    if (typeof calls[i].onStateChange === 'function') { calls[i].onStateChange(snap, meta); return; }
+  }
+  throw new Error('no mount ever registered an onStateChange');
+}
 
 test('the first artist of a visit mounts silent — Discover never opens playing', () => {
   const calls = [];
@@ -900,7 +910,7 @@ test('once playing, advancing to the next artist keeps playing', () => {
   const actions = mkActions(calls);
   renderDeckForTest(ctx, actions, CANON);
   // the player reports that sound was asked for (play tap, tab tap, track tap)
-  lastMount(calls).onStateChange({ play: true });
+  reportState(calls, { play: true });
 
   overlay().querySelector('.dd-btn-pick').click(); // a pick advances the deck
   assert.equal(cardName(), 'PickFlow1', 'we did advance');
@@ -911,8 +921,8 @@ test('a pause sticks — later artists open silent until asked again', () => {
   const calls = [];
   const actions = mkActions(calls);
   renderDeckForTest(ctx, actions, CANON);
-  lastMount(calls).onStateChange({ play: true });
-  lastMount(calls).onStateChange({ play: false }); // they pressed pause
+  reportState(calls, { play: true });
+  reportState(calls, { play: false }); // they pressed pause
 
   overlay().querySelector('.dd-btn-pick').click();
   assert.equal(lastMount(calls).autoplay, false, 'we do not restart sound they turned off');
@@ -921,7 +931,7 @@ test('a pause sticks — later artists open silent until asked again', () => {
 test('the intent is per-visit: closing Discover resets it to silent', () => {
   const calls = [];
   renderDeckForTest(ctx, mkActions(calls), CANON);
-  lastMount(calls).onStateChange({ play: true });
+  reportState(calls, { play: true });
   closeDeck();
 
   const next = [];
@@ -954,11 +964,11 @@ test('a carried player still carries the intent — and still respects a pause',
   const calls = [];
   const actions = mkActions(calls);
   renderDeckForTest(ctx, actions, CANON);
-  calls[calls.length - 1].onStateChange({ play: true });
+  reportState(calls, { play: true });
   overlay().querySelector('.dd-btn-pick').click();
   assert.equal(calls[calls.length - 1].autoplay, true, 'sound follows the swipe');
 
-  calls[calls.length - 1].onStateChange({ play: false });
+  reportState(calls, { play: false });
   overlay().querySelector('.dd-btn-pick').click();
   assert.equal(calls[calls.length - 1].autoplay, false, 'a pause still sticks');
 });
@@ -970,7 +980,7 @@ test('an autoplay refusal fixes the icon without withdrawing the intent', () => 
   const calls = [];
   const actions = mkActions(calls);
   renderDeckForTest(ctx, actions, CANON);
-  calls[calls.length - 1].onStateChange({ play: true });
+  reportState(calls, { play: true });
 
   // what player.js reports when it asked to play and no PLAY event arrived
   calls[calls.length - 1].onStateChange({ play: false }, { autoplayRefused: true });
@@ -995,7 +1005,7 @@ test('a player that cannot carry falls back to a real mount, and still gets the 
     return { destroy: () => { destroys.n++; }, getState: () => ({}), handoverTo: () => {} };
   };
   renderDeckForTest(ctx, actions, CANON);
-  calls[calls.length - 1].onStateChange({ play: true });
+  reportState(calls, { play: true });
 
   overlay().querySelector('.dd-btn-pick').click();
   const last = calls[calls.length - 1];

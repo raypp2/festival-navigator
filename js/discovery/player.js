@@ -374,6 +374,48 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     return park;
   }
 
+  // Rebuild the chrome AROUND a live embed without the embed changing parents.
+  //
+  // The ordinary rebuild wipes root and puts the embed host back afterwards,
+  // which is a reparent — and WebKit re-creates an iframe's browsing context on
+  // any reparent at all, losing the gesture unlock with it (measured,
+  // design/ios-playback-probe step 5B). So when there is a live embed to
+  // protect, every sibling is replaced and the stage that holds it is left
+  // exactly where it is. The stage's own per-artist details are the only things
+  // updated in place, and there are two of them.
+  //
+  // Returns false if the shape is not what it expects, and the caller does the
+  // ordinary rebuild instead — correct, just costly to whatever was playing.
+  function rebuildChromeAroundEmbed(snap) {
+    const body = root.querySelector('.sample-player-body');
+    const stageEl = root.querySelector('.sample-player-np') || root.querySelector('.sample-player-stage');
+    if (!body || !stageEl || !embedHost || !stageEl.contains(embedHost)) return false;
+
+    if (seekTeardown) { seekTeardown(); seekTeardown = null; }
+
+    for (const el of [...root.children]) if (el !== body) el.remove();
+    const head = curLayout !== 'compact' ? renderHead(snap) : renderCompactBadge(snap);
+    if (head) root.insertBefore(head, body);
+    root.insertBefore(renderTabs(snap), body);
+
+    for (const el of [...body.children]) if (el !== stageEl) el.remove();
+    if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
+      body.appendChild(buildSeekRow(snap));
+    }
+    if (snap.currentSource !== 'sp') body.appendChild(renderClips(snap));
+
+    if (snap.failed.length > 0) root.appendChild(renderErrorBanner(snap));
+    if (!snap.online) root.appendChild(renderOfflineNote());
+
+    // The two things inside the stage that are about the artist rather than
+    // about the embed.
+    const meta = stageEl.querySelector('.sample-player-np-meta');
+    if (meta) meta.innerHTML = npMetaHtml(snap);
+    const btn = stageEl.querySelector('.sample-player-np-btn');
+    if (btn) { btn.disabled = !snap.online; setPlayGlyph(btn, snap.play); }
+    return true;
+  }
+
   function rebuildChrome(snap, sourceChanged) {
     // Move, never remove: appendChild between two connected parents relocates
     // the node without it ever being out of the document.
@@ -1342,7 +1384,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       && embedAdapter && typeof embedAdapter.loadArtist === 'function';
 
     if (canCarry) {
-      rebuildChrome(snap, false); // false = preserve embedHost, the whole point
+      // Around the embed if the shape allows; the ordinary rebuild otherwise,
+      // which reparents and therefore costs the embed on iOS.
+      if (!rebuildChromeAroundEmbed(snap)) rebuildChrome(snap, false);
       // Load AFTER the player is back on screen, never while it is parked. The
       // holder is a 1x1 transparent box, and asking a video to start inside one
       // is asking to be refused or instantly paused — which comes back as an

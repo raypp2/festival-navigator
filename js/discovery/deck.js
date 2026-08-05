@@ -312,6 +312,70 @@ function subLineText(ctx, facets) {
 }
 
 // ---- card build ---------------------------------------------------------------------
+// The part of a card that is ABOUT THIS ARTIST — everything except the player.
+//
+// Split out so an advance can replace it without rebuilding the card, because
+// the player must not move: WebKit re-creates an iframe's browsing context on
+// ANY reparent, even one that never leaves the document (measured on an iPhone,
+// design/ios-playback-probe step 5B — onReady fired a second time and the
+// unlock was gone). Everything here is REPLACED wholesale rather than patched
+// field by field, so there is no way for one artist's detail to survive onto
+// the next; the exception list is exactly one element long.
+function paintCard(card, entry, ctx) {
+  const fest = state.FESTIVALS[ctx.fid] || {};
+  const meta = findArtistMeta(fest, entry.name);
+  for (const el of [...card.children]) {
+    if (!el.classList.contains('dd-player-host')) el.remove();
+  }
+  card.dataset.artist = entry.name;
+  const before = card.querySelector('.dd-player-host');
+  const add = (el) => { if (el) card.insertBefore(el, before); };
+
+  const chips = document.createElement('div');
+  chips.className = 'dd-chips';
+  const genreList = [entry.primary, ...(entry.secondary || [])].filter(Boolean);
+  for (const g of genreList) {
+    const c = document.createElement('span');
+    c.className = 'dd-chip';
+    c.textContent = g;
+    chips.appendChild(c);
+  }
+  add(chips);
+
+  const nameBtn = document.createElement('button');
+  nameBtn.type = 'button';
+  nameBtn.className = 'dd-name';
+  nameBtn.textContent = entry.name;
+  nameBtn.setAttribute('aria-label', `Open ${entry.name}`);
+  // The one flow change (build spec §1): every artist name opens the artist
+  // page, stacked on top via the `artist:` router layer — same ctx.onTap
+  // every other surface (wall, timetable) already routes through.
+  nameBtn.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(entry.name); });
+  add(nameBtn);
+
+  // When they play, right under the name — the same DAY · TIME · STAGE line the
+  // artist page carries, from the same findSetInfo, so a card and the page it
+  // opens never disagree. Absent for a lineup with no schedule yet: no set
+  // info, no line (never a placeholder, same rule the reason ribbon follows).
+  // Plain text throughout, including the stage: the festival accent has exactly
+  // four homes (repo law) and a deck card is not one of them.
+  const setLine = formatSetLinePlain(fest, findSetInfo(fest, entry.name, meta));
+  if (setLine) {
+    const when = document.createElement('div');
+    when.className = 'dd-setline';
+    when.textContent = setLine;
+    add(when);
+  }
+
+  // Exactly one reason ribbon — no reason, no ribbon (score.js's guarantee).
+  if (entry.reason) {
+    const ribbon = document.createElement('div');
+    ribbon.className = 'dd-reason';
+    ribbon.textContent = entry.reason.text;
+    add(ribbon);
+  }
+}
+
 function buildCard(entry, ctx, actions, canonData) {
   const fest = state.FESTIVALS[ctx.fid] || {};
   const meta = findArtistMeta(fest, entry.name);
@@ -327,56 +391,11 @@ function buildCard(entry, ctx, actions, canonData) {
 
   const card = document.createElement('div');
   card.className = 'dd-card';
-  card.dataset.artist = entry.name;
-
-  const chips = document.createElement('div');
-  chips.className = 'dd-chips';
-  const genreList = [entry.primary, ...(entry.secondary || [])].filter(Boolean);
-  for (const g of genreList) {
-    const c = document.createElement('span');
-    c.className = 'dd-chip';
-    c.textContent = g;
-    chips.appendChild(c);
-  }
-  card.appendChild(chips);
-
-  const nameBtn = document.createElement('button');
-  nameBtn.type = 'button';
-  nameBtn.className = 'dd-name';
-  nameBtn.textContent = entry.name;
-  nameBtn.setAttribute('aria-label', `Open ${entry.name}`);
-  // The one flow change (build spec §1): every artist name opens the artist
-  // page, stacked on top via the `artist:` router layer — same ctx.onTap
-  // every other surface (wall, timetable) already routes through.
-  nameBtn.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(entry.name); });
-  card.appendChild(nameBtn);
-
-  // When they play, right under the name — the same DAY · TIME · STAGE line the
-  // artist page carries, from the same findSetInfo, so a card and the page it
-  // opens never disagree. Absent for a lineup with no schedule yet: no set
-  // info, no line (never a placeholder, same rule the reason ribbon follows).
-  // Plain text throughout, including the stage: the festival accent has exactly
-  // four homes (repo law) and a deck card is not one of them.
-  const setLine = formatSetLinePlain(fest, findSetInfo(fest, entry.name, meta));
-  if (setLine) {
-    const when = document.createElement('div');
-    when.className = 'dd-setline';
-    when.textContent = setLine;
-    card.appendChild(when);
-  }
-
-  // Exactly one reason ribbon — no reason, no ribbon (score.js's guarantee).
-  if (entry.reason) {
-    const ribbon = document.createElement('div');
-    ribbon.className = 'dd-reason';
-    ribbon.textContent = entry.reason.text;
-    card.appendChild(ribbon);
-  }
 
   const playerHost = document.createElement('div');
   playerHost.className = 'dd-player-host';
   card.appendChild(playerHost);
-  const { primary, secondary } = canonicalize(meta.genres, canonData);
+  paintCard(card, entry, ctx);  const { primary, secondary } = canonicalize(meta.genres, canonData);
   const playerGenres = [primary, ...secondary].filter(Boolean);
   const sources = {
     youtubeVideoIds: meta.youtubeVideoIds,
@@ -718,7 +737,9 @@ function beginDecision(kind, level, ctx, actions) {
     session.decided++;
     session.position++;
     celebrating = null;
-    renderDeckBody(ctx, actions);
+    // In place if we can — moving the player would cost it its embed (see
+    // refreshDeckInPlace). The full rebuild is the fallback, not the default.
+    if (!refreshDeckInPlace(ctx, actions)) renderDeckBody(ctx, actions);
 
     // Vocabulary matches the buttons: the control says "Not for me", so the
     // confirmation does too.
@@ -925,7 +946,7 @@ function skipCurrent(ctx, actions) {
   const advance = () => {
     celebrating = null;
     session.position = from + 1;
-    renderDeckBody(ctx, actions);
+    if (!refreshDeckInPlace(ctx, actions)) renderDeckBody(ctx, actions);
     const ov = document.getElementById(OVERLAY_ID);
     showBarUndo(ov && ov.querySelector('.dd-actions'), `Skipped ${name}`, () => {
       clearDeckTimers();
@@ -1837,6 +1858,106 @@ function renderDesktopBody(overlay, ctx, actions, facets) {
   overlay.appendChild(shell);
 }
 
+// Back · DISCOVER · Filter. Extracted so the in-place advance below can rebuild
+// it without going through a full render.
+function buildTopBar(ctx, facets, actions) {
+  const topBar = document.createElement('div');
+  topBar.className = 'dd-topbar';
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'dd-back';
+  back.textContent = '‹';
+  back.setAttribute('aria-label', 'Close Discover');
+  back.addEventListener('click', () => { if (!router.requestClose()) closeDeck(); });
+  const title = document.createElement('div');
+  title.className = 'dd-title';
+  title.textContent = 'DISCOVER';
+  topBar.append(back, title, buildFilterButton(ctx, facets, actions));
+  return topBar;
+}
+
+// ---- advancing WITHOUT moving the player ------------------------------------------
+// The deck used to answer every change by wiping the overlay and building it
+// again, which meant the sample player was reparented into a fresh card on
+// every advance. On iOS that is fatal to playback: WebKit re-creates an
+// iframe's browsing context on ANY reparent, even one where the element never
+// leaves the document (measured, design/ios-playback-probe step 5B — onReady
+// fired a second time and the gesture unlock was gone with it). Rebuilding also
+// made every card pay for a fresh embed load, and SoundCloud re-walk its
+// getSounds() list from scratch, on the surface people move through fastest.
+//
+// So the mobile deck now has two paths. When only the ARTIST changed, this one
+// keeps the two elements the embed hangs from — the stage and the player host —
+// and replaces everything else wholesale. Wholesale is the point: nothing is
+// patched field by field, so no detail of the previous artist can survive onto
+// the next. The exception list is two elements long and written down here.
+//
+// Returns false when it cannot do it in place, and the caller falls back to the
+// full build that has always worked.
+function refreshDeckInPlace(ctx, actions) {
+  const overlay = document.getElementById(OVERLAY_ID);
+  const shell = overlay && overlay.querySelector('.dd-shell');
+  const stage = shell && shell.querySelector('.dd-stage');
+  const card = stage && stage.querySelector('.dd-card');
+  const host = card && card.querySelector('.dd-player-host');
+  const stack = stage && stage.querySelector('.dd-stack');
+  if (!shell || !stage || !card || !host || !stack) return false;
+  if (!playerHandle || typeof playerHandle.remountFor !== 'function') return false;
+  if (!session || !session.pool.length || session.position >= session.pool.length) return false;
+
+  const entry = session.pool[session.position];
+  const facets = loadFacets(ctx.fid);
+
+  // Everything above and below the stage is cheap and owns no embed.
+  for (const el of [...shell.children]) if (el !== stage) el.remove();
+  shell.insertBefore(buildTopBar(ctx, facets, actions), stage);
+  shell.insertBefore(buildHeader(ctx, facets), stage);
+  shell.appendChild(buildActionBar(ctx, actions));
+
+  // The card carried the exit transform out of the last decision; it comes back
+  // to rest here, and the ghosts/hint/celebrate around it are rebuilt fresh.
+  card.classList.remove('is-exiting');
+  card.style.transform = '';
+  card.style.opacity = '';
+  card.scrollTop = 0;
+  for (const el of [...stack.children]) if (el !== card) el.remove();
+  const ghost2 = document.createElement('div');
+  ghost2.className = 'dd-ghost dd-ghost-2';
+  ghost2.setAttribute('aria-hidden', 'true');
+  const ghost1 = document.createElement('div');
+  ghost1.className = 'dd-ghost dd-ghost-1';
+  ghost1.setAttribute('aria-hidden', 'true');
+  stack.insertBefore(ghost2, card);
+  stack.insertBefore(ghost1, card);
+  const hint = document.createElement('div');
+  hint.className = 'dd-hint';
+  hint.setAttribute('aria-hidden', 'true');
+  stack.append(hint, buildCelebrateOverlay());
+
+  paintCard(card, entry, ctx);
+
+  // Same host object, so the player is not moved at all — remountFor sees a
+  // host it is already inside and re-points the embed without touching the DOM
+  // above it.
+  const fest = state.FESTIVALS[ctx.fid] || {};
+  const meta = findArtistMeta(fest, entry.name);
+  const { primary, secondary } = canonicalize(meta.genres, currentCanonData);
+  playerHandle.remountFor({
+    host, layout: 'compact',
+    artist: { name: entry.name, genres: [primary, ...secondary].filter(Boolean) },
+    sources: {
+      youtubeVideoIds: meta.youtubeVideoIds,
+      youtubeLabels: meta.youtubeLabels,
+      soundcloudSlug: meta.soundcloudSlug,
+      spotifyId: meta.spotifyId,
+    },
+    autoplay: soundIntent,
+  });
+
+  wireSwipe(stack, ctx, actions);
+  return true;
+}
+
 // ---- deck body (re-rendered on every advance/undo/filter change) -------------------
 let currentCanonData = null;
 function renderDeckBody(ctx, actions) {
@@ -1878,20 +1999,7 @@ function renderDeckBody(ctx, actions) {
   const shell = document.createElement('div');
   shell.className = 'dd-shell';
 
-  const topBar = document.createElement('div');
-  topBar.className = 'dd-topbar';
-  const back = document.createElement('button');
-  back.type = 'button';
-  back.className = 'dd-back';
-  back.textContent = '‹';
-  back.setAttribute('aria-label', 'Close Discover');
-  back.addEventListener('click', () => { if (!router.requestClose()) closeDeck(); });
-  const title = document.createElement('div');
-  title.className = 'dd-title';
-  title.textContent = 'DISCOVER';
-  topBar.append(back, title, buildFilterButton(ctx, facets, actions));
-
-  shell.appendChild(topBar);
+  shell.appendChild(buildTopBar(ctx, facets, actions));
   shell.appendChild(buildHeader(ctx, facets));
 
   const stageWrap = document.createElement('div');
