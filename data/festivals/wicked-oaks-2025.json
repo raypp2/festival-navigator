@@ -21,7 +21,17 @@
       ],
       "soundcloudSlug": "eric-prydz",
       "spotifyId": "5sm0jQ1mq0dusiLtDJ2b4R",
-      "youtubeQuery": "Eric Prydz live set"
+      "youtubeQuery": "Eric Prydz live set",
+      "youtubeVideoIds": [
+        "hU-z3iV0LOg",
+        "LIZCWL2zdPo",
+        "MendCBaHiG4"
+      ],
+      "youtubeLabels": [
+        "ERIC PRYDZ LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2026 | RESISTANCE MEGASTRUCTURE",
+        "Eric Prydz WE2 | Tomorrowland 2025",
+        "ERIC PRYDZ LIVE @ ULTRA MIAMI 2024 MEGASTRUCTURE"
+      ]
     },
     {
       "name": "Kaskade",
@@ -55,7 +65,17 @@
       ],
       "soundcloudSlug": "the-bob-moses",
       "spotifyId": "6LHsnRBUYhFyt01PdKXAF5",
-      "youtubeQuery": "Bob Moses live set"
+      "youtubeQuery": "Bob Moses live set",
+      "youtubeVideoIds": [
+        "xKeduffv7_U",
+        "R3wwPJCDumw",
+        "2G93GKqcnAw"
+      ],
+      "youtubeLabels": [
+        "Falling Into Focus (Live Concert Film)",
+        "Bob Moses live at Griffith Observatory in Los Angeles, USA for Cercle",
+        "Bob Moses (Club Set) - Robot Heart Burning Man 2025"
+      ]
     },
     {
       "name": "Max Styler",
@@ -134,7 +154,17 @@
     {
       "name": "Dairy",
       "day": "Saturday",
-      "youtubeQuery": "Dairy live set"
+      "youtubeQuery": "Dairy live set",
+      "youtubeVideoIds": [
+        "6JA78q1_VY0",
+        "jhBs4SjzZ8A",
+        "M0m9_frIMHw"
+      ],
+      "youtubeLabels": [
+        "Ambrxse LIVE at Secret Coffee Party | Dairy Block Denver | Full DJ Set",
+        "Black Milk Boiler Room & Ballantine's Stay True Russia DJ Set",
+        "Milk & Sugar - Live In The Mix [House]"
+      ]
     },
     {
       "name": "VOYD",
@@ -266,7 +296,17 @@
       ],
       "soundcloudSlug": "automhate",
       "spotifyId": "6bWRCpJ69GQnmrL7gE4WHf",
-      "youtubeQuery": "Automhate live set"
+      "youtubeQuery": "Automhate live set",
+      "youtubeVideoIds": [
+        "0ji5-WbD0zE",
+        "qm3AtVRaBUU",
+        "VJvQJ3BR5ik"
+      ],
+      "youtubeLabels": [
+        "THE BROTHERS LIVE @ VOYD DOME",
+        "VKTM, CODD DUBZ & AUTOMHATE @ RAMPAGE INDOOR (LIVE SET)",
+        "Rampage Open Air 2022 - Automhate"
+      ]
     },
     {
       "name": "MAD DUBZ",
@@ -310,13 +350,24 @@
       "day": "Saturday",
       "soundcloudSlug": "vampaofficial",
       "spotifyId": "40j5HqwepBedJ5LN4oHkKK",
-      "youtubeQuery": "VAMPA live set"
+      "youtubeQuery": "VAMPA live set",
+      "youtubeVideoIds": [
+        "4Zi9ymolUcU",
+        "RMKTq6tGQ-8",
+        "a5cjbUIr01s"
+      ],
+      "youtubeLabels": [
+        "Rampage Renegade 2022 - Vampa & Zia",
+        "Witching Hour (Vampa + Jeanie) Live @ Lost Lands 2025 - Couch Lands",
+        "JEANIE & VAMPA PRESENT: WITCHING HOUR LIVE @ RED ROCKS 2025 [FULL SET]"
+      ]
     },
     {
       "name": "JEANIE",
       "day": "Saturday",
       "youtubeQuery": "JEANIE live set",
-      "soundcloudSlug": "jeaniesounds"
+      "soundcloudSlug": "jeaniesounds",
+      "spotifyId": "5y4xjNwy9GEFC4hic2epwe"
     },
     {
       "name": "Akeos",
@@ -370,7 +421,13 @@
       "name": "Surf Mesa",
       "day": "Saturday",
       "youtubeQuery": "Surf Mesa live set",
-      "soundcloudSlug": "surfmesa"
+      "soundcloudSlug": "surfmesa",
+      "genres": [
+        "dance",
+        "electronic",
+        "house"
+      ],
+      "spotifyId": "1lmU3giNF3CSbkVSQmLpHQ"
     },
     {
       "name": "Tony Romera",
@@ -394,7 +451,17 @@
       "day": "Saturday",
       "spotifyId": "7AfIBbjDpPR6FlLWLsAcHu",
       "youtubeQuery": "Sistek live set",
-      "soundcloudSlug": "sistekofficial"
+      "soundcloudSlug": "sistekofficial",
+      "youtubeVideoIds": [
+        "e6TTSPwKlIM",
+        "DH_U0clvla0",
+        "nMlcRO0H3Bc"
+      ],
+      "youtubeLabels": [
+        "SXM FESTIVAL 2026 (FULL SET)",
+        "Sistek Live @ Hags Fest San Diego 2025",
+        "Live in Calgary | Beehive Presents Afrodisiac | August 2025"
+      ]
     },
     {
       "name": "Autograf",
@@ -411,7 +478,17 @@
       "day": "Saturday",
       "soundcloudSlug": "wenzdaymusic",
       "spotifyId": "1TOclxL64oLeB45DFWFFU2",
-      "youtubeQuery": "Wenzday live set"
+      "youtubeQuery": "Wenzday live set",
+      "youtubeVideoIds": [
+        "TE8K1yLyx_M",
+        "eDLVCmuM4O4",
+        "bjX2xfm4xow"
+      ],
+      "youtubeLabels": [
+        "Wenzday @ ManiFest in Brooklyn, NY (July 4th 2025)",
+        "Wednesday on Audiotree Live (Full Session)",
+        "Wednesday - live at Tumbleroot in Santa Fe [FULL SET] 10/9/25"
+      ]
     },
     {
       "name": "Dark Heart",
@@ -422,12 +499,32 @@
     {
       "name": "TRN ME UP",
       "day": "Saturday",
-      "youtubeQuery": "TRN ME UP live set"
+      "youtubeQuery": "TRN ME UP live set",
+      "youtubeVideoIds": [
+        "ronR1HKVKaY",
+        "sNQLWF6LZcI",
+        "Tptt50mCg3A"
+      ],
+      "youtubeLabels": [
+        "MOTi - Turn Me Up Feat. Nabiha (ViP MiX) [Galantis Live at UMF 2016]",
+        "Armin van Buuren - Turn It Up (Live at Ultra Music Festival 2019)",
+        "HD Turn Up the Sun LIVE from Manchester"
+      ]
     },
     {
       "name": "Sonrizas",
       "day": "Saturday",
-      "youtubeQuery": "Sonrizas live set"
+      "youtubeQuery": "Sonrizas live set",
+      "youtubeVideoIds": [
+        "d20722o83WM",
+        "F4lt2PJyKb8",
+        "HQsC9lR-cIQ"
+      ],
+      "youtubeLabels": [
+        "Sonrizas House DJ set @ Maybe Forever Denver",
+        "Latin & Tech House Set | Opening for SIDEPIECE @ Mission Ballroom Denver",
+        "SONRIZAS & LEFTY Live at The Spin & Swim | Full DJ Set From Hotel Van Zandt (August 2025)"
+      ]
     },
     {
       "name": "Martin Garrix",
@@ -480,7 +577,8 @@
         "BUNT. at COACHELLA 2026",
         "LIVE from The Middle Of Nowhere",
         "BUNT “in the round” @ Electric Love"
-      ]
+      ],
+      "soundcloudSlug": "buntmusic"
     },
     {
       "name": "Cloonee",
@@ -515,7 +613,17 @@
       "day": "Sunday",
       "spotifyId": "5TAU3fcCF32FqKMrdbXfRr",
       "youtubeQuery": "Angrybaby live set",
-      "soundcloudSlug": "angrybabymusic"
+      "soundcloudSlug": "angrybabymusic",
+      "youtubeVideoIds": [
+        "WveuI6czL_w",
+        "O7kyJ2aUNxw",
+        "GetKKGlCamM"
+      ],
+      "youtubeLabels": [
+        "Dancey Coffee Shop Set | AM.RADIO 008",
+        "Dancey Daytime Set | AM.RADIO 017 San Francisco",
+        "ANGRYBABY LIVE @ OUTSIDE LANDS FESTIVAL 2024"
+      ]
     },
     {
       "name": "jigitz",
@@ -550,18 +658,49 @@
       "day": "Sunday",
       "soundcloudSlug": "cschambacher",
       "spotifyId": "1UHsMWPbRs6jp7ij7nEEZG",
-      "youtubeQuery": "Chris Schambacher live set"
+      "youtubeQuery": "Chris Schambacher live set",
+      "youtubeVideoIds": [
+        "zYgoM45xclY",
+        "WKZHbDDbSlk",
+        "u7_420NHW4k"
+      ],
+      "youtubeLabels": [
+        "Chris Schambacher Live Stream - June 5th - 10:00PM CST / 8:00PM PST",
+        "Chris Schambacher Live Stream - April 24, 2020",
+        "Chris Schambacher Live Stream - June 20th - 11:00PM CST / 9:00PM PST"
+      ]
     },
     {
       "name": "SVDDEN DEATH",
       "day": "Sunday",
       "youtubeQuery": "SVDDEN DEATH live set",
-      "soundcloudSlug": "svddendeath"
+      "soundcloudSlug": "svddendeath",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "spotifyId": "2u01kCKA5wDvvztuH8lyT0"
     },
     {
       "name": "yvm3",
       "day": "Sunday",
-      "youtubeQuery": "yvm3 live set"
+      "youtubeQuery": "yvm3 live set",
+      "genres": [
+        "riddim dubstep",
+        "tearout"
+      ],
+      "soundcloudSlug": "yvm3net",
+      "spotifyId": "0iQW93sOQJX7rWg8E89jd1",
+      "youtubeVideoIds": [
+        "5j9QOPPBHP4",
+        "zJm9In2vkS4",
+        "txnRFKukbNk"
+      ],
+      "youtubeLabels": [
+        "RAMPAGE WEEKEND 2026 – NIMDA B2B YVM3",
+        "SVDDEN DEATH B2b Nimda B2b Prosecute B2b YVM3 | After The Valley Of Darkness OUT-OF-STUDIO",
+        "15 YEARS OF RAMPAGE - YVM3"
+      ]
     },
     {
       "name": "Nimda",
@@ -634,13 +773,19 @@
         "Hedex Live @ Lost Lands 2025 - Full Set",
         "Live From DnB Allstars 360°",
         "HEDEX MHITR LIVE @ ULTRA MIAMI 2025 (Full 4 Camera DJ Set)"
-      ]
+      ],
+      "soundcloudSlug": "hedexuk"
     },
     {
       "name": "MUST DIE!",
       "day": "Sunday",
       "youtubeQuery": "MUST DIE! live set",
-      "soundcloudSlug": "mustdiemusic"
+      "soundcloudSlug": "mustdiemusic",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "spotifyId": "4aBx7mA6lUOVhEsjokZrXb"
     },
     {
       "name": "Syzy",
@@ -675,13 +820,15 @@
         "PhaseOne Live @ Lost Lands 2025 - Full Set",
         "Live From Denver",
         "PhaseOne Live @ Lost Lands 2024 (Full Set)"
-      ]
+      ],
+      "soundcloudSlug": "phaseoneau"
     },
     {
       "name": "HVDES",
       "day": "Sunday",
       "youtubeQuery": "HVDES live set",
-      "soundcloudSlug": "hvdesmusic"
+      "soundcloudSlug": "hvdesmusic",
+      "spotifyId": "3koHmmPvpgZWHcVmK8AKDq"
     },
     {
       "name": "Codd Dubz",
@@ -706,7 +853,8 @@
       "name": "HAMRO",
       "day": "Sunday",
       "youtubeQuery": "HAMRO live set",
-      "soundcloudSlug": "djhamro"
+      "soundcloudSlug": "djhamro",
+      "spotifyId": "45tIGuLKx3RA70cm4rnSLH"
     },
     {
       "name": "SQISHI",
@@ -723,7 +871,12 @@
       "name": "Phiso",
       "day": "Sunday",
       "youtubeQuery": "Phiso live set",
-      "soundcloudSlug": "phiso"
+      "soundcloudSlug": "phiso",
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "spotifyId": "7csjnVvI7V4mm9e7fvqRdC"
     },
     {
       "name": "Aweminus",
@@ -773,7 +926,17 @@
       "day": "Sunday",
       "soundcloudSlug": "classmatic",
       "spotifyId": "2vOQkFQDXp4QV77pnlet6m",
-      "youtubeQuery": "Classmatic live set"
+      "youtubeQuery": "Classmatic live set",
+      "youtubeVideoIds": [
+        "7KfBHLmbt4g",
+        "rO3ugJEn3ic",
+        "Z1d73Tdrz04"
+      ],
+      "youtubeLabels": [
+        "dj set at The Terrace Miami @OfficialClubSpace",
+        "Classmatic Live At The Cut January 24th 2025",
+        "Classmatic b2b Beltran @ Organic Pieces Pop Up, Florianópolis - BR"
+      ]
     },
     {
       "name": "Mahony",
@@ -785,7 +948,8 @@
       "name": "Maxinne",
       "day": "Sunday",
       "youtubeQuery": "Maxinne live set",
-      "soundcloudSlug": "djmaxinne"
+      "soundcloudSlug": "djmaxinne",
+      "spotifyId": "3sv9dCyzqOsGcJHPl5seiq"
     },
     {
       "name": "BOYCOTT",

@@ -178,7 +178,8 @@
       "name": "The Favors",
       "day": "Friday",
       "weekends": "both",
-      "youtubeQuery": "The Favors live set"
+      "youtubeQuery": "The Favors live set",
+      "spotifyId": "78R275jHTtGF0ue4QfBKpI"
     },
     {
       "name": "Bilmuri",
@@ -248,7 +249,9 @@
       "name": "Good Neighbours",
       "day": "Friday",
       "weekends": "both",
-      "youtubeQuery": "Good Neighbours live set"
+      "youtubeQuery": "Good Neighbours live set",
+      "soundcloudSlug": "good-neighbours",
+      "spotifyId": "52N3KGrTWDRhdQJrgBTofE"
     },
     {
       "name": "spill tab",
@@ -267,7 +270,13 @@
       "name": "Jensen McRae",
       "day": "Friday",
       "weekends": "both",
-      "youtubeQuery": "Jensen McRae live set"
+      "youtubeQuery": "Jensen McRae live set",
+      "genres": [
+        "bedroom pop",
+        "singer-songwriter"
+      ],
+      "soundcloudSlug": "jensenmcrae",
+      "spotifyId": "11dABkjSoOjcP9p3TFSNRj"
     },
     {
       "name": "honestav",
@@ -289,7 +298,11 @@
       "name": "Amble",
       "day": "Friday",
       "weekends": "both",
-      "youtubeQuery": "Amble live set"
+      "youtubeQuery": "Amble live set",
+      "genres": [
+        "folk"
+      ],
+      "spotifyId": "5ZC7GPz5h9zkEfjZBUDNzI"
     },
     {
       "name": "Crowe Boys",
@@ -307,7 +320,11 @@
       "name": "Tiera Kennedy",
       "day": "Friday",
       "weekends": "W1",
-      "youtubeQuery": "Tiera Kennedy live set"
+      "youtubeQuery": "Tiera Kennedy live set",
+      "genres": [
+        "country"
+      ],
+      "spotifyId": "26VEPCGAYB9OClQodb0OR1"
     },
     {
       "name": "Asleep at the Wheel",
@@ -364,7 +381,8 @@
       "name": "Judy Blank",
       "day": "Friday",
       "weekends": "W2",
-      "youtubeQuery": "Judy Blank live set"
+      "youtubeQuery": "Judy Blank live set",
+      "spotifyId": "2Kqa4BYcpEq4KXX9fYmRpH"
     },
     {
       "name": "Skrilla",
@@ -453,7 +471,18 @@
       "name": "The Strokes",
       "day": "Saturday",
       "weekends": "both",
-      "youtubeQuery": "The Strokes live set"
+      "youtubeQuery": "The Strokes live set",
+      "genres": [
+        "indie rock",
+        "garage rock revival",
+        "post-punk revival",
+        "new wave",
+        "rock",
+        "synth-pop",
+        "garage rock"
+      ],
+      "soundcloudSlug": "thestrokes",
+      "spotifyId": "0epOFNiUfyON9EYx7Tpr6V"
     },
     {
       "name": "Doechii",
@@ -494,13 +523,30 @@
       ],
       "soundcloudSlug": "pierce-the-veil-music",
       "spotifyId": "4iJLPqClelZOBCBifm8Fzv",
-      "youtubeQuery": "Pierce The Veil live set"
+      "youtubeQuery": "Pierce The Veil live set",
+      "youtubeVideoIds": [
+        "lJyi40IkzpU",
+        "xeYpHkW1xYM",
+        "NeqglbpQhOY"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live from the KROQ Helpful Honda Sound Space)",
+        "Pierce The Veil Reading Festival 2015",
+        "Bulls In The Bronx (Live From Tecate Pa'l Norte)"
+      ]
     },
     {
       "name": "Zeds Dead",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "Zeds Dead live set"
+      "youtubeQuery": "Zeds Dead live set",
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "electronic"
+      ],
+      "soundcloudSlug": "zedsdead",
+      "spotifyId": "67qogtRNI0GjUr8PlaG6Zh"
     },
     {
       "name": "Sammy Virji",
@@ -516,7 +562,17 @@
       ],
       "soundcloudSlug": "sammyvirji",
       "spotifyId": "1GuqTQbuixFHD6eBkFwVcb",
-      "youtubeQuery": "Sammy Virji live set"
+      "youtubeQuery": "Sammy Virji live set",
+      "youtubeVideoIds": [
+        "fWNeg6x_1Hg",
+        "6zPr1rk0Ans",
+        "sLcvUGn_4VM"
+      ],
+      "youtubeLabels": [
+        "FULL SET TOKYO | ASIA TOUR 2025",
+        "Boiler Room: Denver",
+        "Sammy Virji's Energetic UKG & Bassline Set From DJ Mag HQ"
+      ]
     },
     {
       "name": "The Backseat Lovers",
@@ -534,7 +590,16 @@
       "name": "Modest Mouse",
       "day": "Saturday",
       "weekends": "W1",
-      "youtubeQuery": "Modest Mouse live set"
+      "youtubeQuery": "Modest Mouse live set",
+      "genres": [
+        "indie rock",
+        "alternative rock",
+        "art rock",
+        "post-hardcore",
+        "slacker rock"
+      ],
+      "soundcloudSlug": "modest-mouse-official",
+      "spotifyId": "1yAwtBaoHLEDWAnWR87hBT"
     },
     {
       "name": "Japanese Breakfast",
@@ -552,7 +617,16 @@
       "name": "Car Seat Headrest",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "Car Seat Headrest live set"
+      "youtubeQuery": "Car Seat Headrest live set",
+      "genres": [
+        "indie rock",
+        "lo-fi",
+        "noise rock",
+        "slacker rock",
+        "psychedelic"
+      ],
+      "soundcloudSlug": "car-seat-headrest",
+      "spotifyId": "5PbpKlxQE0Ktl5lcNABoFf"
     },
     {
       "name": "Magdalena Bay",
@@ -617,7 +691,21 @@
       "name": "RIIZE",
       "day": "Saturday",
       "weekends": "W1",
-      "youtubeQuery": "RIIZE live set"
+      "youtubeQuery": "RIIZE live set",
+      "genres": [
+        "k-pop"
+      ],
+      "spotifyId": "2jOm3cYujQx6o1dxuiuqaX",
+      "youtubeVideoIds": [
+        "8lS4Kis2MGw",
+        "cirgy6iLLqU",
+        "i7rGrJjFPOw"
+      ],
+      "youtubeLabels": [
+        "RIIZE Live Stage @ 2025 Austin City Limits Music Festival",
+        "RIIZE Live Stage @ Lollapalooza Chile 2026",
+        "RIIZE Live Stage @ Lollapalooza Argentina 2026"
+      ]
     },
     {
       "name": "Fujii Kaze",
@@ -629,7 +717,8 @@
       "name": "LATIN MAFIA",
       "day": "Saturday",
       "weekends": "both",
-      "youtubeQuery": "LATIN MAFIA live set"
+      "youtubeQuery": "LATIN MAFIA live set",
+      "spotifyId": "6XTGKOV9jceQ6f67lnhpbF"
     },
     {
       "name": "Ocean Alley",
@@ -667,7 +756,17 @@
       "name": "LEISURE",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "LEISURE live set"
+      "youtubeQuery": "LEISURE live set",
+      "genres": [
+        "alternative pop",
+        "alternative rock",
+        "electronic",
+        "indie pop",
+        "indie rock",
+        "soul"
+      ],
+      "soundcloudSlug": "theleisurecollective",
+      "spotifyId": "7b04D0yLktCUpvxQBhmG7R"
     },
     {
       "name": "Spacey Jane",
@@ -684,7 +783,9 @@
       "name": "Yoke Lore",
       "day": "Saturday",
       "weekends": "both",
-      "youtubeQuery": "Yoke Lore live set"
+      "youtubeQuery": "Yoke Lore live set",
+      "soundcloudSlug": "yokelore",
+      "spotifyId": "7FU0xCgmSYQEiBeevUqQ4S"
     },
     {
       "name": "Mallrat",
@@ -726,7 +827,9 @@
       "name": "Odeal",
       "day": "Saturday",
       "weekends": "W2",
-      "youtubeQuery": "Odeal live set"
+      "youtubeQuery": "Odeal live set",
+      "soundcloudSlug": "iamodeal",
+      "spotifyId": "2BPwxhCvvcb8xDl8GWIjbh"
     },
     {
       "name": "The Heavy Heavy",
@@ -819,7 +922,17 @@
       "weekends": "W2",
       "soundcloudSlug": "dizzy-fae",
       "spotifyId": "0jt1EsJCeoQXLNDta4JF6c",
-      "youtubeQuery": "Dizzy Fae live set"
+      "youtubeQuery": "Dizzy Fae live set",
+      "youtubeVideoIds": [
+        "7blcejuqM-k",
+        "ZkrgrgUyKE0",
+        "v4jgswM_Wt8"
+      ],
+      "youtubeLabels": [
+        "Dizzy Fae live in-store performance at Waterloo Records in Austin, TX",
+        "Opening Concert",
+        "Complexion (Live) #MNMUSICSCENE"
+      ]
     },
     {
       "name": "Animal Arcade",
@@ -889,7 +1002,17 @@
       "name": "T-Pain",
       "day": "Sunday",
       "weekends": "both",
-      "youtubeQuery": "T-Pain live set"
+      "youtubeQuery": "T-Pain live set",
+      "youtubeVideoIds": [
+        "OCDBnoxjqAs",
+        "91ck0vJBygo",
+        "yfX7mCHbroc"
+      ],
+      "youtubeLabels": [
+        "T-Pain Live @ Lost Lands 2025 - Full Set",
+        "On Top Of The Covers (Live From The Sun Rose)",
+        "Mashup (To The Beat with Kurt Hugo Schneider)"
+      ]
     },
     {
       "name": "Mk.gee",
@@ -945,7 +1068,17 @@
         "post-punk"
       ],
       "spotifyId": "2TwOrUcYnAlIiKmVQkkoSZ",
-      "youtubeQuery": "Wet Leg live set"
+      "youtubeQuery": "Wet Leg live set",
+      "youtubeVideoIds": [
+        "zIEZdq_25bs",
+        "ILuvxqypKps",
+        "qiovXq3QTok"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Wet Leg ¦ Bonnaroo Music Festival 2026 ¦ Full Set",
+        "WET LEG // 2026-06-03 Primavera Sound Barcelona - Full Set"
+      ]
     },
     {
       "name": "Gigi Perez",
@@ -974,7 +1107,8 @@
         "Disco Lines WE1 | Tomorrowland 2026",
         "Disco Lines Live @ Factory Town Miami 2026",
         "Live @ Red Rocks Colorado 2025"
-      ]
+      ],
+      "soundcloudSlug": "discolines"
     },
     {
       "name": "Gregory Alan Isakov",
@@ -1014,7 +1148,17 @@
       ],
       "soundcloudSlug": "passionpit",
       "spotifyId": "7gjAu1qr5C2grXeQFFOGeh",
-      "youtubeQuery": "Passion Pit live set"
+      "youtubeQuery": "Passion Pit live set",
+      "youtubeVideoIds": [
+        "pb0e8_9axRc",
+        "Z0ngnzSZPDM",
+        "aNy3r91LruE"
+      ],
+      "youtubeLabels": [
+        "Passion Pit (Full set) - Just Like Heaven 2024",
+        "Passion Pit Full Set LIVE | House of Blues Boston, MA | July 24, 2026",
+        "Full Performance (Live on KEXP)"
+      ]
     },
     {
       "name": "The Dare",
