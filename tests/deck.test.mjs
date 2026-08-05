@@ -868,3 +868,48 @@ test('the rail query is per-visit: never persisted, gone on close', () => {
   assert.equal(railSearch().value, '', 'a fresh open opens on the whole pool');
   assert.ok(gridNames().length > 1);
 });
+
+// ---- carried playback intent across artists (device pass, 2026-08-04) -----------
+// Opening Discover is silent. Pressing play is a decision that should survive
+// the swipe to the next artist — and pausing is the same decision in reverse.
+function lastMount(calls) { return calls[calls.length - 1]; }
+
+test('the first artist of a visit mounts silent — Discover never opens playing', () => {
+  const calls = [];
+  renderDeckForTest(ctx, mkActions(calls), CANON);
+  assert.equal(lastMount(calls).autoplay, false);
+});
+
+test('once playing, advancing to the next artist keeps playing', () => {
+  const calls = [];
+  const actions = mkActions(calls);
+  renderDeckForTest(ctx, actions, CANON);
+  // the player reports that sound was asked for (play tap, tab tap, track tap)
+  lastMount(calls).onStateChange({ play: true });
+
+  overlay().querySelector('.dd-btn-pick').click(); // a pick advances the deck
+  assert.equal(cardName(), 'PickFlow1', 'we did advance');
+  assert.equal(lastMount(calls).autoplay, true, 'and the next artist carries the intent');
+});
+
+test('a pause sticks — later artists open silent until asked again', () => {
+  const calls = [];
+  const actions = mkActions(calls);
+  renderDeckForTest(ctx, actions, CANON);
+  lastMount(calls).onStateChange({ play: true });
+  lastMount(calls).onStateChange({ play: false }); // they pressed pause
+
+  overlay().querySelector('.dd-btn-pick').click();
+  assert.equal(lastMount(calls).autoplay, false, 'we do not restart sound they turned off');
+});
+
+test('the intent is per-visit: closing Discover resets it to silent', () => {
+  const calls = [];
+  renderDeckForTest(ctx, mkActions(calls), CANON);
+  lastMount(calls).onStateChange({ play: true });
+  closeDeck();
+
+  const next = [];
+  renderDeckForTest(ctx, mkActions(next), CANON);
+  assert.equal(lastMount(next).autoplay, false, 'a fresh visit opens silent, like the first one');
+});

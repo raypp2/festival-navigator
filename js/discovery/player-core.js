@@ -205,17 +205,26 @@ export function createPlayerCore({ storage } = {}) {
     }));
   }
 
-  // mount() is the only place play resets to false — tap-to-play, iOS-
-  // gesture-safe: an artist card/page appearing on screen must never start
-  // audio on its own (build spec section 6 / design sheet "For engineering").
-  function mount(newArtistKey, sources) {
+  // mount() decides the opening play state, and `autoplay` is the ONLY thing
+  // that can make it true — it defaults to false, so an artist card or page
+  // merely appearing on screen still never starts audio on its own
+  // (tap-to-play, iOS-gesture-safe: build spec section 6 / design sheet "For
+  // engineering").
+  //
+  // The caller passes true only when it is carrying a playback intent the
+  // person already expressed on the PREVIOUS artist: they pressed play, and
+  // then swiped or picked their way here. Continuing sound across that move is
+  // honoring a decision, not making one — and the same rule read backwards is
+  // what makes a pause stick: an intent that is off arrives here as false, and
+  // every subsequent artist opens silent until they ask again.
+  function mount(newArtistKey, sources, { autoplay = false } = {}) {
     artistKey = newArtistKey;
     present = presentSources(sources);
     failed = new Set();
     alternates = { yt: ytAlternates(sources) };
     currentSource = resolveInitialSource(present, readRemembered(storage));
     clipIndex = 0;
-    play = false;
+    play = !!autoplay && present.length > 0;
     clampClipIndex();
     return snapshot();
   }

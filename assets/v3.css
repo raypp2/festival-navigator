@@ -445,6 +445,24 @@ button { touch-action: manipulation; }
   /* An input cannot carry a pseudo-element either way. */
   #search-input { min-height: 44px; }
 
+  /* iOS zooms the whole page when a field smaller than 16px takes focus, and
+   * it does NOT zoom back out — so tapping the nav strip's magnifier, or the
+   * note composer under a day, left the wall scaled up and scrolled sideways
+   * (device report, 2026-08-04). 16px is the entire fix: at that size Safari
+   * has no reason to zoom.
+   *
+   * The alternative everyone reaches for first is `maximum-scale=1` on the
+   * viewport, and it is not available to us: it disables PINCH zoom too, for
+   * the whole app, permanently. This repo already refused that trade once —
+   * see the touch-action note above, which says in as many words that user
+   * scaling stays an accessibility requirement.
+   *
+   * The cost is real and it is the design's: fields specced at 12.5px render
+   * at 16px on touch. Scoped to `input, textarea, select` for the same reason
+   * the height floor is scoped to `button` — a field added later inherits it
+   * instead of waiting to be remembered. */
+  input, textarea, select { font-size: 16px; }
+
   /* Settings rows are DIVs, so `button` never reaches them — and the row is the
    * real target now that tapping the label flips the toggle. Give the row the
    * height, and let the 40x24 switch inside it keep its designed size. */

@@ -134,15 +134,23 @@ let ACTIVE = null;
  *                 artist page already carries both in its hero — frame 5a
  *                 draws the sample block headerless). Offline status still
  *                 renders either way.
+ * autoplay      — default FALSE, and the only way a freshly mounted player
+ *                 opens playing. Pass the caller's carried playback intent:
+ *                 true only when this person already pressed play on the
+ *                 artist they just came from. Never a way to start sound
+ *                 nobody asked for.
  * onStateChange — optional (snapshot) => void, called after every render.
+ *                 Read snap.play here to keep a carried intent up to date —
+ *                 it is true after a play/tab/track tap and false after a
+ *                 pause, which is exactly the signal.
  *
  * Returns { destroy, getState, handoverTo(newHost, newLayout) }.
  */
-export function mountPlayer({ host, artist, sources, layout = 'full', showHeader = true, onStateChange } = {}) {
+export function mountPlayer({ host, artist, sources, layout = 'full', showHeader = true, autoplay = false, onStateChange } = {}) {
   if (!host) throw new Error('mountPlayer: host element is required');
   if (ACTIVE) ACTIVE.destroy(); // tear down the previous embed FIRST, always
 
-  const instance = createInstance({ host, artist, sources, layout, showHeader, onStateChange });
+  const instance = createInstance({ host, artist, sources, layout, showHeader, autoplay, onStateChange });
   ACTIVE = instance;
   instance.init();
 
@@ -156,7 +164,7 @@ export function mountPlayer({ host, artist, sources, layout = 'full', showHeader
   };
 }
 
-function createInstance({ host, artist, sources, layout, showHeader = true, onStateChange }) {
+function createInstance({ host, artist, sources, layout, showHeader = true, autoplay = false, onStateChange }) {
   const core = createPlayerCore({ storage: safeLocalStorage() });
   const artistKey = artist?.id || artist?.name || 'unknown-artist';
   const genresLine = Array.isArray(artist?.genres) ? artist.genres.join(' · ') : artist?.genres || '';
@@ -192,7 +200,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     window.addEventListener('online', onlineHandler);
     window.addEventListener('offline', offlineHandler);
 
-    applyState(core.mount(artistKey, sources || {}));
+    applyState(core.mount(artistKey, sources || {}, { autoplay }));
   }
 
   // -------------------------------------------------------------------------
@@ -312,7 +320,10 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     if (curLayout !== 'compact') {
       root.appendChild(renderHead(snap));
     } else {
-      root.appendChild(renderCompactBadge(snap));
+      // null when there is nothing to report — an empty row still costs its
+      // margin, and this one sits directly above the stage.
+      const badge = renderCompactBadge(snap);
+      if (badge) root.appendChild(badge);
     }
 
     root.appendChild(renderTabs(snap));
@@ -529,20 +540,21 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     return head;
   }
 
+  // Offline, and nothing else. This row used to carry a "Sample" label plus
+  // one of two honesty chips — "30-sec preview" on Spotify, "plays in full ·
+  // no account" everywhere else — and on a phone all three were paying rent in
+  // the scarcest space in the app (device feedback, 2026-08-04). "Sample" only
+  // restated the surface you were already on. The Spotify chip is a claim the
+  // embed makes for itself the moment it draws Spotify's own transport, and
+  // the SoundCloud per-track "30-sec preview" badges stay, so the one case
+  // where preview-vs-full is a real question is still answered where the
+  // choice is actually made. Returns null when there is nothing to say, and
+  // the caller then spends no vertical space at all.
   function renderCompactBadge(snap) {
+    if (snap.online) return null;
     const badge = document.createElement('div');
     badge.className = 'sample-player-head';
-    // Spotify's honesty label lives HERE now. It used to be a chip on the
-    // now-playing row, and that row is gone for Spotify — the real embed
-    // replaced it — so the badge inherits it rather than losing it. It costs
-    // no vertical space in this slot, which is why it isn't the duplicate it
-    // would have been beside the chip (device feedback, 2026-08-02/04).
-    const status = !snap.online
-      ? '<span class="sample-player-status"><span class="sample-player-status-dot"></span>offline</span>'
-      : snap.currentSource === 'sp'
-        ? '<span class="sample-player-sp-chip">30-sec preview</span>'
-        : '<span class="sample-player-status">plays in full · no account</span>';
-    badge.innerHTML = `<span class="sample-player-label">Sample</span>${status}`;
+    badge.innerHTML = '<span class="sample-player-status"><span class="sample-player-status-dot"></span>offline</span>';
     return badge;
   }
 
@@ -625,10 +637,27 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     box.className = 'sample-player-clips';
     const isYt = snap.currentSource === 'yt';
     const label = isYt ? 'Live sets' : 'Tracks';
-    const hint = isYt ? 'tap to switch set' : 'live from their profile';
     const head = document.createElement('div');
     head.className = 'sample-player-clips-head';
-    head.innerHTML = `<span>${label}</span><span class="sample-player-clips-hint">${esc(hint)}</span>`;
+    // No hint text. "tap to switch set" narrated a list — people know what a
+    // list of numbered rows does — and "live from their profile" answered a
+    // question nobody was asking. YouTube spends the reclaimed slot on
+    // something that does work: a way out to the real app, where the video can
+    // go fullscreen, queue, and cast. On a phone this URL opens the YouTube
+    // app itself rather than the browser.
+    head.innerHTML = `<span>${esc(label)}</span>`;
+    if (isYt) {
+      const item = snap.alternates[snap.clipIndex];
+      if (item && item.id) {
+        const out = document.createElement('a');
+        out.className = 'sample-player-clips-out';
+        out.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(item.id);
+        out.target = '_blank';
+        out.rel = 'noopener';
+        out.textContent = 'Open in YouTube ↗';
+        head.appendChild(out);
+      }
+    }
     box.appendChild(head);
 
     const rows = document.createElement('div');
@@ -651,9 +680,17 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
     });
     box.appendChild(rows);
 
+    // The attribution line names what is playing — which is worth a row only
+    // when you cannot already see it. The rows above are capped at maxRows, so
+    // the widget can be parked on a track that is off the end of the list (its
+    // own auto-advance does this); THAT is when this line is the only place
+    // the track name appears. When the current track is one of the rows on
+    // screen, highlighted, the line just says it again (device feedback,
+    // 2026-08-04) and is skipped.
     if (!isYt) {
       const item = snap.alternates[snap.clipIndex];
-      if (item && item.label) {
+      const listed = snap.clipIndex >= 0 && snap.clipIndex < items.length;
+      if (item && item.label && !listed) {
         const attr = document.createElement('div');
         attr.className = 'sample-player-attr';
         const slug = sources?.soundcloudSlug;
@@ -909,6 +946,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, onSt
       // active — lying about the current track was the original reported bug.
       widget.bind(E.PLAY, () => {
         if (torn) return;
+        // A PLAY event is not proof anyone asked for sound. parkOn() calls
+        // skip() to move the widget onto the row we are already showing as
+        // current, and skip() starts the widget by itself — on a phone the
+        // browser then blocks the audio, so the widget sits there wearing a
+        // PAUSE icon with nothing coming out, and the next tap only pauses
+        // something that was never playing (device report, 2026-08-04: "the
+        // pause icon shows but the track is not playing"). Racing it with a
+        // pause() call after skip() is not enough; this is the check that
+        // holds, because it runs on every PLAY the widget can emit.
+        if (!wantPlay) {
+          try { widget.pause(); } catch { /* widget may be mid-teardown */ }
+          setPlaying(false);
+          return;
+        }
         widget.getCurrentSound((s) => {
           if (torn || !s) return;
           // It wandered onto a track we already know it cannot stream: its own

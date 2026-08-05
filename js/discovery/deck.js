@@ -44,6 +44,22 @@ import { auraBackground, whoCorner, nameColor, subColor } from '../v3/aura.js';
 
 const OVERLAY_ID = 'discover-deck-overlay';
 const LS_FILTER_PREFIX = 'fp.discoverFilter.';
+
+// Carried playback intent, for the length of ONE visit to Discover.
+//
+// The deck tears the player down and builds a new one on every artist, so
+// without something outside the player nothing can remember that sound was
+// wanted, and every swipe lands in silence. This is that something: false
+// while nobody has asked for audio, true from the moment they press play or
+// tap a track or a source tab, false again the moment they pause.
+//
+// It is deliberately an INTENT, not a play/pause mirror. Opening Discover is
+// not a request for sound, so it starts false and the first artist is silent
+// until asked. After that the rule reads the same in both directions: someone
+// who is listening keeps listening as they swipe (they already told us), and
+// someone who paused stays paused (they told us that too). Resets on close —
+// the next visit starts silent, like the first one.
+let soundIntent = false;
 // Desktop three-pane (frame 5c) kicks in at the same 1200px breakpoint the
 // artist page's own desktop layout (5b) uses. Unlike 5b — which is a pure CSS
 // reflow of one identical DOM (grid-template-areas over .ap-body's children)
@@ -305,6 +321,8 @@ function buildCard(entry, ctx, actions, canonData) {
   const mount = (actions && actions.mountPlayer) || realMountPlayer;
   playerHandle = mount({
     host: playerHost, artist: { name: entry.name, genres: playerGenres }, sources, layout: 'compact',
+    autoplay: soundIntent,
+    onStateChange: (snap) => { soundIntent = snap.play; },
   });
 
   // The drag hint and the confirmation overlay are siblings of the card, not
@@ -1626,6 +1644,8 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
   // 82x46 thumb was a mobile compromise being paid for on a 1440 canvas.
   playerHandle = mount({
     host: playerHost, artist: { name: focusEntry.name, genres: playerGenres }, sources, layout: 'full',
+    autoplay: soundIntent,
+    onStateChange: (snap) => { soundIntent = snap.play; },
   });
 
   const openBtn = document.createElement('button');
@@ -1860,6 +1880,7 @@ export function closeDeck() {
   deckOpen = false;
   session = null; // a fresh open deals a fresh session, per spec
   deckQuery = ''; // and a fresh search box — the query was for this visit
+  soundIntent = false; // opening Discover is never itself a request for sound
   setFocus(null); // desktop's right-pane focus is per-open too
   pendingOpenGen++;
 }

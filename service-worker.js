@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v56'; // v56 = v55 + player: Spotify's real embed everywhere (numeric height), SoundCloud parks on the track that plays
+const CACHE_VERSION = 'festival-nav-v57'; // v57 = player intent pass: silent until asked then carried across artists, labels culled, YouTube way out, no iOS focus zoom
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

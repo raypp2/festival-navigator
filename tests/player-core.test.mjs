@@ -383,3 +383,34 @@ test('syncClipIndex follows widget reality without touching play state', () => {
   assert.equal(snap.play, false); // widget-driven, not a gesture
   assert.equal(core.syncClipIndex('yt', 0).clipIndex, 1); // wrong source: no-op
 });
+
+// ---- carried playback intent (device pass, 2026-08-04) ---------------------------
+// The rule: arriving at an artist is not a request for sound. Pressing play is,
+// and that request outlives the artist it was made on — until it is withdrawn.
+
+test('mount opens paused by default — arriving somewhere is not asking for sound', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  assert.equal(core.mount('cdw', CDW).play, false);
+  assert.equal(core.mount('cdw', CDW, {}).play, false);
+});
+
+test('mount({autoplay:true}) opens playing — the caller is carrying an intent', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  assert.equal(core.mount('cdw', CDW, { autoplay: true }).play, true);
+});
+
+test('autoplay cannot start sound on an artist with nothing to play', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  const snap = core.mount('nobody', {}, { autoplay: true });
+  assert.equal(snap.play, false, 'a collapsed player never claims to be playing');
+  assert.equal(snap.collapsed, true);
+});
+
+test('play/pause is the signal a caller reads back: true after play, tab and clip taps, false after pause', () => {
+  const core = createPlayerCore({ storage: fakeStorage() });
+  core.mount('cdw', CDW);
+  assert.equal(core.togglePlay().play, true, 'pressing play is the intent');
+  assert.equal(core.togglePlay().play, false, 'pausing withdraws it');
+  assert.equal(core.setSource('sc').play, true, 'choosing a source is asking to hear it');
+  assert.equal(core.setClip(1).play, true, 'so is choosing a track');
+});

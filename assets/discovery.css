@@ -71,10 +71,9 @@
 .sample-player--compact .sample-player-head { padding: 0; display: flex; align-items: center; justify-content: space-between; }
 .sample-player-head-name { margin: 0; color: var(--text-primary); font-weight: 700; font-size: clamp(18px, 2.2vw, 22px); line-height: 1.2; }
 .sample-player-head-genres { color: var(--text-secondary); font-size: 13px; margin-top: 3px; }
-.sample-player-label {
-  font: 800 10px/1 var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase;
-  color: var(--text-tertiary);
-}
+/* (.sample-player-label — the "SAMPLE" caption — removed 2026-08-04: it named
+ * the surface you were already looking at, in the scarcest vertical space the
+ * app has.) */
 .sample-player-status {
   display: inline-flex; align-items: center; gap: 6px; font: 600 10px var(--font-ui); color: var(--text-tertiary);
 }
@@ -222,11 +221,10 @@
 
 /* ---- spotify preview chip (always visible whenever no Premium session; we
  * never detect Premium — this ships as an honesty label, not a probe) ---- */
-.sample-player-sp-chip {
-  display: inline-flex; align-items: center; flex: none; border: 1px solid var(--spotify-stroke);
-  color: var(--spotify-stroke); border-radius: var(--r-pill); padding: 4px 9px;
-  font: 700 9.5px var(--font-ui); letter-spacing: .06em; text-transform: uppercase;
-}
+/* (.sample-player-sp-chip — Spotify's "30-SEC PREVIEW" chip — removed
+ * 2026-08-04. Spotify's own embed draws its transport and says what it is; the
+ * per-track "30-sec preview" badges on SoundCloud rows stay, because there the
+ * preview-vs-full distinction decides which row you tap.) */
 
 /* ---- alternates (clip list) ---- */
 .sample-player-clips { padding: 14px 18px 18px; }
@@ -236,7 +234,13 @@
   font: 800 11px var(--font-ui); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-secondary);
 }
 .sample-player--compact .sample-player-clips-head { font-size: 9.5px; margin-bottom: 6px; }
-.sample-player-clips-hint { font: 600 11px var(--font-ui); color: var(--text-tertiary); text-transform: none; letter-spacing: 0; }
+/* (.sample-player-clips-hint — "tap to switch set" / "live from their profile"
+ * — removed 2026-08-04.) The slot it left is where YouTube's way out lives. */
+.sample-player-clips-out {
+  font: 700 11px var(--font-ui); color: var(--tonal-text); text-decoration: none;
+  text-transform: none; letter-spacing: 0; white-space: nowrap;
+}
+.sample-player-clips-out:hover { text-decoration: underline; }
 .sample-player-cliprow { display: flex; flex-direction: column; gap: 7px; }
 .sample-player--compact .sample-player-cliprow { gap: 6px; }
 .sample-player-clip {
