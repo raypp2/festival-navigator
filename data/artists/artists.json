@@ -370,6 +370,8 @@
     "enrichedAt": "2026-08-03T20:23:07.295Z"
   },
   "lsdream (surprise set)": {
+    "soundcloudSlug": "lsdream",
+    "spotifyId": "3Hrqjumb6WHg2aAUHJHLND",
     "youtubeQuery": "LSDream (Surprise Set) live set",
     "youtubeVideoIds": [
       "t6UnCvoUcg0",
@@ -381,7 +383,8 @@
       "LSDREAM - LOST LANDS 2022 (FULL SET)",
       "LSZEE (LSDREAM & CloZee) - LIVE @ MISSION BALLROOM - NIGHT 2"
     ],
-    "enrichedAt": "2026-08-03T20:23:08.503Z"
+    "mbid": "3e8f5ad6-fcd4-416c-997e-5d7f6aa99043",
+    "enrichedAt": "2026-08-05T06:22:25.405Z"
   },
   "all.lo collective": {
     "youtubeQuery": "All.Lo Collective live set",
@@ -1972,6 +1975,8 @@
     "enrichedAt": "2026-08-03T20:08:50.846Z"
   },
   "dj diesel b2b teddy pain": {
+    "soundcloudSlug": "djdieselofficial",
+    "spotifyId": "75vCyksqhYjtt5VIpc8g7u",
     "youtubeQuery": "DJ Diesel B2B Teddy Pain live set",
     "youtubeVideoIds": [
       "ulm2Sb3-w7I",
@@ -1983,7 +1988,8 @@
       "DIESEL B2B TEDDY PAIN Electric Forest 2026",
       "D Pain (Dj Diesel B2B Teddy Pain) at Electric Forest 2026 (GoPro POV)"
     ],
-    "enrichedAt": "2026-08-04T07:30:10.538Z"
+    "mbid": "1e6f48fc-6a0a-4ded-afd0-3bc809812d36",
+    "enrichedAt": "2026-08-05T06:23:47.514Z"
   },
   "tiffany day": {
     "soundcloudSlug": "tiffanyday",
@@ -2853,8 +2859,11 @@
     "enrichedAt": "2026-07-31T02:16:19.166Z"
   },
   "party pupils (late)": {
+    "soundcloudSlug": "partypupils",
+    "spotifyId": "4F61H4lx1js4wtWfb2Rfnt",
     "youtubeQuery": "Party Pupils (Late) live set",
-    "enrichedAt": "2026-07-31T02:16:21.019Z"
+    "mbid": "32226ad4-6578-45e5-ba89-9e8cd2d92fec",
+    "enrichedAt": "2026-08-05T06:24:20.780Z"
   },
   "culturefies": {
     "youtubeQuery": "Culturefies live set",
@@ -2913,8 +2922,14 @@
     "enrichedAt": "2026-07-31T04:06:14.799Z"
   },
   "torren foot b2b rawolf paradiso": {
+    "genres": [
+      "house"
+    ],
+    "soundcloudSlug": "torrenfoot",
+    "spotifyId": "7lQOxDl96wmNoqGoW4kgv4",
     "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set",
-    "enrichedAt": "2026-07-31T02:17:27.375Z"
+    "mbid": "b437f6b2-b18f-4ca3-bb5e-a6e6efd0cedd",
+    "enrichedAt": "2026-08-05T06:28:13.844Z"
   },
   "jade lemac": {
     "spotifyId": "4JnJjqxsTp8E5rZsyITf63",
@@ -5927,6 +5942,12 @@
     "enrichedAt": "2026-08-01T04:53:14.302Z"
   },
   "excision (2-hour set)": {
+    "genres": [
+      "dubstep",
+      "electronic"
+    ],
+    "soundcloudSlug": "excision",
+    "spotifyId": "5FKchcZpQOkqFvXBj1aCvb",
     "youtubeQuery": "Excision (2-Hour Set) live set",
     "youtubeVideoIds": [
       "b29GV8RODIc",
@@ -5938,9 +5959,16 @@
       "Excision b2b Subtronics Live @ Lost Lands 2025 - Full Set",
       "Excision 2 Hour Set Live @ Lost Lands 2023 - Full Set"
     ],
-    "enrichedAt": "2026-08-03T01:01:45.317Z"
+    "mbid": "733c6e6f-0306-403e-9243-82b16a4f82d8",
+    "enrichedAt": "2026-08-05T06:24:42.754Z"
   },
   "excision (detox set)": {
+    "genres": [
+      "dubstep",
+      "electronic"
+    ],
+    "soundcloudSlug": "excision",
+    "spotifyId": "5FKchcZpQOkqFvXBj1aCvb",
     "youtubeQuery": "Excision (Detox Set) live set",
     "youtubeVideoIds": [
       "yopdqCswvWE",
@@ -5952,9 +5980,16 @@
       "Excision Detox Set Live @ Lost Lands 2024 - Full Set",
       "Excision Detox Set Live @ Lost Lands 2019 - Full Set"
     ],
-    "enrichedAt": "2026-08-03T01:01:46.580Z"
+    "mbid": "733c6e6f-0306-403e-9243-82b16a4f82d8",
+    "enrichedAt": "2026-08-05T06:24:46.437Z"
   },
   "excision b2b space laces": {
+    "genres": [
+      "dubstep",
+      "electronic"
+    ],
+    "soundcloudSlug": "excision",
+    "spotifyId": "5FKchcZpQOkqFvXBj1aCvb",
     "youtubeQuery": "Excision B2B Space Laces live set",
     "youtubeVideoIds": [
       "RRDavrjyxik",
@@ -5966,7 +6001,8 @@
       "Excision 2 Hour Set Live @ Lost Lands 2025 - Full Set",
       "Eptic B2B Space Laces Live at EDC Las Vegas 2026"
     ],
-    "enrichedAt": "2026-08-03T01:01:48.132Z"
+    "mbid": "733c6e6f-0306-403e-9243-82b16a4f82d8",
+    "enrichedAt": "2026-08-05T06:24:53.245Z"
   },
   "flosstradamus": {
     "genres": [
@@ -7579,6 +7615,7 @@
     "enrichedAt": "2026-08-03T01:01:15.706Z"
   },
   "ranger trucco b2b alisha": {
+    "spotifyId": "36N80lh8tNu7XedcW55NC3",
     "youtubeQuery": "Ranger Trucco b2b Alisha live set",
     "youtubeVideoIds": [
       "Kvsm8pH4awA",
@@ -7590,7 +7627,8 @@
       "How Max & Luke Dean Started DJing",
       "Max Dean B2B Luke Dean, neXup Stage, Mint Festival"
     ],
-    "enrichedAt": "2026-08-03T01:01:17.121Z"
+    "mbid": "39de9c60-14bb-4148-a29e-08df6303476a",
+    "enrichedAt": "2026-08-05T06:27:51.678Z"
   },
   "six sex": {
     "genres": [
@@ -7701,6 +7739,7 @@
     "soundcloudSlug": "airwolfparadise"
   },
   "erika b2b sfcowboy": {
+    "spotifyId": "5N9lpSK39RSCDkLxPNH4KC",
     "youtubeQuery": "erika b2b sfcowboy live set",
     "youtubeVideoIds": [
       "TXj7X2Bs-jA",
@@ -7710,7 +7749,8 @@
       "sfcowboy – Club Vitamin 3 | THE WAREHOUSE – SAN FRANCISCO",
       "Erika | Boiler Room Toronto"
     ],
-    "enrichedAt": "2026-08-03T01:01:19.594Z"
+    "mbid": "cc57fd4e-d69f-4f70-b4bb-cc00e18e4dc3",
+    "enrichedAt": "2026-08-05T06:27:55.781Z"
   },
   "felly fell": {
     "youtubeQuery": "Felly Fell live set",
@@ -10269,6 +10309,16 @@
     "enrichedAt": "2026-08-03T01:00:12.105Z"
   },
   "acraze b2b cid": {
+    "genres": [
+      "bass house",
+      "edm",
+      "electro house",
+      "electronica",
+      "future bass",
+      "house"
+    ],
+    "soundcloudSlug": "acraze-3",
+    "spotifyId": "4pnp4w9g30yLfVIAFnZMRd",
     "youtubeQuery": "ACRAZE B2B CID live set",
     "youtubeVideoIds": [
       "yioFLRJNHYQ",
@@ -10280,7 +10330,8 @@
       "KREAM B2B ACRAZE @ EDC Vegas Mainstage Closing Set 2024",
       "ACRAZE Live at EDC Las Vegas 2023 | Full Set"
     ],
-    "enrichedAt": "2026-08-03T01:00:12.667Z"
+    "mbid": "e21e0137-b42d-44a5-abd6-c6ac160d0d7d",
+    "enrichedAt": "2026-08-05T06:25:03.436Z"
   },
   "adrian mills": {
     "youtubeQuery": "Adrián Mills live set",
@@ -10299,6 +10350,15 @@
     "soundcloudSlug": "adrianxmills"
   },
   "adventure club (sunset set)": {
+    "genres": [
+      "dubstep",
+      "drum and bass",
+      "edm",
+      "electro house",
+      "electronic"
+    ],
+    "soundcloudSlug": "adventureclub",
+    "spotifyId": "5CdJjUi9f0cVgo9nFuJrFa",
     "youtubeQuery": "Adventure Club (Sunset Set) live set",
     "youtubeVideoIds": [
       "YQT1Rl1m4SY",
@@ -10310,7 +10370,8 @@
       "Adventure Club - Sunset Music Festival 2023",
       "ADVENTURE CLUB Live at EDC Las Vegas 2026"
     ],
-    "enrichedAt": "2026-08-03T01:00:13.921Z"
+    "mbid": "b9696d80-70c9-4c3d-be9d-8a525b125d23",
+    "enrichedAt": "2026-08-05T06:25:12.973Z"
   },
   "afrojack": {
     "genres": [
@@ -10334,6 +10395,18 @@
     "enrichedAt": "2026-08-01T15:47:45.624Z"
   },
   "alan walker (sunset set)": {
+    "genres": [
+      "electronic",
+      "edm",
+      "electro house",
+      "future bass",
+      "dance",
+      "progressive house",
+      "electropop",
+      "pop"
+    ],
+    "soundcloudSlug": "alanwalker",
+    "spotifyId": "7vk5e3vY1uw9plTHJAMwjN",
     "youtubeQuery": "Alan Walker (Sunset Set) live set",
     "youtubeVideoIds": [
       "wuwPiyvPqLA",
@@ -10345,9 +10418,20 @@
       "Alan Walker - The Brooklyn Mirage (Full Show)",
       "ALAN WALKER FULLSET @ULTRA MIAMI 2026 4K QUALITY"
     ],
-    "enrichedAt": "2026-08-03T01:00:15.163Z"
+    "mbid": "b0e4bc50-3062-4d31-afad-def6a6b7a8e9",
+    "enrichedAt": "2026-08-05T06:25:19.267Z"
   },
   "alesso (sunset set)": {
+    "genres": [
+      "progressive house",
+      "big room house",
+      "dance-pop",
+      "edm",
+      "electro house",
+      "future bass"
+    ],
+    "soundcloudSlug": "alesso",
+    "spotifyId": "4AVFqumd2ogHFlRbKIjp1t",
     "youtubeQuery": "Alesso (Sunset Set) live set",
     "youtubeVideoIds": [
       "1L2Mg3jSJVE",
@@ -10359,7 +10443,8 @@
       "ALESSO LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2025 (FULL DJ SET)",
       "Alesso Live at EDC Las Vegas 2025 (Kinetic Field Full DJ Set)"
     ],
-    "enrichedAt": "2026-08-03T01:00:16.634Z"
+    "mbid": "addb00fd-733c-4223-8fdf-f78be2488acd",
+    "enrichedAt": "2026-08-05T06:25:26.273Z"
   },
   "alison wonderland": {
     "genres": [
@@ -10457,6 +10542,8 @@
     "soundcloudSlug": "ayybo"
   },
   "benda b2b vastive": {
+    "soundcloudSlug": "bendamusic",
+    "spotifyId": "0md3NIXueJZSFZ82HMu26M",
     "youtubeQuery": "Benda B2B Vastive live set",
     "youtubeVideoIds": [
       "TOExg4pSceM",
@@ -10468,7 +10555,8 @@
       "VASTIVE - LOST LANDS 2024 LIVE SET",
       "RZRKT B2B VASTIVE @ EDC VEGAS [FULL SET]"
     ],
-    "enrichedAt": "2026-08-03T01:00:17.885Z"
+    "mbid": "40682644-d458-4325-831b-98d9cba5957f",
+    "enrichedAt": "2026-08-05T06:25:32.587Z"
   },
   "big florida": {
     "spotifyId": "7LjnXw8QLtGkt9GSwyo7aj",
@@ -10488,6 +10576,11 @@
     "soundcloudSlug": "bigflorida"
   },
   "bou b2b kanine": {
+    "genres": [
+      "drum and bass"
+    ],
+    "soundcloudSlug": "boudnb",
+    "spotifyId": "35dxfY1wywqVRUEaVuMm13",
     "youtubeQuery": "Bou B2B Kanine live set",
     "youtubeVideoIds": [
       "ubnIR93S_9Y",
@@ -10499,9 +10592,22 @@
       "Koji Aiken | Live Drum & Bass Set @ Bou x Kanine (Vancouver)",
       "Bassrush Apocalypse 2025 Bou B2B Kanine Quarantine Zone"
     ],
-    "enrichedAt": "2026-08-03T01:00:19.124Z"
+    "mbid": "b3c31c2b-f9ec-4c94-b045-119ac0994da3",
+    "enrichedAt": "2026-08-05T06:25:42.709Z"
   },
   "boys noize b2b brutalismus 3000": {
+    "genres": [
+      "electro",
+      "electro house",
+      "techno",
+      "acid techno",
+      "ebm",
+      "electronic",
+      "electronica",
+      "french electro"
+    ],
+    "soundcloudSlug": "boysnoize",
+    "spotifyId": "62k5LKMhymqlDNo2DWOvvv",
     "youtubeQuery": "Boys Noize B2B Brutalismus 3000 live set",
     "youtubeVideoIds": [
       "xrZLtV2XxMs",
@@ -10513,7 +10619,8 @@
       "Boys Noize [Live from Coachella 2026]",
       "Boys Noize | Boiler Room x DGTL Amsterdam 2024"
     ],
-    "enrichedAt": "2026-08-03T01:00:20.467Z"
+    "mbid": "d2f4a968-1f6e-4a4a-9376-ee2b2a50c87a",
+    "enrichedAt": "2026-08-05T06:25:53.250Z"
   },
   "brunello (sunset set)": {
     "youtubeQuery": "Brunello (Sunset Set) live set",
@@ -10530,6 +10637,7 @@
     "enrichedAt": "2026-08-03T01:00:21.879Z"
   },
   "bullet tooth b2b sidney charles": {
+    "spotifyId": "4KWIkeAdOJfvUgXSq0bEWC",
     "youtubeQuery": "Bullet Tooth B2B Sidney Charles live set",
     "youtubeVideoIds": [
       "DTZ48SxmM6s",
@@ -10541,7 +10649,8 @@
       "Ranger Trucco b2b Sidney Charles: ARC At Sea Miami 2025",
       "Chris Stussy | Boiler Room: Edinburgh"
     ],
-    "enrichedAt": "2026-08-03T01:00:23.442Z"
+    "mbid": "55ef8238-faaa-4034-bddf-b107b81405f8",
+    "enrichedAt": "2026-08-05T06:26:10.757Z"
   },
   "chasewest": {
     "soundcloudSlug": "chase_west",
@@ -10653,6 +10762,17 @@
     "enrichedAt": "2026-08-03T01:00:24.840Z"
   },
   "deorro b2b dj diesel": {
+    "genres": [
+      "big room house",
+      "edm",
+      "electro house",
+      "melbourne bounce",
+      "dutch house",
+      "house",
+      "latin house"
+    ],
+    "soundcloudSlug": "deorro",
+    "spotifyId": "6VD4UEUPvtsemqD3mmTqCR",
     "youtubeQuery": "Deorro B2B DJ Diesel live set",
     "youtubeVideoIds": [
       "N3YWZxr0QpU",
@@ -10664,9 +10784,12 @@
       "DEORRO @ EDC MEXICO 2023 - Kinetic Field [FULL SET]",
       "Latin House, Reggaeton, and Trap in a Car | DEORRO | carRADIO 062"
     ],
-    "enrichedAt": "2026-08-03T01:00:26.305Z"
+    "mbid": "724ffc08-6987-40b0-b107-03bb95a82b80",
+    "enrichedAt": "2026-08-05T06:26:18.336Z"
   },
   "devault (sunset set)": {
+    "soundcloudSlug": "devaultmusic",
+    "spotifyId": "1VBAKMui4zm5MnBWNn3NbL",
     "youtubeQuery": "Devault (Sunset Set) live set",
     "youtubeVideoIds": [
       "hSIVnou7N4s",
@@ -10678,7 +10801,8 @@
       "DeVault at Made In America clip",
       "DEVAULT b2b Kasbo Secret Set @ Electric Forest 2023 [1080p]"
     ],
-    "enrichedAt": "2026-08-03T01:00:27.669Z"
+    "mbid": "da1fd423-e121-4d4e-a040-c9520e1bcb62",
+    "enrichedAt": "2026-08-05T06:26:22.391Z"
   },
   "discip": {
     "soundcloudSlug": "discipmusic",
@@ -11036,9 +11160,12 @@
     "enrichedAt": "2026-08-01T15:48:37.229Z"
   },
   "luke dean b2b max dean": {
+    "soundcloudSlug": "luke-dean-22",
+    "spotifyId": "2BhXOZ96YbOdXz8F6HVUw4",
     "youtubeQuery": "Luke Dean B2B Max Dean live set",
+    "mbid": "72e1c799-934a-4b2a-a49b-a04e81cb590a",
     "youtubeSearchedAt": "2026-08-01T15:48:38.586Z",
-    "enrichedAt": "2026-08-01T15:48:38.586Z"
+    "enrichedAt": "2026-08-05T06:26:35.114Z"
   },
   "m81!": {
     "youtubeQuery": "M81! live set",
@@ -11105,6 +11232,8 @@
     "enrichedAt": "2026-08-03T01:00:38.516Z"
   },
   "malugi (sunset set)": {
+    "soundcloudSlug": "malugienergy",
+    "spotifyId": "50udUOTR7dQUgyPwPuCLM6",
     "youtubeQuery": "MALUGI (Sunset Set) live set",
     "youtubeVideoIds": [
       "fjgd2goQZPE",
@@ -11116,7 +11245,8 @@
       "BBC Radio 1's Residency MALUGI 2026 03 19 one track been removed",
       "Marlon Hoffstadt - WHP Manchester Full Live Set 2025 | Party of the Year"
     ],
-    "enrichedAt": "2026-08-03T01:00:39.776Z"
+    "mbid": "63bd9ba2-89e1-4ae1-9bc6-3aac97654c96",
+    "enrichedAt": "2026-08-05T06:26:44.717Z"
   },
   "matthias": {
     "youtubeQuery": "Matthias live set",
@@ -11217,6 +11347,18 @@
     "enrichedAt": "2026-08-03T01:00:46.296Z"
   },
   "of the trees (sunset set)": {
+    "genres": [
+      "electronic",
+      "dubstep",
+      "bassline",
+      "breakbeat",
+      "breaks",
+      "dance",
+      "drum and bass",
+      "electronica"
+    ],
+    "soundcloudSlug": "ofthetrees",
+    "spotifyId": "5V7NIXgCnX2KuQ01Bxg20c",
     "youtubeQuery": "Of The Trees (Sunset Set) live set",
     "youtubeVideoIds": [
       "cDJaMvR70Js",
@@ -11228,7 +11370,8 @@
       "Of The Trees - Live at Electric Forest Festival 2025 (Full Set)",
       "Of The Trees Sunset Okeechobee 2022 - Spanish Moss"
     ],
-    "enrichedAt": "2026-08-03T01:00:46.855Z"
+    "mbid": "9d8340ff-9f9b-4101-b54c-ff826180244d",
+    "enrichedAt": "2026-08-05T06:26:55.726Z"
   },
   "pegassi": {
     "soundcloudSlug": "pegassimusic",
@@ -11248,6 +11391,8 @@
     "enrichedAt": "2026-08-03T01:00:48.391Z"
   },
   "prospa b2b josh baker": {
+    "soundcloudSlug": "prospauk",
+    "spotifyId": "6HabM2PUM519iIxervGWSb",
     "youtubeQuery": "Prospa B2B Josh Baker live set",
     "youtubeVideoIds": [
       "CWO9NQU5x-o",
@@ -11259,7 +11404,8 @@
       "PROSPA B2B JOSH BAKER @ You&Me, Barcelona",
       "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
     ],
-    "enrichedAt": "2026-08-03T01:00:49.704Z"
+    "mbid": "4c3cffca-37b7-4ecd-9320-e6dcc2cb837a",
+    "enrichedAt": "2026-08-05T06:27:00.969Z"
   },
   "raje": {
     "spotifyId": "7IEMkrrKsLls7zuQs9a57g",
@@ -11310,6 +11456,14 @@
     "enrichedAt": "2026-08-03T01:00:52.720Z"
   },
   "san holo (wholesome riddim set)": {
+    "genres": [
+      "future bass",
+      "edm",
+      "electronic",
+      "trap"
+    ],
+    "soundcloudSlug": "sanholobeats",
+    "spotifyId": "0jNDKefhfSbLR9sFvcPLHo",
     "youtubeQuery": "San Holo (Wholesome Riddim Set) live set",
     "youtubeVideoIds": [
       "YtSk55_uIWQ",
@@ -11321,7 +11475,8 @@
       "San Holo Live at EDC Las Vegas 2026",
       "San Holo Wholesome Riddim Set at VAC 2025"
     ],
-    "enrichedAt": "2026-08-03T01:00:53.854Z"
+    "mbid": "23101701-cecf-4c9b-9b4c-d6a249eac118",
+    "enrichedAt": "2026-08-05T06:27:07.458Z"
   },
   "shdw": {
     "spotifyId": "4IyAdT9yACjgFv8Qk2eSkO",
@@ -11354,6 +11509,12 @@
     "enrichedAt": "2026-08-03T01:00:55.189Z"
   },
   "slander (sunset set)": {
+    "genres": [
+      "dubstep",
+      "electronic"
+    ],
+    "soundcloudSlug": "slanderofficial",
+    "spotifyId": "20DZAfCuP1TKZl5KcY7z3Q",
     "youtubeQuery": "SLANDER (Sunset Set) live set",
     "youtubeVideoIds": [
       "Hd4GlMRFzZQ",
@@ -11365,7 +11526,8 @@
       "Slander live full set @ Sunset Music Fest 2017",
       "Slander Lost Lands 2025 Sunset Set Opening"
     ],
-    "enrichedAt": "2026-08-03T01:00:56.528Z"
+    "mbid": "e33994a3-2f5c-42f5-8df1-4d23c331a4a5",
+    "enrichedAt": "2026-08-05T06:27:18.271Z"
   },
   "sloth": {
     "genres": [
@@ -12043,8 +12205,11 @@
     "enrichedAt": "2026-08-03T20:12:48.408Z"
   },
   "johnny stimson": {
+    "soundcloudSlug": "johnny-stimson",
+    "spotifyId": "00OF0nwYaoBSO3AnPVq3vE",
     "youtubeQuery": "Johnny Stimson live set",
-    "enrichedAt": "2026-08-03T20:12:49.704Z"
+    "mbid": "e527e6a8-4b5a-491c-8709-123f92fdc0e5",
+    "enrichedAt": "2026-08-05T06:28:45.493Z"
   },
   "nicky youre": {
     "genres": [

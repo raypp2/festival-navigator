@@ -615,7 +615,13 @@
         "Excision 2 Hour Set Live @ Lost Lands 2025 - Full Set",
         "Excision b2b Subtronics Live @ Lost Lands 2025 - Full Set",
         "Excision 2 Hour Set Live @ Lost Lands 2023 - Full Set"
-      ]
+      ],
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "excision",
+      "spotifyId": "5FKchcZpQOkqFvXBj1aCvb"
     },
     {
       "name": "Excision (Detox Set)",
@@ -629,7 +635,13 @@
         "Excision Detox Set Live @ Lost Lands 2025 - Full Set",
         "Excision Detox Set Live @ Lost Lands 2024 - Full Set",
         "Excision Detox Set Live @ Lost Lands 2019 - Full Set"
-      ]
+      ],
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "excision",
+      "spotifyId": "5FKchcZpQOkqFvXBj1aCvb"
     },
     {
       "name": "Excision B2B Space Laces",
@@ -643,7 +655,13 @@
         "Excision b2b Subtronics Live @ Lost Lands 2025 - Full Set",
         "Excision 2 Hour Set Live @ Lost Lands 2025 - Full Set",
         "Eptic B2B Space Laces Live at EDC Las Vegas 2026"
-      ]
+      ],
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "excision",
+      "spotifyId": "5FKchcZpQOkqFvXBj1aCvb"
     },
     {
       "name": "Flosstradamus",

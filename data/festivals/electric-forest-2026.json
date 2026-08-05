@@ -1536,7 +1536,9 @@
         "LSDREAM - DREAMROCKS Full Set @ Red Rocks 2023",
         "LSDREAM - LOST LANDS 2022 (FULL SET)",
         "LSZEE (LSDREAM & CloZee) - LIVE @ MISSION BALLROOM - NIGHT 2"
-      ]
+      ],
+      "soundcloudSlug": "lsdream",
+      "spotifyId": "3Hrqjumb6WHg2aAUHJHLND"
     },
     {
       "name": "All.Lo Collective",
@@ -3275,7 +3277,9 @@
         "DJ Diesel (Shaq) b2b Teddy Pain (T-Pain) @ Electric Forest 2026",
         "DIESEL B2B TEDDY PAIN Electric Forest 2026",
         "D Pain (Dj Diesel B2B Teddy Pain) at Electric Forest 2026 (GoPro POV)"
-      ]
+      ],
+      "soundcloudSlug": "djdieselofficial",
+      "spotifyId": "75vCyksqhYjtt5VIpc8g7u"
     },
     {
       "name": "Tiffany Day",
@@ -4222,7 +4226,9 @@
       "name": "Party Pupils (Late)",
       "day": "Day 4",
       "stage": "Center Stage",
-      "youtubeQuery": "Party Pupils (Late) live set"
+      "youtubeQuery": "Party Pupils (Late) live set",
+      "soundcloudSlug": "partypupils",
+      "spotifyId": "4F61H4lx1js4wtWfb2Rfnt"
     },
     {
       "name": "Culturefies",

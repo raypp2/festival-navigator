@@ -134,12 +134,44 @@ async function mbFetch(url) {
   return res;
 }
 
+// A LINEUP name is not always an ARTIST name. Festivals bill the performance:
+// "Alan Walker (Sunset Set)" is a slot, "ACRAZE B2B CID" is two artists sharing
+// one, "Skrillex presents ..." is a show. MusicBrainz indexes the artist, so
+// every one of those searches misses — 40 of the 335 unmatched artists on
+// 2026-08-05 failed for this reason alone and nothing else.
+//
+// Only the SEARCH is normalised. The billed name stays exactly as the festival
+// printed it, because that is what the lineup, the timetable and every card
+// show. A B2B set inherits the first artist's genres, which is a fair
+// description of what you will hear and much better than nothing.
+export function searchNameFor(name) {
+  let n = String(name || '');
+  n = n.replace(/\([^)]*\)/g, ' ');                    // "(Sunset Set)", "(Live)"
+  n = n.replace(/\[[^\]]*\]/g, ' ');
+  n = n.split(/\s+b2b\s+/i)[0];                        // "ACRAZE B2B CID"
+  n = n.split(/\s+presents\s+|\s+pres\.\s+/i)[0];
+  n = n.split(/\s+vs\.?\s+/i)[0];
+  n = n.replace(/\s{2,}/g, ' ').trim();
+  return n;
+}
+
 async function mbSearchArtist(name) {
-  const url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(`artist:"${name}"`)}&fmt=json`;
-  const res = await mbFetch(url);
-  if (!res.ok) return null;
-  const body = await res.json();
-  return pickMbHit(body?.artists, name);
+  const tried = [name];
+  const alt = searchNameFor(name);
+  // The decorated form first — if the festival billed a duo that really is its
+  // own MusicBrainz entity, that entry is the better answer.
+  if (alt && alt !== name) tried.push(alt);
+  for (const q of tried) {
+    const url = `https://musicbrainz.org/ws/2/artist?query=${encodeURIComponent(`artist:"${q}"`)}&fmt=json`;
+    // eslint-disable-next-line no-await-in-loop
+    const res = await mbFetch(url);
+    if (!res.ok) continue;
+    // eslint-disable-next-line no-await-in-loop
+    const body = await res.json();
+    const hit = pickMbHit(body?.artists, q);
+    if (hit) return hit;
+  }
+  return null;
 }
 
 async function mbLookupArtist(mbid) {

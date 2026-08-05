@@ -67,7 +67,17 @@
         "LIVE from Sable Miami",
         "KREAM B2B ACRAZE @ EDC Vegas Mainstage Closing Set 2024",
         "ACRAZE Live at EDC Las Vegas 2023 | Full Set"
-      ]
+      ],
+      "genres": [
+        "bass house",
+        "edm",
+        "electro house",
+        "electronica",
+        "future bass",
+        "house"
+      ],
+      "soundcloudSlug": "acraze-3",
+      "spotifyId": "4pnp4w9g30yLfVIAFnZMRd"
     },
     {
       "name": "Adrián Mills",
@@ -96,7 +106,16 @@
         "Adventure Club Live Full Set Sunset Music Festival Tampa 2021",
         "Adventure Club - Sunset Music Festival 2023",
         "ADVENTURE CLUB Live at EDC Las Vegas 2026"
-      ]
+      ],
+      "genres": [
+        "dubstep",
+        "drum and bass",
+        "edm",
+        "electro house",
+        "electronic"
+      ],
+      "soundcloudSlug": "adventureclub",
+      "spotifyId": "5CdJjUi9f0cVgo9nFuJrFa"
     },
     {
       "name": "Afrojack",
@@ -135,7 +154,19 @@
         "Alan Walker live @tomorrowland 2025 (Full Show)",
         "Alan Walker - The Brooklyn Mirage (Full Show)",
         "ALAN WALKER FULLSET @ULTRA MIAMI 2026 4K QUALITY"
-      ]
+      ],
+      "genres": [
+        "electronic",
+        "edm",
+        "electro house",
+        "future bass",
+        "dance",
+        "progressive house",
+        "electropop",
+        "pop"
+      ],
+      "soundcloudSlug": "alanwalker",
+      "spotifyId": "7vk5e3vY1uw9plTHJAMwjN"
     },
     {
       "name": "Alesso (Sunset Set)",
@@ -149,7 +180,17 @@
         "ALESSO LIVE @ ULTRA EUROPE 2025 (FULL DJ SET)",
         "ALESSO LIVE @ ULTRA MUSIC FESTIVAL MIAMI 2025 (FULL DJ SET)",
         "Alesso Live at EDC Las Vegas 2025 (Kinetic Field Full DJ Set)"
-      ]
+      ],
+      "genres": [
+        "progressive house",
+        "big room house",
+        "dance-pop",
+        "edm",
+        "electro house",
+        "future bass"
+      ],
+      "soundcloudSlug": "alesso",
+      "spotifyId": "4AVFqumd2ogHFlRbKIjp1t"
     },
     {
       "name": "Alison Wonderland",
@@ -332,7 +373,9 @@
         "VASTIVE b2b RZRKT Live @ Lost Lands 2025 - Full Set",
         "VASTIVE - LOST LANDS 2024 LIVE SET",
         "RZRKT B2B VASTIVE @ EDC VEGAS [FULL SET]"
-      ]
+      ],
+      "soundcloudSlug": "bendamusic",
+      "spotifyId": "0md3NIXueJZSFZ82HMu26M"
     },
     {
       "name": "Big Florida",
@@ -378,7 +421,12 @@
         "Kanine | Live From DnB Allstars 360°",
         "Koji Aiken | Live Drum & Bass Set @ Bou x Kanine (Vancouver)",
         "Bassrush Apocalypse 2025 Bou B2B Kanine Quarantine Zone"
-      ]
+      ],
+      "genres": [
+        "drum and bass"
+      ],
+      "soundcloudSlug": "boudnb",
+      "spotifyId": "35dxfY1wywqVRUEaVuMm13"
     },
     {
       "name": "Boys Noize B2B Brutalismus 3000",
@@ -392,7 +440,19 @@
         "Brutalismus 3000 - I Bring My Gun To The Function (with Boys Noize)",
         "Boys Noize [Live from Coachella 2026]",
         "Boys Noize | Boiler Room x DGTL Amsterdam 2024"
-      ]
+      ],
+      "genres": [
+        "electro",
+        "electro house",
+        "techno",
+        "acid techno",
+        "ebm",
+        "electronic",
+        "electronica",
+        "french electro"
+      ],
+      "soundcloudSlug": "boysnoize",
+      "spotifyId": "62k5LKMhymqlDNo2DWOvvv"
     },
     {
       "name": "Brunello (Sunset Set)",
@@ -420,7 +480,8 @@
         "bullet tooth - Live at Lost Paradise 2025",
         "Ranger Trucco b2b Sidney Charles: ARC At Sea Miami 2025",
         "Chris Stussy | Boiler Room: Edinburgh"
-      ]
+      ],
+      "spotifyId": "4KWIkeAdOJfvUgXSq0bEWC"
     },
     {
       "name": "ChaseWest",
@@ -548,7 +609,18 @@
         "Deorro & Friends @ EDC Las Vegas 2025 (Full Set)",
         "DEORRO @ EDC MEXICO 2023 - Kinetic Field [FULL SET]",
         "Latin House, Reggaeton, and Trap in a Car | DEORRO | carRADIO 062"
-      ]
+      ],
+      "genres": [
+        "big room house",
+        "edm",
+        "electro house",
+        "melbourne bounce",
+        "dutch house",
+        "house",
+        "latin house"
+      ],
+      "soundcloudSlug": "deorro",
+      "spotifyId": "6VD4UEUPvtsemqD3mmTqCR"
     },
     {
       "name": "Devault (Sunset Set)",
@@ -562,7 +634,9 @@
         "DEVAULT - Opening DJ set for Madeon live in Nashville, TN (Oct 7th, 2021)",
         "DeVault at Made In America clip",
         "DEVAULT b2b Kasbo Secret Set @ Electric Forest 2023 [1080p]"
-      ]
+      ],
+      "soundcloudSlug": "devaultmusic",
+      "spotifyId": "1VBAKMui4zm5MnBWNn3NbL"
     },
     {
       "name": "Discip",
@@ -1118,7 +1192,9 @@
     },
     {
       "name": "Luke Dean B2B Max Dean",
-      "youtubeQuery": "Luke Dean B2B Max Dean live set"
+      "youtubeQuery": "Luke Dean B2B Max Dean live set",
+      "soundcloudSlug": "luke-dean-22",
+      "spotifyId": "2BhXOZ96YbOdXz8F6HVUw4"
     },
     {
       "name": "M81!",
@@ -1199,7 +1275,9 @@
         "Malugi | Radio Rudina",
         "BBC Radio 1's Residency MALUGI 2026 03 19 one track been removed",
         "Marlon Hoffstadt - WHP Manchester Full Live Set 2025 | Party of the Year"
-      ]
+      ],
+      "soundcloudSlug": "malugienergy",
+      "spotifyId": "50udUOTR7dQUgyPwPuCLM6"
     },
     {
       "name": "Marlon Hoffstadt",
@@ -1384,7 +1462,19 @@
         "Of The Trees - Live at Shambhala Music Festival 2023 (Sunrise Set Audio)",
         "Of The Trees - Live at Electric Forest Festival 2025 (Full Set)",
         "Of The Trees Sunset Okeechobee 2022 - Spanish Moss"
-      ]
+      ],
+      "genres": [
+        "electronic",
+        "dubstep",
+        "bassline",
+        "breakbeat",
+        "breaks",
+        "dance",
+        "drum and bass",
+        "electronica"
+      ],
+      "soundcloudSlug": "ofthetrees",
+      "spotifyId": "5V7NIXgCnX2KuQ01Bxg20c"
     },
     {
       "name": "Omar+",
@@ -1444,7 +1534,9 @@
         "Miami Music Week | RAW CUTS",
         "PROSPA B2B JOSH BAKER @ You&Me, Barcelona",
         "KETTAMA x Josh Baker x Prospa - Live From Coachella 2026"
-      ]
+      ],
+      "soundcloudSlug": "prospauk",
+      "spotifyId": "6HabM2PUM519iIxervGWSb"
     },
     {
       "name": "RAJE",
@@ -1540,7 +1632,15 @@
         "San Holo Wholesome Riddim Set @ Lost Lands",
         "San Holo Live at EDC Las Vegas 2026",
         "San Holo Wholesome Riddim Set at VAC 2025"
-      ]
+      ],
+      "genres": [
+        "future bass",
+        "edm",
+        "electronic",
+        "trap"
+      ],
+      "soundcloudSlug": "sanholobeats",
+      "spotifyId": "0jNDKefhfSbLR9sFvcPLHo"
     },
     {
       "name": "SHDW",
@@ -1599,7 +1699,13 @@
         "SLANDER @LIVE VIRTUAL VIBES 2020 (MEDUSA SET)",
         "Slander live full set @ Sunset Music Fest 2017",
         "Slander Lost Lands 2025 Sunset Set Opening"
-      ]
+      ],
+      "genres": [
+        "dubstep",
+        "electronic"
+      ],
+      "soundcloudSlug": "slanderofficial",
+      "spotifyId": "20DZAfCuP1TKZl5KcY7z3Q"
     },
     {
       "name": "Sloth",

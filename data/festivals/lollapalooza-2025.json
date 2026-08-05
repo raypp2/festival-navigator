@@ -1084,7 +1084,12 @@
       "name": "Torren Foot B2B Rawolf Paradiso",
       "day": "Thursday",
       "stage": "DOLLAPALOOZA",
-      "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set"
+      "youtubeQuery": "Torren Foot B2B Rawolf Paradiso live set",
+      "genres": [
+        "house"
+      ],
+      "soundcloudSlug": "torrenfoot",
+      "spotifyId": "7lQOxDl96wmNoqGoW4kgv4"
     },
     {
       "name": "Jade LeMac",
@@ -2233,7 +2238,17 @@
       "name": "T-Pain",
       "day": "Friday",
       "stage": "Bud Light",
-      "youtubeQuery": "T-Pain live set"
+      "youtubeQuery": "T-Pain live set",
+      "youtubeVideoIds": [
+        "OCDBnoxjqAs",
+        "91ck0vJBygo",
+        "yfX7mCHbroc"
+      ],
+      "youtubeLabels": [
+        "T-Pain Live @ Lost Lands 2025 - Full Set",
+        "On Top Of The Covers (Live From The Sun Rose)",
+        "Mashup (To The Beat with Kurt Hugo Schneider)"
+      ]
     },
     {
       "name": "Bleachers",
