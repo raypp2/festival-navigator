@@ -460,8 +460,14 @@ button { touch-action: manipulation; }
    * The cost is real and it is the design's: fields specced at 12.5px render
    * at 16px on touch. Scoped to `input, textarea, select` for the same reason
    * the height floor is scoped to `button` — a field added later inherits it
-   * instead of waiting to be remembered. */
-  input, textarea, select { font-size: 16px; }
+   * instead of waiting to be remembered.
+   *
+   * `!important` because that inheritance claim is otherwise false: the name
+   * fields on Create and Join and the paste field on the bad-link screen carry
+   * their size in an INLINE style, which beats any ordinary rule here and left
+   * all three still zooming. Same reason, and the same precedent, as the
+   * :focus-visible ring in v3-tokens.css. */
+  input, textarea, select { font-size: 16px !important; }
 
   /* Settings rows are DIVs, so `button` never reaches them — and the row is the
    * real target now that tapping the label flips the toggle. Give the row the
