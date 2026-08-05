@@ -97,7 +97,17 @@ function mkActions(mountCalls = [], destroyCounter = { n: 0 }) {
     canonData: CANON,
     mountPlayer: (opts) => {
       mountCalls.push(opts);
-      return { destroy: () => { destroyCounter.n++; }, getState: () => ({}), handoverTo: () => {} };
+      // remountFor is how the real player re-points itself at a new artist
+      // WITHOUT rebuilding the embed (js/discovery/player.js) — the deck
+      // prefers it over a fresh mount. Recorded into the same array, because
+      // from a caller's point of view both are "the player was re-pointed
+      // once"; `viaRemount` is what tells the two apart.
+      return {
+        destroy: () => { destroyCounter.n++; },
+        getState: () => ({}),
+        handoverTo: () => {},
+        remountFor: (o) => { mountCalls.push({ ...o, viaRemount: true }); return true; },
+      };
     },
   };
 }
@@ -446,9 +456,14 @@ test('a pane decision never touches the live player before the deck moves on', (
   assert.equal(mounts.length, mountsAfterFocus, 'and remounted it zero times — the stream plays through');
   assert.ok(overlay().querySelector('.dd2-pane-body'), 'the pane body (which owns the embed) is still mounted');
 
-  // Moving to a DIFFERENT artist is the one time a new embed is correct.
+  // Moving to a DIFFERENT artist re-points the player exactly once. It is no
+  // longer a NEW embed: the live one carries over and loads the next artist,
+  // which is what keeps sound going on iOS (see remountFor). Still one
+  // re-point, still zero destroys.
   actions.flush();
-  assert.equal(mounts.length, mountsAfterFocus + 1, 'the next artist gets its own player, exactly once');
+  assert.equal(mounts.length, mountsAfterFocus + 1, 'the next artist re-points the player, exactly once');
+  assert.equal(mounts[mounts.length - 1].viaRemount, true, 'and does it by carrying the embed, not rebuilding it');
+  assert.equal(destroys.n, destroysAfterFocus, 'nothing was torn down to get there');
 });
 
 test('a pane decision repaints the grid and the pick control around the player', () => {
@@ -912,4 +927,55 @@ test('the intent is per-visit: closing Discover resets it to silent', () => {
   const next = [];
   renderDeckForTest(ctx, mkActions(next), CANON);
   assert.equal(lastMount(next).autoplay, false, 'a fresh visit opens silent, like the first one');
+});
+
+// ---- the embed survives the artist change (iOS, device pass 2026-08-04) --------
+// Why this matters more than it looks: iOS refuses to start audio on an element
+// no finger has touched. Rebuilding the iframe per artist therefore made the
+// carried intent UNREACHABLE on a phone — every advance produced a fresh,
+// never-tapped element whose play() was silently refused, which is what showed
+// up as a Pause icon over silence and two taps to start sound.
+test('advancing re-points the LIVE player instead of building a new one', () => {
+  const calls = [];
+  const destroys = { n: 0 };
+  const actions = mkActions(calls, destroys);
+  renderDeckForTest(ctx, actions, CANON);
+  assert.equal(calls[0].viaRemount, undefined, 'the first artist of a visit has nothing to carry — a real mount');
+
+  overlay().querySelector('.dd-btn-pick').click();
+
+  const last = calls[calls.length - 1];
+  assert.equal(last.viaRemount, true, 'the next artist rides the embed that is already unlocked');
+  assert.equal(destroys.n, 0, 'and nothing was destroyed to get there');
+  assert.equal(last.artist.name, 'PickFlow1', 'pointed at the artist we actually advanced to');
+});
+
+test('a carried player still carries the intent — and still respects a pause', () => {
+  const calls = [];
+  const actions = mkActions(calls);
+  renderDeckForTest(ctx, actions, CANON);
+  calls[calls.length - 1].onStateChange({ play: true });
+  overlay().querySelector('.dd-btn-pick').click();
+  assert.equal(calls[calls.length - 1].autoplay, true, 'sound follows the swipe');
+
+  calls[calls.length - 1].onStateChange({ play: false });
+  overlay().querySelector('.dd-btn-pick').click();
+  assert.equal(calls[calls.length - 1].autoplay, false, 'a pause still sticks');
+});
+
+// The watchdog corrects the ICON when a platform refuses to play. It must not
+// be mistaken for the person pausing, or one refusal would silence the rest of
+// the session.
+test('an autoplay refusal fixes the icon without withdrawing the intent', () => {
+  const calls = [];
+  const actions = mkActions(calls);
+  renderDeckForTest(ctx, actions, CANON);
+  calls[calls.length - 1].onStateChange({ play: true });
+
+  // what player.js reports when it asked to play and no PLAY event arrived
+  calls[calls.length - 1].onStateChange({ play: false }, { autoplayRefused: true });
+
+  overlay().querySelector('.dd-btn-pick').click();
+  assert.equal(calls[calls.length - 1].autoplay, true,
+    'the next artist still tries — the platform said no, the person did not');
 });

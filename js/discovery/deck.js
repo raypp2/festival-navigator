@@ -74,6 +74,41 @@ const DESKTOP_MQ = '(min-width: 1200px)';
 
 // ---- module state: one deck instance, ever ---------------------------------------
 let playerHandle = null;
+
+// Mount the sample player for an artist — carrying the LIVE embed over from
+// the previous artist whenever the player can manage it.
+//
+// This is not an optimisation. iOS refuses to start audio on an element no
+// finger has touched, and the ordinary mount builds a brand-new cross-origin
+// iframe per artist, arriving on the advance timer rather than inside the tap
+// — so "keep playing as I swipe" could not work at all, and every swipe left a
+// Pause icon over silence. Reusing the embed keeps the unlock the person
+// already granted, which is the only thing that makes the carried intent real
+// on a phone. player.js's remountFor returns false when it could not carry
+// (different source, or an adapter with nowhere to load into), and then this
+// is exactly the mount it always was.
+// Lift the player's own root out of the tree that is about to be erased.
+// getState() is a cheap liveness probe; a handle that cannot answer is not one
+// worth carrying.
+function detachPlayerRoot() {
+  const el = document.querySelector('#' + OVERLAY_ID + ' .sample-player');
+  if (el && el.parentNode) el.parentNode.removeChild(el);
+}
+
+function mountOrCarry(actions, opts) {
+  if (playerHandle && typeof playerHandle.remountFor === 'function') {
+    try {
+      playerHandle.remountFor(opts);
+      return playerHandle;
+    } catch {
+      // A player that cannot re-point itself is not one to keep.
+      try { playerHandle.destroy(); } catch { /* best-effort teardown */ }
+      playerHandle = null;
+    }
+  }
+  const mount = (actions && actions.mountPlayer) || realMountPlayer;
+  return mount(opts);
+}
 let session = null;      // { pool, position, decided } — reset per open (or per filter commit); MOBILE only
 let deckOpen = false;
 let pendingOpenGen = 0;  // guards a stale async canon-load landing after a newer navigation
@@ -318,11 +353,12 @@ function buildCard(entry, ctx, actions, canonData) {
     soundcloudSlug: meta.soundcloudSlug,
     spotifyId: meta.spotifyId,
   };
-  const mount = (actions && actions.mountPlayer) || realMountPlayer;
-  playerHandle = mount({
+  playerHandle = mountOrCarry(actions, {
     host: playerHost, artist: { name: entry.name, genres: playerGenres }, sources, layout: 'compact',
     autoplay: soundIntent,
-    onStateChange: (snap) => { soundIntent = snap.play; },
+    // A refusal is the platform's answer, not the person's — it corrects the
+    // icon without withdrawing the intent, so the next artist still gets a try.
+    onStateChange: (snap, meta) => { if (!meta || !meta.autoplayRefused) soundIntent = snap.play; },
   });
 
   // The drag hint and the confirmation overlay are siblings of the card, not
@@ -1637,15 +1673,14 @@ function buildFocusPane(ctx, actions, focusEntry, canonData) {
     soundcloudSlug: meta.soundcloudSlug,
     spotifyId: meta.spotifyId,
   };
-  const mount = (actions && actions.mountPlayer) || realMountPlayer;
   // "The pane runs the FULL player, not the mini one — the first 30 seconds
   // of a set tells you nothing, so a draggable scrubber is non-negotiable"
   // (screens 5c, 2026-08-01). The pane has the room for a 16:9 stage; the
   // 82x46 thumb was a mobile compromise being paid for on a 1440 canvas.
-  playerHandle = mount({
+  playerHandle = mountOrCarry(actions, {
     host: playerHost, artist: { name: focusEntry.name, genres: playerGenres }, sources, layout: 'full',
     autoplay: soundIntent,
-    onStateChange: (snap) => { soundIntent = snap.play; },
+    onStateChange: (snap, meta) => { if (!meta || !meta.autoplayRefused) soundIntent = snap.play; },
   });
 
   const openBtn = document.createElement('button');
@@ -1784,11 +1819,18 @@ function renderDeckBody(ctx, actions) {
   const active = document.activeElement;
   const caret = (active && active.id === 'dd2-search-input')
     ? { id: active.id, pos: active.selectionStart } : null;
+  // Detach the live player BEFORE the tree is wiped, so wiping it does not
+  // take the embed with it. It is re-hosted a few lines later by mountOrCarry
+  // -> remountFor, whose appendChild MOVES the still-connected node; that is
+  // what preserves the iframe (and, on iOS, the gesture unlock that lets it
+  // keep playing). "ONE PLAYER, ALWAYS" is unchanged — there is still exactly
+  // one, it just outlives the DOM around it now instead of being rebuilt with
+  // it. If anything below fails to re-home it, destroy() still runs on the
+  // next close and the orphan is a detached node, not a second player.
+  const carried = playerHandle && typeof playerHandle.remountFor === 'function';
+  if (carried) detachPlayerRoot();
   overlay.textContent = '';
-  // Both layouts mount their own fresh player (grid's sibling desktop pane,
-  // or the mobile card) — always tear down whatever was live first, same
-  // "ONE PLAYER, ALWAYS" discipline player.js itself enforces.
-  if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
+  if (!carried && playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
 
   if (isDesktopLayout()) {
     renderDesktopBody(overlay, ctx, actions, facets);

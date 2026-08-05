@@ -161,13 +161,19 @@ export function mountPlayer({ host, artist, sources, layout = 'full', showHeader
     },
     getState: () => instance.core.getState(),
     handoverTo: (newHost, newLayout) => instance.handoverTo(newHost, newLayout),
+    remountFor: (opts) => instance.remountFor(opts),
   };
 }
 
 function createInstance({ host, artist, sources, layout, showHeader = true, autoplay = false, onStateChange }) {
   const core = createPlayerCore({ storage: safeLocalStorage() });
-  const artistKey = artist?.id || artist?.name || 'unknown-artist';
-  const genresLine = Array.isArray(artist?.genres) ? artist.genres.join(' · ') : artist?.genres || '';
+  // `let`, not `const`: remountFor() re-points this instance at a NEW ARTIST
+  // without tearing the embed down (see the note on remountFor below), so the
+  // artist identity has to be able to move.
+  let curArtist = artist;
+  let curSources = sources;
+  let artistKey = artist?.id || artist?.name || 'unknown-artist';
+  let genresLine = Array.isArray(artist?.genres) ? artist.genres.join(' · ') : artist?.genres || '';
 
   let curLayout = layout;
   let curHost = host;
@@ -184,8 +190,37 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   let seekTeardown = null; // ends a live drag if the row is rebuilt under it
   let playingNow = false; // the EMBED says it is playing — not merely that we asked it to
 
-  function notify(snap) {
-    if (typeof onStateChange === 'function') onStateChange(snap);
+  function notify(snap, meta) {
+    if (typeof onStateChange === 'function') onStateChange(snap, meta);
+  }
+
+  // ---- the honest-icon watchdog -------------------------------------------
+  // Asking an embed to play is not the same as it playing, and on iOS the gap
+  // between the two is a rule, not a glitch: Safari refuses to start audio on
+  // an element no finger has touched. When that happens the glyph used to
+  // paint from what we ASKED for, so it showed Pause over silence — and the
+  // next tap only turned off a request that had never been granted, which is
+  // why starting sound took two taps (device report, 2026-08-04).
+  //
+  // So: after every request to play, wait. If no real PLAY event arrives, the
+  // platform said no, and the player says so too — back to a Play glyph, and
+  // the very next tap is a genuine user gesture that will be honored.
+  const PLAY_REFUSED_MS = 1500;
+  let playWatchdog = null;
+  function clearPlayWatchdog() {
+    if (playWatchdog) { clearTimeout(playWatchdog); playWatchdog = null; }
+  }
+  function armPlayWatchdog() {
+    clearPlayWatchdog();
+    playWatchdog = setTimeout(() => {
+      playWatchdog = null;
+      if (destroyed || playingNow) return;
+      if (!lastSnap || !lastSnap.play || lastSnap.collapsed) return;
+      // Reconcile to what is true. The carried INTENT is deliberately not
+      // withdrawn here — the caller is told this was a refusal, not a person
+      // pausing, so the next artist still gets its try. Only the icon changes.
+      applyState(core.togglePlay(), { autoplayRefused: true });
+    }, PLAY_REFUSED_MS);
   }
 
   function onlineHandler() { applyState(core.setOnline(true)); }
@@ -200,7 +235,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     window.addEventListener('online', onlineHandler);
     window.addEventListener('offline', offlineHandler);
 
-    applyState(core.mount(artistKey, sources || {}, { autoplay }));
+    applyState(core.mount(artistKey, curSources || {}, { autoplay }));
   }
 
   // -------------------------------------------------------------------------
@@ -223,11 +258,14 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // from the document and reattached later, so anything that can avoid that
   // path, does.
   // -------------------------------------------------------------------------
-  function applyState(snap) {
+  function applyState(snap, meta) {
     if (destroyed) return;
     const prev = lastSnap;
     lastSnap = snap;
     root.classList.toggle('is-offline', !snap.online);
+    // Every transition into "playing" is a claim that has to be checked.
+    if (snap.play && !snap.collapsed) armPlayWatchdog();
+    else clearPlayWatchdog();
 
     if (snap.collapsed) {
       teardownEmbed();
@@ -246,7 +284,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       patchClipAndPlay(snap);
       reconcileEmbed(snap, prev);
     }
-    notify(snap);
+    notify(snap, meta);
   }
 
   function reconcileEmbed(snap, prev) {
@@ -284,7 +322,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
 
   function npMetaHtml(snap) {
     const item = snap.alternates[snap.clipIndex];
-    const title = snap.currentSource === 'sp' ? (artist?.name || '') : item?.label || 'Loading…';
+    const title = snap.currentSource === 'sp' ? (curArtist?.name || '') : item?.label || 'Loading…';
     const sub = snap.currentSource === 'sp'
       ? 'Top track · Spotify'
       : `${SOURCE_META[snap.currentSource].label} · ${snap.clipIndex + 1} of ${Math.max(snap.alternates.length, 1)}`;
@@ -506,6 +544,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // embed's own play/pause events move it now — asking a player to start is
   // not the same as it having started.
   function setPlaying(on) {
+    if (on) clearPlayWatchdog(); // it really started — nothing left to check
     if (playingNow === on) return;
     playingNow = on;
     if (root) root.classList.toggle('is-playing', on);
@@ -528,7 +567,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     const head = document.createElement('div');
     head.className = 'sample-player-head';
     if (showHeader) {
-      head.innerHTML = `<h2 class="sample-player-head-name">${esc(artist?.name || '')}</h2>` +
+      head.innerHTML = `<h2 class="sample-player-head-name">${esc(curArtist?.name || '')}</h2>` +
         (genresLine ? `<div class="sample-player-head-genres">${esc(genresLine)}</div>` : '');
     }
     if (!snap.online) {
@@ -693,10 +732,10 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       if (item && item.label && !listed) {
         const attr = document.createElement('div');
         attr.className = 'sample-player-attr';
-        const slug = sources?.soundcloudSlug;
+        const slug = curSources?.soundcloudSlug;
         attr.innerHTML = slug
-          ? `${esc(item.label)} — <a href="https://soundcloud.com/${esc(slug)}" target="_blank" rel="noopener">${esc(artist?.name || slug)} · SoundCloud</a>`
-          : `${esc(item.label)} — ${esc(artist?.name || '')}`;
+          ? `${esc(item.label)} — <a href="https://soundcloud.com/${esc(slug)}" target="_blank" rel="noopener">${esc(curArtist?.name || slug)} · SoundCloud</a>`
+          : `${esc(item.label)} — ${esc(curArtist?.name || '')}`;
         box.appendChild(attr);
       }
     }
@@ -803,9 +842,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       notify(synced);
     };
 
-    if (src === 'yt') embedAdapter = buildYouTube(embedHost, sources, snap, { setReady, onError });
-    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, sources, snap, { setReady, onError, onSounds, onTrackSync, onNothingPlayable });
-    else if (src === 'sp') embedAdapter = buildSpotify(embedHost, sources, snap, { setReady, onError });
+    if (src === 'yt') embedAdapter = buildYouTube(embedHost, curSources, snap, { setReady, onError });
+    else if (src === 'sc') embedAdapter = buildSoundCloud(embedHost, curSources, snap, { setReady, onError, onSounds, onTrackSync, onNothingPlayable });
+    else if (src === 'sp') embedAdapter = buildSpotify(embedHost, curSources, snap, { setReady, onError });
   }
 
   function teardownEmbed() {
@@ -865,6 +904,19 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       play: () => player && player.playVideo && player.playVideo(),
       pause: () => player && player.pauseVideo && player.pauseVideo(),
       loadClip: (item) => player && player.loadVideoById && player.loadVideoById(item.id),
+      // Same live player, different artist. This is what makes autoplay
+      // possible on iOS at all: Safari refuses to start audio on an element
+      // that has never been touched, and a brand-new iframe never has been —
+      // but THIS one was unlocked by the tap that started the previous
+      // artist, and the unlock survives a load. cue vs load is the whole
+      // difference between honoring an intent and inventing one.
+      loadArtist: (_srcData, snap, wantPlay) => {
+        const first = snap.alternates[snap.clipIndex] || snap.alternates[0];
+        if (!player || !first) return false;
+        if (wantPlay && player.loadVideoById) { player.loadVideoById(first.id); return true; }
+        if (player.cueVideoById) { player.cueVideoById(first.id); return true; }
+        return false;
+      },
       seekTo: (frac) => {
         if (!player || !player.getDuration) return;
         const dur = player.getDuration();
@@ -917,8 +969,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     iframe.allow = 'autoplay';
     iframe.scrolling = 'no';
     iframe.frameBorder = 'no';
-    const url = 'https://soundcloud.com/' + encodeURIComponent(srcData?.soundcloudSlug || '');
-    iframe.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(url) +
+    const profileUrl = (d) => 'https://soundcloud.com/' + encodeURIComponent(d?.soundcloudSlug || '');
+    iframe.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(profileUrl(srcData)) +
       '&color=%23c084fc&auto_play=false&hide_related=true&show_comments=false&show_user=true&visual=false';
     container.appendChild(iframe);
 
@@ -1067,6 +1119,32 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
           if (i >= 0) { parked = true; widget.skip(i); widget.play(); }
         });
       },
+      // Same live widget, a different profile. The point is the iOS unlock:
+      // the tap that started the previous artist unlocked THIS iframe, and
+      // load() keeps it — where a fresh iframe would have to be tapped again.
+      // Every piece of per-profile discovery state resets with it, because
+      // none of it describes the profile we are moving to.
+      loadArtist: (srcDataNext, _snap, nextWantPlay) => {
+        if (!widget || !widget.load) return false;
+        if (pollTimer) { clearTimeout(pollTimer); pollTimer = null; }
+        wantPlay = !!nextWantPlay;
+        parked = false;
+        lastKnownItems = [];
+        scDurMs = 0;
+        polls = 0;
+        lastTotal = -1;
+        unchangedRuns = 0;
+        widget.load(profileUrl(srcDataNext), {
+          auto_play: false, // parkOn owns the first press; see the note there
+          color: '#c084fc',
+          hide_related: true,
+          show_comments: false,
+          show_user: true,
+          visual: false,
+          callback: () => { if (!torn) fetchSounds(); },
+        });
+        return true;
+      },
       seekTo: (frac) => {
         if (!widget) return;
         widget.getDuration((d) => { if (d > 0) widget.seekTo(d * frac); });
@@ -1116,6 +1194,15 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       destroy: () => { torn = true; try { controller && controller.destroy && controller.destroy(); } catch { /* noop */ } },
       play: () => controller && controller.play && controller.play(),
       pause: () => controller && controller.pause && controller.pause(),
+      // Same controller, a different artist URI — the iOS unlock rides along
+      // exactly as it does for the other two. loadUri does not start playback
+      // by itself, so an intent still has to ask.
+      loadArtist: (srcDataNext, _snap, nextWantPlay) => {
+        if (!controller || !controller.loadUri) return false;
+        controller.loadUri('spotify:artist:' + (srcDataNext?.spotifyId || ''));
+        if (nextWantPlay && controller.play) controller.play();
+        return true;
+      },
     };
   }
 
@@ -1138,9 +1225,71 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     return true;
   }
 
+  // ---- remountFor: a NEW ARTIST through the SAME LIVE EMBED ---------------
+  // The reason this exists is iOS. Safari will not start audio on an element
+  // that has never received a user gesture, and mountPlayer's ordinary path
+  // builds a brand-new cross-origin iframe per artist — one that has never
+  // been touched, arriving on a timer well outside the tap that caused it. So
+  // "keep playing as I swipe" was not merely unimplemented, it was
+  // unreachable: the play() call was refused every time.
+  //
+  // Keeping the embed alive keeps its unlock. When the artist we are moving to
+  // resolves to the SAME source, the iframe stays, its adapter loads the new
+  // artist into it, and playback continues because as far as Safari is
+  // concerned this is still the element the person tapped. When the source
+  // differs (or the adapter cannot load in place), there is nothing to
+  // preserve and we fall back to the ordinary teardown-and-build — correct,
+  // just silent until the next tap.
+  //
+  // Returns false when it could not do it in place, so the caller knows the
+  // difference. UNVERIFIED off-device: no desktop browser enforces the policy
+  // this is written for.
+  function remountFor({ artist: nextArtist, sources: nextSources, autoplay: nextAutoplay = false, host: nextHost, layout: nextLayout } = {}) {
+    if (destroyed || !root) return false;
+    const prevSource = lastSnap && !lastSnap.collapsed ? lastSnap.currentSource : null;
+
+    curArtist = nextArtist;
+    curSources = nextSources || {};
+    artistKey = nextArtist?.id || nextArtist?.name || 'unknown-artist';
+    genresLine = Array.isArray(nextArtist?.genres) ? nextArtist.genres.join(' · ') : nextArtist?.genres || '';
+
+    if (nextLayout) curLayout = nextLayout;
+    root.className = 'sample-player sample-player--' + curLayout;
+    if (nextHost) { curHost = nextHost; curHost.appendChild(root); } // appendChild of a connected node MOVES it
+
+    const snap = core.mount(artistKey, curSources, { autoplay: nextAutoplay });
+    lastSnap = snap;
+    root.classList.toggle('is-offline', !snap.online);
+
+    if (snap.collapsed) {
+      clearPlayWatchdog();
+      teardownEmbed();
+      renderCollapsed();
+      notify(snap);
+      return true;
+    }
+
+    const canCarry = !!prevSource && snap.currentSource === prevSource
+      && embedAdapter && typeof embedAdapter.loadArtist === 'function';
+
+    if (canCarry) {
+      rebuildChrome(snap, false); // false = preserve embedHost, the whole point
+      const carried = embedAdapter.loadArtist(curSources, snap, !!nextAutoplay);
+      if (!carried) { teardownEmbed(); mountEmbed(snap.currentSource, snap); }
+    } else {
+      rebuildChrome(snap, true);
+      teardownEmbed();
+      mountEmbed(snap.currentSource, snap);
+    }
+    if (snap.play) armPlayWatchdog(); else clearPlayWatchdog();
+    notify(snap);
+    return canCarry;
+  }
+
   function destroy() {
     if (destroyed) return;
     destroyed = true;
+    clearPlayWatchdog();
     teardownEmbed();
     window.removeEventListener('online', onlineHandler);
     window.removeEventListener('offline', offlineHandler);
@@ -1148,7 +1297,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     root = null;
   }
 
-  return { init, destroy, handoverTo, core };
+  return { init, destroy, handoverTo, remountFor, core };
 }
 
 export { PRIORITY, SOURCE_META };

@@ -1,6 +1,6 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v58'; // v58 = v57 + the iOS zoom rule now beats the inline font sizes on the Create/Join/bad-link fields
+const CACHE_VERSION = 'festival-nav-v59'; // v59 = the embed survives the artist change (iOS gesture unlock) + the play glyph follows reality, not the request
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
