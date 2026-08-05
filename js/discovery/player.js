@@ -347,9 +347,31 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // followed by a later, separate re-insertion risks exactly that. UNVERIFIED
   // without a real browser — see design/player-harness.html.
   // -------------------------------------------------------------------------
+  // Where a live embed waits out a chrome rebuild. It has to be IN the document
+  // — Safari discards an iframe's browsing context the moment it leaves, and it
+  // does not wait for the end of the tick to do it, whatever the note above
+  // hoped. Measured consequence on an iPhone: the carried YouTube embed came
+  // back reloaded, which cost it the gesture unlock, redrew its poster, and
+  // left our API object talking to a player that no longer existed
+  // (2026-08-04). Offscreen but rendered — display:none stops media by itself.
+  function embedPark() {
+    let park = document.getElementById('sp-embed-park');
+    if (!park) {
+      park = document.createElement('div');
+      park.id = 'sp-embed-park';
+      park.setAttribute('aria-hidden', 'true');
+      park.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;'
+        + 'overflow:hidden;opacity:0;pointer-events:none;';
+      document.body.appendChild(park);
+    }
+    return park;
+  }
+
   function rebuildChrome(snap, sourceChanged) {
+    // Move, never remove: appendChild between two connected parents relocates
+    // the node without it ever being out of the document.
     const preserved = !sourceChanged && embedHost ? embedHost : null;
-    if (preserved && preserved.parentNode) preserved.parentNode.removeChild(preserved);
+    if (preserved) embedPark().appendChild(preserved);
 
     // The old seek row is about to be discarded; if a finger is still down on
     // it, its window listeners would outlive the element they were painting.
@@ -1268,7 +1290,25 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
 
     if (nextLayout) curLayout = nextLayout;
     root.className = 'sample-player sample-player--' + curLayout;
-    if (nextHost) { curHost = nextHost; curHost.appendChild(root); } // appendChild of a connected node MOVES it
+    // The root must never leave the document — Safari reloads a disconnected
+    // iframe and the reload costs us the gesture unlock (see deck.js's park).
+    // The caller builds its new card detached and inserts it at the end of the
+    // render, so the host we are handed is usually NOT connected yet. Moving
+    // into it now would disconnect the very thing we are protecting. Wait
+    // instead: the root stays parked (connected) and the move happens in a
+    // microtask, once the render that created this host has finished putting it
+    // in the document. Both parents connected at both ends — never a detach.
+    if (nextHost) {
+      curHost = nextHost;
+      if (nextHost.isConnected) curHost.appendChild(root);
+      else {
+        const wanted = nextHost;
+        queueMicrotask(() => {
+          if (destroyed || !root || curHost !== wanted) return;
+          if (wanted.isConnected) wanted.appendChild(root);
+        });
+      }
+    }
 
     const snap = core.mount(artistKey, curSources, { autoplay: nextAutoplay });
     lastSnap = snap;
@@ -1308,6 +1348,10 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     window.removeEventListener('offline', offlineHandler);
     if (root && root.parentNode) root.parentNode.removeChild(root);
     root = null;
+    // The park only ever holds an embed mid-rebuild; by here teardownEmbed has
+    // taken the host, so anything left is an empty holder to sweep.
+    const park = document.getElementById('sp-embed-park');
+    if (park && park.parentNode) park.parentNode.removeChild(park);
   }
 
   return { init, destroy, handoverTo, remountFor, core };

@@ -87,12 +87,43 @@ let playerHandle = null;
 // on a phone. player.js's remountFor returns false when it could not carry
 // (different source, or an adapter with nowhere to load into), and then this
 // is exactly the mount it always was.
-// Lift the player's own root out of the tree that is about to be erased.
-// getState() is a cheap liveness probe; a handle that cannot answer is not one
-// worth carrying.
-function detachPlayerRoot() {
+// Park the live player somewhere the coming wipe cannot reach — WITHOUT ever
+// taking it out of the document.
+//
+// That distinction is the whole bug. Safari reloads an <iframe> that has been
+// disconnected from the document, even briefly, and a reloaded YouTube embed
+// loses its gesture unlock (taps do nothing), redraws its poster (a play button
+// over the thumbnail that never starts) and desyncs from the API object we hold
+// (loadVideoById goes nowhere). Every one of those was reported off the phone
+// on 2026-08-04, and the file this parks for had already written the warning:
+// "a mid-teardown removeChild followed by a later, separate re-insertion risks
+// exactly that."
+//
+// So the root moves between two CONNECTED parents — the card it is leaving and
+// this holder — which is an atomic move, not a removal. The holder lives on
+// <body>, outside the overlay, so overlay.textContent = '' cannot touch it, and
+// it stays rendered (offscreen, not display:none) because a hidden subtree is
+// its own way of stopping media.
+const PARK_ID = 'dd-player-park';
+function playerPark() {
+  let park = document.getElementById(PARK_ID);
+  if (!park) {
+    park = document.createElement('div');
+    park.id = PARK_ID;
+    park.setAttribute('aria-hidden', 'true');
+    park.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;'
+      + 'overflow:hidden;opacity:0;pointer-events:none;';
+    document.body.appendChild(park);
+  }
+  return park;
+}
+function parkPlayerRoot() {
   const el = document.querySelector('#' + OVERLAY_ID + ' .sample-player');
-  if (el && el.parentNode) el.parentNode.removeChild(el);
+  if (el) playerPark().appendChild(el); // connected -> connected: a move, never a detach
+}
+function removePlayerPark() {
+  const park = document.getElementById(PARK_ID);
+  if (park && park.parentNode) park.parentNode.removeChild(park);
 }
 
 function mountOrCarry(actions, opts) {
@@ -1828,7 +1859,7 @@ function renderDeckBody(ctx, actions) {
   // it. If anything below fails to re-home it, destroy() still runs on the
   // next close and the orphan is a detached node, not a second player.
   const carried = playerHandle && typeof playerHandle.remountFor === 'function';
-  if (carried) detachPlayerRoot();
+  if (carried) parkPlayerRoot();
   overlay.textContent = '';
   if (!carried && playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
 
@@ -1923,6 +1954,7 @@ export function closeDeck() {
   session = null; // a fresh open deals a fresh session, per spec
   deckQuery = ''; // and a fresh search box — the query was for this visit
   soundIntent = false; // opening Discover is never itself a request for sound
+  removePlayerPark();
   setFocus(null); // desktop's right-pane focus is per-open too
   pendingOpenGen++;
 }
