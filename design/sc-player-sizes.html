@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SoundCloud widget — size breakpoints</title>
+<style>
+  body { margin:0; background:#0C0A14; color:#C6CBD6;
+         font:14px/1.5 -apple-system, system-ui, sans-serif;
+         padding:14px 12px calc(28px + env(safe-area-inset-bottom));
+         padding-top:calc(14px + env(safe-area-inset-top)); }
+  h1 { font-size:16px; color:#EDEAF4; margin:0 0 4px; }
+  .sub { font-size:12px; color:#877FA4; margin:0 0 16px; }
+  h2 { font-size:12px; color:#D8B4FE; margin:22px 0 4px; letter-spacing:.08em; text-transform:uppercase; }
+  h2 + p { font-size:11.5px; color:#877FA4; margin:0 0 12px; }
+  .case { margin-bottom:14px; }
+  .cap { font:700 10.5px ui-monospace,monospace; color:#8E86A8; margin-bottom:5px;
+         display:flex; justify-content:space-between; gap:8px; }
+  .cap b { color:#EDEAF4; font-weight:800; }
+  .frame { background:#000; border-radius:8px; overflow:hidden; }
+  .frame iframe { display:block; border:0; width:100%; height:100%; }
+  /* The deck card's real inner width for reference, so a case can be compared
+     against what the app actually gives the player today. */
+  .ref { border-left:2px solid rgba(192,132,252,.5); padding-left:8px; }
+  .legend { background:#141021; border:1px solid #241E38; border-radius:10px;
+            padding:10px 12px; font-size:11.5px; color:#9A93B4; margin-bottom:6px; }
+  .legend b { color:#EDEAF4; }
+</style>
+</head>
+<body>
+
+<h1>SoundCloud widget — where the layout changes</h1>
+<p class="sub">The same profile, same params, only the BOX changes. Read it for the
+   width at which artwork appears and the height at which the classic player
+   turns into the artwork player.</p>
+
+<div class="legend">
+  <b>Measured on an iPhone 17 Pro (402pt wide), 2026-08-06.</b> WIDTH is the
+  gate, not height: artwork appears somewhere between <b>341px</b> (no) and
+  <b>351px</b> (yes), and once you are past it the side-by-side layout works
+  at as little as <b>120px</b> tall — SHORTER than the 166px the app uses
+  today, and with artwork. So the artwork is not bought with height; it is
+  bought with width. Note this threshold is in CSS px, so a wider phone crosses
+  it where a narrower one does not — which is why the artist page shows artwork
+  on some devices and not others.
+</div>
+
+<h2>A · Width, at a fixed 166px tall</h2>
+<p>classic player (<code>visual=false</code>). Find the width where the artwork
+   square appears on the left.</p>
+<div id="widths"></div>
+
+<h2>B · Height, at full width</h2>
+<p>classic player. Find where it stops being a single strip.</p>
+<div id="heights"></div>
+
+<h2>C · The artwork player</h2>
+<p><code>visual=true</code> — artwork as background, waveform overlaid only while
+   playing. Costs the most height.</p>
+<div id="visuals"></div>
+
+<script>
+// A real artist with a real profile, so the widget renders what it will render
+// in the app. Slug read out of data/festivals/ubbi-dubbi-2026.json.
+var SLUG = 'troyboi';
+var BASE = 'https://w.soundcloud.com/player/?url='
+  + encodeURIComponent('https://soundcloud.com/' + SLUG)
+  + '&color=%23c084fc&auto_play=false&hide_related=true&show_comments=false&show_user=true';
+
+function mount(host, opts) {
+  var wrap = document.createElement('div');
+  wrap.className = 'case' + (opts.ref ? ' ref' : '');
+
+  var cap = document.createElement('div');
+  cap.className = 'cap';
+  var left = document.createElement('span');
+  left.innerHTML = '<b>' + opts.w + '</b> &times; <b>' + opts.h + '</b>'
+    + (opts.visual ? ' · visual' : ' · classic');
+  var right = document.createElement('span');
+  right.textContent = opts.note || '';
+  cap.append(left, right);
+
+  var frame = document.createElement('div');
+  frame.className = 'frame';
+  frame.style.height = opts.h + 'px';
+  frame.style.width = opts.w === 'full' ? '100%' : opts.w + 'px';
+
+  var f = document.createElement('iframe');
+  f.allow = 'autoplay';
+  f.loading = 'lazy';
+  f.src = BASE + '&visual=' + (opts.visual ? 'true' : 'false');
+  frame.appendChild(f);
+
+  wrap.append(cap, frame);
+  host.appendChild(wrap);
+}
+
+var W = document.getElementById('widths');
+[
+  { w: 260, h: 166 },
+  { w: 280, h: 166 },
+  { w: 300, h: 166 },
+  { w: 305, h: 166, ref: true, note: 'deck card today' },
+  { w: 320, h: 166 },
+  { w: 341, h: 166, ref: true, note: 'artist page today' },
+  { w: 345, h: 166 },
+  { w: 350, h: 166 },
+  { w: 355, h: 166 },
+  { w: 360, h: 166 },
+].forEach(function (o) { mount(W, o); });
+
+var H = document.getElementById('heights');
+[
+  { w: 'full', h: 100 },
+  { w: 'full', h: 110 },
+  { w: 'full', h: 120 },
+  { w: 'full', h: 140 },
+  { w: 'full', h: 166, ref: true, note: 'app default' },
+  { w: 'full', h: 200 },
+].forEach(function (o) { mount(H, o); });
+
+var V = document.getElementById('visuals');
+[
+  { w: 'full', h: 200, visual: true },
+  { w: 'full', h: 250, visual: true },
+  { w: 'full', h: 300, visual: true, ref: true, note: 'what we trialled' },
+].forEach(function (o) { mount(V, o); });
+</script>
+</body>
+</html>

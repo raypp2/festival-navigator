@@ -399,12 +399,6 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     root.insertBefore(renderTabs(snap), body);
 
     for (const el of [...body.children]) if (el !== stageEl) el.remove();
-    // YouTube only: its native chrome is unusable at 82x46, which is what this
-    // row is for. SoundCloud now brings its own waveform on the full stage, and
-    // a second scrubber under the first is just noise.
-    if (curLayout === 'compact' && snap.currentSource === 'yt') {
-      body.appendChild(buildSeekRow(snap));
-    }
     if (snap.currentSource !== 'sp') body.appendChild(renderClips(snap));
 
     if (snap.failed.length > 0) root.appendChild(renderErrorBanner(snap));
@@ -430,7 +424,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     if (seekTeardown) { seekTeardown(); seekTeardown = null; }
     // A rebuild drops the class with the old DOM; re-assert it from the flag
     // below so a chrome rebuild mid-playback does not silently stop the eq.
-    setPlaying(false);
+    // fromEmbed:false — this is bookkeeping, not the embed telling us anything,
+    // and reconciling from it would withdraw the play intent on every rebuild.
+    setPlaying(false, false);
     if (sourceChanged) { seekTarget = null; lastSeekFrac = 0; }
 
     root.innerHTML = '';
@@ -457,7 +453,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // orange button of ours, which is strictly less than the artist page shows
     // for the same artist. Same embed, same format, every layout
     // (device feedback, 2026-08-04).
-    // ONLY YouTube keeps the 82x46 thumb now. Spotify escaped it on 2026-08-04
+    // NOBODY keeps the 82x46 thumb now. Spotify escaped it on 2026-08-04
     // because its iframe IS the control surface; SoundCloud's is too, and it
     // was still paying the thumb's price — at 82x46 the widget has room for
     // nothing but its own "Privacy policy" link, so the deck showed a grey box
@@ -466,8 +462,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // clickable waveform, which is the artist page's treatment and the reason
     // that surface reads better. --disc-stage-sc-h (166px) already sized this;
     // nothing new is invented here, the height was waiting for a caller.
-    const useNowPlayingRow = curLayout === 'compact' && snap.currentSource === 'yt';
-    const stageWrap = useNowPlayingRow ? buildCompactStage(snap) : buildFullStage(snap);
+    const stageWrap = buildFullStage(snap);
     body.appendChild(stageWrap);
     // Compact can't fit usable native chrome (YT at 82x46) and SC compact has
     // no visible widget at all — a full-width seek row is the scrubber there.
@@ -476,9 +471,6 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // YouTube only: its native chrome is unusable at 82x46, which is what this
     // row is for. SoundCloud now brings its own waveform on the full stage, and
     // a second scrubber under the first is just noise.
-    if (curLayout === 'compact' && snap.currentSource === 'yt') {
-      body.appendChild(buildSeekRow(snap));
-    }
     // Spotify draws no alternates block at all. Its embed already lists its own
     // top tracks, so a panel restating that — plus a preview caveat the chip on
     // the row already carries — was pure vertical cost on the surface with the
@@ -649,22 +641,37 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     if (playingNow) root.classList.add('is-playing');
   }
 
-  function setPlaying(on) {
+  // `fromEmbed` false means WE are resetting the flag as part of a re-render,
+  // not the embed reporting. That distinction is load-bearing: rebuildChrome
+  // clears the flag on every chrome rebuild, and reconciling from that would
+  // withdraw a live play intent for no reason.
+  function setPlaying(on, fromEmbed = true) {
     if (playingNow === on) return;
     playingNow = on;
     if (root) root.classList.toggle('is-playing', on);
-    // Spotify is the one source whose transport the person can drive WITHOUT
-    // going through a control of ours — its embed draws its own, full size, on
-    // every surface. So the state machine and the embed can disagree, and when
-    // they do the EMBED is right: it is reporting, we are only asking. Without
-    // this, starting Spotify from its own button leaves our glyph showing ▶
-    // over playing audio, which is the same dishonest-icon bug the watchdog
-    // exists to prevent, arriving from the other direction.
+    if (!fromEmbed) return;
+    // EVERY source is now driven by its own embed's transport — the deck draws
+    // no play control of its own since all three moved to the full stage. So
+    // the state machine can only learn what is happening by being told.
     //
-    // Scoped to 'sp' deliberately. yt/sc in the deck are driven only through
-    // our button, so there is nothing to reconcile and no reason to widen the
-    // blast radius of a state-machine write.
-    if (lastSnap && !lastSnap.collapsed && lastSnap.currentSource === 'sp' && lastSnap.play !== on) {
+    // This is not cosmetic. `soundIntent` in deck.js follows snap.play, and it
+    // is what asks the NEXT artist to keep playing — so without it the one
+    // carry that works on iOS (YouTube) would never be requested.
+    //
+    // UPWARD ONLY, and that restriction is the whole lesson. Reconciling a
+    // report of "not playing" looked symmetrical and broke the carry outright
+    // (device report, 2026-08-06): YouTube fires ENDED/PAUSED transiently while
+    // loadVideoById swaps the video, so an advance produced setPlaying(false) ->
+    // togglePlay -> snap.play false -> reconcileEmbed -> pause() ON THE VIDEO
+    // THAT WAS STILL LOADING. Black frame, no autoplay, and soundIntent now
+    // false so the NEXT advance called cueVideoById instead of loadVideoById —
+    // a poster, silent, for every artist after.
+    //
+    // Losing the downward direction costs nothing here: no source draws a glyph
+    // of ours any more, so there is no icon left to tell a lie, and a genuine
+    // refusal is already the watchdog's job — which withdraws the ICON without
+    // ever withdrawing the intent, for exactly this reason.
+    if (on && lastSnap && !lastSnap.collapsed && !lastSnap.play) {
       applyState(core.togglePlay());
     }
   }

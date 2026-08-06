@@ -477,7 +477,7 @@ button { touch-action: manipulation; }
   /* --- the opt-outs: small controls that take borrowed space instead ------ */
   .person-chip, .chip-notes,
   .dock .day-tab, .day-rail .day-tab,
-  .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close,
+  .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close, .dd-back,
   button.avatar,
   .toggle,      /* a 40x24 switch; stretching its track to 44 breaks it, and the
                  * whole row is the tap target anyway */
@@ -486,7 +486,7 @@ button { touch-action: manipulation; }
   }
   .person-chip, .chip-notes,
   .dock .day-tab, .day-rail .day-tab,
-  .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close,
+  .back-btn, .gear-btn, .pin-btn, .fest-link, .sheet-close, .dd-back,
   button.avatar {
     position: relative;
   }
@@ -503,7 +503,7 @@ button { touch-action: manipulation; }
    * `button.avatar` on purpose: the avatars inside cards are spans, and giving
    * THEM a hit area would steal taps from the pick underneath. */
   .back-btn::after, .gear-btn::after, .pin-btn::after, .fest-link::after,
-  .sheet-close::after, .chip-notes::after, button.avatar::after {
+  .sheet-close::after, .chip-notes::after, button.avatar::after, .dd-back::after {
     content: ''; position: absolute; inset: -14px -12px;
   }
 

@@ -15,7 +15,15 @@
   /* Fixed embed stage shapes (build spec section 6 / design sheet "What the
    * research changed" — YouTube 16:9, SoundCloud 166px, Spotify 352px. Panel
    * height varies by tab; these are the per-tab constants, not a lock. */
-  --disc-stage-sc-h: 166px;
+  --disc-stage-yt-h: 150px;
+  --disc-stage-sc-h: 140px;
+  /* card padding (10) + player padding (8) — the two the stage bleeds through */
+  --disc-sc-bleed: 18px;
+  /* SoundCloud draws the artwork layout at 350 and the flat strip at 345 —
+     measured either side of the line, design/sc-player-sizes.html. So 350 is
+     the whole requirement and anything past it is width taken from the tabs
+     and the track list for nothing. */
+  --disc-sc-w: 350px;
   --disc-stage-sp-h: 352px;
 
   /* Compact (deck-card) now-playing thumbnail — design sheet "02 · Compact",
@@ -55,7 +63,10 @@
 /* compact: deck card — its own bordered card, mirrors design sheet "02" */
 .sample-player--compact {
   gap: 10px; border: 1px solid var(--border-card); border-radius: var(--r-row);
-  background: var(--card); padding: 12px;
+  /* 8, not 12. This padding and the card's below are the two the SoundCloud
+     stage bleeds through, and every px kept here is a px the source tabs and
+     the track list do NOT get. --disc-sc-bleed must stay their sum. */
+  background: var(--card); padding: 8px;
 }
 
 /* desktop: artist-page wide layout — bordered panel, stage-beside-rail grid */
@@ -110,10 +121,47 @@
 }
 .sample-player-stage[data-swapping="1"] { opacity: 0; }
 .sample-player-tab { transition: background-color var(--dd-fast) var(--dd-ease), color var(--dd-fast) var(--dd-ease); }
+/* 16:9 is right where the width decides the box — the artist page and the
+   desktop pane. In the DECK the height is the scarce axis, so the stage is
+   given a height and YouTube letterboxes inside it, exactly as SoundCloud and
+   Spotify already do. --disc-stage-yt-h is that height. */
 .sample-player-stage[data-shape="yt"] { aspect-ratio: 16 / 9; }
+.sample-player--compact .sample-player-stage[data-shape="yt"] {
+  aspect-ratio: auto; height: var(--disc-stage-yt-h);
+  background: #000; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
 .sample-player-stage[data-shape="sc"] {
   height: var(--disc-stage-sc-h); background: var(--dock);
   border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+/* SoundCloud's artwork layout is gated on WIDTH, not height — measured on an
+ * iPhone 2026-08-06 (design/sc-player-sizes.html): at 341px the widget draws a
+ * flat strip, by 351px the artwork square appears on the left, and once past
+ * that threshold the side-by-side layout holds at 120px tall, SHORTER than the
+ * 166px the strip needed. So the artwork is bought with width and it hands
+ * height back.
+ *
+ * Inside a deck card the player gets ~297px: 18px of stage padding, 16px of
+ * card padding and 12px of player padding per side. The STAGE alone bleeds back
+ * out through the last two (--disc-sc-bleed = 16 + 12) — the tabs and the track
+ * list keep their inset, so only the embed goes edge to edge, which is where a
+ * full-bleed image belongs anyway.
+ *
+ * This does NOT reach 350 on every phone: a 402pt device clears it, a 390pt or
+ * 375pt one does not, and there it simply keeps today's strip. That is a
+ * deliberate soft landing rather than stripping the deck's margins bare to buy
+ * artwork on the narrowest screens. */
+.sample-player--compact .sample-player-stage {
+  /* Exactly --disc-sc-w when the room exists, never more: 350 buys the artwork
+     and a wider embed buys nothing. Centred with left+translate rather than
+     auto margins, because a block wider than its container has its auto margins
+     resolved to zero and would sit off to one side. */
+  width: calc(100% + var(--disc-sc-bleed) * 2);
+  max-width: var(--disc-sc-w);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0;
 }
 .sample-player-stage[data-shape="sp"] {
   height: var(--disc-stage-sp-h); background: var(--dock);
@@ -562,7 +610,11 @@
   padding: max(10px, env(safe-area-inset-top)) 18px 10px;
 }
 .dd-back {
-  width: 40px; height: 40px; flex: none; justify-self: start; border-radius: var(--r-pill);
+  /* 32 to match .dd-filter-btn's min-height, so the row is as short as its
+     tallest control rather than 8px taller for no reason. The 44px touch floor
+     is applied to `button` and expands the HIT AREA, not the box, so shrinking
+     the visual size does not shrink the target. */
+  width: 32px; height: 32px; flex: none; justify-self: start; border-radius: var(--r-pill);
   border: 1px solid var(--border-card); background: transparent;
   color: var(--text-body); font-size: 16px; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
@@ -571,7 +623,7 @@
   font-family: var(--font-display); letter-spacing: var(--track-display);
   font-size: 20px; color: var(--text-header); text-align: center; white-space: nowrap;
 }
-.dd-topbar .dd-filter-btn { justify-self: end; }
+.dd-topbar-right { justify-self: end; display: flex; align-items: center; gap: 9px; }
 
 /* ---- session header: progress, sub-line + counter ----
  * The filter button and a "DISCOVERY SESSION" micro-label used to own a row of
@@ -580,11 +632,6 @@
  * button moved up to the title row on 2026-08-04 and the label went away. The
  * counter stayed and joined the sub-line, next to the "N unheard left" it is
  * counting. */
-.dd-header { flex: none; padding: 0 18px 12px; }
-.dd-header-meta {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-  margin-top: 7px;
-}
 .dd-counter { flex: none; font: 800 10px var(--font-ui); color: var(--text-body); }
 .dd-filter-btn {
   display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 11px;
@@ -597,9 +644,6 @@
   color: #EDD9FF; display: inline-flex; align-items: center; justify-content: center;
   font: 800 9px var(--font-ui); padding: 0 4px;
 }
-.dd-progress { height: 6px; border-radius: var(--r-pill); background: var(--hairline); margin-top: 2px; overflow: hidden; }
-.dd-progress-fill { height: 100%; background: rgb(var(--brand)); border-radius: var(--r-pill); transition: width .3s ease; }
-.dd-subline { min-width: 0; font: 500 11px var(--font-ui); color: var(--text-tertiary); }
 
 /* ---- card stack ----
  * EVERY CARD IS THE SAME HEIGHT, and that is a decision, not an accident.
@@ -616,8 +660,13 @@
  * sub-line (the ghosts sit 7px above the card, so this has to cover them and
  * then some), the bottom holds the card off the pick controls. Both were too
  * tight at 0/14 and the card read as wedged between two things. */
+/* 12px of side padding, not 18. Those 6px per side are what carries the common
+ * 390/393pt phones (iPhone 13/14/15/16) over SoundCloud's ~350px artwork
+ * threshold once the stage bleeds through the card — at 18px they landed ~10px
+ * short and got the flat strip instead. Measured, not guessed: see
+ * design/sc-player-sizes.html and the note on the sc stage above. */
 .dd-stage {
-  flex: 1; min-height: 0; padding: 12px 18px 22px; position: relative;
+  flex: 1; min-height: 0; padding: 12px 12px 22px; position: relative;
   display: flex; flex-direction: column;
 }
 .dd-stack { position: relative; flex: 1; min-height: 0; }
@@ -639,7 +688,7 @@
    * re-open. */
   box-sizing: border-box;
   background: var(--card-unpicked); border: 1px solid var(--border-card);
-  overflow: hidden auto; display: flex; flex-direction: column; gap: 12px; padding: 16px;
+  overflow: hidden auto; display: flex; flex-direction: column; gap: 12px; padding: 10px;
   touch-action: pan-y; cursor: grab;
   /* "Deck advance — the acted card leaves, the next RISES FROM THE STACK."
    * The ghosts behind it are the stack; this is the next one arriving. */

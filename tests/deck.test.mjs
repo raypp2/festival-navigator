@@ -155,8 +155,14 @@ test('the top bar carries back, title and filter on ONE row', () => {
   // card a row of height on a phone.
   assert.equal(overlay().querySelectorAll('.dd-filter-btn').length, 1, 'exactly one filter control');
   assert.ok(!/DISCOVERY SESSION/i.test(overlay().textContent), 'the micro-label is gone');
-  // The counter kept its job and joined the sub-line.
-  assert.ok(overlay().querySelector('.dd-header-meta .dd-counter'));
+  // The counter kept its job and moved again, this time INTO this row beside
+  // Filter (2026-08-06). The block it used to sit in — a progress bar and an
+  // "N unheard left" sub-line — cost ~41px of a phone screen to say what the
+  // counter already says, on the surface with the least room to spare. The
+  // counter is the part worth keeping, and here it is free: the row exists.
+  assert.ok(overlay().querySelector('.dd-topbar .dd-counter'), 'counter rides with Filter');
+  assert.equal(overlay().querySelectorAll('.dd-progress').length, 0, 'no progress bar');
+  assert.equal(overlay().querySelectorAll('.dd-header').length, 0, 'no header block');
 });
 
 test('the card shows when the artist plays, and nothing when there is no set', () => {

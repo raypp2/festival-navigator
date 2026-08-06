@@ -299,17 +299,6 @@ function decisionKind(artistName, ctx) {
   return lvl >= 1 ? 'pick' : null;
 }
 
-// ---- sub-line copy -----------------------------------------------------------------
-function subLineText(ctx, facets) {
-  const coldStart = !personHasAnyActivity(ctx.fid, ctx.meName) && activeFacetCount(facets) === 0;
-  if (coldStart) return 'Starting from the top of the bill — the names you know';
-  const remaining = Math.max(0, session.pool.length - session.position);
-  const genres = facets.genres || [];
-  if (genres.length) {
-    return `${remaining} unheard left — sampling ${genres.join(' & ')}`;
-  }
-  return `${remaining} unheard left`;
-}
 
 // ---- card build ---------------------------------------------------------------------
 // The part of a card that is ABOUT THIS ARTIST — everything except the player.
@@ -509,31 +498,7 @@ function buildFilterButton(ctx, facets, actions) {
   return filterBtn;
 }
 
-function buildHeader(ctx, facets) {
-  const header = document.createElement('div');
-  header.className = 'dd-header';
 
-  const bar = document.createElement('div');
-  bar.className = 'dd-progress';
-  const fill = document.createElement('div');
-  fill.className = 'dd-progress-fill';
-  const pct = session.pool.length ? Math.min(100, Math.round((session.position / session.pool.length) * 100)) : 0;
-  fill.style.width = pct + '%';
-  bar.appendChild(fill);
-
-  const meta = document.createElement('div');
-  meta.className = 'dd-header-meta';
-  const sub = document.createElement('div');
-  sub.className = 'dd-subline';
-  sub.textContent = subLineText(ctx, facets);
-  const counter = document.createElement('span');
-  counter.className = 'dd-counter';
-  counter.textContent = `${Math.min(session.position + 1, session.pool.length)} / ${session.pool.length}`;
-  meta.append(sub, counter);
-
-  header.append(bar, meta);
-  return header;
-}
 // ---- the decision flow ----------------------------------------------------------------
 // Modelled directly on "Discovery - Swipe Demo.dc.html", which is the deck's
 // interaction reference (its begin/pickTap/renderVals). Three things there that
@@ -1872,7 +1837,19 @@ function buildTopBar(ctx, facets, actions) {
   const title = document.createElement('div');
   title.className = 'dd-title';
   title.textContent = 'DISCOVER';
-  topBar.append(back, title, buildFilterButton(ctx, facets, actions));
+  // The counter rides with Filter instead of owning a row below. It is the one
+  // piece of the old header worth its pixels — "where am I in this stack" — and
+  // it costs nothing here because the row already exists.
+  const right = document.createElement('div');
+  right.className = 'dd-topbar-right';
+  if (session && session.pool.length) {
+    const counter = document.createElement('span');
+    counter.className = 'dd-counter';
+    counter.textContent = `${Math.min(session.position + 1, session.pool.length)} / ${session.pool.length}`;
+    right.appendChild(counter);
+  }
+  right.appendChild(buildFilterButton(ctx, facets, actions));
+  topBar.append(back, title, right);
   return topBar;
 }
 
@@ -1911,7 +1888,6 @@ function refreshDeckInPlace(ctx, actions) {
   // Everything above and below the stage is cheap and owns no embed.
   for (const el of [...shell.children]) if (el !== stage) el.remove();
   shell.insertBefore(buildTopBar(ctx, facets, actions), stage);
-  shell.insertBefore(buildHeader(ctx, facets), stage);
   shell.appendChild(buildActionBar(ctx, actions));
 
   // The card carried the exit transform out of the last decision; it comes back
@@ -2000,7 +1976,6 @@ function renderDeckBody(ctx, actions) {
   shell.className = 'dd-shell';
 
   shell.appendChild(buildTopBar(ctx, facets, actions));
-  shell.appendChild(buildHeader(ctx, facets));
 
   const stageWrap = document.createElement('div');
   stageWrap.className = 'dd-stage';

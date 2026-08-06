@@ -1,9 +1,9 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v70 = a PLAY event after the widget has parked is the PERSON pressing
-// SoundCloud's own control, not our skip() — v69 moved SC to its full widget
-// and left the guard swallowing genuine taps. player.js is precached.
-const CACHE_VERSION = 'festival-nav-v70';
+// v74 = the embed->state reconcile is UPWARD ONLY. Reconciling a transient
+// ENDED/PAUSED during loadVideoById paused the incoming video mid-load and
+// left every later advance cueing a silent poster.
+const CACHE_VERSION = 'festival-nav-v74';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
