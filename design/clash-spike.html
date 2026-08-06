@@ -258,8 +258,7 @@ function lapWindow() {
 }
 
 function roleOf(i) {
-  if (state.kind === 'split')  return 'both';
-  if (state.kind === 'onsite') return 'alt';
+  if (state.kind === 'keep') return 'both';
   return i === state.lead ? 'lead' : 'alt';
 }
 // The set immediately before / after the clash window, from what is already picked.
@@ -403,11 +402,11 @@ function drawVerdict() {
   var frag = document.createDocumentFragment();
   frag.appendChild(document.createTextNode(mins + ' min overlap. '));
 
-  if (state.kind === 'split') {
-    frag.appendChild(document.createTextNode('You will catch part of each — '));
+  if (state.kind === 'keep') {
+    frag.appendChild(document.createTextNode('All of them stay in the day — '));
     var b2 = document.createElement('b');
-    b2.textContent = ss.map(x => x.name).join(' and ');
-    frag.append(b2, document.createTextNode(' both stay in the day.'));
+    b2.textContent = ss.map(x => x.name).join(', ');
+    frag.append(b2, document.createTextNode('. How you split it is yours on the day.'));
   } else {
     var shortest = Math.min.apply(null, ss.map(s2 => s2.endMin - s2.startMin));
     var frac = Math.round((mins / shortest) * 100);
@@ -431,12 +430,10 @@ function drawPath() {
 
   var seq = [];
   if (b) seq.push({ label:b.stage, hot:false });
-  if (state.kind === 'split') {
+  if (state.kind === 'keep') {
     ss.slice().sort((x,y)=>x.startMin-y.startMin).forEach(s => seq.push({ label:s.stage, hot:true }));
-  } else if (state.kind === 'lead') {
-    seq.push({ label: ss[state.lead].stage, hot:true });
   } else {
-    seq.push({ label:'?', hot:true });
+    seq.push({ label: ss[state.lead].stage, hot:true });
   }
   if (a) seq.push({ label:a.stage, hot:false });
 
@@ -458,8 +455,7 @@ function drawPath() {
 
   var n = document.createElement('span');
   n.className = 'n';
-  if (state.kind === 'onsite') n.textContent = 'Route depends on what you pick on-site.';
-  else if (crossings === 0) n.innerHTML = 'No stage change — you stay put either side.';
+  if (crossings === 0) n.innerHTML = 'No stage change — you stay put either side.';
   else n.innerHTML = crossings + ' stage change' + (crossings > 1 ? 's' : '')
        + ' — <b>budget the walk</b>, and remember it comes out of the set you are leaving.';
   el.appendChild(n);
@@ -473,8 +469,12 @@ function drawChoices() {
   ss.forEach(function (s, i) {
     add('lead', i, 'Lead with ' + s.name, s.stage);
   });
-  add('split', null, 'See both', '');
-  add('onsite', null, 'Decide on-site', '');
+  // ONE option, not two. "See both" and "Decide on-site" described the same
+  // intent once the invented handover time was removed: no lead, nobody
+  // dropped, sort it out when you are standing there. Two buttons for one
+  // intent is a choice the person has to think about and cannot get right.
+  add('keep', null, ss.length === 2 ? 'Keep both' : 'Keep all ' + ss.length,
+      'No lead \u2014 decide on-site');
 
   function add(kind, lead, k, d) {
     var b = document.createElement('button');
@@ -508,8 +508,7 @@ function drawBeforeAfter() {
     var tag = levelLabel(s.level);
     if (state.kind === 'lead')  return { name:s.name, level:i === state.lead ? 'lead' : s.level,
                                          tag:(i === state.lead ? 'lead · ' : 'alternate · ') + tag };
-    if (state.kind === 'split') return { name:s.name, level:'both', tag:'both · ' + tag };
-    return { name:s.name, level:s.level, tag:'on-site · ' + tag };
+    return { name:s.name, level:'both', tag:'kept · ' + tag };
   }));
   host.append(before, arrow, after);
   document.getElementById('unchanged').innerHTML =
@@ -537,26 +536,19 @@ function drawDay() {
   var ss = sets(), b = beforeSet(), a = afterSet();
   if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true, null, levelLabel(b.level)));
 
-  if (state.kind === 'split') {
-    // Each set keeps its REAL time. Cutting one short at an invented handover
-    // was false precision — nobody at a festival leaves at 10:04 because a
-    // phone said so, and pretending otherwise makes the day read like a
-    // work calendar.
+  if (state.kind === 'keep') {
+    // Every set keeps its REAL time and every one of them is listed. This is
+    // the least lossy thing the day can say: the clash is settled, nobody was
+    // dropped, and the summary is not hiding an artist you had considered.
     var ordered = ss.slice().sort((x,y)=>x.startMin-y.startMin);
     ordered.forEach(function (s, i) {
       // The walk flag belongs on THIS set when the NEXT one is somewhere else.
-      // It was on the arriving set, which reads as "there is a walk to get
-      // here" — but the thing you have to DO is get out early, and you do that
-      // during the set you are already at.
+      // The thing you have to DO is get out early, and you do that during the
+      // set you are already standing in — not when you arrive.
       var next = ordered[i + 1];
       host.appendChild(slot(clock(s.startMin) + ' – ' + clock(s.endMin), s.name, s.stage, 'both', [], false,
         next ? next.stage : null, levelLabel(s.level)));
     });
-  } else if (state.kind === 'onsite') {
-    host.appendChild(slot(
-      clock(Math.min.apply(null, ss.map(s=>s.startMin))) + ' – ' + clock(Math.max.apply(null, ss.map(s=>s.endMin))),
-      'Your call on-site', '', null,
-      ss.map(s => ({ name:s.name, w: metaOf(s) }))));
   } else {
     var lead = ss[state.lead];
     host.appendChild(slot(clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
@@ -575,7 +567,7 @@ function drawDay() {
     nn.appendChild(document.createTextNode(name));
     if (badge) {
       var bd = document.createElement('span'); bd.className = 'badge ' + badge;
-      bd.textContent = badge === 'lead' ? 'leading' : 'seeing both';
+      bd.textContent = badge === 'lead' ? 'leading' : 'your call';
       nn.appendChild(bd);
     }
     if (walk && walk !== stage) {
