@@ -123,7 +123,7 @@ function buildSetRow(setEntry, ctx, plan) {
     const next = plan.alternates
       .filter((o) => o.startMin >= setEntry.startMin && o.stage !== setEntry.stage)
       .sort((a, b) => a.startMin - b.startMin)[0];
-    if (next && plan.role !== 'alt') {
+    if (next && plan.role === 'keep') {
       const walk = document.createElement('span');
       walk.className = 'md-plan is-walk';
       walk.textContent = `leave early \u2192 ${next.stage}`;

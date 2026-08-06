@@ -397,7 +397,7 @@ function buildCard(setEntry, day, clash, ctx, actions, canonData, fest, slotIdx)
   metaRow.className = 'dc-card-meta';
   const others = clash.sets.filter((s) => s.name !== setEntry.name).map((s) => s.name);
   const giveUp = document.createElement('span');
-  const giveUpB = document.createElement('b'); giveUpB.textContent = 'Give up: ';
+  const giveUpB = document.createElement('b'); giveUpB.textContent = 'Alternate: ';
   giveUp.append(giveUpB, document.createTextNode(others.length ? others.join(', ') : 'nothing else marked'));
   const playsAgain = document.createElement('span');
   const playsAgainB = document.createElement('b'); playsAgainB.textContent = 'Plays again: ';
