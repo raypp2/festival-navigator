@@ -1,9 +1,8 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v75 = reconcileEmbed no longer echoes an embed-REPORTED state back at the
-// embed. Spotify's controller.play() restarts from zero (resume() continues),
-// so answering its own playback_update restarted the clip a second in.
-const CACHE_VERSION = 'festival-nav-v75';
+// v76 = the in-place advance clears the per-card flags the last decision left
+// behind. A stale data-intent="pass" carried grayscale onto the next artist.
+const CACHE_VERSION = 'festival-nav-v76';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

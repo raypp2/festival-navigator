@@ -590,6 +590,28 @@ test('swipe right past the threshold picks ×1 — the same write the Pick butto
   assert.equal(cardName(), 'PickFlow1', 'the deck advanced');
 });
 
+// The card ELEMENT survives an in-place advance, so anything the last decision
+// stamped on it lands on the NEXT artist. A stale data-intent="pass" carries
+// grayscale+brightness with it, and the incoming card arrives washed out and
+// black for no reason visible in its own data — reported on a device against
+// an artist whose genres and reason were both perfectly fine (2026-08-06).
+test('a decision leaves no intent stamped on the card the next artist inherits', () => {
+  const actions = mkActions();
+  renderDeckForTest(ctx, actions, CANON);
+  assert.equal(cardName(), 'RankTarget');
+
+  // pass by swipe: the path that sets data-intent and then advances in place
+  drag(overlay().querySelector('.dd-card'), 260, 300, 100, 305);
+  assert.equal(cardName(), 'PickFlow1', 'the deck advanced');
+
+  const card = overlay().querySelector('.dd-card');
+  assert.equal(card.dataset.intent || '', '',
+    'the incoming artist must not inherit the previous card\'s intent — '
+    + '"pass" paints it grayscale, "pick"/"must" paints it as decided');
+  assert.equal(card.classList.contains('is-settling'), false,
+    'nor the snap-back transition class');
+});
+
 test('swipe left past the threshold passes', () => {
   const actions = mkActions();
   renderDeckForTest(ctx, actions, CANON);

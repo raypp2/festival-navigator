@@ -1892,7 +1892,23 @@ function refreshDeckInPlace(ctx, actions) {
 
   // The card carried the exit transform out of the last decision; it comes back
   // to rest here, and the ghosts/hint/celebrate around it are rebuilt fresh.
-  card.classList.remove('is-exiting');
+  // The card ELEMENT is reused, so every per-card flag the last decision left on
+  // it has to come off by hand — the full rebuild got this for free by building
+  // a new node, and that is exactly why the in-place path keeps losing one.
+  //
+  // data-intent is the one that shows: it paints the intent a drag is ABOUT to
+  // commit, and a stale "pass" carries `filter: grayscale(.7) brightness(.82)`
+  // onto the NEXT artist, which arrives looking washed out and black instead of
+  // purple, for no reason a reader could ever find in that artist's data
+  // (reported 2026-08-06 against Westend, whose genres and reason were both
+  // fine — the artist was never the variable, the previous swipe was). A stale
+  // "pick"/"must" is the same bug wearing the opposite colour: an undecided
+  // card showing the aura of a decision nobody made on it.
+  //
+  // is-settling is the snap-back transition and would otherwise animate the
+  // incoming card's first transform.
+  card.classList.remove('is-exiting', 'is-settling');
+  card.dataset.intent = '';
   card.style.transform = '';
   card.style.opacity = '';
   card.scrollTop = 0;
