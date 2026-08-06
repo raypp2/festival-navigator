@@ -4451,6 +4451,16 @@
         "uk garage",
         "electro",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "Rb6AALmtYEs",
+        "zHYwtd-mCfQ",
+        "rrt0rcZcuVI"
+      ],
+      "youtubeLabels": [
+        "Live From Culver City (Yacht House, Funky House, Disco, RnB House)",
+        "Yacht House Summer - Live from Marina Del Rey (Yacht House, Funky House, Soul House)",
+        "DISCO & HOUSE - LIVE FROM ANGEL'S POINT, LOS ANGELES, CA"
       ]
     },
     {
@@ -4459,7 +4469,17 @@
       "stage": "Center Stage",
       "youtubeQuery": "Party Pupils (Late) live set",
       "soundcloudSlug": "partypupils",
-      "spotifyId": "4F61H4lx1js4wtWfb2Rfnt"
+      "spotifyId": "4F61H4lx1js4wtWfb2Rfnt",
+      "youtubeVideoIds": [
+        "yt-u7frw8RY",
+        "IpaN8T9F7rM",
+        "yB2oCkXvGyw"
+      ],
+      "youtubeLabels": [
+        "Party Pupils, MAX - Ms. Jackson Live (Rickshaw Stop; November 8, 2019)",
+        "Delta One Sky Club LAX — Miles DiPaola | Open Format DJ Set (AlphaTheta Wave 8 + DDJ-REV7)",
+        "Party Pupils x Big Gigantic - Renegade"
+      ]
     },
     {
       "name": "Culturefies",
@@ -4471,7 +4491,17 @@
       "name": "Polyjamorous",
       "day": "Day 4",
       "stage": "Grand Artique",
-      "youtubeQuery": "Polyjamorous live set"
+      "youtubeQuery": "Polyjamorous live set",
+      "youtubeVideoIds": [
+        "MnTCEnF-xIw",
+        "pm70xSiUjHA",
+        "4Bn20suD9Vs"
+      ],
+      "youtubeLabels": [
+        "Polyamorous - Breaking Benjamin HD live at stabler arena",
+        "Breaking Benjamin | Polyamorous (Live on Fuse)",
+        "Aurora live at the Aragon in Chicago"
+      ]
     }
   ],
   "activities": {

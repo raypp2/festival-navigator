@@ -604,7 +604,17 @@
       "genres": [
         "country"
       ],
-      "spotifyId": "26VEPCGAYB9OClQodb0OR1"
+      "spotifyId": "26VEPCGAYB9OClQodb0OR1",
+      "youtubeVideoIds": [
+        "qkX6DT8eLuw",
+        "r2Ecq-Lwouc",
+        "RjXI3gcafM0"
+      ],
+      "youtubeLabels": [
+        "In the Garden (Greenhouse Sessions) (Live) - Tiera Kennedy",
+        "Found It In You at 98.7 The Bull | PNC Live Studio Session",
+        "Point of View - Tiera Kennedy"
+      ]
     },
     {
       "name": "Asleep at the Wheel",
@@ -638,7 +648,17 @@
         "pop"
       ],
       "spotifyId": "4XQI4hyuy5xun1ou3SM8Oe",
-      "youtubeQuery": "Aidan Bissett live set"
+      "youtubeQuery": "Aidan Bissett live set",
+      "youtubeVideoIds": [
+        "S6bArutyjwI",
+        "wrpceRpDvNs",
+        "AG5jDtjP6Mg"
+      ],
+      "youtubeLabels": [
+        "Aidan Bissett Live from House of Blues Chicago pt. 2",
+        "Mr Jamzilla's Fresh 2023 Lollapalooza Saturday - Aiden Bissett - 8-5-23",
+        "Mr Jamzilla's Fresh 2023 Lollapalooza Saturday - Aiden Bissett - 8-5-23"
+      ]
     },
     {
       "name": "Johnny Stimson",
@@ -652,6 +672,16 @@
         "soul",
         "indie",
         "house"
+      ],
+      "youtubeVideoIds": [
+        "NHZE4Qsu5RI",
+        "uAj5e9EDSyU",
+        "zmX8k86W6pE"
+      ],
+      "youtubeLabels": [
+        "조니 스팀슨 (Johnny Stimson) - Butterflies | SLOW LIFE SLOW LIVE 2023",
+        "Johnny Stimson Acoustic Session | Live! at Folkative",
+        "Johnny Stimson live set (drum cam)"
       ]
     },
     {
@@ -663,7 +693,17 @@
         "teen pop"
       ],
       "spotifyId": "7qmpXeNz2ojlMl2EEfkeLs",
-      "youtubeQuery": "Nicky Youre live set"
+      "youtubeQuery": "Nicky Youre live set",
+      "youtubeVideoIds": [
+        "G5xSLbYMr-I",
+        "cJfrV1q3Z54",
+        "gK74SfZfgJU"
+      ],
+      "youtubeLabels": [
+        "Nicky Youre, dazy - Sunroof",
+        "Never Go Wrong (Live Performance)",
+        "Sunroof | Nicky Youre | Opening for Good Neighbours | Minneapolis, MN | October 27, 2025"
+      ]
     },
     {
       "name": "Judy Blank",
@@ -675,6 +715,16 @@
         "pop",
         "singer-songwriter",
         "americana"
+      ],
+      "youtubeVideoIds": [
+        "gF8dMGBepXk",
+        "m5eZCN1G-W0",
+        "rqFA91fSpDQ"
+      ],
+      "youtubeLabels": [
+        "\"Cosmic Kids (Ft. SUSTO)\" | \"Toy Heart\" | \"Pony\" | KUTX",
+        "\"Fading Star\" (30A Songwriters Sessions)",
+        "The Magic (live in East Nashville) 💜👻🪽"
       ]
     },
     {
@@ -686,7 +736,17 @@
       ],
       "soundcloudSlug": "skrilla",
       "spotifyId": "3qdQnBjEBHrk5nZYxXdV1U",
-      "youtubeQuery": "Skrilla live set"
+      "youtubeQuery": "Skrilla live set",
+      "youtubeVideoIds": [
+        "ZhpeK3F7xsw",
+        "djC4r5RApG0",
+        "LrUe_G1qarI"
+      ],
+      "youtubeLabels": [
+        "Skrilla LIVE @ Rolling Loud Orlando 2026 [FULL SET]",
+        "Kodak Black - Skrilla (Live from Rolling Loud Miami 2023)",
+        "Media Day Freestyle"
+      ]
     },
     {
       "name": "Moody Joody",
@@ -696,6 +756,16 @@
       "youtubeQuery": "Moody Joody live set",
       "genres": [
         "indie pop"
+      ],
+      "youtubeVideoIds": [
+        "MB0zR8Yz-w0",
+        "XWvw_uZPGDA",
+        "eD4yG1IAbbo"
+      ],
+      "youtubeLabels": [
+        "Moody Judy - The Electric Kool-Aid Jammers Show",
+        "Crosby Stills and Nash - Suite: Judy Blue Eyes - Live 2012",
+        "Deephouse I Sunset Cartel Presents JUDY JAY"
       ]
     },
     {
@@ -703,7 +773,17 @@
       "day": "Friday",
       "weekends": "W1",
       "spotifyId": "2qabc8edZgoWe8DY4HIGED",
-      "youtubeQuery": "Chance Emerson live set"
+      "youtubeQuery": "Chance Emerson live set",
+      "youtubeVideoIds": [
+        "3guYhu296kY",
+        "1tzQsJVsIuY",
+        "kIYtQjT6xpU"
+      ],
+      "youtubeLabels": [
+        "Chance Emerson, Full Session | Ocean State Sessions",
+        "Chance Emerson (Live) | Brown University | Quadio After Hours",
+        "Chance Emerson/Northeast Traffic | Ocean State Sessions"
+      ]
     },
     {
       "name": "Maggie Antone",
@@ -713,6 +793,16 @@
       "youtubeQuery": "Maggie Antone live set",
       "genres": [
         "country"
+      ],
+      "youtubeVideoIds": [
+        "fLFKBe9bQCo",
+        "77MyShnnViw",
+        "JtH2UYmLmk4"
+      ],
+      "youtubeLabels": [
+        "LIVE At The National",
+        "LIVE At Brooklyn Bowl",
+        "Ella Langley & Maggie Antone: \"Dreams\" (Fleetwood Mac Cover) Live 10/16/24 Oxford, OH"
       ]
     },
     {
@@ -742,14 +832,34 @@
       "weekends": "W1",
       "soundcloudSlug": "user-502986064",
       "spotifyId": "6VJa7asxiDZyqRa94XNRLA",
-      "youtubeQuery": "LVVRS live set"
+      "youtubeQuery": "LVVRS live set",
+      "youtubeVideoIds": [
+        "ZoWyr4qWuNo",
+        "juu2QbA3F80",
+        "MqBGHjay3Bk"
+      ],
+      "youtubeLabels": [
+        "Iconic Live in Galveston, TX",
+        "LVVRS live in concert",
+        "LIVE in concert"
+      ]
     },
     {
       "name": "The Animeros",
       "day": "Friday",
       "weekends": "W1",
       "spotifyId": "5LTUoyFqp3m3i3xolfdwPI",
-      "youtubeQuery": "The Animeros live set"
+      "youtubeQuery": "The Animeros live set",
+      "youtubeVideoIds": [
+        "fj0xxF1WRzk",
+        "AdYI5far__E",
+        "d-v4eS_i8zk"
+      ],
+      "youtubeLabels": [
+        "“La Camita” | “Danza de Los Saguaros” | “Terlingua” | KUTX",
+        "#shorts The Animeros perform \"Gózalo\" backstage at #aclfest #acl with #kutx",
+        "Heavy Soul - The Black Keys 2026.07.15 The Vic Theatre Chicago"
+      ]
     },
     {
       "name": "Farmer's Wife",
@@ -761,6 +871,16 @@
         "rock",
         "punk",
         "garage"
+      ],
+      "youtubeVideoIds": [
+        "uYnk0GIwX1g",
+        "_4bxiipeOhE",
+        "2v6TNJtDUhA"
+      ],
+      "youtubeLabels": [
+        "Farmer’s Wife - live at Sunshine Theater in Albuquerque [FULL SET] 3/24/25",
+        "Farmer's Wife (Local Live @ KVRX 91.7FM)",
+        "The Farmer's Wife at Hotel Vegas - 11/14"
       ]
     },
     {
@@ -774,7 +894,17 @@
       ],
       "soundcloudSlug": "sabrinacarpenter",
       "spotifyId": "74KM79TiuVKeVCqs8QtB0B",
-      "youtubeQuery": "Sabrina Carpenter live set"
+      "youtubeQuery": "Sabrina Carpenter live set",
+      "youtubeVideoIds": [
+        "lNIc0aj37M0",
+        "1mtJvsfAtF0",
+        "7uEp74EuZSk"
+      ],
+      "youtubeLabels": [
+        "Sabrina Carpenter Live at Lollapalooza Chile 2026 | Full Set",
+        "Espresso/Bed Chem (Live at The BRIT Awards 2025)",
+        "Manchild (Live From The 68th Annual GRAMMY Awards / 2026)"
+      ]
     },
     {
       "name": "The Strokes",
@@ -791,7 +921,17 @@
         "garage rock"
       ],
       "soundcloudSlug": "thestrokes",
-      "spotifyId": "0epOFNiUfyON9EYx7Tpr6V"
+      "spotifyId": "0epOFNiUfyON9EYx7Tpr6V",
+      "youtubeVideoIds": [
+        "yEeYayTuUZU",
+        "Vb9Nu0waj_I",
+        "mO2DqV8xNH8"
+      ],
+      "youtubeLabels": [
+        "Live at Bonnaroo Music & Arts Festival (June 2026)",
+        "The Adults Are Talking (Live SNL) Full HD",
+        "Reading 2011 (Full Set) (Captioned)"
+      ]
     },
     {
       "name": "Doechii",
@@ -803,7 +943,17 @@
       ],
       "soundcloudSlug": "iam-doechii",
       "spotifyId": "4E2rKHVDssGJm2SCDOMMJB",
-      "youtubeQuery": "Doechii live set"
+      "youtubeQuery": "Doechii live set",
+      "youtubeVideoIds": [
+        "2Kgxqlt8Dsg",
+        "5zRdN4NGtlE",
+        "-91vymvIH0c"
+      ],
+      "youtubeLabels": [
+        "CATFISH / DENIAL IS A RIVER (Live From The 67th Grammy Awards/2025)",
+        "Doechii Camp Flog Gnaw 2024",
+        "Tiny Desk Concert"
+      ]
     },
     {
       "name": "Djo",
@@ -817,7 +967,17 @@
       ],
       "soundcloudSlug": "djokyri",
       "spotifyId": "5p9HO3XC5P3BLxJs5Mtrhm",
-      "youtubeQuery": "Djo live set"
+      "youtubeQuery": "Djo live set",
+      "youtubeVideoIds": [
+        "OZVyQyq07ow",
+        "Ec08db2hP10",
+        "NxZ9-uSgkI4"
+      ],
+      "youtubeLabels": [
+        "Live at Lollapalooza Chile 2026 (Full Set)",
+        "'End of Beginning' (live at Laneway 2025)",
+        "Djo Full Set LIVE"
+      ]
     },
     {
       "name": "Pierce The Veil",
@@ -855,7 +1015,17 @@
         "electronic"
       ],
       "soundcloudSlug": "zedsdead",
-      "spotifyId": "67qogtRNI0GjUr8PlaG6Zh"
+      "spotifyId": "67qogtRNI0GjUr8PlaG6Zh",
+      "youtubeVideoIds": [
+        "BpABmFq3-cM",
+        "Dz6OF5NLVS8",
+        "acLdrrfLSoc"
+      ],
+      "youtubeLabels": [
+        "2025 North Coast 15 Year Anniversary Full Set",
+        "Zeds Dead Live @ Lost Lands 2024 - Full Set",
+        "ZEDS DEAD FULL SET @ HULAWEEN"
+      ]
     },
     {
       "name": "Sammy Virji",
@@ -893,7 +1063,17 @@
         "indie pop"
       ],
       "spotifyId": "6p2HnfM955TI1bX34dkLnI",
-      "youtubeQuery": "The Backseat Lovers live set"
+      "youtubeQuery": "The Backseat Lovers live set",
+      "youtubeVideoIds": [
+        "DfqwADYQnfE",
+        "MTbrSfryYSA",
+        "qeTE2MqyxFs"
+      ],
+      "youtubeLabels": [
+        "Life Is Beautiful Festival 2021 - Full Performance",
+        "live at Best Kept Secret 2025",
+        "Lollapalooza 2023"
+      ]
     },
     {
       "name": "Modest Mouse",
@@ -908,7 +1088,17 @@
         "slacker rock"
       ],
       "soundcloudSlug": "modest-mouse-official",
-      "spotifyId": "1yAwtBaoHLEDWAnWR87hBT"
+      "spotifyId": "1yAwtBaoHLEDWAnWR87hBT",
+      "youtubeVideoIds": [
+        "eut-b4gtDDg",
+        "9FJeWP7oWhs",
+        "O9f91sP0V-c"
+      ],
+      "youtubeLabels": [
+        "Modest Mouse @ Lollapalooza Brasil 2023",
+        "Modest Mouse ¦ Bonnaroo Music Festival 2026 ¦ Full Set",
+        "The World At Large Live"
+      ]
     },
     {
       "name": "Japanese Breakfast",
@@ -920,7 +1110,17 @@
       ],
       "soundcloudSlug": "japanesebreakfast",
       "spotifyId": "7MoIc5s9KXolCBH1fy9kkw",
-      "youtubeQuery": "Japanese Breakfast live set"
+      "youtubeQuery": "Japanese Breakfast live set",
+      "youtubeVideoIds": [
+        "ZaiBb5uwC5Q",
+        "dC74jyStmBI",
+        "JB7OotPgVV0"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Be Sweet | Glastonbury 2025",
+        "Austin City Limits Festival 2018 | Full Live Set"
+      ]
     },
     {
       "name": "Car Seat Headrest",
@@ -935,7 +1135,17 @@
         "psychedelic"
       ],
       "soundcloudSlug": "car-seat-headrest",
-      "spotifyId": "5PbpKlxQE0Ktl5lcNABoFf"
+      "spotifyId": "5PbpKlxQE0Ktl5lcNABoFf",
+      "youtubeVideoIds": [
+        "RZZHTVr-r-g",
+        "xSNfKg2C8II",
+        "CqT3U2UYS4k"
+      ],
+      "youtubeLabels": [
+        "NPR Music Tiny Desk Concert",
+        "Full Performance (Live on KEXP)",
+        "Full Performance (Live on KEXP)"
+      ]
     },
     {
       "name": "Magdalena Bay",
@@ -976,7 +1186,17 @@
         "pop"
       ],
       "spotifyId": "00x1fYSGhdqScXBRpSj3DW",
-      "youtubeQuery": "Olivia Dean live set"
+      "youtubeQuery": "Olivia Dean live set",
+      "youtubeVideoIds": [
+        "St7G1F4mu_4",
+        "SCz9ITAyvpI",
+        "JUGCQK8dUhc"
+      ],
+      "youtubeLabels": [
+        "Live At The Jazz Cafe",
+        "Boiler Room Festival London 2021 | gal-dem",
+        "Man I Need (Live From The 68th Grammy Awards / 2026)"
+      ]
     },
     {
       "name": "MARINA",
@@ -994,7 +1214,17 @@
       ],
       "soundcloudSlug": "marinadiamandis",
       "spotifyId": "1dYg03VTo2pCwwqxjNa3YI",
-      "youtubeQuery": "Marina live set"
+      "youtubeQuery": "Marina live set",
+      "youtubeVideoIds": [
+        "ZlnS0H-QA4Q",
+        "zQqnTFJN5u0",
+        "tnN17z97_ro"
+      ],
+      "youtubeLabels": [
+        "Lollapalooza Chicago 2025 (Full Set)",
+        "MARINA @ Lollapalooza Chile 2026 - Full Show - Sunday, 03/15",
+        "CUNTISSIMO (Live from the PRINCESS OF POWER Tour)"
+      ]
     },
     {
       "name": "RIIZE",
@@ -1026,6 +1256,16 @@
         "pop",
         "indie pop",
         "disco"
+      ],
+      "youtubeVideoIds": [
+        "rGyQHyDMZZI",
+        "TELFpTs29Ag",
+        "lRVJuPI5IXI"
+      ],
+      "youtubeLabels": [
+        "Tiny Desk Concerts JAPAN",
+        "Fujii Kaze Stadium Live “Feelin' Good” [Full show]",
+        "\"Shinunoga E-Wa\" Live at Nippon Budokan (2020)"
       ]
     },
     {
@@ -1038,6 +1278,16 @@
         "indie pop",
         "latin",
         "rnb"
+      ],
+      "youtubeVideoIds": [
+        "sEAbrM-WWmY",
+        "0sZF6YzhrRU",
+        "7Gi8kKtiqak"
+      ],
+      "youtubeLabels": [
+        "\"Yo siempre contesto\" - Latin Mafia",
+        "Fred again.. & LATIN MAFIA - under the fabric (Mexico City, 11th December 2025)",
+        "Fred again.. making a mixtape with LATIN MAFIA (FULL TRACKS)"
       ]
     },
     {
@@ -1073,7 +1323,17 @@
       ],
       "soundcloudSlug": "joeyvalenceandbrae",
       "spotifyId": "1q4618qKswelCGLoanFKQh",
-      "youtubeQuery": "Joey Valence & Brae live set"
+      "youtubeQuery": "Joey Valence & Brae live set",
+      "youtubeVideoIds": [
+        "XhhonU_HeGA",
+        "s3WHnsG7PCY",
+        "lySjQ1l1q3Y"
+      ],
+      "youtubeLabels": [
+        "Bonnaroo 2025 | FULL SET",
+        "'THE BADDEST' (live at Laneway 2025)",
+        "'PUNK TACTICS' (live at Laneway 2025)"
+      ]
     },
     {
       "name": "LP Giobbi",
@@ -1085,7 +1345,17 @@
       ],
       "soundcloudSlug": "lpgiobbi",
       "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
-      "youtubeQuery": "LP Giobbi live set"
+      "youtubeQuery": "LP Giobbi live set",
+      "youtubeVideoIds": [
+        "-eOa77e_uJg",
+        "kbVq3KRUitc",
+        "gUrIVfzGg9U"
+      ],
+      "youtubeLabels": [
+        "LP Giobbi WE2 | Tomorrowland 2026",
+        "LP Giobbi at Coachella 2026 - Quasar Stage",
+        "Tomorrowland Winter 2025"
+      ]
     },
     {
       "name": "LEISURE",
@@ -1101,7 +1371,17 @@
         "soul"
       ],
       "soundcloudSlug": "theleisurecollective",
-      "spotifyId": "7b04D0yLktCUpvxQBhmG7R"
+      "spotifyId": "7b04D0yLktCUpvxQBhmG7R",
+      "youtubeVideoIds": [
+        "uWVwHnOFXio",
+        "_Q3a9Eo2_LU",
+        "I0Rhmur2hDw"
+      ],
+      "youtubeLabels": [
+        "Live at Lollapalooza Chicago 2024",
+        "\"Slipping Away\" (Live at WFUV)",
+        "Missing You (Live at Taliesin West)"
+      ]
     },
     {
       "name": "Spacey Jane",
@@ -1112,7 +1392,17 @@
       ],
       "soundcloudSlug": "spacey-jane",
       "spotifyId": "6V70yeZQCoSR2M3fyW8qiA",
-      "youtubeQuery": "Spacey Jane live set"
+      "youtubeQuery": "Spacey Jane live set",
+      "youtubeVideoIds": [
+        "5dzCQB2UB7E",
+        "1gqC1I0-l1s",
+        "jLrNVM2YSDw"
+      ],
+      "youtubeLabels": [
+        "Full Set (live at One Night Stand 2025)",
+        "Live in Melbourne from Reunion Park Concert Film",
+        "Live | Brooklyn Steel NYC | September 11, 2025"
+      ]
     },
     {
       "name": "Yoke Lore",
@@ -1124,6 +1414,16 @@
       "genres": [
         "indie pop",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "F9q5svfHpvI",
+        "cGeHASu-PAo",
+        "k_NMNgcbBlw"
+      ],
+      "youtubeLabels": [
+        "Beige (Live Performance) | Vevo",
+        "[Full Set] (SXSW 2025) HD",
+        "Yoke Lore Spring 2025 Set Charlotte, NC"
       ]
     },
     {
@@ -1139,7 +1439,17 @@
       ],
       "soundcloudSlug": "lilmallrat",
       "spotifyId": "4OSArit7O2Jaj4mgf3YN7A",
-      "youtubeQuery": "Mallrat live set"
+      "youtubeQuery": "Mallrat live set",
+      "youtubeVideoIds": [
+        "mkr9Nl3OKAQ",
+        "Eo9gTfJErMo",
+        "CyhSJ8CEtpg"
+      ],
+      "youtubeLabels": [
+        "‘Charlie’ (live for triple j’s 50th Tour)",
+        "'Groceries' live on The Set",
+        "Pavement Live Ventura Music Hall Ventura,CA 10/18/25"
+      ]
     },
     {
       "name": "LA LOM",
@@ -1153,6 +1463,16 @@
         "latin",
         "soul",
         "americana"
+      ],
+      "youtubeVideoIds": [
+        "BkSL9e5zZ3U",
+        "guBM-dEVNss",
+        "Tbx4k_wpbnc"
+      ],
+      "youtubeLabels": [
+        "Live at The Kessler Theater, Oak Cliff, TX 9/18/2024",
+        "Trail Mix Session",
+        "LA LOM live in Hawaii(4k)"
       ]
     },
     {
@@ -1163,6 +1483,16 @@
       "genres": [
         "indie pop",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "q8VDxUYMq_I",
+        "QHHUT3DxNBw",
+        "yWS1PIGmCVE"
+      ],
+      "youtubeLabels": [
+        "Live From KCRW HQ",
+        "TOPS Live at WNXP's Sonic Cathedral (Full Performance)",
+        "Live at The Roxy"
       ]
     },
     {
@@ -1198,6 +1528,16 @@
         "rap",
         "soul",
         "afrobeats"
+      ],
+      "youtubeVideoIds": [
+        "KTfsflrZXfY",
+        "vTx1ITE67g4",
+        "W2Z4gExz774"
+      ],
+      "youtubeLabels": [
+        "The Show That Saved Me Live in London (Full Show)",
+        "Tiny Desk Concert",
+        "Miami ft. Leon Thomas"
       ]
     },
     {
@@ -1210,6 +1550,16 @@
         "psychedelic rock",
         "indie rock",
         "soul"
+      ],
+      "youtubeVideoIds": [
+        "XMl9GqnQC3A",
+        "GIYwA2OO5HA",
+        "CmSBWrIpUSw"
+      ],
+      "youtubeLabels": [
+        "XPoNential Music Festival 2024 (Full Set)",
+        "Wild Emotion (Church Sessions)",
+        "Go Down River (Karma Sessions)"
       ]
     },
     {
@@ -1219,7 +1569,17 @@
       "genres": [
         "shoegaze"
       ],
-      "youtubeQuery": "Hotline TNT live set"
+      "youtubeQuery": "Hotline TNT live set",
+      "youtubeVideoIds": [
+        "rMx8rdSuMbc",
+        "8OyPyfJispA",
+        "uXLAo2-LTFI"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Hotline TNT Live at WNXP's Sonic Cathedral (Full Performance)",
+        "Hotline TNT • FULL SET • Scranton, Pa • 1.28.26"
+      ]
     },
     {
       "name": "INOHA",
@@ -1230,6 +1590,16 @@
       "genres": [
         "indie rock",
         "pop punk"
+      ],
+      "youtubeVideoIds": [
+        "F1e2ZiNVP5A",
+        "-rwn-zWJi1w",
+        "dvj7ETSKqQg"
+      ],
+      "youtubeLabels": [
+        "Live in Austin, 3TEN ACL Live - October 10, 2025",
+        "INOHA Full Opening Set LIVE | Roadrunner Boston, MA | April 16, 2026",
+        "LIVE (FULL CONCERT) @ The Fillmore - Philadelphia, PA - 04/20/26"
       ]
     },
     {
@@ -1243,6 +1613,16 @@
         "singer-songwriter",
         "indie pop",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "L2B2yubc7QE",
+        "u9v20dNDQdM",
+        "CtA4uS7_RJg"
+      ],
+      "youtubeLabels": [
+        "Sydney Rose, The Independent, San Francisco, CA, December 4, 2025",
+        "Sydney Rose, 2025 ACL Music Festival , Weekend One, Saturday, October 4, 2025",
+        "SYDNEY ROSE live at Thalia Hall 08/01/21 SKYDIVE"
       ]
     },
     {
@@ -1253,6 +1633,16 @@
       "genres": [
         "country",
         "rock"
+      ],
+      "youtubeVideoIds": [
+        "VJ_z_IeGCeQ",
+        "IeGthCEh8bE",
+        "AO3M2rw8ZEY"
+      ],
+      "youtubeLabels": [
+        "Alvvays | Next of Kin (CBC Music Festival 2016)",
+        "The Next of Kin - LIve at The 2nd Annual American Roots Music Festival",
+        "Alvvays - Next Of Kin (LIVE at Music Tastes Good)"
       ]
     },
     {
@@ -1265,13 +1655,33 @@
         "folk",
         "country",
         "indie"
+      ],
+      "youtubeVideoIds": [
+        "az6H06VhV5Y",
+        "fU3sG9SVcyo",
+        "_WsSJwHGHU8"
+      ],
+      "youtubeLabels": [
+        "Full Performance || goodnoise live",
+        "Clover County Full Set at Classic City Vintage Guitars",
+        "Virginia Slim | 101.9 KINK | PNC Live Studio Session"
       ]
     },
     {
       "name": "S.L. Houser",
       "day": "Saturday",
       "weekends": "W1",
-      "youtubeQuery": "S.L. Houser live set"
+      "youtubeQuery": "S.L. Houser live set",
+      "youtubeVideoIds": [
+        "5reuz_sHYds",
+        "VE-0IdTR-PA",
+        "KFza2osiXjE"
+      ],
+      "youtubeLabels": [
+        "Sonic Guild and KUTX Presents SL Houser and Sisi, live from Pershing in Austin, Texas",
+        "Sonic Guild and KUTX presents S.L. Houser and Sisi, Live from Pershing in Austin, Texas",
+        "Melodic Journey /Progressive/Tech House/Deep House Live Mix Set - XTRO SL"
+      ]
     },
     {
       "name": "Eric Slick",
@@ -1283,6 +1693,16 @@
         "rock",
         "jazz",
         "indie rock"
+      ],
+      "youtubeVideoIds": [
+        "oau1ERX-ABk",
+        "MOgitVAqe4k",
+        "cuXPWmZCdZs"
+      ],
+      "youtubeLabels": [
+        "Full Session - 1/27/2017 - Paste Studios - New York, NY",
+        "(Johnny Brenda's) Philadelphia,Pa 2.1.17 (Complete Show)",
+        "(Johnny Brenda's) Philadelphia,Pa 1.6.19 (Bullfighter EP Release Show)"
       ]
     },
     {
@@ -1295,6 +1715,16 @@
         "folk",
         "soul",
         "indie"
+      ],
+      "youtubeVideoIds": [
+        "g2fTP7nGe5s",
+        "aM4RVjcy_GY",
+        "Zqm3ixryvNw"
+      ],
+      "youtubeLabels": [
+        "The Mix at Martin",
+        "Easy does it (Live) from The Troubadour",
+        "Got You Right - GoldFord - Live @ The Troubador"
       ]
     },
     {
@@ -1306,7 +1736,17 @@
         "bluegrass"
       ],
       "spotifyId": "5fGjyURfvKXXCTcnCfU9Dl",
-      "youtubeQuery": "Southall live set"
+      "youtubeQuery": "Southall live set",
+      "youtubeVideoIds": [
+        "S46Bs4pZ_I4",
+        "ltJNdKUMzhw",
+        "7zhZRGLZQz4"
+      ],
+      "youtubeLabels": [
+        "Solomun – Live at Alexandra Palace, London (2026)",
+        "Read Southall Band full set live @Whiskey Myers Firewater Festival 10/1/2022 in LaCyne Kansas",
+        "Dom Dolla Live @ Printworks, London 2022"
+      ]
     },
     {
       "name": "South Arcade",
@@ -1317,7 +1757,17 @@
         "pop punk"
       ],
       "spotifyId": "3vEL65ycUboLH76pgdtqlF",
-      "youtubeQuery": "South Arcade live set"
+      "youtubeQuery": "South Arcade live set",
+      "youtubeVideoIds": [
+        "kKO6ACPC2oc",
+        "dUGf-I_nq-E",
+        "drOYjJK_sgo"
+      ],
+      "youtubeLabels": [
+        "South Arcade on Audiotree Live (Full Session)",
+        "SOUTH ARCADE live in The K! Pit (tiny dive bar show)",
+        "2005 (Live from KOKO, London)"
+      ]
     },
     {
       "name": "Dizzy Fae",
@@ -1346,7 +1796,17 @@
       "name": "Animal Arcade",
       "day": "Saturday",
       "weekends": "W1",
-      "youtubeQuery": "Animal Arcade live set"
+      "youtubeQuery": "Animal Arcade live set",
+      "youtubeVideoIds": [
+        "gmTBMeiwBkA",
+        "w1KPSwWTOWY",
+        "GP6N8Z7jSJs"
+      ],
+      "youtubeLabels": [
+        "Simple Arcade Game CHANGED His Life",
+        "Pet Claw Machine - Day 9 #clawmachine #arcade",
+        "AFTER HOUR ANIMALS (FULL SET) - 6/12/22 @ X-RAY ARCADE"
+      ]
     },
     {
       "name": "Shallowater",
@@ -1357,6 +1817,16 @@
       "genres": [
         "alt-country",
         "shoegaze"
+      ],
+      "youtubeVideoIds": [
+        "KfgF5VIHSeE",
+        "TOellMDQOGs",
+        "OG3IUFIu9sc"
+      ],
+      "youtubeLabels": [
+        "Live at Washington D.C [FULL SET | 7/21/25]",
+        "Breathe.Pause.Praise: I Will Remember",
+        "Shallowater \"Laredo\""
       ]
     },
     {
@@ -1381,7 +1851,17 @@
       ],
       "soundcloudSlug": "thekillers",
       "spotifyId": "0C0XlULifJtAgn6ZNCW2eu",
-      "youtubeQuery": "The Killers live set"
+      "youtubeQuery": "The Killers live set",
+      "youtubeVideoIds": [
+        "E5FS_Yy3WGM",
+        "vvfQN1_ysm0",
+        "zDQa0ubLK40"
+      ],
+      "youtubeLabels": [
+        "Live in Glasgow - pro-shot July 2018",
+        "The Killers Live in Nashville (Pro-Shot) April 2026",
+        "The Killers Live in Austin (Pro-Shot) October 2025"
+      ]
     },
     {
       "name": "John Summit",
@@ -1395,7 +1875,17 @@
       ],
       "soundcloudSlug": "johnsummit",
       "spotifyId": "7kNqXtgeIwFtelmRjWv205",
-      "youtubeQuery": "John Summit live set"
+      "youtubeQuery": "John Summit live set",
+      "youtubeVideoIds": [
+        "9TKqqBCmDHA",
+        "_bxHsZP4m8w",
+        "aloPGSlq31Y"
+      ],
+      "youtubeLabels": [
+        "JOHN SUMMIT LIVE @ LOLLAPALOOZA CHICAGO 2026",
+        "John Summit Live @ Ultra Europe 2026 Full Set",
+        "JOHN SUMMIT LIVE @ ULTRA MIAMI MAIN STAGE 2026"
+      ]
     },
     {
       "name": "Feid",
@@ -1408,7 +1898,17 @@
       ],
       "soundcloudSlug": "feid_oficial",
       "spotifyId": "2LRoIwlKmHjgvigdNGBHNo",
-      "youtubeQuery": "Feid live set"
+      "youtubeQuery": "Feid live set",
+      "youtubeVideoIds": [
+        "gBuIDtGVLDQ",
+        "Qr59TI50Qf8",
+        "eiqko6khfQA"
+      ],
+      "youtubeLabels": [
+        "FEID VS FERXXO SESSION - DJ ASTO",
+        "Amazon Music live with Feid",
+        "LO MEJOR DE FERXXO MIX 2025 | BEST OF FEID MIX 2025 LIVE | DJ MELO | LIVE FROM MIAMI | BRICKELL"
+      ]
     },
     {
       "name": "T-Pain",
@@ -1445,7 +1945,17 @@
       ],
       "soundcloudSlug": "mkgee",
       "spotifyId": "7tr9pbgNEKtG0GQTKe08Tz",
-      "youtubeQuery": "Mk.gee live set"
+      "youtubeQuery": "Mk.gee live set",
+      "youtubeVideoIds": [
+        "Jfrmng_5t_0",
+        "qsaaPYFv2Vo",
+        "_8cNtH-fluQ"
+      ],
+      "youtubeLabels": [
+        "MKGEE FULL CONCERT DC HOWARD THEATRE (High Quality Recording)",
+        "Mk.gee live at the Franklin Music Hall, Philadelphia 11/7/24",
+        "Live | Brooklyn Paramount NYC | September 29, 2024"
+      ]
     },
     {
       "name": "Polo & Pan",
@@ -1460,7 +1970,17 @@
       ],
       "soundcloudSlug": "polo-pan",
       "spotifyId": "45yEuthJ9yq1rNXAOpBnqM",
-      "youtubeQuery": "Polo & Pan live set"
+      "youtubeQuery": "Polo & Pan live set",
+      "youtubeVideoIds": [
+        "CsGauHXioos",
+        "Ujx_wc33SPE",
+        "JyUUrpBpBeM"
+      ],
+      "youtubeLabels": [
+        "Polo & Pan live for Cercle at Serre Monumentale in Paris, France",
+        "POLO & PAN @ CORONA CAPITAL 2025 (ALMOST FULL SET)",
+        "POLO & PAN (DJ SET) | ARTSY NIGHTS | ZONA MACO ART WEEK | 2023, Mexico City"
+      ]
     },
     {
       "name": "Rainbow Kitten Surprise",
@@ -1473,7 +1993,17 @@
       ],
       "soundcloudSlug": "rainbow-kitten-surprise",
       "spotifyId": "4hz8tIajF2INpgM0qzPJz2",
-      "youtubeQuery": "Rainbow Kitten Surprise live set"
+      "youtubeQuery": "Rainbow Kitten Surprise live set",
+      "youtubeVideoIds": [
+        "fXPgH13jI74",
+        "FPaAy2RqIA4",
+        "mdRmJyw_R8o"
+      ],
+      "youtubeLabels": [
+        "Live at Bonnaroo 2017 (Full Set)",
+        "Full Session | Paste",
+        "Tropics (Live From Red Rocks)"
+      ]
     },
     {
       "name": "Wet Leg",
@@ -1508,7 +2038,17 @@
       ],
       "soundcloudSlug": "gigiperez",
       "spotifyId": "1iCnM8foFssWlPRLfAbIwo",
-      "youtubeQuery": "Gigi Perez live set"
+      "youtubeQuery": "Gigi Perez live set",
+      "youtubeVideoIds": [
+        "waYAB0CZgXY",
+        "dlGXdax3lzw",
+        "lj1eAfnrxoM"
+      ],
+      "youtubeLabels": [
+        "Full Set All Things Go DC Music Festival 2025",
+        "Sailor Song (Live On The Tonight Show Starring Jimmy Fallon)",
+        "Fable (Live) | Coal Drops Sessions"
+      ]
     },
     {
       "name": "Disco Lines",
@@ -1544,7 +2084,17 @@
         "indie"
       ],
       "spotifyId": "5sXaGoRLSpd7VeyZrLkKwt",
-      "youtubeQuery": "Gregory Alan Isakov live set"
+      "youtubeQuery": "Gregory Alan Isakov live set",
+      "youtubeVideoIds": [
+        "qv680s1rmcg",
+        "rFnmvaMPUtU",
+        "niZ_Jio2YL8"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Live at the Caverns in Tennessee",
+        "Gregory Alan Isakov & The Atlanta Pops Orchestra - FULL CONCERT - March 23, 2025. (Audio)"
+      ]
     },
     {
       "name": "Phantogram",
@@ -1560,7 +2110,17 @@
       ],
       "soundcloudSlug": "phantogram",
       "spotifyId": "1l9d7B8W0IHy3LqWsxP2SH",
-      "youtubeQuery": "Phantogram live set"
+      "youtubeQuery": "Phantogram live set",
+      "youtubeVideoIds": [
+        "VCLSOTXcvAg",
+        "OgXwbeVwX1o",
+        "Vd1i8DC912w"
+      ],
+      "youtubeLabels": [
+        "Live at Lollapalooza 2017",
+        "Full Performance (Live on KEXP)",
+        "2025-01-17 · SOMA · San Diego · full live show"
+      ]
     },
     {
       "name": "Passion Pit",
@@ -1614,6 +2174,16 @@
         "acid house",
         "hip-hop",
         "g-house"
+      ],
+      "youtubeVideoIds": [
+        "5d-OTDHQfdE",
+        "9kqnsoY94L8",
+        "gHmA1PYH5Io"
+      ],
+      "youtubeLabels": [
+        "CA7RIEL Y PACO AMOROSO | OUTSIDE LANDS FESTIVAL 2025 (FULL SET)",
+        "Tiny Desk Concert",
+        "BAÑO MARÍA (En Vivo - Buenos Aires)"
       ]
     },
     {
@@ -1626,7 +2196,17 @@
       ],
       "soundcloudSlug": "wildriversband",
       "spotifyId": "59sBwR0jPSTrbMtuTkRPN5",
-      "youtubeQuery": "Wild Rivers live set"
+      "youtubeQuery": "Wild Rivers live set",
+      "youtubeVideoIds": [
+        "D_G7FMq14kA",
+        "3wBk3DU4esY",
+        "Mlcf0vnsGxo"
+      ],
+      "youtubeLabels": [
+        "Live Concert | CBC Music Live",
+        "Thinking 'Bout Love (Live at Roy Thomson Hall)",
+        "Live at RCA, Studio B"
+      ]
     },
     {
       "name": "Anderson East",
@@ -1637,7 +2217,17 @@
         "r&b"
       ],
       "spotifyId": "5q6z6GTth6lMbL9I8CAgby",
-      "youtubeQuery": "Anderson East live set"
+      "youtubeQuery": "Anderson East live set",
+      "youtubeVideoIds": [
+        "xWMsrlkEAHY",
+        "K1hCGR6OwOQ",
+        "2_6w5ZRi9Ko"
+      ],
+      "youtubeLabels": [
+        "Anderson East Performs Live at the Leon Loft (2025)",
+        "Daryl Hall & Anderson East - She's Gone (Live From Daryl's House)",
+        "Anderson East \"This Too Shall Last\" | Austin City Limits Web Exclusive"
+      ]
     },
     {
       "name": "Lucius",
@@ -1652,7 +2242,17 @@
       ],
       "soundcloudSlug": "ilovelucius",
       "spotifyId": "0Z21adRvCzdVx4LjgfbQLT",
-      "youtubeQuery": "Lucius live set"
+      "youtubeQuery": "Lucius live set",
+      "youtubeVideoIds": [
+        "Q33lPG0co6g",
+        "kKH0-dV4n9k",
+        "8Pk_2dVPjms"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live on KEXP)",
+        "Full Performance (Live on KEXP)",
+        "NPR Music Tiny Desk Concert"
+      ]
     },
     {
       "name": "Royal & the Serpent",
@@ -1686,7 +2286,17 @@
       ],
       "soundcloudSlug": "flower_garden",
       "spotifyId": "1JspXUvEv3D9ddMeLNqYWj",
-      "youtubeQuery": "Flowerovlove live set"
+      "youtubeQuery": "Flowerovlove live set",
+      "youtubeVideoIds": [
+        "Qp0JAyWHhow",
+        "-KQLakA04iE",
+        "HoWzKrOy0Us"
+      ],
+      "youtubeLabels": [
+        "flowerovlove performs \"breaking news\" LIVE on Wish 107.5 Bus",
+        "Flowerovlove with Bini, \"breaking news\" Coachella 2026 4/12/26",
+        "Flowerovlove, \"American Wedding\" Gov Ball NYC, 6/6/26"
+      ]
     },
     {
       "name": "julie",
@@ -1696,6 +2306,16 @@
       "genres": [
         "shoegaze",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "XGCdmxaiKx4",
+        "sRfva6w7Z5M",
+        "GS2j6HDuP3o"
+      ],
+      "youtubeLabels": [
+        "Julie at Outbreak Fest Manchester 2025",
+        "2026-04-02 · Sid the Cat Auditorium · South Pasadena · full live show",
+        "live at webster hall, nyc (oct 22nd, 2024)"
       ]
     },
     {
@@ -1707,6 +2327,16 @@
       "genres": [
         "folk",
         "indie"
+      ],
+      "youtubeVideoIds": [
+        "yVwGncg9azg",
+        "dOORInwjqIg",
+        "B7p0kBV52S8"
+      ],
+      "youtubeLabels": [
+        "Live | Mercury Lounge NYC | April 20, 2024",
+        "Hans Williams Live at Whale Aid 2023 Burlington, VT (Partial Set)",
+        "Body On My Shoulders"
       ]
     },
     {
@@ -1719,6 +2349,16 @@
       "genres": [
         "synthpop",
         "indie"
+      ],
+      "youtubeVideoIds": [
+        "LMF76fEUlZg",
+        "qkPSYsDdoQA",
+        "2lhsQ4BHVhY"
+      ],
+      "youtubeLabels": [
+        "Live From KCRW HQ (Full Performance)",
+        "HAUTE & FREDDY @ CORONA CAPITAL 2025 (FULL CONCERT)",
+        "Haute & Freddy Live in the Medium Sized Backyard"
       ]
     },
     {
@@ -1752,6 +2392,16 @@
         "dream pop",
         "chillout",
         "pop"
+      ],
+      "youtubeVideoIds": [
+        "37ENaoo8-4A",
+        "1zu7NhQBEos",
+        "2j9zYFdX9sk"
+      ],
+      "youtubeLabels": [
+        "Beanie",
+        "Chezile Live in the Medium Sized Backyard",
+        "Chezile LIVE @ Camp Flog Gnaw 2025 || Full Concert (Remastered)"
       ]
     },
     {

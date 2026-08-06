@@ -537,7 +537,17 @@
     {
       "name": "Otsukare",
       "day": "Saturday",
-      "youtubeQuery": "Otsukare live set"
+      "youtubeQuery": "Otsukare live set",
+      "youtubeVideoIds": [
+        "fL96HXQCs8s",
+        "2VMO0ntULZI",
+        "X804jJkGHI0"
+      ],
+      "youtubeLabels": [
+        "Live From Denver",
+        "OTSUKARE LIVE @ NORTHERN INVASION PRE PARTY 2026 (SHOT BY ISO.ASH)",
+        "OTSUKARE @ Mushroom | Riddim live set [Asia/South Korea debut]"
+      ]
     },
     {
       "name": "Surf Mesa",
@@ -549,7 +559,17 @@
         "electronic",
         "house"
       ],
-      "spotifyId": "1lmU3giNF3CSbkVSQmLpHQ"
+      "spotifyId": "1lmU3giNF3CSbkVSQmLpHQ",
+      "youtubeVideoIds": [
+        "4IoG_L7kZls",
+        "mWBDdsOP00o",
+        "9QSqgoePxDo"
+      ],
+      "youtubeLabels": [
+        "Surf Mesa Live @ Mavericks Beach Club | House Music Mix",
+        "On The Radar DJ SET",
+        "Morning Aprés Ski House Set | AM.RADIO 006"
+      ]
     },
     {
       "name": "Tony Romera",
@@ -566,7 +586,17 @@
       ],
       "soundcloudSlug": "tonyromera",
       "spotifyId": "7GQsOji7pfixzkLt63awo5",
-      "youtubeQuery": "Tony Romera live set"
+      "youtubeQuery": "Tony Romera live set",
+      "youtubeVideoIds": [
+        "Uj1glCL55Qc",
+        "wLo5zavg8Ls",
+        "3Xf90_40zyU"
+      ],
+      "youtubeLabels": [
+        "Live at elrow (Toulouse - France)",
+        "Live at House Delivery Stage - Madame Loyal XXL - Paris (France)",
+        "Live at Silo Brooklyn (New York - USA)"
+      ]
     },
     {
       "name": "Sistek",
@@ -598,7 +628,17 @@
       ],
       "soundcloudSlug": "autografmusic",
       "spotifyId": "0FVj4JuzTyudaXAwfqDQ20",
-      "youtubeQuery": "Autograf live set"
+      "youtubeQuery": "Autograf live set",
+      "youtubeVideoIds": [
+        "nFvYdAaUlwY",
+        "9R6XH7JZlJI",
+        "iLJv5ikbOD0"
+      ],
+      "youtubeLabels": [
+        "Autograf at Zenyara Full Live Set | Coachella Afterparty",
+        "Chasing Sunsets | Autograf at Chicago's North Avenue Beach",
+        "Afro House Mix 2026 | Magical Beach Sunset in Bali"
+      ]
     },
     {
       "name": "Wenzday",
@@ -627,6 +667,16 @@
       "soundcloudSlug": "dddarkheart",
       "genres": [
         "heavy metal"
+      ],
+      "youtubeVideoIds": [
+        "XWb2ANXMYSc",
+        "qlGCb33XYq4",
+        "ZD6tqaQQlnU"
+      ],
+      "youtubeLabels": [
+        "Anakim B2B Dark Heart: Live from Sound Nightclub (Los Angeles) DJ Set",
+        "Dark Heart at Insomniac Warehouse Los Angeles [Melodic Techno DJ SET in 4K]",
+        "Dark Heart Surgery - Ganja White Night (FULL SET 10/10 - “The One” Tour @ The Firmament - 11/6/19)"
       ]
     },
     {
@@ -695,7 +745,17 @@
       ],
       "soundcloudSlug": "gryffinofficial",
       "spotifyId": "2ZRQcIgzPCVaT9XKhXZIzh",
-      "youtubeQuery": "Gryffin live set"
+      "youtubeQuery": "Gryffin live set",
+      "youtubeVideoIds": [
+        "YUZBFR2391E",
+        "V17fQ1ZIDHA",
+        "L5mVCPjFWtQ"
+      ],
+      "youtubeLabels": [
+        "GRYFFIN LIVE @ ULTRA MIAMI 2025",
+        "LIVE AT RED ROCKS",
+        "Lake Tahoe Sunrise Set"
+      ]
     },
     {
       "name": "BUNT.",
@@ -749,7 +809,17 @@
       ],
       "soundcloudSlug": "lpgiobbi",
       "spotifyId": "3oKnyRhYWzNsTiss5n4Z1J",
-      "youtubeQuery": "LP Giobbi live set"
+      "youtubeQuery": "LP Giobbi live set",
+      "youtubeVideoIds": [
+        "-eOa77e_uJg",
+        "kbVq3KRUitc",
+        "gUrIVfzGg9U"
+      ],
+      "youtubeLabels": [
+        "LP Giobbi WE2 | Tomorrowland 2026",
+        "LP Giobbi at Coachella 2026 - Quasar Stage",
+        "Tomorrowland Winter 2025"
+      ]
     },
     {
       "name": "Angrybaby",
@@ -804,7 +874,17 @@
       ],
       "spotifyId": "2qlQds30O0pDx4WqHEOoqj",
       "youtubeQuery": "Carola live set",
-      "soundcloudSlug": "listentocarola"
+      "soundcloudSlug": "listentocarola",
+      "youtubeVideoIds": [
+        "0uEUZCuNDog",
+        "XzLtKtz5eeI",
+        "6Qx0Reo4ztY"
+      ],
+      "youtubeLabels": [
+        "MARCO CAROLA at MUSIC ON FESTIVAL 2024 • AMSTERDAM",
+        "MARCO CAROLA at MUSIC ON FESTIVAL 2023 • AMSTERDAM",
+        "Marco Carola b2b Jamie Jones - KEEZY HOMECOMING"
+      ]
     },
     {
       "name": "Chris Schambacher",
@@ -832,7 +912,17 @@
         "dubstep",
         "electronic"
       ],
-      "spotifyId": "2u01kCKA5wDvvztuH8lyT0"
+      "spotifyId": "2u01kCKA5wDvvztuH8lyT0",
+      "youtubeVideoIds": [
+        "DYlcCkyYDnA",
+        "xAcJRlUYPFg",
+        "Yj7N51lR0hQ"
+      ],
+      "youtubeLabels": [
+        "SVDDEN DEATH Presents: VOYD Live @ Lost Lands 2025 - Full Set",
+        "SVDDEN DEATH (VOYD) - VOYDOME 2025 (FULL SET)",
+        "SVDDEN Death @ Forbidden Kingdom 2025"
+      ]
     },
     {
       "name": "yvm3",
@@ -865,7 +955,17 @@
       ],
       "soundcloudSlug": "nimda_uk",
       "spotifyId": "3Au3D8Hsiy5B8z4C2uH02h",
-      "youtubeQuery": "Nimda live set"
+      "youtubeQuery": "Nimda live set",
+      "youtubeVideoIds": [
+        "Xx4JIZB5H7E",
+        "CSJpIKDitWw",
+        "S8tmaELI36A"
+      ],
+      "youtubeLabels": [
+        "RAMPAGE OPEN AIR 2026 (FULL SET)",
+        "LOST LANDS DEBUT 2025 (FULL SET)",
+        "Live From Denver"
+      ]
     },
     {
       "name": "Kai Wachi",
@@ -942,7 +1042,17 @@
         "dubstep",
         "electronic"
       ],
-      "spotifyId": "4aBx7mA6lUOVhEsjokZrXb"
+      "spotifyId": "4aBx7mA6lUOVhEsjokZrXb",
+      "youtubeVideoIds": [
+        "PGeGzVXl8CY",
+        "Q6EMYHtCcAY",
+        "oydZljhmJQo"
+      ],
+      "youtubeLabels": [
+        "MUST DIE! // A NIGHT OF CHAOS // CLUB VINYL 12/19/25",
+        "Must Die! Live at Lost Land Festival 2021",
+        "MUST DIE! Live @ HOUSE OF LIPS"
+      ]
     },
     {
       "name": "Syzy",
@@ -958,7 +1068,17 @@
       ],
       "soundcloudSlug": "st-ars-tar-star-sta-r",
       "spotifyId": "4Uu7oYMJmwNxi1qTXaeRDL",
-      "youtubeQuery": "Syzy live set"
+      "youtubeQuery": "Syzy live set",
+      "youtubeVideoIds": [
+        "e0gSUO-Cf4Q",
+        "H8U9cmUDWow",
+        "TPk4B-zPrY0"
+      ],
+      "youtubeLabels": [
+        "Syzy @ Red Rocks (Cyclops Rocks V Night 1 - Morrison, CO 2025) (Recap)",
+        "Syzy Cyclops Rocks V 2025 (Full Set)",
+        "Syzy @ HCD Bay Area"
+      ]
     },
     {
       "name": "PhaseOne",
@@ -990,6 +1110,16 @@
         "electro house",
         "psytrance",
         "dnb"
+      ],
+      "youtubeVideoIds": [
+        "2FVbl00fRDA",
+        "avNFRR1m6Mo",
+        "hLWsEmseaIY"
+      ],
+      "youtubeLabels": [
+        "Live From Denver",
+        "HVDES for mau5trap x Insomniac Records Livestream (September 26, 2020)",
+        "HVDES @ The Pinnacle (SVDDEN DEATH: PINNACLE Nashville Night 2 - 2025) (Full Set)"
       ]
     },
     {
@@ -1001,6 +1131,16 @@
       "genres": [
         "dubstep",
         "riddim dubstep"
+      ],
+      "youtubeVideoIds": [
+        "oqhM1ydMgts",
+        "o07NPG4sCds",
+        "V3-XyEQHDVY"
+      ],
+      "youtubeLabels": [
+        "Codd Dubz Live @ Lost Lands 2025 - Full Set",
+        "Codd Dubz Live @ Lost Lands 2025 - Couch Lands",
+        "Big Bass Ting 360"
       ]
     },
     {
@@ -1011,6 +1151,16 @@
         "pop",
         "dubstep",
         "riddim"
+      ],
+      "youtubeVideoIds": [
+        "U_VJqpZmAmI",
+        "Unca62bn4Qw",
+        "VggktlHhqKo"
+      ],
+      "youtubeLabels": [
+        "PYKE LIVE @ KEMISTRY NIGHT CLUB | 02/24",
+        "PYKE // PYKE b2b SVDDEN DEATH x ZYN x Aweminus (Full Set) @ The Vanguard (FK Official Preparty 2024)",
+        "VICIOUS @ PYKE ALBUM RELEASE PARTY [ FULL SET + DIRECT AUDIO ]"
       ]
     },
     {
@@ -1022,6 +1172,16 @@
       "genres": [
         "dubstep",
         "riddim"
+      ],
+      "youtubeVideoIds": [
+        "56Jas43w6BQ",
+        "X192NVm0XDE",
+        "T2b-0dz_hfk"
+      ],
+      "youtubeLabels": [
+        "Sqishi b2b Blvnkspvce At Realms Ottawa",
+        "Live From Denver",
+        "SQISHI b2b BLVNKSPVCE b2b Decimate (Full Set) @ Home Bass 2024: A Hero's Quest - Day 3 (Orlando)"
       ]
     },
     {
@@ -1054,7 +1214,17 @@
       ],
       "soundcloudSlug": "sqishi_dubz",
       "spotifyId": "0UIHAcihBBHr4dlN4syE1h",
-      "youtubeQuery": "SQISHI live set"
+      "youtubeQuery": "SQISHI live set",
+      "youtubeVideoIds": [
+        "q9FsZRr6D6s",
+        "DSnS6vz05gU",
+        "56Jas43w6BQ"
+      ],
+      "youtubeLabels": [
+        "Space Yacht: Big Bass Ting",
+        "Live From Denver",
+        "Sqishi b2b Blvnkspvce At Realms Ottawa"
+      ]
     },
     {
       "name": "Phiso",
@@ -1065,7 +1235,17 @@
         "dubstep",
         "electronic"
       ],
-      "spotifyId": "7csjnVvI7V4mm9e7fvqRdC"
+      "spotifyId": "7csjnVvI7V4mm9e7fvqRdC",
+      "youtubeVideoIds": [
+        "OKQ5KsYiCeM",
+        "yKy32Mh0Js4",
+        "2ASlTBZSuWQ"
+      ],
+      "youtubeLabels": [
+        "PHISO",
+        "phiso",
+        "PHISO @ THE HOLLYWOOD PALLADIUM"
+      ]
     },
     {
       "name": "Aweminus",
@@ -1078,7 +1258,17 @@
       ],
       "soundcloudSlug": "aweminus",
       "spotifyId": "3sS9RKjrDJMl7zpG3cWHk7",
-      "youtubeQuery": "Aweminus live set"
+      "youtubeQuery": "Aweminus live set",
+      "youtubeVideoIds": [
+        "7V90AbIL2FY",
+        "1lg8_nIugqQ",
+        "wlFaTpQQlJk"
+      ],
+      "youtubeLabels": [
+        "Aweminus b2b Phiso @ The Pinnacle (SVDDEN DEATH: PINNACLE Nashville Night 1 - 2025) (Full Set)",
+        "Aweminus b2b Phiso @ Summit (Shiverz’s CHOPPED Denver 2026) (Recap)",
+        "Aweminus for ATLiens Space Cult Livestream (December 12, 2020)"
+      ]
     },
     {
       "name": "MYTHM",
@@ -1088,14 +1278,34 @@
       ],
       "soundcloudSlug": "mythmofficial",
       "spotifyId": "1glLUw3XRj8AcWWGgb8CTZ",
-      "youtubeQuery": "MYTHM live set"
+      "youtubeQuery": "MYTHM live set",
+      "youtubeVideoIds": [
+        "m89Xyly6M3k",
+        "Z5ExSNjgoh4",
+        "DQHU8xbUTAs"
+      ],
+      "youtubeLabels": [
+        "MYTHM LIVE AT RED ROCKS 2025",
+        "MYTHM (LIVE) @ DEF: THE BOILER",
+        "REAL DUBSTEP HOURS W/ GENTLEMENS CLUB B2B SHIVERZ B2B MYTHM B2B OBEY B2B ???"
+      ]
     },
     {
       "name": "STVG",
       "day": "Sunday",
       "soundcloudSlug": "stvgisnotreal",
       "spotifyId": "2rx1yiRvSJFvluHaIiv6h7",
-      "youtubeQuery": "STVG live set"
+      "youtubeQuery": "STVG live set",
+      "youtubeVideoIds": [
+        "bW_snx4XhQY",
+        "sMRPef__yRs",
+        "cC5fVAf5HJs"
+      ],
+      "youtubeLabels": [
+        "Live @ Colours Hoxton London (Full Multicam Set)",
+        "STVG @ Red Rocks (SVDDEN DEATH: The Valley of Darkness III Night 2 - Morrison, CO 2025) (Full Set)",
+        "STVG SET PREMIERE!! Do not miss this wild dubstep/tearout full live multicam set (feat Nimda)"
+      ]
     },
     {
       "name": "SOSA",
@@ -1104,6 +1314,16 @@
       "soundcloudSlug": "sosamusicuk",
       "genres": [
         "trance"
+      ],
+      "youtubeVideoIds": [
+        "mrAi6lvPoP0",
+        "9T28y81aIOI",
+        "Vi3cAzgxhUk"
+      ],
+      "youtubeLabels": [
+        "SOSA DJ Set | Rockstar Energy presents @creamfields 2025 | @beatport Live",
+        "SOSA Tech-House Set Live From DJ Mag HQ",
+        "SOSA @ Coachella 2026 - Yuma Tent"
       ]
     },
     {
@@ -1116,6 +1336,16 @@
         "house",
         "tech house",
         "deep house"
+      ],
+      "youtubeVideoIds": [
+        "JifvniEqaoE",
+        "DB1Vh1vCJko",
+        "w9cm0NGoKZE"
+      ],
+      "youtubeLabels": [
+        "FULL SET | DGTL AMSTERDAM 2026",
+        "Luuk van Dijk @Thuishaven 10HRS, Amsterdam",
+        "House Calls: Live with Luuk Van Dijk"
       ]
     },
     {
@@ -1147,6 +1377,16 @@
       "soundcloudSlug": "mahonydj",
       "genres": [
         "jazz"
+      ],
+      "youtubeVideoIds": [
+        "nSRyu8AXgow",
+        "HV4CndkboC8",
+        "Lygi0M4oZ2w"
+      ],
+      "youtubeLabels": [
+        "Mahony LIVE Sunwaves 37",
+        "Mahony Live @ Neversea Kapital 2025",
+        "Take Notes Showcase @ weSKI Muntele Mic 2026 (Full DJ Set)"
       ]
     },
     {
@@ -1159,6 +1399,16 @@
         "house",
         "deep house",
         "tech-house"
+      ],
+      "youtubeVideoIds": [
+        "hUgpfByiE8k",
+        "qYDlX_eYWKY",
+        "j6DPBUjbgwE"
+      ],
+      "youtubeLabels": [
+        "Balearica Sunset Sessions at Secret Cave | Ibiza (Spain)",
+        "Maxinne live DJ set from E1 LONDON July 2023",
+        "Ky William b2b Maxinne - Live DJ Set @ 1001Tracklists x DJ Lovers Club Miami Rooftop Sessions 2024"
       ]
     },
     {
@@ -1170,7 +1420,17 @@
       ],
       "spotifyId": "5SO0HbJrDq3xwQYwIYXUGi",
       "youtubeQuery": "BOYCOTT live set",
-      "soundcloudSlug": "itsboycott"
+      "soundcloudSlug": "itsboycott",
+      "youtubeVideoIds": [
+        "BNLo4bEhsaw",
+        "ISBT-Ej4qgE",
+        "IUMzRU3u5mo"
+      ],
+      "youtubeLabels": [
+        "BOYCOTT Live Underground at The Morning Spin | Full DJ Set from Tiger Lilly (April 2025)",
+        "Elvira Dj set - Boycott Eurovision Kvartirnik/ Casa Zemstvei",
+        "BOYCOTT B2B LEIF | Trap EDM and Dubstep Set Live from TRAP HAUS (Austin, TX)"
+      ]
     }
   ]
 }
