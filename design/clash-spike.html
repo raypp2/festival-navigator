@@ -10,8 +10,10 @@
     --hairline:#241E38; --border-card:#2B2440;
     --text-header:#EDEAF4; --text-primary:#E6E2F0; --text-body:#C6CBD6;
     --text-tertiary:#877FA4; --brand:192,132,252;
-    --lead:#C084FC; --alt:#5A5178; --both:#67B98A;
+    --lead:#C084FC; --alt:#5A5178; --both:#67B98A; --ctx:#2A2440;
     --r-row:14px; --r-pill:999px;
+    /* the wall's own vertical scale: 15 minutes to a 20px row */
+    --row-h:20px;
   }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--page); color:var(--text-body);
@@ -29,31 +31,58 @@
   .panel > h2 { font:800 10px system-ui; letter-spacing:.14em; text-transform:uppercase;
                 color:var(--text-tertiary); margin:0 0 10px; }
 
-  /* ---- the overlap timeline ---- */
-  .tl { position:relative; margin:4px 0 10px; }
-  .tl-row { position:relative; height:34px; margin-bottom:6px; }
-  .tl-bar { position:absolute; top:5px; height:24px; border-radius:7px;
-            display:flex; align-items:center; padding:0 8px; overflow:hidden;
-            font:700 11px system-ui; color:#fff; white-space:nowrap;
-            transition:background .18s ease, opacity .18s ease; }
-  .tl-bar .st { font-weight:600; opacity:.72; margin-left:6px; font-size:10px; }
-  .tl-bar[data-role="lead"] { background:var(--lead); color:#1A1030; }
-  .tl-bar[data-role="alt"]  { background:var(--alt); opacity:.85; }
-  .tl-bar[data-role="both"] { background:var(--both); color:#0C2A1C; }
-  /* the shared minutes, drawn over everything */
-  .tl-lap { position:absolute; top:0; bottom:0; background:repeating-linear-gradient(
-              -45deg, rgba(255,255,255,.13) 0 5px, transparent 5px 10px);
-            border-left:1px dashed rgba(255,255,255,.4); border-right:1px dashed rgba(255,255,255,.4);
-            pointer-events:none; }
-  .tl-axis { display:flex; justify-content:space-between; font:600 9.5px ui-monospace,monospace;
-             color:var(--text-tertiary); margin-top:2px; }
-  .tl-cut { position:absolute; top:0; bottom:18px; width:2px; background:#fff;
-            box-shadow:0 0 0 3px rgba(255,255,255,.18); border-radius:2px; cursor:grab; }
-  .tl-cut::after { content:''; position:absolute; inset:-14px -16px; }
+  /* ---- the vertical timetable: time runs DOWN, stages are columns, exactly
+         the wall's orientation. Switching axis between two views of the same
+         festival day is the thing that makes people re-read a screen. ---- */
+  .tt { display:grid; grid-template-columns:38px 1fr; gap:0; position:relative; }
+  .tt-heads { display:grid; gap:5px; margin-bottom:5px; }
+  .tt-head { font:800 9px system-ui; letter-spacing:.1em; text-transform:uppercase;
+             color:var(--text-tertiary); text-align:center; padding-bottom:4px;
+             border-bottom:1px solid var(--hairline); white-space:nowrap;
+             overflow:hidden; text-overflow:ellipsis; }
+  .tt-head.hot { color:#DEC2FF; border-bottom-color:rgba(var(--brand),.55); }
+  .tt-rail { position:relative; }
+  .tt-tick { position:absolute; right:6px; font:600 9px ui-monospace,monospace;
+             color:var(--text-tertiary); transform:translateY(-50%); white-space:nowrap; }
+  .tt-grid { position:relative; display:grid; gap:5px; }
+  .tt-col { position:relative; border-left:1px solid rgba(255,255,255,.045); }
+  .tt-line { position:absolute; left:0; right:0; height:1px; background:rgba(255,255,255,.05); }
 
-  .verdict { font:700 12px system-ui; color:var(--text-primary); margin:2px 0 12px; }
+  .blk { position:absolute; left:2px; right:2px; border-radius:7px; padding:4px 6px;
+         font:700 10.5px system-ui; overflow:hidden; line-height:1.25;
+         transition:background .18s ease, opacity .18s ease, color .18s ease; }
+  .blk .t { display:block; font:600 9px ui-monospace,monospace; opacity:.75; margin-top:1px; }
+  .blk[data-role="lead"] { background:var(--lead); color:#1A1030; }
+  .blk[data-role="alt"]  { background:var(--alt); color:#E6E2F0; }
+  .blk[data-role="both"] { background:var(--both); color:#0C2A1C; }
+  .blk[data-role="ctx"]  { background:var(--ctx); color:#8E86A8;
+                           border:1px dashed rgba(255,255,255,.13); }
+
+  /* the shared minutes, banded across every column */
+  .tt-lap { position:absolute; left:0; right:0; pointer-events:none;
+            background:repeating-linear-gradient(-45deg, rgba(255,255,255,.11) 0 5px, transparent 5px 10px);
+            border-top:1px dashed rgba(255,255,255,.42); border-bottom:1px dashed rgba(255,255,255,.42); }
+  /* the handover, dragged vertically */
+  .tt-cut { position:absolute; left:0; right:0; height:2px; background:#fff;
+            box-shadow:0 0 0 3px rgba(255,255,255,.16); border-radius:2px; cursor:grab; z-index:3; }
+  .tt-cut::after { content:''; position:absolute; inset:-15px 0; }
+  .tt-cut .lab { position:absolute; right:2px; top:-17px; font:800 9px ui-monospace,monospace;
+                 color:#1A1030; background:#fff; border-radius:4px; padding:1px 4px; }
+
+  .verdict { font:700 12px system-ui; color:var(--text-primary); margin:10px 0 0; }
   .verdict b { color:var(--lead); }
   .verdict .warn { color:#F2B8B5; }
+
+  /* ---- the walk: stage to stage, which is what the overlap really costs ---- */
+  .path { display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin-top:9px;
+          font:700 10px system-ui; }
+  .path .s { background:var(--card); border:1px solid var(--hairline); border-radius:var(--r-pill);
+             padding:3px 8px; color:var(--text-body); }
+  .path .s.hot { border-color:rgba(var(--brand),.6); color:#DEC2FF; }
+  .path .arr { color:var(--text-tertiary); }
+  .path .arr.cross { color:#F2B8B5; }
+  .path .n { width:100%; font:600 10px system-ui; color:var(--text-tertiary); margin-top:3px; }
+  .path .n b { color:#F2B8B5; }
 
   /* ---- choices ---- */
   .choices { display:flex; flex-direction:column; gap:7px; }
@@ -69,24 +98,20 @@
   .choice[aria-pressed="true"] .dot { border-color:var(--lead); background:var(--lead); }
 
   /* ---- before / after ---- */
-  .ba { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center;
+  .ba { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:start;
         background:var(--card); border:1px solid var(--hairline); border-radius:11px;
         padding:10px 11px; margin-top:11px; }
   .ba .col { min-width:0; }
   .ba h3 { font:800 9px system-ui; letter-spacing:.12em; text-transform:uppercase;
            color:var(--text-tertiary); margin:0 0 5px; }
-  .ba .arrow { color:var(--text-tertiary); font-size:15px; }
-  /* wraps rather than truncating — "ALTERNATE · MUST" is the whole point of the
-     panel and an ellipsis eats the half that answers "what happened to them" */
-  .ent { display:flex; align-items:center; gap:6px; font-size:11.5px; margin-bottom:5px;
-         flex-wrap:wrap; }
-  .ent .tag { flex-basis:100%; padding-left:14px; }
+  .ba .arrow { color:var(--text-tertiary); font-size:15px; padding-top:14px; }
+  .ent { display:flex; align-items:center; gap:6px; font-size:11.5px; margin-bottom:5px; flex-wrap:wrap; }
   .pip { flex:none; width:8px; height:8px; border-radius:var(--r-pill); background:var(--alt); }
   .pip[data-l="4"] { background:var(--lead); box-shadow:0 0 0 2px rgba(192,132,252,.28); }
   .pip[data-l="lead"] { background:var(--lead); }
   .pip[data-l="both"] { background:var(--both); }
-  .ent .tag { font:700 9px system-ui; letter-spacing:.06em; text-transform:uppercase;
-              color:var(--text-tertiary); }
+  .ent .tag { flex-basis:100%; padding-left:14px; font:700 9px system-ui; letter-spacing:.06em;
+              text-transform:uppercase; color:var(--text-tertiary); }
   .unchanged { font-size:10.5px; color:var(--text-tertiary); margin-top:7px; }
   .unchanged b { color:#9FE6C0; }
 
@@ -94,12 +119,15 @@
   .day { background:var(--card); border:1px solid var(--hairline); border-radius:11px; overflow:hidden; }
   .slot { padding:10px 11px; border-bottom:1px solid var(--hairline); }
   .slot:last-child { border-bottom:none; }
+  .slot.ctx { opacity:.55; }
   .slot-t { font:600 10px ui-monospace,monospace; color:var(--text-tertiary); margin-bottom:3px; }
-  .slot-n { font:800 13px system-ui; color:var(--text-header); display:flex; align-items:center; gap:7px; }
+  .slot-n { font:800 13px system-ui; color:var(--text-header); display:flex; align-items:center;
+            gap:7px; flex-wrap:wrap; }
   .badge { font:800 8.5px system-ui; letter-spacing:.08em; text-transform:uppercase;
            padding:2px 6px; border-radius:var(--r-pill); }
   .badge.lead { background:rgba(192,132,252,.2); color:#DEC2FF; }
   .badge.both { background:rgba(103,185,138,.2); color:#9FE6C0; }
+  .badge.walk { background:rgba(242,184,181,.16); color:#F2B8B5; }
   .alts { margin-top:6px; }
   .alts summary { font:700 10.5px system-ui; color:var(--text-tertiary); cursor:pointer; list-style:none; }
   .alts summary::-webkit-details-marker { display:none; }
@@ -122,18 +150,19 @@
    this exists to answer whether LEAD and SPLIT read clearly before any of it is built.</p>
 
 <div class="note">
-  The two questions this is meant to settle: <b>does the timeline make the overlap
-  legible enough to decide from</b>, and <b>does “lead + alternates” feel like a
-  decision</b> — one that clears the clash without pretending the other artists
-  stopped existing. Everything below is fake data. Drag the white handle on SPLIT.
+  Time runs <b>down</b> and stages are <b>columns</b>, the same orientation as the
+  wall. The sets either side of the window are drawn too, dashed — the real cost
+  of a clash is usually the <b>walk</b>, and you cannot judge that from the two
+  clashing sets alone. Fake data. Drag the white handle on SPLIT.
 </div>
 
 <div class="scen" id="scen"></div>
 
 <div class="panel">
-  <h2>The overlap</h2>
-  <div class="tl" id="tl"></div>
+  <h2>The window</h2>
+  <div id="tt"></div>
   <div class="verdict" id="verdict"></div>
+  <div class="path" id="path"></div>
 </div>
 
 <div class="panel">
@@ -150,28 +179,39 @@
 
 <script>
 // ---------------------------------------------------------------------------
-// Fake clashes, in the shape gaps.js's dayPlan actually emits:
-//   { name, stage, startMin, endMin, level }
-// so anything that reads well here can be fed the real thing unchanged.
+// Fake data in the shape gaps.js's dayPlan emits — { name, stage, startMin,
+// endMin, level } — so anything that reads well here can be fed the real thing.
+// `context` is what is already picked either side of the window: not part of
+// the clash, but the reason a clash is expensive or cheap.
 // ---------------------------------------------------------------------------
 var SCENARIOS = [
-  { id:'partial', label:'Partial (the common one)', sets:[
-    { name:'Tape B',  stage:'Main',    startMin:21*60,    endMin:22*60+30, level:4 },
-    { name:'TroyBoi', stage:'Cosmic',  startMin:22*60,    endMin:23*60,    level:4 },
-  ]},
-  { name:'', id:'heavy', label:'Near-total', sets:[
-    { name:'Kx5',     stage:'Main',    startMin:22*60,    endMin:23*60+30, level:4 },
-    { name:'Zedd',    stage:'Wormhole',startMin:22*60+10, endMin:23*60+20, level:4 },
-  ]},
-  { id:'sliver', label:'Sliver (see both)', sets:[
-    { name:'Whethan', stage:'Main',    startMin:20*60,    endMin:21*60+30, level:3 },
-    { name:'Kaivon',  stage:'Cosmic',  startMin:21*60+20, endMin:22*60+30, level:4 },
-  ]},
+  { id:'partial', label:'Partial · same stage after', sets:[
+      { name:'Tape B',  stage:'Main',   startMin:21*60,    endMin:22*60+30, level:4 },
+      { name:'TroyBoi', stage:'Cosmic', startMin:22*60,    endMin:23*60,    level:4 },
+    ], context:[
+      { name:'Kaivon',  stage:'Main',   startMin:19*60+45, endMin:20*60+45, level:2 },
+      { name:'Zedd',    stage:'Main',   startMin:23*60+15, endMin:24*60+30, level:4 },
+    ]},
+  { id:'crossing', label:'Partial · you end up crossing twice', sets:[
+      { name:'Tape B',  stage:'Main',   startMin:21*60,    endMin:22*60+30, level:4 },
+      { name:'TroyBoi', stage:'Far Field', startMin:22*60, endMin:23*60,    level:4 },
+    ], context:[
+      { name:'Kaivon',  stage:'Main',   startMin:19*60+45, endMin:20*60+45, level:2 },
+      { name:'Zedd',    stage:'Main',   startMin:23*60+15, endMin:24*60+30, level:4 },
+    ]},
+  { id:'heavy', label:'Near-total', sets:[
+      { name:'Kx5',     stage:'Main',     startMin:22*60,    endMin:23*60+30, level:4 },
+      { name:'Zedd',    stage:'Wormhole', startMin:22*60+10, endMin:23*60+20, level:4 },
+    ], context:[
+      { name:'ONHELL',  stage:'Wormhole', startMin:20*60+30, endMin:21*60+45, level:3 },
+    ]},
   { id:'three', label:'Three at once', sets:[
-    { name:'ONHELL',  stage:'Main',    startMin:23*60,    endMin:24*60+30, level:4 },
-    { name:'LAYZ',    stage:'Cosmic',  startMin:23*60+20, endMin:24*60+40, level:2 },
-    { name:'Trym',    stage:'Bass',    startMin:23*60+40, endMin:25*60,    level:4 },
-  ]},
+      { name:'ONHELL',  stage:'Main',   startMin:23*60,    endMin:24*60+30, level:4 },
+      { name:'LAYZ',    stage:'Cosmic', startMin:23*60+20, endMin:24*60+40, level:2 },
+      { name:'Trym',    stage:'Bass',   startMin:23*60+40, endMin:25*60,    level:4 },
+    ], context:[
+      { name:'Obskür',  stage:'Bass',   startMin:21*60+30, endMin:22*60+45, level:3 },
+    ]},
 ];
 
 var state = { scen:'partial', kind:'lead', lead:0, cut:null };
@@ -181,103 +221,169 @@ function clock(m) {
   var ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 === 0 ? 12 : h % 12;
   return h12 + ':' + String(mm).padStart(2,'0') + ' ' + ap;
 }
-function sets() { return SCENARIOS.find(s => s.id === state.scen).sets; }
-function span() {
-  var ss = sets();
-  return { a: Math.min.apply(null, ss.map(s=>s.startMin)), b: Math.max.apply(null, ss.map(s=>s.endMin)) };
+function hhmm(m) {
+  var t = ((m % 1440) + 1440) % 1440, h = Math.floor(t/60);
+  var ap = h >= 12 ? 'p' : 'a', h12 = h % 12 === 0 ? 12 : h % 12;
+  return h12 + ap;
 }
+function scen()    { return SCENARIOS.find(s => s.id === state.scen); }
+function sets()    { return scen().sets; }
+function context() { return scen().context || []; }
+function all()     { return sets().concat(context()); }
+
 function lapWindow() {
   var ss = sets();
   var a = Math.max.apply(null, ss.map(s=>s.startMin));
   var b = Math.min.apply(null, ss.map(s=>s.endMin));
   return b > a ? { a:a, b:b } : null;
 }
-// Default handover: the moment the second set starts — "leave A when B begins".
-function defaultCut() {
-  var lap = lapWindow();
-  return lap ? lap.a : null;
-}
+function defaultCut() { var l = lapWindow(); return l ? l.a : null; }
 function cut() { return state.cut == null ? defaultCut() : state.cut; }
 
-// ---- the timeline --------------------------------------------------------
-function drawTimeline() {
-  var host = document.getElementById('tl');
-  host.textContent = '';
-  var ss = sets(), sp = span(), total = sp.b - sp.a;
-  var pct = m => ((m - sp.a) / total) * 100;
+function roleOf(i) {
+  if (state.kind === 'split')  return 'both';
+  if (state.kind === 'onsite') return 'alt';
+  return i === state.lead ? 'lead' : 'alt';
+}
+// The set immediately before / after the clash window, from what is already picked.
+function beforeSet() {
+  var w = Math.min.apply(null, sets().map(s=>s.startMin));
+  return context().filter(c => c.endMin <= w).sort((a,b)=>b.endMin-a.endMin)[0] || null;
+}
+function afterSet() {
+  // the first picked set that begins once the EARLIEST clashing set has ended —
+  // that is the soonest thing you could already be walking to
+  var earliestEnd = Math.min.apply(null, sets().map(s => s.endMin));
+  return context()
+    .filter(c => c.startMin >= earliestEnd)
+    .sort((a, b) => a.startMin - b.startMin)[0] || null;
+}
 
-  ss.forEach(function (s, i) {
-    var row = document.createElement('div');
-    row.className = 'tl-row';
-    var bar = document.createElement('div');
-    bar.className = 'tl-bar';
-    bar.style.left = pct(s.startMin) + '%';
-    bar.style.width = (pct(s.endMin) - pct(s.startMin)) + '%';
-    bar.dataset.role = roleOf(i);
-    var nm = document.createElement('span');
-    nm.textContent = s.name;
-    var st = document.createElement('span');
-    st.className = 'st';
-    st.textContent = s.stage;
-    bar.append(nm, st);
-    row.appendChild(bar);
-    host.appendChild(row);
+// ---- the vertical timetable ---------------------------------------------
+function drawTimetable() {
+  var host = document.getElementById('tt');
+  host.textContent = '';
+
+  var everything = all();
+  var from = Math.floor(Math.min.apply(null, everything.map(s=>s.startMin)) / 15) * 15 - 15;
+  var to   = Math.ceil(Math.max.apply(null, everything.map(s=>s.endMin)) / 15) * 15 + 15;
+  var rows = (to - from) / 15;
+  var H = rows * 20;                                   // 20px per 15 min, like the wall
+  var y  = m => ((m - from) / 15) * 20;
+
+  // stage columns, in the order they first appear — canonical enough for a spike
+  var stages = [];
+  everything.forEach(s => { if (stages.indexOf(s.stage) < 0) stages.push(s.stage); });
+  var hot = new Set(sets().map(s => s.stage));
+
+  // heads
+  var heads = document.createElement('div');
+  heads.className = 'tt-heads';
+  heads.style.gridTemplateColumns = 'repeat(' + stages.length + ', minmax(0,1fr))';
+  heads.style.marginLeft = '38px';
+  stages.forEach(function (st) {
+    var h = document.createElement('div');
+    h.className = 'tt-head' + (hot.has(st) ? ' hot' : '');
+    h.textContent = st;
+    heads.appendChild(h);
+  });
+  host.appendChild(heads);
+
+  var tt = document.createElement('div');
+  tt.className = 'tt';
+
+  // hour rail
+  var rail = document.createElement('div');
+  rail.className = 'tt-rail';
+  rail.style.height = H + 'px';
+  for (var m = Math.ceil(from/60)*60; m <= to; m += 60) {
+    var tick = document.createElement('div');
+    tick.className = 'tt-tick';
+    tick.style.top = y(m) + 'px';
+    tick.textContent = hhmm(m);
+    rail.appendChild(tick);
+  }
+  tt.appendChild(rail);
+
+  // grid of stage columns
+  var grid = document.createElement('div');
+  grid.className = 'tt-grid';
+  grid.style.gridTemplateColumns = 'repeat(' + stages.length + ', minmax(0,1fr))';
+  grid.style.height = H + 'px';
+
+  stages.forEach(function (st) {
+    var col = document.createElement('div');
+    col.className = 'tt-col';
+    col.style.height = H + 'px';
+    for (var mm = Math.ceil(from/60)*60; mm <= to; mm += 60) {
+      var ln = document.createElement('div');
+      ln.className = 'tt-line';
+      ln.style.top = y(mm) + 'px';
+      col.appendChild(ln);
+    }
+    grid.appendChild(col);
   });
 
-  // the shared minutes, spanning every row
+  function place(s, role) {
+    var col = grid.children[stages.indexOf(s.stage)];
+    var b = document.createElement('div');
+    b.className = 'blk';
+    b.dataset.role = role;
+    b.style.top = y(s.startMin) + 'px';
+    b.style.height = Math.max(26, y(s.endMin) - y(s.startMin) - 3) + 'px';
+    var n = document.createElement('span'); n.textContent = s.name;
+    var t = document.createElement('span'); t.className = 't';
+    t.textContent = clock(s.startMin) + '–' + clock(s.endMin);
+    b.append(n, t);
+    col.appendChild(b);
+  }
+  context().forEach(c => place(c, 'ctx'));
+  sets().forEach((s, i) => place(s, roleOf(i)));
+
+  // shared minutes, banded across the whole grid
   var lap = lapWindow();
   if (lap) {
     var band = document.createElement('div');
-    band.className = 'tl-lap';
-    band.style.left = pct(lap.a) + '%';
-    band.style.width = (pct(lap.b) - pct(lap.a)) + '%';
-    band.style.top = '0';
-    band.style.height = (ss.length * 40) + 'px';
-    host.appendChild(band);
+    band.className = 'tt-lap';
+    band.style.top = y(lap.a) + 'px';
+    band.style.height = (y(lap.b) - y(lap.a)) + 'px';
+    grid.appendChild(band);
   }
-
   if (state.kind === 'split' && lap) {
     var handle = document.createElement('div');
-    handle.className = 'tl-cut';
-    handle.style.left = pct(cut()) + '%';
-    handle.style.height = (ss.length * 40) + 'px';
-    dragCut(handle, host, sp);
-    host.appendChild(handle);
+    handle.className = 'tt-cut';
+    handle.style.top = y(cut()) + 'px';
+    var lab = document.createElement('span');
+    lab.className = 'lab';
+    lab.textContent = clock(cut());
+    handle.appendChild(lab);
+    dragCut(handle, grid, from, to, H);
+    grid.appendChild(handle);
   }
 
-  var axis = document.createElement('div');
-  axis.className = 'tl-axis';
-  var l = document.createElement('span'); l.textContent = clock(sp.a);
-  var r = document.createElement('span'); r.textContent = clock(sp.b);
-  axis.append(l, r);
-  host.appendChild(axis);
+  tt.appendChild(grid);
+  host.appendChild(tt);
 }
 
-function dragCut(handle, host, sp) {
+function dragCut(handle, grid, from, to, H) {
   var lap = lapWindow();
-  function to(clientX) {
-    var box = host.getBoundingClientRect();
-    var f = Math.min(1, Math.max(0, (clientX - box.left) / box.width));
-    var m = Math.round((sp.a + f * (sp.b - sp.a)) / 5) * 5;      // 5-minute grain
+  function to_(clientY) {
+    var box = grid.getBoundingClientRect();
+    var f = Math.min(1, Math.max(0, (clientY - box.top) / box.height));
+    var m = Math.round((from + f * (to - from)) / 5) * 5;
     state.cut = Math.min(lap.b, Math.max(lap.a, m));
     render();
   }
   handle.addEventListener('pointerdown', function (e) {
     e.preventDefault();
-    var move = ev => to(ev.clientX);
+    var move = ev => to_(ev.clientY);
     var up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', up);
   });
 }
 
-function roleOf(i) {
-  if (state.kind === 'split') return 'both';
-  if (state.kind === 'onsite') return 'alt';
-  return i === state.lead ? 'lead' : 'alt';
-}
-
-// ---- the plain-language verdict -----------------------------------------
+// ---- verdict -------------------------------------------------------------
 function drawVerdict() {
   var el = document.getElementById('verdict');
   el.textContent = '';
@@ -289,58 +395,96 @@ function drawVerdict() {
 
   if (state.kind === 'split') {
     var c = cut();
-    var parts = ss.map(function (s) {
-      var got = s.startMin < c ? Math.min(s.endMin, c) - s.startMin : s.endMin - Math.max(s.startMin, c);
-      return { s:s, got:Math.max(0, got) };
-    });
-    parts.forEach(function (p, i) {
+    var ordered = ss.slice().sort((a,b)=>a.startMin-b.startMin);
+    ordered.forEach(function (s, i) {
+      var got = i === 0 ? Math.min(s.endMin, c) - s.startMin : s.endMin - Math.max(s.startMin, c);
       if (i) frag.appendChild(document.createTextNode(', then '));
-      var b = document.createElement('b'); b.textContent = p.s.name;
-      frag.append(b, document.createTextNode(' ' + p.got + ' of ' + (p.s.endMin - p.s.startMin) + ' min'));
+      var b = document.createElement('b'); b.textContent = s.name;
+      frag.append(b, document.createTextNode(
+        ' ' + Math.max(0, got) + ' of ' + (s.endMin - s.startMin) + ' min'));
     });
     frag.appendChild(document.createTextNode('. Leave at ' + clock(c) + '.'));
-    // the honest caveat: a stage change costs time nobody models
-    var w = document.createElement('span');
-    w.className = 'warn';
-    w.textContent = '  (different stages — budget the walk)';
-    if (new Set(ss.map(s=>s.stage)).size > 1) frag.appendChild(w);
   } else {
-    var worst = Math.round((mins / Math.min.apply(null, ss.map(s=>s.endMin-s.startMin))) * 100);
+    var shortest = Math.min.apply(null, ss.map(s=>s.endMin-s.startMin));
+    var frac = Math.round((mins / shortest) * 100);
     frag.appendChild(document.createTextNode(
-      worst >= 80 ? 'Effectively the same slot — one of these.'
-      : worst >= 40 ? 'You could catch part of the other.'
+      frac >= 80 ? 'Effectively the same slot — one of these.'
+      : frac >= 40 ? 'You could catch part of the other.'
       : 'Small enough to see both.'));
   }
   el.appendChild(frag);
 }
 
-// ---- the choices ---------------------------------------------------------
+// ---- the walk ------------------------------------------------------------
+// The stage sequence you would actually move through, so a clash between two
+// adjacent stages reads differently from one that sends you across the site
+// and back to where you already were.
+function drawPath() {
+  var el = document.getElementById('path');
+  el.textContent = '';
+  var ss = sets();
+  var b = beforeSet(), a = afterSet();
+
+  var seq = [];
+  if (b) seq.push({ label:b.stage, hot:false });
+  if (state.kind === 'split') {
+    ss.slice().sort((x,y)=>x.startMin-y.startMin).forEach(s => seq.push({ label:s.stage, hot:true }));
+  } else if (state.kind === 'lead') {
+    seq.push({ label: ss[state.lead].stage, hot:true });
+  } else {
+    seq.push({ label:'?', hot:true });
+  }
+  if (a) seq.push({ label:a.stage, hot:false });
+
+  var crossings = 0;
+  seq.forEach(function (s, i) {
+    if (i) {
+      var arr = document.createElement('span');
+      var cross = seq[i-1].label !== s.label && s.label !== '?' && seq[i-1].label !== '?';
+      if (cross) crossings++;
+      arr.className = 'arr' + (cross ? ' cross' : '');
+      arr.textContent = cross ? '⇥' : '→';
+      el.appendChild(arr);
+    }
+    var chip = document.createElement('span');
+    chip.className = 's' + (s.hot ? ' hot' : '');
+    chip.textContent = s.label;
+    el.appendChild(chip);
+  });
+
+  var n = document.createElement('span');
+  n.className = 'n';
+  if (state.kind === 'onsite') n.textContent = 'Route depends on what you pick on the night.';
+  else if (crossings === 0) n.innerHTML = 'No stage change — you stay put either side.';
+  else n.innerHTML = crossings + ' stage change' + (crossings > 1 ? 's' : '')
+       + ' — <b>budget the walk</b>, and remember it comes out of the set you are leaving.';
+  el.appendChild(n);
+}
+
+// ---- choices -------------------------------------------------------------
 function drawChoices() {
   var host = document.getElementById('choices');
   host.textContent = '';
   var ss = sets();
-
   ss.forEach(function (s, i) {
     add('lead', i, 'Lead with ' + s.name,
-        'Plan on ' + s.name + '. The rest stay picked, shown as alternates.');
+        s.stage + ' · the rest stay picked, shown as alternates.');
   });
   add('split', null, 'See both — split the window',
-      'Leave one partway through. Drag the handle above to set when.');
+      'Leave one partway through. Drag the handle to set when.');
   add('onsite', null, 'Decide on-site',
       'No lead. All of them stay, and My Day shows the choice at the time.');
 
   function add(kind, lead, k, d) {
     var b = document.createElement('button');
-    b.className = 'choice';
-    b.type = 'button';
+    b.className = 'choice'; b.type = 'button';
     var on = state.kind === kind && (kind !== 'lead' || state.lead === lead);
     b.setAttribute('aria-pressed', String(on));
     var dot = document.createElement('span'); dot.className = 'dot';
     var wrap = document.createElement('span');
     var kk = document.createElement('span'); kk.className = 'k'; kk.textContent = k;
     var dd = document.createElement('span'); dd.className = 'd'; dd.textContent = d;
-    wrap.append(kk, dd);
-    b.append(dot, wrap);
+    wrap.append(kk, dd); b.append(dot, wrap);
     b.addEventListener('click', function () {
       state.kind = kind;
       if (kind === 'lead') state.lead = lead;
@@ -351,25 +495,22 @@ function drawChoices() {
   }
 }
 
-// ---- before / after, so nothing moves invisibly --------------------------
+// ---- before / after ------------------------------------------------------
 function drawBeforeAfter() {
   var host = document.getElementById('ba');
   host.textContent = '';
   var ss = sets();
-
-  var before = col('Now', ss.map(function (s) {
-    return { name:s.name, level:s.level, tag: s.level === 4 ? 'must' : 'pick ×' + s.level };
-  }));
+  var before = col('Now', ss.map(s => ({ name:s.name, level:s.level,
+    tag: s.level === 4 ? 'must' : 'pick ×' + s.level })));
   var arrow = document.createElement('div'); arrow.className = 'arrow'; arrow.textContent = '→';
   var after = col('After', ss.map(function (s, i) {
     var tag = s.level === 4 ? 'must' : 'pick ×' + s.level;
     if (state.kind === 'lead')  return { name:s.name, level:i === state.lead ? 'lead' : s.level,
-                                         tag: i === state.lead ? 'lead · ' + tag : 'alternate · ' + tag };
+                                         tag:(i === state.lead ? 'lead · ' : 'alternate · ') + tag };
     if (state.kind === 'split') return { name:s.name, level:'both', tag:'both · ' + tag };
     return { name:s.name, level:s.level, tag:'on-site · ' + tag };
   }));
   host.append(before, arrow, after);
-
   document.getElementById('unchanged').innerHTML =
     'Nobody is demoted. Every pick level is <b>exactly as you left it</b> — '
     + 'this records the plan, not how much you like them.';
@@ -388,43 +529,49 @@ function drawBeforeAfter() {
   }
 }
 
-// ---- the payoff: what My Day looks like afterwards -----------------------
+// ---- My Day --------------------------------------------------------------
 function drawDay() {
   var host = document.getElementById('day');
   host.textContent = '';
-  var ss = sets();
+  var ss = sets(), b = beforeSet(), a = afterSet();
+  if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true));
 
   if (state.kind === 'split') {
     var c = cut();
-    var ordered = ss.slice().sort((a,b) => a.startMin - b.startMin);
-    ordered.forEach(function (s, i) {
+    ss.slice().sort((x,y)=>x.startMin-y.startMin).forEach(function (s, i) {
       var from = i === 0 ? s.startMin : c;
       var to   = i === 0 ? c : s.endMin;
-      host.appendChild(slot(clock(from) + ' – ' + clock(to), s.name, s.stage, 'both', []));
+      host.appendChild(slot(clock(from) + ' – ' + clock(to), s.name, s.stage, 'both', [], false,
+        i === 1 && ss[0].stage !== s.stage));
     });
-    return;
-  }
-  if (state.kind === 'onsite') {
-    host.appendChild(slot(clock(span().a) + ' – ' + clock(span().b), 'Your call on the night', '', null,
+  } else if (state.kind === 'onsite') {
+    host.appendChild(slot(
+      clock(Math.min.apply(null, ss.map(s=>s.startMin))) + ' – ' + clock(Math.max.apply(null, ss.map(s=>s.endMin))),
+      'Your call on the night', '', null,
       ss.map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
-    return;
+  } else {
+    var lead = ss[state.lead];
+    host.appendChild(slot(clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
+      ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
   }
-  var lead = ss[state.lead];
-  host.appendChild(slot(
-    clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
-    ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
 
-  function slot(t, name, stage, badge, alts) {
-    var d = document.createElement('div'); d.className = 'slot';
+  if (a) host.appendChild(slot(clock(a.startMin) + ' – ' + clock(a.endMin), a.name, a.stage, null, [], true));
+
+  function slot(t, name, stage, badge, alts, muted, walk) {
+    var d = document.createElement('div'); d.className = 'slot' + (muted ? ' ctx' : '');
     var tt = document.createElement('div'); tt.className = 'slot-t';
     tt.textContent = t + (stage ? '  ·  ' + stage : '');
     var nn = document.createElement('div'); nn.className = 'slot-n';
     nn.appendChild(document.createTextNode(name));
     if (badge) {
-      var b = document.createElement('span');
-      b.className = 'badge ' + badge;
-      b.textContent = badge === 'lead' ? 'leading' : 'seeing both';
-      nn.appendChild(b);
+      var bd = document.createElement('span'); bd.className = 'badge ' + badge;
+      bd.textContent = badge === 'lead' ? 'leading' : 'seeing both';
+      nn.appendChild(bd);
+    }
+    if (walk) {
+      var wk = document.createElement('span'); wk.className = 'badge walk';
+      wk.textContent = 'walk';
+      nn.appendChild(wk);
     }
     d.append(tt, nn);
     if (alts && alts.length) {
@@ -432,10 +579,10 @@ function drawDay() {
       var sum = document.createElement('summary');
       sum.textContent = alts.length + ' alternate' + (alts.length > 1 ? 's' : '') + ' in this window';
       det.appendChild(sum);
-      alts.forEach(function (a) {
+      alts.forEach(function (x) {
         var r = document.createElement('div'); r.className = 'alt-row';
-        var n = document.createElement('span'); n.textContent = a.name;
-        var w = document.createElement('span'); w.className = 'w'; w.textContent = a.w;
+        var n = document.createElement('span'); n.textContent = x.name;
+        var w = document.createElement('span'); w.className = 'w'; w.textContent = x.w;
         r.append(n, w); det.appendChild(r);
       });
       d.appendChild(det);
@@ -449,8 +596,7 @@ function drawScenarios() {
   host.textContent = '';
   SCENARIOS.forEach(function (s) {
     var b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = s.label;
+    b.type = 'button'; b.textContent = s.label;
     b.setAttribute('aria-pressed', String(state.scen === s.id));
     b.addEventListener('click', function () {
       state.scen = s.id; state.lead = 0; state.cut = null; render();
@@ -460,7 +606,7 @@ function drawScenarios() {
 }
 
 function render() {
-  drawScenarios(); drawTimeline(); drawVerdict();
+  drawScenarios(); drawTimetable(); drawVerdict(); drawPath();
   drawChoices(); drawBeforeAfter(); drawDay();
 }
 render();
