@@ -37,6 +37,12 @@ offline/
 # report in the tree is just a second answer to the same question.
 soundcloud-backfill-report*.md
 
+# YouTube pick audit (scripts/audit-youtube-picks.mjs). Same reasoning, and one
+# more: the report is a snapshot of what YouTube served on the day it ran, and
+# videos die in clumps — a committed copy would be stale within weeks while
+# still reading as current. Re-run it (~40 units) rather than trusting a file.
+youtube-audit-report*.json
+
 # Deny every image by default; name the three that actually ship.
 *.png
 !favicon.png
