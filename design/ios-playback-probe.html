@@ -67,13 +67,16 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
 </div>
 
 <div class="step">
-  <h2>4 · SoundCloud only — load, then ask explicitly</h2>
-  <p>Step 3 loads with <code>auto_play</code> and never calls play(). The app does
-     something different: it loads, waits for the callback, then calls play()
-     itself. If THAT works, SoundCloud is fixable; if it does not, the widget
-     drops its unlock on load and needs another approach entirely.</p>
-  <button id="run-d" disabled>Load artist 2, then call play() in the callback</button>
-  <div class="verdict wait" id="v-d">not run — SoundCloud only</div>
+  <h2>4 · SoundCloud and Spotify — load, then ask explicitly</h2>
+  <p>Step 3 never calls play(). The app does. <b>SoundCloud:</b> it loads, waits
+     for the callback, then calls play() itself. <b>Spotify:</b> <code>loadArtist</code>
+     calls <code>loadUri()</code> and <code>play()</code> on the very next line —
+     this runs exactly that, and if it stays silent, calls play() again on a delay
+     with no new tap. That second try is the whole point: it separates <i>the app
+     races the load</i> from <i>the unlock did not survive it</i>, which are
+     different bugs with different fixes.</p>
+  <button id="run-d" disabled>Load artist 2, then call play() explicitly</button>
+  <div class="verdict wait" id="v-d">not run — SoundCloud and Spotify</div>
 </div>
 
 <div class="step">
@@ -93,6 +96,7 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
   <h2>Source</h2>
   <button class="ghost" id="src-yt">▶ Test with YouTube</button>
   <button class="ghost" id="src-sc">▶ Test with SoundCloud</button>
+  <button class="ghost" id="src-sp">▶ Test with Spotify</button>
   <div class="verdict wait" id="v-src">YouTube selected</div>
 </div>
 
@@ -107,12 +111,12 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
 
 <script>
 // Two REAL artists, read out of data/festivals/ubbi-dubbi-2026.json — both
-// carry a YouTube id and a SoundCloud slug. Do not hand-write ids here: an
-// embed-disabled video fails with YT ERROR 150 and the probe then measures
-// nothing but our own typo.
+// carry a YouTube id, a SoundCloud slug and a Spotify artist id. Do not
+// hand-write ids here: an embed-disabled video fails with YT ERROR 150 and the
+// probe then measures nothing but our own typo.
 var ARTISTS = [
-  { name: 'Tape B',  yt: 'x-fYL7jm7eg', sc: 'tape-b-official' },
-  { name: 'TroyBoi', yt: '0Ahjqyo876s', sc: 'troyboi' }
+  { name: 'Tape B',  yt: 'x-fYL7jm7eg', sc: 'tape-b-official', sp: '59tlsKpLWoLTxjNNS2wdPi' },
+  { name: 'TroyBoi', yt: '0Ahjqyo876s', sc: 'troyboi',         sp: '0tvpihdAsKiNnP6sWS3jUI' }
 ];
 var source = 'yt';
 var t0 = Date.now();
@@ -132,7 +136,7 @@ function verdict(id, state, text) {
 }
 
 document.getElementById('stamp').textContent =
-  'build: ' + document.location.host + ' · probe-1 · ' + navigator.userAgent.slice(0, 72);
+  'build: ' + document.location.host + ' · probe-2 (spotify) · ' + navigator.userAgent.slice(0, 72);
 
 // ---- position sampling: the only honest proof that sound is happening -------
 // A PLAY event is a claim. A playhead that has MOVED is evidence. Everything in
@@ -209,19 +213,86 @@ function mountSC(cb) {
   });
 }
 
+// ---- Spotify ---------------------------------------------------------------
+// Mirrors js/discovery/player.js's buildSpotify deliberately: same script, same
+// createController shape, same artist URI, and a NUMBER for height (Spotify
+// picks its layout from the height it is HANDED, not from the box it lands in).
+// A probe that mounts it differently from the app is measuring a different
+// thing.
+//
+// Position comes off playback_update, whose position/duration are in
+// MILLISECONDS. Everything else in this file is seconds, so the conversion
+// happens here and nowhere else.
+var spCtl = null, spPos = 0, spPaused = null, spDurLogged = false;
+function loadSPApi(cb) {
+  if (window.__probeSpotifyApi) return cb(window.__probeSpotifyApi);
+  window.onSpotifyIframeApiReady = function (api) { window.__probeSpotifyApi = api; cb(api); };
+  var s = document.createElement('script');
+  s.src = 'https://open.spotify.com/embed/iframe-api/v1';
+  s.async = true;
+  document.head.appendChild(s);
+}
+function mountSP(cb) {
+  var node = document.createElement('div');
+  document.getElementById('stage-a').appendChild(node);
+  loadSPApi(function (api) {
+    api.createController(node, {
+      uri: 'spotify:artist:' + ARTISTS[0].sp, width: '100%', height: 150
+    }, function (c) {
+      spCtl = c;
+      // Fires once per controller, then again on every state change. isPaused
+      // is a claim like any PLAY event; the position beside it is the evidence.
+      c.addListener('playback_update', function (e) {
+        var d = (e && e.data) || {};
+        spPos = (d.position || 0) / 1000;
+        if (!spDurLogged && d.duration) {
+          spDurLogged = true;
+          log('SP duration ' + Math.round(d.duration / 1000) + 's'
+            + (d.duration <= 31000 ? ' — a 30-second preview, so keep each step short' : ''));
+        }
+        if (d.isPaused !== spPaused) {
+          spPaused = d.isPaused;
+          log('SP ' + (d.isPaused ? 'PAUSE' : 'PLAY') + ' event');
+        }
+      });
+      // Proceed on ready, but never hang on it: a controller that never reports
+      // ready is itself a finding, and the steps below can still be run.
+      var started = false;
+      var go = function (why) { if (started) return; started = true; log('SP ' + why); cb(); };
+      c.addListener('ready', function () { go('ready'); });
+      setTimeout(function () { go('ready never fired within 4s — continuing anyway'); }, 4000);
+    });
+  });
+}
+
+// ---- one dispatch per source, so a step reads as a step --------------------
+function mountFor(cb) { (source === 'yt' ? mountYT : source === 'sc' ? mountSC : mountSP)(cb); }
+function playNow() {
+  if (source === 'yt') yt.playVideo();
+  else if (source === 'sc') scWidget.play();
+  else spCtl.play();
+}
+function posNow() { return source === 'yt' ? ytPos() : source === 'sc' ? scPos : spPos; }
+// Spotify's controller owns its iframe — we never hold a handle to it, so the
+// identity check reads it back out of the stage.
+function frameNow() {
+  if (source === 'yt') return yt && yt.getIframe ? yt.getIframe() : null;
+  if (source === 'sc') return scIframe;
+  return document.getElementById('stage-a').querySelector('iframe');
+}
+
 // ---- steps -----------------------------------------------------------------
 document.getElementById('run-a').addEventListener('click', function () {
   this.disabled = true;
   t0 = Date.now();
   log('=== STEP 1: no gesture, source=' + source + ' ===');
-  var mount = source === 'yt' ? mountYT : mountSC;
-  mount(function () {
+  mountFor(function () {
     log('mounted; calling play() with no gesture in scope');
     // Deliberately deferred: a call inside this handler would still be inside
     // the tap that started the probe, which is the thing we are testing without.
     setTimeout(function () {
-      try { source === 'yt' ? yt.playVideo() : scWidget.play(); } catch (e) { log('play() threw: ' + e.message); }
-      watchPosition(source === 'yt' ? ytPos : function () { return scPos; }, 3200, function (moved) {
+      try { playNow(); } catch (e) { log('play() threw: ' + e.message); }
+      watchPosition(posNow, 3200, function (moved) {
         verdict('v-a', moved ? 'bad' : 'ok',
           moved ? 'Played WITHOUT a gesture — this phone is not enforcing the policy'
                 : 'Refused, as expected. The events above are what a refusal looks like.');
@@ -234,13 +305,13 @@ document.getElementById('run-a').addEventListener('click', function () {
 document.getElementById('run-b').addEventListener('click', function () {
   this.disabled = true;
   log('=== STEP 2: play() called inside the tap ===');
-  try { source === 'yt' ? yt.playVideo() : scWidget.play(); } catch (e) { log('play() threw: ' + e.message); }
-  watchPosition(source === 'yt' ? ytPos : function () { return scPos; }, 3200, function (moved) {
+  try { playNow(); } catch (e) { log('play() threw: ' + e.message); }
+  watchPosition(posNow, 3200, function (moved) {
     verdict('v-b', moved ? 'ok' : 'bad',
       moved ? 'Playing. This element is now unlocked.'
             : 'Did NOT play even from a gesture — something else is wrong.');
     document.getElementById('run-c').disabled = !moved;
-    if (source === 'sc' && moved) {
+    if ((source === 'sc' || source === 'sp') && moved) {
       document.getElementById('run-d').disabled = false;
       verdict('v-d', 'wait', 'ready — run step 3 first, then this');
     }
@@ -254,18 +325,37 @@ document.getElementById('run-b').addEventListener('click', function () {
 document.getElementById('run-c').addEventListener('click', function () {
   this.disabled = true;
   log('=== STEP 3: load artist 2 into the SAME element, no new tap ===');
-  var before = source === 'yt' ? (yt && yt.getIframe ? yt.getIframe() : null) : scIframe;
+  var before = frameNow();
+  var beforeSrc = before ? before.src : null;
   if (source === 'yt') {
     yt.loadVideoById(ARTISTS[1].yt);
-  } else {
+  } else if (source === 'sc') {
     scWidget.load('https://soundcloud.com/' + ARTISTS[1].sc, {
       auto_play: true, callback: function () { log('SC load() callback'); }
     });
+  } else {
+    // loadUri and NOTHING else — the pure carry question. The app also calls
+    // play() straight after, and that is step 4's job, not this one.
+    //
+    // The reset is not optional here: artist 2 starts its clock at zero, so a
+    // stale position from artist 1 would leave the samples running DOWNWARD and
+    // a real carry would read as a refusal.
+    spPos = 0;
+    spCtl.loadUri('spotify:artist:' + ARTISTS[1].sp);
   }
   setTimeout(function () {
-    var after = source === 'yt' ? (yt && yt.getIframe ? yt.getIframe() : null) : scIframe;
+    var after = frameNow();
     log('same iframe element? ' + (before === after));
-    watchPosition(source === 'yt' ? ytPos : function () { return scPos; }, 4500, function (moved) {
+    // The element surviving is not the same as the browsing context surviving.
+    // Measured on desktop 2026-08-05: Spotify's loadUri keeps the very same
+    // <iframe> node and NAVIGATES it to the new artist's embed URL, where
+    // YouTube and SoundCloud both drive theirs by postMessage and never touch
+    // src. A navigation is a new document, and a new document has never been
+    // touched — so if this line says the src changed, expect the unlock to be
+    // gone on a phone for the same reason a reload costs it.
+    log('same iframe src? ' + (after ? (beforeSrc === after.src) : 'no iframe handle')
+      + (after && beforeSrc !== after.src ? '  <- the frame NAVIGATED' : ''));
+    watchPosition(posNow, 4500, function (moved) {
       verdict('v-c', moved ? 'ok' : 'bad',
         moved ? 'KEPT PLAYING. The unlock survives a load — the app approach is right.'
               : 'STOPPED. The unlock does NOT survive a load on this phone — we need a different approach.');
@@ -273,12 +363,20 @@ document.getElementById('run-c').addEventListener('click', function () {
   }, 900);
 });
 
-// Step 4 exists because step 3 tested SoundCloud the way the PROBE does it
-// (auto_play in the load options, no explicit call), and the app does it the
-// other way (load, wait for the callback, then play()). Those are different
-// questions and step 3 only answered one of them.
+// Step 4 exists because step 3 loads the way the PROBE does it and the app does
+// it differently, on both of the sources that have a step here. Those are
+// different questions and step 3 only ever answered one of them.
+//
+// Spotify's version is two-phase on purpose. The app's loadArtist calls
+// loadUri() and play() on consecutive lines (player.js), which is a race it
+// might simply be losing — loadUri has no callback to wait on. So: run the
+// app's exact sequence first, and only if that is silent, call play() AGAIN on
+// a delay with no new tap. Moving on the second try means the fix is to defer
+// the play call and keep loadArtist. Silent on both means the unlock does not
+// survive loadUri and Spotify has to drop loadArtist the way SoundCloud did.
 document.getElementById('run-d').addEventListener('click', function () {
   this.disabled = true;
+  if (source === 'sp') { runSpotifyStep4(); return; }
   log('=== STEP 4: SC load(), then explicit play() from the callback ===');
   var sawProgress = false;
   var onProg = function () { sawProgress = true; };
@@ -300,6 +398,31 @@ document.getElementById('run-d').addEventListener('click', function () {
     }
   });
 });
+
+function runSpotifyStep4() {
+  log('=== STEP 4: SP loadUri(), then play() on the next line — the app sequence ===');
+  // Back to artist 1: step 3 already left artist 2 loaded, and asking Spotify
+  // to load the URI it is already on tests nothing.
+  spPos = 0;
+  spCtl.loadUri('spotify:artist:' + ARTISTS[0].sp);
+  try { spCtl.play(); } catch (e) { log('play() threw: ' + e.message); }
+  setTimeout(function () {
+    watchPosition(posNow, 4000, function (movedA) {
+      if (movedA) {
+        verdict('v-d', 'ok', 'PLAYED on the app sequence. loadUri + play() carries — the fault, if any, is above this layer.');
+        return;
+      }
+      log('   immediate play() did not move it — calling play() again on a delay, NO new tap');
+      spPos = 0;
+      try { spCtl.play(); } catch (e) { log('play() threw: ' + e.message); }
+      watchPosition(posNow, 4000, function (movedB) {
+        verdict('v-d', movedB ? 'wait' : 'bad',
+          movedB ? 'Only the DELAYED play() worked — loadUri needs settling time. Defer the play call; keep loadArtist.'
+                 : 'Silent both ways. The unlock does not survive loadUri — Spotify needs to drop loadArtist, as SoundCloud did.');
+      });
+    });
+  }, 900);
+}
 
 // A: size alone. Same element, same parent, just squeezed to the deck's
 // thumbnail before the load.
@@ -353,6 +476,7 @@ document.getElementById('run-e2').addEventListener('click', function () {
 
 document.getElementById('src-yt').addEventListener('click', function () { source = 'yt'; verdict('v-src', 'wait', 'YouTube selected — reload the page to start clean'); });
 document.getElementById('src-sc').addEventListener('click', function () { source = 'sc'; verdict('v-src', 'wait', 'SoundCloud selected — reload the page to start clean'); });
+document.getElementById('src-sp').addEventListener('click', function () { source = 'sp'; verdict('v-src', 'wait', 'Spotify selected — reload the page to start clean. Step 5 is YouTube only.'); });
 
 document.getElementById('copy').addEventListener('click', function () {
   var text = lines.join('\n');

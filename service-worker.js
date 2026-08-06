@@ -1,6 +1,11 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-const CACHE_VERSION = 'festival-nav-v65'; // v65 = stop re-appending the player onto the parent it is already in — that is a reparent too
+// v66 = a Spotify source on the iOS playback probe. Precautionary: the probe is
+// a top-level navigation and navigations are network-first below, so a stale
+// copy could only ever surface offline. Bumped anyway — on this project the
+// cost of a needless bump is one re-download and the cost of a missed one is a
+// wasted device trip, and that trade has been settled the hard way.
+const CACHE_VERSION = 'festival-nav-v66';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
