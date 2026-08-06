@@ -145,6 +145,39 @@ test('findClashes: a 3-way overlap merges into a single group', () => {
   assert.equal(clashes[0].sets.length, 3);
 });
 
+// A CHAIN is not a clash. A-B overlap and B-C overlap does not make A-C a
+// conflict, and grouping all three asked people to choose between two sets they
+// could comfortably both see. Two genuine conflicts, reported as two.
+test('findClashes: a chain of overlaps is two conflicts, not one group of three', () => {
+  const day = { artists: [
+    { name: 'A', stage: 'Main', time: '10:00 PM - 11:00 PM' },
+    { name: 'B', stage: 'Second', time: '10:45 PM - 12:00 AM' },
+    { name: 'C', stage: 'Third', time: '11:30 PM - 1:00 AM' },
+  ] };
+  const artists = computeDayArtists(day);
+  const p = dayPlan({ dayArtists: artists, picks: { A: { [ME]: 4 }, B: { [ME]: 4 }, C: { [ME]: 4 } }, me: ME });
+  const clashes = findClashes(p);
+
+  const names = clashes.map((c) => c.sets.map((s) => s.name).join('+'));
+  assert.deepEqual(names, ['A+B', 'B+C'],
+    'A and C never overlap (A ends 11:00, C starts 11:30) and must not be grouped together');
+  assert.ok(!names.some((n) => n.includes('A') && n.includes('C')),
+    'no group may contain both ends of the chain');
+});
+
+test('findClashes: three mutually overlapping sets stay ONE group, not three pairs', () => {
+  const day = { artists: [
+    { name: 'A', stage: 'Main', time: '10:00 PM - 11:40 PM' },
+    { name: 'B', stage: 'Second', time: '10:20 PM - 11:50 PM' },
+    { name: 'C', stage: 'Third', time: '10:40 PM - 12:00 AM' },
+  ] };
+  const artists = computeDayArtists(day);
+  const p = dayPlan({ dayArtists: artists, picks: { A: { [ME]: 1 }, B: { [ME]: 1 }, C: { [ME]: 1 } }, me: ME });
+  const clashes = findClashes(p);
+  assert.equal(clashes.length, 1, 'the pair subsets collapse into the maximal group');
+  assert.deepEqual(clashes[0].sets.map((s) => s.name), ['A', 'B', 'C']);
+});
+
 test('findClashes: back-to-back (non-overlapping) sets are not a clash', () => {
   const day = { artists: [
     { name: 'A', stage: 'Main', time: '9:00 PM - 10:00 PM' },

@@ -140,23 +140,36 @@ export function findGaps(plan, dayBounds) {
 // 'musts' when 2+ members of the group are level 4 (frame 2b's "⚡ Clash · 2 of
 // your musts"), else 'picks'.
 export function findClashes(plan) {
-  const sorted = [...plan].sort((a, b) => a.startMin - b.startMin);
-  const groups = [];
-  let cluster = [];
-  let clusterEnd = -Infinity;
-  const flush = () => { if (cluster.length >= 2) groups.push(cluster); };
+  // A clash is a set of sets that ALL overlap each other — not a chain of
+  // pairwise overlaps. The difference is not academic: A 10:00-11:00,
+  // B 10:45-12:00, C 11:30-13:00 chains into one group of three, and then the
+  // app asks you to choose between A and C, which never overlap at all and can
+  // both be seen comfortably. That is one conflict presented as a bigger one,
+  // and it pushes people to drop an artist they never needed to drop.
+  //
+  // These are intervals, so the maximal groups are exactly "everything playing
+  // at some instant", and it is enough to test the instant each set STARTS —
+  // any group that all overlap share at least one start. Groups that turn out
+  // to be contained in a larger one are dropped, so three mutually overlapping
+  // sets stay a single group of three rather than becoming three pairs.
+  //
+  // O(n^2) on a DAY'S marked sets, which is a handful.
+  const sorted = [...plan].sort((a, b) => a.startMin - b.startMin || a.endMin - b.endMin);
+  const byKey = new Map();
   for (const s of sorted) {
-    if (cluster.length && s.startMin < clusterEnd) {
-      cluster.push(s);
-      clusterEnd = Math.max(clusterEnd, s.endMin);
-    } else {
-      flush();
-      cluster = [s];
-      clusterEnd = s.endMin;
-    }
+    const at = s.startMin;
+    // filter preserves `sorted` order, so a group is time-ordered and its key
+    // is stable — decide.js indexes into this output from a router key.
+    const group = sorted.filter((o) => o.startMin <= at && o.endMin > at);
+    if (group.length < 2) continue;
+    const key = group.map((o) => o.name).join('\u0000');
+    if (!byKey.has(key)) byKey.set(key, group);
   }
-  flush();
-  return groups.map((sets) => {
+  const all = [...byKey.values()];
+  const maximal = all.filter(
+    (g) => !all.some((h) => h !== g && h.length > g.length && g.every((x) => h.includes(x))),
+  );
+  return maximal.map((sets) => {
     const musts = sets.filter((s) => s.level === 4).length;
     return { sets, severity: musts >= 2 ? 'musts' : 'picks' };
   });
