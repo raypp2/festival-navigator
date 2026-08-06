@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clash resolution — spike</title>
+<style>
+  :root {
+    --page:#0C0A14; --card:#141021; --card-unpicked:#1C1731;
+    --hairline:#241E38; --border-card:#2B2440;
+    --text-header:#EDEAF4; --text-primary:#E6E2F0; --text-body:#C6CBD6;
+    --text-tertiary:#877FA4; --brand:192,132,252;
+    --lead:#C084FC; --alt:#5A5178; --both:#67B98A;
+    --r-row:14px; --r-pill:999px;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--text-body);
+         font:14px/1.5 -apple-system, system-ui, sans-serif;
+         padding:14px 12px calc(28px + env(safe-area-inset-bottom));
+         padding-top:calc(14px + env(safe-area-inset-top)); }
+  h1 { font-size:16px; color:var(--text-header); margin:0 0 3px; }
+  .sub { font-size:11.5px; color:var(--text-tertiary); margin:0 0 14px; }
+  .note { background:var(--card); border:1px solid var(--hairline); border-radius:10px;
+          padding:9px 11px; font-size:11px; color:#9A93B4; margin-bottom:16px; }
+  .note b { color:var(--text-header); }
+
+  .panel { background:var(--card-unpicked); border:1px solid var(--border-card);
+           border-radius:var(--r-row); padding:12px; margin-bottom:16px; }
+  .panel > h2 { font:800 10px system-ui; letter-spacing:.14em; text-transform:uppercase;
+                color:var(--text-tertiary); margin:0 0 10px; }
+
+  /* ---- the overlap timeline ---- */
+  .tl { position:relative; margin:4px 0 10px; }
+  .tl-row { position:relative; height:34px; margin-bottom:6px; }
+  .tl-bar { position:absolute; top:5px; height:24px; border-radius:7px;
+            display:flex; align-items:center; padding:0 8px; overflow:hidden;
+            font:700 11px system-ui; color:#fff; white-space:nowrap;
+            transition:background .18s ease, opacity .18s ease; }
+  .tl-bar .st { font-weight:600; opacity:.72; margin-left:6px; font-size:10px; }
+  .tl-bar[data-role="lead"] { background:var(--lead); color:#1A1030; }
+  .tl-bar[data-role="alt"]  { background:var(--alt); opacity:.85; }
+  .tl-bar[data-role="both"] { background:var(--both); color:#0C2A1C; }
+  /* the shared minutes, drawn over everything */
+  .tl-lap { position:absolute; top:0; bottom:0; background:repeating-linear-gradient(
+              -45deg, rgba(255,255,255,.13) 0 5px, transparent 5px 10px);
+            border-left:1px dashed rgba(255,255,255,.4); border-right:1px dashed rgba(255,255,255,.4);
+            pointer-events:none; }
+  .tl-axis { display:flex; justify-content:space-between; font:600 9.5px ui-monospace,monospace;
+             color:var(--text-tertiary); margin-top:2px; }
+  .tl-cut { position:absolute; top:0; bottom:18px; width:2px; background:#fff;
+            box-shadow:0 0 0 3px rgba(255,255,255,.18); border-radius:2px; cursor:grab; }
+  .tl-cut::after { content:''; position:absolute; inset:-14px -16px; }
+
+  .verdict { font:700 12px system-ui; color:var(--text-primary); margin:2px 0 12px; }
+  .verdict b { color:var(--lead); }
+  .verdict .warn { color:#F2B8B5; }
+
+  /* ---- choices ---- */
+  .choices { display:flex; flex-direction:column; gap:7px; }
+  .choice { display:flex; gap:10px; align-items:flex-start; text-align:left; width:100%;
+            background:var(--card); border:1px solid var(--border-card); color:var(--text-body);
+            border-radius:11px; padding:10px 11px; cursor:pointer; font:inherit; }
+  .choice[aria-pressed="true"] { border-color:rgba(var(--brand),.75);
+            background:linear-gradient(0deg, rgba(var(--brand),.12), rgba(var(--brand),.12)), var(--card); }
+  .choice .k { font:800 11.5px system-ui; color:var(--text-header); display:block; margin-bottom:1px; }
+  .choice .d { font-size:11px; color:var(--text-tertiary); display:block; }
+  .choice .dot { flex:none; width:16px; height:16px; border-radius:var(--r-pill);
+                 border:2px solid var(--border-card); margin-top:1px; }
+  .choice[aria-pressed="true"] .dot { border-color:var(--lead); background:var(--lead); }
+
+  /* ---- before / after ---- */
+  .ba { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center;
+        background:var(--card); border:1px solid var(--hairline); border-radius:11px;
+        padding:10px 11px; margin-top:11px; }
+  .ba .col { min-width:0; }
+  .ba h3 { font:800 9px system-ui; letter-spacing:.12em; text-transform:uppercase;
+           color:var(--text-tertiary); margin:0 0 5px; }
+  .ba .arrow { color:var(--text-tertiary); font-size:15px; }
+  /* wraps rather than truncating — "ALTERNATE · MUST" is the whole point of the
+     panel and an ellipsis eats the half that answers "what happened to them" */
+  .ent { display:flex; align-items:center; gap:6px; font-size:11.5px; margin-bottom:5px;
+         flex-wrap:wrap; }
+  .ent .tag { flex-basis:100%; padding-left:14px; }
+  .pip { flex:none; width:8px; height:8px; border-radius:var(--r-pill); background:var(--alt); }
+  .pip[data-l="4"] { background:var(--lead); box-shadow:0 0 0 2px rgba(192,132,252,.28); }
+  .pip[data-l="lead"] { background:var(--lead); }
+  .pip[data-l="both"] { background:var(--both); }
+  .ent .tag { font:700 9px system-ui; letter-spacing:.06em; text-transform:uppercase;
+              color:var(--text-tertiary); }
+  .unchanged { font-size:10.5px; color:var(--text-tertiary); margin-top:7px; }
+  .unchanged b { color:#9FE6C0; }
+
+  /* ---- resulting My Day ---- */
+  .day { background:var(--card); border:1px solid var(--hairline); border-radius:11px; overflow:hidden; }
+  .slot { padding:10px 11px; border-bottom:1px solid var(--hairline); }
+  .slot:last-child { border-bottom:none; }
+  .slot-t { font:600 10px ui-monospace,monospace; color:var(--text-tertiary); margin-bottom:3px; }
+  .slot-n { font:800 13px system-ui; color:var(--text-header); display:flex; align-items:center; gap:7px; }
+  .badge { font:800 8.5px system-ui; letter-spacing:.08em; text-transform:uppercase;
+           padding:2px 6px; border-radius:var(--r-pill); }
+  .badge.lead { background:rgba(192,132,252,.2); color:#DEC2FF; }
+  .badge.both { background:rgba(103,185,138,.2); color:#9FE6C0; }
+  .alts { margin-top:6px; }
+  .alts summary { font:700 10.5px system-ui; color:var(--text-tertiary); cursor:pointer; list-style:none; }
+  .alts summary::-webkit-details-marker { display:none; }
+  .alts summary::before { content:'▸ '; }
+  .alts[open] summary::before { content:'▾ '; }
+  .alt-row { display:flex; justify-content:space-between; gap:8px; font-size:11.5px;
+             color:var(--text-body); padding:5px 0 0 12px; }
+  .alt-row .w { color:var(--text-tertiary); font:600 10px ui-monospace,monospace; }
+
+  .scen { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+  .scen button { background:var(--card); border:1px solid var(--border-card); color:var(--text-body);
+                 border-radius:var(--r-pill); padding:6px 11px; font:700 11px system-ui; cursor:pointer; }
+  .scen button[aria-pressed="true"] { border-color:rgba(var(--brand),.7); color:#DEC2FF; }
+</style>
+</head>
+<body>
+
+<h1>Clash resolution — spike</h1>
+<p class="sub">Throwaway prototype. No app state, no schema, nothing written anywhere —
+   this exists to answer whether LEAD and SPLIT read clearly before any of it is built.</p>
+
+<div class="note">
+  The two questions this is meant to settle: <b>does the timeline make the overlap
+  legible enough to decide from</b>, and <b>does “lead + alternates” feel like a
+  decision</b> — one that clears the clash without pretending the other artists
+  stopped existing. Everything below is fake data. Drag the white handle on SPLIT.
+</div>
+
+<div class="scen" id="scen"></div>
+
+<div class="panel">
+  <h2>The overlap</h2>
+  <div class="tl" id="tl"></div>
+  <div class="verdict" id="verdict"></div>
+</div>
+
+<div class="panel">
+  <h2>What do you want to do</h2>
+  <div class="choices" id="choices"></div>
+  <div class="ba" id="ba"></div>
+  <div class="unchanged" id="unchanged"></div>
+</div>
+
+<div class="panel">
+  <h2>How My Day would then read</h2>
+  <div class="day" id="day"></div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Fake clashes, in the shape gaps.js's dayPlan actually emits:
+//   { name, stage, startMin, endMin, level }
+// so anything that reads well here can be fed the real thing unchanged.
+// ---------------------------------------------------------------------------
+var SCENARIOS = [
+  { id:'partial', label:'Partial (the common one)', sets:[
+    { name:'Tape B',  stage:'Main',    startMin:21*60,    endMin:22*60+30, level:4 },
+    { name:'TroyBoi', stage:'Cosmic',  startMin:22*60,    endMin:23*60,    level:4 },
+  ]},
+  { name:'', id:'heavy', label:'Near-total', sets:[
+    { name:'Kx5',     stage:'Main',    startMin:22*60,    endMin:23*60+30, level:4 },
+    { name:'Zedd',    stage:'Wormhole',startMin:22*60+10, endMin:23*60+20, level:4 },
+  ]},
+  { id:'sliver', label:'Sliver (see both)', sets:[
+    { name:'Whethan', stage:'Main',    startMin:20*60,    endMin:21*60+30, level:3 },
+    { name:'Kaivon',  stage:'Cosmic',  startMin:21*60+20, endMin:22*60+30, level:4 },
+  ]},
+  { id:'three', label:'Three at once', sets:[
+    { name:'ONHELL',  stage:'Main',    startMin:23*60,    endMin:24*60+30, level:4 },
+    { name:'LAYZ',    stage:'Cosmic',  startMin:23*60+20, endMin:24*60+40, level:2 },
+    { name:'Trym',    stage:'Bass',    startMin:23*60+40, endMin:25*60,    level:4 },
+  ]},
+];
+
+var state = { scen:'partial', kind:'lead', lead:0, cut:null };
+
+function clock(m) {
+  var t = ((m % 1440) + 1440) % 1440, h = Math.floor(t/60), mm = t%60;
+  var ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 === 0 ? 12 : h % 12;
+  return h12 + ':' + String(mm).padStart(2,'0') + ' ' + ap;
+}
+function sets() { return SCENARIOS.find(s => s.id === state.scen).sets; }
+function span() {
+  var ss = sets();
+  return { a: Math.min.apply(null, ss.map(s=>s.startMin)), b: Math.max.apply(null, ss.map(s=>s.endMin)) };
+}
+function lapWindow() {
+  var ss = sets();
+  var a = Math.max.apply(null, ss.map(s=>s.startMin));
+  var b = Math.min.apply(null, ss.map(s=>s.endMin));
+  return b > a ? { a:a, b:b } : null;
+}
+// Default handover: the moment the second set starts — "leave A when B begins".
+function defaultCut() {
+  var lap = lapWindow();
+  return lap ? lap.a : null;
+}
+function cut() { return state.cut == null ? defaultCut() : state.cut; }
+
+// ---- the timeline --------------------------------------------------------
+function drawTimeline() {
+  var host = document.getElementById('tl');
+  host.textContent = '';
+  var ss = sets(), sp = span(), total = sp.b - sp.a;
+  var pct = m => ((m - sp.a) / total) * 100;
+
+  ss.forEach(function (s, i) {
+    var row = document.createElement('div');
+    row.className = 'tl-row';
+    var bar = document.createElement('div');
+    bar.className = 'tl-bar';
+    bar.style.left = pct(s.startMin) + '%';
+    bar.style.width = (pct(s.endMin) - pct(s.startMin)) + '%';
+    bar.dataset.role = roleOf(i);
+    var nm = document.createElement('span');
+    nm.textContent = s.name;
+    var st = document.createElement('span');
+    st.className = 'st';
+    st.textContent = s.stage;
+    bar.append(nm, st);
+    row.appendChild(bar);
+    host.appendChild(row);
+  });
+
+  // the shared minutes, spanning every row
+  var lap = lapWindow();
+  if (lap) {
+    var band = document.createElement('div');
+    band.className = 'tl-lap';
+    band.style.left = pct(lap.a) + '%';
+    band.style.width = (pct(lap.b) - pct(lap.a)) + '%';
+    band.style.top = '0';
+    band.style.height = (ss.length * 40) + 'px';
+    host.appendChild(band);
+  }
+
+  if (state.kind === 'split' && lap) {
+    var handle = document.createElement('div');
+    handle.className = 'tl-cut';
+    handle.style.left = pct(cut()) + '%';
+    handle.style.height = (ss.length * 40) + 'px';
+    dragCut(handle, host, sp);
+    host.appendChild(handle);
+  }
+
+  var axis = document.createElement('div');
+  axis.className = 'tl-axis';
+  var l = document.createElement('span'); l.textContent = clock(sp.a);
+  var r = document.createElement('span'); r.textContent = clock(sp.b);
+  axis.append(l, r);
+  host.appendChild(axis);
+}
+
+function dragCut(handle, host, sp) {
+  var lap = lapWindow();
+  function to(clientX) {
+    var box = host.getBoundingClientRect();
+    var f = Math.min(1, Math.max(0, (clientX - box.left) / box.width));
+    var m = Math.round((sp.a + f * (sp.b - sp.a)) / 5) * 5;      // 5-minute grain
+    state.cut = Math.min(lap.b, Math.max(lap.a, m));
+    render();
+  }
+  handle.addEventListener('pointerdown', function (e) {
+    e.preventDefault();
+    var move = ev => to(ev.clientX);
+    var up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  });
+}
+
+function roleOf(i) {
+  if (state.kind === 'split') return 'both';
+  if (state.kind === 'onsite') return 'alt';
+  return i === state.lead ? 'lead' : 'alt';
+}
+
+// ---- the plain-language verdict -----------------------------------------
+function drawVerdict() {
+  var el = document.getElementById('verdict');
+  el.textContent = '';
+  var ss = sets(), lap = lapWindow();
+  if (!lap) { el.textContent = 'These do not actually overlap.'; return; }
+  var mins = lap.b - lap.a;
+  var frag = document.createDocumentFragment();
+  frag.appendChild(document.createTextNode(mins + ' min overlap. '));
+
+  if (state.kind === 'split') {
+    var c = cut();
+    var parts = ss.map(function (s) {
+      var got = s.startMin < c ? Math.min(s.endMin, c) - s.startMin : s.endMin - Math.max(s.startMin, c);
+      return { s:s, got:Math.max(0, got) };
+    });
+    parts.forEach(function (p, i) {
+      if (i) frag.appendChild(document.createTextNode(', then '));
+      var b = document.createElement('b'); b.textContent = p.s.name;
+      frag.append(b, document.createTextNode(' ' + p.got + ' of ' + (p.s.endMin - p.s.startMin) + ' min'));
+    });
+    frag.appendChild(document.createTextNode('. Leave at ' + clock(c) + '.'));
+    // the honest caveat: a stage change costs time nobody models
+    var w = document.createElement('span');
+    w.className = 'warn';
+    w.textContent = '  (different stages — budget the walk)';
+    if (new Set(ss.map(s=>s.stage)).size > 1) frag.appendChild(w);
+  } else {
+    var worst = Math.round((mins / Math.min.apply(null, ss.map(s=>s.endMin-s.startMin))) * 100);
+    frag.appendChild(document.createTextNode(
+      worst >= 80 ? 'Effectively the same slot — one of these.'
+      : worst >= 40 ? 'You could catch part of the other.'
+      : 'Small enough to see both.'));
+  }
+  el.appendChild(frag);
+}
+
+// ---- the choices ---------------------------------------------------------
+function drawChoices() {
+  var host = document.getElementById('choices');
+  host.textContent = '';
+  var ss = sets();
+
+  ss.forEach(function (s, i) {
+    add('lead', i, 'Lead with ' + s.name,
+        'Plan on ' + s.name + '. The rest stay picked, shown as alternates.');
+  });
+  add('split', null, 'See both — split the window',
+      'Leave one partway through. Drag the handle above to set when.');
+  add('onsite', null, 'Decide on-site',
+      'No lead. All of them stay, and My Day shows the choice at the time.');
+
+  function add(kind, lead, k, d) {
+    var b = document.createElement('button');
+    b.className = 'choice';
+    b.type = 'button';
+    var on = state.kind === kind && (kind !== 'lead' || state.lead === lead);
+    b.setAttribute('aria-pressed', String(on));
+    var dot = document.createElement('span'); dot.className = 'dot';
+    var wrap = document.createElement('span');
+    var kk = document.createElement('span'); kk.className = 'k'; kk.textContent = k;
+    var dd = document.createElement('span'); dd.className = 'd'; dd.textContent = d;
+    wrap.append(kk, dd);
+    b.append(dot, wrap);
+    b.addEventListener('click', function () {
+      state.kind = kind;
+      if (kind === 'lead') state.lead = lead;
+      if (kind !== 'split') state.cut = null;
+      render();
+    });
+    host.appendChild(b);
+  }
+}
+
+// ---- before / after, so nothing moves invisibly --------------------------
+function drawBeforeAfter() {
+  var host = document.getElementById('ba');
+  host.textContent = '';
+  var ss = sets();
+
+  var before = col('Now', ss.map(function (s) {
+    return { name:s.name, level:s.level, tag: s.level === 4 ? 'must' : 'pick ×' + s.level };
+  }));
+  var arrow = document.createElement('div'); arrow.className = 'arrow'; arrow.textContent = '→';
+  var after = col('After', ss.map(function (s, i) {
+    var tag = s.level === 4 ? 'must' : 'pick ×' + s.level;
+    if (state.kind === 'lead')  return { name:s.name, level:i === state.lead ? 'lead' : s.level,
+                                         tag: i === state.lead ? 'lead · ' + tag : 'alternate · ' + tag };
+    if (state.kind === 'split') return { name:s.name, level:'both', tag:'both · ' + tag };
+    return { name:s.name, level:s.level, tag:'on-site · ' + tag };
+  }));
+  host.append(before, arrow, after);
+
+  document.getElementById('unchanged').innerHTML =
+    'Nobody is demoted. Every pick level is <b>exactly as you left it</b> — '
+    + 'this records the plan, not how much you like them.';
+
+  function col(title, rows) {
+    var c = document.createElement('div'); c.className = 'col';
+    var h = document.createElement('h3'); h.textContent = title; c.appendChild(h);
+    rows.forEach(function (r) {
+      var e = document.createElement('div'); e.className = 'ent';
+      var p = document.createElement('span'); p.className = 'pip'; p.dataset.l = String(r.level);
+      var n = document.createElement('span'); n.textContent = r.name;
+      var t = document.createElement('span'); t.className = 'tag'; t.textContent = r.tag;
+      e.append(p, n, t); c.appendChild(e);
+    });
+    return c;
+  }
+}
+
+// ---- the payoff: what My Day looks like afterwards -----------------------
+function drawDay() {
+  var host = document.getElementById('day');
+  host.textContent = '';
+  var ss = sets();
+
+  if (state.kind === 'split') {
+    var c = cut();
+    var ordered = ss.slice().sort((a,b) => a.startMin - b.startMin);
+    ordered.forEach(function (s, i) {
+      var from = i === 0 ? s.startMin : c;
+      var to   = i === 0 ? c : s.endMin;
+      host.appendChild(slot(clock(from) + ' – ' + clock(to), s.name, s.stage, 'both', []));
+    });
+    return;
+  }
+  if (state.kind === 'onsite') {
+    host.appendChild(slot(clock(span().a) + ' – ' + clock(span().b), 'Your call on the night', '', null,
+      ss.map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
+    return;
+  }
+  var lead = ss[state.lead];
+  host.appendChild(slot(
+    clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
+    ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
+
+  function slot(t, name, stage, badge, alts) {
+    var d = document.createElement('div'); d.className = 'slot';
+    var tt = document.createElement('div'); tt.className = 'slot-t';
+    tt.textContent = t + (stage ? '  ·  ' + stage : '');
+    var nn = document.createElement('div'); nn.className = 'slot-n';
+    nn.appendChild(document.createTextNode(name));
+    if (badge) {
+      var b = document.createElement('span');
+      b.className = 'badge ' + badge;
+      b.textContent = badge === 'lead' ? 'leading' : 'seeing both';
+      nn.appendChild(b);
+    }
+    d.append(tt, nn);
+    if (alts && alts.length) {
+      var det = document.createElement('details'); det.className = 'alts';
+      var sum = document.createElement('summary');
+      sum.textContent = alts.length + ' alternate' + (alts.length > 1 ? 's' : '') + ' in this window';
+      det.appendChild(sum);
+      alts.forEach(function (a) {
+        var r = document.createElement('div'); r.className = 'alt-row';
+        var n = document.createElement('span'); n.textContent = a.name;
+        var w = document.createElement('span'); w.className = 'w'; w.textContent = a.w;
+        r.append(n, w); det.appendChild(r);
+      });
+      d.appendChild(det);
+    }
+    return d;
+  }
+}
+
+function drawScenarios() {
+  var host = document.getElementById('scen');
+  host.textContent = '';
+  SCENARIOS.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = s.label;
+    b.setAttribute('aria-pressed', String(state.scen === s.id));
+    b.addEventListener('click', function () {
+      state.scen = s.id; state.lead = 0; state.cut = null; render();
+    });
+    host.appendChild(b);
+  });
+}
+
+function render() {
+  drawScenarios(); drawTimeline(); drawVerdict();
+  drawChoices(); drawBeforeAfter(); drawDay();
+}
+render();
+</script>
+</body>
+</html>
