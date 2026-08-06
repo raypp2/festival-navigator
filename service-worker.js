@@ -1,11 +1,9 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v69 = SoundCloud takes the full widget in the deck (artwork + its own
-// waveform, replacing an 82x46 box that had room only for a privacy link);
-// no pause glyph is painted over a silence we already predicted; and the
-// is-playing class now survives a carry. player.js and discovery.css are both
-// precached, so this bump is load-bearing.
-const CACHE_VERSION = 'festival-nav-v69';
+// v70 = a PLAY event after the widget has parked is the PERSON pressing
+// SoundCloud's own control, not our skip() — v69 moved SC to its full widget
+// and left the guard swallowing genuine taps. player.js is precached.
+const CACHE_VERSION = 'festival-nav-v70';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

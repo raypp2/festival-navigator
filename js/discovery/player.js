@@ -1157,7 +1157,19 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
         // pause icon shows but the track is not playing"). Racing it with a
         // pause() call after skip() is not enough; this is the check that
         // holds, because it runs on every PLAY the widget can emit.
-        if (!wantPlay) {
+        // ...but once we are PARKED, every skip() of ours has already landed,
+        // so a PLAY we did not ask for is the person pressing SoundCloud's own
+        // control. Adopt it. Before 2026-08-06 this branch could not tell the
+        // two apart and did not need to: SoundCloud wore our round play button,
+        // so a human press always arrived through adapter.play() with wantPlay
+        // already true. Moving SC to its full widget took that button away and
+        // left this guard swallowing genuine taps — press play, the widget
+        // starts, we pause it inside the same tick, nothing comes out. Picking
+        // a track row still worked, because loadClip() sets wantPlay itself,
+        // which is exactly the shape of the bug reported on the device.
+        if (!wantPlay && parked) {
+          wantPlay = true;
+        } else if (!wantPlay) {
           try { widget.pause(); } catch { /* widget may be mid-teardown */ }
           setPlaying(false);
           return;
