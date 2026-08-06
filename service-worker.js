@@ -1,10 +1,11 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v68 = Spotify loses loadArtist (it cannot carry — its loadUri navigates the
-// iframe) and gains a transport of ours plus a playback_update listener. This
-// one is NOT precautionary: player.js and discovery.css are both precached
-// below, so without the bump a returning browser keeps serving the old player.
-const CACHE_VERSION = 'festival-nav-v68';
+// v69 = SoundCloud takes the full widget in the deck (artwork + its own
+// waveform, replacing an 82x46 box that had room only for a privacy link);
+// no pause glyph is painted over a silence we already predicted; and the
+// is-playing class now survives a carry. player.js and discovery.css are both
+// precached, so this bump is load-bearing.
+const CACHE_VERSION = 'festival-nav-v69';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell

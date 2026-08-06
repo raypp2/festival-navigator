@@ -2033,9 +2033,27 @@ function ensureOverlay() {
   return overlay;
 }
 
+// The mobile dock (person / day tabs / fest name) sits at z-index 30 and the
+// deck overlay at 34, so while the deck is open the dock is painted over and
+// invisible — but still rendered, still laying out, still repainting behind a
+// full-screen overlay nobody can see it through. Hiding it is the honest
+// statement of what is already true on screen.
+//
+// A NOTE ON HEIGHT, because it is the obvious thing to assume and it is wrong:
+// this reclaims none. The overlay is position:fixed over the whole viewport and
+// .dd-actions already runs to the bottom edge (measured 2026-08-06: action bar
+// bottom gap = 0), so the deck was never yielding those 45px to begin with.
+// `.dock.hidden` is v3's own mechanism — app.js already uses it when the wall's
+// search field takes focus — so this is that switch, not a new one.
+function setDockHidden(hidden) {
+  const dock = document.getElementById('dock');
+  if (dock) dock.classList.toggle('hidden', hidden);
+}
+
 export function openDeck(ctx, actions = {}) {
   ensureOverlay();
   deckOpen = true;
+  setDockHidden(true);
   forcedLayout = null; // real usage always defers to the real matchMedia, regardless of any test residue
   watchLayout(ctx, actions);
   const gen = ++pendingOpenGen;
@@ -2053,6 +2071,7 @@ export function closeDeck() {
   // Before anything else: a pick timer that fires after the deck is gone would
   // write a level onto whatever card the next session deals at that index.
   clearDeckTimers();
+  setDockHidden(false);
   resetDesktopSession(); // a fresh open deals a fresh session on desktop too
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
   unwatchLayout();

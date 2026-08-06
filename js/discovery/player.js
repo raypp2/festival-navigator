@@ -241,7 +241,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
 
   function init() {
     root = document.createElement('div');
-    root.className = 'sample-player sample-player--' + curLayout;
+    setLayoutClass();
     curHost.appendChild(root);
 
     core.setOnline(typeof navigator === 'undefined' ? true : navigator.onLine !== false);
@@ -399,10 +399,11 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     root.insertBefore(renderTabs(snap), body);
 
     for (const el of [...body.children]) if (el !== stageEl) el.remove();
-    if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
+    // YouTube only: its native chrome is unusable at 82x46, which is what this
+    // row is for. SoundCloud now brings its own waveform on the full stage, and
+    // a second scrubber under the first is just noise.
+    if (curLayout === 'compact' && snap.currentSource === 'yt') {
       body.appendChild(buildSeekRow(snap));
-    } else if (curLayout === 'compact' && snap.currentSource === 'sp') {
-      body.appendChild(buildSpotifyTransport(snap));
     }
     if (snap.currentSource !== 'sp') body.appendChild(renderClips(snap));
 
@@ -456,20 +457,27 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // orange button of ours, which is strictly less than the artist page shows
     // for the same artist. Same embed, same format, every layout
     // (device feedback, 2026-08-04).
-    const useNowPlayingRow = curLayout === 'compact' && snap.currentSource !== 'sp';
+    // ONLY YouTube keeps the 82x46 thumb now. Spotify escaped it on 2026-08-04
+    // because its iframe IS the control surface; SoundCloud's is too, and it
+    // was still paying the thumb's price — at 82x46 the widget has room for
+    // nothing but its own "Privacy policy" link, so the deck showed a grey box
+    // with a legal notice where the artwork should be (reported 2026-08-06).
+    // On the full stage the same widget draws artwork, title and its own
+    // clickable waveform, which is the artist page's treatment and the reason
+    // that surface reads better. --disc-stage-sc-h (166px) already sized this;
+    // nothing new is invented here, the height was waiting for a caller.
+    const useNowPlayingRow = curLayout === 'compact' && snap.currentSource === 'yt';
     const stageWrap = useNowPlayingRow ? buildCompactStage(snap) : buildFullStage(snap);
     body.appendChild(stageWrap);
     // Compact can't fit usable native chrome (YT at 82x46) and SC compact has
     // no visible widget at all — a full-width seek row is the scrubber there.
     // Full/desktop YT has native controls; full/desktop SC has the widget's
     // own clickable waveform; Spotify's embed is self-contained.
-    if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
+    // YouTube only: its native chrome is unusable at 82x46, which is what this
+    // row is for. SoundCloud now brings its own waveform on the full stage, and
+    // a second scrubber under the first is just noise.
+    if (curLayout === 'compact' && snap.currentSource === 'yt') {
       body.appendChild(buildSeekRow(snap));
-    } else if (curLayout === 'compact' && snap.currentSource === 'sp') {
-      // Same slot, same scrubber, plus a play control — Spotify has no
-      // now-playing row to carry one. Only reachable now that playback_update
-      // feeds updateSeekRow; before that there was no position to draw.
-      body.appendChild(buildSpotifyTransport(snap));
     }
     // Spotify draws no alternates block at all. Its embed already lists its own
     // top tracks, so a panel restating that — plus a preview caveat the chip on
@@ -627,6 +635,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
   // player before anyone pressed anything (reported 2026-08-02). Only the
   // embed's own play/pause events move it now — asking a player to start is
   // not the same as it having started.
+  // The ONE place root's className is written. Resetting it to base + layout is
+  // the point, but the STATE classes have to come back with it. `is-offline`
+  // was already re-asserted by hand at the call sites; `is-playing` was not,
+  // and it could never recover on its own — setPlaying() early-returns when
+  // playingNow is unchanged, so once the class was dropped mid-playback nothing
+  // ever put it back. Measured in the desktop pane 2026-08-06: after a pick the
+  // video was demonstrably still running (frames advancing four seconds apart)
+  // while the equaliser sat dark. That is the honest-icon rule broken from the
+  // other direction — the UI claiming silence over sound.
+  function setLayoutClass() {
+    root.className = 'sample-player sample-player--' + curLayout;
+    if (playingNow) root.classList.add('is-playing');
+  }
+
   function setPlaying(on) {
     if (playingNow === on) return;
     playingNow = on;
@@ -743,36 +765,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     return stage;
   }
 
-  // ---- Spotify's transport: our play control BESIDE the scrubber -----------
-  // Spotify draws its own transport, but only inside the embed — so on the deck
-  // the one control this source offers sits at a different place and size from
-  // the round button every other tab gives you. Measured on an iPhone (probe
-  // step 6, iOS Simulator 2026-08-06): after a load has silenced it, ONE tap on
-  // a control of OURS starts the incoming artist — clock from zero, climbing.
-  // SoundCloud fails the same test, because its own gate is up. So the
-  // consistency is available for Spotify specifically, and it is worth taking.
+  // NO transport row of ours for Spotify, and none for SoundCloud either. One
+  // shipped on 2026-08-06 on the strength of probe step 6 (a tap on our own
+  // control DOES start Spotify after a load, where SoundCloud's gate refuses
+  // one). The measurement stands; the control did not. Spotify's stage is
+  // --disc-stage-sp-h (352px), so on a deck card the row landed past the
+  // card's own overflow — clipped, not merely below the fold, verified in the
+  // Simulator. And once SoundCloud moved to its full widget the same day, the
+  // rule that was already written for Spotify covered all three: an embed that
+  // draws its own transport IS the control surface, and we only draw one where
+  // the native chrome is unusable — YouTube at 82x46, and nowhere else.
   //
-  // BESIDE the scrubber and BELOW the stage, never over the embed: covering
-  // Spotify's real UI with a button of ours is exactly what the 2026-08-04
-  // device feedback rejected, and this does not re-open it. The seek row is
-  // itself a <button> and owns a drag, so our control is its sibling, not its
-  // child.
-  //
-  // Reuses `sample-player-np-btn` so patchClipAndPlay's existing lookup paints
-  // this glyph too, with no second code path to keep in step.
-  function buildSpotifyTransport(snap) {
-    const row = document.createElement('div');
-    row.className = 'sample-player-sp-transport';
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'sample-player-np-btn is-sp';
-    btn.disabled = !snap.online;
-    btn.setAttribute('aria-label', 'Play or pause');
-    setPlayGlyph(btn, snap.play);
-    btn.addEventListener('click', () => applyState(core.togglePlay()));
-    row.append(btn, buildSeekRow(snap));
-    return row;
-  }
+  // What that work was actually worth is the playback_update listener in
+  // buildSpotify: without it the app was deaf to this source and the watchdog
+  // would pause a healthy embed 2500ms after any request. That stays.
 
   // ---- compact: 82x46 now-playing row (empty placeholder — mountEmbed/rebuildChrome fill it).
   // YouTube and SoundCloud only: Spotify takes the full stage on every layout,
@@ -1409,7 +1415,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     if (destroyed || !newHost) return false;
     curHost = newHost;
     if (newLayout) curLayout = newLayout;
-    root.className = 'sample-player sample-player--' + curLayout;
+    setLayoutClass();
     newHost.appendChild(root); // appendChild of an already-connected node is a MOVE, not remove+reinsert
     if (lastSnap && !lastSnap.collapsed) rebuildChrome(lastSnap, false);
     else if (lastSnap) renderCollapsed();
@@ -1445,7 +1451,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     genresLine = Array.isArray(nextArtist?.genres) ? nextArtist.genres.join(' · ') : nextArtist?.genres || '';
 
     if (nextLayout) curLayout = nextLayout;
-    root.className = 'sample-player sample-player--' + curLayout;
+    setLayoutClass();
     // The root must never leave the document — Safari reloads a disconnected
     // iframe and the reload costs us the gesture unlock (see deck.js's park).
     // The caller builds its new card detached and inserts it at the end of the
@@ -1477,7 +1483,9 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       }
     }
 
-    const snap = core.mount(artistKey, curSources, { autoplay: nextAutoplay });
+    // `let`, not `const`: the refusal path below re-points this at the snapshot
+    // core returns after withdrawing a play we know cannot be granted.
+    let snap = core.mount(artistKey, curSources, { autoplay: nextAutoplay });
     lastSnap = snap;
     root.classList.toggle('is-offline', !snap.online);
 
@@ -1491,6 +1499,27 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
 
     const canCarry = !!prevSource && snap.currentSource === prevSource
       && embedAdapter && typeof embedAdapter.loadArtist === 'function';
+
+    // A source that cannot carry cannot start without a fresh tap. That is
+    // measured, not assumed: SoundCloud re-gates behind its own interstitial
+    // and Spotify navigates the iframe out from under the unlock (probe steps
+    // 3/4, 2026-08-05 and 2026-08-06). Painting a PAUSE glyph over that
+    // silence is a claim we already know to be false at the moment we draw it,
+    // and it costs the person their first tap: tapping pause calls togglePlay,
+    // which withdraws a request that was never granted, so the track then
+    // needs a second tap to start. The watchdog only corrects the glyph 2500ms
+    // later, which is no help at all to anyone who taps straight away —
+    // reported from the deck, 2026-08-06.
+    //
+    // So do not make the claim. The INTENT is not withdrawn: this reports as a
+    // refusal, exactly as the watchdog does, so the deck keeps soundIntent and
+    // the next artist still gets its try.
+    let refusedUpFront = false;
+    if (!canCarry && snap.play) {
+      snap = core.togglePlay();
+      lastSnap = snap;
+      refusedUpFront = true;
+    }
 
     if (canCarry) {
       // Around the embed if the shape allows; the ordinary rebuild otherwise,
@@ -1515,7 +1544,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       settle(() => { if (!destroyed) mountEmbed(snap.currentSource, snap); });
     }
     if (snap.play) armPlayWatchdog(); else clearPlayWatchdog();
-    notify(snap);
+    notify(snap, refusedUpFront ? { autoplayRefused: true } : undefined);
     return canCarry;
   }
 
