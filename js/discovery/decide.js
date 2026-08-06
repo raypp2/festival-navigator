@@ -39,6 +39,11 @@ let playerHandle = null;
 let activeSlot = 0; // which card index currently owns the live player
 let decideOpen = false;
 let currentKey = null;
+// SPIKE — the selection being PREVIEWED, before it is committed. The whole
+// value of the window is watching the plan land on it; committing on the first
+// tap throws that away and sends you back to My Day before you have seen
+// anything. null means "showing what is already saved".
+let pending = null;
 
 // ---- router key -------------------------------------------------------------------
 export function keyFor(day, idx) { return `decide:${day}:${idx}`; }
@@ -409,24 +414,32 @@ function buildCard(setEntry, day, clash, ctx, actions, canonData, fest, slotIdx)
   chooseBtn.type = 'button';
   chooseBtn.className = 'dc-choose';
   chooseBtn.textContent = `Choose ${setEntry.name}`;
-  chooseBtn.addEventListener('click', () => chooseArtist(day, clash, setEntry.name, ctx, actions, fest));
+  const shownNow = pending || getResolution(ctx.fid, day, clash.sets.map((x) => x.name));
+  chooseBtn.setAttribute('aria-pressed',
+    String(!!shownNow && shownNow.kind === 'lead' && shownNow.lead === setEntry.name));
+  chooseBtn.addEventListener('click', () => {
+    pending = { kind: 'lead', lead: setEntry.name };
+    renderBody(day, clash, ctx, actions, canonData, fest);
+  });
   card.appendChild(chooseBtn);
 
   return card;
 }
 
 // ---- choose / split / on-site actions ---------------------------------------------
-function chooseArtist(day, clash, chosenName, ctx, actions, fest) {
+function commitPlan(day, clash, plan, ctx, actions) {
   // SPIKE — this used to demote every OTHER artist to pick x1 and touch nothing
   // else, which is why the clash came straight back (dayPlan keeps anything at
   // level >= 1) and why the person could not tell what had happened. It now
   // records a PLAN and leaves every pick level exactly where they left it.
   const names = clash.sets.map((s) => s.name);
   const before = getResolution(ctx.fid, day, names);
-  setResolution(ctx.fid, day, names, { kind: 'lead', lead: chosenName });
+  setResolution(ctx.fid, day, names, plan);
+  pending = null;
   if (actions.refreshMyDay) actions.refreshMyDay();
+  const said = plan.kind === 'lead' ? `Leading with ${plan.lead}` : 'Keeping both';
   if (actions.showUndoToast) {
-    actions.showUndoToast(`Leading with ${chosenName} — undo`, () => {
+    actions.showUndoToast(`${said} — undo`, () => {
       if (before) setResolution(ctx.fid, day, names, before);
       else clearResolution(ctx.fid, day, names);
       if (actions.refreshMyDay) actions.refreshMyDay();
@@ -446,6 +459,11 @@ function dismissClash(day, clash, kind, ctx, actions) {
 function renderBody(day, clash, ctx, actions, canonData, fest) {
   const overlay = document.getElementById(OVERLAY_ID);
   if (!overlay) return;
+  // Keep the reader where they were. Tapping "sample this one" rebuilds the
+  // body (the ONE PLAYER rule means the other card's player has to go), and
+  // without this it also scrolled them back to the top of a screen they had
+  // deliberately scrolled down.
+  const prevScroll = overlay.querySelector('.dc-scroll')?.scrollTop || 0;
   overlay.textContent = '';
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
 
@@ -481,8 +499,9 @@ function renderBody(day, clash, ctx, actions, canonData, fest) {
   // clash from two artist cards side by side — they say nothing about how much
   // of each you would actually lose.
   const names = clash.sets.map((s) => s.name);
-  const resolution = getResolution(ctx.fid, day, names);
-  scroll.appendChild(buildWindow(clash, clash.plan || [], resolution));
+  const saved = getResolution(ctx.fid, day, names);
+  const shown = pending || saved;   // preview beats saved; saved beats nothing
+  scroll.appendChild(buildWindow(clash, clash.plan || [], shown));
 
   const cardsWrap = document.createElement('div');
   cardsWrap.className = 'dc-cards';
@@ -508,13 +527,30 @@ function renderBody(day, clash, ctx, actions, canonData, fest) {
   keepBtn.className = 'dc-onsite';
   keepBtn.textContent = clash.sets.length === 2 ? 'Keep both — decide on-site'
     : `Keep all ${clash.sets.length} — decide on-site`;
-  keepBtn.setAttribute('aria-pressed', String(!!resolution && resolution.kind === 'keep'));
+  keepBtn.setAttribute('aria-pressed', String(!!shown && shown.kind === 'keep'));
   keepBtn.addEventListener('click', () => {
-    setResolution(ctx.fid, day, names, { kind: 'keep' });
-    if (actions.refreshMyDay) actions.refreshMyDay();
-    if (!router.requestClose()) closeDecide();
+    pending = { kind: 'keep' };
+    renderBody(day, clash, ctx, actions, canonData, fest);
   });
   footer.append(keepBtn);
+
+  // The commit. Only appears once something is selected, and says what it will
+  // do rather than "Save" — the person should never have to remember which
+  // option they tapped thirty seconds ago at the top of a scrolling screen.
+  if (shown) {
+    const commit = document.createElement('button');
+    commit.type = 'button';
+    commit.className = 'dc-commit';
+    const lead = shown.kind === 'lead' ? shown.lead : null;
+    commit.textContent = lead
+      ? `Lead with ${lead}`
+      : (clash.sets.length === 2 ? 'Keep both' : `Keep all ${clash.sets.length}`);
+    const isSaved = saved && JSON.stringify(saved) === JSON.stringify(shown);
+    commit.disabled = !!isSaved;
+    if (isSaved) commit.textContent += ' \u2014 saved';
+    commit.addEventListener('click', () => commitPlan(day, clash, shown, ctx, actions));
+    footer.appendChild(commit);
+  }
   scroll.appendChild(footer);
 
   const foot = document.createElement('div');
@@ -523,6 +559,7 @@ function renderBody(day, clash, ctx, actions, canonData, fest) {
   scroll.appendChild(foot);
 
   shell.appendChild(scroll);
+  if (prevScroll) requestAnimationFrame(() => { scroll.scrollTop = prevScroll; });
   overlay.appendChild(shell);
 }
 
@@ -568,6 +605,7 @@ function ensureOverlay() {
 }
 
 export function openDecide(day, idx, ctx, actions = {}) {
+  pending = null;
   ensureOverlay();
   decideOpen = true;
   currentKey = keyFor(day, idx);
@@ -580,6 +618,7 @@ export function openDecide(day, idx, ctx, actions = {}) {
 }
 
 export function closeDecide() {
+  pending = null;
   if (playerHandle) { try { playerHandle.destroy(); } catch { /* best-effort teardown */ } playerHandle = null; }
   const overlay = document.getElementById(OVERLAY_ID);
   if (overlay) overlay.remove();

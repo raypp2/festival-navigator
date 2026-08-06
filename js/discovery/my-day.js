@@ -154,6 +154,41 @@ function buildSetRow(setEntry, ctx, plan) {
 }
 
 // ---- clash row --------------------------------------------------------------------
+// SPIKE — the strip above a window you have already decided. It states the
+// plan in words and, crucially, is the way BACK IN. A decision that cannot be
+// revisited is worse than one that nags: the clash card at least had a door.
+function buildPlanRow(day, clash, res, idx, ctx, actions) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'md-row md-planrow';
+
+  const time = document.createElement('span');
+  time.className = 'md-time';
+  time.textContent = '';
+
+  const card = document.createElement('div');
+  card.className = 'md-planrow-card';
+
+  const label = document.createElement('span');
+  label.className = 'md-planrow-label';
+  label.textContent = res.kind === 'lead'
+    ? `Leading with ${res.lead}`
+    : (clash.sets.length === 2 ? 'Keeping both' : `Keeping all ${clash.sets.length}`);
+
+  const change = document.createElement('span');
+  change.className = 'md-planrow-change';
+  change.textContent = 'Change \u203a';
+
+  card.append(label, change);
+  btn.append(time, card);
+  btn.setAttribute('aria-label', `${label.textContent} — change this plan`);
+  btn.addEventListener('click', () => {
+    openDecide(day, idx, ctx, actions);
+    router.push(keyFor(day, idx));
+  });
+  return btn;
+}
+
 function buildClashRow(day, clash, idx, ctx, actions) {
   const startMin = Math.min(...clash.sets.map((s) => s.startMin));
   const names = clash.sets.map((s) => s.name);
@@ -443,6 +478,10 @@ function buildBody(shell, day, fest, ctx, actions, canonData) {
     }
   }
   const items = [
+    ...[...resolved].map(([c, r]) => ({
+      type: 'plan', startMin: Math.min(...c.sets.map((s) => s.startMin)) - 1,
+      clash: c, res: r, idx: clashes.indexOf(c),
+    })),
     ...soloSets.map((s) => ({ type: 'set', startMin: s.startMin, set: s, plan: planOf.get(s.name) || null })),
     ...openClashes.map((c) => ({
       type: 'clash', startMin: Math.min(...c.sets.map((s) => s.startMin)), clash: c,
@@ -453,7 +492,8 @@ function buildBody(shell, day, fest, ctx, actions, canonData) {
   items.sort((a, b) => a.startMin - b.startMin);
 
   for (const item of items) {
-    if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx, item.plan));
+    if (item.type === 'plan') spine.appendChild(buildPlanRow(day, item.clash, item.res, item.idx, ctx, actions));
+    else if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx, item.plan));
     else if (item.type === 'clash') spine.appendChild(buildClashRow(day, item.clash, item.idx, ctx, actions));
     else spine.appendChild(buildGapRow(item.gap, dayArtists, ranked, ctx, actions, picks, passes));
   }

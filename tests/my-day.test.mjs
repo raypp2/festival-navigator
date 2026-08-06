@@ -154,6 +154,22 @@ test('clicking the clash card routes to Decide with both clashing artists', () =
   assert.ok(dOverlay.querySelector('.dc-choose'), 'a Choose button renders for the card');
 });
 
+// Selecting and COMMITTING are two steps now, deliberately: the whole value of
+// the window is watching the plan land on it before you agree to it. These
+// helpers mirror what a person does.
+function selectLead(name) {
+  const btn = [...decideOverlay().querySelectorAll('.dc-choose')]
+    .find((b) => b.textContent === `Choose ${name}`);
+  assert.ok(btn, `a Choose ${name} button`);
+  btn.click();
+}
+function commit() {
+  const btn = decideOverlay().querySelector('.dc-commit');
+  assert.ok(btn, 'a commit button appears once something is selected');
+  assert.equal(btn.disabled, false, 'and it is live when the selection differs from what is saved');
+  btn.click();
+}
+
 // SPIKE — these five used to pin the old semantics: choose DEMOTED everyone
 // else to pick x1, and "split"/"on-site" wrote a dismissal. That is the exact
 // behaviour the lead/keep model replaces, so they are rewritten rather than
@@ -165,10 +181,11 @@ test('Decide: choosing records a LEAD and demotes nobody', () => {
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
 
-  const chooseSkrillex = [...decideOverlay().querySelectorAll('.dc-choose')]
-    .find((b) => b.textContent === 'Choose Skrillex');
-  assert.ok(chooseSkrillex);
-  chooseSkrillex.click();
+  selectLead('Skrillex');
+  // selecting alone must NOT write — it is a preview
+  assert.equal(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']), null,
+    'selecting previews the plan on the window; it does not save it');
+  commit();
 
   assert.deepEqual(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']),
     { kind: 'lead', lead: 'Skrillex' });
@@ -184,8 +201,7 @@ test('Decide: undo restores the previous plan, still touching no levels', () => 
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
-  [...decideOverlay().querySelectorAll('.dc-choose')]
-    .find((b) => b.textContent === 'Choose Skrillex').click();
+  selectLead('Skrillex'); commit();
   assert.equal(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']).lead, 'Skrillex');
 
   const undo = actions.getLastUndo();
@@ -204,6 +220,7 @@ test('Decide: "Keep both" records a keep plan and writes nothing to the doc', ()
   overlay().querySelector('.md-clash').click();
 
   decideOverlay().querySelector('.dc-onsite').click();
+  commit();
 
   assert.deepEqual(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']), { kind: 'keep' });
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4);
@@ -214,8 +231,7 @@ test('a resolved window stops being a clash and its artists become rows', () => 
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
-  [...decideOverlay().querySelectorAll('.dc-choose')]
-    .find((b) => b.textContent === 'Choose Skrillex').click();
+  selectLead('Skrillex'); commit();
 
   // The complaint this whole change answers: the clash used to come straight
   // back after deciding.
@@ -227,11 +243,32 @@ test('a resolved window stops being a clash and its artists become rows', () => 
   assert.ok(overlay().querySelector('.md-plan.is-lead'), 'the lead is marked as such');
 });
 
+test('a decided window stays reachable — the plan strip reopens Decide', () => {
+  const actions = mkActions();
+  renderMyDayForTest(ctx, actions, CANON, DAY);
+  overlay().querySelector('.md-clash').click();
+  selectLead('Skrillex'); commit();
+
+  // Once the undo toast goes, this strip is the ONLY route back to the
+  // decision. Without it the choice is permanent by accident.
+  const strip = overlay().querySelector('.md-planrow');
+  assert.ok(strip, 'a resolved window shows what was planned');
+  assert.match(strip.textContent, /Leading with Skrillex/);
+  assert.match(strip.textContent, /Change/);
+
+  strip.click();
+  assert.ok(decideOverlay(), 'and tapping it reopens Decide for that window');
+  // reopening shows the SAVED plan, not a blank slate
+  const commitBtn = decideOverlay().querySelector('.dc-commit');
+  assert.ok(commitBtn.disabled, 'the saved plan is already selected, so committing it again is a no-op');
+});
+
 test('a plan persists in localStorage keyed by day + sorted artist names, and survives a fresh render', () => {
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
   decideOverlay().querySelector('.dc-onsite').click();
+  commit();
 
   const raw = localStorage.getItem('fp.clashPlan.' + FID);
   assert.ok(raw, 'a fake-localStorage entry was written');
