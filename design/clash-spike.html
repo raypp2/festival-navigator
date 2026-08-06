@@ -458,7 +458,7 @@ function drawPath() {
 
   var n = document.createElement('span');
   n.className = 'n';
-  if (state.kind === 'onsite') n.textContent = 'Route depends on what you pick on the night.';
+  if (state.kind === 'onsite') n.textContent = 'Route depends on what you pick on-site.';
   else if (crossings === 0) n.innerHTML = 'No stage change — you stay put either side.';
   else n.innerHTML = crossings + ' stage change' + (crossings > 1 ? 's' : '')
        + ' — <b>budget the walk</b>, and remember it comes out of the set you are leaving.';
@@ -535,31 +535,38 @@ function drawDay() {
   var host = document.getElementById('day');
   host.textContent = '';
   var ss = sets(), b = beforeSet(), a = afterSet();
-  if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true, false, levelLabel(b.level)));
+  if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true, null, levelLabel(b.level)));
 
   if (state.kind === 'split') {
     // Each set keeps its REAL time. Cutting one short at an invented handover
     // was false precision — nobody at a festival leaves at 10:04 because a
     // phone said so, and pretending otherwise makes the day read like a
     // work calendar.
-    ss.slice().sort((x,y)=>x.startMin-y.startMin).forEach(function (s, i) {
+    var ordered = ss.slice().sort((x,y)=>x.startMin-y.startMin);
+    ordered.forEach(function (s, i) {
+      // The walk flag belongs on THIS set when the NEXT one is somewhere else.
+      // It was on the arriving set, which reads as "there is a walk to get
+      // here" — but the thing you have to DO is get out early, and you do that
+      // during the set you are already at.
+      var next = ordered[i + 1];
       host.appendChild(slot(clock(s.startMin) + ' – ' + clock(s.endMin), s.name, s.stage, 'both', [], false,
-        i > 0 && ss[i-1].stage !== s.stage));
+        next ? next.stage : null, levelLabel(s.level)));
     });
   } else if (state.kind === 'onsite') {
     host.appendChild(slot(
       clock(Math.min.apply(null, ss.map(s=>s.startMin))) + ' – ' + clock(Math.max.apply(null, ss.map(s=>s.endMin))),
-      'Your call on the night', '', null,
+      'Your call on-site', '', null,
       ss.map(s => ({ name:s.name, w: metaOf(s) }))));
   } else {
     var lead = ss[state.lead];
     host.appendChild(slot(clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
       ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: metaOf(s) })),
-      false, false, levelLabel(lead.level)));
+      false, null, levelLabel(lead.level)));
   }
 
-  if (a) host.appendChild(slot(clock(a.startMin) + ' – ' + clock(a.endMin), a.name, a.stage, null, [], true, false, levelLabel(a.level)));
+  if (a) host.appendChild(slot(clock(a.startMin) + ' – ' + clock(a.endMin), a.name, a.stage, null, [], true, null, levelLabel(a.level)));
 
+  // `walk` is the stage you head to NEXT, or null — see the note at the call site
   function slot(t, name, stage, badge, alts, muted, walk, lvl) {
     var d = document.createElement('div'); d.className = 'slot' + (muted ? ' ctx' : '');
     var tt = document.createElement('div'); tt.className = 'slot-t';
@@ -571,9 +578,9 @@ function drawDay() {
       bd.textContent = badge === 'lead' ? 'leading' : 'seeing both';
       nn.appendChild(bd);
     }
-    if (walk) {
+    if (walk && walk !== stage) {
       var wk = document.createElement('span'); wk.className = 'badge walk';
-      wk.textContent = 'walk';
+      wk.textContent = 'leave early \u2192 ' + walk;
       nn.appendChild(wk);
     }
     d.append(tt, nn);
