@@ -87,3 +87,36 @@ test('YouTube DOES define loadArtist — it is the one source that carries', () 
     + 'the live player keeps the unlock — same iframe, playhead advancing, no new tap. Removing it '
     + 'would route the only carryable source through a needless rebuild.');
 });
+
+// ---- the embed->state reconcile ------------------------------------------
+// This one mechanism has produced three separate device bugs in two days, each
+// time because a rule that reads as "symmetrical" or "harmless" is neither. It
+// has no unit-testable seam (it lives inside mountPlayer's closure, behind a
+// DOM and three cross-origin SDKs), so these are tripwires on the source, in
+// the same spirit as the loadArtist guards above.
+
+test('the embed->state reconcile is UPWARD ONLY', () => {
+  // Asserted against the whole source, not a function body: mountPlayer is far
+  // too big for the brace-walk above to survive, and this invariant is about one
+  // condition either existing or not.
+  assert.match(src, /if \(on && lastSnap && !lastSnap\.collapsed && !lastSnap\.play\)/,
+    'setPlaying must only reconcile when the embed reports PLAYING (`on &&`). '
+    + 'The symmetrical version broke the YouTube carry outright: YouTube fires ENDED/PAUSED '
+    + 'transiently while loadVideoById swaps videos, so an advance ran setPlaying(false) -> '
+    + 'togglePlay -> intent false -> pause() on the video that was still loading. Black frame, '
+    + 'no autoplay, and every later advance cued a silent poster instead. A genuine refusal is '
+    + 'the watchdog\'s job, and it withdraws the ICON without ever withdrawing the INTENT.');
+  // and the symmetrical form must not come back
+  assert.doesNotMatch(src, /lastSnap\.play !== on/,
+    'the two-way reconcile is what broke the carry; do not restore it.');
+});
+
+test('reconcileEmbed never echoes an embed-REPORTED state back at the embed', () => {
+  const body = bodyOf('reconcileEmbed');
+  assert.match(body, /meta\s*&&\s*meta\.fromEmbed/,
+    'reconcileEmbed must bail out when the play change came FROM the embed. It is already in '
+    + 'that state and telling it again is not a no-op: Spotify\'s controller.play() restarts '
+    + 'the track from zero (resume() is the one that continues), so echoing its own '
+    + 'playback_update restarted the clip about a second in — exactly when that event first '
+    + 'arrives (device report, 2026-08-06).');
+});

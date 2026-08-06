@@ -295,17 +295,24 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       if (sourceChanged) mountEmbed(snap.currentSource, snap);
     } else {
       patchClipAndPlay(snap);
-      reconcileEmbed(snap, prev);
+      reconcileEmbed(snap, prev, meta);
     }
     notify(snap, meta);
   }
 
-  function reconcileEmbed(snap, prev) {
+  function reconcileEmbed(snap, prev, meta) {
     if (!embedAdapter) return;
     if (snap.clipIndex !== prev.clipIndex) {
       const item = snap.alternates[snap.clipIndex];
       if (item && embedAdapter.loadClip) embedAdapter.loadClip(item);
     } else if (snap.play !== prev.play) {
+      // The embed REPORTED this; it is already in the state we just recorded,
+      // and telling it again is not a no-op. Spotify's controller.play() starts
+      // the track from the BEGINNING — resume() is the one that continues — so
+      // echoing its own play back at it restarted the clip about a second in,
+      // which is exactly when playback_update first arrives (device report,
+      // 2026-08-06). Record what we were told; do not answer it.
+      if (meta && meta.fromEmbed) return;
       if (snap.play) embedAdapter.play && embedAdapter.play();
       else embedAdapter.pause && embedAdapter.pause();
     }
@@ -672,7 +679,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // refusal is already the watchdog's job — which withdraws the ICON without
     // ever withdrawing the intent, for exactly this reason.
     if (on && lastSnap && !lastSnap.collapsed && !lastSnap.play) {
-      applyState(core.togglePlay());
+      applyState(core.togglePlay(), { fromEmbed: true });
     }
   }
 
