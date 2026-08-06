@@ -51,7 +51,9 @@
   .blk { position:absolute; left:2px; right:2px; border-radius:7px; padding:4px 6px;
          font:700 10.5px system-ui; overflow:hidden; line-height:1.25;
          transition:background .18s ease, opacity .18s ease, color .18s ease; }
-  .blk .t { display:block; font:600 9px ui-monospace,monospace; opacity:.75; margin-top:1px; }
+  .blk .t { display:block; font:600 9px ui-monospace,monospace; opacity:.75; margin-top:1px;
+             white-space:nowrap; }
+  .blk .lv { font:800 8.5px system-ui; letter-spacing:.07em; text-transform:uppercase; opacity:.9; }
   .blk[data-role="lead"] { background:var(--lead); color:#1A1030; }
   .blk[data-role="alt"]  { background:var(--alt); color:#E6E2F0; }
   .blk[data-role="both"] { background:var(--both); color:#0C2A1C; }
@@ -62,12 +64,19 @@
   .tt-lap { position:absolute; left:0; right:0; pointer-events:none;
             background:repeating-linear-gradient(-45deg, rgba(255,255,255,.11) 0 5px, transparent 5px 10px);
             border-top:1px dashed rgba(255,255,255,.42); border-bottom:1px dashed rgba(255,255,255,.42); }
-  /* the handover, dragged vertically */
-  .tt-cut { position:absolute; left:0; right:0; height:2px; background:#fff;
-            box-shadow:0 0 0 3px rgba(255,255,255,.16); border-radius:2px; cursor:grab; z-index:3; }
-  .tt-cut::after { content:''; position:absolute; inset:-15px 0; }
-  .tt-cut .lab { position:absolute; right:2px; top:-17px; font:800 9px ui-monospace,monospace;
-                 color:#1A1030; background:#fff; border-radius:4px; padding:1px 4px; }
+  /* Either side of the window: a MENTION, not a block. It is there to answer
+     "where am I coming from and going to", and it has to say WHY it counts —
+     a must either side is a very different constraint from a pick x1. */
+  .ctx-line { display:flex; align-items:baseline; gap:6px; font-size:10.5px;
+              color:var(--text-tertiary); padding:3px 0; }
+  .ctx-line .w { font:800 8.5px system-ui; letter-spacing:.1em; text-transform:uppercase;
+                 color:#6E6788; flex:none; width:44px; }
+  .ctx-line .nm { color:var(--text-body); font-weight:700; }
+  .ctx-line .lv { font:700 8.5px system-ui; letter-spacing:.06em; text-transform:uppercase;
+                  border:1px solid var(--border-card); border-radius:var(--r-pill);
+                  padding:1px 6px; color:var(--text-tertiary); }
+  .ctx-line .lv[data-must="1"] { border-color:rgba(var(--brand),.5); color:#DEC2FF; }
+  .ctx-line.none { color:#5C556F; }
 
   .verdict { font:700 12px system-ui; color:var(--text-primary); margin:10px 0 0; }
   .verdict b { color:var(--lead); }
@@ -151,9 +160,10 @@
 
 <div class="note">
   Time runs <b>down</b> and stages are <b>columns</b>, the same orientation as the
-  wall. The sets either side of the window are drawn too, dashed — the real cost
-  of a clash is usually the <b>walk</b>, and you cannot judge that from the two
-  clashing sets alone. Fake data. Drag the white handle on SPLIT.
+  wall. What is picked either side is named above and below with <b>why it counts</b>
+  — a must either side is a very different constraint from a pick&nbsp;×1 — because
+  the real cost of a clash is usually the <b>walk</b>. Fake data, mixed pick levels
+  on purpose.
 </div>
 
 <div class="scen" id="scen"></div>
@@ -186,35 +196,38 @@
 // ---------------------------------------------------------------------------
 var SCENARIOS = [
   { id:'partial', label:'Partial · same stage after', sets:[
-      { name:'Tape B',  stage:'Main',   startMin:21*60,    endMin:22*60+30, level:4 },
-      { name:'TroyBoi', stage:'Cosmic', startMin:22*60,    endMin:23*60,    level:4 },
+      { name:'Tape B',  stage:'Main',      startMin:21*60,    endMin:22*60+30, level:4 },
+      { name:'TroyBoi', stage:'Cosmic',    startMin:22*60,    endMin:23*60,    level:2 },
     ], context:[
-      { name:'Kaivon',  stage:'Main',   startMin:19*60+45, endMin:20*60+45, level:2 },
-      { name:'Zedd',    stage:'Main',   startMin:23*60+15, endMin:24*60+30, level:4 },
+      { name:'Kaivon',  stage:'Main',      startMin:19*60+45, endMin:20*60+45, level:1 },
+      { name:'Zedd',    stage:'Main',      startMin:23*60+15, endMin:24*60+30, level:3 },
     ]},
-  { id:'crossing', label:'Partial · you end up crossing twice', sets:[
-      { name:'Tape B',  stage:'Main',   startMin:21*60,    endMin:22*60+30, level:4 },
-      { name:'TroyBoi', stage:'Far Field', startMin:22*60, endMin:23*60,    level:4 },
+  { id:'crossing', label:'Partial · crossing twice', sets:[
+      { name:'Tape B',  stage:'Main',      startMin:21*60,    endMin:22*60+30, level:3 },
+      { name:'TroyBoi', stage:'Far Field', startMin:22*60,    endMin:23*60,    level:4 },
     ], context:[
-      { name:'Kaivon',  stage:'Main',   startMin:19*60+45, endMin:20*60+45, level:2 },
-      { name:'Zedd',    stage:'Main',   startMin:23*60+15, endMin:24*60+30, level:4 },
+      { name:'Kaivon',  stage:'Main',      startMin:19*60+45, endMin:20*60+45, level:2 },
+      { name:'Zedd',    stage:'Main',      startMin:23*60+15, endMin:24*60+30, level:4 },
     ]},
-  { id:'heavy', label:'Near-total', sets:[
-      { name:'Kx5',     stage:'Main',     startMin:22*60,    endMin:23*60+30, level:4 },
-      { name:'Zedd',    stage:'Wormhole', startMin:22*60+10, endMin:23*60+20, level:4 },
+  { id:'heavy', label:'Near-total · two musts', sets:[
+      { name:'Kx5',     stage:'Main',      startMin:22*60,    endMin:23*60+30, level:4 },
+      { name:'Zedd',    stage:'Wormhole',  startMin:22*60+10, endMin:23*60+20, level:4 },
     ], context:[
-      { name:'ONHELL',  stage:'Wormhole', startMin:20*60+30, endMin:21*60+45, level:3 },
+      { name:'ONHELL',  stage:'Wormhole',  startMin:20*60+30, endMin:21*60+45, level:1 },
     ]},
-  { id:'three', label:'Three at once', sets:[
-      { name:'ONHELL',  stage:'Main',   startMin:23*60,    endMin:24*60+30, level:4 },
-      { name:'LAYZ',    stage:'Cosmic', startMin:23*60+20, endMin:24*60+40, level:2 },
-      { name:'Trym',    stage:'Bass',   startMin:23*60+40, endMin:25*60,    level:4 },
+  { id:'three', label:'Three at once · mixed', sets:[
+      { name:'ONHELL',  stage:'Main',      startMin:23*60,    endMin:24*60+30, level:4 },
+      { name:'LAYZ',    stage:'Cosmic',    startMin:23*60+20, endMin:24*60+40, level:1 },
+      { name:'Trym',    stage:'Bass',      startMin:23*60+40, endMin:25*60,    level:3 },
     ], context:[
-      { name:'Obskür',  stage:'Bass',   startMin:21*60+30, endMin:22*60+45, level:3 },
+      { name:'Obskür',  stage:'Bass',      startMin:21*60+30, endMin:22*60+45, level:2 },
     ]},
 ];
 
-var state = { scen:'partial', kind:'lead', lead:0, cut:null };
+// picked / must is the app's whole vocabulary for this — never invent a third word
+function levelLabel(l) { return l === 4 ? 'must' : 'pick \u00d7' + l; }
+
+var state = { scen:'partial', kind:'lead', lead:0 };
 
 function clock(m) {
   var t = ((m % 1440) + 1440) % 1440, h = Math.floor(t/60), mm = t%60;
@@ -237,8 +250,6 @@ function lapWindow() {
   var b = Math.min.apply(null, ss.map(s=>s.endMin));
   return b > a ? { a:a, b:b } : null;
 }
-function defaultCut() { var l = lapWindow(); return l ? l.a : null; }
-function cut() { return state.cut == null ? defaultCut() : state.cut; }
 
 function roleOf(i) {
   if (state.kind === 'split')  return 'both';
@@ -264,7 +275,11 @@ function drawTimetable() {
   var host = document.getElementById('tt');
   host.textContent = '';
 
-  var everything = all();
+  // The grid spans the CLASH only now. The sets either side are mentioned in a
+  // line above and below rather than drawn — they were dominating a view whose
+  // subject is the overlap, and all they need to contribute is where you are
+  // coming from, where you are going, and how strongly.
+  var everything = sets();
   var from = Math.floor(Math.min.apply(null, everything.map(s=>s.startMin)) / 15) * 15 - 15;
   var to   = Math.ceil(Math.max.apply(null, everything.map(s=>s.endMin)) / 15) * 15 + 15;
   var rows = (to - from) / 15;
@@ -273,7 +288,7 @@ function drawTimetable() {
 
   // stage columns, in the order they first appear — canonical enough for a spike
   var stages = [];
-  everything.forEach(s => { if (stages.indexOf(s.stage) < 0) stages.push(s.stage); });
+  sets().forEach(s => { if (stages.indexOf(s.stage) < 0) stages.push(s.stage); });
   var hot = new Set(sets().map(s => s.stage));
 
   // heads
@@ -334,10 +349,11 @@ function drawTimetable() {
     var n = document.createElement('span'); n.textContent = s.name;
     var t = document.createElement('span'); t.className = 't';
     t.textContent = clock(s.startMin) + '–' + clock(s.endMin);
-    b.append(n, t);
+    var lv = document.createElement('span'); lv.className = 't lv';
+    lv.textContent = levelLabel(s.level);
+    b.append(n, t, lv);
     col.appendChild(b);
   }
-  context().forEach(c => place(c, 'ctx'));
   sets().forEach((s, i) => place(s, roleOf(i)));
 
   // shared minutes, banded across the whole grid
@@ -349,38 +365,26 @@ function drawTimetable() {
     band.style.height = (y(lap.b) - y(lap.a)) + 'px';
     grid.appendChild(band);
   }
-  if (state.kind === 'split' && lap) {
-    var handle = document.createElement('div');
-    handle.className = 'tt-cut';
-    handle.style.top = y(cut()) + 'px';
-    var lab = document.createElement('span');
-    lab.className = 'lab';
-    lab.textContent = clock(cut());
-    handle.appendChild(lab);
-    dragCut(handle, grid, from, to, H);
-    grid.appendChild(handle);
-  }
-
   tt.appendChild(grid);
+
+  host.appendChild(ctxLine('before', beforeSet()));
   host.appendChild(tt);
+  host.appendChild(ctxLine('after', afterSet()));
 }
 
-function dragCut(handle, grid, from, to, H) {
-  var lap = lapWindow();
-  function to_(clientY) {
-    var box = grid.getBoundingClientRect();
-    var f = Math.min(1, Math.max(0, (clientY - box.top) / box.height));
-    var m = Math.round((from + f * (to - from)) / 5) * 5;
-    state.cut = Math.min(lap.b, Math.max(lap.a, m));
-    render();
-  }
-  handle.addEventListener('pointerdown', function (e) {
-    e.preventDefault();
-    var move = ev => to_(ev.clientY);
-    var up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  });
+function ctxLine(which, c) {
+  var el = document.createElement('div');
+  el.className = 'ctx-line' + (c ? '' : ' none');
+  var w = document.createElement('span'); w.className = 'w'; w.textContent = which;
+  el.appendChild(w);
+  if (!c) { el.appendChild(document.createTextNode('nothing picked')); return el; }
+  var nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = c.name;
+  var lv = document.createElement('span'); lv.className = 'lv';
+  lv.dataset.must = c.level === 4 ? '1' : '0';
+  lv.textContent = levelLabel(c.level);
+  el.append(nm, document.createTextNode(c.stage), lv,
+            document.createTextNode(clock(c.startMin) + '–' + clock(c.endMin)));
+  return el;
 }
 
 // ---- verdict -------------------------------------------------------------
@@ -394,18 +398,12 @@ function drawVerdict() {
   frag.appendChild(document.createTextNode(mins + ' min overlap. '));
 
   if (state.kind === 'split') {
-    var c = cut();
-    var ordered = ss.slice().sort((a,b)=>a.startMin-b.startMin);
-    ordered.forEach(function (s, i) {
-      var got = i === 0 ? Math.min(s.endMin, c) - s.startMin : s.endMin - Math.max(s.startMin, c);
-      if (i) frag.appendChild(document.createTextNode(', then '));
-      var b = document.createElement('b'); b.textContent = s.name;
-      frag.append(b, document.createTextNode(
-        ' ' + Math.max(0, got) + ' of ' + (s.endMin - s.startMin) + ' min'));
-    });
-    frag.appendChild(document.createTextNode('. Leave at ' + clock(c) + '.'));
+    frag.appendChild(document.createTextNode('You will catch part of each — '));
+    var b2 = document.createElement('b');
+    b2.textContent = ss.map(x => x.name).join(' and ');
+    frag.append(b2, document.createTextNode(' both stay in the day.'));
   } else {
-    var shortest = Math.min.apply(null, ss.map(s=>s.endMin-s.startMin));
+    var shortest = Math.min.apply(null, ss.map(s2 => s2.endMin - s2.startMin));
     var frac = Math.round((mins / shortest) * 100);
     frag.appendChild(document.createTextNode(
       frac >= 80 ? 'Effectively the same slot — one of these.'
@@ -467,13 +465,10 @@ function drawChoices() {
   host.textContent = '';
   var ss = sets();
   ss.forEach(function (s, i) {
-    add('lead', i, 'Lead with ' + s.name,
-        s.stage + ' · the rest stay picked, shown as alternates.');
+    add('lead', i, 'Lead with ' + s.name, s.stage);
   });
-  add('split', null, 'See both — split the window',
-      'Leave one partway through. Drag the handle to set when.');
-  add('onsite', null, 'Decide on-site',
-      'No lead. All of them stay, and My Day shows the choice at the time.');
+  add('split', null, 'See both', '');
+  add('onsite', null, 'Decide on-site', '');
 
   function add(kind, lead, k, d) {
     var b = document.createElement('button');
@@ -483,12 +478,12 @@ function drawChoices() {
     var dot = document.createElement('span'); dot.className = 'dot';
     var wrap = document.createElement('span');
     var kk = document.createElement('span'); kk.className = 'k'; kk.textContent = k;
-    var dd = document.createElement('span'); dd.className = 'd'; dd.textContent = d;
-    wrap.append(kk, dd); b.append(dot, wrap);
+    wrap.appendChild(kk);
+    if (d) { var dd = document.createElement('span'); dd.className = 'd'; dd.textContent = d; wrap.appendChild(dd); }
+    b.append(dot, wrap);
     b.addEventListener('click', function () {
       state.kind = kind;
       if (kind === 'lead') state.lead = lead;
-      if (kind !== 'split') state.cut = null;
       render();
     });
     host.appendChild(b);
@@ -501,10 +496,10 @@ function drawBeforeAfter() {
   host.textContent = '';
   var ss = sets();
   var before = col('Now', ss.map(s => ({ name:s.name, level:s.level,
-    tag: s.level === 4 ? 'must' : 'pick ×' + s.level })));
+    tag: levelLabel(s.level) })));
   var arrow = document.createElement('div'); arrow.className = 'arrow'; arrow.textContent = '→';
   var after = col('After', ss.map(function (s, i) {
-    var tag = s.level === 4 ? 'must' : 'pick ×' + s.level;
+    var tag = levelLabel(s.level);
     if (state.kind === 'lead')  return { name:s.name, level:i === state.lead ? 'lead' : s.level,
                                          tag:(i === state.lead ? 'lead · ' : 'alternate · ') + tag };
     if (state.kind === 'split') return { name:s.name, level:'both', tag:'both · ' + tag };
@@ -534,33 +529,35 @@ function drawDay() {
   var host = document.getElementById('day');
   host.textContent = '';
   var ss = sets(), b = beforeSet(), a = afterSet();
-  if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true));
+  if (b) host.appendChild(slot(clock(b.startMin) + ' – ' + clock(b.endMin), b.name, b.stage, null, [], true, false, levelLabel(b.level)));
 
   if (state.kind === 'split') {
-    var c = cut();
+    // Each set keeps its REAL time. Cutting one short at an invented handover
+    // was false precision — nobody at a festival leaves at 10:04 because a
+    // phone said so, and pretending otherwise makes the day read like a
+    // work calendar.
     ss.slice().sort((x,y)=>x.startMin-y.startMin).forEach(function (s, i) {
-      var from = i === 0 ? s.startMin : c;
-      var to   = i === 0 ? c : s.endMin;
-      host.appendChild(slot(clock(from) + ' – ' + clock(to), s.name, s.stage, 'both', [], false,
-        i === 1 && ss[0].stage !== s.stage));
+      host.appendChild(slot(clock(s.startMin) + ' – ' + clock(s.endMin), s.name, s.stage, 'both', [], false,
+        i > 0 && ss[i-1].stage !== s.stage));
     });
   } else if (state.kind === 'onsite') {
     host.appendChild(slot(
       clock(Math.min.apply(null, ss.map(s=>s.startMin))) + ' – ' + clock(Math.max.apply(null, ss.map(s=>s.endMin))),
       'Your call on the night', '', null,
-      ss.map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
+      ss.map(s => ({ name:s.name, w: levelLabel(s.level) + ' · ' + s.stage }))));
   } else {
     var lead = ss[state.lead];
     host.appendChild(slot(clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
-      ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: clock(s.startMin) + ' · ' + s.stage }))));
+      ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: levelLabel(s.level) + ' · ' + s.stage })),
+      false, false, levelLabel(lead.level)));
   }
 
-  if (a) host.appendChild(slot(clock(a.startMin) + ' – ' + clock(a.endMin), a.name, a.stage, null, [], true));
+  if (a) host.appendChild(slot(clock(a.startMin) + ' – ' + clock(a.endMin), a.name, a.stage, null, [], true, false, levelLabel(a.level)));
 
-  function slot(t, name, stage, badge, alts, muted, walk) {
+  function slot(t, name, stage, badge, alts, muted, walk, lvl) {
     var d = document.createElement('div'); d.className = 'slot' + (muted ? ' ctx' : '');
     var tt = document.createElement('div'); tt.className = 'slot-t';
-    tt.textContent = t + (stage ? '  ·  ' + stage : '');
+    tt.textContent = t + (stage ? '  ·  ' + stage : '') + (lvl ? '  ·  ' + lvl : '');
     var nn = document.createElement('div'); nn.className = 'slot-n';
     nn.appendChild(document.createTextNode(name));
     if (badge) {
@@ -599,7 +596,7 @@ function drawScenarios() {
     b.type = 'button'; b.textContent = s.label;
     b.setAttribute('aria-pressed', String(state.scen === s.id));
     b.addEventListener('click', function () {
-      state.scen = s.id; state.lead = 0; state.cut = null; render();
+      state.scen = s.id; state.lead = 0; render();
     });
     host.appendChild(b);
   });
