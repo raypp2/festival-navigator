@@ -401,6 +401,8 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     for (const el of [...body.children]) if (el !== stageEl) el.remove();
     if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
       body.appendChild(buildSeekRow(snap));
+    } else if (curLayout === 'compact' && snap.currentSource === 'sp') {
+      body.appendChild(buildSpotifyTransport(snap));
     }
     if (snap.currentSource !== 'sp') body.appendChild(renderClips(snap));
 
@@ -463,6 +465,11 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     // own clickable waveform; Spotify's embed is self-contained.
     if (curLayout === 'compact' && (snap.currentSource === 'yt' || snap.currentSource === 'sc')) {
       body.appendChild(buildSeekRow(snap));
+    } else if (curLayout === 'compact' && snap.currentSource === 'sp') {
+      // Same slot, same scrubber, plus a play control — Spotify has no
+      // now-playing row to carry one. Only reachable now that playback_update
+      // feeds updateSeekRow; before that there was no position to draw.
+      body.appendChild(buildSpotifyTransport(snap));
     }
     // Spotify draws no alternates block at all. Its embed already lists its own
     // top tracks, so a panel restating that — plus a preview caveat the chip on
@@ -624,6 +631,20 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     if (playingNow === on) return;
     playingNow = on;
     if (root) root.classList.toggle('is-playing', on);
+    // Spotify is the one source whose transport the person can drive WITHOUT
+    // going through a control of ours — its embed draws its own, full size, on
+    // every surface. So the state machine and the embed can disagree, and when
+    // they do the EMBED is right: it is reporting, we are only asking. Without
+    // this, starting Spotify from its own button leaves our glyph showing ▶
+    // over playing audio, which is the same dishonest-icon bug the watchdog
+    // exists to prevent, arriving from the other direction.
+    //
+    // Scoped to 'sp' deliberately. yt/sc in the deck are driven only through
+    // our button, so there is nothing to reconcile and no reason to widen the
+    // blast radius of a state-machine write.
+    if (lastSnap && !lastSnap.collapsed && lastSnap.currentSource === 'sp' && lastSnap.play !== on) {
+      applyState(core.togglePlay());
+    }
   }
 
   function updateSeekRow(cur, dur) {
@@ -720,6 +741,37 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     stage.dataset.shape = snap.currentSource;
     stage.dataset.state = 'mounting';
     return stage;
+  }
+
+  // ---- Spotify's transport: our play control BESIDE the scrubber -----------
+  // Spotify draws its own transport, but only inside the embed — so on the deck
+  // the one control this source offers sits at a different place and size from
+  // the round button every other tab gives you. Measured on an iPhone (probe
+  // step 6, iOS Simulator 2026-08-06): after a load has silenced it, ONE tap on
+  // a control of OURS starts the incoming artist — clock from zero, climbing.
+  // SoundCloud fails the same test, because its own gate is up. So the
+  // consistency is available for Spotify specifically, and it is worth taking.
+  //
+  // BESIDE the scrubber and BELOW the stage, never over the embed: covering
+  // Spotify's real UI with a button of ours is exactly what the 2026-08-04
+  // device feedback rejected, and this does not re-open it. The seek row is
+  // itself a <button> and owns a drag, so our control is its sibling, not its
+  // child.
+  //
+  // Reuses `sample-player-np-btn` so patchClipAndPlay's existing lookup paints
+  // this glyph too, with no second code path to keep in step.
+  function buildSpotifyTransport(snap) {
+    const row = document.createElement('div');
+    row.className = 'sample-player-sp-transport';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sample-player-np-btn is-sp';
+    btn.disabled = !snap.online;
+    btn.setAttribute('aria-label', 'Play or pause');
+    setPlayGlyph(btn, snap.play);
+    btn.addEventListener('click', () => applyState(core.togglePlay()));
+    row.append(btn, buildSeekRow(snap));
+    return row;
   }
 
   // ---- compact: 82x46 now-playing row (empty placeholder — mountEmbed/rebuildChrome fill it).
@@ -1259,6 +1311,7 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
     container.appendChild(node);
     let controller = null;
     let torn = false;
+    let spDurSec = 0;
     // clientHeight of the STAGE, not of `container`: that is the content box
     // the CSS sized to --disc-stage-sp-h, which is the number the embed needs
     // to see. (The stage is content-box precisely so its hairlines can't shave
@@ -1273,6 +1326,24 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
         controller = c;
         setReady();
         c.addListener('ready', () => { if (snap.play && c.play) c.play(); });
+        // The app was deaf to Spotify: no listener at all, so `playingNow` was
+        // permanently false and `lastKnownPos` permanently 0. Two consequences,
+        // both real. The equaliser could never light for this source, and the
+        // honest-icon watchdog — which stands down only when it sees real
+        // playback — would fire 2500ms after any request and PAUSE a Spotify
+        // embed that was playing perfectly well.
+        //
+        // position/duration arrive in MILLISECONDS here; every other consumer
+        // in this file works in seconds, so the conversion happens once, on the
+        // way in. (Verified live in the iOS Simulator, 2026-08-06: the event
+        // fires about once a second with a monotonic position.)
+        c.addListener('playback_update', (e) => {
+          const d = (e && e.data) || {};
+          if (torn) return;
+          setPlaying(!d.isPaused);
+          spDurSec = (d.duration || 0) / 1000;
+          updateSeekRow((d.position || 0) / 1000, spDurSec);
+        });
         // Spotify's public iframe-api has no documented error event; a bad
         // or missing artist id renders an empty/broken embed rather than
         // firing something we can catch — unverified without a browser.
@@ -1283,15 +1354,46 @@ function createInstance({ host, artist, sources, layout, showHeader = true, auto
       destroy: () => { torn = true; try { controller && controller.destroy && controller.destroy(); } catch { /* noop */ } },
       play: () => controller && controller.play && controller.play(),
       pause: () => controller && controller.pause && controller.pause(),
-      // Same controller, a different artist URI — the iOS unlock rides along
-      // exactly as it does for the other two. loadUri does not start playback
-      // by itself, so an intent still has to ask.
-      loadArtist: (srcDataNext, _snap, nextWantPlay) => {
-        if (!controller || !controller.loadUri) return false;
-        controller.loadUri('spotify:artist:' + (srcDataNext?.spotifyId || ''));
-        if (nextWantPlay && controller.play) controller.play();
-        return true;
+      // controller.seek takes SECONDS, unlike playback_update which reports
+      // milliseconds. The scrubber hands out a fraction, so the duration it is
+      // multiplied by has to be the one we already converted.
+      seekTo: (frac) => {
+        if (!controller || !controller.seek || !(spDurSec > 0)) return;
+        controller.seek(spDurSec * frac);
       },
+      // NO loadArtist, deliberately — the same absence, for the same reason, as
+      // the SoundCloud adapter above. This one USED to be here, on the
+      // reasoning that `loadUri` reuses the controller so "the iOS unlock rides
+      // along exactly as it does for the other two". That was inference, and it
+      // was wrong.
+      //
+      // Measured on an iPhone (design/ios-playback-probe, source=Spotify,
+      // 2026-08-05), twice, on fresh pages with the preview nowhere near its
+      // 27s end — so neither run is confounded by the item simply finishing:
+      //
+      //   STEP 3  loadUri, no play()      same iframe element? true
+      //                                   same iframe src? false  <- NAVIGATED
+      //                                   positions frozen  restarted=false
+      //   STEP 4  loadUri + play()        positions frozen  climbed=false
+      //           play() again, delayed   positions frozen  climbed=false
+      //
+      // `loadUri` keeps the same <iframe> NODE but CHANGES ITS SRC. That is a
+      // navigation, the new document has never been touched by a finger, and
+      // the unlock does not transfer to it — so neither an immediate play() nor
+      // a later one is honored. It is SoundCloud's failure by a different
+      // route: SC re-gates behind its own interstitial, Spotify simply
+      // navigates out from under the unlock.
+      //
+      // The trap this cost two device sessions to find: when step 3 fires
+      // quickly after step 2, the OLD document keeps making sound for several
+      // seconds after the navigation, and its playhead keeps climbing. A probe
+      // that judged on movement alone read that as a successful carry. It is
+      // not — the incoming artist never started. Judge a carry on the playhead
+      // RESTARTING, never on it merely moving.
+      //
+      // Without this method remountFor's canCarry is false, Spotify takes the
+      // teardown-and-rebuild path, and each artist opens silent on its own
+      // transport — which is honest, and is one tap.
     };
   }
 

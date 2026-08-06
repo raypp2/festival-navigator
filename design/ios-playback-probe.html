@@ -93,6 +93,18 @@ gesture-unlocked embed keep playing when we load a different artist into it?</p>
 </div>
 
 <div class="step">
+  <h2>6 · The fallback — can OUR button restart it after a load?</h2>
+  <p>Steps 3 and 4 establish whether a source can carry. This asks the question
+     that matters when it cannot: once the load has killed playback, does
+     <b>one real tap on a control of ours</b> start the new artist — or does the
+     tap have to land inside the embed's own transport? That is the difference
+     between the app drawing one consistent play button and the app being at the
+     mercy of whatever each service draws. Run it after step 3 or 4.</p>
+  <button id="run-f" disabled>Tap to play the artist that is loaded now</button>
+  <div class="verdict wait" id="v-f">not run</div>
+</div>
+
+<div class="step">
   <h2>Source</h2>
   <button class="ghost" id="src-yt">▶ Test with YouTube</button>
   <button class="ghost" id="src-sc">▶ Test with SoundCloud</button>
@@ -118,7 +130,11 @@ var ARTISTS = [
   { name: 'Tape B',  yt: 'x-fYL7jm7eg', sc: 'tape-b-official', sp: '59tlsKpLWoLTxjNNS2wdPi' },
   { name: 'TroyBoi', yt: '0Ahjqyo876s', sc: 'troyboi',         sp: '0tvpihdAsKiNnP6sWS3jUI' }
 ];
-var source = 'yt';
+// ?src=yt|sc|sp picks the source at load. The three buttons at the bottom still
+// work, but they carry a "reload to start clean" caveat that a driver forgets;
+// setting it in the URL cannot be forgotten, and one fewer tap is one fewer
+// mis-tap.
+var source = (/[?&]src=(yt|sc|sp)\b/.exec(location.search) || [null, 'yt'])[1];
 var t0 = Date.now();
 var logEl = document.getElementById('log');
 var lines = [];
@@ -129,14 +145,66 @@ function log(msg) {
   logEl.textContent += '\n' + line;
   logEl.scrollTop = logEl.scrollHeight;
 }
+
+// ---- opt-in trace beacon (?log=1) ------------------------------------------
+// A phone or a simulator cannot be asked to read its own screen back reliably,
+// and a screenshot of a log pane is the weakest possible evidence. With ?log=1
+// the whole trace is POSTed to /probe-log on a timer, so whoever is driving can
+// read it as a file. Whole snapshots, last write wins — no ordering to get
+// wrong. Off unless asked for, and it never touches the measurement path.
+if (/[?&]log=1/.test(location.search)) {
+  // Tagged per PAGE INSTANCE. A tab left open from an earlier run keeps
+  // beaconing its own (stale) trace, and without this the newest run and the
+  // oldest one take turns overwriting each other — which cost a step's result
+  // to spot. The id makes the two separable at the sink.
+  var runId = String(Date.now()).slice(-7) + '-' + Math.floor(Math.random() * 9000 + 1000);
+  log('trace id ' + runId + '  src=' + source);
+  setInterval(function () {
+    // Only the FOREGROUND tab reports. Every earlier run left a backgrounded
+    // tab that kept beaconing its own finished trace, so "the newest file" was
+    // whichever stale tab last ticked rather than the run being driven — twice
+    // that handed me the wrong source's results. A hidden page has nothing to
+    // say.
+    if (document.visibilityState !== 'visible') return;
+    try {
+      fetch('/probe-log?id=' + runId, { method: 'POST', body: lines.join('\n'), keepalive: true })
+        .catch(function () {});
+    } catch (e) { /* a dead sink must never break the probe */ }
+  }, 800);
+}
+
+// ---- is the tap real? -------------------------------------------------------
+// Everything below step 1 is gated on a genuine user gesture, and a
+// JS-synthesized click carries isTrusted:false — iOS does not accept it. An
+// automated run that cannot produce a trusted tap will report "refused" for
+// every step and look exactly like a platform finding. So record it, on every
+// press, and never reason about a refusal without checking this line first.
+document.addEventListener('click', function (e) {
+  var b = e.target && e.target.closest ? e.target.closest('button') : null;
+  if (b && b.id) log('tap #' + b.id + '  isTrusted=' + e.isTrusted);
+}, true);
 function verdict(id, state, text) {
   var el = document.getElementById(id);
   el.className = 'verdict ' + state;
   el.textContent = text;
 }
 
+// ---- ?compact=1 — for a driver, human or otherwise ------------------------
+// Hides the prose so every control fits in a screen or two, which is what makes
+// an automated run tap the button it meant to. The STAGES keep their real size
+// deliberately: an embed asked to play inside a collapsed box gets refused for
+// being invisible, and that would be a measurement artifact dressed as a
+// platform finding.
+if (/[?&]compact=1/.test(location.search)) {
+  var st = document.createElement('style');
+  st.textContent = '.sub,.step p{display:none}.step{padding:8px;margin-bottom:8px}'
+    + '.step h2{font-size:11px;margin:0 0 6px}button{min-height:44px;font-size:13px;margin-bottom:6px}'
+    + '.verdict{font-size:11px;padding:6px 8px;margin-top:6px}#log{height:120px}';
+  document.head.appendChild(st);
+}
+
 document.getElementById('stamp').textContent =
-  'build: ' + document.location.host + ' · probe-3 (restart-aware) · ' + navigator.userAgent.slice(0, 72);
+  'build: ' + document.location.host + ' · probe-3 (restart-aware) · src=' + source + ' · ' + navigator.userAgent.slice(0, 60);
 
 // ---- position sampling: the only honest proof that sound is happening -------
 // A PLAY event is a claim. A playhead that has MOVED is evidence. Everything in
@@ -160,7 +228,14 @@ function classify(samples, posBefore) {
   if (restartAt < 0 && posBefore !== null && samples.length && samples[0] < posBefore - 0.5) restartAt = 0;
   var tail = samples.slice(restartAt < 0 ? 0 : restartAt);
   var climbed = tail.length > 1 && tail[tail.length - 1] > tail[0] + 0.15;
-  return { restarted: restartAt >= 0, climbed: climbed };
+  // `started` is the question every caller actually wants answered: is the
+  // INCOMING item playing? That needs a climb AND evidence of a beginning —
+  // either the clock went backwards, or it was already parked at zero and there
+  // was nothing to go backwards from. Callers that tested `climbed` alone
+  // reported the old item still running as a success, which is the same mistake
+  // the movement-only test made, one level down.
+  var fromZero = posBefore !== null && posBefore < 0.5;
+  return { restarted: restartAt >= 0, climbed: climbed, started: climbed && (restartAt >= 0 || fromZero) };
 }
 
 function watchPosition(readPos, ms, done) {
@@ -379,14 +454,17 @@ document.getElementById('run-c').addEventListener('click', function () {
       + (after && beforeSrc !== after.src ? '  <- the frame NAVIGATED' : ''));
     watchPosition(posNow, 4500, function (moved, samples) {
       var c = classify(samples, posBefore);
-      log('   restarted=' + c.restarted + '  climbed=' + c.climbed);
-      if (c.restarted && c.climbed) {
+      log('   restarted=' + c.restarted + '  climbed=' + c.climbed + '  started=' + c.started);
+      if (c.started) {
         verdict('v-c', 'ok', 'CARRIED. The clock restarted and is climbing — the NEW artist is playing in the same element.');
-      } else if (!c.restarted && c.climbed) {
+      } else if (c.climbed) {
         verdict('v-c', 'wait', 'INCONCLUSIVE — the OLD item is still playing and the new one never started. Not a carry. Re-run on a fresh page.');
       } else {
         verdict('v-c', 'bad', 'STOPPED. The unlock does NOT survive a load on this phone — we need a different approach.');
       }
+      // A load has happened, so the fallback question is now askable.
+      document.getElementById('run-f').disabled = false;
+      verdict('v-f', 'wait', 'ready — the artist now loaded is silent; see if our button starts it');
     });
   }, 900);
 });
@@ -444,8 +522,8 @@ function runSpotifyStep4() {
   setTimeout(function () {
     watchPosition(posNow, 4000, function (movedA, samplesA) {
       var a = classify(samplesA, posBefore);
-      log('   restarted=' + a.restarted + '  climbed=' + a.climbed);
-      if (a.restarted && a.climbed) {
+      log('   restarted=' + a.restarted + '  climbed=' + a.climbed + '  started=' + a.started);
+      if (a.started) {
         verdict('v-d', 'ok', 'PLAYED on the app sequence. loadUri + play() carries — the fault, if any, is above this layer.');
         return;
       }
@@ -454,9 +532,9 @@ function runSpotifyStep4() {
       try { spCtl.play(); } catch (e) { log('play() threw: ' + e.message); }
       watchPosition(posNow, 4000, function (movedB, samplesB) {
         var b = classify(samplesB, posMid);
-        log('   restarted=' + b.restarted + '  climbed=' + b.climbed);
-        verdict('v-d', b.climbed ? 'wait' : 'bad',
-          b.climbed ? 'Only the DELAYED play() worked — loadUri needs settling time. Defer the play call; keep loadArtist.'
+        log('   restarted=' + b.restarted + '  climbed=' + b.climbed + '  started=' + b.started);
+        verdict('v-d', b.started ? 'wait' : 'bad',
+          b.started ? 'Only the DELAYED play() worked — loadUri needs settling time. Defer the play call; keep loadArtist.'
                     : 'Silent both ways. The unlock does not survive loadUri — Spotify needs to drop loadArtist, as SoundCloud did.');
       });
     });
@@ -511,6 +589,27 @@ document.getElementById('run-e2').addEventListener('click', function () {
               : 'MOVING breaks it. Reparenting costs the player its unlock.');
     });
   }, 900);
+});
+
+// Step 6 — the one that decides what the app can OFFER when a source cannot
+// carry. A dead carry is survivable if one tap of ours revives it; it is a much
+// worse UX if the person has to find the service's own play button, which sits
+// at a different place and size in each of the three embeds.
+document.getElementById('run-f').addEventListener('click', function () {
+  this.disabled = true;
+  log('=== STEP 6: a REAL tap on OUR control, after the load ===');
+  var posBefore = posNow();
+  log('   position before the tap: ' + Math.round(posBefore * 1000) / 1000);
+  try { playNow(); } catch (e) { log('play() threw: ' + e.message); }
+  watchPosition(posNow, 4500, function (moved, samples) {
+    var c = classify(samples, posBefore);
+    log('   restarted=' + c.restarted + '  climbed=' + c.climbed + '  started=' + c.started);
+    if (c.started) {
+      verdict('v-f', 'ok', 'ONE TAP ON OUR OWN BUTTON STARTS IT. The app can keep a single play control for this source.');
+    } else {
+      verdict('v-f', 'bad', 'Our button cannot start it after a load. The tap has to land inside the embed — or the service has put its own gate up.');
+    }
+  });
 });
 
 document.getElementById('src-yt').addEventListener('click', function () { source = 'yt'; verdict('v-src', 'wait', 'YouTube selected — reload the page to start clean'); });

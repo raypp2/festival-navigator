@@ -154,3 +154,41 @@ Non-inferable facts only (the code answers everything else — read it).
   a "make sure there aren't any typos" error that has nothing to do with typos.
 - Adding a festival: `docs/add-a-festival.md`. Validate with
   `node scripts/validate-festivals.mjs` before committing — CI enforces it.
+
+- **There is an iOS Simulator on this Mac and it is a REAL oracle for the
+  playback rules — use it instead of waiting for a phone.** Xcode 26, iOS 26
+  runtime, iPhone 17 Pro. Two properties were checked before trusting it
+  (2026-08-06), and they are the two that would have made it worthless:
+  **automated taps arrive as `isTrusted=true`**, and **it enforces the autoplay
+  policy** — all three sources refused the no-gesture baseline, where desktop
+  Chrome sails through. It runs real WebKit, so gesture-unlock and
+  iframe-navigation behaviour are genuine. Hardware-dependent things (DRM,
+  AirPlay, the mute switch, decode performance) are NOT.
+
+  The workflow, all of it reproducible from this repo:
+
+      node scripts/probe-log-server.mjs                     # static + trace sink, :8899
+      xcrun simctl openurl booted "http://localhost:8899/design/ios-playback-probe.html?log=1&compact=1&src=sp"
+      cat .probe-traces/<id>.log                            # the run, as text
+
+  Four things that are not guessable and each cost a cycle to learn:
+  - **`ios_webkit_debug_proxy` does not work with simulators** — it talks to
+    usbmuxd, `/json` returns `[]` forever. There is no JS-eval oracle. Read the
+    trace file instead; that is what `?log=1` is for. Don't re-attempt the proxy.
+  - **Terminate Safari between runs** (`xcrun simctl terminate booted
+    com.apple.mobilesafari`). `openurl` opens a NEW tab each time and every old
+    tab keeps running, so results from an earlier source overwrite the current
+    one. The beacon is also tagged per page instance and pauses while the tab is
+    hidden, but a clean start is still the cheapest guarantee.
+  - **A screenshot cannot tell a working page from a frozen one.** Prefer the
+    trace. Screenshots are for what only the eye can confirm — that
+    SoundCloud's orange interstitial is up, that a control landed where the CSS
+    intended.
+  - The probe takes `?log=1` (beacon), `?compact=1` (hides prose so controls
+    fit a screen — stages keep their real size on purpose, because an embed in
+    a collapsed box is refused for being invisible) and `?src=yt|sc|sp`.
+
+  Dead ends, do not retry: Facebook's `idb` and `ios-simulator-mcp` (the
+  idb-companion bottle predates this toolchain and the tap is untrusted —
+  never `brew trust facebook/fb`), and Maestro (its XCTest driver has open
+  issues against Xcode 26 and does not reliably see local simulators).

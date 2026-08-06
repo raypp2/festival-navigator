@@ -42,3 +42,6 @@ soundcloud-backfill-report*.md
 !favicon.png
 !icon-192.png
 !icon-512.png
+
+# iOS Simulator probe traces — run artifacts, never source (scripts/probe-log-server.mjs)
+.probe-traces/

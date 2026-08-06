@@ -179,6 +179,10 @@
  * service than the one it is driving. */
 .sample-player-np-btn.is-yt { background: rgba(255, 78, 69, .92); }
 .sample-player-np-btn.is-sc { background: rgba(255, 122, 47, .92); }
+/* #67B98A — the same green SOURCE_META gives Spotify. Without this the control
+   inherits the base orange and drives Spotify wearing SoundCloud's colour,
+   which is the exact thing the rule above exists to prevent. */
+.sample-player-np-btn.is-sp { background: rgba(103, 185, 138, .92); }
 .sample-player-np-btn:disabled { opacity: .5; }
 
 /* full/desktop YouTube stage: custom overlay controls (compact intentionally
@@ -214,6 +218,16 @@
   border-radius: var(--r-pill); background: #fff; box-shadow: 0 0 0 3px rgba(var(--brand), .3);
 }
 .sample-player-seek:disabled { opacity: .5; cursor: default; }
+/* Spotify's transport: our play control beside the scrubber, under the stage.
+   Spotify is the only source that draws its own transport, and it draws it
+   INSIDE the embed — so without this the person loses the round button every
+   other tab trained them to use. It sits beside the rail, never over the embed;
+   covering Spotify's real UI with ours is what the 2026-08-04 device pass
+   rejected. The button keeps .sample-player-np-btn so one glyph-painting path
+   serves every surface. */
+.sample-player-sp-transport { display: flex; align-items: center; gap: 9px; width: 100%; }
+.sample-player-sp-transport .sample-player-seek { flex: 1; min-width: 0; }
+.sample-player-sp-transport .sample-player-np-btn { position: static; flex: none; }
 .sample-player-clip-preview {
   flex: none; border: 1px solid var(--spotify-stroke); color: var(--spotify-stroke);
   border-radius: var(--r-pill); padding: 2px 7px;

@@ -1,11 +1,10 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v67 = the probe judges a carry on the SHAPE of the playhead, not on movement
-// alone. Same precautionary reasoning as v66: the probe is a top-level
-// navigation and navigations are network-first below, so a stale copy could
-// only ever surface offline — but on this project a needless bump costs one
-// re-download and a missed one costs a device trip.
-const CACHE_VERSION = 'festival-nav-v67';
+// v68 = Spotify loses loadArtist (it cannot carry — its loadUri navigates the
+// iframe) and gains a transport of ours plus a playback_update listener. This
+// one is NOT precautionary: player.js and discovery.css are both precached
+// below, so without the bump a returning browser keeps serving the old player.
+const CACHE_VERSION = 'festival-nav-v68';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
