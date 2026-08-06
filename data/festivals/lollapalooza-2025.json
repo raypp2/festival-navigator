@@ -1575,7 +1575,18 @@
       ],
       "soundcloudSlug": "cagetheelephant",
       "spotifyId": "26T3LtbuGT1Fu9m0eRq5X3",
-      "youtubeQuery": "Cage the Elephant live set"
+      "youtubeQuery": "Cage the Elephant live set",
+      "youtubeVideoIds": [
+        "LMXdFfKE80U",
+        "Qgoy3g_2m6k",
+        "0l0hFLh8b48"
+      ],
+      "youtubeLabels": [
+        "Full Performance (Live from the KROQ Helpful Honda Sound Space)",
+        "Live Corona Capital 2024",
+        "Live in San Antonio, TX (10/04/2025) [FULL 4K SHOW] [FRONT ROW] [BEST AUDIO]"
+      ],
+      "mbid": "b41b38d4-ef3e-4f37-8c75-cfe9af999696"
     },
     {
       "name": "Xaviersobased",
@@ -1709,7 +1720,18 @@
       ],
       "soundcloudSlug": "lukecombs",
       "spotifyId": "718COspgdWOnwOFpJHRZHS",
-      "youtubeQuery": "Luke Combs live set"
+      "youtubeQuery": "Luke Combs live set",
+      "youtubeVideoIds": [
+        "CBwzFErjF2s",
+        "SR5-e9BlZQ4",
+        "0jufTpOU2rI"
+      ],
+      "youtubeLabels": [
+        "Live from Georgia Theatre",
+        "Luke Combs Lollapalooza Chicago 2025",
+        "Full Concert (Lexington, KY | Feb. 14, 2020)"
+      ],
+      "mbid": "c20ee61f-071f-4e65-9c81-45ee931a54ce"
     },
     {
       "name": "Xdinary Heroes",
@@ -3216,7 +3238,18 @@
         "rock"
       ],
       "spotifyId": "5Rc75vGFBWZPgL7EXb4k89",
-      "youtubeQuery": "Bilmuri live set"
+      "youtubeQuery": "Bilmuri live set",
+      "youtubeVideoIds": [
+        "RW5nHYDSVDw",
+        "y2VIKmZlkQQ",
+        "GmjZYP8SFqI"
+      ],
+      "youtubeLabels": [
+        "LIVE FROM ATLANTA",
+        "full set (Live in Madison) - May 2026 concert (KINDA HARD Tour) - Johnny Franck",
+        "THE END (LIVE)"
+      ],
+      "mbid": "b09de30a-09ac-4cc9-8812-49bb12e2bfa6"
     },
     {
       "name": "Clairo",
@@ -3507,7 +3540,18 @@
       "genres": [
         "folk",
         "pop"
-      ]
+      ],
+      "youtubeVideoIds": [
+        "iSVEuR9ngA8",
+        "YoUZ8oo4lx4",
+        "QfsU6RixwEo"
+      ],
+      "youtubeLabels": [
+        "Vincent Lima Full ish Set Live At The Grove Lollapalooza Chicago Sunday 8/03/25 V2",
+        "FIREHOUSE MUSIC SESSION #15: Vincent Lima",
+        "Vincent Lima (Live) | Wesleyan University | Quadio After Hours"
+      ],
+      "mbid": "55989e47-4c3f-49ad-9b1c-10cf4f9c2107"
     },
     {
       "name": "Post Animal",
@@ -3556,7 +3600,18 @@
       "genres": [
         "country",
         "folk"
-      ]
+      ],
+      "youtubeVideoIds": [
+        "beXPFqG-x9U",
+        "MJsKNAH7t3Q",
+        "e9W5Rpm4Drk"
+      ],
+      "youtubeLabels": [
+        "LIVE (FULL SET) @ Category 10 - Nashville, TN - 060326",
+        "WILLOW AVALON (NUÇI’S SPACE’S 25TH ANNIVERSARY BENEFIT CONCERT) @ Georgia Theatre - 12/12/25",
+        "FULL SHOW | Hinterland | St. Charles, IA | August 2, 2025 | LIVE"
+      ],
+      "mbid": "a7c5cd9d-861f-4500-9958-ec4a50b7d80f"
     },
     {
       "name": "Rebecca Black",
