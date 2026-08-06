@@ -1481,3 +1481,70 @@
 .dd2-pane-empty { padding: 40px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .dd2-pane-empty-title { font: 800 15px var(--font-ui); color: var(--text-primary); }
 .dd2-pane-empty-sub { font: 500 12px/1.5 var(--font-ui); color: var(--text-tertiary); max-width: 34ch; }
+
+/* ---- SPIKE: the clash window in Decide, and the plan badges in My Day ------
+ * Time runs DOWN and stages are columns, matching the wall — a festival day
+ * should not change axis between two views of itself. 20px to fifteen minutes
+ * is the wall's own scale. */
+.dc-window { margin: 0 0 14px; }
+.dc-ctx { display: flex; align-items: baseline; gap: 6px; padding: 3px 0;
+          font: 500 10.5px var(--font-ui); color: var(--text-tertiary); }
+.dc-ctx-w { flex: none; width: 44px; font: 800 8.5px var(--font-ui);
+            letter-spacing: .1em; text-transform: uppercase; color: #6E6788; }
+.dc-ctx-nm { color: var(--text-body); font-weight: 700; }
+.dc-ctx-lv { border: 1px solid var(--border-card); border-radius: var(--r-pill);
+             padding: 1px 6px; font: 700 8.5px var(--font-ui);
+             letter-spacing: .06em; text-transform: uppercase; }
+.dc-ctx-lv[data-must="1"] { border-color: rgba(var(--brand), .5); color: #DEC2FF; }
+.dc-ctx.is-none { color: #5C556F; }
+
+.dc-heads { display: grid; gap: 5px; margin: 6px 0 5px 38px; }
+.dc-head { font: 800 9px var(--font-ui); letter-spacing: .1em; text-transform: uppercase;
+           color: var(--text-tertiary); text-align: center; padding-bottom: 4px;
+           border-bottom: 1px solid var(--hairline);
+           white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dc-tt { display: grid; grid-template-columns: 38px 1fr; position: relative; }
+.dc-rail { position: relative; }
+.dc-tick { position: absolute; right: 6px; transform: translateY(-50%);
+           font: 600 9px ui-monospace, Menlo, monospace; color: var(--text-tertiary);
+           white-space: nowrap; }
+.dc-grid { position: relative; display: grid; gap: 5px; }
+.dc-col { position: relative; border-left: 1px solid rgba(255, 255, 255, .045); }
+.dc-blk { position: absolute; left: 2px; right: 2px; border-radius: 7px; padding: 4px 6px;
+          font: 700 10.5px var(--font-ui); overflow: hidden; line-height: 1.25; }
+.dc-blk-t { display: block; font: 600 9px ui-monospace, Menlo, monospace;
+            opacity: .75; margin-top: 1px; white-space: nowrap; }
+.dc-blk-lv { display: block; font: 800 8.5px var(--font-ui); letter-spacing: .07em;
+             text-transform: uppercase; opacity: .9; }
+/* Undecided is the state this screen OPENS in — neutral, so the screen is not
+ * pre-suggesting an answer before the person has made one. */
+.dc-blk[data-role="undecided"] { background: var(--card-unpicked); color: var(--text-body);
+                                 border: 1px solid var(--border-card); }
+.dc-blk[data-role="lead"] { background: rgb(var(--brand)); color: #1A1030; }
+.dc-blk[data-role="alt"]  { background: #5A5178; color: var(--text-primary); }
+.dc-blk[data-role="both"] { background: #67B98A; color: #0C2A1C; }
+.dc-lap { position: absolute; left: 0; right: 0; pointer-events: none;
+          background: repeating-linear-gradient(-45deg,
+            rgba(255, 255, 255, .11) 0 5px, transparent 5px 10px);
+          border-top: 1px dashed rgba(255, 255, 255, .42);
+          border-bottom: 1px dashed rgba(255, 255, 255, .42); }
+
+.dc-verdict { font: 700 12px var(--font-ui); color: var(--text-primary); margin-top: 10px; }
+.dc-path { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 9px;
+           font: 700 10px var(--font-ui); }
+.dc-stage { background: var(--card); border: 1px solid var(--hairline);
+            border-radius: var(--r-pill); padding: 3px 8px; color: var(--text-body); }
+.dc-stage.is-hot { border-color: rgba(var(--brand), .6); color: #DEC2FF; }
+.dc-arr { color: var(--text-tertiary); }
+.dc-arr.is-cross { color: #F2B8B5; }
+.dc-path-n { width: 100%; margin-top: 3px; font: 600 10px var(--font-ui);
+             color: var(--text-tertiary); }
+
+/* My Day: what the plan was, on the row it applies to. */
+.md-plan { margin-left: 7px; padding: 2px 6px; border-radius: var(--r-pill);
+           font: 800 8.5px var(--font-ui); letter-spacing: .08em; text-transform: uppercase;
+           vertical-align: middle; }
+.md-plan.is-lead { background: rgba(var(--brand), .2); color: #DEC2FF; }
+.md-plan.is-keep { background: rgba(103, 185, 138, .2); color: #9FE6C0; }
+.md-plan.is-alt  { background: rgba(255, 255, 255, .07); color: var(--text-tertiary); }
+.md-plan.is-walk { background: rgba(242, 184, 181, .16); color: #F2B8B5; }

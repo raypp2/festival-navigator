@@ -27,7 +27,8 @@ const state = await import('../js/state.js');
 const model = await import('../js/v3/model.js');
 const { FESTIVAL_INDEX } = await import('../js/festivals.js');
 const { renderMyDayForTest, closeMyDay, refreshOpenMyDay } = await import('../js/discovery/my-day.js');
-const { closeDecide, getClashDismissal } = await import('../js/discovery/decide.js');
+const { closeDecide } = await import('../js/discovery/decide.js');
+const { getResolution } = await import('../js/discovery/resolutions.js');
 
 const FID = 'myday-fest';
 FESTIVAL_INDEX.push({ id: FID, status: 'scheduled' });
@@ -153,83 +154,95 @@ test('clicking the clash card routes to Decide with both clashing artists', () =
   assert.ok(dOverlay.querySelector('.dc-choose'), 'a Choose button renders for the card');
 });
 
-test('Decide: choosing demotes the OTHER clashing artist to level 1, mirrored into the local doc', () => {
+// SPIKE — these five used to pin the old semantics: choose DEMOTED everyone
+// else to pick x1, and "split"/"on-site" wrote a dismissal. That is the exact
+// behaviour the lead/keep model replaces, so they are rewritten rather than
+// deleted — the assertion worth keeping from every one of them is "never a doc
+// write", and it still holds, more strongly than before.
+
+test('Decide: choosing records a LEAD and demotes nobody', () => {
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
 
-  const chooseButtons = [...decideOverlay().querySelectorAll('.dc-choose')];
-  const chooseSkrillex = chooseButtons.find((b) => b.textContent === 'Choose Skrillex');
+  const chooseSkrillex = [...decideOverlay().querySelectorAll('.dc-choose')]
+    .find((b) => b.textContent === 'Choose Skrillex');
   assert.ok(chooseSkrillex);
   chooseSkrillex.click();
 
-  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4, 'the chosen artist keeps its level');
-  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 1, 'the other clash member is demoted to level 1, not cleared');
+  assert.deepEqual(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']),
+    { kind: 'lead', lead: 'Skrillex' });
+  // The whole point: pick level is TASTE and a resolution is PLAN. Choosing one
+  // artist must not say you like the other one less.
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4,
+    'the chosen artist keeps its level');
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 4,
+    'and so does the one not chosen — nobody is demoted behind the person\'s back');
 });
 
-test('Decide: undo restores the demoted artist to its prior level', () => {
+test('Decide: undo restores the previous plan, still touching no levels', () => {
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
-  const chooseSkrillex = [...decideOverlay().querySelectorAll('.dc-choose')].find((b) => b.textContent === 'Choose Skrillex');
-  chooseSkrillex.click();
-  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 1);
+  [...decideOverlay().querySelectorAll('.dc-choose')]
+    .find((b) => b.textContent === 'Choose Skrillex').click();
+  assert.equal(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']).lead, 'Skrillex');
 
   const undo = actions.getLastUndo();
   assert.equal(typeof undo, 'function', 'choosing offers an undo callback');
   undo();
 
-  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 4, 'undo restores the prior must level atomically');
-  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4, 'the chosen artist is untouched by the whole round-trip');
+  assert.equal(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']), null,
+    'undo clears the plan it created');
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 4);
+  assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4);
 });
 
-test('Decide: "Split it" is a device-local dismissal (never a doc write) that re-renders My day as resolved', () => {
+test('Decide: "Keep both" records a keep plan and writes nothing to the doc', () => {
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
 
-  decideOverlay().querySelector('.dc-split').click();
+  decideOverlay().querySelector('.dc-onsite').click();
 
-  assert.equal(getClashDismissal(FID, DAY, ['Skrillex', 'AlisonWonderland']), 'split');
-  // Never written to the shared crew doc — selections are untouched.
+  assert.deepEqual(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']), { kind: 'keep' });
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.Skrillex.Kevin), 4);
   assert.equal(model.readLevel(state.crewDoc, state.crewDoc.festivals[FID].selections.AlisonWonderland.Kevin), 4);
-
-  // actions.refreshMyDay() (wired to refreshOpenMyDay) re-rendered My day live.
-  const clashRow = overlay().querySelector('.md-clash');
-  assert.ok(clashRow.classList.contains('is-resolved'));
-  assert.match(clashRow.querySelector('.md-clash-label').textContent, /Split planned/);
 });
 
-test('Decide: "keep both starred, decide on-site" dismisses as onsite, independently of split', () => {
+test('a resolved window stops being a clash and its artists become rows', () => {
+  const actions = mkActions();
+  renderMyDayForTest(ctx, actions, CANON, DAY);
+  overlay().querySelector('.md-clash').click();
+  [...decideOverlay().querySelectorAll('.dc-choose')]
+    .find((b) => b.textContent === 'Choose Skrillex').click();
+
+  // The complaint this whole change answers: the clash used to come straight
+  // back after deciding.
+  assert.equal(overlay().querySelectorAll('.md-clash').length, 0, 'no clash row survives the decision');
+  const names = [...overlay().querySelectorAll('.md-set-name')].map((n) => n.textContent);
+  assert.ok(names.some((n) => n.includes('Skrillex')), 'the lead is a row');
+  assert.ok(names.some((n) => n.includes('AlisonWonderland')),
+    'and so is the alternate — My Day must not drop an artist that was considered');
+  assert.ok(overlay().querySelector('.md-plan.is-lead'), 'the lead is marked as such');
+});
+
+test('a plan persists in localStorage keyed by day + sorted artist names, and survives a fresh render', () => {
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
   decideOverlay().querySelector('.dc-onsite').click();
 
-  assert.equal(getClashDismissal(FID, DAY, ['Skrillex', 'AlisonWonderland']), 'onsite');
-  const clashRow = overlay().querySelector('.md-clash');
-  assert.match(clashRow.querySelector('.md-clash-label').textContent, /Deciding on-site/);
-});
-
-test('dismissal persists in localStorage keyed by day + sorted artist names, and survives a fresh render', () => {
-  const actions = mkActions();
-  renderMyDayForTest(ctx, actions, CANON, DAY);
-  overlay().querySelector('.md-clash').click();
-  decideOverlay().querySelector('.dc-split').click();
-
-  const raw = localStorage.getItem('fp.clashResolved.' + FID);
+  const raw = localStorage.getItem('fp.clashPlan.' + FID);
   assert.ok(raw, 'a fake-localStorage entry was written');
   const parsed = JSON.parse(raw);
   const key = Object.keys(parsed)[0];
   assert.match(key, /^Day 1\|/);
-  assert.equal(parsed[key], 'split');
+  assert.deepEqual(parsed[key], { kind: 'keep' });
 
-  // A totally fresh render (simulating a reload) reads the same dismissal back.
   closeMyDay();
   renderMyDayForTest(ctx, actions, CANON, DAY);
-  const clashRow = overlay().querySelector('.md-clash');
-  assert.ok(clashRow.classList.contains('is-resolved'));
+  assert.equal(overlay().querySelectorAll('.md-clash').length, 0, 'still resolved after a reload');
 });
 
 test('empty state: nothing marked yet renders the friendly Discover-deck card, not gap/clash noise', () => {

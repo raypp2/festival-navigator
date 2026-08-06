@@ -1,8 +1,7 @@
 // Festival Navigator service worker — offline-first app shell.
 // Bump CACHE_VERSION whenever you change cached static assets.
-// v77 = a clash is a set of sets that ALL overlap, not a chain of pairwise
-// overlaps. A-B and B-C no longer drag A and C into one group.
-const CACHE_VERSION = 'festival-nav-v77';
+// v78 = SPIKE BRANCH ONLY — clash window + lead/keep plans.
+const CACHE_VERSION = 'festival-nav-v78-spike';
 
 // The shell that MUST be complete for offline to be real: if any of these
 // fail, install fails and the old worker keeps serving — a half-cached shell
@@ -48,6 +47,7 @@ const APP_CORE = [
   '/js/discovery/gaps.js',
   '/js/discovery/my-day.js',
   '/js/discovery/decide.js',
+  '/js/discovery/resolutions.js',
   '/assets/discovery.css',
   '/data/festivals/index.json',
   // Repo-owned genre canon (js/discovery/genres.js's loadGenreCanon) — every

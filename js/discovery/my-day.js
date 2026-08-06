@@ -32,6 +32,7 @@ import { colorIndexOf } from '../v3/wall.js';
 import { auraBackground, whoCorner } from '../v3/aura.js';
 import { loadGenreCanon } from './genres.js';
 import { rankLineup, derivePopularity } from './score.js';
+import { getResolution } from './resolutions.js';
 import { openDeck } from './deck.js';
 import { openDecide, keyFor, getClashDismissal } from './decide.js';
 import {
@@ -76,7 +77,7 @@ function defaultDay(fest, ctx, days) {
 }
 
 // ---- set (marked pick) row -------------------------------------------------------
-function buildSetRow(setEntry, ctx) {
+function buildSetRow(setEntry, ctx, plan) {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'md-row md-set';
@@ -108,6 +109,27 @@ function buildSetRow(setEntry, ctx) {
   sub.className = 'md-set-sub';
   sub.textContent = `${setEntry.stage} · ${clockLabel(setEntry.startMin)}–${clockLabel(setEntry.endMin)} · ${levelText(setEntry.level)}`;
   card.append(nm, sub);
+
+  // SPIKE — the plan for this window, if one was made. A badge says which, and
+  // the alternates stay reachable: My Day summarises, it must not quietly drop
+  // an artist that was considered.
+  if (plan) {
+    const badge = document.createElement('span');
+    badge.className = `md-plan is-${plan.role}`;
+    badge.textContent = plan.role === 'lead' ? 'leading'
+      : plan.role === 'keep' ? 'your call' : 'alternate';
+    nm.appendChild(badge);
+    // walking out of this one? say so where the action is taken
+    const next = plan.alternates
+      .filter((o) => o.startMin >= setEntry.startMin && o.stage !== setEntry.stage)
+      .sort((a, b) => a.startMin - b.startMin)[0];
+    if (next && plan.role !== 'alt') {
+      const walk = document.createElement('span');
+      walk.className = 'md-plan is-walk';
+      walk.textContent = `leave early \u2192 ${next.stage}`;
+      nm.appendChild(walk);
+    }
+  }
 
   const who = document.createElement('span');
   who.className = 'md-set-who';
@@ -398,17 +420,40 @@ function buildBody(shell, day, fest, ctx, actions, canonData) {
     order, popularity: order === 'schedule' ? derivePopularity(fest) : undefined,
   });
 
-  const clashedNames = new Set(clashes.flatMap((c) => c.sets.map((s) => s.name)));
+  // SPIKE — a RESOLVED window is no longer a clash. The person decided;
+  // continuing to flag it is nagging, and it was the loudest complaint about
+  // this screen. Resolved windows contribute their sets as ordinary rows,
+  // annotated with the plan, so the summary never hides an artist that was
+  // considered.
+  const resolved = new Map();   // clash -> resolution
+  const openClashes = [];
+  for (const c of clashes) {
+    const r = getResolution(ctx.fid, day, c.sets.map((s) => s.name));
+    if (r) resolved.set(c, r); else openClashes.push(c);
+  }
+  const clashedNames = new Set(openClashes.flatMap((c) => c.sets.map((s) => s.name)));
   const soloSets = plan.filter((s) => !clashedNames.has(s.name));
+  const planOf = new Map();     // set name -> { role, alternates }
+  for (const [c, r] of resolved) {
+    for (const st of c.sets) {
+      planOf.set(st.name, {
+        role: r.kind === 'keep' ? 'keep' : (r.lead === st.name ? 'lead' : 'alt'),
+        alternates: c.sets.filter((o) => o.name !== st.name),
+      });
+    }
+  }
   const items = [
-    ...soloSets.map((s) => ({ type: 'set', startMin: s.startMin, set: s })),
-    ...clashes.map((c, idx) => ({ type: 'clash', startMin: Math.min(...c.sets.map((s) => s.startMin)), clash: c, idx })),
+    ...soloSets.map((s) => ({ type: 'set', startMin: s.startMin, set: s, plan: planOf.get(s.name) || null })),
+    ...openClashes.map((c) => ({
+      type: 'clash', startMin: Math.min(...c.sets.map((s) => s.startMin)), clash: c,
+      idx: clashes.indexOf(c),
+    })),
     ...gaps.map((g) => ({ type: 'gap', startMin: g.startMin, gap: g })),
   ];
   items.sort((a, b) => a.startMin - b.startMin);
 
   for (const item of items) {
-    if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx));
+    if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx, item.plan));
     else if (item.type === 'clash') spine.appendChild(buildClashRow(day, item.clash, item.idx, ctx, actions));
     else spine.appendChild(buildGapRow(item.gap, dayArtists, ranked, ctx, actions, picks, passes));
   }
