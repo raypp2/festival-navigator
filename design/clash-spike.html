@@ -142,9 +142,10 @@
   .alts summary::-webkit-details-marker { display:none; }
   .alts summary::before { content:'▸ '; }
   .alts[open] summary::before { content:'▾ '; }
-  .alt-row { display:flex; justify-content:space-between; gap:8px; font-size:11.5px;
-             color:var(--text-body); padding:5px 0 0 12px; }
-  .alt-row .w { color:var(--text-tertiary); font:600 10px ui-monospace,monospace; }
+  .alt-row { display:block; font-size:11.5px; color:var(--text-body); padding:6px 0 0 12px; }
+  .alt-row .nm { font-weight:700; display:block; }
+  .alt-row .w { display:block; color:var(--text-tertiary);
+                font:600 9.5px ui-monospace,monospace; margin-top:1px; }
 
   .scen { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
   .scen button { background:var(--card); border:1px solid var(--border-card); color:var(--text-body);
@@ -226,6 +227,11 @@ var SCENARIOS = [
 
 // picked / must is the app's whole vocabulary for this — never invent a third word
 function levelLabel(l) { return l === 4 ? 'must' : 'pick \u00d7' + l; }
+// time · stage · level, in that order, everywhere it appears
+function metaOf(s) {
+  return clock(s.startMin) + '\u2013' + clock(s.endMin) + '  \u00b7  ' + s.stage
+    + '  \u00b7  ' + levelLabel(s.level);
+}
 
 var state = { scen:'partial', kind:'lead', lead:0 };
 
@@ -302,6 +308,7 @@ function drawTimetable() {
     h.textContent = st;
     heads.appendChild(h);
   });
+  host.appendChild(ctxLine('before', beforeSet()));
   host.appendChild(heads);
 
   var tt = document.createElement('div');
@@ -367,7 +374,6 @@ function drawTimetable() {
   }
   tt.appendChild(grid);
 
-  host.appendChild(ctxLine('before', beforeSet()));
   host.appendChild(tt);
   host.appendChild(ctxLine('after', afterSet()));
 }
@@ -544,11 +550,11 @@ function drawDay() {
     host.appendChild(slot(
       clock(Math.min.apply(null, ss.map(s=>s.startMin))) + ' – ' + clock(Math.max.apply(null, ss.map(s=>s.endMin))),
       'Your call on the night', '', null,
-      ss.map(s => ({ name:s.name, w: levelLabel(s.level) + ' · ' + s.stage }))));
+      ss.map(s => ({ name:s.name, w: metaOf(s) }))));
   } else {
     var lead = ss[state.lead];
     host.appendChild(slot(clock(lead.startMin) + ' – ' + clock(lead.endMin), lead.name, lead.stage, 'lead',
-      ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: levelLabel(s.level) + ' · ' + s.stage })),
+      ss.filter((_, i) => i !== state.lead).map(s => ({ name:s.name, w: metaOf(s) })),
       false, false, levelLabel(lead.level)));
   }
 
@@ -578,7 +584,7 @@ function drawDay() {
       det.appendChild(sum);
       alts.forEach(function (x) {
         var r = document.createElement('div'); r.className = 'alt-row';
-        var n = document.createElement('span'); n.textContent = x.name;
+        var n = document.createElement('span'); n.className = 'nm'; n.textContent = x.name;
         var w = document.createElement('span'); w.className = 'w'; w.textContent = x.w;
         r.append(n, w); det.appendChild(r);
       });
