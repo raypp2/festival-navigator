@@ -44,6 +44,8 @@ let currentKey = null;
 // tap throws that away and sends you back to My Day before you have seen
 // anything. null means "showing what is already saved".
 let pending = null;
+// set when a re-render is deliberately meant to land at the top
+let suppressScrollRestore = false;
 
 // ---- router key -------------------------------------------------------------------
 export function keyFor(day, idx) { return `decide:${day}:${idx}`; }
@@ -418,8 +420,14 @@ function buildCard(setEntry, day, clash, ctx, actions, canonData, fest, slotIdx)
   chooseBtn.setAttribute('aria-pressed',
     String(!!shownNow && shownNow.kind === 'lead' && shownNow.lead === setEntry.name));
   chooseBtn.addEventListener('click', () => {
+    // Sampling is how you make up your mind; the card is where you are when it
+    // happens. So the card can set the choice — but the confirm is up with the
+    // window, so go back to it rather than leaving the person to hunt.
     pending = { kind: 'lead', lead: setEntry.name };
+    suppressScrollRestore = true;
     renderBody(day, clash, ctx, actions, canonData, fest);
+    const sc = document.getElementById(OVERLAY_ID)?.querySelector('.dc-scroll');
+    if (sc) requestAnimationFrame(() => sc.scrollTo({ top: 0, behavior: 'smooth' }));
   });
   card.appendChild(chooseBtn);
 
@@ -503,6 +511,62 @@ function renderBody(day, clash, ctx, actions, canonData, fest) {
   const shown = pending || saved;   // preview beats saved; saved beats nothing
   scroll.appendChild(buildWindow(clash, clash.plan || [], shown));
 
+  // The decision itself sits with the picture of it. Most people know which one
+  // they want the moment they see the overlap — they should not have to scroll
+  // past two artist cards and a sample player to say so, and then scroll back
+  // up to check what they did. Selecting and confirming belong together.
+  const choices = document.createElement('div');
+  choices.className = 'dc-choices';
+  const pick = (plan, label, sub) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dc-opt';
+    const on = !!shown && JSON.stringify(shown) === JSON.stringify(plan);
+    b.setAttribute('aria-pressed', String(on));
+    const dot = document.createElement('span');
+    dot.className = 'dc-opt-dot';
+    const txt = document.createElement('span');
+    const k = document.createElement('span');
+    k.className = 'dc-opt-k';
+    k.textContent = label;
+    txt.appendChild(k);
+    if (sub) {
+      const d = document.createElement('span');
+      d.className = 'dc-opt-d';
+      d.textContent = sub;
+      txt.appendChild(d);
+    }
+    b.append(dot, txt);
+    b.addEventListener('click', () => {
+      pending = plan;
+      renderBody(day, clash, ctx, actions, canonData, fest);
+    });
+    choices.appendChild(b);
+  };
+  clash.sets.forEach((st) => pick({ kind: 'lead', lead: st.name }, `Lead with ${st.name}`, st.stage));
+  // NOT a lesser option tucked under the others — for a lot of people this is
+  // the answer, and it reads as an afterthought when it lives in a footer.
+  pick({ kind: 'keep' },
+    clash.sets.length === 2 ? 'Keep both' : `Keep all ${clash.sets.length}`,
+    'no lead \u2014 decide on-site');
+  scroll.appendChild(choices);
+
+  const confirmWrap = document.createElement('div');
+  confirmWrap.className = 'dc-confirm-wrap';
+  const confirm = document.createElement('button');
+  confirm.type = 'button';
+  confirm.className = 'dc-commit';
+  const savedNow = getResolution(ctx.fid, day, names);
+  const isSaved = !!shown && !!savedNow && JSON.stringify(savedNow) === JSON.stringify(shown);
+  confirm.disabled = !shown || isSaved;
+  confirm.textContent = !shown ? 'Pick one to confirm'
+    : isSaved ? 'Confirmed'
+      : (shown.kind === 'lead' ? `Confirm \u2014 lead with ${shown.lead}`
+        : `Confirm \u2014 keep ${clash.sets.length === 2 ? 'both' : 'all ' + clash.sets.length}`);
+  confirm.addEventListener('click', () => commitPlan(day, clash, shown, ctx, actions));
+  confirmWrap.appendChild(confirm);
+  scroll.appendChild(confirmWrap);
+
   const cardsWrap = document.createElement('div');
   cardsWrap.className = 'dc-cards';
   clash.sets.forEach((setEntry, i) => {
@@ -519,47 +583,16 @@ function renderBody(day, clash, ctx, actions, canonData, fest) {
 
   const footer = document.createElement('div');
   footer.className = 'dc-footer';
-  // SPIKE: ONE option, not two. "Split it — 45 min each" invented a handover
-  // nobody at a festival honours, and "keep both starred and decide on-site"
-  // described the same intent without it. Both said: no lead, nobody dropped.
-  const keepBtn = document.createElement('button');
-  keepBtn.type = 'button';
-  keepBtn.className = 'dc-onsite';
-  keepBtn.textContent = clash.sets.length === 2 ? 'Keep both — decide on-site'
-    : `Keep all ${clash.sets.length} — decide on-site`;
-  keepBtn.setAttribute('aria-pressed', String(!!shown && shown.kind === 'keep'));
-  keepBtn.addEventListener('click', () => {
-    pending = { kind: 'keep' };
-    renderBody(day, clash, ctx, actions, canonData, fest);
-  });
-  footer.append(keepBtn);
-
-  // The commit. Only appears once something is selected, and says what it will
-  // do rather than "Save" — the person should never have to remember which
-  // option they tapped thirty seconds ago at the top of a scrolling screen.
-  if (shown) {
-    const commit = document.createElement('button');
-    commit.type = 'button';
-    commit.className = 'dc-commit';
-    const lead = shown.kind === 'lead' ? shown.lead : null;
-    commit.textContent = lead
-      ? `Lead with ${lead}`
-      : (clash.sets.length === 2 ? 'Keep both' : `Keep all ${clash.sets.length}`);
-    const isSaved = saved && JSON.stringify(saved) === JSON.stringify(shown);
-    commit.disabled = !!isSaved;
-    if (isSaved) commit.textContent += ' \u2014 saved';
-    commit.addEventListener('click', () => commitPlan(day, clash, shown, ctx, actions));
-    footer.appendChild(commit);
-  }
-  scroll.appendChild(footer);
-
+  // The keep option and the confirm both live under the window now, with the
+  // rest of the choices. Nothing decision-shaped is left down here.
   const foot = document.createElement('div');
   foot.className = 'dc-foot';
   foot.textContent = 'Every option is informed: why it’s worth it, what you give up, whether it plays again, and where the crew leans. It never picks for you.';
   scroll.appendChild(foot);
 
   shell.appendChild(scroll);
-  if (prevScroll) requestAnimationFrame(() => { scroll.scrollTop = prevScroll; });
+  if (prevScroll && !suppressScrollRestore) requestAnimationFrame(() => { scroll.scrollTop = prevScroll; });
+  suppressScrollRestore = false;
   overlay.appendChild(shell);
 }
 

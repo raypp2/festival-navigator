@@ -78,15 +78,19 @@ function defaultDay(fest, ctx, days) {
 
 // ---- set (marked pick) row -------------------------------------------------------
 function buildSetRow(setEntry, ctx, plan) {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'md-row md-set';
+  // A wrapper, not a button. The plan control has to sit INSIDE the card — a
+  // strip floating above the group read as unrelated to it — and a button
+  // cannot contain another button. So the card is the button and the control
+  // is a sibling positioned over it.
+  const btn = document.createElement('div');
+  btn.className = 'md-row md-set' + (plan ? ` is-${plan.role}` : '');
 
   const time = document.createElement('span');
   time.className = 'md-time';
   time.textContent = clockLabel(setEntry.startMin);
 
-  const card = document.createElement('div');
+  const card = document.createElement('button');
+  card.type = 'button';
   card.className = 'md-set-card';
 
   const peopleObj = state.people();
@@ -113,17 +117,11 @@ function buildSetRow(setEntry, ctx, plan) {
   // SPIKE — the plan for this window, if one was made. A badge says which, and
   // the alternates stay reachable: My Day summarises, it must not quietly drop
   // an artist that was considered.
-  if (plan) {
-    const badge = document.createElement('span');
-    badge.className = `md-plan is-${plan.role}`;
-    badge.textContent = plan.role === 'lead' ? 'leading'
-      : plan.role === 'keep' ? 'your call' : 'alternate';
-    nm.appendChild(badge);
-    // walking out of this one? say so where the action is taken
+  if (plan && plan.role === 'keep') {
     const next = plan.alternates
       .filter((o) => o.startMin >= setEntry.startMin && o.stage !== setEntry.stage)
       .sort((a, b) => a.startMin - b.startMin)[0];
-    if (next && plan.role === 'keep') {
+    if (next) {
       const walk = document.createElement('span');
       walk.className = 'md-plan is-walk';
       walk.textContent = `leave early \u2192 ${next.stage}`;
@@ -148,47 +146,24 @@ function buildSetRow(setEntry, ctx, plan) {
   card.appendChild(who);
 
   btn.append(time, card);
-  btn.setAttribute('aria-label', `${setEntry.name} — ${levelText(setEntry.level) || 'picked'}, open artist page`);
-  btn.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(setEntry.name); });
+  card.setAttribute('aria-label', `${setEntry.name} — ${levelText(setEntry.level) || 'picked'}, open artist page`);
+  card.addEventListener('click', () => { if (ctx.onTap) ctx.onTap(setEntry.name); });
+
+  // The plan, stated inside the box it applies to, and tappable to revisit it.
+  // Only the LEAD (or the first of a kept group) carries it — repeating it on
+  // every alternate is noise on a list people scan in seconds.
+  if (plan && plan.onChange && plan.role !== 'alt') {
+    const chg = document.createElement('button');
+    chg.type = 'button';
+    chg.className = 'md-set-plan';
+    chg.textContent = (plan.role === 'lead' ? 'Leading' : 'Your call') + ' \u00b7 change';
+    chg.addEventListener('click', (e) => { e.stopPropagation(); plan.onChange(); });
+    btn.appendChild(chg);
+  }
   return btn;
 }
 
 // ---- clash row --------------------------------------------------------------------
-// SPIKE — the strip above a window you have already decided. It states the
-// plan in words and, crucially, is the way BACK IN. A decision that cannot be
-// revisited is worse than one that nags: the clash card at least had a door.
-function buildPlanRow(day, clash, res, idx, ctx, actions) {
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'md-row md-planrow';
-
-  const time = document.createElement('span');
-  time.className = 'md-time';
-  time.textContent = '';
-
-  const card = document.createElement('div');
-  card.className = 'md-planrow-card';
-
-  const label = document.createElement('span');
-  label.className = 'md-planrow-label';
-  label.textContent = res.kind === 'lead'
-    ? `Leading with ${res.lead}`
-    : (clash.sets.length === 2 ? 'Keeping both' : `Keeping all ${clash.sets.length}`);
-
-  const change = document.createElement('span');
-  change.className = 'md-planrow-change';
-  change.textContent = 'Change \u203a';
-
-  card.append(label, change);
-  btn.append(time, card);
-  btn.setAttribute('aria-label', `${label.textContent} — change this plan`);
-  btn.addEventListener('click', () => {
-    openDecide(day, idx, ctx, actions);
-    router.push(keyFor(day, idx));
-  });
-  return btn;
-}
-
 function buildClashRow(day, clash, idx, ctx, actions) {
   const startMin = Math.min(...clash.sets.map((s) => s.startMin));
   const names = clash.sets.map((s) => s.name);
@@ -470,18 +445,21 @@ function buildBody(shell, day, fest, ctx, actions, canonData) {
   const soloSets = plan.filter((s) => !clashedNames.has(s.name));
   const planOf = new Map();     // set name -> { role, alternates }
   for (const [c, r] of resolved) {
+    const idx = clashes.indexOf(c);
+    const reopen = () => { openDecide(day, idx, ctx, actions); router.push(keyFor(day, idx)); };
+    // For a kept group nobody leads, so the EARLIEST set carries the control —
+    // one per window, never one per row.
+    const firstKept = [...c.sets].sort((a, b) => a.startMin - b.startMin)[0];
     for (const st of c.sets) {
+      const role = r.kind === 'keep' ? 'keep' : (r.lead === st.name ? 'lead' : 'alt');
       planOf.set(st.name, {
-        role: r.kind === 'keep' ? 'keep' : (r.lead === st.name ? 'lead' : 'alt'),
+        role,
         alternates: c.sets.filter((o) => o.name !== st.name),
+        onChange: (r.kind === 'keep' ? st.name === firstKept.name : role === 'lead') ? reopen : null,
       });
     }
   }
   const items = [
-    ...[...resolved].map(([c, r]) => ({
-      type: 'plan', startMin: Math.min(...c.sets.map((s) => s.startMin)) - 1,
-      clash: c, res: r, idx: clashes.indexOf(c),
-    })),
     ...soloSets.map((s) => ({ type: 'set', startMin: s.startMin, set: s, plan: planOf.get(s.name) || null })),
     ...openClashes.map((c) => ({
       type: 'clash', startMin: Math.min(...c.sets.map((s) => s.startMin)), clash: c,
@@ -492,8 +470,7 @@ function buildBody(shell, day, fest, ctx, actions, canonData) {
   items.sort((a, b) => a.startMin - b.startMin);
 
   for (const item of items) {
-    if (item.type === 'plan') spine.appendChild(buildPlanRow(day, item.clash, item.res, item.idx, ctx, actions));
-    else if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx, item.plan));
+    if (item.type === 'set') spine.appendChild(buildSetRow(item.set, ctx, item.plan));
     else if (item.type === 'clash') spine.appendChild(buildClashRow(day, item.clash, item.idx, ctx, actions));
     else spine.appendChild(buildGapRow(item.gap, dayArtists, ranked, ctx, actions, picks, passes));
   }

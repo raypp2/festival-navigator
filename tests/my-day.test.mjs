@@ -138,7 +138,9 @@ test('tapping a set card opens the artist page via ctx.onTap', () => {
   const actions = mkActions();
   const localCtx = { ...ctx, onTap: (name) => tapped.push(name) };
   renderMyDayForTest(localCtx, actions, CANON, DAY);
-  overlay().querySelector('.md-set').click();
+  // .md-set is a wrapper now so the plan control can sit inside the card; the
+  // card itself is the button that opens the artist page.
+  overlay().querySelector('.md-set .md-set-card').click();
   assert.deepEqual(tapped, ['FourTet']);
 });
 
@@ -219,7 +221,7 @@ test('Decide: "Keep both" records a keep plan and writes nothing to the doc', ()
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
 
-  decideOverlay().querySelector('.dc-onsite').click();
+  [...decideOverlay().querySelectorAll('.dc-opt')].find((b) => /^Keep/.test(b.textContent)).click();
   commit();
 
   assert.deepEqual(getResolution(FID, DAY, ['Skrillex', 'AlisonWonderland']), { kind: 'keep' });
@@ -240,7 +242,9 @@ test('a resolved window stops being a clash and its artists become rows', () => 
   assert.ok(names.some((n) => n.includes('Skrillex')), 'the lead is a row');
   assert.ok(names.some((n) => n.includes('AlisonWonderland')),
     'and so is the alternate — My Day must not drop an artist that was considered');
-  assert.ok(overlay().querySelector('.md-plan.is-lead'), 'the lead is marked as such');
+  // marked by the SHAPE of the row, not a tag you have to stop and read
+  assert.ok(overlay().querySelector('.md-set.is-lead'), 'the lead is marked as such');
+  assert.ok(overlay().querySelector('.md-set.is-alt'), 'the alternate is subordinate to it');
 });
 
 test('a decided window stays reachable — the plan strip reopens Decide', () => {
@@ -251,12 +255,16 @@ test('a decided window stays reachable — the plan strip reopens Decide', () =>
 
   // Once the undo toast goes, this strip is the ONLY route back to the
   // decision. Without it the choice is permanent by accident.
-  const strip = overlay().querySelector('.md-planrow');
-  assert.ok(strip, 'a resolved window shows what was planned');
-  assert.match(strip.textContent, /Leading with Skrillex/);
-  assert.match(strip.textContent, /Change/);
+  // the control lives INSIDE the lead's card now, not in a strip above the group
+  const lead = overlay().querySelector('.md-set.is-lead');
+  assert.ok(lead, 'the lead row is marked as the lead');
+  assert.ok(overlay().querySelector('.md-set.is-alt'), 'and the alternate is subordinate to it');
+  const chg = lead.querySelector('.md-set-plan');
+  assert.ok(chg, 'the lead card carries the plan control');
+  assert.match(chg.textContent, /Leading/);
+  assert.match(chg.textContent, /change/i);
 
-  strip.click();
+  chg.click();
   assert.ok(decideOverlay(), 'and tapping it reopens Decide for that window');
   // reopening shows the SAVED plan, not a blank slate
   const commitBtn = decideOverlay().querySelector('.dc-commit');
@@ -267,7 +275,7 @@ test('a plan persists in localStorage keyed by day + sorted artist names, and su
   const actions = mkActions();
   renderMyDayForTest(ctx, actions, CANON, DAY);
   overlay().querySelector('.md-clash').click();
-  decideOverlay().querySelector('.dc-onsite').click();
+  [...decideOverlay().querySelectorAll('.dc-opt')].find((b) => /^Keep/.test(b.textContent)).click();
   commit();
 
   const raw = localStorage.getItem('fp.clashPlan.' + FID);

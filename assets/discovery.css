@@ -1558,24 +1558,62 @@
 .md-plan.is-alt  { background: rgba(255, 255, 255, .07); color: var(--text-tertiary); }
 .md-plan.is-walk { background: rgba(242, 184, 181, .16); color: #F2B8B5; }
 
-/* SPIKE: the commit, and the plan strip that leads back into Decide. */
+/* SPIKE: the decision, and how a decided window reads in a list you scan in
+   seconds rather than study. */
+
+/* Decide — the choices sit with the picture of the overlap, and the confirm
+   sits with the choices. Selecting at the top and confirming at the bottom of a
+   scrolling screen made the person hunt for their own decision. */
+.dc-choices { display: flex; flex-direction: column; gap: 7px; margin: 14px 0 0; }
+.dc-opt {
+  display: flex; gap: 10px; align-items: flex-start; width: 100%; text-align: left;
+  background: var(--card); border: 1px solid var(--border-card); color: var(--text-body);
+  border-radius: 11px; padding: 11px; cursor: pointer; font: inherit;
+}
+.dc-opt[aria-pressed="true"] {
+  border-color: rgba(var(--brand), .75);
+  background: linear-gradient(0deg, rgba(var(--brand), .12), rgba(var(--brand), .12)), var(--card);
+}
+.dc-opt-dot { flex: none; width: 16px; height: 16px; margin-top: 1px;
+              border-radius: var(--r-pill); border: 2px solid var(--border-card); }
+.dc-opt[aria-pressed="true"] .dc-opt-dot { border-color: rgb(var(--brand)); background: rgb(var(--brand)); }
+.dc-opt-k { display: block; font: 800 12px var(--font-ui); color: var(--text-header); }
+.dc-opt-d { display: block; font: 500 11px var(--font-ui); color: var(--text-tertiary); }
+.dc-confirm-wrap { margin: 11px 0 4px; }
 .dc-commit {
-  width: 100%; min-height: 46px; margin-top: 10px; border-radius: var(--r-pill);
+  width: 100%; min-height: 46px; border-radius: var(--r-pill);
   border: 1px solid rgba(var(--brand), .55); background: var(--tonal-fill);
   color: var(--tonal-text); font: 800 13px var(--font-ui); cursor: pointer;
 }
-.dc-commit:disabled { opacity: .55; cursor: default; border-color: var(--border-card); }
-/* Selected, not committed — the artist card and the keep button both show it,
-   so the window's colours are never the only thing carrying the choice. */
-.dc-choose[aria-pressed="true"], .dc-onsite[aria-pressed="true"] {
+.dc-commit:disabled { opacity: .5; cursor: default; border-color: var(--border-card);
+                      background: transparent; color: var(--text-tertiary); }
+.dc-choose[aria-pressed="true"] {
   border-color: rgba(var(--brand), .75);
   box-shadow: inset 0 0 0 1px rgba(var(--brand), .45);
 }
-.md-planrow { align-items: center; }
-.md-planrow-card {
-  flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 7px 11px; border-radius: var(--r-pill);
-  border: 1px dashed var(--border-card); background: transparent;
+
+/* My Day — the shape of the list has to carry the plan, not a tag you have to
+   stop and read. A lead sits at full weight; its alternates are indented and
+   dimmed beneath it, so scanning the left edge gives you the day. */
+.md-row.md-set { position: relative; }
+.md-set > .md-set-card { flex: 1; text-align: left; border: none; font: inherit;
+                         cursor: pointer; color: inherit; }
+.md-set.is-lead > .md-set-card { box-shadow: inset 0 0 0 1px rgba(var(--brand), .45); }
+.md-set.is-alt { margin-left: 26px; opacity: .62; }
+.md-set.is-alt > .md-set-card { transform: scale(.97); transform-origin: left center; }
+/* the indent gets a rail so the relationship is structural, not just spacing */
+.md-set.is-alt::before {
+  content: ''; position: absolute; left: -14px; top: -4px; bottom: 10px; width: 1px;
+  background: linear-gradient(180deg, rgba(var(--brand), .45), transparent);
 }
-.md-planrow-label { font: 700 11px var(--font-ui); color: var(--text-tertiary); }
-.md-planrow-change { font: 800 10.5px var(--font-ui); color: var(--tonal-text); flex: none; }
+.md-set-plan {
+  position: absolute; right: 10px; bottom: 8px; z-index: 2;
+  padding: 3px 9px; border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, .18); background: rgba(12, 10, 20, .55);
+  color: #EDEAF4; font: 800 9px var(--font-ui); letter-spacing: .07em;
+  text-transform: uppercase; cursor: pointer; backdrop-filter: blur(3px);
+}
+.md-plan { margin-left: 7px; padding: 2px 6px; border-radius: var(--r-pill);
+           font: 800 8.5px var(--font-ui); letter-spacing: .08em; text-transform: uppercase;
+           vertical-align: middle; }
+.md-plan.is-walk { background: rgba(242, 184, 181, .16); color: #F2B8B5; }
