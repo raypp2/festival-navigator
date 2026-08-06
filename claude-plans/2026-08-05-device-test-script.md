@@ -132,21 +132,18 @@ Spotify has to drop `loadArtist`, the way SoundCloud did.
 Step 5 stays YouTube-only, correctly: the deck gives Spotify the full stage and
 never reparents or shrinks it, so neither variable applies.
 
-**One thing the probe already established, on a desktop browser, before the
-phone is involved:** Spotify's `loadUri` keeps the same `<iframe>` node but
-**navigates it** — the src changes from
-`/embed/artist/59tlsK…` to `/embed/artist/0tvpih…?utm_source=iframe-api`.
-YouTube and SoundCloud both drive their embeds by postMessage and never touch
-src. A navigation is a new document, and a new document has never been touched
-by a finger. That is a strong prior that Spotify's carry cannot work on iOS for
-the same underlying reason SoundCloud's cannot, by a different mechanism — and
-step 4 is what settles it. The probe now logs `same iframe src?` in the trace so
-this is visible rather than inferred.
+**Measured on the phone, 2026-08-05:** both SoundCloud's `widget.load()` and
+Spotify's `loadUri` keep the same `<iframe>` node and **navigate it** — the src
+changes to the new artist. A navigation is a new document, and a new document
+has never been touched by a finger, so it loses the unlock for the same reason
+a reload does. This is now the single shared mechanism behind both failures,
+rather than two unrelated ones.
 
-Also measured on desktop: `loadUri` alone does **not** resume playback (step 3
-stopped dead), while `loadUri` followed immediately by `play()` **does** (step 4
-phase A played). So the app's sequence is right in principle; the open question
-is purely whether iOS honours it.
+(An earlier version of this doc claimed SoundCloud drives its widget by
+postMessage and never touches src. That was asserted, not measured, and the
+device trace shows it is wrong. YouTube's `loadVideoById` has still not been
+checked against this line — it is the one source known to carry, so it is the
+interesting control and worth one run.)
 
 ## Test 2 — SoundCloud
 

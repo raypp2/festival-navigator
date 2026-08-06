@@ -136,12 +136,33 @@ function verdict(id, state, text) {
 }
 
 document.getElementById('stamp').textContent =
-  'build: ' + document.location.host + ' · probe-2 (spotify) · ' + navigator.userAgent.slice(0, 72);
+  'build: ' + document.location.host + ' · probe-3 (restart-aware) · ' + navigator.userAgent.slice(0, 72);
 
 // ---- position sampling: the only honest proof that sound is happening -------
 // A PLAY event is a claim. A playhead that has MOVED is evidence. Everything in
 // this probe judges on movement, because on iOS the embeds fire PLAY and then
 // sit at zero when the platform refuses them.
+// A climbing playhead is not by itself proof that the NEW artist is playing —
+// it is equally what the OLD one looks like when a load never took effect on
+// the audio. Measured on an iPhone 2026-08-05: after a Spotify loadUri the
+// positions read 11.68 → 15.69, a smooth continuation of artist 1's clock,
+// while artist 2 had not started at all. The first version of this probe called
+// that a carry. It was not.
+//
+// So classify on the SHAPE, not on movement alone. A new item beginning shows
+// up as the clock going BACKWARDS — the only signal that separates "the next
+// artist started" from "the last one never stopped".
+function classify(samples, posBefore) {
+  var restartAt = -1;
+  for (var i = 1; i < samples.length; i++) {
+    if (samples[i] < samples[i - 1] - 0.5) restartAt = i;
+  }
+  if (restartAt < 0 && posBefore !== null && samples.length && samples[0] < posBefore - 0.5) restartAt = 0;
+  var tail = samples.slice(restartAt < 0 ? 0 : restartAt);
+  var climbed = tail.length > 1 && tail[tail.length - 1] > tail[0] + 0.15;
+  return { restarted: restartAt >= 0, climbed: climbed };
+}
+
 function watchPosition(readPos, ms, done) {
   var samples = [];
   var start = Date.now();
@@ -223,7 +244,7 @@ function mountSC(cb) {
 // Position comes off playback_update, whose position/duration are in
 // MILLISECONDS. Everything else in this file is seconds, so the conversion
 // happens here and nowhere else.
-var spCtl = null, spPos = 0, spPaused = null, spDurLogged = false;
+var spCtl = null, spPos = 0, spDur = 0, spPaused = null, spDurLogged = false;
 function loadSPApi(cb) {
   if (window.__probeSpotifyApi) return cb(window.__probeSpotifyApi);
   window.onSpotifyIframeApiReady = function (api) { window.__probeSpotifyApi = api; cb(api); };
@@ -245,6 +266,7 @@ function mountSP(cb) {
       c.addListener('playback_update', function (e) {
         var d = (e && e.data) || {};
         spPos = (d.position || 0) / 1000;
+        if (d.duration) spDur = d.duration / 1000;
         if (!spDurLogged && d.duration) {
           spDurLogged = true;
           log('SP duration ' + Math.round(d.duration / 1000) + 's'
@@ -327,6 +349,10 @@ document.getElementById('run-c').addEventListener('click', function () {
   log('=== STEP 3: load artist 2 into the SAME element, no new tap ===');
   var before = frameNow();
   var beforeSrc = before ? before.src : null;
+  // Captured BEFORE the load and never reset: the old clock is the reference
+  // that tells a new item apart from an old one that never stopped.
+  var posBefore = posNow();
+  log('   position before the load: ' + Math.round(posBefore * 1000) / 1000);
   if (source === 'yt') {
     yt.loadVideoById(ARTISTS[1].yt);
   } else if (source === 'sc') {
@@ -336,29 +362,31 @@ document.getElementById('run-c').addEventListener('click', function () {
   } else {
     // loadUri and NOTHING else — the pure carry question. The app also calls
     // play() straight after, and that is step 4's job, not this one.
-    //
-    // The reset is not optional here: artist 2 starts its clock at zero, so a
-    // stale position from artist 1 would leave the samples running DOWNWARD and
-    // a real carry would read as a refusal.
-    spPos = 0;
     spCtl.loadUri('spotify:artist:' + ARTISTS[1].sp);
   }
   setTimeout(function () {
     var after = frameNow();
     log('same iframe element? ' + (before === after));
     // The element surviving is not the same as the browsing context surviving.
-    // Measured on desktop 2026-08-05: Spotify's loadUri keeps the very same
-    // <iframe> node and NAVIGATES it to the new artist's embed URL, where
-    // YouTube and SoundCloud both drive theirs by postMessage and never touch
-    // src. A navigation is a new document, and a new document has never been
-    // touched — so if this line says the src changed, expect the unlock to be
-    // gone on a phone for the same reason a reload costs it.
+    // Measured on an iPhone 2026-08-05: BOTH SoundCloud's widget.load() and
+    // Spotify's loadUri keep the very same <iframe> node and NAVIGATE it to the
+    // new artist. A navigation is a new document, and a new document has never
+    // been touched by a finger — so a changed src here predicts a lost unlock
+    // for the same reason a reload costs one. (YouTube's loadVideoById has not
+    // been checked against this line yet; it is the one source known to carry,
+    // so it is the interesting control.)
     log('same iframe src? ' + (after ? (beforeSrc === after.src) : 'no iframe handle')
       + (after && beforeSrc !== after.src ? '  <- the frame NAVIGATED' : ''));
-    watchPosition(posNow, 4500, function (moved) {
-      verdict('v-c', moved ? 'ok' : 'bad',
-        moved ? 'KEPT PLAYING. The unlock survives a load — the app approach is right.'
-              : 'STOPPED. The unlock does NOT survive a load on this phone — we need a different approach.');
+    watchPosition(posNow, 4500, function (moved, samples) {
+      var c = classify(samples, posBefore);
+      log('   restarted=' + c.restarted + '  climbed=' + c.climbed);
+      if (c.restarted && c.climbed) {
+        verdict('v-c', 'ok', 'CARRIED. The clock restarted and is climbing — the NEW artist is playing in the same element.');
+      } else if (!c.restarted && c.climbed) {
+        verdict('v-c', 'wait', 'INCONCLUSIVE — the OLD item is still playing and the new one never started. Not a carry. Re-run on a fresh page.');
+      } else {
+        verdict('v-c', 'bad', 'STOPPED. The unlock does NOT survive a load on this phone — we need a different approach.');
+      }
     });
   }, 900);
 });
@@ -401,24 +429,35 @@ document.getElementById('run-d').addEventListener('click', function () {
 
 function runSpotifyStep4() {
   log('=== STEP 4: SP loadUri(), then play() on the next line — the app sequence ===');
+  // An anonymous embed serves a ~30s preview. If the previous steps burned it,
+  // this step starts from an item that has ALREADY ENDED, and "silent" then has
+  // two possible causes instead of one. Log the state so that is visible in the
+  // trace rather than discovered afterwards.
+  var posBefore = posNow();
+  log('   position before the load: ' + Math.round(posBefore * 1000) / 1000
+    + (spDur ? ' of ' + Math.round(spDur) + 's' : '')
+    + (spDur && posBefore >= spDur - 1.5 ? '  <- the preview had run out; re-run this on a fresh page' : ''));
   // Back to artist 1: step 3 already left artist 2 loaded, and asking Spotify
   // to load the URI it is already on tests nothing.
-  spPos = 0;
   spCtl.loadUri('spotify:artist:' + ARTISTS[0].sp);
   try { spCtl.play(); } catch (e) { log('play() threw: ' + e.message); }
   setTimeout(function () {
-    watchPosition(posNow, 4000, function (movedA) {
-      if (movedA) {
+    watchPosition(posNow, 4000, function (movedA, samplesA) {
+      var a = classify(samplesA, posBefore);
+      log('   restarted=' + a.restarted + '  climbed=' + a.climbed);
+      if (a.restarted && a.climbed) {
         verdict('v-d', 'ok', 'PLAYED on the app sequence. loadUri + play() carries — the fault, if any, is above this layer.');
         return;
       }
-      log('   immediate play() did not move it — calling play() again on a delay, NO new tap');
-      spPos = 0;
+      log('   immediate play() did not start the new artist — calling play() again on a delay, NO new tap');
+      var posMid = posNow();
       try { spCtl.play(); } catch (e) { log('play() threw: ' + e.message); }
-      watchPosition(posNow, 4000, function (movedB) {
-        verdict('v-d', movedB ? 'wait' : 'bad',
-          movedB ? 'Only the DELAYED play() worked — loadUri needs settling time. Defer the play call; keep loadArtist.'
-                 : 'Silent both ways. The unlock does not survive loadUri — Spotify needs to drop loadArtist, as SoundCloud did.');
+      watchPosition(posNow, 4000, function (movedB, samplesB) {
+        var b = classify(samplesB, posMid);
+        log('   restarted=' + b.restarted + '  climbed=' + b.climbed);
+        verdict('v-d', b.climbed ? 'wait' : 'bad',
+          b.climbed ? 'Only the DELAYED play() worked — loadUri needs settling time. Defer the play call; keep loadArtist.'
+                    : 'Silent both ways. The unlock does not survive loadUri — Spotify needs to drop loadArtist, as SoundCloud did.');
       });
     });
   }, 900);
